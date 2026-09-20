@@ -2795,7 +2795,7 @@ function renderSmallQuick(){
 }
 function renderSmallExam(){const m=rankState['l5-exam'];$('smallBody').innerHTML=`<section class="card ${rankClass(m.rank)}"><div class="between"><div><div class="h2">Level 5 examen</div><div class="muted">Kleine kana, っ en ー toegepast in woorden en bekende Level 4-zinnen.</div></div><span class="rank ${rankClass(m.rank)}">${rankText(m.rank)}</span></div><button id="smallExam" class="btn primary" style="width:100%;margin-top:10px">Start level-examen</button></section>`;$('smallExam').onclick=startSmallExam}
 function advancedQuestions(course,l,index){
-  const known=course.lessons.slice(0,index+1).flatMap(x=>x.words),allMean=[...new Set([...langLessons.flatMap(x=>x.words.map(w=>w[1])),...Object.values(advancedCourses).flatMap(c=>c.lessons.flatMap(x=>x.words.map(w=>w[1])))])];
+  const known=course.lessons.slice(0,index+1).flatMap(x=>x.words),prior=Object.values(advancedCourses).filter(c=>c.number<course.number).flatMap(c=>c.lessons.flatMap(x=>x.words)),allMean=[...new Set([...langLessons.flatMap(x=>x.words.map(w=>w[1])),...prior.map(w=>w[1]),...known.map(w=>w[1])])];
   const raw=l.words.slice(0,4).map(([jp,nl])=>['mc',jp,nl,shuffle([nl,...shuffle(allMean.filter(x=>x!==nl)).slice(0,2)]),'vocab']);
   if(l.words.length){const [jp,nl]=l.words[0],forms=[...new Set(known.map(w=>w[0]).filter(x=>x!==jp))];raw.push(['mc',nl,jp,shuffle([jp,...shuffle(forms).slice(0,2)]),'vocab'])}
   const otherMean=course.lessons.map(x=>x.models[0].meaning).filter(x=>x!==l.models[0].meaning);
@@ -3191,7 +3191,7 @@ function renderProgressLevelTab(box){
   </section>
   <div id="progressLevelCards" class="stack"></div>`;
 
-  levels.slice(0,5).forEach((lv,i)=>{
+  levels.slice(0,activeLevels).forEach((lv,i)=>{
     const rank=levelRank(i);
     const ids=levelLessonIds(i);
     const done=ids.filter(id=>rankState[id]?.rank).length;
