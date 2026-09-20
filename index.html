@@ -1219,8 +1219,52 @@ body[data-scene="classroom"]::after{
   overflow-x:auto;
   scroll-snap-type:x proximity;
   padding-bottom:7px;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
 }
+.active-levels::-webkit-scrollbar,.phase-levels::-webkit-scrollbar{display:none}
 .active-levels .level-menu-card,.phase-levels .level-menu-card{scroll-snap-align:start}
+.level-slider-shell{min-width:0}
+.level-slider-arrow{display:none}
+@media(min-width:641px){
+  .level-slider-shell{
+    display:grid;
+    grid-template-columns:42px minmax(0,1fr) 42px;
+    align-items:stretch;
+    gap:8px;
+    margin-top:10px;
+  }
+  .level-slider-shell .phase-levels{
+    grid-auto-columns:calc((100% - 18px)/3);
+    gap:9px;
+    margin-top:0;
+    padding-bottom:0;
+    scroll-behavior:smooth;
+    scroll-snap-type:x mandatory;
+  }
+  .level-slider-arrow{
+    display:grid;
+    place-items:center;
+    min-width:0;
+    padding:0;
+    border:1px solid var(--glass-border);
+    border-radius:14px;
+    background:var(--glass-strong);
+    color:var(--text);
+    box-shadow:0 8px 24px rgba(31,45,48,.1);
+    -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px);
+    font:800 28px/1 system-ui,sans-serif;
+    cursor:pointer;
+    transition:transform .16s ease,opacity .16s ease,background .16s ease;
+  }
+  .level-slider-arrow:hover:not(:disabled){transform:translateY(-1px);background:var(--glass)}
+  .level-slider-arrow:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 45%,transparent);outline-offset:2px}
+  .level-slider-arrow:disabled{opacity:.28;cursor:default}
+}
+@media(min-width:1000px){
+  .level-slider-shell .phase-levels{grid-auto-columns:calc((100% - 27px)/4)}
+}
 .future-levels .level-menu-card{
   background:color-mix(in srgb,var(--level-glass) 76%,transparent);
   box-shadow:0 8px 25px rgba(31,45,48,.09);
@@ -2324,12 +2368,42 @@ function phaseLevelCard(item){
   d.innerHTML=`<div class="level-no">Level ${item.number}</div><div class="level-title">${item.title}</div><div class="level-desc">${item.description}</div><div class="level-status">Voorlopig · later aanpasbaar</div>`;
   return d;
 }
+function addDesktopSliderControls(grid,label){
+  const shell=document.createElement('div');
+  shell.className='level-slider-shell';
+  const previous=document.createElement('button'),next=document.createElement('button');
+  previous.type=next.type='button';
+  previous.className=next.className='level-slider-arrow';
+  previous.setAttribute('aria-label',`Vorige levels in ${label}`);
+  next.setAttribute('aria-label',`Volgende levels in ${label}`);
+  previous.innerHTML='&#8249;';
+  next.innerHTML='&#8250;';
+  grid.replaceWith(shell);
+  shell.append(previous,grid,next);
+  const update=()=>{
+    const max=Math.max(0,grid.scrollWidth-grid.clientWidth);
+    previous.disabled=grid.scrollLeft<=2;
+    next.disabled=grid.scrollLeft>=max-2;
+  };
+  const move=direction=>{
+    const card=grid.querySelector('.level-menu-card');
+    const gap=parseFloat(getComputedStyle(grid).columnGap)||9;
+    grid.scrollBy({left:direction*((card?.getBoundingClientRect().width||grid.clientWidth)+gap),behavior:'smooth'});
+  };
+  previous.onclick=()=>move(-1);
+  next.onclick=()=>move(1);
+  grid.addEventListener('scroll',update,{passive:true});
+  if('ResizeObserver' in window)new ResizeObserver(update).observe(grid);
+  requestAnimationFrame(update);
+}
 function renderCoursePhase(phase,index){
   const p=phaseProgressInfo(phase),details=document.createElement('details');
   details.className='course-phase';
   if(phase.status==='active')details.open=true;
   details.innerHTML=`<summary class="course-phase-summary"><div class="phase-kicker">${phase.title}</div><div class="phase-title">${phase.subtitle}</div><div class="phase-subtitle">${phase.description}</div><div class="phase-meta"><span>Level ${phase.startLevel}–${phase.endLevel}</span><span>${phase.status==='active'?`${p.done}/${p.total} levelranks`:phase.status==='planned'?'Voorlopige route':'Conceptuele route'}</span>${p.current?`<span>Nu: Level ${p.current.number} van ${p.total}</span>`:''}</div><div class="phase-progress"><div style="width:${p.pct}%"></div></div></summary><div class="phase-details"><div class="phase-goal"><strong>Groter doel</strong><div class="small" style="margin-top:4px">${phase.goal}</div></div><div class="level-menu-grid phase-levels" role="region" aria-label="${phase.title}"></div></div>`;
-  phase.levels.forEach(level=>details.querySelector('.phase-levels').appendChild(phaseLevelCard(level)));
+  const grid=details.querySelector('.phase-levels');
+  phase.levels.forEach(level=>grid.appendChild(phaseLevelCard(level)));
+  addDesktopSliderControls(grid,phase.title);
   return details;
 }
 function renderLevelMenu(box){
