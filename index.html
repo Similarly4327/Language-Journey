@@ -1980,11 +1980,12 @@ function scheduleSave(){
   saveTimer=setTimeout(saveProgress,80);
 }
 function loadProgress(){
+  let savedVersion=STORAGE_VERSION;
   try{
     const raw=localStorage.getItem(STORAGE_KEY);
-    if(!raw){updateStorageUI();return}
-    const saved=JSON.parse(raw);
-    if(!saved||![1,2,3,4].includes(saved.version)){updateStorageUI();return}
+    const parsed=raw?JSON.parse(raw):null;
+    const saved=parsed&&[1,2,3,4].includes(parsed.version)?parsed:{version:STORAGE_VERSION,state:{},ranks:{}};
+    savedVersion=saved.version;
     const s=saved.state||{};
     if(['levels','level','module'].includes(s.screen))state.screen=s.screen;
     else state.screen='levels';
@@ -2059,7 +2060,7 @@ function loadProgress(){
     vocabCatalog.forEach(v=>ensureVocabMastery(v.id));
     // Oude voortgang blijft geldig: woorden uit eerder behaalde lessen gelden als geïntroduceerd.
     const introduced=new Set(state.introducedVocabIds);
-    if(saved.version<4)vocabCatalog.filter(v=>v.legacy&&!!rankState[v.lessonId]?.rank).forEach(v=>introduced.add(v.id));
+    if(savedVersion<4)vocabCatalog.filter(v=>v.legacy&&!!rankState[v.lessonId]?.rank).forEach(v=>introduced.add(v.id));
     vocabCatalog.filter(v=>!!rankState[v.lessonId]?.rank).forEach(v=>introduced.add(v.id));
     state.introducedVocabIds=[...introduced];
   }catch(err){
