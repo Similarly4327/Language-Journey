@@ -920,9 +920,204 @@ section{
   }
 }
 
+/* === v12 immersive anime scenes + liquid glass === */
+:root{
+  --glass:rgba(255,255,255,.72);
+  --glass-strong:rgba(255,255,255,.86);
+  --glass-soft:rgba(247,250,252,.58);
+  --glass-border:rgba(255,255,255,.72);
+  --glass-shadow:0 18px 48px rgba(31,45,48,.16),0 2px 8px rgba(31,45,48,.08);
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --glass:rgba(19,27,30,.72);
+    --glass-strong:rgba(17,24,27,.88);
+    --glass-soft:rgba(32,43,47,.62);
+    --glass-border:rgba(255,255,255,.17);
+    --glass-shadow:0 20px 58px rgba(0,0,0,.38),0 2px 10px rgba(0,0,0,.2);
+  }
+}
+body{
+  position:relative;
+  isolation:isolate;
+  background:#d9e0da;
+}
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  inset:-3vmax;
+  pointer-events:none;
+}
+body::before{
+  z-index:-2;
+  background-image:url("assets/japan-journey-home.webp");
+  background-size:cover;
+  background-position:center center;
+  filter:saturate(.88) contrast(.94) brightness(.96);
+  transform:scale(1.025);
+  transition:opacity .45s ease,filter .45s ease;
+}
+body[data-scene="classroom"]::before{
+  background-image:url("assets/anime-classroom.webp");
+  background-position:center center;
+  filter:saturate(.82) contrast(.9) brightness(.9);
+}
+body::after{
+  z-index:-1;
+  background:
+    linear-gradient(180deg,rgba(248,251,249,.42),rgba(236,241,237,.28) 48%,rgba(218,227,219,.5)),
+    radial-gradient(circle at 50% 12%,rgba(255,255,255,.34),transparent 45%);
+}
+body[data-scene="classroom"]::after{
+  background:linear-gradient(180deg,rgba(244,237,224,.22),rgba(32,42,45,.26));
+}
+@media(prefers-color-scheme:dark){
+  body::after{
+    background:linear-gradient(180deg,rgba(7,15,18,.42),rgba(8,15,18,.68));
+  }
+  body[data-scene="classroom"]::after{
+    background:linear-gradient(180deg,rgba(12,16,18,.45),rgba(5,9,11,.72));
+  }
+}
+.app{position:relative;z-index:1}
+.app-header{
+  position:sticky;
+  top:max(8px,env(safe-area-inset-top));
+  z-index:20;
+  padding:10px 12px;
+  border:1px solid var(--glass-border);
+  border-radius:18px;
+  background:var(--glass);
+  box-shadow:0 10px 30px rgba(32,48,52,.12);
+  -webkit-backdrop-filter:blur(22px) saturate(1.28);
+  backdrop-filter:blur(22px) saturate(1.28);
+}
+.card,
+.level-menu-card,
+.module-card,
+.lesson-select-card,
+.skill-row,
+.vocab-progress-row{
+  border-color:var(--glass-border);
+  background:var(--glass);
+  box-shadow:var(--glass-shadow);
+  -webkit-backdrop-filter:blur(24px) saturate(1.3);
+  backdrop-filter:blur(24px) saturate(1.3);
+}
+.panel,
+.overview-note>div,
+.kana-card,
+.vocab,
+.choice,
+.selection-summary,
+.progress-stat,
+.mastery-summary .rankbox,
+.progress-note,
+.notice,
+.error{
+  background:var(--glass-soft);
+  border:1px solid color-mix(in srgb,var(--glass-border) 70%,transparent);
+  -webkit-backdrop-filter:blur(16px) saturate(1.2);
+  backdrop-filter:blur(16px) saturate(1.2);
+}
+.btn,
+.tab,
+.select,
+.nav-back,
+.level-arrow,
+.select-tile,
+.char-select-tile,
+.progress-tab{
+  border-color:var(--glass-border);
+  background:var(--glass-strong);
+  box-shadow:0 5px 16px rgba(34,48,51,.08);
+  -webkit-backdrop-filter:blur(18px) saturate(1.25);
+  backdrop-filter:blur(18px) saturate(1.25);
+}
+.btn.primary,.tab.active,.progress-tab.active{
+  background:linear-gradient(135deg,#d65356,#bf363d);
+  border-color:rgba(255,255,255,.46);
+  box-shadow:0 9px 22px rgba(144,37,43,.24);
+}
+.level-menu-grid{perspective:900px}
+.level-menu-card{
+  position:relative;
+  overflow:hidden;
+  min-height:146px;
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+.level-menu-card::before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:4px;
+  background:linear-gradient(#e95d61,#cb3038);
+  opacity:.9;
+}
+.level-menu-card:active{transform:scale(.985)}
+@media(hover:hover){
+  .level-menu-card:hover,.module-card:hover,.lesson-select-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 22px 52px rgba(31,45,48,.22);
+  }
+}
+.journey-hero{
+  position:relative;
+  overflow:hidden;
+  min-height:132px;
+  padding-right:86px;
+  background:linear-gradient(135deg,var(--glass-strong),var(--glass));
+}
+.journey-hero .hero-mark{
+  position:absolute;
+  right:18px;
+  top:50%;
+  translate:0 -50%;
+  color:rgba(194,44,52,.64);
+  font:800 62px/1 Georgia,"Yu Mincho",serif;
+  text-shadow:0 8px 22px rgba(113,28,33,.16);
+}
+.journey-hero .hero-kicker{
+  color:#a62f36;
+  font-size:11px;
+  font-weight:850;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+body[data-scene="classroom"] .card,
+body[data-scene="classroom"] .module-card,
+body[data-scene="classroom"] .lesson-select-card{
+  background:var(--glass-strong);
+}
+#mainView,#quizView,#resultView,#sessionView{animation:scene-in .32s ease both}
+@keyframes scene-in{
+  from{opacity:0;transform:translateY(7px)}
+  to{opacity:1;transform:none}
+}
+@media(max-width:640px){
+  body::before{background-position:center center}
+  body[data-scene="classroom"]::before{background-position:52% center}
+  .app-header{top:max(6px,env(safe-area-inset-top));padding:9px 10px;border-radius:16px}
+  .level-menu-card{min-height:138px}
+  .journey-hero{min-height:124px;padding-right:70px}
+  .journey-hero .hero-mark{right:13px;font-size:54px}
+  #quizView .card,#resultView .card{background:rgba(255,255,255,.9)}
+}
+@media(max-width:380px){
+  .level-menu-grid{grid-template-columns:1fr}
+  .level-menu-card{min-height:116px}
+}
+@media(prefers-color-scheme:dark) and (max-width:640px){
+  #quizView .card,#resultView .card{background:rgba(17,24,27,.91)}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+}
+
 </style>
 </head>
-<body>
+<body data-scene="journey" data-view="main">
 <div id="app" class="app stack">
 <section class="app-header">
   <div class="between" style="align-items:center">
@@ -1629,7 +1824,15 @@ function clearStoredProgress(){
 
 
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
-function show(which){$('mainView').classList.toggle('hidden',which!=='main');$('quizView').classList.toggle('hidden',which!=='quiz');$('resultView').classList.toggle('hidden',which!=='result');$('sessionView').classList.toggle('hidden',which!=='session')}
+function show(which){
+  $('mainView').classList.toggle('hidden',which!=='main');
+  $('quizView').classList.toggle('hidden',which!=='quiz');
+  $('resultView').classList.toggle('hidden',which!=='result');
+  $('sessionView').classList.toggle('hidden',which!=='session');
+  document.body.dataset.view=which;
+  if(which==='quiz'||which==='result')document.body.dataset.scene='classroom';
+  if(which==='session')document.body.dataset.scene='journey';
+}
 function setMain(){show('main');renderMain()}
 const pct=x=>Math.round(x*100)+'%';
 
@@ -1681,8 +1884,8 @@ function levelIntro(i){
 function renderLevelMenu(box){
   updateHeader();
   const intro=document.createElement('section');
-  intro.className='card';
-  intro.innerHTML=`<div class="h2">Level select</div><div class="muted">Kies waar je verder wilt. De rand van een level toont de laagste rank zodra alle kernonderdelen minstens die rank hebben.</div>`;
+  intro.className='card journey-hero';
+  intro.innerHTML=`<div class="hero-kicker">日本語への道 · jouw route</div><div class="h2" style="margin-top:5px">Jouw Japanse leerreis</div><div class="muted" style="margin-top:5px">Kies een level en bouw rustig verder. Je laagste kernrank bepaalt de rand van ieder level.</div><span class="hero-mark" aria-hidden="true">旅</span>`;
   box.appendChild(intro);
   const grid=document.createElement('div');
   grid.className='level-menu-grid';
@@ -1773,6 +1976,7 @@ function tabsHtml(key,labels=['Leerroute','Oefenen','Examens']){const t=state.ta
 function bindTabs(key){$('tabA').onclick=()=>{state.tabs[key]='learn';scheduleSave();renderMain()};$('tabB').onclick=()=>{state.tabs[key]='practice';scheduleSave();renderMain()};$('tabC').onclick=()=>{state.tabs[key]='exams';scheduleSave();renderMain()}}
 function renderLevels(){/* v7: levels are rendered in the dedicated level menu */}
 function renderMain(){
+  document.body.dataset.scene=state.screen==='module'?'classroom':'journey';
   show('main');
   updateHeader();
   const box=$('mainView');
