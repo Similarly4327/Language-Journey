@@ -1127,6 +1127,65 @@ body[data-scene="journey"][data-view="main"] #mainView{
 @media(prefers-color-scheme:dark) and (max-width:640px){
   #quizView .card,#resultView .card{background:rgba(17,24,27,.91)}
 }
+.swipe-cue{display:none}
+@media(max-width:640px){
+  .level-menu-grid{
+    display:grid;
+    grid-template-columns:none;
+    grid-auto-flow:column;
+    grid-auto-columns:clamp(142px,42vw,178px);
+    gap:9px;
+    width:auto;
+    margin-inline:calc(-1 * max(9px,env(safe-area-inset-left)));
+    padding:2px 64px 12px max(9px,env(safe-area-inset-left));
+    overflow-x:auto;
+    overflow-y:hidden;
+    overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory;
+    scroll-padding-left:max(9px,env(safe-area-inset-left));
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+    touch-action:pan-x;
+  }
+  .level-menu-grid::-webkit-scrollbar{display:none}
+  .level-menu-card{
+    width:100%;
+    min-height:154px;
+    scroll-snap-align:start;
+    scroll-snap-stop:normal;
+    touch-action:pan-x;
+  }
+  .swipe-cue{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:7px;
+    margin-top:-5px;
+    padding:0 5px;
+    color:var(--text);
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.04em;
+    text-shadow:0 1px 8px rgba(255,255,255,.9);
+  }
+  .swipe-cue::after{
+    content:"→";
+    display:grid;
+    place-items:center;
+    width:27px;
+    height:27px;
+    border:1px solid var(--glass-border);
+    border-radius:999px;
+    background:var(--glass-strong);
+    box-shadow:0 5px 14px rgba(31,45,48,.12);
+    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
+    font-size:16px;
+  }
+}
+@media(prefers-color-scheme:dark) and (max-width:640px){
+  .swipe-cue{text-shadow:0 1px 8px rgba(0,0,0,.9)}
+}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
 }
@@ -1905,6 +1964,8 @@ function renderLevelMenu(box){
   box.appendChild(intro);
   const grid=document.createElement('div');
   grid.className='level-menu-grid';
+  grid.setAttribute('role','region');
+  grid.setAttribute('aria-label','Levels, horizontaal scrollbaar op mobiel');
   levels.forEach((lv,i)=>{
     const rank=levelRank(i);
     const b=document.createElement('button');
@@ -1915,6 +1976,10 @@ function renderLevelMenu(box){
     grid.appendChild(b);
   });
   box.appendChild(grid);
+  const swipeCue=document.createElement('div');
+  swipeCue.className='swipe-cue';
+  swipeCue.textContent='Veeg voor meer levels';
+  box.appendChild(swipeCue);
 }
 function overviewAction(label,desc,fn,rank=null){
   const d=document.createElement('button');
