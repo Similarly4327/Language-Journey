@@ -929,6 +929,7 @@ section{
   --glass-shadow:0 18px 48px rgba(31,45,48,.16),0 2px 8px rgba(31,45,48,.08);
   --level-glass:rgba(255,255,255,.24);
   --level-glass-strong:rgba(255,255,255,.34);
+  --continue-glass:rgba(255,250,243,.74);
 }
 @media(prefers-color-scheme:dark){
   :root{
@@ -939,6 +940,7 @@ section{
     --glass-shadow:0 20px 58px rgba(0,0,0,.38),0 2px 10px rgba(0,0,0,.2);
     --level-glass:rgba(16,24,27,.26);
     --level-glass-strong:rgba(17,25,28,.36);
+    --continue-glass:rgba(24,28,27,.78);
   }
 }
 body{
@@ -992,10 +994,39 @@ body[data-scene="classroom"]::after{
   padding:10px 12px;
   border:1px solid var(--glass-border);
   border-radius:18px;
-  background:var(--glass);
+  background:var(--glass-strong);
   box-shadow:0 10px 30px rgba(32,48,52,.12);
   -webkit-backdrop-filter:blur(22px) saturate(1.28);
   backdrop-filter:blur(22px) saturate(1.28);
+}
+.app-header .storage-badge{display:none}
+.header-actions{
+  align-items:center;
+  flex-direction:row;
+}
+.app-nav{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  padding:4px;
+  border:1px solid color-mix(in srgb,var(--glass-border) 78%,transparent);
+  border-radius:13px;
+  background:color-mix(in srgb,var(--glass-soft) 74%,transparent);
+}
+.app-nav-item{
+  min-height:36px;
+  border:0;
+  border-radius:9px;
+  padding:6px 12px;
+  background:transparent;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:760;
+}
+.app-nav-item.active{
+  background:var(--glass-strong);
+  color:var(--text);
+  box-shadow:0 3px 12px rgba(32,48,52,.1);
 }
 .card,
 .level-menu-card,
@@ -1049,18 +1080,40 @@ body[data-scene="classroom"]::after{
   position:relative;
   overflow:hidden;
   min-height:146px;
+  justify-content:flex-start;
   background:var(--level-glass);
+  border:2px solid color-mix(in srgb,var(--glass-border) 72%,transparent);
+  box-shadow:0 12px 34px rgba(31,45,48,.13);
   -webkit-backdrop-filter:blur(10px) saturate(1.12);
   backdrop-filter:blur(10px) saturate(1.12);
   transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
 }
 .level-menu-card::before{
+  display:none;
+}
+.level-menu-card.rank-Copper,
+.level-menu-card.rank-Silver,
+.level-menu-card.rank-Gold,
+.level-menu-card.rank-Platinum{
+  background:var(--level-glass);
+  box-shadow:0 12px 34px rgba(31,45,48,.13);
+}
+.level-menu-card.rank-Copper{border-color:#a96c46}
+.level-menu-card.rank-Silver{border-color:#aeb7c0}
+.level-menu-card.rank-Gold{border-color:#c59b3b}
+.level-menu-card.rank-Platinum{border-color:#8dc9dc}
+.level-menu-card::after{content:none}
+.level-menu-card.rank-Platinum::after{
   content:"";
   position:absolute;
-  inset:0 auto 0 0;
-  width:4px;
-  background:linear-gradient(#e95d61,#cb3038);
-  opacity:.9;
+  top:-2px;
+  right:13px;
+  width:54px;
+  height:2px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.92),transparent);
+  rotate:-8deg;
+  transform-origin:right center;
+  pointer-events:none;
 }
 .level-menu-card:active{transform:scale(.985)}
 @media(hover:hover){
@@ -1072,11 +1125,12 @@ body[data-scene="classroom"]::after{
 .journey-hero{
   position:relative;
   overflow:hidden;
-  min-height:132px;
-  padding-right:86px;
-  background:linear-gradient(135deg,var(--level-glass-strong),var(--level-glass));
-  -webkit-backdrop-filter:blur(10px) saturate(1.12);
-  backdrop-filter:blur(10px) saturate(1.12);
+  min-height:174px;
+  padding:20px 108px 20px 20px;
+  background:linear-gradient(135deg,var(--continue-glass),color-mix(in srgb,var(--continue-glass) 80%,rgba(196,74,62,.2)));
+  box-shadow:0 22px 58px rgba(48,44,38,.2),0 3px 10px rgba(48,44,38,.1);
+  -webkit-backdrop-filter:blur(22px) saturate(1.24);
+  backdrop-filter:blur(22px) saturate(1.24);
 }
 .journey-hero .hero-mark{
   position:absolute;
@@ -1094,6 +1148,22 @@ body[data-scene="classroom"]::after{
   letter-spacing:.12em;
   text-transform:uppercase;
 }
+.continue-title{margin-top:7px;max-width:560px}
+.continue-detail{margin-top:6px;color:var(--muted);font-size:14px;font-weight:650}
+.continue-action{width:auto;margin-top:16px;padding-inline:18px}
+.menu-section-head{
+  display:grid;
+  gap:3px;
+  margin-top:12px;
+  padding-inline:3px;
+}
+.menu-section-head .h2{font-size:19px}
+.future-head{margin-top:25px}
+.future-levels .level-menu-card{
+  background:color-mix(in srgb,var(--level-glass) 76%,transparent);
+  box-shadow:0 8px 25px rgba(31,45,48,.09);
+}
+.future-levels .level-title{font-weight:730}
 body[data-scene="classroom"] .card,
 body[data-scene="classroom"] .module-card,
 body[data-scene="classroom"] .lesson-select-card{
@@ -1116,8 +1186,14 @@ body[data-scene="journey"][data-view="main"] #mainView{
   body[data-scene="classroom"]::before{background-position:52% center}
   .app-header{top:max(6px,env(safe-area-inset-top));padding:9px 10px;border-radius:16px}
   .level-menu-card{min-height:138px}
-  .journey-hero{min-height:124px;padding-right:70px}
+  .journey-hero{min-height:190px;padding:17px 72px 17px 16px}
   .journey-hero .hero-mark{right:13px;font-size:54px}
+  .continue-title{font-size:22px;margin-top:6px}
+  .continue-action{width:100%;max-width:240px;margin-top:14px}
+  .app-nav{gap:2px;padding:3px}
+  .app-nav-item{min-height:34px;padding:5px 9px;font-size:12px}
+  .menu-section-head{margin-top:10px;padding-inline:1px}
+  .future-head{margin-top:20px}
   #quizView .card,#resultView .card{background:rgba(255,255,255,.9)}
 }
 @media(max-width:380px){
@@ -1133,11 +1209,11 @@ body[data-scene="journey"][data-view="main"] #mainView{
     display:grid;
     grid-template-columns:none;
     grid-auto-flow:column;
-    grid-auto-columns:clamp(142px,42vw,178px);
+    grid-auto-columns:min(86%,360px);
     gap:9px;
     width:auto;
     margin-inline:calc(-1 * max(9px,env(safe-area-inset-left)));
-    padding:2px 64px 12px max(9px,env(safe-area-inset-left));
+    padding:2px 54px 12px max(9px,env(safe-area-inset-left));
     overflow-x:auto;
     overflow-y:hidden;
     overscroll-behavior-x:contain;
@@ -1150,7 +1226,7 @@ body[data-scene="journey"][data-view="main"] #mainView{
   .level-menu-grid::-webkit-scrollbar{display:none}
   .level-menu-card{
     width:100%;
-    min-height:154px;
+    min-height:152px;
     scroll-snap-align:start;
     scroll-snap-stop:normal;
     touch-action:pan-x;
@@ -1183,6 +1259,10 @@ body[data-scene="journey"][data-view="main"] #mainView{
     font-size:16px;
   }
 }
+@media(min-width:1000px){
+  .active-levels{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .future-levels{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
 @media(prefers-color-scheme:dark) and (max-width:640px){
   .swipe-cue{text-shadow:0 1px 8px rgba(0,0,0,.9)}
 }
@@ -1199,13 +1279,16 @@ body[data-scene="journey"][data-view="main"] #mainView{
     <div class="header-left">
       <button id="navBack" class="nav-back hidden" type="button" aria-label="Terug">←</button>
       <div class="header-copy">
-        <div id="headerEyebrow" class="eyebrow">Leerroute</div>
-        <div id="headerTitle" class="h1">Kies een level</div>
+        <div id="headerEyebrow" class="eyebrow">日本語</div>
+        <div id="headerTitle" class="h1">Language Journey</div>
       </div>
     </div>
     <div class="header-actions">
       <div id="storageBadge" class="storage-badge" title="Voortgang wordt in deze browser opgeslagen">v11.1 · opslag</div>
-      <button id="sessionBtn" class="btn tiny">Voortgang</button>
+      <nav class="app-nav" aria-label="Hoofdnavigatie">
+        <button id="learnNav" class="app-nav-item active" type="button">Leren</button>
+        <button id="sessionBtn" class="app-nav-item" type="button">Voortgang</button>
+      </nav>
     </div>
   </div>
 </section>
@@ -1912,19 +1995,21 @@ function setMain(){show('main');renderMain()}
 const pct=x=>Math.round(x*100)+'%';
 
 function updateHeader(){
-  const back=$('navBack'),ey=$('headerEyebrow'),title=$('headerTitle');
-  if(state.screen==='levels'){
+  const back=$('navBack'),ey=$('headerEyebrow'),title=$('headerTitle'),learn=$('learnNav'),progress=$('sessionBtn');
+  const progressOpen=!$('sessionView').classList.contains('hidden');
+  learn.classList.toggle('active',!progressOpen);
+  progress.classList.toggle('active',progressOpen);
+  if(progressOpen||state.screen==='levels'){
     back.classList.add('hidden');
-    ey.textContent='Leerroute';
-    title.textContent='Kies een level';
+    ey.textContent='日本語';
+    title.textContent='Language Journey';
   }else{
     back.classList.remove('hidden');
     const lv=levels[state.level];
     ey.textContent=lv?.[0]||'Leerroute';
     title.textContent=state.screen==='module' ? (moduleHeaderTitle()||lv?.[1]||'Japans') : (lv?.[1]||'Japans');
   }
-  if(!$('sessionView').classList.contains('hidden'))$('sessionBtn').textContent='Sluiten';
-  else $('sessionBtn').textContent='Voortgang';
+  progress.textContent='Voortgang';
 }
 function moduleHeaderTitle(){
   if(state.level===0)return state.basisModule==='numbers'?'Cijfers':kanaModules[state.basisModule]?.label;
@@ -1956,30 +2041,79 @@ function levelIntro(i){
     ['Je voegt kleine ゃゅょ, kleine っ en lange klinkers toe.','De nieuwe klanken worden meteen toegepast in bekende woorden en zinsstructuren.']
   ][i]||['Dit level is voorbereid voor de volgende stap in de cursus.','Alles blijft toegankelijk zonder locks.'];
 }
+function hasJourneyActivity(){
+  return Object.values(rankState).some(x=>x.rank||x.attempts>0)
+    ||state.level>0
+    ||state.basisModule!=='hiragana'
+    ||state.row.hiragana>0
+    ||state.row.katakana>0
+    ||state.step.hiragana>0
+    ||state.step.katakana>0
+    ||state.numberLesson>0
+    ||state.dakPattern>0
+    ||state.langLesson>0
+    ||state.smallLesson>0;
+}
+function continueJourneyPlan(){
+  if(!hasJourneyActivity())return{
+    title:'Begin je Japanse leerreis',
+    detail:'Level 1 · Basis',
+    button:'Start bij Basis →',
+    action:()=>openLevel(0)
+  };
+  const level=Math.max(0,Math.min(state.level,levels.length-1));
+  if(level===0){
+    const key=state.basisModule;
+    if(key==='numbers')return{title:'Ga verder met Cijfers',detail:`Les ${state.numberLesson+1} · ${numberLessons[state.numberLesson]?.name||'Japanse cijfers'}`,button:'Verder leren →',action:()=>openModule(0)};
+    const script=key==='katakana'?'Katakana':'Hiragana';
+    const row=kanaModules[key]?.rows[state.row[key]];
+    return{title:`Ga verder met ${script}`,detail:`Rij ${state.row[key]+1} · ${row?.name||'Basis'}`,button:'Verder leren →',action:()=>openModule(0)};
+  }
+  if(level===1)return{title:'Ga verder met Kana Mix',detail:'Level 2 · 92 basiskana schakelen',button:'Verder leren →',action:()=>openModule(1)};
+  if(level===2)return{title:'Ga verder met Dakuten',detail:`Level 3 · ${dakutenPatterns[state.dakPattern]?.name||'Klankmodificaties'}`,button:'Verder leren →',action:()=>openModule(2)};
+  if(level===3)return{title:'Ga verder met Eerste taalbouw',detail:`Les ${state.langLesson+1} · ${langLessons[state.langLesson]?.title||'Eerste zinnen'}`,button:'Verder leren →',action:()=>openModule(3)};
+  if(level===4)return{title:'Ga verder met klankbouw',detail:`Les ${state.smallLesson+1} · ${smallLessons[state.smallLesson]?.title||'Kleine kana'}`,button:'Verder leren →',action:()=>openModule(4)};
+  return{title:`Ga verder met ${levels[level][1]}`,detail:`Verder op je reis · ${levels[level][2]}`,button:'Verder kijken →',action:()=>openModule(level)};
+}
+function levelMenuCard(lv,i){
+  const rank=levelRank(i);
+  const b=document.createElement('button');
+  b.type='button';
+  b.className=`level-menu-card ${rankClass(rank)}`;
+  b.innerHTML=`<div class="level-no">${lv[0]}</div><div class="level-title">${lv[1]}</div><div class="level-desc">${lv[2]}</div>`;
+  b.onclick=()=>openLevel(i);
+  return b;
+}
 function renderLevelMenu(box){
   updateHeader();
+  const plan=continueJourneyPlan();
   const intro=document.createElement('section');
   intro.className='card journey-hero';
-  intro.innerHTML=`<div class="hero-kicker">日本語への道 · jouw route</div><div class="h2" style="margin-top:5px">Jouw Japanse leerreis</div><div class="muted" style="margin-top:5px">Kies een level en bouw rustig verder. Je laagste kernrank bepaalt de rand van ieder level.</div><span class="hero-mark" aria-hidden="true">旅</span>`;
+  intro.innerHTML=`<div class="hero-kicker">日本語への道 · jouw route</div><div class="h1 continue-title">${plan.title}</div><div class="continue-detail">${plan.detail}</div><button class="btn primary continue-action" type="button">${plan.button}</button><span class="hero-mark" aria-hidden="true">旅</span>`;
+  intro.querySelector('.continue-action').onclick=plan.action;
   box.appendChild(intro);
+
+  const activeHead=document.createElement('div');
+  activeHead.className='menu-section-head';
+  activeHead.innerHTML=`<div class="h2">Jouw leerroute</div><div class="muted">Kies een level en bouw in je eigen tempo verder.</div>`;
+  box.appendChild(activeHead);
   const grid=document.createElement('div');
-  grid.className='level-menu-grid';
+  grid.className='level-menu-grid active-levels';
   grid.setAttribute('role','region');
-  grid.setAttribute('aria-label','Levels, horizontaal scrollbaar op mobiel');
-  levels.forEach((lv,i)=>{
-    const rank=levelRank(i);
-    const b=document.createElement('button');
-    b.type='button';
-    b.className=`level-menu-card ${rankClass(rank)}`;
-    b.innerHTML=`<div><div class="level-no">${lv[0]}</div><div class="level-title">${lv[1]}</div><div class="level-desc">${lv[2]}</div></div><div class="level-rank-line"><span class="small">${i<5?'Actief curriculum':'Voorbereid'}</span><span class="rank ${rankClass(rank)}">${rankText(rank)}</span></div>`;
-    b.onclick=()=>openLevel(i);
-    grid.appendChild(b);
-  });
+  grid.setAttribute('aria-label','Jouw leerroute');
+  levels.slice(0,5).forEach((lv,i)=>grid.appendChild(levelMenuCard(lv,i)));
   box.appendChild(grid);
-  const swipeCue=document.createElement('div');
-  swipeCue.className='swipe-cue';
-  swipeCue.textContent='Veeg voor meer levels';
-  box.appendChild(swipeCue);
+
+  const futureHead=document.createElement('div');
+  futureHead.className='menu-section-head future-head';
+  futureHead.innerHTML=`<div class="h2">Verder op je reis</div><div class="muted">Meer vaardigheden worden onderdeel van je reis wanneer je verder komt.</div>`;
+  box.appendChild(futureHead);
+  const futureGrid=document.createElement('div');
+  futureGrid.className='level-menu-grid future-levels';
+  futureGrid.setAttribute('role','region');
+  futureGrid.setAttribute('aria-label','Verder op je reis');
+  levels.slice(5).forEach((lv,j)=>futureGrid.appendChild(levelMenuCard(lv,j+5)));
+  box.appendChild(futureGrid);
 }
 function overviewAction(label,desc,fn,rank=null){
   const d=document.createElement('button');
@@ -3028,7 +3162,6 @@ function renderProgressSkillsTab(box){
 function renderSession(){
   show('session');
   updateHeader();
-  $('sessionBtn').textContent='Sluiten';
   const box=$('sessionContent');
   box.innerHTML=`<div class="progress-tabs">
     <button class="progress-tab ${state.progressTab==='levels'?'active':''}" data-progress="levels">Levelprogressie</button>
@@ -3055,7 +3188,13 @@ function toggleProgress(){
   if(!$('sessionView').classList.contains('hidden'))setMain();
   else renderSession();
 }
+function goToLearningHome(){
+  state.screen='levels';
+  scheduleSave();
+  renderMain();
+}
 $('sessionBtn').onclick=toggleProgress;
+$('learnNav').onclick=goToLearningHome;
 $('sessionBack').onclick=setMain;
 $('navBack').onclick=navigateBack;
 $('quitQuiz').onclick=setMain;
