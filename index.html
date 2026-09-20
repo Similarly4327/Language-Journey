@@ -2109,8 +2109,8 @@ function moduleHeaderTitle(){
   if(state.level===0)return state.basisModule==='numbers'?'Cijfers':kanaModules[state.basisModule]?.label;
   if(state.level===1)return'Kana Mix';
   if(state.level===2)return'Dakuten & Handakuten';
-  if(state.level===3)return'Eerste taalbouw';
-  if(state.level===4)return'Kleine kana & klankbouw';
+  if(state.level===3)return'Eerste taalbasis';
+  if(state.level===4)return'Kana compleet';
   return levels[state.level]?.[1]||'Japans';
 }
 function navigateBack(){
@@ -2176,8 +2176,8 @@ function hasJourneyActivity(){
 function continueJourneyPlan(){
   if(!hasJourneyActivity())return{
     title:'Begin je Japanse leerreis',
-    detail:'Level 1 · Basis',
-    button:'Start bij Basis →',
+    detail:'Level 1 · Schriftbasis',
+    button:'Start bij Schriftbasis →',
     action:()=>openLevel(0)
   };
   const level=Math.max(0,Math.min(state.level,levels.length-1));
@@ -2190,8 +2190,8 @@ function continueJourneyPlan(){
   }
   if(level===1)return{title:'Ga verder met Kana Mix',detail:'Level 2 · 92 basiskana schakelen',button:'Verder leren →',action:()=>openModule(1)};
   if(level===2)return{title:'Ga verder met Dakuten',detail:`Level 3 · ${dakutenPatterns[state.dakPattern]?.name||'Klankmodificaties'}`,button:'Verder leren →',action:()=>openModule(2)};
-  if(level===3)return{title:'Ga verder met Eerste taalbouw',detail:`Les ${state.langLesson+1} · ${langLessons[state.langLesson]?.title||'Eerste zinnen'}`,button:'Verder leren →',action:()=>openModule(3)};
-  if(level===4)return{title:'Ga verder met klankbouw',detail:`Les ${state.smallLesson+1} · ${smallLessons[state.smallLesson]?.title||'Kleine kana'}`,button:'Verder leren →',action:()=>openModule(4)};
+  if(level===3)return{title:'Ga verder met Eerste taalbasis',detail:`Les ${state.langLesson+1} · ${langLessons[state.langLesson]?.title||'Eerste zinnen'}`,button:'Verder leren →',action:()=>openModule(3)};
+  if(level===4)return{title:'Ga verder met Kana compleet',detail:`Les ${state.smallLesson+1} · ${smallLessons[state.smallLesson]?.title||'Kleine kana'}`,button:'Verder leren →',action:()=>openModule(4)};
   return{title:`Ga verder met ${levels[level][1]}`,detail:`Verder op je reis · ${levels[level][2]}`,button:'Verder kijken →',action:()=>openModule(level)};
 }
 function levelMenuCard(lv,i){
