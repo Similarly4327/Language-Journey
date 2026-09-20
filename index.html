@@ -1186,6 +1186,15 @@ body[data-scene="classroom"]::after{
 }
 .menu-section-head .h2{font-size:19px}
 .future-head{margin-top:25px}
+.active-levels{
+  grid-template-columns:none;
+  grid-auto-flow:column;
+  grid-auto-columns:minmax(168px,220px);
+  overflow-x:auto;
+  scroll-snap-type:x proximity;
+  padding-bottom:7px;
+}
+.active-levels .level-menu-card{scroll-snap-align:start}
 .future-levels .level-menu-card{
   background:color-mix(in srgb,var(--level-glass) 76%,transparent);
   box-shadow:0 8px 25px rgba(31,45,48,.09);
@@ -1287,7 +1296,6 @@ body[data-scene="journey"][data-view="main"] #mainView{
   }
 }
 @media(min-width:1000px){
-  .active-levels{grid-template-columns:repeat(5,minmax(0,1fr))}
   .future-levels{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 @media(prefers-color-scheme:dark) and (max-width:640px){
@@ -1311,7 +1319,7 @@ body[data-scene="journey"][data-view="main"] #mainView{
       </div>
     </div>
     <div class="header-actions">
-      <div id="storageBadge" class="storage-badge" title="Voortgang wordt in deze browser opgeslagen">v11.1 · opslag</div>
+      <div id="storageBadge" class="storage-badge" title="Voortgang wordt in deze browser opgeslagen">v12 · opslag</div>
       <nav class="app-nav" aria-label="Hoofdnavigatie">
         <button id="learnNav" class="app-nav-item active" type="button">Leren</button>
         <button id="sessionBtn" class="app-nav-item" type="button">Voortgang</button>
@@ -1377,46 +1385,54 @@ const smallLessons=[
 {id:'l5-5',title:'Lange klinkers in Katakana',goal:'Het teken ー herkennen en gebruiken in bekende zinsstructuren.',newItems:[['ケーキ','keeki'],['ゲーム','geemu'],['コーヒー','koohii'],['スーパー','suupaa'],['タクシー','takushii']],apply:['ケーキ','ゲーム','コーヒー'],note:'ー verlengt de voorafgaande klinker. Geen nieuw alfabet.',check:[['mc','ゲーム','geemu',['gemu','geemu','gemu']],['mc','koohii','コーヒー',['コヒ','コーヒー','コーヒ']],['meaning','スーパー','supermarkt',['supermarkt','hotel','station']],['order','Zet goed: コーヒー / を / のみます','コーヒー を のみます',['コーヒー を のみます','のみます コーヒー を','を コーヒー のみます']],['meaning','これは ケーキ です','Dit is cake.',['Dit is cake.','Dit is koffie.','Dit is een spel.']]]}
 ];
 
-// De vervolglevels zijn bewust curriculumroutes, nog geen schijnbaar werkende quizzen.
-// Iedere les noemt precies welke bekende kennis terugkomt en welk kleine onderdeel nieuw is.
-const futureCurriculum={
-  5:{intro:'Gebruik bekende です-zinnen om mensen en relaties te beschrijven.',lessons:[
-    ['Mensen om je heen','わたし · あなた · ひと · ともだち','Bekend: X は Y です','Nieuw: woorden voor mensen'],
-    ['Mijn familie','かぞく · ちち · はは','Bekend: woorden verbinden','Nieuw: の voor bezit en relatie'],
-    ['Broer en zus','あに · あね','Bekend: わたし の ...','Nieuw: twee familiewoorden'],
-    ['Dit is mijn moeder','これは わたし の はは です','Bekend: これ en です','Nieuw: alles samen toepassen']
+function advancedParts(sentence){return sentence.split(' ').map(token=>{const roles={は:['topicmarkering','wa'],の:['relatie','van'],を:['objectmarkering','o'],に:['tijd / doel','op / naar'],で:['handeling hier','op / in'],と:['met-persoon','met'],か:['vraag','?'],です:['slot','is'],います:['slot','is / zijn'],いきます:['werkwoord','gaan'],きます:['werkwoord','komen'],たべます:['werkwoord','eten'],のみます:['werkwoord','drinken'],ください:['verzoek','alstublieft'],あいます:['werkwoord','ontmoeten'],のります:['werkwoord','instappen']};return[token,...(roles[token]||['inhoud','woordblok'])]})}
+function advancedLesson(id,title,goal,review,words,pattern,grammar,sentence,meaning,focus,story=null){return{id,title,goal,review,newLabel:`${words.length} nieuwe woorden`,pattern,words,grammar,models:[{sentence,meaning,parts:advancedParts(sentence)}],builders:[[meaning,sentence,[...sentence.split(' ')].reverse()]],focus,story}}
+const advancedCourses={
+  5:{number:6,title:'Mensen & relaties',competency:'Ik kan eenvoudige personen en familierelaties benoemen.',lessons:[
+    advancedLesson('l6-1','Mensen om mij heen','Benoem jezelf, een persoon en een vriend.','Herhaling: わたし, ひと en ともだち kwamen in Level 4 al voor.',[['あなた','jij','anata'],['かぞく','familie','kazoku'],['おとこ','man','otoko'],['おんな','vrouw','onna']],'X は Y です','De bekende です-zin werkt ook voor personen. Voeg vandaag alleen vier menswoorden toe.','あなた は ともだち です','Jij bent een vriend.',['fill','あなた ___ ともだち です','は',['は','の','を'],'structure']),
+    advancedLesson('l6-2','Mijn vader en moeder','Zeg wie jouw vader of moeder is.','Herhaling: の betekent “van” en maakt een relatie tussen twee woorden.',[['ちち','mijn vader','chichi'],['はは','mijn moeder','haha'],['おとうさん','vader / iemands vader','otousan'],['おかあさん','moeder / iemands moeder','okaasan']],'X の Y','Gebruik ちち en はは voor je eigen ouders. おとうさん en おかあさん gebruik je beleefd voor die van iemand anders.','これは わたし の はは です','Dit is mijn moeder.',['fill','わたし ___ はは','の',['の','は','に'],'structure']),
+    advancedLesson('l6-3','Broer en zus','Benoem een oudere broer of zus in een bekende zin.','Herhaling: わたし の ... betekent “mijn ...”.',[['あに','mijn oudere broer','ani'],['あね','mijn oudere zus','ane'],['きょうだい','broers en zussen','kyoudai'],['だれ','wie','dare']],'だれ です か','だれ betekent “wie”. Zet か achter de bekende です-zin om naar een persoon te vragen.','これは だれ です か','Wie is dit?',['fill','これは だれ です ___','か',['か','の','を'],'structure']),
+    advancedLesson('l6-4','Jongere broer en zus','Breid dezelfde familiezinnen uit met twee nieuwe relaties.','Herhaling: je kent nu de vraag だれ です か en bezit met の.',[['おとうと','jongere broer','otouto'],['いもうと','jongere zus','imouto'],['こども','kind','kodomo'],['みんな','iedereen','minna']],'bekend patroon + nieuwe familie','Er komt geen nieuwe grammatica bij. Gebruik dezelfde blokken met nieuwe familiewoorden.','それ は ともだち の いもうと です','Dat is de jongere zus van een vriend.',['fill','ともだち ___ いもうと','の',['の','を','に'],'structure']),
+    advancedLesson('l6-5','Familiemissie','Begrijp en bouw een kort familiebericht.','Herhaling: は, の, です en か komen samen; er is geen nieuwe regel.',[],'wie → relatie → persoon','Lees steeds per blok: over wie gaat het, welke relatie staat met の, en wie is de persoon?','これは わたし の かぞく です','Dit is mijn familie.',['order','Welk blok geeft de relatie aan?','の',['は','の','です'],'integration'],['これは わたし の かぞく です。 あれは わたし の あに です。','Wie is daar?','mijn oudere broer',['mijn oudere broer','mijn vader','een vriend']])
   ]},
-  6:{intro:'Herbruik je cijfers; voeg per module slechts één soort teller toe.',lessons:[
-    ['Dingen tellen','ひとつ · ふたつ · みっつ','Bekend: cijfers','Nieuw: algemene teller 〜つ'],
-    ['Mensen tellen','ひとり · ふたり · さんにん','Bekend: personen','Nieuw: teller voor mensen'],
-    ['Dieren tellen','いっぴき · にひき · さんびき','Bekend: aantallen','Nieuw: teller voor kleine dieren'],
-    ['Vorm bepaalt de teller','〜ほん · 〜まい','Bekend: tellen','Nieuw: lang tegenover plat'],
-    ['Eerste, tweede, derde','いちばんめ · にばんめ · さんばんめ','Bekend: cijfers','Nieuw: rangtelwoord 〜ばんめ']
+  6:{number:7,title:'Hoeveelheden',competency:'Ik kan enkele veelgebruikte dingen, mensen en dieren tellen.',lessons:[
+    advancedLesson('l7-1','Dingen tellen met つ','Tel één tot en met vier algemene dingen.','Herhaling: de getallen zijn bekend; alleen de telvorm is nieuw.',[['ひとつ','één ding','hitotsu'],['ふたつ','twee dingen','futatsu'],['みっつ','drie dingen','mittsu'],['よっつ','vier dingen','yottsu']],'aantal + zelfstandig woord','〜つ is een algemene teller. Leer eerst alleen één tot en met vier als complete klankblokken.','パン は ふたつ です','Het zijn twee broden.',['mc','みっつ','drie dingen',['één ding','twee dingen','drie dingen'],'vocab']),
+    advancedLesson('l7-2','Mensen tellen','Tel één, twee en drie personen.','Herhaling: ひと betekent persoon; nu verandert alleen de telvorm.',[['ひとり','één persoon','hitori'],['ふたり','twee personen','futari'],['さんにん','drie personen','sannin'],['よにん','vier personen','yonin']],'aantal + にん','Bij één en twee gebruik je ひとり en ふたり. Vanaf drie hoor je het bekende getal met にん.','かぞく は よにん です','Het gezin bestaat uit vier personen.',['fill','かぞく は ___ です','よにん',['よっつ','よにん','よんほん'],'structure']),
+    advancedLesson('l7-3','Kleine dieren tellen','Tel één tot en met drie kleine dieren.','Herhaling: ねこ en いぬ zijn bekend; de teller is het enige nieuwe systeem.',[['いっぴき','één klein dier','ippiki'],['にひき','twee kleine dieren','nihiki'],['さんびき','drie kleine dieren','sanbiki'],['なんびき','hoeveel kleine dieren','nanbiki']],'aantal + ひき','De uitspraak wisselt bij één en drie. Leer alleen de vormen die je nu gebruikt, niet alle uitzonderingen.','ねこ は さんびき です','Er zijn drie katten.',['fill','ねこ は ___ です','さんびき',['さんにん','みっつ','さんびき'],'structure']),
+    advancedLesson('l7-4','Lang of plat','Kies een teller op basis van de vorm.','Herhaling: je kent het principe “getal + teller”; vandaag voeg je twee vormen toe.',[['いっぽん','één lang voorwerp','ippon'],['にほん','twee lange voorwerpen','nihon'],['いちまい','één plat voorwerp','ichimai'],['にまい','twee platte voorwerpen','nimai']],'ほん of まい','Gebruik ほん voor lange cilindrische dingen en まい voor platte dingen. Oefen voorlopig alleen één en twee.','きって は にまい です','Het zijn twee postzegels.',['fill','きって は に___ です','まい',['まい','ほん','ひき'],'structure']),
+    advancedLesson('l7-5','Eerste, tweede, derde','Geef een eenvoudige positie in een rij aan.','Herhaling: bekende getallen blijven herkenbaar vooraan.',[['いちばんめ','eerste','ichibanme'],['にばんめ','tweede','nibanme'],['さんばんめ','derde','sanbanme'],['どれ','welke','dore']],'getal + ばんめ','ばんめ maakt van een getal een positie. Begin alleen met eerste, tweede en derde.','ねこ は にばんめ です','De kat is tweede.',['fill','ねこ は ___ です','にばんめ',['にひき','にばんめ','にまい'],'structure'])
   ]},
-  7:{intro:'Zet bekende cijfers stap voor stap om in bruikbare agenda-informatie.',lessons:[
-    ['Dagen van de week','げつようび → にちようび','Bekend: kana lezen','Nieuw: weekdagen'],
-    ['Vandaag en morgen','きょう · あした · きのう','Bekend: dagen','Nieuw: relatieve dag'],
-    ['Maand en datum','なんがつ · なんにち','Bekend: cijfers','Nieuw: datum lezen'],
-    ['Hoe laat?','なんじ です か','Bekend: vraag met か','Nieuw: uren'],
-    ['Een afspraak','あした さんじ','Bekend: dag + tijd','Nieuw: agendablokken combineren']
+  7:{number:8,title:'Tijd & agenda',competency:'Ik kan eenvoudige dagen, tijden en afspraken begrijpen.',lessons:[
+    advancedLesson('l8-1','Begin van de week','Herken maandag tot en met donderdag.','Herhaling: alle kana zijn bekend; de vier weekdagen zijn de enige nieuwe informatie.',[['げつようび','maandag','getsuyoubi'],['かようび','dinsdag','kayoubi'],['すいようび','woensdag','suiyoubi'],['もくようび','donderdag','mokuyoubi']],'dag + は','Een weekdag kan gewoon vóór は staan. De rest van de zin blijft bekend.','げつようび は みせ に いきます','Maandag ga ik naar de winkel.',['mc','すいようび','woensdag',['maandag','woensdag','donderdag'],'vocab']),
+    advancedLesson('l8-2','Einde van de week','Maak de week compleet en mix alle dagen.','Herhaling: de eerste vier weekdagen komen in de oefeningen terug.',[['きんようび','vrijdag','kinyoubi'],['どようび','zaterdag','doyoubi'],['にちようび','zondag','nichiyoubi'],['なんようび','welke dag','nanyoubi']],'なんようび です か','なんようび vraagt naar de dag. De bekende vraagmarkering か blijft achteraan.','きょう は なんようび です か','Welke dag is het vandaag?',['fill','なんようび です ___','か',['か','に','を'],'structure']),
+    advancedLesson('l8-3','Vandaag, morgen, gisteren','Plaats een gebeurtenis dicht bij vandaag.','Herhaling: dagen en gaan met に zijn bekend.',[['きょう','vandaag','kyou'],['あした','morgen','ashita'],['きのう','gisteren','kinou'],['こんしゅう','deze week','konshuu']],'tijd vooraan','Een tijdswoord mag vooraan staan. Bij きょう, あした en きのう laat je in deze basiszinnen に weg.','あした えき に いきます','Morgen ga ik naar het station.',['fill','___ えき に いきます','あした',['あした','みぎ','ふたり'],'structure']),
+    advancedLesson('l8-4','Maand en datum','Herken een eenvoudige maand en de eerste drie datums.','Herhaling: cijfers helpen bij maanden; datums leer je als kleine vaste blokken.',[['いちがつ','januari','ichigatsu'],['にがつ','februari','nigatsu'],['ついたち','de eerste dag','tsuitachi'],['ふつか','de tweede dag','futsuka'],['みっか','de derde dag','mikka']],'maand + datum','Maanden volgen meestal getal + がつ. De eerste drie datums hebben eigen lezingen en worden apart geoefend.','にがつ ふつか です','Het is 2 februari.',['fill','にがつ ___ です','ふつか',['ふたつ','ふつか','ふたり'],'structure']),
+    advancedLesson('l8-5','Hele uren','Vraag en zeg een eenvoudig heel uur.','Herhaling: か maakt een vraag en bekende cijfers staan voor じ.',[['いちじ','één uur','ichiji'],['にじ','twee uur','niji'],['さんじ','drie uur','sanji'],['なんじ','hoe laat','nanji']],'getal + じ','じ betekent hier uur. Zet なんじ in de bekende vraagvorm om naar de tijd te vragen.','いま なんじ です か','Hoe laat is het nu?',['fill','いま ___ です か','なんじ',['なんじ','なんにん','なんびき'],'structure']),
+    advancedLesson('l8-6','Een afspraak','Combineer persoon, dag, tijd en plaats.','Herhaling: alle onderdelen zijn eerder apart geleerd; deze les voegt geen nieuwe grammatica toe.',[['やくそく','afspraak','yakusoku'],['らいしゅう','volgende week','raishuu'],['せんしゅう','vorige week','senshuu'],['いま','nu','ima']],'wanneer + wie + waar','Bouw de informatie in rustige blokken. Het werkwoord blijft achteraan.','あした さんじ えき に いきます','Morgen om drie uur ga ik naar het station.',['order','Wat staat in deze zin als tijd?','さんじ',['あした','さんじ','えき'],'integration'],['あした は げつようび です。 さんじ えき に いきます。','Wanneer ga je naar het station?','morgen om drie uur',['vandaag om twee uur','morgen om drie uur','maandag om één uur']])
   ]},
-  8:{intro:'Breid het bekende gaan-patroon uit met plaatsen en eenvoudige richtingen.',lessons:[
-    ['Hier en daar','ここ · そこ · あそこ','Bekend: これ / それ / あれ','Nieuw: plaatswoorden'],
-    ['Links en rechts','ひだり · みぎ','Bekend: plaats benoemen','Nieuw: twee richtingen'],
-    ['Voor, achter en naast','まえ · うしろ · となり','Bekend: の-verbinding','Nieuw: positie met の'],
-    ['Boven en beneden','うえ · した','Bekend: positie','Nieuw: verticale richting'],
-    ['De weg naar het station','えき に いきます','Bekend: bestemming met に','Nieuw: richting in context']
+  8:{number:9,title:'Plaats & richting',competency:'Ik kan eenvoudige plaats, positie en beweging begrijpen.',lessons:[
+    advancedLesson('l9-1','Hier en daar','Wijs een plaats dichtbij of verder weg aan.','Herhaling: これ, それ en あれ worden nu plaatswoorden.',[['ここ','hier','koko'],['そこ','daar bij jou','soko'],['あそこ','daar verderop','asoko'],['どこ','waar','doko']],'どこ です か','どこ vraagt naar een plaats. De bekende です か-vraag blijft verder gelijk.','えき は どこ です か','Waar is het station?',['fill','えき は ___ です か','どこ',['だれ','どこ','どれ'],'structure']),
+    advancedLesson('l9-2','Links en rechts','Herken twee basisrichtingen.','Herhaling: ここ / そこ / あそこ geven al aan waar iets is.',[['ひだり','links','hidari'],['みぎ','rechts','migi'],['まっすぐ','rechtdoor','massugu'],['みち','weg','michi']],'richting + です','Voor een eerste routekeuze kun je de richting als beschrijving vóór です zetten.','えき は みぎ です','Het station is rechts.',['fill','えき は ___ です','みぎ',['みぎ','あした','さんじ'],'structure']),
+    advancedLesson('l9-3','Voor, achter en naast','Zeg waar iets ligt ten opzichte van iets bekends.','Herhaling: の verbindt twee woorden; nu verbindt het een plek en positie.',[['まえ','voor','mae'],['うしろ','achter','ushiro'],['となり','naast','tonari'],['なか','binnen','naka']],'X の positie','みせ の となり betekent “naast de winkel”. Het referentiepunt staat vóór の.','えき は みせ の となり です','Het station is naast de winkel.',['fill','みせ ___ となり','の',['の','を','に'],'structure']),
+    advancedLesson('l9-4','Boven en beneden','Voeg twee verticale posities toe.','Herhaling: X の positie blijft hetzelfde patroon.',[['うえ','boven / op','ue'],['した','onder','shita'],['そと','buiten','soto'],['ちかく','dichtbij','chikaku']],'X の うえ / した','Alleen de positiewoorden zijn nieuw. De relatie met の ken je al.','ねこ は ベッド の うえ です','De kat is op het bed.',['fill','ベッド の ___','うえ',['うえ','みぎ','あした'],'structure']),
+    advancedLesson('l9-5','Handeling op een plek','Zeg waar een handeling plaatsvindt.','Herhaling: に blijft voor de bestemming van gaan. Vandaag komt één andere rol erbij.',[['こうえん','park','kouen'],['がっこう','school','gakkou'],['レストラン','restaurant','resutoran'],['ちず','kaart','chizu']],'plaats + で + handeling','で markeert waar je iets doet. Vergelijk: みせ に いきます (naar) en みせ で たべます (daar eten).','レストラン で パン を たべます','Ik eet brood in het restaurant.',['fill','レストラン ___ パン を たべます','で',['で','に','の'],'structure'],['きょう こうえん に いきます。 こうえん で パン を たべます。','Waar eet je brood?','in het park',['thuis','in het park','op het station']])
   ]},
-  9:{intro:'Combineer alleen taal die in Level 1–9 stap voor stap is aangeleerd.',lessons:[
-    ['Iets bestellen','eten/drinken + aantallen','Bekend: を en tellers','Nieuw: één bestelpatroon'],
-    ['Iets kopen','voorwerp + aantal','Bekend: woorden en tellers','Nieuw: koopsituatie'],
-    ['Een afspraak maken','dag + tijd + vraag','Bekend: Level 8','Nieuw: één korte dialoog'],
-    ['Zeggen waar je gaat','plaats + tijd + に いきます','Bekend: Level 4 en 9','Nieuw: informatie combineren'],
-    ['Eindmissie','lezen · kiezen · ordenen · bouwen','Bekend: Level 1–9','Nieuw: geen; functioneel toepassen']
+  9:{number:10,title:'Dagelijks Japans',competency:'Ik kan eenvoudige dagelijkse situaties combineren.',lessons:[
+    advancedLesson('l10-1','In de winkel','Combineer aanwijzen, hoeveelheid en een eenvoudige keuze.','Herhaling: これ, hoeveelheden en vragen zijn bekend.',[['ください','alstublieft / geef mij','kudasai'],['いくら','hoeveel kost het','ikura'],['おかね','geld','okane'],['かいます','kopen','kaimasu']],'X を ください','Zet wat je wilt vóór を en sluit af met ください. Dit is het enige nieuwe vaste patroon.','パン を ふたつ ください','Twee broden, alstublieft.',['fill','パン を ふたつ ___','ください',['ください','いきます','です'],'structure']),
+    advancedLesson('l10-2','Eten bestellen','Bestel eten of drinken met een hoeveelheid.','Herhaling: を ください en tellers komen direct terug.',[['メニュー','menu','menyuu'],['みせて','laat zien','misete'],['おちゃ','thee','ocha'],['ケーキ','cake','keeki']],'bekend bestelpatroon','Er komt geen nieuwe grammatica bij. Kies product en hoeveelheid en gebruik を ください.','おちゃ を ひとつ ください','Eén thee, alstublieft.',['fill','おちゃ を ___ ください','ひとつ',['ひとつ','ひとり','いっぴき'],'structure']),
+    advancedLesson('l10-3','Een afspraak maken','Combineer persoon, dag, tijd en plaats in één plan.','Herhaling: Level 6-personen en Level 8-agenda komen samen.',[['あいます','ontmoeten','aimasu'],['いつ','wanneer','itsu'],['いっしょに','samen','isshoni'],['だいじょうぶ','in orde','daijoubu']],'persoon と あいます','と betekent hier “met”. Gebruik het alleen in dit duidelijke ontmoetingspatroon.','あした さんじ ともだち と あいます','Morgen om drie uur ontmoet ik een vriend.',['fill','ともだち ___ あいます','と',['と','を','で'],'structure']),
+    advancedLesson('l10-4','Onderweg','Begrijp een korte route met plaats en tijd.','Herhaling: links, rechts, rechtdoor, に en で zijn al geleerd.',[['でんしゃ','trein','densha'],['バス','bus','basu'],['のります','instappen / nemen','norimasu'],['おります','uitstappen','orimasu']],'vervoer + に のります','Bij instappen markeert に het voertuig. Leer dit als één praktisch patroon.','えき で でんしゃ に のります','Op het station neem ik de trein.',['fill','でんしゃ ___ のります','に',['に','で','を'],'structure']),
+    advancedLesson('l10-5','Basismissie','Volg een mini-dialoog met wie, waar, wanneer en wat.','Herhaling: deze eindmissie introduceert geen nieuwe woorden of grammatica.',[],'persoon + tijd + plaats + handeling','Lees regel voor regel. Zoek eerst wie, dan tijd, plaats en als laatste de handeling.','あした ともだち と えき に いきます','Morgen ga ik met een vriend naar het station.',['order','Welk blok zegt met wie?','ともだち と',['あした','ともだち と','えき に'],'integration'],['あした は どようび です。 さんじ ともだち と えき に いきます。 えき で でんしゃ に のります。','Wat gebeurt eerst?','naar het station gaan',['de trein uitstappen','naar het station gaan','thuis eten']])
   ]}
 };
+const specializationMilestones=[
+  ['Level 11–15','Lezen voor beginners','Korte zinnen, basis-kanji en een eerste kinderboekje.','Doel: een eenvoudig kinderboek met veel beeldsteun lezen.'],
+  ['Level 16–20','Verhalen & manga','Informele dialogen, tekstballonnen, klankwoorden en verhaalvolgorde.','Doel: eenvoudige manga met woordenboeksteun lezen.'],
+  ['Level 21–25','Luisteren & ondertitels','Bekende taal op natuurlijker tempo, luisterstrategieën en ondertitels.','Doel: toegankelijke anime met Japanse ondertitels volgen.'],
+  ['Level 26–30','Actueel Japans','Formelere stijl, veelgebruikte kanji, koppen en nieuwscontext.','Doel: eenvoudig nieuws stap voor stap kunnen volgen.']
+];
 
-function rankDefs(){const o={};['hiragana','katakana'].forEach(k=>{kanaModules[k].rows.forEach((r,i)=>o[`${k}-row-${i}`]={name:`${kanaModules[k].label} · ${r.name}`});kanaClusters.forEach((c,i)=>o[`${k}-cluster-${i}`]={name:`${kanaModules[k].label} · ${c.name}`});['exam1','exam2','exam3'].forEach(id=>o[`${k}-${id}`]={name:`${kanaModules[k].label} · ${id}`})});['num-basic','num-midterm','num-triangle','num-math','num-teens','num-tens','num-under100','num-hundreds','num-thousands','num-exam1','num-exam2'].forEach(id=>o[id]={name:id});['mix-exam1','mix-exam2'].forEach(id=>o[id]={name:id});dakutenPatterns.forEach(p=>['hiragana','katakana'].forEach(s=>o[`dak-${s}-${p.id}`]={name:`${s} ${p.name}`}));dakutenClusters.forEach((c,i)=>o[`dak-cluster-${i}`]={name:c.name});['dak-examA','dak-examB','dak-examC'].forEach(id=>o[id]={name:id});langLessons.forEach(l=>o[l.id]={name:l.title});o['l4-exam']={name:'Level 4 examen'};smallLessons.forEach(l=>o[l.id]={name:l.title});o['l5-exam']={name:'Level 5 examen'};return o}
+function rankDefs(){const o={};['hiragana','katakana'].forEach(k=>{kanaModules[k].rows.forEach((r,i)=>o[`${k}-row-${i}`]={name:`${kanaModules[k].label} · ${r.name}`});kanaClusters.forEach((c,i)=>o[`${k}-cluster-${i}`]={name:`${kanaModules[k].label} · ${c.name}`});['exam1','exam2','exam3'].forEach(id=>o[`${k}-${id}`]={name:`${kanaModules[k].label} · ${id}`})});['num-basic','num-midterm','num-triangle','num-math','num-teens','num-tens','num-under100','num-hundreds','num-thousands','num-exam1','num-exam2'].forEach(id=>o[id]={name:id});['mix-exam1','mix-exam2'].forEach(id=>o[id]={name:id});dakutenPatterns.forEach(p=>['hiragana','katakana'].forEach(s=>o[`dak-${s}-${p.id}`]={name:`${s} ${p.name}`}));dakutenClusters.forEach((c,i)=>o[`dak-cluster-${i}`]={name:c.name});['dak-examA','dak-examB','dak-examC'].forEach(id=>o[id]={name:id});langLessons.forEach(l=>o[l.id]={name:l.title});o['l4-exam']={name:'Level 4 examen'};smallLessons.forEach(l=>o[l.id]={name:l.title});o['l5-exam']={name:'Level 5 examen'};Object.values(advancedCourses).forEach(c=>{c.lessons.forEach(l=>o[l.id]={name:`Level ${c.number} · ${l.title}`});o[`l${c.number}-exam`]={name:`Level ${c.number} examen`}});return o}
 const defsCache=rankDefs(),rankState={};Object.keys(defsCache).forEach(id=>rankState[id]={rank:null,last:null,attempts:0});
 
 const MASTERY_CONFIG={
@@ -1451,6 +1467,11 @@ const vocabCatalog=(()=>{
       }
     });
   });
+  Object.values(advancedCourses).forEach(course=>course.lessons.forEach((lesson,lessonIndex)=>{
+    lesson.words.forEach(([jp,meaning])=>{
+      if(!map.has(jp))map.set(jp,{id:`vocab-${jp}`,jp,meaning,lessonId:lesson.id,lessonIndex,lessonTitle:lesson.title,level:course.number});
+    });
+  }));
   // Houd mastery van woorden uit het vorige Level 4-curriculum leesbaar.
   const legacyWords=[
     ['l4-2',1,'Dit, dat en meer',[['かばん','tas'],['テレビ','televisie']]],
@@ -1784,14 +1805,15 @@ function normalizeVocabText(v){
 function inferVocabIds(prompt,correct,lesson=null){
   const p=normalizeVocabText(prompt);
   const c=normalizeVocabText(correct);
-  const candidates=lesson
-    ?vocabCatalog.filter(v=>v.lessonId===lesson.id)
-    :vocabCatalog;
+  const introduced=new Set(state.introducedVocabIds||[]);
+  const candidates=lesson?vocabCatalog.filter(v=>v.lessonId===lesson.id||introduced.has(v.id)):vocabCatalog;
   return candidates.filter(v=>
     p===normalizeVocabText(v.jp)||
     p===normalizeVocabText(v.meaning)||
     c===normalizeVocabText(v.jp)||
-    c===normalizeVocabText(v.meaning)
+    c===normalizeVocabText(v.meaning)||
+    p.split(/\s+/).includes(normalizeVocabText(v.jp))||
+    c.split(/\s+/).includes(normalizeVocabText(v.jp))
   ).map(v=>v.id);
 }
 function vocabDirectionFor(prompt,correct,ids){
@@ -1877,6 +1899,7 @@ function levelRankIds(level){
   if(level===2)return['dak-examA','dak-examB','dak-examC'];
   if(level===3)return['l4-exam'];
   if(level===4)return['l5-exam'];
+  if(level>=5&&level<=9)return[`l${level+1}-exam`];
   return[];
 }
 function levelRank(level){return minRankForIds(levelRankIds(level))}
@@ -1891,7 +1914,7 @@ function moduleRank(key){
 }
 
 
-const state={screen:'levels',level:0,basisModule:'hiragana',tabs:{hiragana:'learn',katakana:'learn',numbers:'learn',mix:'practice',dakuten:'learn',lang:'learn',small:'learn'},row:{hiragana:0,katakana:0},step:{hiragana:0,katakana:0},numberLesson:0,dakScript:'hiragana',dakPattern:0,dakStep:0,langLesson:0,langView:'list',langStep:'overview',langStepProgress:{},introducedVocabIds:[],smallLesson:0,progressTab:'levels',progressKanaGroup:'hiragana',progressDetailId:null,progressVocabDetailId:null,practiceSelections:{hiragana:[0,1,2],katakana:[0,1,2],hiraganaChars:[],katakanaChars:[],dakuten:['g','z'],dakScripts:['hiragana','katakana'],numbers:['0-10']},errorBank:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[]},lastErrors:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[]},quiz:null,lastConfig:null};
+const state={screen:'levels',level:0,basisModule:'hiragana',tabs:{hiragana:'learn',katakana:'learn',numbers:'learn',mix:'practice',dakuten:'learn',lang:'learn',small:'learn',advanced:'learn'},row:{hiragana:0,katakana:0},step:{hiragana:0,katakana:0},numberLesson:0,dakScript:'hiragana',dakPattern:0,dakStep:0,langLesson:0,langView:'list',langStep:'overview',langStepProgress:{},introducedVocabIds:[],smallLesson:0,advancedLesson:{5:0,6:0,7:0,8:0,9:0},advancedView:{5:'list',6:'list',7:'list',8:'list',9:'list'},advancedStep:{5:'overview',6:'overview',7:'overview',8:'overview',9:'overview'},advancedStepProgress:{},progressTab:'levels',progressKanaGroup:'hiragana',progressDetailId:null,progressVocabDetailId:null,practiceSelections:{hiragana:[0,1,2],katakana:[0,1,2],hiraganaChars:[],katakanaChars:[],dakuten:['g','z'],dakScripts:['hiragana','katakana'],numbers:['0-10']},errorBank:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},lastErrors:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},quiz:null,lastConfig:null};
 
 const STORAGE_KEY='taal-japanse-leerapp-v1';
 const STORAGE_VERSION=4;
@@ -1914,7 +1937,7 @@ function updateStorageUI(){
   const layout=detectLayout();
   if(badge){
     badge.classList.toggle('off',!storageOk);
-    badge.textContent=storageOk?'v11.1 · opgeslagen':'v11.1 · opslag uit';
+    badge.textContent=storageOk?'v12 · opgeslagen':'v12 · opslag uit';
     badge.title=storageOk
       ?`Lokale browseropslag actief · ${layout.kind} ${layout.width}×${layout.height}`
       :'Lokale browseropslag is niet beschikbaar';
@@ -1944,6 +1967,10 @@ function storageStateSnapshot(){
     langStepProgress:state.langStepProgress,
     introducedVocabIds:state.introducedVocabIds,
     smallLesson:state.smallLesson,
+    advancedLesson:state.advancedLesson,
+    advancedView:state.advancedView,
+    advancedStep:state.advancedStep,
+    advancedStepProgress:state.advancedStepProgress,
     progressTab:state.progressTab,
     progressKanaGroup:state.progressKanaGroup,
     progressDetailId:state.progressDetailId,
@@ -2002,6 +2029,7 @@ function loadProgress(){
     if(['overview','words','model','understand','build','check'].includes(s.langStep))state.langStep=s.langStep;
     if(s.langStepProgress&&typeof s.langStepProgress==='object')state.langStepProgress=s.langStepProgress;
     if(Array.isArray(s.introducedVocabIds))state.introducedVocabIds=s.introducedVocabIds.filter(id=>!!vocabById[id]);
+    ['advancedLesson','advancedView','advancedStep','advancedStepProgress'].forEach(k=>{if(s[k]&&typeof s[k]==='object')Object.assign(state[k],s[k])});
     if(['hiragana','katakana'].includes(s.dakScript))state.dakScript=s.dakScript;
     if(['levels','kana','vocab','skills'].includes(s.progressTab))state.progressTab=s.progressTab;
     if(['hiragana','katakana','dakuten'].includes(s.progressKanaGroup))state.progressKanaGroup=s.progressKanaGroup;
@@ -2130,6 +2158,12 @@ function navigateBack(){
     scheduleSave();
     return renderMain();
   }
+  if(state.screen==='module'&&state.level>=5&&state.tabs.advanced==='learn'&&state.advancedView[state.level]==='lesson'){
+    if(state.advancedStep[state.level]!=='overview')state.advancedStep[state.level]='overview';
+    else state.advancedView[state.level]='list';
+    scheduleSave();
+    return renderMain();
+  }
   if(state.screen==='module'){state.screen='level';scheduleSave();return renderMain()}
   if(state.screen==='level'){state.screen='levels';scheduleSave();return renderMain()}
 }
@@ -2194,7 +2228,8 @@ function continueJourneyPlan(){
   if(level===2)return{title:'Ga verder met Dakuten',detail:`Level 3 · ${dakutenPatterns[state.dakPattern]?.name||'Klankmodificaties'}`,button:'Verder leren →',action:()=>openModule(2)};
   if(level===3)return{title:'Ga verder met Eerste taalbasis',detail:`Les ${state.langLesson+1} · ${langLessons[state.langLesson]?.title||'Eerste zinnen'}`,button:'Verder leren →',action:()=>openModule(3)};
   if(level===4)return{title:'Ga verder met Kana compleet',detail:`Les ${state.smallLesson+1} · ${smallLessons[state.smallLesson]?.title||'Kleine kana'}`,button:'Verder leren →',action:()=>openModule(4)};
-  return{title:`Ga verder met ${levels[level][1]}`,detail:`Verder op je reis · ${levels[level][2]}`,button:'Verder kijken →',action:()=>openModule(level)};
+  const course=advancedCourses[level],lesson=course?.lessons[state.advancedLesson[level]||0];
+  return{title:`Ga verder met ${levels[level][1]}`,detail:`Les ${(state.advancedLesson[level]||0)+1} · ${lesson?.title||levels[level][2]}`,button:'Verder leren →',action:()=>openModule(level)};
 }
 function levelMenuCard(lv,i){
   const rank=levelRank(i);
@@ -2216,24 +2251,24 @@ function renderLevelMenu(box){
 
   const activeHead=document.createElement('div');
   activeHead.className='menu-section-head';
-  activeHead.innerHTML=`<div class="h2">Jouw leerroute</div><div class="muted">Kies een level en bouw in je eigen tempo verder.</div>`;
+  activeHead.innerHTML=`<div class="h2">De absolute basis · Level 1–10</div><div class="muted">Eén doorlopende rij van schrift naar bruikbaar dagelijks Japans.</div>`;
   box.appendChild(activeHead);
   const grid=document.createElement('div');
   grid.className='level-menu-grid active-levels';
   grid.setAttribute('role','region');
   grid.setAttribute('aria-label','Jouw leerroute');
-  levels.slice(0,5).forEach((lv,i)=>grid.appendChild(levelMenuCard(lv,i)));
+  levels.forEach((lv,i)=>grid.appendChild(levelMenuCard(lv,i)));
   box.appendChild(grid);
 
   const futureHead=document.createElement('div');
   futureHead.className='menu-section-head future-head';
-  futureHead.innerHTML=`<div class="h2">Verder op je reis</div><div class="muted">Meer vaardigheden worden onderdeel van je reis wanneer je verder komt.</div>`;
+  futureHead.innerHTML=`<div class="h2">Daarna · specialiseren naar echt materiaal</div><div class="muted">Dit is een voorlopig format. De precieze lessen worden later per doel klein en cumulatief uitgewerkt.</div>`;
   box.appendChild(futureHead);
   const futureGrid=document.createElement('div');
   futureGrid.className='level-menu-grid future-levels';
   futureGrid.setAttribute('role','region');
-  futureGrid.setAttribute('aria-label','Verder op je reis');
-  levels.slice(5).forEach((lv,j)=>futureGrid.appendChild(levelMenuCard(lv,j+5)));
+  futureGrid.setAttribute('aria-label','Specialisatieroute');
+  specializationMilestones.forEach(([range,title,desc,goal])=>{const d=document.createElement('section');d.className='level-menu-card';d.innerHTML=`<div class="level-no">${range}</div><div class="level-title">${title}</div><div class="level-desc">${desc}</div><div class="small" style="margin-top:9px">${goal}</div>`;futureGrid.appendChild(d)});
   box.appendChild(futureGrid);
 }
 function overviewAction(label,desc,fn,rank=null){
@@ -2289,7 +2324,11 @@ function renderLevelOverview(box,i){
     list.appendChild(overviewAction('Open alle lessen','Bekijk kleine kana, kleine っ en lange klinkers als één route.',()=>openModule(4,()=>state.tabs.small='learn')));
     return;
   }
-  list.appendChild(overviewAction('Bekijk cursusroute','Bekijk de cumulatieve lessen en welk klein onderdeel per les wordt toegevoegd.',()=>openModule(i)));
+  const course=advancedCourses[i],next=firstIncompleteLesson(course.lessons),head=document.createElement('div');
+  head.innerHTML=levelRouteSummary(course.lessons,`l${course.number}-exam`,i);
+  list.appendChild(head);
+  head.querySelector('.resume-route').onclick=()=>openModule(i,()=>{state.advancedLesson[i]=next;state.advancedView[i]='lesson';state.advancedStep[i]='overview';state.tabs.advanced='learn'});
+  list.appendChild(overviewAction('Open alle lessen',`${course.lessons.length} compacte lessen · ${course.competency}`,()=>openModule(i,()=>{state.advancedView[i]='list';state.tabs.advanced='learn'})));
 }
 
 function tabsHtml(key,labels=['Leerroute','Oefenen','Examens']){const t=state.tabs[key];return`<div class="tabs"><button id="tabA" class="tab ${t==='learn'?'active':''}">${labels[0]}</button><button id="tabB" class="tab ${t==='practice'?'active':''}">${labels[1]}</button><button id="tabC" class="tab ${t==='exams'?'active':''}">${labels[2]}</button></div>`}
@@ -2308,7 +2347,7 @@ function renderMain(){
   if(state.level===2)return renderDakuten(box);
   if(state.level===3)return renderLanguage(box);
   if(state.level===4)return renderSmallKana(box);
-  return renderFuture(box,state.level);
+  return renderAdvancedCourse(box,state.level);
 }
 
 function renderBasis(box){
@@ -2755,12 +2794,55 @@ function renderSmallQuick(){
   $('smallSavedErrors').onclick=()=>practiceErrorBank('small');
 }
 function renderSmallExam(){const m=rankState['l5-exam'];$('smallBody').innerHTML=`<section class="card ${rankClass(m.rank)}"><div class="between"><div><div class="h2">Level 5 examen</div><div class="muted">Kleine kana, っ en ー toegepast in woorden en bekende Level 4-zinnen.</div></div><span class="rank ${rankClass(m.rank)}">${rankText(m.rank)}</span></div><button id="smallExam" class="btn primary" style="width:100%;margin-top:10px">Start level-examen</button></section>`;$('smallExam').onclick=startSmallExam}
-function renderFuture(box,i){
-  const route=futureCurriculum[i];
-  if(!route)return;
-  box.innerHTML=`<section class="card"><div class="eyebrow">${levels[i][0]} · cursusroute</div><div class="h1">${levels[i][1]}</div><div class="muted">${route.intro}</div><div class="notice" style="margin-top:10px"><strong>Voorbereid, nog niet toetsbaar</strong><div class="small" style="margin-top:4px">Deze route maakt de didactische volgorde zichtbaar. Interactieve lessen en ranks worden pas geactiveerd wanneer hun uitleg en oefeningen compleet zijn.</div></div></section><div id="futureLessonList" class="lang-lesson-list"></div>`;
-  route.lessons.forEach((l,n)=>{const d=document.createElement('section');d.className='lang-lesson-card';d.innerHTML=`<div class="eyebrow">Les ${n+1}</div><div class="h2">${l[0]}</div><div class="pattern">${l[1]}</div><div class="grid2" style="margin-top:9px"><div class="panel"><strong>${l[2]}</strong></div><div class="panel"><strong>${l[3]}</strong></div></div>`;$('futureLessonList').appendChild(d)})
+function advancedQuestions(course,l,index){
+  const known=course.lessons.slice(0,index+1).flatMap(x=>x.words),allMean=[...new Set([...langLessons.flatMap(x=>x.words.map(w=>w[1])),...Object.values(advancedCourses).flatMap(c=>c.lessons.flatMap(x=>x.words.map(w=>w[1])))])];
+  const raw=l.words.slice(0,4).map(([jp,nl])=>['mc',jp,nl,shuffle([nl,...shuffle(allMean.filter(x=>x!==nl)).slice(0,2)]),'vocab']);
+  if(l.words.length){const [jp,nl]=l.words[0],forms=[...new Set(known.map(w=>w[0]).filter(x=>x!==jp))];raw.push(['mc',nl,jp,shuffle([jp,...shuffle(forms).slice(0,2)]),'vocab'])}
+  const otherMean=course.lessons.map(x=>x.models[0].meaning).filter(x=>x!==l.models[0].meaning);
+  raw.push(['meaning',l.models[0].sentence,l.models[0].meaning,shuffle([l.models[0].meaning,...shuffle(otherMean).slice(0,2)]),'meaning']);
+  raw.push(l.focus);
+  raw.push(['build',`Bouw: ${l.models[0].meaning}`,l.models[0].sentence,l.builders[0][2],'build']);
+  if(l.story)raw.push(['meaning',`${l.story[0]}\n${l.story[1]}`,l.story[2],l.story[3],'integration']);
+  if(raw.length<5){const previous=course.lessons[Math.max(0,index-1)];raw.push(previous.focus,['meaning',previous.models[0].sentence,previous.models[0].meaning,shuffle([previous.models[0].meaning,...shuffle(otherMean).slice(0,2)]),'review'])}
+  return raw.map(q=>lessonQuestion(q,l));
 }
+function advancedStepState(id){if(!state.advancedStepProgress[id])state.advancedStepProgress[id]=[];return state.advancedStepProgress[id]}
+function markAdvancedStep(id,step){const done=new Set(advancedStepState(id));done.add(step);state.advancedStepProgress[id]=[...done];scheduleSave()}
+function renderAdvancedCourse(box,level){
+  const c=advancedCourses[level],p=lessonProgress(c.lessons);
+  box.innerHTML=`<section class="card"><div class="eyebrow">Level ${c.number}</div><div class="h1">${c.title}</div><div class="muted">${c.competency}</div><div class="progress" style="margin-top:10px"><div style="width:${p.pct}%"></div></div><div class="small" style="margin-top:5px">${p.done}/${p.total} lessen afgerond.</div>${readinessHtml(`l${c.number}-exam`)}</section>${tabsHtml('advanced',['Leerroute','Snelle checks','Level-examen'])}<div id="advancedBody"></div>`;
+  bindTabs('advanced');
+  if(state.tabs.advanced==='learn')renderAdvancedLessons(c,level);else if(state.tabs.advanced==='practice')renderAdvancedQuick(c,level);else renderAdvancedExam(c,level);
+}
+function renderAdvancedLessons(c,level){
+  if(state.advancedView[level]==='lesson')return renderAdvancedLessonCard(c,level,state.advancedLesson[level]||0);
+  const next=firstIncompleteLesson(c.lessons);
+  $('advancedBody').innerHTML=`<section class="card"><div class="h2">${c.lessons.length} cumulatieve lessen</div><div class="muted">Bekende kennis + één klein nieuw onderdeel. Alleen de geopende lesstap staat centraal.</div><div class="notice" style="margin-top:10px"><strong>Volgende: Les ${next+1} · ${c.lessons[next].title}</strong><div class="small">${c.lessons[next].goal}</div></div></section><div id="advancedLessonList" class="lang-lesson-list"></div>`;
+  c.lessons.forEach((l,i)=>{const m=rankState[l.id],b=document.createElement('button');b.className=`lang-lesson-card ${rankClass(m.rank)}`;b.innerHTML=`<div class="between"><div><div class="eyebrow">Les ${i+1}${i===next?' · volgende':''}</div><div class="h2">${l.title}</div></div><span class="rank ${rankClass(m.rank)}">${m.rank?'✓ '+m.rank:'Nog te doen'}</span></div><div class="pattern">${l.newLabel} · ${l.pattern}</div>`;b.onclick=()=>{state.advancedLesson[level]=i;state.advancedView[level]='lesson';state.advancedStep[level]='overview';renderMain()};$('advancedLessonList').appendChild(b)})
+}
+function advancedStepper(l,level){const done=new Set(advancedStepState(l.id)),current=state.advancedStep[level];return`<div class="lang-stepper">${langStepDefs.map(([id,label],i)=>`<button class="lang-step-btn ${current===id?'active':''} ${done.has(id)?'done':''}" data-advanced-step="${id}">${i+1}<br>${label}</button>`).join('')}</div>`}
+function renderAdvancedLessonCard(c,level,index){
+  const l=c.lessons[index],m=rankState[l.id];
+  $('advancedBody').innerHTML=`<section class="card"><div class="between"><button id="backAdvancedLessons" class="btn tiny">← Alle lessen</button><span class="rank ${rankClass(m.rank)}">${rankText(m.rank)}</span></div><div class="eyebrow" style="margin-top:12px">Les ${index+1} van ${c.lessons.length}</div><div class="h1">${l.title}</div><div class="muted">${l.goal}</div>${advancedStepper(l,level)}</section><div id="advancedStepBody"></div>`;
+  $('backAdvancedLessons').onclick=()=>{state.advancedView[level]='list';state.advancedStep[level]='overview';renderMain()};
+  root.querySelectorAll('[data-advanced-step]').forEach(b=>b.onclick=()=>{state.advancedStep[level]=b.dataset.advancedStep;renderMain()});
+  const step=state.advancedStep[level];
+  if(step==='overview')renderAdvancedOverview(l,level);else if(step==='words')renderAdvancedWords(c,l,level,index);else if(step==='model')renderAdvancedModel(l,level);else if(step==='understand')renderAdvancedUnderstand(c,l,level,index);else if(step==='build')renderAdvancedBuild(l,level,index);else renderAdvancedCheck(c,l,level,index)
+}
+function renderAdvancedOverview(l,level){$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Dit ga je leren</div><div class="h2">${l.pattern}</div><div class="panel" style="margin-top:10px">${l.goal}</div><button id="advancedStart" class="btn primary" style="width:100%;margin-top:12px">Start leerroute</button></section>`;$('advancedStart').onclick=()=>{state.advancedStep[level]='words';renderMain()}}
+function introduceAdvancedWords(l){const ids=new Set(state.introducedVocabIds);l.words.forEach(([jp])=>{const v=vocabCatalog.find(x=>x.jp===jp);if(v)ids.add(v.id)});state.introducedVocabIds=[...ids];scheduleSave()}
+function renderAdvancedWords(c,l,level,index){
+  introduceAdvancedWords(l);$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 1 · voorkennis en woorden</div><div class="notice">${l.review}</div><div id="advancedWords" class="vocab-grid" style="margin-top:10px"></div><button id="advancedWordsNext" class="btn primary" style="width:100%;margin-top:12px">Naar het nieuwe patroon →</button></section>`;
+  if(!l.words.length)$('advancedWords').innerHTML='<div class="panel">Geen nieuwe woorden. Deze les combineert bekende kennis.</div>';
+  l.words.forEach(([jp,nl,ro])=>{const d=document.createElement('div');d.className='vocab';d.innerHTML=`<div class="jp">${jp}</div><div class="word-romaji">${ro}</div><div class="small">${nl}</div>`;$('advancedWords').appendChild(d)});
+  $('advancedWordsNext').onclick=()=>{markAdvancedStep(l.id,'words');state.advancedStep[level]='model';renderMain()}
+}
+function renderAdvancedModel(l,level){$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 2 · één nieuw principe</div><div class="h2">${l.pattern}</div><div class="notice" style="margin-top:9px">${l.grammar}</div><div class="panel" style="margin-top:10px">${modelAnalysisHtml(l.models[0])}</div><button id="advancedModelNext" class="btn primary" style="width:100%;margin-top:12px">Direct herkennen →</button></section>`;$('advancedModelNext').onclick=()=>{markAdvancedStep(l.id,'model');state.advancedStep[level]='understand';renderMain()}}
+function renderAdvancedUnderstand(c,l,level,index){const qs=advancedQuestions(c,l,index).filter(q=>q.kind!=='build').slice(0,6);$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 3 · herkennen en toepassen</div><div class="h2">Korte oefening</div><div class="muted">Woorden, betekenis en het ene nieuwe patroon komen gemixt terug.</div><button id="advancedUnderstandStart" class="btn primary" style="width:100%;margin-top:12px">Start ${qs.length} vragen</button></section>`;$('advancedUnderstandStart').onclick=()=>startQuiz({source:'advanced',title:`Level ${c.number} · ${l.title} · herkennen`,official:false,pool:[],questions:qs,choices:3,next:{kind:'advancedStep',level,index,step:'build',complete:'understand'}})}
+function renderAdvancedBuild(l,level,index){$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 4 · zelf bouwen</div><div class="h2">Tik de zin bij elkaar</div><div id="advancedBuilder" style="margin-top:10px"></div></section>`;renderSentenceBuilder($('advancedBuilder'),l.builders,()=>{markAdvancedStep(l.id,'build');state.advancedStep[level]='check';renderMain()})}
+function renderAdvancedCheck(c,l,level,index){const qs=advancedQuestions(c,l,index);$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 5 · mini-check</div><div class="h2">Les afronden</div><div class="muted">${qs.length} korte vragen. 80% of hoger verhoogt de lesrank maximaal één stap.</div><button id="advancedCheckStart" class="btn primary" style="width:100%;margin-top:12px">Start mini-check</button></section>`;$('advancedCheckStart').onclick=()=>startQuiz({source:'advanced',title:`Level ${c.number} · Les ${index+1} · ${l.title}`,rankId:l.id,rankThreshold:.8,official:true,pool:[],questions:shuffle(qs),choices:3,next:{kind:'advancedLesson',level,index:index+1}})}
+function renderAdvancedQuick(c,level){const bankCount=(state.errorBank.advanced||[]).reduce((n,e)=>n+(e.count||1),0);$('advancedBody').innerHTML=`<section class="card"><div class="h2">Snelle checks</div><div class="muted">Herhaal één les in enkele minuten, zonder uitlegschermen.</div></section><div id="advancedQuickList" class="stack"></div><section class="card"><button id="advancedErrors" class="btn" style="width:100%" ${bankCount?'':'disabled'}>Oefen moeilijke punten · ${bankCount}</button></section>`;c.lessons.forEach((l,i)=>{const d=document.createElement('section');d.className=`card ${rankClass(rankState[l.id].rank)}`;d.innerHTML=`<div class="between"><strong>Les ${i+1} · ${l.title}</strong><span class="rank ${rankClass(rankState[l.id].rank)}">${rankText(rankState[l.id].rank)}</span></div><button class="btn advancedQuick" data-i="${i}" style="width:100%;margin-top:9px">Snelle check</button>`;$('advancedQuickList').appendChild(d)});root.querySelectorAll('.advancedQuick').forEach(b=>b.onclick=()=>{const i=Number(b.dataset.i),l=c.lessons[i];startQuiz({source:'advanced',title:`Snelle check · ${l.title}`,official:false,pool:[],questions:shuffle(advancedQuestions(c,l,i)).slice(0,5),choices:3})});$('advancedErrors').onclick=()=>practiceErrorBank('advanced')}
+function renderAdvancedExam(c,level){const id=`l${c.number}-exam`,m=rankState[id],ready=!!rankState[c.lessons.at(-1).id]?.rank;$('advancedBody').innerHTML=`<section class="card ${rankClass(m.rank)}"><div class="between"><div><div class="h2">Level ${c.number} examen</div><div class="muted">Woorden, betekenis, invullen, volgorde en toepassen uit dit level.</div></div><span class="rank ${rankClass(m.rank)}">${rankText(m.rank)}</span></div>${ready?'':'<div class="notice" style="margin-top:10px">Rond eerst de laatste les met een succesvolle mini-check af.</div>'}<button id="advancedExamStart" class="btn primary" style="width:100%;margin-top:10px" ${ready?'':'disabled'}>Start level-examen</button></section>`;if(ready)$('advancedExamStart').onclick=()=>{const qs=c.lessons.flatMap((l,i)=>advancedQuestions(c,l,i));startQuiz({source:'advanced',title:`Level ${c.number} examen`,rankId:id,official:true,pool:[],questions:shuffle(qs).slice(0,Math.min(30,qs.length)),choices:3})}}
 
 function kanaQuestion(item,mode){return{type:'kana',item,mode}}function randomKanaQuestions(pool,count,mode='mixed'){const out=[];let last='';for(let i=0;i<count;i++){let q;for(let t=0;t<60;t++){const item=pool[Math.floor(Math.random()*pool.length)],dir=mode==='mixed'?(Math.random()<.5?'forward':'reverse'):mode,key=item.id+'|'+dir;if(key!==last){q=kanaQuestion(item,dir);last=key;break}}out.push(q||kanaQuestion(pool[i%pool.length],'forward'))}return out}function exactKanaQuestions(pool,mode){return shuffle(pool).map(item=>kanaQuestion(item,mode==='mixed'?(Math.random()<.5?'forward':'reverse'):mode))}function pairedKanaQuestions(pool){return shuffle(pool.flatMap(item=>[kanaQuestion(item,'forward'),kanaQuestion(item,'reverse')]))}
 function startKanaMini(key,row,step){const chunk=kanaChunks(kanaModules[key].rows[row])[step],pool=chunk.map(([front,back])=>({id:`${key}-${front}`,front,back}));startQuiz({source:key,title:`${kanaModules[key].rows[row].name} · stap ${step+1}`,official:false,pool,questions:randomKanaQuestions(pool,pool.length===3?12:8),choices:pool.length,next:{kind:'kanaStep',key,row,step:step+1}})}
@@ -2954,7 +3036,7 @@ function answer(ok,b,chosen){const c=state.quiz,q=currentQ();[...$('qChoices').q
 function nextQuestion(){if(state.quiz.index>=state.quiz.questions.length)finishQuiz();else renderQuestion()}
 function finishQuiz(){const c=state.quiz,acc=c.score/c.questions.length;c.passed=acc>=(c.rankThreshold??.9);let rr=null;if(c.official&&c.rankId)rr=applyRank(c.rankId,acc,c.rankThreshold??.9);if(state.lastErrors[c.source])state.lastErrors[c.source]=[...c.mistakes];mergeErrorBank(c.source,c.mistakes);show('result');$('resultTitle').textContent=c.title;$('resultScore').textContent=`${c.score} / ${c.questions.length}`;$('resultStats').textContent=`Goed: ${c.score} · Fout: ${c.questions.length-c.score} · Nauwkeurigheid: ${pct(acc)}`;if(rr){$('resultRank').classList.remove('hidden');$('resultRank').innerHTML=`${c.rankId&&/-row-/.test(c.rankId)?'Rijrank':'Sessierank'}: <strong>${rankText(rr.next)}</strong>${rr.prev!==rr.next?` · vorige: ${rankText(rr.prev)}`:''}. Een succesvolle volledige toets stijgt maximaal één stap.`}else $('resultRank').classList.add('hidden');renderErrors(c.mistakes);$('practiceErrors').disabled=!c.mistakes.length;configureNext(c);saveProgress()}
 function renderErrors(errors){const box=$('errorList');box.innerHTML='';$('errorIntro').textContent=errors.length?'Score blijft staan. Bekijk kort wat misging.':'Geen fouten.';if(!errors.length){box.innerHTML='<div class="panel">Alles correct.</div>';return}errors.forEach(e=>{const d=document.createElement('div');d.className='error';d.innerHTML=`<div class="small">Vraag ${e.number}</div><div style="font-weight:750;margin-top:4px">${e.asked}</div><div style="margin-top:5px">Jouw antwoord: ${e.chosen}</div><div>Correct: <strong>${e.correct}</strong></div><div class="small" style="margin-top:4px">${e.detail}</div>`;box.appendChild(d)})}
-function configureNext(c){const b=$('nextBtn');b.classList.add('hidden');b.onclick=null;const n=c.next;if(!n)return;if(n.kind==='kanaStep'){const chunks=kanaChunks(kanaModules[n.key].rows[n.row]);if(n.step<=chunks.length){b.classList.remove('hidden');b.textContent='Volgende stap →';b.onclick=()=>{state.row[n.key]=n.row;state.step[n.key]=n.step;state.tabs[n.key]='learn';setMain()}}}if(n.kind==='kanaRow'&&n.row<kanaModules[n.key].rows.length){b.classList.remove('hidden');b.textContent=`Volgende rij · ${kanaModules[n.key].rows[n.row].name} →`;b.onclick=()=>{state.row[n.key]=n.row;state.step[n.key]=0;state.tabs[n.key]='learn';setMain()}}if(n.kind==='numberLesson'&&n.index<numberLessons.length){b.classList.remove('hidden');b.textContent='Volgende cijferles →';b.onclick=()=>{state.numberLesson=n.index;state.tabs.numbers='learn';setMain()}}if(n.kind==='dakStep'&&n.step<=2){b.classList.remove('hidden');b.textContent=n.step===2?'Volledige rij →':'Volgende stap →';b.onclick=()=>{state.dakStep=n.step;state.tabs.dakuten='learn';setMain()}}if(n.kind==='dakNextPattern'&&state.dakPattern<dakutenPatterns.length-1){b.classList.remove('hidden');b.textContent=`Volgende patroon · ${dakutenPatterns[state.dakPattern+1].name} →`;b.onclick=()=>{state.dakPattern++;state.dakStep=0;state.tabs.dakuten='learn';setMain()}}if(n.kind==='langStep'){b.classList.remove('hidden');b.textContent=`Volgende stap · ${langStepDefs.find(x=>x[0]===n.step)?.[1]||'leerroute'} →`;b.onclick=()=>{if(n.complete)markLanguageStep(langLessons[n.index].id,n.complete);state.langLesson=n.index;state.langView='lesson';state.langStep=n.step;state.tabs.lang='learn';setMain()}}if(n.kind==='langLesson'){if(!c.passed)return;if(n.complete)markLanguageStep(langLessons[Math.max(0,n.index-1)].id,n.complete);b.classList.remove('hidden');if(n.index<langLessons.length){b.textContent=`Volgende les · ${langLessons[n.index].title} →`;b.onclick=()=>{state.langLesson=n.index;state.langView='lesson';state.langStep='overview';state.tabs.lang='learn';setMain()}}else{b.textContent='Naar Level 4 examen →';b.onclick=()=>{state.tabs.lang='exams';state.langView='list';setMain()}}}if(n.kind==='smallLesson'&&n.index<smallLessons.length){b.classList.remove('hidden');b.textContent=`Volgende les · ${smallLessons[n.index].title} →`;b.onclick=()=>{state.smallLesson=n.index;state.tabs.small='learn';setMain()}}}
+function configureNext(c){const b=$('nextBtn');b.classList.add('hidden');b.onclick=null;const n=c.next;if(!n)return;if(n.kind==='kanaStep'){const chunks=kanaChunks(kanaModules[n.key].rows[n.row]);if(n.step<=chunks.length){b.classList.remove('hidden');b.textContent='Volgende stap →';b.onclick=()=>{state.row[n.key]=n.row;state.step[n.key]=n.step;state.tabs[n.key]='learn';setMain()}}}if(n.kind==='kanaRow'&&n.row<kanaModules[n.key].rows.length){b.classList.remove('hidden');b.textContent=`Volgende rij · ${kanaModules[n.key].rows[n.row].name} →`;b.onclick=()=>{state.row[n.key]=n.row;state.step[n.key]=0;state.tabs[n.key]='learn';setMain()}}if(n.kind==='numberLesson'&&n.index<numberLessons.length){b.classList.remove('hidden');b.textContent='Volgende cijferles →';b.onclick=()=>{state.numberLesson=n.index;state.tabs.numbers='learn';setMain()}}if(n.kind==='dakStep'&&n.step<=2){b.classList.remove('hidden');b.textContent=n.step===2?'Volledige rij →':'Volgende stap →';b.onclick=()=>{state.dakStep=n.step;state.tabs.dakuten='learn';setMain()}}if(n.kind==='dakNextPattern'&&state.dakPattern<dakutenPatterns.length-1){b.classList.remove('hidden');b.textContent=`Volgende patroon · ${dakutenPatterns[state.dakPattern+1].name} →`;b.onclick=()=>{state.dakPattern++;state.dakStep=0;state.tabs.dakuten='learn';setMain()}}if(n.kind==='langStep'){b.classList.remove('hidden');b.textContent=`Volgende stap · ${langStepDefs.find(x=>x[0]===n.step)?.[1]||'leerroute'} →`;b.onclick=()=>{if(n.complete)markLanguageStep(langLessons[n.index].id,n.complete);state.langLesson=n.index;state.langView='lesson';state.langStep=n.step;state.tabs.lang='learn';setMain()}}if(n.kind==='langLesson'){if(!c.passed)return;if(n.complete)markLanguageStep(langLessons[Math.max(0,n.index-1)].id,n.complete);b.classList.remove('hidden');if(n.index<langLessons.length){b.textContent=`Volgende les · ${langLessons[n.index].title} →`;b.onclick=()=>{state.langLesson=n.index;state.langView='lesson';state.langStep='overview';state.tabs.lang='learn';setMain()}}else{b.textContent='Naar Level 4 examen →';b.onclick=()=>{state.tabs.lang='exams';state.langView='list';setMain()}}}if(n.kind==='smallLesson'&&n.index<smallLessons.length){b.classList.remove('hidden');b.textContent=`Volgende les · ${smallLessons[n.index].title} →`;b.onclick=()=>{state.smallLesson=n.index;state.tabs.small='learn';setMain()}}if(n.kind==='advancedStep'){const course=advancedCourses[n.level],l=course.lessons[n.index];b.classList.remove('hidden');b.textContent='Volgende stap · zelf bouwen →';b.onclick=()=>{if(n.complete)markAdvancedStep(l.id,n.complete);state.advancedLesson[n.level]=n.index;state.advancedView[n.level]='lesson';state.advancedStep[n.level]=n.step;state.tabs.advanced='learn';setMain()}}if(n.kind==='advancedLesson'){if(!c.passed)return;const course=advancedCourses[n.level];markAdvancedStep(course.lessons[Math.max(0,n.index-1)].id,'check');b.classList.remove('hidden');if(n.index<course.lessons.length){b.textContent=`Volgende les · ${course.lessons[n.index].title} →`;b.onclick=()=>{state.advancedLesson[n.level]=n.index;state.advancedView[n.level]='lesson';state.advancedStep[n.level]='overview';state.tabs.advanced='learn';setMain()}}else{b.textContent=`Naar Level ${course.number} examen →`;b.onclick=()=>{state.tabs.advanced='exams';state.advancedView[n.level]='list';setMain()}}}}
 
 function questionSignature(q){
   if(!q)return'unknown';
@@ -3035,6 +3117,7 @@ function levelLessonIds(level){
   if(level===2)return dakutenPatterns.flatMap(p=>[`dak-hiragana-${p.id}`,`dak-katakana-${p.id}`]);
   if(level===3)return langLessons.map(x=>x.id);
   if(level===4)return smallLessons.map(x=>x.id);
+  if(level>=5&&level<=9)return advancedCourses[level].lessons.map(x=>x.id);
   return[];
 }
 function completedLessonCount(level){
@@ -3077,7 +3160,12 @@ function recommendedNextStep(){
   const small=smallLessons.find(l=>!rankState[l.id]?.rank);
   if(small)return`Level 5 · ${small.title}.`;
   if(!rankState['l5-exam']?.rank)return'Level 5 · level-examen.';
-  return'Herhaal een moeilijk punt of ga verder met een toekomstig level.';
+  for(let level=5;level<=9;level++){
+    const course=advancedCourses[level],lesson=course.lessons.find(l=>!rankState[l.id]?.rank);
+    if(lesson)return`Level ${course.number} · ${lesson.title}.`;
+    if(!rankState[`l${course.number}-exam`]?.rank)return`Level ${course.number} · level-examen.`;
+  }
+  return'De absolute basis is afgerond. Kies daarna een specialisatieroute.';
 }
 function examRowsForLevel(level){
   return levelRankIds(level).map(id=>({
@@ -3088,7 +3176,7 @@ function examRowsForLevel(level){
   }));
 }
 function renderProgressLevelTab(box){
-  const activeLevels=5;
+  const activeLevels=10;
   const finished=Array.from({length:activeLevels},(_,i)=>levelRank(i)).filter(Boolean).length;
   const current=Math.min(state.level,activeLevels-1);
   box.innerHTML=`<section class="card">
@@ -3216,7 +3304,7 @@ function renderVocabDetail(box,id){
   const recent=recentMasteryStats(rec,20);
   box.innerHTML=`<section class="card ${rankClass(rec.rank)}">
     <div class="between"><button id="backVocab" class="btn tiny">← Woordenlijst</button><span class="rank ${rankClass(rec.rank)}">${rankText(rec.rank)}</span></div>
-    <div style="text-align:center;margin-top:14px"><div style="font-size:42px;font-weight:800">${v.jp}</div><div class="h2">${v.meaning}</div><div class="small">Geïntroduceerd: Level 4 · Les ${v.lessonIndex+1} · ${v.lessonTitle}</div></div>
+    <div style="text-align:center;margin-top:14px"><div style="font-size:42px;font-weight:800">${v.jp}</div><div class="h2">${v.meaning}</div><div class="small">Geïntroduceerd: Level ${v.level} · Les ${v.lessonIndex+1} · ${v.lessonTitle}</div></div>
     <div class="mastery-detail-grid" style="margin-top:14px">
       <div class="panel"><div class="small">Mastery</div><div class="mastery-score">${Math.round(rec.masteryScore*10)/10}</div><div class="small">van 100</div></div>
       <div class="panel"><div class="small">Accuracy</div><div class="h2">${rec.seen?formatPctValue(masteryAccuracy(rec)):'—'}</div><div class="small">${rec.correct} goed · ${rec.incorrect} fout</div></div>
@@ -3249,7 +3337,7 @@ function renderProgressVocabTab(box){
     <div class="milestones" style="margin-top:8px">
       ${milestones.map(m=>`<span class="milestone ${learned.length>=m?'reached':''}">${m} woorden</span>`).join('')}
     </div>
-    <div class="progress-note" style="margin-top:10px">Een woord telt mee zodra het expliciet in het woordendeel van een Level 4-les is geïntroduceerd. Woorden die alleen in een voorbeeld voorkomen tellen niet automatisch mee.</div>
+    <div class="progress-note" style="margin-top:10px">Een woord telt mee zodra het expliciet in het woordendeel van een taalles is geïntroduceerd. Woorden die alleen in een voorbeeld voorkomen tellen niet automatisch mee.</div>
   </section>
   <section class="card">
     <div class="h2">Woordenlijst</div>
@@ -3257,7 +3345,7 @@ function renderProgressVocabTab(box){
   </section>`;
 
   if(!learned.length){
-    $('vocabProgressList').innerHTML='<div class="panel">0 geleerde woorden. Open het woordendeel van een Level 4-les om woorden officieel te introduceren.</div>';
+    $('vocabProgressList').innerHTML='<div class="panel">0 geleerde woorden. Open het woordendeel van een taalles om woorden officieel te introduceren.</div>';
     return;
   }
   learned.forEach(v=>{
@@ -3265,7 +3353,7 @@ function renderProgressVocabTab(box){
     const b=document.createElement('button');
     b.type='button';
     b.className=`vocab-progress-row ${rankClass(rec.rank)}`;
-    b.innerHTML=`<div><div class="word">${v.jp}</div><div class="small">${v.meaning} · Les ${v.lessonIndex+1}</div><div class="small">${rec.seen?`${rec.correct}/${rec.seen} goed · ${formatPctValue(masteryAccuracy(rec))}`:'Nog geen individuele oefendata'}</div></div><span class="rank ${rankClass(rec.rank)}">${rankText(rec.rank)}</span>`;
+    b.innerHTML=`<div><div class="word">${v.jp}</div><div class="small">${v.meaning} · Level ${v.level} · Les ${v.lessonIndex+1}</div><div class="small">${rec.seen?`${rec.correct}/${rec.seen} goed · ${formatPctValue(masteryAccuracy(rec))}`:'Nog geen individuele oefendata'}</div></div><span class="rank ${rankClass(rec.rank)}">${rankText(rec.rank)}</span>`;
     b.onclick=()=>{state.progressVocabDetailId=v.id;scheduleSave();renderSession()};
     $('vocabProgressList').appendChild(b);
   });
@@ -3279,7 +3367,12 @@ const languageSkills=[
   {label:'Ik kan een eenvoudige vraag maken met か.',requires:['l4-5']},
   {label:'Ik kan “ook” gebruiken met も.',requires:['l4-6']},
   {label:'Ik begrijp de basisvolgorde topic → object → werkwoord.',requires:['l4-7','l4-8']},
-  {label:'Ik kan zeggen dat ik naar een eenvoudige plaats ga met に いきます.',requires:['l4-9']}
+  {label:'Ik kan zeggen dat ik naar een eenvoudige plaats ga met に いきます.',requires:['l4-9']},
+  {label:'Ik kan eenvoudige personen en familierelaties benoemen.',requires:['l6-exam']},
+  {label:'Ik kan enkele veelgebruikte hoeveelheden tellen.',requires:['l7-exam']},
+  {label:'Ik kan eenvoudige dagen, tijden en afspraken begrijpen.',requires:['l8-exam']},
+  {label:'Ik kan eenvoudige plaats en richting begrijpen.',requires:['l9-exam']},
+  {label:'Ik kan simpele dagelijkse situaties combineren.',requires:['l10-exam']}
 ];
 function renderProgressSkillsTab(box){
   const unlocked=languageSkills.filter(s=>s.requires.every(id=>!!rankState[id]?.rank)).length;
