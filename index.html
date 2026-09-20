@@ -927,8 +927,8 @@ section{
   --glass-soft:rgba(247,250,252,.58);
   --glass-border:rgba(255,255,255,.72);
   --glass-shadow:0 18px 48px rgba(31,45,48,.16),0 2px 8px rgba(31,45,48,.08);
-  --level-glass:rgba(255,255,255,.46);
-  --level-glass-strong:rgba(255,255,255,.56);
+  --level-glass:rgba(255,255,255,.24);
+  --level-glass-strong:rgba(255,255,255,.34);
 }
 @media(prefers-color-scheme:dark){
   :root{
@@ -937,8 +937,8 @@ section{
     --glass-soft:rgba(32,43,47,.62);
     --glass-border:rgba(255,255,255,.17);
     --glass-shadow:0 20px 58px rgba(0,0,0,.38),0 2px 10px rgba(0,0,0,.2);
-    --level-glass:rgba(16,24,27,.44);
-    --level-glass-strong:rgba(17,25,28,.54);
+    --level-glass:rgba(16,24,27,.26);
+    --level-glass-strong:rgba(17,25,28,.36);
   }
 }
 body{
@@ -1050,6 +1050,8 @@ body[data-scene="classroom"]::after{
   overflow:hidden;
   min-height:146px;
   background:var(--level-glass);
+  -webkit-backdrop-filter:blur(10px) saturate(1.12);
+  backdrop-filter:blur(10px) saturate(1.12);
   transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
 }
 .level-menu-card::before{
@@ -1073,6 +1075,8 @@ body[data-scene="classroom"]::after{
   min-height:132px;
   padding-right:86px;
   background:linear-gradient(135deg,var(--level-glass-strong),var(--level-glass));
+  -webkit-backdrop-filter:blur(10px) saturate(1.12);
+  backdrop-filter:blur(10px) saturate(1.12);
 }
 .journey-hero .hero-mark{
   position:absolute;
