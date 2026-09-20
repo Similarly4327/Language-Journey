@@ -1186,7 +1186,33 @@ body[data-scene="classroom"]::after{
 }
 .menu-section-head .h2{font-size:19px}
 .future-head{margin-top:25px}
-.active-levels{
+.course-phase{
+  border:1px solid var(--glass-border);
+  border-radius:19px;
+  background:color-mix(in srgb,var(--glass) 84%,transparent);
+  box-shadow:0 12px 34px rgba(31,45,48,.1);
+  overflow:hidden;
+}
+.course-phase+ .course-phase{margin-top:12px}
+.course-phase-summary{position:relative;display:block;padding:16px 54px 15px 16px;cursor:pointer;list-style:none}
+.course-phase-summary::-webkit-details-marker{display:none}
+.course-phase-summary::after{content:'＋';position:absolute;right:17px;top:17px;font-size:21px;font-weight:800}
+.course-phase[open]>.course-phase-summary::after{content:'−'}
+.phase-kicker{font-size:11px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.phase-title{font-size:20px;font-weight:850;line-height:1.15;margin-top:4px}
+.phase-subtitle{font-size:13px;color:var(--muted);margin-top:4px}
+.phase-meta{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:10px;font-size:12px;color:var(--muted)}
+.phase-progress{height:7px;margin-top:10px;border-radius:999px;background:var(--panel);overflow:hidden}
+.phase-progress>div{height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--accent),#e68b72)}
+.phase-details{padding:0 14px 15px}
+.phase-goal{padding:10px 11px;border-radius:12px;background:var(--panel);font-size:13px}
+.phase-levels{margin-top:10px}
+.phase-level-card.placeholder{opacity:.82;border-style:dashed;cursor:default}
+.phase-level-card .level-status{margin-top:auto;font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.milestone-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.milestone-card{padding:13px;border:1px solid var(--glass-border);border-radius:15px;background:var(--glass);min-width:0}
+.milestone-icon{font-size:24px}.milestone-card .h2{font-size:16px;margin-top:7px}.milestone-card .small{margin-top:5px}
+.active-levels,.phase-levels{
   grid-template-columns:none;
   grid-auto-flow:column;
   grid-auto-columns:minmax(168px,220px);
@@ -1194,7 +1220,7 @@ body[data-scene="classroom"]::after{
   scroll-snap-type:x proximity;
   padding-bottom:7px;
 }
-.active-levels .level-menu-card{scroll-snap-align:start}
+.active-levels .level-menu-card,.phase-levels .level-menu-card{scroll-snap-align:start}
 .future-levels .level-menu-card{
   background:color-mix(in srgb,var(--level-glass) 76%,transparent);
   box-shadow:0 8px 25px rgba(31,45,48,.09);
@@ -1230,6 +1256,10 @@ body[data-scene="journey"][data-view="main"] #mainView{
   .app-nav-item{min-height:34px;padding:5px 9px;font-size:12px}
   .menu-section-head{margin-top:10px;padding-inline:1px}
   .future-head{margin-top:20px}
+  .course-phase-summary{padding:14px 48px 13px 13px}
+  .phase-title{font-size:18px}
+  .phase-details{padding:0 10px 12px}
+  .milestone-grid{grid-template-columns:1fr}
   #quizView .card,#resultView .card{background:rgba(255,255,255,.9)}
 }
 @media(max-width:380px){
@@ -1425,11 +1455,48 @@ const advancedCourses={
     advancedLesson('l10-5','Basismissie','Volg een mini-dialoog met wie, waar, wanneer en wat.','Herhaling: deze eindmissie introduceert geen nieuwe woorden of grammatica.',[],'persoon + tijd + plaats + handeling','Lees regel voor regel. Zoek eerst wie, dan tijd, plaats en als laatste de handeling.','あした ともだち と えき に いきます','Morgen ga ik met een vriend naar het station.',['order','Welk blok zegt met wie?','ともだち と',['あした','ともだち と','えき に'],'integration'],['あした は どようび です。 さんじ ともだち と えき に いきます。 えき で でんしゃ に のります。','Wat gebeurt eerst?','naar het station gaan',['de trein uitstappen','naar het station gaan','thuis eten']])
   ]}
 };
-const specializationMilestones=[
-  ['Level 11–15','Lezen voor beginners','Korte zinnen, basis-kanji en een eerste kinderboekje.','Doel: een eenvoudig kinderboek met veel beeldsteun lezen.'],
-  ['Level 16–20','Verhalen & manga','Informele dialogen, tekstballonnen, klankwoorden en verhaalvolgorde.','Doel: eenvoudige manga met woordenboeksteun lezen.'],
-  ['Level 21–25','Luisteren & ondertitels','Bekende taal op natuurlijker tempo, luisterstrategieën en ondertitels.','Doel: toegankelijke anime met Japanse ondertitels volgen.'],
-  ['Level 26–30','Actueel Japans','Formelere stijl, veelgebruikte kanji, koppen en nieuwscontext.','Doel: eenvoudig nieuws stap voor stap kunnen volgen.']
+const futureLevel=(number,title,description)=>({number,title,description,status:'placeholder'});
+const coursePhases=[
+  {
+    id:'foundation',title:'Fase 1 — Japanse basis',subtitle:'De fundering leggen',description:'Schrift, eerste grammatica en bruikbaar dagelijks Japans vormen samen één absolute basis.',startLevel:1,endLevel:10,goal:'Na deze fase heb je een echte fundering om verder op te bouwen.',status:'active',theme:'基',
+    levels:levels.map((lv,index)=>({number:index+1,title:lv[1],description:lv[2],status:'playable',levelIndex:index}))
+  },
+  {
+    id:'usable-japanese',title:'Fase 2 — Japans gaan gebruiken',subtitle:'Van losse zinnen naar situaties en korte teksten',description:'Japans wordt steeds bruikbaarder in dialogen, routines en korte verhalen.',startLevel:11,endLevel:20,goal:'Steeds meer complete zinnen, situaties en korte teksten begrijpen en bouwen.',status:'planned',theme:'使',
+    levels:[
+      futureLevel(11,'Dagelijkse routines','Handelingen en vaste momenten van een dag.'),
+      futureLevel(12,'Eten en bestellen','Meer natuurlijke bestelsituaties en voorkeuren.'),
+      futureLevel(13,'Winkelen en geld','Prijzen, keuzes en eenvoudige winkelgesprekken.'),
+      futureLevel(14,'Onderweg en vervoer','Routes, voertuigen en praktische reisinformatie.'),
+      futureLevel(15,'Sociale gesprekken','Kennismaken en korte gesprekjes onderhouden.'),
+      futureLevel(16,'Verleden en ervaringen','Eenvoudig vertellen wat er is gebeurd.'),
+      futureLevel(17,'Plannen en afspraken','Vooruitkijken, afspreken en intenties begrijpen.'),
+      futureLevel(18,'Korte teksten en microverhalen','Van enkele regels naar samenhangende tekst.'),
+      futureLevel(19,'Natuurlijker Japans','Bekende structuren in minder schoolse formuleringen.'),
+      futureLevel(20,'Integratie bruikbaar Japans','De onderdelen van deze fase samen toepassen.')
+    ]
+  },
+  {
+    id:'reading-natural-japanese',title:'Fase 3 — Lezen & natuurlijker Japans',subtitle:'Van eenvoudige tekst naar rijkere context',description:'Langere teksten, geleidelijke kanji, informelere taal en contextueel begrip.',startLevel:21,endLevel:30,goal:'Steeds zelfstandiger eenvoudige verhalen en natuurlijke dialogen begrijpen.',status:'concept',theme:'読',
+    levels:[
+      futureLevel(21,'Korte teksten','Voorlopig format; inhoud wordt later didactisch bepaald.'),
+      futureLevel(22,'Verhaalverbanden','Voorlopig format; inhoud wordt later didactisch bepaald.'),
+      futureLevel(23,'Kanji in bekende woorden','Bekend woord → kanji-vorm → lezen in context.'),
+      futureLevel(24,'Informele basis','Voorlopig format voor alledaagse, minder formele taal.'),
+      futureLevel(25,'Dialogen in context','Wie spreekt, tegen wie en met welke bedoeling?'),
+      futureLevel(26,'Personages en spreekstijl','Voorlopig format voor verschillen tussen sprekers.'),
+      futureLevel(27,'Manga-achtige scènes','Korte tekstballonnen en contextueel lezen.'),
+      futureLevel(28,'Natuurlijker formuleren','Bekende kennis herkennen in compactere taal.'),
+      futureLevel(29,'Langer lezen','Geleidelijk van regels naar pagina’s.'),
+      futureLevel(30,'Fase-integratie','Geen eindpunt; alleen een integratie van deze fase.')
+    ]
+  }
+];
+const journeyMilestones=[
+  {id:'child-book',title:'Eerste eenvoudig kinderboek',description:'Van losse zin via microverhaal en korte tekst naar een echt eenvoudig verhaal.',status:'richting',icon:'📖'},
+  {id:'manga',title:'Manga lezen',description:'Meer kanji, informele grammatica, dialogen en spreekstijlen in context.',status:'richting',icon:'💬'},
+  {id:'anime-subtitles',title:'Anime met Japanse ondertitels',description:'Lezen en luisteren groeien samen van langzame zin naar langere scène.',status:'richting',icon:'🎧'},
+  {id:'general-news',title:'De hoofdlijn van algemeen nieuws volgen',description:'Een verre mijlpaal voor formeel taalgebruik en algemeen begrip; zonder vast levelnummer.',status:'verre richting',icon:'📰'}
 ];
 
 function rankDefs(){const o={};['hiragana','katakana'].forEach(k=>{kanaModules[k].rows.forEach((r,i)=>o[`${k}-row-${i}`]={name:`${kanaModules[k].label} · ${r.name}`});kanaClusters.forEach((c,i)=>o[`${k}-cluster-${i}`]={name:`${kanaModules[k].label} · ${c.name}`});['exam1','exam2','exam3'].forEach(id=>o[`${k}-${id}`]={name:`${kanaModules[k].label} · ${id}`})});['num-basic','num-midterm','num-triangle','num-math','num-teens','num-tens','num-under100','num-hundreds','num-thousands','num-exam1','num-exam2'].forEach(id=>o[id]={name:id});['mix-exam1','mix-exam2'].forEach(id=>o[id]={name:id});dakutenPatterns.forEach(p=>['hiragana','katakana'].forEach(s=>o[`dak-${s}-${p.id}`]={name:`${s} ${p.name}`}));dakutenClusters.forEach((c,i)=>o[`dak-cluster-${i}`]={name:c.name});['dak-examA','dak-examB','dak-examC'].forEach(id=>o[id]={name:id});langLessons.forEach(l=>o[l.id]={name:l.title});o['l4-exam']={name:'Level 4 examen'};smallLessons.forEach(l=>o[l.id]={name:l.title});o['l5-exam']={name:'Level 5 examen'};Object.values(advancedCourses).forEach(c=>{c.lessons.forEach(l=>o[l.id]={name:`Level ${c.number} · ${l.title}`});o[`l${c.number}-exam`]={name:`Level ${c.number} examen`}});return o}
@@ -2240,6 +2307,31 @@ function levelMenuCard(lv,i){
   b.onclick=()=>openLevel(i);
   return b;
 }
+function phaseProgressInfo(phase){
+  const playable=phase.levels.filter(l=>l.status==='playable');
+  const done=playable.filter(l=>!!levelRank(l.levelIndex)).length;
+  const current=playable.find(l=>l.levelIndex===state.level);
+  return{done,total:phase.levels.length,pct:phase.levels.length?done/phase.levels.length*100:0,current};
+}
+function phaseLevelCard(item){
+  if(item.status==='playable'){
+    const b=levelMenuCard(levels[item.levelIndex],item.levelIndex);
+    b.classList.add('phase-level-card');
+    return b;
+  }
+  const d=document.createElement('section');
+  d.className='level-menu-card phase-level-card placeholder';
+  d.innerHTML=`<div class="level-no">Level ${item.number}</div><div class="level-title">${item.title}</div><div class="level-desc">${item.description}</div><div class="level-status">Voorlopig · later aanpasbaar</div>`;
+  return d;
+}
+function renderCoursePhase(phase,index){
+  const p=phaseProgressInfo(phase),details=document.createElement('details');
+  details.className='course-phase';
+  if(phase.status==='active')details.open=true;
+  details.innerHTML=`<summary class="course-phase-summary"><div class="phase-kicker">${phase.title}</div><div class="phase-title">${phase.subtitle}</div><div class="phase-subtitle">${phase.description}</div><div class="phase-meta"><span>Level ${phase.startLevel}–${phase.endLevel}</span><span>${phase.status==='active'?`${p.done}/${p.total} levelranks`:phase.status==='planned'?'Voorlopige route':'Conceptuele route'}</span>${p.current?`<span>Nu: Level ${p.current.number} van ${p.total}</span>`:''}</div><div class="phase-progress"><div style="width:${p.pct}%"></div></div></summary><div class="phase-details"><div class="phase-goal"><strong>Groter doel</strong><div class="small" style="margin-top:4px">${phase.goal}</div></div><div class="level-menu-grid phase-levels" role="region" aria-label="${phase.title}"></div></div>`;
+  phase.levels.forEach(level=>details.querySelector('.phase-levels').appendChild(phaseLevelCard(level)));
+  return details;
+}
 function renderLevelMenu(box){
   updateHeader();
   const plan=continueJourneyPlan();
@@ -2249,27 +2341,20 @@ function renderLevelMenu(box){
   intro.querySelector('.continue-action').onclick=plan.action;
   box.appendChild(intro);
 
-  const activeHead=document.createElement('div');
-  activeHead.className='menu-section-head';
-  activeHead.innerHTML=`<div class="h2">De absolute basis · Level 1–10</div><div class="muted">Eén doorlopende rij van schrift naar bruikbaar dagelijks Japans.</div>`;
-  box.appendChild(activeHead);
-  const grid=document.createElement('div');
-  grid.className='level-menu-grid active-levels';
-  grid.setAttribute('role','region');
-  grid.setAttribute('aria-label','Jouw leerroute');
-  levels.forEach((lv,i)=>grid.appendChild(levelMenuCard(lv,i)));
-  box.appendChild(grid);
+  const routeHead=document.createElement('div');
+  routeHead.className='menu-section-head';
+  routeHead.innerHTML=`<div class="h2">Jouw lange leerreis</div><div class="muted">Tien levels vormen steeds één grotere fase. Open alleen de fase die je nu nodig hebt.</div>`;
+  box.appendChild(routeHead);
+  coursePhases.forEach((phase,index)=>box.appendChild(renderCoursePhase(phase,index)));
 
-  const futureHead=document.createElement('div');
-  futureHead.className='menu-section-head future-head';
-  futureHead.innerHTML=`<div class="h2">Daarna · specialiseren naar echt materiaal</div><div class="muted">Dit is een voorlopig format. De precieze lessen worden later per doel klein en cumulatief uitgewerkt.</div>`;
-  box.appendChild(futureHead);
-  const futureGrid=document.createElement('div');
-  futureGrid.className='level-menu-grid future-levels';
-  futureGrid.setAttribute('role','region');
-  futureGrid.setAttribute('aria-label','Specialisatieroute');
-  specializationMilestones.forEach(([range,title,desc,goal])=>{const d=document.createElement('section');d.className='level-menu-card';d.innerHTML=`<div class="level-no">${range}</div><div class="level-title">${title}</div><div class="level-desc">${desc}</div><div class="small" style="margin-top:9px">${goal}</div>`;futureGrid.appendChild(d)});
-  box.appendChild(futureGrid);
+  const milestoneHead=document.createElement('div');
+  milestoneHead.className='menu-section-head future-head';
+  milestoneHead.innerHTML=`<div class="h2">Grote mijlpalen in de verte</div><div class="muted">Richtinggevers zonder vast levelnummer of valse eindbelofte.</div>`;
+  box.appendChild(milestoneHead);
+  const milestoneGrid=document.createElement('div');
+  milestoneGrid.className='milestone-grid';
+  journeyMilestones.forEach(m=>{const d=document.createElement('section');d.className='milestone-card';d.innerHTML=`<div class="between"><span class="milestone-icon" aria-hidden="true">${m.icon}</span><span class="rank">${m.status}</span></div><div class="h2">${m.title}</div><div class="small">${m.description}</div>`;milestoneGrid.appendChild(d)});
+  box.appendChild(milestoneGrid);
 }
 function overviewAction(label,desc,fn,rank=null){
   const d=document.createElement('button');
