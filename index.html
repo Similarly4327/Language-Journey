@@ -743,7 +743,7 @@ section{
 /* === v11 expanded progress & individual mastery === */
 .progress-tabs{
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
+  grid-template-columns:repeat(5,minmax(0,1fr));
   gap:7px;
 }
 .progress-tab{
@@ -1153,11 +1153,30 @@ body[data-scene="classroom"]::after{
   position:relative;
   overflow:hidden;
   min-height:174px;
-  padding:20px 108px 20px 20px;
+  padding:20px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 118px;
+  gap:14px;
+  align-items:center;
   background:linear-gradient(135deg,var(--continue-glass),color-mix(in srgb,var(--continue-glass) 80%,rgba(196,74,62,.2)));
   box-shadow:0 22px 58px rgba(48,44,38,.2),0 3px 10px rgba(48,44,38,.1);
   -webkit-backdrop-filter:blur(22px) saturate(1.24);
   backdrop-filter:blur(22px) saturate(1.24);
+}
+.journey-hero-copy{position:relative;z-index:1;min-width:0}
+.journey-avatar{position:relative;z-index:1;justify-self:end;width:112px;display:grid;justify-items:center;align-self:end}
+.avatar-sprite{
+  width:96px;height:160px;
+  background-image:url("assets/avatar-skins.png");
+  background-repeat:no-repeat;
+  background-size:1000% 200%;
+  background-position:var(--avatar-x,0%) var(--avatar-y,0%);
+  filter:drop-shadow(0 8px 13px rgba(49,39,34,.16));
+}
+.journey-avatar-level{
+  margin-top:-3px;padding:3px 9px;border:1px solid color-mix(in srgb,var(--border) 78%,transparent);
+  border-radius:999px;background:color-mix(in srgb,var(--card) 85%,transparent);
+  color:var(--muted);font-size:11px;font-weight:800
 }
 .journey-hero .hero-mark{
   position:absolute;
@@ -1178,6 +1197,19 @@ body[data-scene="classroom"]::after{
 .continue-title{margin-top:7px;max-width:560px}
 .continue-detail{margin-top:6px;color:var(--muted);font-size:14px;font-weight:650}
 .continue-action{width:auto;margin-top:16px;padding-inline:18px}
+.avatar-settings-grid{display:grid;gap:10px;margin-top:12px}
+.avatar-setting-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.avatar-choice-group{display:flex;flex-wrap:wrap;gap:7px}
+.avatar-choice{min-height:40px;padding:7px 13px;border:1px solid var(--border);border-radius:999px;background:var(--panel);color:var(--text);font-weight:750}
+.avatar-choice.active{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--panel))}
+.avatar-skin-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:11px}
+.avatar-skin-card{position:relative;min-width:0;border:1px solid var(--border);border-radius:13px;background:var(--panel);padding:7px 4px 8px;display:grid;justify-items:center;color:var(--text)}
+.avatar-skin-card.active{border-color:var(--accent);box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 32%,transparent)}
+.avatar-skin-card.locked{opacity:.48}
+.avatar-settings-preview{width:76px;height:127px;flex:0 0 auto}
+.avatar-skin-card .avatar-sprite{width:58px;height:97px;filter:none}
+.avatar-skin-card .skin-label{font-size:10px;font-weight:800;margin-top:2px}
+.avatar-skin-card .skin-state{font-size:9px;color:var(--muted);margin-top:1px}
 .menu-section-head{
   display:grid;
   gap:3px;
@@ -1292,10 +1324,15 @@ body[data-scene="journey"][data-view="main"] #mainView{
   body[data-scene="classroom"]::before{background-position:52% center}
   .app-header{top:max(6px,env(safe-area-inset-top));padding:9px 10px;border-radius:16px}
   .level-menu-card{min-height:138px}
-  .journey-hero{min-height:190px;padding:17px 72px 17px 16px}
+  .journey-hero{min-height:190px;padding:17px 12px 17px 16px;grid-template-columns:minmax(0,1fr) 82px;gap:7px}
   .journey-hero .hero-mark{right:13px;font-size:54px}
+  .journey-avatar{width:78px}
+  .journey-avatar .avatar-sprite{width:72px;height:120px}
+  .journey-avatar-level{font-size:10px;padding:3px 7px}
   .continue-title{font-size:22px;margin-top:6px}
-  .continue-action{width:100%;max-width:240px;margin-top:14px}
+  .continue-action{width:100%;max-width:220px;margin-top:14px}
+  .avatar-setting-row{align-items:flex-start;flex-direction:column}
+  .avatar-skin-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
   .app-nav{gap:2px;padding:3px}
   .app-nav-item{min-height:34px;padding:5px 9px;font-size:12px}
   .menu-section-head{margin-top:10px;padding-inline:1px}
@@ -1419,6 +1456,18 @@ body[data-scene="journey"][data-view="main"] #mainView{
 (() => {
 const root=document.getElementById('app'),$=id=>document.getElementById(id);
 const levels=[['Level 1','Schriftbasis','Hiragana · Cijfers · Katakana'],['Level 2','Kana Mix','92 basiskana schakelen'],['Level 3','Dakuten & Handakuten','Bekende kana modificeren'],['Level 4','Eerste taalbasis','Woorden + eerste zinnen'],['Level 5','Kana compleet','ゃゅょ · っ · ー'],['Level 6','Mensen & relaties','Wie iemand is · bezit met の'],['Level 7','Hoeveelheden','Tellers · rangtelwoorden'],['Level 8','Tijd & agenda','Dag · datum · afspraak'],['Level 9','Plaats & richting','Waar · links · rechts'],['Level 10','Dagelijks Japans','Eerste praktijksituaties']];
+const avatarSkins=[
+  {id:'skin-1',level:1,name:'Beginner'},
+  {id:'skin-2',level:2,name:'Studie'},
+  {id:'skin-3',level:3,name:'Traditioneel accent'},
+  {id:'skin-4',level:4,name:'Dagelijks'},
+  {id:'skin-5',level:5,name:'Praktijk'},
+  {id:'skin-6',level:6,name:'Sociaal'},
+  {id:'skin-7',level:7,name:'Markt'},
+  {id:'skin-8',level:8,name:'Agenda'},
+  {id:'skin-9',level:9,name:'Reiziger'},
+  {id:'skin-10',level:10,name:'Festival'}
+];
 const rowNames=['Klinkers','K-rij','S-rij','T-rij','N-rij','H-rij','M-rij','Y-rij','R-rij','W + ん'];
 const hira=[[['あ','a'],['い','i'],['う','u'],['え','e'],['お','o']],[['か','ka'],['き','ki'],['く','ku'],['け','ke'],['こ','ko']],[['さ','sa'],['し','shi'],['す','su'],['せ','se'],['そ','so']],[['た','ta'],['ち','chi'],['つ','tsu'],['て','te'],['と','to']],[['な','na'],['に','ni'],['ぬ','nu'],['ね','ne'],['の','no']],[['は','ha'],['ひ','hi'],['ふ','fu'],['へ','he'],['ほ','ho']],[['ま','ma'],['み','mi'],['む','mu'],['め','me'],['も','mo']],[['や','ya'],['ゆ','yu'],['よ','yo']],[['ら','ra'],['り','ri'],['る','ru'],['れ','re'],['ろ','ro']],[['わ','wa'],['を','wo'],['ん','n']]];
 const kata=[[['ア','a'],['イ','i'],['ウ','u'],['エ','e'],['オ','o']],[['カ','ka'],['キ','ki'],['ク','ku'],['ケ','ke'],['コ','ko']],[['サ','sa'],['シ','shi'],['ス','su'],['セ','se'],['ソ','so']],[['タ','ta'],['チ','chi'],['ツ','tsu'],['テ','te'],['ト','to']],[['ナ','na'],['ニ','ni'],['ヌ','nu'],['ネ','ne'],['ノ','no']],[['ハ','ha'],['ヒ','hi'],['フ','fu'],['ヘ','he'],['ホ','ho']],[['マ','ma'],['ミ','mi'],['ム','mu'],['メ','me'],['モ','mo']],[['ヤ','ya'],['ユ','yu'],['ヨ','yo']],[['ラ','ra'],['リ','ri'],['ル','ru'],['レ','re'],['ロ','ro']],[['ワ','wa'],['ヲ','wo'],['ン','n']]];
@@ -2025,7 +2074,30 @@ function moduleRank(key){
 }
 
 
-const state={screen:'levels',level:0,basisModule:'hiragana',tabs:{hiragana:'learn',katakana:'learn',numbers:'learn',mix:'practice',dakuten:'learn',lang:'learn',small:'learn',advanced:'learn'},row:{hiragana:0,katakana:0},step:{hiragana:0,katakana:0},numberLesson:0,dakScript:'hiragana',dakPattern:0,dakStep:0,langLesson:0,langView:'list',langStep:'overview',langStepProgress:{},introducedVocabIds:[],smallLesson:0,advancedLesson:{5:0,6:0,7:0,8:0,9:0},advancedView:{5:'list',6:'list',7:'list',8:'list',9:'list'},advancedStep:{5:'overview',6:'overview',7:'overview',8:'overview',9:'overview'},advancedStepProgress:{},progressTab:'levels',progressKanaGroup:'hiragana',progressDetailId:null,progressVocabDetailId:null,practiceSelections:{hiragana:[0,1,2],katakana:[0,1,2],hiraganaChars:[],katakanaChars:[],dakuten:['g','z'],dakScripts:['hiragana','katakana'],numbers:['0-10']},errorBank:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},lastErrors:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},quiz:null,lastConfig:null};
+const state={screen:'levels',level:0,currentLevel:1,avatarEnabled:true,avatarGender:'female',avatarMode:'auto',selectedAvatarSkin:null,unlockedAvatarSkins:['skin-1'],basisModule:'hiragana',tabs:{hiragana:'learn',katakana:'learn',numbers:'learn',mix:'practice',dakuten:'learn',lang:'learn',small:'learn',advanced:'learn'},row:{hiragana:0,katakana:0},step:{hiragana:0,katakana:0},numberLesson:0,dakScript:'hiragana',dakPattern:0,dakStep:0,langLesson:0,langView:'list',langStep:'overview',langStepProgress:{},introducedVocabIds:[],smallLesson:0,advancedLesson:{5:0,6:0,7:0,8:0,9:0},advancedView:{5:'list',6:'list',7:'list',8:'list',9:'list'},advancedStep:{5:'overview',6:'overview',7:'overview',8:'overview',9:'overview'},advancedStepProgress:{},progressTab:'levels',progressKanaGroup:'hiragana',progressDetailId:null,progressVocabDetailId:null,practiceSelections:{hiragana:[0,1,2],katakana:[0,1,2],hiraganaChars:[],katakanaChars:[],dakuten:['g','z'],dakScripts:['hiragana','katakana'],numbers:['0-10']},errorBank:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},lastErrors:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},quiz:null,lastConfig:null};
+
+function avatarSkinId(level){return`skin-${Math.max(1,Math.min(avatarSkins.length,level))}`}
+function syncAvatarState(){
+  state.currentLevel=Math.max(1,Math.min(levels.length,state.level+1));
+  const valid=new Set(avatarSkins.map(s=>s.id));
+  const unlocked=new Set((state.unlockedAvatarSkins||[]).filter(id=>valid.has(id)));
+  for(let level=1;level<=state.currentLevel;level++)unlocked.add(avatarSkinId(level));
+  unlocked.add('skin-1');
+  state.unlockedAvatarSkins=[...unlocked].sort((a,b)=>Number(a.split('-')[1])-Number(b.split('-')[1]));
+  if(state.selectedAvatarSkin&&!unlocked.has(state.selectedAvatarSkin))state.selectedAvatarSkin=null;
+}
+function activeAvatarSkin(){
+  syncAvatarState();
+  const id=state.avatarMode==='manual'&&state.selectedAvatarSkin?state.selectedAvatarSkin:avatarSkinId(state.currentLevel);
+  return avatarSkins.find(s=>s.id===id)||avatarSkins[0];
+}
+function avatarSpriteStyle(skin,gender=state.avatarGender){
+  const x=skin.level===1?0:(skin.level-1)/9*100;
+  return`--avatar-x:${x.toFixed(4)}%;--avatar-y:${gender==='female'?100:0}%`;
+}
+function avatarSpriteHtml(skin,extraClass=''){
+  return`<div class="avatar-sprite ${extraClass}" style="${avatarSpriteStyle(skin)}" role="img" aria-label="Avatar-skin voor Level ${skin.level}: ${skin.name}"></div>`;
+}
 
 const STORAGE_KEY='taal-japanse-leerapp-v1';
 const STORAGE_VERSION=4;
@@ -2061,9 +2133,16 @@ function updateStorageUI(){
   }
 }
 function storageStateSnapshot(){
+  syncAvatarState();
   return {
     screen:state.screen,
     level:state.level,
+    currentLevel:state.currentLevel,
+    avatarEnabled:state.avatarEnabled,
+    avatarGender:state.avatarGender,
+    avatarMode:state.avatarMode,
+    selectedAvatarSkin:state.selectedAvatarSkin,
+    unlockedAvatarSkins:state.unlockedAvatarSkins,
     basisModule:state.basisModule,
     tabs:{...state.tabs},
     row:{...state.row},
@@ -2129,6 +2208,11 @@ function loadProgress(){
     if(['levels','level','module'].includes(s.screen))state.screen=s.screen;
     else state.screen='levels';
     if(Number.isInteger(s.level))state.level=Math.max(0,Math.min(levels.length-1,s.level));
+    if(typeof s.avatarEnabled==='boolean')state.avatarEnabled=s.avatarEnabled;
+    if(['male','female'].includes(s.avatarGender))state.avatarGender=s.avatarGender;
+    if(['auto','manual'].includes(s.avatarMode))state.avatarMode=s.avatarMode;
+    if(typeof s.selectedAvatarSkin==='string')state.selectedAvatarSkin=s.selectedAvatarSkin;
+    if(Array.isArray(s.unlockedAvatarSkins))state.unlockedAvatarSkins=s.unlockedAvatarSkins;
     if(['hiragana','numbers','katakana'].includes(s.basisModule))state.basisModule=s.basisModule;
     if(s.tabs&&typeof s.tabs==='object')Object.assign(state.tabs,s.tabs);
     if(s.row&&typeof s.row==='object')Object.assign(state.row,s.row);
@@ -2142,7 +2226,7 @@ function loadProgress(){
     if(Array.isArray(s.introducedVocabIds))state.introducedVocabIds=s.introducedVocabIds.filter(id=>!!vocabById[id]);
     ['advancedLesson','advancedView','advancedStep','advancedStepProgress'].forEach(k=>{if(s[k]&&typeof s[k]==='object')Object.assign(state[k],s[k])});
     if(['hiragana','katakana'].includes(s.dakScript))state.dakScript=s.dakScript;
-    if(['levels','kana','vocab','skills'].includes(s.progressTab))state.progressTab=s.progressTab;
+    if(['levels','kana','vocab','skills','avatar'].includes(s.progressTab))state.progressTab=s.progressTab;
     if(['hiragana','katakana','dakuten'].includes(s.progressKanaGroup))state.progressKanaGroup=s.progressKanaGroup;
     state.progressDetailId=typeof s.progressDetailId==='string'?s.progressDetailId:null;
     state.progressVocabDetailId=typeof s.progressVocabDetailId==='string'?s.progressVocabDetailId:null;
@@ -2195,6 +2279,7 @@ function loadProgress(){
   }
   state.quiz=null;
   state.lastConfig=null;
+  syncAvatarState();
   // Ensure catalog records exist without inventing historic seen/correct counts.
   try{
     ensureGroupMastery('hiragana');
@@ -2281,9 +2366,10 @@ function navigateBack(){
   if(state.screen==='module'){state.screen='level';scheduleSave();return renderMain()}
   if(state.screen==='level'){state.screen='levels';scheduleSave();return renderMain()}
 }
-function openLevel(i){state.level=i;state.screen='level';scheduleSave();renderMain()}
+function openLevel(i){state.level=i;syncAvatarState();state.screen='level';scheduleSave();renderMain()}
 function openModule(level,setup){
   state.level=level;
+  syncAvatarState();
   state.screen='module';
   if(typeof setup==='function')setup();
   scheduleSave();
@@ -2412,9 +2498,10 @@ function renderCoursePhase(phase,index){
 function renderLevelMenu(box){
   updateHeader();
   const plan=continueJourneyPlan();
+  const avatar=activeAvatarSkin();
   const intro=document.createElement('section');
   intro.className='card journey-hero';
-  intro.innerHTML=`<div class="hero-kicker">日本語への道 · jouw route</div><div class="h1 continue-title">${plan.title}</div><div class="continue-detail">${plan.detail}</div><button class="btn primary continue-action" type="button">${plan.button}</button><span class="hero-mark" aria-hidden="true">旅</span>`;
+  intro.innerHTML=`<div class="journey-hero-copy"><div class="hero-kicker">日本語への道 · jouw route</div><div class="h1 continue-title">${plan.title}</div><div class="continue-detail">${plan.detail}</div><button class="btn primary continue-action" type="button">${plan.button}</button></div>${state.avatarEnabled?`<div class="journey-avatar">${avatarSpriteHtml(avatar)}<div class="journey-avatar-level">Level ${state.currentLevel}</div></div>`:'<span class="hero-mark" aria-hidden="true">旅</span>'}`;
   intro.querySelector('.continue-action').onclick=plan.action;
   box.appendChild(intro);
 
@@ -3564,6 +3651,24 @@ function renderProgressSkillsTab(box){
     $('skillsList').appendChild(d);
   });
 }
+function renderAvatarSettings(box){
+  syncAvatarState();
+  const active=activeAvatarSkin(),unlocked=new Set(state.unlockedAvatarSkins);
+  box.innerHTML=`<section class="card"><div class="between"><div><div class="h2">Avatar</div><div class="muted">Een rustige mascotte voor je leerreis. Geen ranks of extra statistieken.</div></div>${avatarSpriteHtml(active,'avatar-settings-preview')}</div><div class="avatar-settings-grid"><div class="avatar-setting-row"><div><strong>Avatar tonen</strong><div class="small">Toon de mascotte op de Ga verder-kaart.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarEnabled?'active':''}" data-avatar-enabled="true">Aan</button><button class="avatar-choice ${!state.avatarEnabled?'active':''}" data-avatar-enabled="false">Uit</button></div></div><div class="avatar-setting-row"><div><strong>Presentatie</strong><div class="small">Kies de mannelijke of vrouwelijke avatarreeks.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarGender==='male'?'active':''}" data-avatar-gender="male">Man</button><button class="avatar-choice ${state.avatarGender==='female'?'active':''}" data-avatar-gender="female">Vrouw</button></div></div><div class="avatar-setting-row"><div><strong>Skin-modus</strong><div class="small">Auto volgt je huidige level; Handmatig blijft op jouw keuze.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarMode==='auto'?'active':''}" data-avatar-mode="auto">Auto</button><button class="avatar-choice ${state.avatarMode==='manual'?'active':''}" data-avatar-mode="manual">Handmatig</button></div></div></div><div class="progress-note" style="margin-top:12px">Een skin wordt vrijgespeeld zodra je dat level voor het eerst opent. Bereikt: Level ${state.currentLevel}.</div></section>${state.avatarMode==='manual'?'<section class="card"><div class="h2">Kies skin</div><div class="muted">Alleen skins van bereikte levels zijn selecteerbaar.</div><div id="avatarSkinGrid" class="avatar-skin-grid"></div></section>':''}`;
+  root.querySelectorAll('[data-avatar-enabled]').forEach(b=>b.onclick=()=>{state.avatarEnabled=b.dataset.avatarEnabled==='true';scheduleSave();renderAvatarSettings(box)});
+  root.querySelectorAll('[data-avatar-gender]').forEach(b=>b.onclick=()=>{state.avatarGender=b.dataset.avatarGender;scheduleSave();renderAvatarSettings(box)});
+  root.querySelectorAll('[data-avatar-mode]').forEach(b=>b.onclick=()=>{state.avatarMode=b.dataset.avatarMode;if(state.avatarMode==='manual'&&!state.selectedAvatarSkin)state.selectedAvatarSkin=avatarSkinId(state.currentLevel);scheduleSave();renderAvatarSettings(box)});
+  const grid=$('avatarSkinGrid');
+  if(grid)avatarSkins.forEach(skin=>{
+    const available=unlocked.has(skin.id),b=document.createElement('button');
+    b.type='button';
+    b.disabled=!available;
+    b.className=`avatar-skin-card ${state.selectedAvatarSkin===skin.id?'active':''} ${available?'':'locked'}`;
+    b.innerHTML=`${avatarSpriteHtml(skin)}<span class="skin-label">Level ${skin.level}</span><span class="skin-state">${available?skin.name:'Nog vergrendeld'}</span>`;
+    if(available)b.onclick=()=>{state.selectedAvatarSkin=skin.id;scheduleSave();renderAvatarSettings(box)};
+    grid.appendChild(b);
+  });
+}
 function renderSession(){
   show('session');
   updateHeader();
@@ -3573,6 +3678,7 @@ function renderSession(){
     <button class="progress-tab ${state.progressTab==='kana'?'active':''}" data-progress="kana">Kana</button>
     <button class="progress-tab ${state.progressTab==='vocab'?'active':''}" data-progress="vocab">Vocabulaire</button>
     <button class="progress-tab ${state.progressTab==='skills'?'active':''}" data-progress="skills">Taalvaardigheden</button>
+    <button class="progress-tab ${state.progressTab==='avatar'?'active':''}" data-progress="avatar">Avatar</button>
   </div>
   <div id="progressBody" class="stack"></div>`;
   root.querySelectorAll('[data-progress]').forEach(b=>b.onclick=()=>{
@@ -3586,6 +3692,7 @@ function renderSession(){
   if(state.progressTab==='kana')renderProgressKanaTab(body);
   else if(state.progressTab==='vocab')renderProgressVocabTab(body);
   else if(state.progressTab==='skills')renderProgressSkillsTab(body);
+  else if(state.progressTab==='avatar')renderAvatarSettings(body);
   else renderProgressLevelTab(body);
 }
 

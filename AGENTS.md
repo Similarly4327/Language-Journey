@@ -16,3 +16,10 @@
 - Quick checks and practice sessions skip explanatory screens and open questions directly.
 - Preserve the mobile-first tap-based sentence builder; do not require drag-and-drop or a Japanese keyboard.
 - Level 4 may use only writing taught through Level 3: no kanji, small kana, small っ, or long-vowel mark ー.
+
+## Homepage avatar
+
+- Preserve the optional homepage mascot and its saved settings: enabled state, gender presentation, auto/manual mode, selected skin, unlocked skins, and current level.
+- Keep the mascot secondary to the learning content: compact, calm, and without rank text, currency, shops, or loud gamification.
+- Auto mode follows the most recently active level. Manual mode may select only skins unlocked by opening that level.
+- Keep the Level 1–10 skins visually consistent and maintain the mobile layout so the learning button and copy remain readable.
