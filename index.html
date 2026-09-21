@@ -1428,6 +1428,24 @@ body[data-scene="journey"][data-view="main"] #mainView{
 @media(prefers-color-scheme:dark) and (max-width:640px){
   .swipe-cue{text-shadow:0 1px 8px rgba(0,0,0,.9)}
 }
+/* === v13 study history === */
+.study-hero{background:linear-gradient(145deg,color-mix(in srgb,var(--card) 88%,#f7d8c9),var(--card));overflow:hidden}
+.study-kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+.study-kpi{padding:11px;border:1px solid var(--border);border-radius:14px;background:var(--panel)}
+.study-kpi strong{display:block;font-size:22px;line-height:1.1;margin-bottom:3px}
+.study-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.study-chart{width:100%;height:auto;min-height:150px;display:block;margin-top:10px}
+.study-chart text{fill:var(--muted);font-size:10px}.study-chart .grid{stroke:var(--border);stroke-width:1}.study-chart .line{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.study-chart .area{fill:color-mix(in srgb,var(--accent) 15%,transparent)}
+.category-bar{display:grid;grid-template-columns:minmax(90px,1fr) 3fr auto;gap:8px;align-items:center;margin-top:8px}.category-bar-track{height:9px;background:var(--panel);border-radius:999px;overflow:hidden}.category-bar-track span{height:100%;display:block;background:linear-gradient(90deg,var(--accent),#e68b72);border-radius:inherit}
+.study-range{position:relative;height:42px;margin:8px 8px 0}.study-range-track,.study-range-fill{position:absolute;left:0;right:0;top:17px;height:8px;border-radius:999px;background:var(--panel)}.study-range-fill{background:var(--accent);left:var(--low);right:calc(100% - var(--high))}
+.study-range input{position:absolute;inset:0;width:100%;height:42px;margin:0;background:transparent;pointer-events:none;appearance:none;-webkit-appearance:none}.study-range input::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--card);border:4px solid var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.18);pointer-events:auto;cursor:grab}.study-range input::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--card);border:4px solid var(--accent);pointer-events:auto;cursor:grab}
+.study-presets{display:flex;gap:6px;overflow:auto;padding-bottom:3px}.study-presets .btn{white-space:nowrap}
+.study-event{position:relative;padding-left:25px}.study-event::before{content:'';position:absolute;left:7px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--accent)}.study-event::after{content:'';position:absolute;left:11px;top:19px;bottom:-17px;width:2px;background:var(--border)}.study-event:last-child::after{display:none}
+.session-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start}.session-actions{display:flex;gap:5px}.session-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.session-tag{font-size:11px;border:1px solid var(--border);border-radius:999px;padding:3px 7px;color:var(--muted)}
+.study-form{display:grid;gap:10px}.study-form label,.study-form-grid label{display:grid;gap:4px;font-size:12px;font-weight:750;color:var(--muted)}.study-form input,.study-form select,.study-form textarea,.study-form-grid input,.study-form-grid select{width:100%;box-sizing:border-box;padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font:inherit}.study-form textarea{min-height:72px;resize:vertical}.study-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.study-adjust{margin-top:10px;border-color:color-mix(in srgb,var(--accent) 45%,var(--border))}.study-adjust summary{cursor:pointer;font-weight:800}.baseline-notice{border-left:4px solid var(--accent)}
+@media(min-width:760px){.study-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}.study-form-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:520px){.session-row{grid-template-columns:1fr}.session-actions{justify-content:flex-end}.category-bar{grid-template-columns:85px 1fr auto}.study-form-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
 }
@@ -1446,7 +1464,7 @@ body[data-scene="journey"][data-view="main"] #mainView{
       </div>
     </div>
     <div class="header-actions">
-      <div id="storageBadge" class="storage-badge" title="Voortgang wordt in deze browser opgeslagen">v12 · opslag</div>
+      <div id="storageBadge" class="storage-badge" title="Voortgang wordt in deze browser opgeslagen">v13 · opslag</div>
       <nav class="app-nav" aria-label="Hoofdnavigatie">
         <button id="learnNav" class="app-nav-item active" type="button">Leren</button>
         <button id="sessionBtn" class="app-nav-item" type="button">Voortgang</button>
@@ -1457,7 +1475,7 @@ body[data-scene="journey"][data-view="main"] #mainView{
 <main id="mainView" class="stack"></main>
 <section id="quizView" class="stack hidden"><div class="card"><div class="between"><div><div id="quizTitle" class="h2"></div><div id="quizMeta" class="small"></div></div><div><span id="qNow">1</span>/<span id="qTotal">10</span></div></div><div class="progress" style="margin-top:9px"><div id="qBar"></div></div></div><div class="card question"><div id="qHint" class="muted"></div><div id="qPrompt" class="prompt"></div><div id="qChoices" class="choices"></div><div id="qFeedback" class="feedback"></div><div class="between" style="align-items:center;margin-top:8px"><span id="qScore" class="small">Goed: 0</span><button id="quitQuiz" class="btn tiny">Stop</button></div></div></section>
 <section id="resultView" class="stack hidden"><div class="card question"><div id="resultTitle" class="h2"></div><div id="resultScore" style="font-size:40px;font-weight:800;margin-top:8px"></div><div id="resultStats" class="muted"></div><div id="resultRank" class="panel hidden" style="margin-top:10px"></div></div><div class="card"><div class="h2">Fouten</div><div id="errorIntro" class="small"></div><div id="errorList" class="stack" style="margin-top:9px"></div></div><div class="grid2"><button id="practiceErrors" class="btn">Oefen mijn fouten</button><button id="retryBtn" class="btn">Opnieuw</button><button id="nextBtn" class="btn primary hidden">Volgende →</button><button id="backBtn" class="btn">Terug naar overzicht</button></div></section>
-<section id="sessionView" class="stack hidden"><div class="card"><div class="h1">Voortgang bekijken</div><div class="muted">Cursusstatus, individuele mastery, vocabulaire en functionele vaardigheden.</div></div><div id="sessionContent" class="stack"></div>
+<section id="sessionView" class="stack hidden"><div class="card"><div class="h1">Mijn Japanse leerreis</div><div class="muted">Studietijd, historie, analyses en kennisprogressie op één plek.</div></div><div id="sessionContent" class="stack"></div>
 <section class="card">
   <div class="h2">Browseropslag</div>
   <div id="storageInfo" class="muted">Voortgang wordt lokaal in deze browser opgeslagen.</div>
@@ -1831,20 +1849,24 @@ function questionMasteryDirection(q){
 function recordQuestionMastery(q,ok,quiz){
   const item=trackableKanaFromQuestion(q);
   if(item){
+    const rec=ensureKanaMastery(item),previous=rec.rank;
     recordMasteryResult(
-      ensureKanaMastery(item),
+      rec,
       ok,
       questionMasteryDirection(q),
       quiz?.source||'general'
     );
+    if(previous!==rec.rank)recordHistoricRankEvent('kana',item.id,previous,rec.rank);
   }
   if(Array.isArray(q?.vocabIds)){
     q.vocabIds.forEach(id=>{
       if(!(state.introducedVocabIds||[]).includes(id)&&!rankState[vocabById[id]?.lessonId]?.rank)return;
       const rec=ensureVocabMastery(id);
       if(!rec)return;
+      const previous=rec.rank;
       const dir=q.vocabDirection||'general';
       recordMasteryResult(rec,ok,dir,quiz?.source||'lang');
+      if(previous!==rec.rank)recordHistoricRankEvent('woord',id,previous,rec.rank);
     });
   }
 }
@@ -2054,7 +2076,7 @@ function startSingleVocabPractice(id){
 
 const rankOrder=[null,'Copper','Silver','Gold','Platinum'];
 function rankIndex(r){return Math.max(0,rankOrder.indexOf(r))}function promoteOne(r){return rankOrder[Math.min(4,rankIndex(r)+1)]}
-function applyRank(id,accuracy,threshold=.9){const m=rankState[id];if(!m)return null;const prev=m.rank;m.attempts++;m.last=accuracy;if(accuracy>=threshold)m.rank=promoteOne(prev);else{if(prev==='Platinum'&&accuracy<.90)m.rank='Gold';else if(prev==='Gold'&&accuracy<.80)m.rank='Silver';else if(prev==='Silver'&&accuracy<.70)m.rank='Copper'}return{prev,next:m.rank}}
+function applyRank(id,accuracy,threshold=.9){const m=rankState[id];if(!m)return null;const prev=m.rank;m.attempts++;m.last=accuracy;if(accuracy>=threshold)m.rank=promoteOne(prev);else{if(prev==='Platinum'&&accuracy<.90)m.rank='Gold';else if(prev==='Gold'&&accuracy<.80)m.rank='Silver';else if(prev==='Silver'&&accuracy<.70)m.rank='Copper'}if(prev!==m.rank)recordHistoricRankEvent('cursus',id,prev,m.rank);return{prev,next:m.rank}}
 
 const rankText=r=>r||'Geen rank',rankClass=r=>r?`rank-${r}`:'rank-new';
 function minRankForIds(ids){
@@ -2090,7 +2112,7 @@ function moduleRank(key){
 }
 
 
-const state={screen:'levels',level:0,currentLevel:1,userName:'',userNameJapanese:'',avatarId:'avatar-female',avatarName:'Miku',avatarNameJapanese:'ミク',avatarNameCustom:false,avatarNameJapaneseCustom:false,avatarEnabled:true,avatarGender:'female',avatarMode:'auto',selectedAvatarSkin:null,unlockedAvatarSkins:['skin-1'],basisModule:'hiragana',tabs:{hiragana:'learn',katakana:'learn',numbers:'learn',mix:'practice',dakuten:'learn',lang:'learn',small:'learn',advanced:'learn'},row:{hiragana:0,katakana:0},step:{hiragana:0,katakana:0},numberLesson:0,dakScript:'hiragana',dakPattern:0,dakStep:0,langLesson:0,langView:'list',langStep:'overview',langStepProgress:{},introducedVocabIds:[],smallLesson:0,advancedLesson:{5:0,6:0,7:0,8:0,9:0},advancedView:{5:'list',6:'list',7:'list',8:'list',9:'list'},advancedStep:{5:'overview',6:'overview',7:'overview',8:'overview',9:'overview'},advancedStepProgress:{},progressTab:'levels',progressKanaGroup:'hiragana',progressDetailId:null,progressVocabDetailId:null,practiceSelections:{hiragana:[0,1,2],katakana:[0,1,2],hiraganaChars:[],katakanaChars:[],dakuten:['g','z'],dakScripts:['hiragana','katakana'],numbers:['0-10']},errorBank:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},lastErrors:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},quiz:null,lastConfig:null};
+const state={screen:'levels',level:0,currentLevel:1,userName:'',userNameJapanese:'',avatarId:'avatar-female',avatarName:'Miku',avatarNameJapanese:'ミク',avatarNameCustom:false,avatarNameJapaneseCustom:false,avatarEnabled:true,avatarGender:'female',avatarMode:'auto',selectedAvatarSkin:null,unlockedAvatarSkins:['skin-1'],basisModule:'hiragana',tabs:{hiragana:'learn',katakana:'learn',numbers:'learn',mix:'practice',dakuten:'learn',lang:'learn',small:'learn',advanced:'learn'},row:{hiragana:0,katakana:0},step:{hiragana:0,katakana:0},numberLesson:0,dakScript:'hiragana',dakPattern:0,dakStep:0,langLesson:0,langView:'list',langStep:'overview',langStepProgress:{},introducedVocabIds:[],smallLesson:0,advancedLesson:{5:0,6:0,7:0,8:0,9:0},advancedView:{5:'list',6:'list',7:'list',8:'list',9:'list'},advancedStep:{5:'overview',6:'overview',7:'overview',8:'overview',9:'overview'},advancedStepProgress:{},progressTab:'overview',progressKnowledgeTab:'levels',progressKanaGroup:'hiragana',progressDetailId:null,progressVocabDetailId:null,studyRange:{low:0,high:100},studyCalendar:{from:'',to:''},studyFilters:{category:'',skill:'',origin:'',level:'',tag:''},studyTracker:{version:1,courseStartedAt:null,trackingStartedAt:null,sessions:[],events:[],noticeDismissed:false,active:null},practiceSelections:{hiragana:[0,1,2],katakana:[0,1,2],hiraganaChars:[],katakanaChars:[],dakuten:['g','z'],dakScripts:['hiragana','katakana'],numbers:['0-10']},errorBank:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},lastErrors:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},quiz:null,lastConfig:null};
 
 function avatarDefaults(gender=state.avatarGender){return gender==='male'?{name:'Ren',japanese:'レン'}:{name:'Miku',japanese:'ミク'}}
 function cleanProfileValue(value){return typeof value==='string'?value.trim().slice(0,40):''}
@@ -2153,7 +2175,7 @@ function avatarSpriteHtml(skin,extraClass=''){
 }
 
 const STORAGE_KEY='taal-japanse-leerapp-v1';
-const STORAGE_VERSION=4;
+const STORAGE_VERSION=5;
 let storageOk=true;
 let lastSavedAt=null;
 let saveTimer=null;
@@ -2173,7 +2195,7 @@ function updateStorageUI(){
   const layout=detectLayout();
   if(badge){
     badge.classList.toggle('off',!storageOk);
-    badge.textContent=storageOk?'v12 · opgeslagen':'v12 · opslag uit';
+    badge.textContent=storageOk?'v13 · opgeslagen':'v13 · opslag uit';
     badge.title=storageOk
       ?`Lokale browseropslag actief · ${layout.kind} ${layout.width}×${layout.height}`
       :'Lokale browseropslag is niet beschikbaar';
@@ -2222,9 +2244,14 @@ function storageStateSnapshot(){
     advancedStep:state.advancedStep,
     advancedStepProgress:state.advancedStepProgress,
     progressTab:state.progressTab,
+    progressKnowledgeTab:state.progressKnowledgeTab,
     progressKanaGroup:state.progressKanaGroup,
     progressDetailId:state.progressDetailId,
     progressVocabDetailId:state.progressVocabDetailId,
+    studyRange:state.studyRange,
+    studyCalendar:state.studyCalendar,
+    studyFilters:state.studyFilters,
+    studyTracker:state.studyTracker,
     practiceSelections:state.practiceSelections,
     errorBank:state.errorBank,
     lastErrors:state.lastErrors
@@ -2262,7 +2289,7 @@ function loadProgress(){
   try{
     const raw=localStorage.getItem(STORAGE_KEY);
     const parsed=raw?JSON.parse(raw):null;
-    const saved=parsed&&[1,2,3,4].includes(parsed.version)?parsed:{version:STORAGE_VERSION,state:{},ranks:{}};
+    const saved=parsed&&[1,2,3,4,5].includes(parsed.version)?parsed:{version:STORAGE_VERSION,state:{},ranks:{}};
     savedVersion=saved.version;
     const s=saved.state||{};
     if(['levels','level','module'].includes(s.screen))state.screen=s.screen;
@@ -2292,10 +2319,20 @@ function loadProgress(){
     if(Array.isArray(s.introducedVocabIds))state.introducedVocabIds=s.introducedVocabIds.filter(id=>!!vocabById[id]);
     ['advancedLesson','advancedView','advancedStep','advancedStepProgress'].forEach(k=>{if(s[k]&&typeof s[k]==='object')Object.assign(state[k],s[k])});
     if(['hiragana','katakana'].includes(s.dakScript))state.dakScript=s.dakScript;
-    if(['levels','kana','vocab','skills','avatar'].includes(s.progressTab))state.progressTab=s.progressTab;
+    if(['overview','analysis','timeline','activities','knowledge'].includes(s.progressTab))state.progressTab=s.progressTab;
+    else if(['levels','kana','vocab','skills','avatar'].includes(s.progressTab)){state.progressTab='overview';state.progressKnowledgeTab=s.progressTab}
+    if(['levels','kana','vocab','skills','avatar'].includes(s.progressKnowledgeTab))state.progressKnowledgeTab=s.progressKnowledgeTab;
     if(['hiragana','katakana','dakuten'].includes(s.progressKanaGroup))state.progressKanaGroup=s.progressKanaGroup;
     state.progressDetailId=typeof s.progressDetailId==='string'?s.progressDetailId:null;
     state.progressVocabDetailId=typeof s.progressVocabDetailId==='string'?s.progressVocabDetailId:null;
+    if(s.studyRange&&typeof s.studyRange==='object')state.studyRange={low:Number(s.studyRange.low)||0,high:Number(s.studyRange.high)||100};
+    if(s.studyCalendar&&typeof s.studyCalendar==='object')state.studyCalendar={from:String(s.studyCalendar.from||''),to:String(s.studyCalendar.to||'')};
+    if(s.studyFilters&&typeof s.studyFilters==='object')Object.assign(state.studyFilters,s.studyFilters);
+    if(s.studyTracker&&typeof s.studyTracker==='object'){
+      const sessions=Array.isArray(s.studyTracker.sessions)?s.studyTracker.sessions.filter(x=>x&&x.id&&Number.isFinite(Number(x.effectiveSeconds))):[];
+      const events=Array.isArray(s.studyTracker.events)?s.studyTracker.events.filter(x=>x&&x.id):[];
+      state.studyTracker={version:1,courseStartedAt:s.studyTracker.courseStartedAt||null,trackingStartedAt:s.studyTracker.trackingStartedAt||null,sessions,events,noticeDismissed:!!s.studyTracker.noticeDismissed,active:s.studyTracker.active&&s.studyTracker.active.id?s.studyTracker.active:null};
+    }
     if(s.practiceSelections&&typeof s.practiceSelections==='object'){
       Object.keys(state.practiceSelections).forEach(k=>{
         if(Array.isArray(s.practiceSelections[k]))state.practiceSelections[k]=s.practiceSelections[k];
@@ -2413,9 +2450,11 @@ function navigateBack(){
   if(!$('sessionView').classList.contains('hidden'))return setMain();
   // Een quiz of resultaat is één tijdelijke laag boven de plek waar hij begon.
   // De onderliggende module-/lesstaat blijft intact, dus keer daar direct naar terug.
-  if(!$('quizView').classList.contains('hidden')||!$('resultView').classList.contains('hidden'))return setMain();
+  if(!$('quizView').classList.contains('hidden')){completeStudySession({status:'afgebroken'});return setMain()}
+  if(!$('resultView').classList.contains('hidden'))return setMain();
   // Level 4 heeft een extra hiërarchie: lesstap → lesoverzicht → lessenlijst.
   if(state.screen==='module'&&state.level===3&&state.tabs.lang==='learn'&&state.langView==='lesson'){
+    if(state.studyTracker.active?.source==='lesson:lang')completeStudySession({status:'verlaten'});
     if(state.langStep!=='overview'){
       state.langStep='overview';
     }else{
@@ -2425,6 +2464,7 @@ function navigateBack(){
     return renderMain();
   }
   if(state.screen==='module'&&state.level>=5&&state.tabs.advanced==='learn'&&state.advancedView[state.level]==='lesson'){
+    if(state.studyTracker.active?.source==='lesson:advanced')completeStudySession({status:'verlaten'});
     if(state.advancedStep[state.level]!=='overview')state.advancedStep[state.level]='overview';
     else state.advancedView[state.level]='list';
     scheduleSave();
@@ -3063,10 +3103,10 @@ function languageStepper(l){const done=new Set(languageStepState(l.id));return`<
 function bindLanguageStepper(){root.querySelectorAll('[data-lang-step]').forEach(b=>b.onclick=()=>{state.langStep=b.dataset.langStep;scheduleSave();renderMain()})}
 function renderLanguageLessonCard(l,index){
   const m=rankState[l.id];$('langBody').innerHTML=`<section class="card"><div class="between"><button id="backLangLessons" class="btn tiny">← Alle lessen</button><span class="rank ${rankClass(m.rank)}">${rankText(m.rank)}</span></div><div class="eyebrow" style="margin-top:12px">Les ${index+1}</div><div class="h1">${l.title}</div><div class="muted">${l.goal}</div>${languageStepper(l)}</section><div id="langStepBody"></div>`;
-  $('backLangLessons').onclick=()=>{state.langView='list';state.langStep='overview';scheduleSave();renderMain()};bindLanguageStepper();
+  $('backLangLessons').onclick=()=>{if(state.studyTracker.active?.source==='lesson:lang')completeStudySession({status:'verlaten'});state.langView='list';state.langStep='overview';scheduleSave();renderMain()};bindLanguageStepper();
   if(state.langStep==='overview')renderLanguageLessonOverview(l,index);else if(state.langStep==='words')renderLanguageWords(l,index);else if(state.langStep==='model')renderLanguageModel(l,index);else if(state.langStep==='understand')renderLanguageUnderstand(l,index);else if(state.langStep==='build')renderLanguageBuild(l,index);else renderLanguageCheck(l,index)
 }
-function renderLanguageLessonOverview(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="h2">Lesoverzicht</div><div class="panel" style="margin-top:10px"><strong>${l.pattern}</strong><div class="small" style="margin-top:5px">${l.grammar}</div></div>${l.id==='l4-3'?introductionDialogueHtml():''}<button id="startLangRoute" class="btn primary" style="width:100%;margin-top:12px">Start leerroute</button></section>`;$('startLangRoute').onclick=()=>{state.langStep='words';scheduleSave();renderMain()}}
+function renderLanguageLessonOverview(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="h2">Lesoverzicht</div><div class="panel" style="margin-top:10px"><strong>${l.pattern}</strong><div class="small" style="margin-top:5px">${l.grammar}</div></div>${l.id==='l4-3'?introductionDialogueHtml():''}<button id="startLangRoute" class="btn primary" style="width:100%;margin-top:12px">Start leerroute</button></section>`;$('startLangRoute').onclick=()=>{beginStudySession({title:`Level 4 · Les ${index+1} · ${l.title}`,activityType:'les',category:'app',source:'lesson:lang',level:4,tags:['leerroute'],skills:['grammatica','woordenschat']});state.langStep='words';scheduleSave();renderMain()}}
 function introduceLessonWords(l){const ids=new Set(state.introducedVocabIds);l.words.forEach(([jp])=>{const v=vocabCatalog.find(x=>x.jp===jp);if(v)ids.add(v.id)});state.introducedVocabIds=[...ids];scheduleSave()}
 function wordLearningQuestions(l){if(!l.words.length)return[];const all=langLessons.slice(0,state.langLesson+1).flatMap(x=>x.words);return shuffle(l.words.flatMap(([jp,nl])=>{const others=shuffle(all.filter(x=>x[0]!==jp));return[['mc',jp,nl,shuffle([nl,...others.slice(0,2).map(x=>x[1])])],['mc',nl,jp,shuffle([jp,...others.slice(0,2).map(x=>x[0])])]]})).map(raw=>lessonQuestion(raw,l))}
 function renderLanguageWords(l,index){introduceLessonWords(l);const body=$('langStepBody');body.innerHTML=`<section class="card"><div class="eyebrow">Stap 1</div><div class="h2">Woorden leren</div><div class="muted">Bekijk eerst vorm, uitspraak en betekenis. Daarna herken je beide richtingen.</div><div id="learnWords" class="vocab-grid" style="margin-top:10px"></div><div class="route-actions"><button id="practiceLangWords" class="btn primary">${l.words.length?'Oefen woordherkenning':'Ga door naar de basiszin'}</button><button id="wordsNext" class="btn">Basiszin →</button></div></section>`;const host=$('learnWords');if(!l.words.length)host.innerHTML='<div class="panel">Geen nieuwe woorden in deze les. Je gebruikt bekende woorden opnieuw.</div>';l.words.forEach(([jp,nl,ro])=>{const d=document.createElement('div');d.className='vocab';d.innerHTML=`<div class="jp">${jp}</div><div class="word-romaji">${ro}</div><div class="small">${nl}</div>`;host.appendChild(d)});const go=()=>{markLanguageStep(l.id,'words');state.langStep='model';renderMain()};$('wordsNext').onclick=go;$('practiceLangWords').onclick=()=>{const qs=wordLearningQuestions(l);if(!qs.length)return go();startQuiz({source:'lang',title:`Les ${index+1} · woorden leren`,official:false,pool:[],questions:qs,choices:3,next:{kind:'langStep',index,step:'model',complete:'words'}})}}
@@ -3140,12 +3180,12 @@ function advancedStepper(l,level){const done=new Set(advancedStepState(l.id)),cu
 function renderAdvancedLessonCard(c,level,index){
   const l=c.lessons[index],m=rankState[l.id];
   $('advancedBody').innerHTML=`<section class="card"><div class="between"><button id="backAdvancedLessons" class="btn tiny">← Alle lessen</button><span class="rank ${rankClass(m.rank)}">${rankText(m.rank)}</span></div><div class="eyebrow" style="margin-top:12px">Les ${index+1} van ${c.lessons.length}</div><div class="h1">${l.title}</div><div class="muted">${l.goal}</div>${advancedStepper(l,level)}</section><div id="advancedStepBody"></div>`;
-  $('backAdvancedLessons').onclick=()=>{state.advancedView[level]='list';state.advancedStep[level]='overview';renderMain()};
+  $('backAdvancedLessons').onclick=()=>{if(state.studyTracker.active?.source==='lesson:advanced')completeStudySession({status:'verlaten'});state.advancedView[level]='list';state.advancedStep[level]='overview';renderMain()};
   root.querySelectorAll('[data-advanced-step]').forEach(b=>b.onclick=()=>{state.advancedStep[level]=b.dataset.advancedStep;renderMain()});
   const step=state.advancedStep[level];
   if(step==='overview')renderAdvancedOverview(l,level);else if(step==='words')renderAdvancedWords(c,l,level,index);else if(step==='model')renderAdvancedModel(l,level);else if(step==='understand')renderAdvancedUnderstand(c,l,level,index);else if(step==='build')renderAdvancedBuild(l,level,index);else renderAdvancedCheck(c,l,level,index)
 }
-function renderAdvancedOverview(l,level){$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Dit ga je leren</div><div class="h2">${l.pattern}</div><div class="panel" style="margin-top:10px">${l.goal}</div><button id="advancedStart" class="btn primary" style="width:100%;margin-top:12px">Start leerroute</button></section>`;$('advancedStart').onclick=()=>{state.advancedStep[level]='words';renderMain()}}
+function renderAdvancedOverview(l,level){$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Dit ga je leren</div><div class="h2">${l.pattern}</div><div class="panel" style="margin-top:10px">${l.goal}</div><button id="advancedStart" class="btn primary" style="width:100%;margin-top:12px">Start leerroute</button></section>`;$('advancedStart').onclick=()=>{beginStudySession({title:`Level ${level+1} · ${l.title}`,activityType:'les',category:'app',source:'lesson:advanced',level:level+1,tags:['leerroute'],skills:['grammatica','woordenschat']});state.advancedStep[level]='words';renderMain()}}
 function introduceAdvancedWords(l){const ids=new Set(state.introducedVocabIds);l.words.forEach(([jp])=>{const v=vocabCatalog.find(x=>x.jp===jp);if(v)ids.add(v.id)});state.introducedVocabIds=[...ids];scheduleSave()}
 function renderAdvancedWords(c,l,level,index){
   introduceAdvancedWords(l);$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 1 · voorkennis en woorden</div><div class="notice">${l.review}</div><div id="advancedWords" class="vocab-grid" style="margin-top:10px"></div><button id="advancedWordsNext" class="btn primary" style="width:100%;margin-top:12px">Naar het nieuwe patroon →</button></section>`;
@@ -3281,7 +3321,75 @@ function startLanguageExam(){const pool=langLessons.flatMap(l=>l.check.map(raw=>
 function startSmallLesson(l,index,quick){const own=l.check.map(raw=>lessonQuestion(raw)),prev=smallLessons.slice(0,index).flatMap(x=>x.check.map(raw=>lessonQuestion(raw))),review=shuffle(langLessons.flatMap(x=>x.check.map(raw=>lessonQuestion(raw,x)))).slice(0,2),qs=quick?shuffle(own).slice(0,5):shuffle([...own,...shuffle(prev).slice(0,2),...review]);startQuiz({source:'small',title:`Les ${index+1} · ${l.title}${quick?' · snelle check':''}`,rankId:quick?null:l.id,rankThreshold:.8,official:!quick,pool:[],questions:qs,choices:3,next:quick?null:{kind:'smallLesson',index:index+1}})}
 function startSmallExam(){const own=smallLessons.flatMap(l=>l.check.map(raw=>lessonQuestion(raw))),review=shuffle(langLessons.flatMap(l=>l.check.map(raw=>lessonQuestion(raw,l)))).slice(0,6);startQuiz({source:'small',title:'Level 5 examen',rankId:'l5-exam',official:true,pool:[],questions:shuffle([...own,...review]).slice(0,28),choices:3})}
 
-function startQuiz(cfg){state.lastConfig=cfg;state.quiz={...cfg,index:0,score:0,mistakes:[]};show('quiz');updateHeader();renderQuestion()}
+const studyCategoryLabels={app:'App-les',practice:'Oefenen',exam:'Examen',reading:'Lezen',listening:'Luisteren',watching:'Kijken',speaking:'Spreken',writing:'Schrijven',vocab:'Woordenschat',kanji:'Kanji',grammar:'Grammatica',immersion:'Immersion',kana:'Kana',review:'Herhaling',other:'Overig'};
+const studyMilestones=[1,5,10,25,50,100,250,500,1000,2000,3000];
+function studyId(prefix='study'){return`${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,8)}`}
+function knowledgeSnapshot(){
+  const kana=Object.values(itemMastery).filter(x=>Number(x?.seen)>0).length;
+  const vocab=learnedVocabEntries().length;
+  const skills=languageSkills.filter(s=>s.requires.every(id=>!!rankState[id]?.rank)).length;
+  const rankedLevels=levels.filter((_,i)=>!!levelRank(i)).length;
+  const completedLevels=levels.map((_,i)=>levelRank(i)?i+1:null).filter(Boolean);
+  const rankedUnits=Object.values(rankState).filter(x=>!!x.rank).length;
+  const vocabGold=learnedVocabEntries().filter(v=>['Gold','Platinum'].includes(vocabMastery[v.id]?.rank)).length;
+  const grammar=[...langLessons,...Object.values(advancedCourses).flatMap(c=>c.lessons)].filter(l=>!!rankState[l.id]?.rank).length;
+  return{at:new Date().toISOString(),kana,vocab,vocabGold,kanji:0,grammar,skills,rankedLevels,completedLevels,rankedUnits,currentLevel:state.currentLevel};
+}
+function recordHistoricRankEvent(kind,id,previous,next){if(!state?.studyTracker||previous===next)return;state.studyTracker.events.push({id:studyId('rank'),type:'rank',at:new Date().toISOString(),sessionId:state.studyTracker.active?.id||null,title:`${id}: ${next||'geen rank'}`,detail:`${kind}rank ${previous||'geen'} → ${next||'geen'}`})}
+function hasExistingKnowledge(){return Object.values(rankState).some(x=>x.rank)||Object.values(itemMastery).some(x=>x?.seen)||state.introducedVocabIds.length>0}
+function normalizeStudySession(session){
+  const raw=Math.max(0,Number(session.rawSeconds)||0),effective=Math.max(0,Number(session.effectiveSeconds ?? raw)||0);
+  return{...session,rawSeconds:raw,effectiveSeconds:effective,category:studyCategoryLabels[session.category]?session.category:'other',skills:Array.isArray(session.skills)?session.skills:[],tags:Array.isArray(session.tags)?session.tags:[]};
+}
+function studySessions(){return state.studyTracker.sessions.map(normalizeStudySession).sort((a,b)=>new Date(a.startedAt)-new Date(b.startedAt))}
+function totalStudySeconds(){return studySessions().reduce((n,s)=>n+s.effectiveSeconds,0)}
+function formatDuration(seconds,compact=false){
+  const mins=Math.round(Math.max(0,seconds)/60),hours=Math.floor(mins/60),rest=mins%60;
+  if(seconds>0&&mins===0)return compact?'<1m':'minder dan 1 minuut';
+  if(compact)return hours?`${hours}u ${rest?`${rest}m`:''}`.trim():`${rest}m`;
+  return hours?`${hours} uur${rest?` ${rest} min`:''}`:`${rest} minuten`;
+}
+function activeElapsedSeconds(active=state.studyTracker.active){
+  if(!active)return 0;
+  const running=active.runningSince&&!document.hidden?Math.max(0,(Date.now()-new Date(active.runningSince).getTime())/1000):0;
+  return Math.round((Number(active.accumulatedSeconds)||0)+running);
+}
+function pauseActiveStudySession(){const a=state.studyTracker.active;if(!a||!a.runningSince)return;if(!document.hidden)a.accumulatedSeconds=activeElapsedSeconds(a);else a.accumulatedSeconds=Math.round((Number(a.accumulatedSeconds)||0)+Math.max(0,(Date.now()-new Date(a.runningSince).getTime())/1000));a.runningSince=null;saveProgress()}
+function resumeActiveStudySession(){const a=state.studyTracker.active;if(a&&!a.runningSince){a.runningSince=new Date().toISOString();scheduleSave()}}
+function beginStudySession(meta={}){
+  const current=state.studyTracker.active;
+  if(current&&current.source===meta.source&&current.title===meta.title){resumeActiveStudySession();return current.id}
+  if(current)completeStudySession({status:'switched'});
+  const now=new Date().toISOString();
+  if(!state.studyTracker.trackingStartedAt)state.studyTracker.trackingStartedAt=now;
+  if(!state.studyTracker.courseStartedAt)state.studyTracker.courseStartedAt=now;
+  state.studyTracker.active={id:studyId('session'),title:meta.title||'Leersessie',activityType:meta.activityType||'oefening',category:meta.category||'other',skills:meta.skills||[],tags:meta.tags||[],level:Number(meta.level||state.level+1),source:meta.source||'app',startedAt:now,runningSince:now,accumulatedSeconds:0,snapshotStart:knowledgeSnapshot(),manual:false};
+  saveProgress();return state.studyTracker.active.id;
+}
+function completeStudySession(extra={}){
+  const a=state.studyTracker.active;if(!a)return null;
+  const raw=Math.max(1,activeElapsedSeconds(a)),endedAt=new Date().toISOString();
+  const session=normalizeStudySession({...a,...extra,endedAt,rawSeconds:raw,effectiveSeconds:Number.isFinite(extra.effectiveSeconds)?extra.effectiveSeconds:raw,snapshotEnd:knowledgeSnapshot()});
+  delete session.runningSince;delete session.accumulatedSeconds;
+  state.studyTracker.sessions.push(session);
+  state.studyTracker.events.push({id:studyId('event'),type:'session',at:endedAt,sessionId:session.id,title:session.title,snapshot:session.snapshotEnd});
+  const before=session.snapshotStart||{},after=session.snapshotEnd||{};
+  [['kana','kana beheerst'],['vocab','woorden geleerd'],['skills','vaardigheden bevestigd'],['rankedUnits','nieuwe ranks']].forEach(([key,label])=>{const delta=(after[key]||0)-(before[key]||0);if(delta>0)state.studyTracker.events.push({id:studyId('event'),type:'knowledge',at:endedAt,sessionId:session.id,title:`+${delta} ${label}`,detail:`Tijdens ${session.title}`})});
+  if((after.rankedLevels||0)>(before.rankedLevels||0))state.studyTracker.events.push({id:studyId('event'),type:'knowledge',at:endedAt,sessionId:session.id,title:`Levelrank bevestigd`,detail:`${before.rankedLevels||0} → ${after.rankedLevels} levels met rank`});
+  (after.completedLevels||[]).filter(level=>!(before.completedLevels||[]).includes(level)).forEach(level=>state.studyTracker.events.push({id:studyId('event'),type:'course',at:endedAt,sessionId:session.id,title:`Level ${level} afgerond`,detail:'Minimaal één volledige levelrank bevestigd.'}));
+  state.studyTracker.active=null;saveProgress();return session;
+}
+function recoverInterruptedStudySession(){
+  const a=state.studyTracker.active;if(!a)return;
+  const endedAt=a.runningSince||a.startedAt,raw=Math.max(0,Number(a.accumulatedSeconds)||0);
+  if(raw>=30)state.studyTracker.sessions.push(normalizeStudySession({...a,endedAt,rawSeconds:raw,effectiveSeconds:raw,status:'onderbroken',note:a.note||'Automatisch bewaard na een onderbroken activiteit.',snapshotEnd:a.snapshotStart}));
+  state.studyTracker.active=null;
+}
+function quizStudyMeta(cfg){
+  const category=cfg.official?'exam':'practice';
+  return{title:cfg.title,activityType:cfg.official?'examen':'oefening',category,source:`quiz:${cfg.source}`,level:state.level+1,tags:cfg.official?['officieel']:['oefening']};
+}
+function startQuiz(cfg){beginStudySession(quizStudyMeta(cfg));state.lastConfig=cfg;state.quiz={...cfg,index:0,score:0,mistakes:[]};show('quiz');updateHeader();renderQuestion()}
 function currentQ(){return state.quiz.questions[state.quiz.index]}
 function renderQuestion(){const c=state.quiz,q=currentQ();$('quizTitle').textContent=c.title;$('quizMeta').textContent=c.official?'Deze toets kan de sessierank maximaal één stap verhogen.':'Vrij oefenen / snelle check · geen rankstap.';$('qNow').textContent=c.index+1;$('qTotal').textContent=c.questions.length;$('qBar').style.width=(c.index/c.questions.length*100)+'%';$('qScore').textContent='Goed: '+c.score;$('qFeedback').textContent='';$('qPrompt').style.fontSize='';const box=$('qChoices');box.className='choices';box.removeAttribute('style');box.innerHTML='';if(q.type==='kana')renderKanaQ(c,q,box);else if(q.type==='scriptReverse')renderScriptReverseQ(c,q,box);else if(q.type==='number')renderNumberQ(c,q,box);else if(q.type==='math')renderMathQ(c,q,box);else renderLessonQ(c,q,box)}
 function renderKanaQ(c,q,box){
@@ -3359,7 +3467,7 @@ function addChoice(box,text,ok){const b=document.createElement('button');b.class
 function qData(q){if(q.type==='kana')return{asked:q.mode==='forward'?q.item.front:hasDakutenSourceContext(q)?dakutenReversePrompt(q.item):q.item.back,correct:q.mode==='forward'?q.item.back:q.item.front,detail:`${q.item.base?`${q.item.base} → `:''}${q.item.front} ↔ ${q.item.back}`};if(q.type==='scriptReverse')return{asked:hasDakutenSourceContext(q)?dakutenReversePrompt(q.item):`${q.item.back} · ${q.script}`,correct:q.item.front,detail:`${q.item.base?`${q.item.base} → `:''}${q.item.front} ↔ ${q.item.back}`};if(q.type==='number')return{asked:fieldText(q.item,q.from),correct:fieldText(q.item,q.to),detail:`${q.item.symbol} ↔ ${q.item.valueText} ↔ ${q.item.reading}`};if(q.type==='math')return{asked:`${numberSymbol(q.a)} ${q.op} ${numberSymbol(q.b)}`,correct:numberSymbol(q.answer),detail:`${numberSymbol(q.answer)} ↔ ${q.answer} ↔ ${numberReading(q.answer)}`};return{asked:q.prompt,correct:q.correct,detail:q.correct}}
 function answer(ok,b,chosen){const c=state.quiz,q=currentQ();[...$('qChoices').querySelectorAll('button')].forEach(x=>x.disabled=true);recordQuestionMastery(q,ok,c);if(ok){c.score++;if(c.errorBankPractice)resolveErrorBank(c.source,q);b.classList.add('correct');$('qFeedback').textContent='✓ Goed';c.index++;setTimeout(nextQuestion,550)}else{const d=qData(q);c.mistakes.push({number:c.index+1,chosen,...d,source:c.source,question:q});[...$('qChoices').querySelectorAll('button')].forEach(x=>{if(x.dataset.correct==='1')x.classList.add('correct')});$('qFeedback').innerHTML=`Niet goed · <strong>${d.correct}</strong>`;c.index++;setTimeout(nextQuestion,1700)}$('qBar').style.width=(c.index/c.questions.length*100)+'%';scheduleSave()}
 function nextQuestion(){if(state.quiz.index>=state.quiz.questions.length)finishQuiz();else renderQuestion()}
-function finishQuiz(){const c=state.quiz,acc=c.score/c.questions.length;c.passed=acc>=(c.rankThreshold??.9);let rr=null;if(c.official&&c.rankId)rr=applyRank(c.rankId,acc,c.rankThreshold??.9);if(state.lastErrors[c.source])state.lastErrors[c.source]=[...c.mistakes];mergeErrorBank(c.source,c.mistakes);show('result');$('resultTitle').textContent=c.title;$('resultScore').textContent=`${c.score} / ${c.questions.length}`;$('resultStats').textContent=`Goed: ${c.score} · Fout: ${c.questions.length-c.score} · Nauwkeurigheid: ${pct(acc)}`;if(rr){$('resultRank').classList.remove('hidden');$('resultRank').innerHTML=`${c.rankId&&/-row-/.test(c.rankId)?'Rijrank':'Sessierank'}: <strong>${rankText(rr.next)}</strong>${rr.prev!==rr.next?` · vorige: ${rankText(rr.prev)}`:''}. Een succesvolle volledige toets stijgt maximaal één stap.`}else $('resultRank').classList.add('hidden');renderErrors(c.mistakes);$('practiceErrors').disabled=!c.mistakes.length;configureNext(c);saveProgress()}
+function finishQuiz(){const c=state.quiz,acc=c.score/c.questions.length;c.passed=acc>=(c.rankThreshold??.9);let rr=null;if(c.official&&c.rankId)rr=applyRank(c.rankId,acc,c.rankThreshold??.9);if(state.lastErrors[c.source])state.lastErrors[c.source]=[...c.mistakes];mergeErrorBank(c.source,c.mistakes);const study=completeStudySession({status:'afgerond',result:{score:c.score,total:c.questions.length,accuracy:acc,passed:c.passed}});show('result');$('resultTitle').textContent=c.title;$('resultScore').textContent=`${c.score} / ${c.questions.length}`;$('resultStats').textContent=`Goed: ${c.score} · Fout: ${c.questions.length-c.score} · Nauwkeurigheid: ${pct(acc)}`;if(rr){$('resultRank').classList.remove('hidden');$('resultRank').innerHTML=`${c.rankId&&/-row-/.test(c.rankId)?'Rijrank':'Sessierank'}: <strong>${rankText(rr.next)}</strong>${rr.prev!==rr.next?` · vorige: ${rankText(rr.prev)}`:''}. Een succesvolle volledige toets stijgt maximaal één stap.`}else $('resultRank').classList.add('hidden');renderErrors(c.mistakes);$('practiceErrors').disabled=!c.mistakes.length;configureNext(c);if(study)renderStudyAdjustment(study.id);saveProgress()}
 function renderErrors(errors){const box=$('errorList');box.innerHTML='';$('errorIntro').textContent=errors.length?'Score blijft staan. Bekijk kort wat misging.':'Geen fouten.';if(!errors.length){box.innerHTML='<div class="panel">Alles correct.</div>';return}errors.forEach(e=>{const d=document.createElement('div');d.className='error';d.innerHTML=`<div class="small">Vraag ${e.number}</div><div style="font-weight:750;margin-top:4px">${e.asked}</div><div style="margin-top:5px">Jouw antwoord: ${e.chosen}</div><div>Correct: <strong>${e.correct}</strong></div><div class="small" style="margin-top:4px">${e.detail}</div>`;box.appendChild(d)})}
 function configureNext(c){const b=$('nextBtn');b.classList.add('hidden');b.onclick=null;const n=c.next;if(!n)return;if(n.kind==='kanaStep'){const chunks=kanaChunks(kanaModules[n.key].rows[n.row]);if(n.step<=chunks.length){b.classList.remove('hidden');b.textContent='Volgende stap →';b.onclick=()=>{state.row[n.key]=n.row;state.step[n.key]=n.step;state.tabs[n.key]='learn';setMain()}}}if(n.kind==='kanaRow'&&n.row<kanaModules[n.key].rows.length){b.classList.remove('hidden');b.textContent=`Volgende rij · ${kanaModules[n.key].rows[n.row].name} →`;b.onclick=()=>{state.row[n.key]=n.row;state.step[n.key]=0;state.tabs[n.key]='learn';setMain()}}if(n.kind==='numberLesson'&&n.index<numberLessons.length){b.classList.remove('hidden');b.textContent='Volgende cijferles →';b.onclick=()=>{state.numberLesson=n.index;state.tabs.numbers='learn';setMain()}}if(n.kind==='dakStep'&&n.step<=2){b.classList.remove('hidden');b.textContent=n.step===2?'Naar volledige rij ›':'Naar volgende stap ›';b.onclick=()=>{state.dakStep=n.step;state.tabs.dakuten='learn';setMain()}}if(n.kind==='dakNextPattern'&&state.dakPattern<dakutenPatterns.length-1){b.classList.remove('hidden');b.textContent=`Volgend onderdeel: ${dakutenPatterns[state.dakPattern+1].name} ›`;b.onclick=()=>{state.dakPattern++;state.dakStep=0;state.tabs.dakuten='learn';setMain()}}if(n.kind==='langStep'){b.classList.remove('hidden');b.textContent=`Volgende stap · ${langStepDefs.find(x=>x[0]===n.step)?.[1]||'leerroute'} →`;b.onclick=()=>{if(n.complete)markLanguageStep(langLessons[n.index].id,n.complete);state.langLesson=n.index;state.langView='lesson';state.langStep=n.step;state.tabs.lang='learn';setMain()}}if(n.kind==='langLesson'){if(!c.passed)return;if(n.complete)markLanguageStep(langLessons[Math.max(0,n.index-1)].id,n.complete);b.classList.remove('hidden');if(n.index<langLessons.length){b.textContent=`Volgende les · ${langLessons[n.index].title} →`;b.onclick=()=>{state.langLesson=n.index;state.langView='lesson';state.langStep='overview';state.tabs.lang='learn';setMain()}}else{b.textContent='Naar Level 4 examen →';b.onclick=()=>{state.tabs.lang='exams';state.langView='list';setMain()}}}if(n.kind==='smallLesson'&&n.index<smallLessons.length){b.classList.remove('hidden');b.textContent=`Volgende les · ${smallLessons[n.index].title} →`;b.onclick=()=>{state.smallLesson=n.index;state.tabs.small='learn';setMain()}}if(n.kind==='advancedStep'){const course=advancedCourses[n.level],l=course.lessons[n.index];b.classList.remove('hidden');b.textContent='Volgende stap · zelf bouwen →';b.onclick=()=>{if(n.complete)markAdvancedStep(l.id,n.complete);state.advancedLesson[n.level]=n.index;state.advancedView[n.level]='lesson';state.advancedStep[n.level]=n.step;state.tabs.advanced='learn';setMain()}}if(n.kind==='advancedLesson'){if(!c.passed)return;const course=advancedCourses[n.level];markAdvancedStep(course.lessons[Math.max(0,n.index-1)].id,'check');b.classList.remove('hidden');if(n.index<course.lessons.length){b.textContent=`Volgende les · ${course.lessons[n.index].title} →`;b.onclick=()=>{state.advancedLesson[n.level]=n.index;state.advancedView[n.level]='lesson';state.advancedStep[n.level]='overview';state.tabs.advanced='learn';setMain()}}else{b.textContent=`Naar Level ${course.number} examen →`;b.onclick=()=>{state.tabs.advanced='exams';state.advancedView[n.level]='list';setMain()}}}}
 
@@ -3741,31 +3849,88 @@ function renderAvatarSettings(box){
     grid.appendChild(b);
   });
 }
+let studyEditingId=null;
+function cumulativeStudySessions(){let total=0;return studySessions().map(s=>{const start=total;total+=s.effectiveSeconds;return{...s,cumulativeStart:start,cumulativeEnd:total}})}
+function studyDateLabel(value){return new Date(value).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'})}
+function studyDateTimeLabel(value){return new Date(value).toLocaleString('nl-NL',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}
+function localInputValue(value){const d=new Date(value||Date.now());return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16)}
+function studyDayKey(value){const d=new Date(value);return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function filteredStudySessions(){const {from,to}=state.studyCalendar,f=state.studyFilters;return studySessions().filter(s=>(!from||studyDayKey(s.startedAt)>=from)&&(!to||studyDayKey(s.startedAt)<=to)&&(!f.category||s.category===f.category)&&(!f.origin||(f.origin==='manual'?s.manual:!s.manual))&&(!f.level||String(s.level)===String(f.level))&&(!f.skill||s.skills.some(x=>x.toLowerCase().includes(f.skill.toLowerCase())))&&(!f.tag||s.tags.some(x=>x.toLowerCase().includes(f.tag.toLowerCase()))))}
+function setStudyCalendarPreset(preset){const now=new Date(),today=studyDayKey(now),start=new Date(now);let from='',to='';if(preset==='today')from=to=today;if(preset==='week'){start.setDate(now.getDate()-((now.getDay()+6)%7));from=studyDayKey(start);to=today}if(preset==='month'){start.setDate(1);from=studyDayKey(start);to=today}if(preset==='30'){start.setDate(now.getDate()-29);from=studyDayKey(start);to=today}if(preset==='year'){start.setMonth(0,1);from=studyDayKey(start);to=today}state.studyCalendar={from,to}}
+function studyTotals(sessions=studySessions()){
+  const total=sessions.reduce((n,s)=>n+s.effectiveSeconds,0),raw=sessions.reduce((n,s)=>n+s.rawSeconds,0),days=new Set(sessions.filter(s=>s.effectiveSeconds>0).map(s=>studyDayKey(s.startedAt))).size;
+  const byCategory={};sessions.forEach(s=>byCategory[s.category]=(byCategory[s.category]||0)+s.effectiveSeconds);
+  return{total,raw,days,byCategory};
+}
+function nextStudyMilestone(hours){return studyMilestones.find(x=>x>hours)||3000}
+function studyLineChart(sessions){
+  const list=[...sessions].sort((a,b)=>new Date(a.startedAt)-new Date(b.startedAt));if(!list.length)return'<div class="panel">Nog geen tijddata voor een grafiek.</div>';
+  let cumulative=0;const points=[{x:0,y:0},...list.map((s,i)=>({x:i+1,y:(cumulative+=s.effectiveSeconds/3600)}))],max=Math.max(1,cumulative),w=600,h=180,p=24;
+  const coords=points.map(pt=>`${p+(pt.x/(points.length-1||1))*(w-p*2)},${h-p-(pt.y/max)*(h-p*2)}`).join(' ');
+  return`<svg class="study-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="Cumulatieve studietijd"><line class="grid" x1="${p}" y1="${h-p}" x2="${w-p}" y2="${h-p}"/><line class="grid" x1="${p}" y1="${p}" x2="${p}" y2="${h-p}"/><polyline class="line" points="${coords}"/><text x="${p}" y="${h-5}">start</text><text x="${w-p}" y="${h-5}" text-anchor="end">nu</text><text x="${p+4}" y="${p+10}">${max.toFixed(max<10?1:0)}u</text></svg>`;
+}
+function categoryBreakdownHtml(byCategory,total){
+  const rows=Object.entries(byCategory).sort((a,b)=>b[1]-a[1]);if(!rows.length)return'<div class="panel">Nog geen categoriegegevens.</div>';
+  return rows.map(([key,value])=>`<div class="category-bar"><span>${studyCategoryLabels[key]||key}</span><div class="category-bar-track"><span style="width:${total?value/total*100:0}%"></span></div><strong>${formatDuration(value,true)}</strong></div>`).join('');
+}
+function legacyStudyNotice(){return hasExistingKnowledge()&&!state.studyTracker.sessions.length&&!state.studyTracker.noticeDismissed?`<section class="card baseline-notice"><div class="h2">Je voortgang bestond al vóór de tijdmeting</div><div class="muted">Ranks en mastery blijven volledig behouden. Er wordt geen studietijd verzonnen; je kunt wel één transparante historische startwaarde toevoegen.</div><div class="study-toolbar" style="margin-top:10px"><button id="addBaseline" class="btn primary">Historische basis toevoegen</button><button id="dismissBaseline" class="btn">Niet nu</button></div></section>`:''}
+function renderStudyOverview(box){
+  const sessions=studySessions(),totals=studyTotals(sessions),hours=totals.total/3600,next=nextStudyMilestone(hours),start=state.studyTracker.courseStartedAt||sessions[0]?.startedAt||state.studyTracker.trackingStartedAt,first=sessions[0]?.startedAt||start,calendarDays=first?Math.max(1,Math.floor((Date.now()-new Date(first))/86400000)+1):0,weekStart=new Date();weekStart.setDate(weekStart.getDate()-((weekStart.getDay()+6)%7));weekStart.setHours(0,0,0,0);const weekSeconds=sessions.filter(s=>new Date(s.startedAt)>=weekStart).reduce((n,s)=>n+s.effectiveSeconds,0),snap=knowledgeSnapshot();
+  box.innerHTML=`${legacyStudyNotice()}<section class="card study-hero"><div class="eyebrow">Persoonlijke leerreis</div><div class="h1">${formatDuration(totals.total)} Japans gestudeerd</div><div class="muted">Effectieve tijd is leidend. Tijd verandert nooit je mastery of rank.</div><div class="study-kpis"><div class="study-kpi"><strong>${hours.toFixed(hours<10?1:0)}u</strong><span class="small">effectieve tijd</span></div><div class="study-kpi"><strong>${formatDuration(weekSeconds,true)}</strong><span class="small">deze week</span></div><div class="study-kpi"><strong>${totals.days}</strong><span class="small">actieve dagen van ${calendarDays}</span></div><div class="study-kpi"><strong>${snap.vocab}</strong><span class="small">woorden</span></div><div class="study-kpi"><strong>${snap.kana}</strong><span class="small">kana gezien</span></div><div class="study-kpi"><strong>${snap.kanji}</strong><span class="small">kanji</span></div><div class="study-kpi"><strong>${sessions.length}</strong><span class="small">activiteiten</span></div><div class="study-kpi"><strong>${state.currentLevel}</strong><span class="small">huidig level</span></div></div></section><section class="card"><div class="between"><div><div class="h2">Urenmijlpaal</div><div class="small">Volgende: ${next} uur · persoonlijk langetermijndoel: 3000 uur</div></div><span class="rank">${Math.min(100,Math.round(hours/next*100))}%</span></div><div class="progress" style="margin-top:10px"><div style="width:${Math.min(100,hours/next*100)}%"></div></div><div class="milestones" style="margin-top:10px">${studyMilestones.map(m=>`<span class="milestone ${hours>=m?'reached':''}">${m}u</span>`).join('')}</div></section><section class="card"><div class="h2">Ontwikkeling door de tijd</div>${studyLineChart(sessions)}</section><section class="card"><div class="h2">Waar je tijd naartoe ging</div>${categoryBreakdownHtml(totals.byCategory,totals.total)}</section><section class="card"><div class="small">Startdatum</div><strong>${sessions[0]?.startedAt?studyDateLabel(sessions[0].startedAt):start?studyDateLabel(start):'Begint bij je eerste gemeten activiteit'}</strong></section>`;
+  if($('addBaseline'))$('addBaseline').onclick=()=>{studyEditingId='baseline';state.progressTab='activities';renderSession()};
+  if($('dismissBaseline'))$('dismissBaseline').onclick=()=>{state.studyTracker.noticeDismissed=true;scheduleSave();renderStudyOverview(box)};
+}
+function snapshotAtCumulative(seconds){let found=null;cumulativeStudySessions().forEach(s=>{if(s.cumulativeEnd<=seconds+0.001)found=s.snapshotEnd||found});return found}
+function rangeStudyData(lowSeconds,highSeconds){
+  const selected=[];cumulativeStudySessions().forEach(s=>{const overlap=Math.max(0,Math.min(highSeconds,s.cumulativeEnd)-Math.max(lowSeconds,s.cumulativeStart));if(overlap>0)selected.push({...s,selectedSeconds:overlap})});
+  const byCategory={};selected.forEach(s=>byCategory[s.category]=(byCategory[s.category]||0)+s.selectedSeconds);
+  return{selected,seconds:selected.reduce((n,s)=>n+s.selectedSeconds,0),byCategory,startSnapshot:snapshotAtCumulative(lowSeconds),endSnapshot:snapshotAtCumulative(highSeconds)};
+}
+function renderStudyAnalysis(box){
+  const total=totalStudySeconds(),max=Math.max(1,total),range=state.studyRange,low=Math.min(range.low,range.high),high=Math.max(range.low,range.high),lowSec=max*low/100,highSec=max*high/100,data=rangeStudyData(lowSec,highSec),start=data.startSnapshot||{kana:0,vocab:0,vocabGold:0,kanji:0,grammar:0,skills:0,rankedLevels:0},end=data.endSnapshot||start,totalHours=total/3600,presets=['<button class="btn tiny" data-range="0,100">Alles</button>'];[10,25,50,100].filter(h=>totalHours>=h).forEach(h=>{presets.push(`<button class="btn tiny" data-first-hours="${h}">Eerste ${h}u</button>`,`<button class="btn tiny" data-hours="${h}">Laatste ${h}u</button>`)});[[0,100],[100,250],[250,500],[500,1000],[1000,2000]].filter(([,to])=>totalHours>=to).forEach(([from,to])=>presets.push(`<button class="btn tiny" data-window="${from},${to}">${from}–${to}u</button>`));
+  box.innerHTML=`<section class="card"><div class="between"><div><div class="h2">Analyseer een urenbereik</div><div class="small">Totaal: ${formatDuration(total)}</div></div><span class="rank">${(total/3600).toFixed(1)}u</span></div><div class="muted" style="margin-top:7px">De as wordt altijd opnieuw berekend uit de effectieve duur van alle activiteiten. Wijzig je oude tijd, dan verschuift alles automatisch mee.</div><div id="studyRange" class="study-range" style="--low:${low}%;--high:${high}%"><div class="study-range-track"></div><div class="study-range-fill"></div><input id="studyLow" type="range" min="0" max="100" step="0.1" value="${low}" aria-label="Begin van urenbereik"><input id="studyHigh" type="range" min="0" max="100" step="0.1" value="${high}" aria-label="Einde van urenbereik"></div><div class="between"><strong id="rangeLowLabel">${(lowSec/3600).toFixed(1)}u</strong><strong id="rangeHighLabel">${(highSec/3600).toFixed(1)}u</strong></div><div class="study-presets" style="margin-top:10px">${presets.join('')}</div></section><div id="rangeAnalysis"></div>`;
+  const draw=which=>{let l=Number($('studyLow').value),h=Number($('studyHigh').value);if(which==='low')l=Math.min(l,h-.1);else h=Math.max(h,l+.1);state.studyRange={low:Math.max(0,Math.min(99.9,l)),high:Math.min(100,Math.max(.1,h))};scheduleSave();renderStudyAnalysis(box)};
+  $('studyLow').onchange=()=>draw('low');$('studyHigh').onchange=()=>draw('high');
+  root.querySelectorAll('[data-range]').forEach(b=>b.onclick=()=>{state.studyRange={low:0,high:100};renderStudyAnalysis(box)});
+  root.querySelectorAll('[data-hours]').forEach(b=>b.onclick=()=>{const span=Math.min(total,Number(b.dataset.hours)*3600);state.studyRange={low:total?Math.max(0,(total-span)/total*100):0,high:100};renderStudyAnalysis(box)});
+  root.querySelectorAll('[data-first-hours]').forEach(b=>b.onclick=()=>{state.studyRange={low:0,high:Number(b.dataset.firstHours)*3600/total*100};renderStudyAnalysis(box)});root.querySelectorAll('[data-window]').forEach(b=>b.onclick=()=>{const[from,to]=b.dataset.window.split(',').map(Number);state.studyRange={low:from*3600/total*100,high:to*3600/total*100};renderStudyAnalysis(box)});
+  const selectedIds=new Set(data.selected.map(s=>s.id)),rangeEvents=state.studyTracker.events.filter(e=>['knowledge','rank','content','course'].includes(e.type)&&selectedIds.has(e.sessionId)),rangeDays=new Set(data.selected.map(s=>studyDayKey(s.startedAt))).size,rangeDates=data.selected.map(s=>new Date(s.startedAt)).sort((a,b)=>a-b);studyMilestones.forEach(hours=>{const seconds=hours*3600;if(seconds>=lowSec&&seconds<=highSec&&seconds<=total)rangeEvents.push({title:`${hours} uur bereikt`,detail:'Urenmijlpaal'})});
+  $('rangeAnalysis').innerHTML=`<section class="card"><div class="h2">Geselecteerd: ${formatDuration(data.seconds)}</div><div class="small">${rangeDates.length?`${studyDateLabel(rangeDates[0])} → ${studyDateLabel(rangeDates.at(-1))} · ${rangeDays} actieve dagen`:'Nog geen kalenderperiode'} · exacte, proportionele uitsnede.</div><div class="study-kpis"><div class="study-kpi"><strong>${data.selected.length}</strong><span class="small">activiteiten</span></div><div class="study-kpi"><strong>+${Math.max(0,(end.vocab||0)-(start.vocab||0))}</strong><span class="small">woorden</span></div><div class="study-kpi"><strong>+${Math.max(0,(end.vocabGold||0)-(start.vocabGold||0))}</strong><span class="small">Gold+ woorden</span></div><div class="study-kpi"><strong>+${Math.max(0,(end.kanji||0)-(start.kanji||0))}</strong><span class="small">kanji</span></div><div class="study-kpi"><strong>+${Math.max(0,(end.grammar||0)-(start.grammar||0))}</strong><span class="small">grammatica</span></div><div class="study-kpi"><strong>+${Math.max(0,(end.rankedLevels||0)-(start.rankedLevels||0))}</strong><span class="small">levelranks</span></div></div></section><section class="card"><div class="h2">Categorieën in dit bereik</div>${categoryBreakdownHtml(data.byCategory,data.seconds)}</section><section class="card"><div class="h2">Begin → einde</div><div class="small">Level ${start.currentLevel||'—'} → ${end.currentLevel||'—'} · woorden ${start.vocab||0} → ${end.vocab||0} · Gold+ ${start.vocabGold||0} → ${end.vocabGold||0} · kanji ${start.kanji||0} → ${end.kanji||0} · grammatica ${start.grammar||0} → ${end.grammar||0}</div></section><section class="card"><div class="h2">Belangrijke momenten</div>${rangeEvents.length?rangeEvents.map(e=>`<div class="panel" style="margin-top:7px"><strong>${escapeHtml(e.title)}</strong><div class="small">${escapeHtml(e.detail||'')}</div></div>`).join(''):'<div class="panel" style="margin-top:7px">Geen mijlpalen of kenniswijzigingen binnen dit bereik.</div>'}</section>`;
+}
+function computedTimelineEvents(){
+  const sessions=cumulativeStudySessions(),events=state.studyTracker.events.filter(e=>['knowledge','rank','content','course'].includes(e.type)).map(e=>({...e}));let previous=0;
+  if(sessions.length)events.push({id:'first-activity',at:sessions[0].startedAt,type:'milestone',title:'Eerste geregistreerde activiteit',detail:sessions[0].title});
+  const firstExam=sessions.find(s=>s.category==='exam');if(firstExam)events.push({id:'first-exam',at:firstExam.endedAt||firstExam.startedAt,type:'milestone',title:'Eerste examen geregistreerd',detail:firstExam.title});
+  studyMilestones.forEach(hours=>{const sec=hours*3600;if(sec<=totalStudySeconds()){const hit=sessions.find(s=>s.cumulativeEnd>=sec);events.push({id:`milestone-${hours}`,at:hit?.endedAt||hit?.startedAt,type:'milestone',title:`${hours} uur Japans bereikt`,detail:'Berekend uit effectieve studietijd.'})}});
+  [50,100,250,500,1000].forEach(count=>{const hit=sessions.find(s=>(s.snapshotEnd?.vocab||0)>=count);if(hit)events.push({id:`vocab-${count}`,at:hit.endedAt,type:'milestone',title:`${count} woorden geïntroduceerd`,detail:'Berekend uit opgeslagen kennissnapshots.'})});
+  sessions.forEach(s=>{events.push({id:s.id,at:s.endedAt||s.startedAt,type:'session',title:s.title,detail:`${studyCategoryLabels[s.category]} · ${formatDuration(s.effectiveSeconds,true)}`});const snap=s.snapshotEnd;if(snap&&snap.currentLevel>previous){events.push({id:`level-${s.id}`,at:s.endedAt,type:'knowledge',title:`Level ${snap.currentLevel} actief`,detail:'Momentopname uit de cursusvoortgang.'});previous=snap.currentLevel}});return events.sort((a,b)=>new Date(b.at)-new Date(a.at))
+}
+function renderStudyTimeline(box){const items=computedTimelineEvents();box.innerHTML=`<section class="card"><div class="h2">Tijdlijn</div><div class="muted">Activiteiten en automatisch berekende mijlpalen, chronologisch bewaard.</div></section><div class="card stack">${items.length?items.map(e=>`<div class="study-event"><strong>${escapeHtml(e.title)}</strong><div class="small">${studyDateTimeLabel(e.at)} · ${escapeHtml(e.detail||'')}</div></div>`).join(''):'<div class="panel">De tijdlijn begint na je eerste activiteit.</div>'}</div>`}
+function studyFormHtml(session=null,baseline=false){
+  const s=session||{},now=localInputValue(s.startedAt),duration=s.effectiveSeconds>0?Math.max(1,Math.round(s.effectiveSeconds/60)):0,category=s.category||'other',scale=(name,value,labels)=>`<select name="${name}"><option value="">Niet ingevuld</option>${labels.map((label,i)=>`<option value="${i+1}" ${Number(value)===i+1?'selected':''}>${i+1} — ${label}</option>`).join('')}</select>`;
+  return`<section class="card"><div class="between"><div><div class="h2">${session?'Activiteit bewerken':baseline?'Historische basis':'Activiteit toevoegen'}</div><div class="small">Raw tijd blijft zichtbaar; effectieve tijd wordt gebruikt in analyses.</div></div><button id="cancelStudyEdit" class="btn tiny">Sluiten</button></div><form id="studyForm" class="study-form" style="margin-top:12px"><div class="study-form-grid"><label>Titel<input name="title" required maxlength="80" value="${escapeHtml(s.title|| (baseline?'Historische studie vóór tijdmeting':''))}"></label><label>Datum en tijd<input name="startedAt" type="datetime-local" required value="${now}"></label><label>Effectieve minuten<input name="effectiveMinutes" type="number" min="0" max="1000000" step="1" required value="${duration}"></label><label>Categorie<select name="category">${Object.entries(studyCategoryLabels).map(([k,v])=>`<option value="${k}" ${category===k?'selected':''}>${v}</option>`).join('')}</select></label><label>Subtype<input name="activityType" maxlength="40" value="${escapeHtml(s.activityType|| (baseline?'historische basis':'zelfstudie'))}" placeholder="podcast, manga, ChatGPT…"></label><label>Level<input name="level" type="number" min="1" max="99" value="${Number(s.level||state.currentLevel)}"></label><label>Moeilijkheid${scale('difficulty',s.difficulty,['heel makkelijk','makkelijk','gemiddeld','moeilijk','heel moeilijk'])}</label><label>Begrip${scale('comprehension',s.comprehension,['bijna niets','enkele woorden','hoofdlijn','grotendeels','bijna alles'])}</label><label>Tags (komma's)<input name="tags" value="${escapeHtml((s.tags||[]).join(', '))}"></label></div><label>Geoefende vaardigheden<input name="skills" value="${escapeHtml((s.skills||[]).join(', '))}" placeholder="bijv. luisteren, lezen, vocabulaire"></label><label>Notitie<textarea name="note">${escapeHtml(s.note|| (baseline?'Door de gebruiker opgegeven historische schatting; geen automatisch gemeten tijd.':''))}</textarea></label><button class="btn primary" type="submit">Opslaan</button></form></section>`;
+}
+function bindStudyForm(box,session=null,baseline=false){
+  $('cancelStudyEdit').onclick=()=>{studyEditingId=null;renderStudyActivities(box)};
+  $('studyForm').onsubmit=e=>{e.preventDefault();const fd=new FormData(e.currentTarget),startedAt=new Date(fd.get('startedAt')).toISOString(),effectiveSeconds=Math.max(0,Number(fd.get('effectiveMinutes'))*60),current=session||{};const updated=normalizeStudySession({...current,id:current.id||studyId('manual'),title:String(fd.get('title')).trim(),startedAt,endedAt:current.endedAt||startedAt,rawSeconds:Number(current.rawSeconds ?? effectiveSeconds),effectiveSeconds,category:String(fd.get('category')),activityType:String(fd.get('activityType')).trim()||'zelfstudie',level:Number(fd.get('level'))||null,difficulty:Number(fd.get('difficulty'))||null,comprehension:Number(fd.get('comprehension'))||null,tags:String(fd.get('tags')).split(',').map(x=>x.trim()).filter(Boolean),skills:String(fd.get('skills')).split(',').map(x=>x.trim()).filter(Boolean),note:String(fd.get('note')).trim(),manual:true,baseline,snapshotStart:current.snapshotStart||knowledgeSnapshot(),snapshotEnd:current.snapshotEnd||knowledgeSnapshot()});if(session){const i=state.studyTracker.sessions.findIndex(x=>x.id===session.id);state.studyTracker.sessions[i]=updated}else state.studyTracker.sessions.push(updated);if(!state.studyTracker.courseStartedAt||new Date(startedAt)<new Date(state.studyTracker.courseStartedAt))state.studyTracker.courseStartedAt=startedAt;studyEditingId=null;saveProgress();renderStudyActivities(box)};
+}
+function renderStudyActivities(box){
+  const sessions=filteredStudySessions().sort((a,b)=>new Date(b.startedAt)-new Date(a.startedAt)),editing=studyEditingId&&studyEditingId!=='new'&&studyEditingId!=='baseline'?state.studyTracker.sessions.find(s=>s.id===studyEditingId):null;
+  box.innerHTML=`<section class="card"><div class="between"><div><div class="h2">Activiteiten</div><div class="muted">Automatische en handmatige sessies blijven volledig aanpasbaar.</div></div><button id="addStudy" class="btn primary">+ Toevoegen</button></div><div class="study-presets" style="margin-top:10px">${[['today','Vandaag'],['week','Deze week'],['month','Deze maand'],['30','Laatste 30 dagen'],['year','Dit jaar'],['all','Alles']].map(([id,label])=>`<button class="btn tiny" data-calendar="${id}">${label}</button>`).join('')}</div><div class="study-form-grid" style="margin-top:10px"><label>Van<input id="studyFrom" type="date" value="${state.studyCalendar.from}"></label><label>Tot<input id="studyTo" type="date" value="${state.studyCalendar.to}"></label><label>Categorie<select data-study-filter="category"><option value="">Alle categorieën</option>${Object.entries(studyCategoryLabels).map(([k,v])=>`<option value="${k}" ${state.studyFilters.category===k?'selected':''}>${v}</option>`).join('')}</select></label><label>Bron<select data-study-filter="origin"><option value="">Automatisch + handmatig</option><option value="auto" ${state.studyFilters.origin==='auto'?'selected':''}>Automatisch</option><option value="manual" ${state.studyFilters.origin==='manual'?'selected':''}>Handmatig</option></select></label><label>Level<input data-study-filter="level" type="number" min="1" placeholder="Alle" value="${escapeHtml(state.studyFilters.level)}"></label><label>Vaardigheid<input data-study-filter="skill" placeholder="bijv. luisteren" value="${escapeHtml(state.studyFilters.skill)}"></label><label>Tag<input data-study-filter="tag" placeholder="bijv. manga" value="${escapeHtml(state.studyFilters.tag)}"></label></div></section>${studyEditingId?studyFormHtml(editing,studyEditingId==='baseline'):''}<div id="studySessionList" class="stack">${sessions.length?sessions.map(s=>`<section class="card session-row"><div><strong>${escapeHtml(s.title)}</strong><div class="small">${studyDateTimeLabel(s.startedAt)} · raw ${formatDuration(s.rawSeconds,true)} · effectief ${formatDuration(s.effectiveSeconds,true)}</div><div class="session-meta"><span class="session-tag">${studyCategoryLabels[s.category]}</span>${s.activityType?`<span class="session-tag">${escapeHtml(s.activityType)}</span>`:''}${s.manual?'<span class="session-tag">handmatig</span>':''}${s.difficulty?`<span class="session-tag">moeilijkheid ${s.difficulty}/5</span>`:''}${s.comprehension?`<span class="session-tag">begrip ${s.comprehension}/5</span>`:''}</div>${s.note?`<div class="small" style="margin-top:6px">${escapeHtml(s.note)}</div>`:''}</div><div class="session-actions"><button class="btn tiny" data-edit-session="${s.id}">Bewerk</button><button class="btn tiny" data-delete-session="${s.id}">Wis</button></div></section>`).join(''):'<section class="card">Nog geen activiteiten voor deze filters.</section>'}</div>`;
+  $('addStudy').textContent='Activiteit toevoegen';$('addStudy').onclick=()=>{studyEditingId='new';renderStudyActivities(box)};$('studyFrom').onchange=e=>{state.studyCalendar.from=e.target.value;scheduleSave();renderStudyActivities(box)};$('studyTo').onchange=e=>{state.studyCalendar.to=e.target.value;scheduleSave();renderStudyActivities(box)};root.querySelectorAll('[data-calendar]').forEach(b=>b.onclick=()=>{setStudyCalendarPreset(b.dataset.calendar);scheduleSave();renderStudyActivities(box)});root.querySelectorAll('[data-study-filter]').forEach(el=>el.onchange=()=>{state.studyFilters[el.dataset.studyFilter]=el.value;scheduleSave();renderStudyActivities(box)});
+  if(studyEditingId)bindStudyForm(box,editing,studyEditingId==='baseline');
+  root.querySelectorAll('[data-edit-session]').forEach(b=>b.onclick=()=>{studyEditingId=b.dataset.editSession;renderStudyActivities(box)});
+  root.querySelectorAll('[data-delete-session]').forEach(b=>b.onclick=()=>{if(!confirm('Deze activiteit verwijderen? Uren en analyses worden daarna opnieuw berekend.'))return;state.studyTracker.sessions=state.studyTracker.sessions.filter(s=>s.id!==b.dataset.deleteSession);state.studyTracker.events=state.studyTracker.events.filter(e=>e.sessionId!==b.dataset.deleteSession);saveProgress();renderStudyActivities(box)});
+}
+function renderStudyAdjustment(sessionId){
+  const s=state.studyTracker.sessions.find(x=>x.id===sessionId),card=$('resultStats')?.parentElement;if(!s||!card)return;const minutes=s.effectiveSeconds>0?Math.max(1,Math.round(s.effectiveSeconds/60)):0;let host=$('studyAdjustment');if(!host){host=document.createElement('details');host.id='studyAdjustment';host.className='panel study-adjust';card.appendChild(host)}host.innerHTML=`<summary>Studietijd aanpassen · ${formatDuration(s.effectiveSeconds,true)}</summary><form id="resultStudyForm" class="study-form" style="margin-top:10px"><div class="study-form-grid"><label>Effectieve minuten<input id="resultStudyMinutes" name="minutes" type="number" min="0" value="${minutes}"></label><label>Moeilijkheid 1–5<input name="difficulty" type="number" min="1" max="5" value="${s.difficulty||''}"></label><label>Begrip 1–5<input name="comprehension" type="number" min="1" max="5" value="${s.comprehension||''}"></label></div><div class="study-toolbar"><button class="btn tiny" type="button" data-minute-delta="-5">−5 min</button><button class="btn tiny" type="button" data-minute-delta="-1">−1 min</button><button class="btn tiny" type="button" data-minute-delta="1">+1 min</button><button class="btn tiny" type="button" data-minute-delta="5">+5 min</button></div><label>Notitie<textarea name="note">${escapeHtml(s.note||'')}</textarea></label><button class="btn primary" type="submit">Aanpassing opslaan</button></form>`;root.querySelectorAll('[data-minute-delta]').forEach(b=>b.onclick=()=>{$('resultStudyMinutes').value=Math.max(0,Number($('resultStudyMinutes').value||0)+Number(b.dataset.minuteDelta))});$('resultStudyForm').onsubmit=e=>{e.preventDefault();const fd=new FormData(e.currentTarget);s.effectiveSeconds=Math.max(0,Number(fd.get('minutes'))*60);s.difficulty=Number(fd.get('difficulty'))||null;s.comprehension=Number(fd.get('comprehension'))||null;s.note=String(fd.get('note')).trim();saveProgress();renderStudyAdjustment(sessionId)};
+}
+function renderProgressKnowledge(box){
+  box.innerHTML=`<div class="progress-tabs"><button class="progress-tab ${state.progressKnowledgeTab==='levels'?'active':''}" data-knowledge="levels">Levels</button><button class="progress-tab ${state.progressKnowledgeTab==='kana'?'active':''}" data-knowledge="kana">Kana</button><button class="progress-tab ${state.progressKnowledgeTab==='vocab'?'active':''}" data-knowledge="vocab">Vocabulaire</button><button class="progress-tab ${state.progressKnowledgeTab==='skills'?'active':''}" data-knowledge="skills">Vaardigheden</button><button class="progress-tab ${state.progressKnowledgeTab==='avatar'?'active':''}" data-knowledge="avatar">Profiel</button></div><div id="knowledgeBody" class="stack"></div>`;
+  root.querySelectorAll('[data-knowledge]').forEach(b=>b.onclick=()=>{state.progressKnowledgeTab=b.dataset.knowledge;state.progressDetailId=null;state.progressVocabDetailId=null;scheduleSave();renderProgressKnowledge(box)});const body=$('knowledgeBody');if(state.progressKnowledgeTab==='kana')renderProgressKanaTab(body);else if(state.progressKnowledgeTab==='vocab')renderProgressVocabTab(body);else if(state.progressKnowledgeTab==='skills')renderProgressSkillsTab(body);else if(state.progressKnowledgeTab==='avatar')renderAvatarSettings(body);else renderProgressLevelTab(body)
+}
 function renderSession(){
-  show('session');
-  updateHeader();
-  const box=$('sessionContent');
-  box.innerHTML=`<div class="progress-tabs">
-    <button class="progress-tab ${state.progressTab==='levels'?'active':''}" data-progress="levels">Levelprogressie</button>
-    <button class="progress-tab ${state.progressTab==='kana'?'active':''}" data-progress="kana">Kana</button>
-    <button class="progress-tab ${state.progressTab==='vocab'?'active':''}" data-progress="vocab">Vocabulaire</button>
-    <button class="progress-tab ${state.progressTab==='skills'?'active':''}" data-progress="skills">Taalvaardigheden</button>
-    <button class="progress-tab ${state.progressTab==='avatar'?'active':''}" data-progress="avatar">Profiel</button>
-  </div>
-  <div id="progressBody" class="stack"></div>`;
-  root.querySelectorAll('[data-progress]').forEach(b=>b.onclick=()=>{
-    state.progressTab=b.dataset.progress;
-    state.progressDetailId=null;
-    state.progressVocabDetailId=null;
-    scheduleSave();
-    renderSession();
-  });
-  const body=$('progressBody');
-  if(state.progressTab==='kana')renderProgressKanaTab(body);
-  else if(state.progressTab==='vocab')renderProgressVocabTab(body);
-  else if(state.progressTab==='skills')renderProgressSkillsTab(body);
-  else if(state.progressTab==='avatar')renderAvatarSettings(body);
-  else renderProgressLevelTab(body);
+  show('session');updateHeader();const box=$('sessionContent');box.innerHTML=`<div class="progress-tabs"><button class="progress-tab ${state.progressTab==='overview'?'active':''}" data-progress="overview">Overzicht</button><button class="progress-tab ${state.progressTab==='analysis'?'active':''}" data-progress="analysis">Uren & analyse</button><button class="progress-tab ${state.progressTab==='timeline'?'active':''}" data-progress="timeline">Tijdlijn</button><button class="progress-tab ${state.progressTab==='activities'?'active':''}" data-progress="activities">Activiteiten</button><button class="progress-tab ${state.progressTab==='knowledge'?'active':''}" data-progress="knowledge">Kennis</button></div><div id="progressBody" class="stack"></div>`;root.querySelectorAll('[data-progress]').forEach(b=>b.onclick=()=>{state.progressTab=b.dataset.progress;state.progressDetailId=null;state.progressVocabDetailId=null;studyEditingId=null;scheduleSave();renderSession()});const body=$('progressBody');if(state.progressTab==='analysis')renderStudyAnalysis(body);else if(state.progressTab==='timeline')renderStudyTimeline(body);else if(state.progressTab==='activities')renderStudyActivities(body);else if(state.progressTab==='knowledge')renderProgressKnowledge(body);else renderStudyOverview(body)
 }
 
 function toggleProgress(){
@@ -3773,6 +3938,7 @@ function toggleProgress(){
   else renderSession();
 }
 function goToLearningHome(){
+  if(state.studyTracker.active)completeStudySession({status:'verlaten'});
   state.screen='levels';
   scheduleSave();
   renderMain();
@@ -3781,7 +3947,7 @@ $('sessionBtn').onclick=toggleProgress;
 $('learnNav').onclick=goToLearningHome;
 $('sessionBack').onclick=setMain;
 $('navBack').onclick=navigateBack;
-$('quitQuiz').onclick=setMain;
+$('quitQuiz').onclick=()=>{completeStudySession({status:'afgebroken'});setMain()};
 $('backBtn').onclick=setMain;
 $('practiceErrors').onclick=practiceCurrentErrors;
 $('retryBtn').onclick=retryCurrent;
@@ -3791,11 +3957,12 @@ root.addEventListener('click',scheduleSave);
 root.addEventListener('change',scheduleSave);
 window.addEventListener('resize',()=>{detectLayout();updateStorageUI()},{passive:true});
 window.addEventListener('orientationchange',()=>setTimeout(()=>{detectLayout();updateStorageUI()},120),{passive:true});
-window.addEventListener('pagehide',saveProgress);
-document.addEventListener('visibilitychange',()=>{if(document.hidden)saveProgress()});
+window.addEventListener('pagehide',pauseActiveStudySession);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseActiveStudySession();else resumeActiveStudySession()});
 
 detectLayout();
 loadProgress();
+recoverInterruptedStudySession();
 renderMain();
 updateStorageUI();
 })();
