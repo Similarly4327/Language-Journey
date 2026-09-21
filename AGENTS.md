@@ -23,3 +23,6 @@
 - Keep the mascot secondary to the learning content: compact, calm, and without rank text, currency, shops, or loud gamification.
 - Auto mode follows the most recently active level. Manual mode may select only skins unlocked by opening that level.
 - Keep the Level 1–10 skins visually consistent and maintain the mobile layout so the learning button and copy remain readable.
+- Preserve personal profile fields and their backward-compatible localStorage defaults. Ren / レン is the default male companion and Miku / ミク the default female companion; users may rename either without affecting progress or skins.
+- Keep avatar variant, avatar name, and selected skin as separate data. Skin changes never rename the companion or affect mastery.
+- Resolve future personalized lesson copy through the shared profile placeholder helper instead of hardcoding learner or companion names.
