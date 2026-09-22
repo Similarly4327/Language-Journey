@@ -17,6 +17,15 @@
 - Preserve the mobile-first tap-based sentence builder; do not require drag-and-drop or a Japanese keyboard.
 - Level 4 may use only writing taught through Level 3: no kanji, small kana, small っ, or long-vowel mark ー.
 
+## Level 5 teaching style
+
+- Give every exercise one primary learning goal tied to the current lesson's new kana rule.
+- Introduce every new example word with kana, romaji, and Dutch meaning before testing it.
+- Reuse earlier grammar or vocabulary only as context for the current kana target, never as a detached review question.
+- Keep the lesson sequence: introduce the rule → show examples → recognize → apply → check.
+- Prefer useful contrasts such as きや versus きゃ, and avoid ambiguous answer options.
+- Quick checks test only the selected lesson; the Level 5 exam is balanced across all five Level 5 lessons.
+
 ## Homepage avatar
 
 - Preserve the optional homepage mascot and its saved settings: enabled state, gender presentation, auto/manual mode, selected skin, unlocked skins, and current level.
