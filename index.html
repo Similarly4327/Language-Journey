@@ -324,6 +324,7 @@ section{
   font-weight:700;
   line-height:1.05;
   overflow-wrap:anywhere;
+  white-space:pre-line;
   color:var(--text)
 }
 .choices{
@@ -1534,6 +1535,226 @@ const langLessons=[
 {id:'l4-9',title:'Bestemming met に',goal:'Zeg dat iemand naar een eenvoudige plaats gaat.',newLabel:'4 nieuwe woorden',pattern:'[topic] は [plaats] に いきます',words:[['いきます','gaan','ikimasu'],['みせ','winkel','mise'],['えき','station','eki'],['うち','huis / thuis','uchi']],grammar:'に markeert hier de bestemming. De plaats staat vóór に en het werkwoord いきます staat aan het einde.',models:[{sentence:'わたし は みせ に いきます',meaning:'Ik ga naar de winkel.',parts:[['わたし','topic','ik'],['は','markering','wa'],['みせ','bestemming','winkel'],['に','markering','naar'],['いきます','werkwoord','ga']]},{sentence:'わたし は えき に いきます',meaning:'Ik ga naar het station.',parts:[['わたし','topic','ik'],['は','markering','wa'],['えき','bestemming','station'],['に','markering','naar'],['いきます','werkwoord','ga']]}],builders:[['Ik ga naar de winkel.','わたし は みせ に いきます',['みせ','いきます','は','に','わたし']],['Ik ga naar huis.','わたし は うち に いきます',['に','うち','わたし','いきます','は']]],check:[['mc','みせ','winkel',['winkel','station','huis'],'vocab'],['mc','gaan','いきます',['のみます','いきます','みます'],'vocab'],['meaning','わたし は えき に いきます','Ik ga naar het station.',['Ik ga naar de winkel.','Ik ga naar het station.','Ik kijk naar het station.'],'meaning'],['meaning','わたし は うち に いきます','Ik ga naar huis.',['Ik ga naar huis.','Dit is mijn huis.','Ik drink thuis.'],'meaning'],['fill','わたし は みせ ___ いきます','に',['に','を','の'],'structure'],['fill','Wat staat achteraan? わたし は えき に いきます','いきます',['えき','に','いきます'],'structure'],['build','Bouw: Ik ga naar de winkel.','わたし は みせ に いきます',['いきます','わたし','に','みせ','は'],'build'],['order','Kies topic → bestemming → werkwoord.','わたし は うち に いきます',['うち に わたし は いきます','わたし は うち に いきます','いきます わたし は うち に'],'integration']]},
 {id:'l4-10',title:'Alles combineren',goal:'Pas alle bekende woorden, particles en zinstypen zelfstandig toe.',newLabel:'Geen nieuwe grammatica',pattern:'herkennen → ontleden → bouwen',words:[],grammar:'Je combineert nu です, の, か, も, を en に. Vraag steeds: waar gaat de zin over, welke rol hebben de andere blokken, en welk predicaat staat achteraan?',models:[{sentence:'これは わたし の ほん です',meaning:'Dit is mijn boek.',parts:[['これ','topic','dit'],['は','markering','wa'],['わたし の ほん','beschrijving','mijn boek'],['です','predicaat','is']]},{sentence:'わたし は みず を のみます',meaning:'Ik drink water.',parts:[['わたし','topic','ik'],['は','markering','wa'],['みず','object','water'],['を','markering','o'],['のみます','werkwoord','drink']]},{sentence:'わたし は みせ に いきます',meaning:'Ik ga naar de winkel.',parts:[['わたし','topic','ik'],['は','markering','wa'],['みせ','bestemming','winkel'],['に','markering','naar'],['いきます','werkwoord','ga']]}],builders:[['Dit is mijn boek.','これ は わたし の ほん です',['ほん','は','わたし','です','これ','の']],['Ik drink water.','わたし は みず を のみます',['を','わたし','のみます','は','みず']],['Ik ga naar het station.','わたし は えき に いきます',['いきます','に','えき','は','わたし']]],check:[['meaning','これは わたし の ほん です','Dit is mijn boek.',['Dit is mijn boek.','Is dit mijn boek?','Dat is een vriend.'],'meaning'],['meaning','これは ねこ です か','Is dit een kat?',['Dit is een kat.','Is dit een kat?','Is dat een kat?'],'meaning'],['fill','わたし は みず ___ のみます','を',['を','に','の'],'structure'],['fill','わたし は みせ ___ いきます','に',['を','に','も'],'structure'],['order','Welk blok is het predicaat? これは わたし の ほん です','です',['これ','わたし の ほん','です'],'structure'],['order','Welk blok is de bestemming? わたし は えき に いきます','えき',['わたし','えき','いきます'],'structure'],['build','Bouw: Ik drink water.','わたし は みず を のみます',['みず','は','のみます','を','わたし'],'build'],['build','Bouw: Ik ga naar de winkel.','わたし は みせ に いきます',['に','みせ','いきます','わたし','は'],'integration']]}
 ];
+
+/* Level 4 has one cumulative source of truth. The original `check` arrays stay
+   in the lesson data for saved error compatibility, but new sessions are built
+   from the metadata and validated templates below. */
+const level4LessonMetadata=[
+  {introducedGrammar:['は','です'],introducedPatterns:['copula']},
+  {introducedGrammar:[],introducedPatterns:['demonstratives']},
+  {introducedGrammar:[],introducedPatterns:['topic-description']},
+  {introducedGrammar:['の'],introducedPatterns:['possession']},
+  {introducedGrammar:['か'],introducedPatterns:['question']},
+  {introducedGrammar:['も'],introducedPatterns:['also']},
+  {introducedGrammar:['を'],introducedPatterns:['object-action']},
+  {introducedGrammar:[],introducedPatterns:['verb-final-order']},
+  {introducedGrammar:['に'],introducedPatterns:['destination']},
+  {introducedGrammar:[],introducedPatterns:['integration']}
+];
+
+const level4Didactics=[
+  {focus:'Een eenvoudige mededeling heeft hier een topic, een beschrijving en een beleefd slot.',watch:'は markeert het topic en klinkt in deze rol als wa.'},
+  {focus:'これ, それ en あれ veranderen de afstand; de zinsbouw blijft hetzelfde.',watch:'Kies het aanwijzend woord op basis van dit, dat bij jou of dat daar.'},
+  {focus:'Het blok vóór は is het topic. Alles erna vertelt iets over dat topic.',watch:'Zoek eerst は; dan zie je direct waar de zin over gaat.'},
+  {focus:'X の Y betekent: Y van X. の verbindt de bezitter met wat erbij hoort.',watch:'Lees na の eerst Y en voeg daarna “van X” toe.'},
+  {focus:'Een bekende mededeling wordt een ja/nee-vraag door か achteraan toe te voegen.',watch:'De rest van de zin verandert niet.'},
+  {focus:'も betekent hier “ook” en staat op de plaats waar eerder は stond.',watch:'Gebruik も alleen wanneer de tweede zin iets toevoegt aan eerdere informatie.'},
+  {focus:'を markeert waarop de handeling gericht is. Het werkwoord staat achteraan.',watch:'Lees: topic → object met を → handeling.'},
+  {focus:'Particles tonen de rol van elk blok, ook wanneer er meerdere woorden in de zin staan.',watch:'Vind は en を; controleer daarna of het werkwoord achteraan staat.'},
+  {focus:'に markeert hier de bestemming: de plaats waar iemand naartoe gaat.',watch:'Gebruik を voor een object van een handeling en に voor een bestemming.'},
+  {focus:'Kies het patroon vanuit de betekenis: beschrijven, bezit, vraag, ook, object of bestemming.',watch:'Bepaal eerst de bedoeling; kies daarna pas het juiste partikel.'}
+];
+
+langLessons.forEach((lesson,index)=>{
+  const meta=level4LessonMetadata[index];
+  lesson.introducedVocabulary=lesson.words.map(([jp,meaning,reading])=>({jp,meaning,reading}));
+  lesson.introducedGrammar=[...meta.introducedGrammar];
+  lesson.introducedPatterns=[...meta.introducedPatterns];
+  lesson.knownVocabulary=langLessons.slice(0,index+1).flatMap(x=>x.words.map(w=>w[0]));
+  lesson.knownGrammar=level4LessonMetadata.slice(0,index+1).flatMap(x=>x.introducedGrammar);
+  lesson.knownPatterns=level4LessonMetadata.slice(0,index+1).flatMap(x=>x.introducedPatterns);
+});
+
+const level4WordInfo={};
+langLessons.forEach((lesson,lessonIndex)=>lesson.introducedVocabulary.forEach(word=>{
+  level4WordInfo[word.jp]={...word,lessonIndex};
+}));
+
+function level4Knowledge(index){
+  const lessons=langLessons.slice(0,index+1);
+  return{
+    vocabulary:lessons.flatMap(l=>l.introducedVocabulary),
+    grammar:lessons.flatMap(l=>l.introducedGrammar),
+    patterns:lessons.flatMap(l=>l.introducedPatterns)
+  };
+}
+
+function level4Sentence(tokens,meaning,pattern,patternLesson){
+  const vocabLesson=Math.max(-1,...tokens.map(t=>level4WordInfo[t]?.lessonIndex??-1));
+  return{tokens,meaning,pattern,introducedAt:Math.max(patternLesson,vocabLesson)};
+}
+
+function level4SentencePool(index){
+  const known=new Set(level4Knowledge(index).vocabulary.map(v=>v.jp));
+  const out=[];
+  const add=(tokens,meaning,pattern,at)=>{
+    if(tokens.every(t=>known.has(t)||['は','です','の','か','も','を','に'].includes(t)))out.push(level4Sentence(tokens,meaning,pattern,at));
+  };
+  const demos=[['これ','dit'],['それ','dat bij jou'],['あれ','dat daar']].filter(([jp])=>known.has(jp));
+  const things=[['ねこ','een kat'],['いぬ','een hond'],['みず','water'],['パン','brood'],['ほん','een boek'],['さかな','een vis']].filter(([jp])=>known.has(jp));
+  demos.forEach(([d,dm])=>things.forEach(([n,nm])=>add([d,'は',n,'です'],`${dm[0].toUpperCase()+dm.slice(1)} is ${nm}.`,'copula',0)));
+  if(known.has('わたし')){
+    [['ひと','Ik ben een persoon.'],['ともだち','Ik ben een vriend.']].forEach(([n,m])=>add(['わたし','は',n,'です'],m,'topic-description',2));
+  }
+  if(index>=3){
+    const owners=[['わたし','mijn'],['ともだち','van een vriend']].filter(([jp])=>known.has(jp));
+    const owned=[['ほん','boek','het boek'],['ねこ','kat','de kat'],['いぬ','hond','de hond']].filter(([jp])=>known.has(jp));
+    demos.forEach(([d,dm])=>owners.forEach(([o,om])=>owned.forEach(([n,nm,defined])=>{
+      const possession=om==='mijn'?`mijn ${nm}`:`${defined} ${om}`;
+      add([d,'は',o,'の',n,'です'],`${dm[0].toUpperCase()+dm.slice(1)} is ${possession}.`,'possession',3);
+    })));
+  }
+  if(index>=4){
+    out.filter(s=>['copula','topic-description','possession'].includes(s.pattern)).forEach(s=>{
+      const statement=s.meaning.replace(/\.$/,'');
+      const question=statement.startsWith('Ik ben ')?`Ben ik ${statement.slice(7).toLowerCase()}?`:`Is ${statement[0].toLowerCase()+statement.slice(1).replace(/ is /,' ')}?`;
+      out.push(level4Sentence([...s.tokens,'か'],question,'question',4));
+    });
+  }
+  if(index>=5)demos.forEach(([d,dm])=>things.forEach(([n,nm])=>add([d,'も',n,'です'],`${dm[0].toUpperCase()+dm.slice(1)} is ook ${nm}.`,'also',5)));
+  if(index>=6&&known.has('わたし')){
+    const actions=[
+      ['みず','のみます','Ik drink water.'],
+      ['パン','たべます','Ik eet brood.'],
+      ['さかな','たべます','Ik eet vis.'],
+      ['さかな','みます','Ik kijk naar de vis.'],
+      ['ねこ','みます','Ik kijk naar de kat.'],
+      ['いぬ','みます','Ik kijk naar de hond.'],
+      ['ほん','よみます','Ik lees een boek.']
+    ];
+    actions.forEach(([object,verb,meaning])=>add(['わたし','は',object,'を',verb],meaning,'object-action',verb==='よみます'?7:6));
+  }
+  if(index>=8&&known.has('わたし')){
+    [['みせ','Ik ga naar de winkel.'],['えき','Ik ga naar het station.'],['うち','Ik ga naar huis.']]
+      .forEach(([place,meaning])=>add(['わたし','は',place,'に','いきます'],meaning,'destination',8));
+  }
+  return out.filter((s,pos,arr)=>arr.findIndex(x=>x.tokens.join(' ')===s.tokens.join(' '))===pos);
+}
+
+function level4Choices(correct,candidates,count=3){
+  return shuffle([correct,...shuffle([...new Set(candidates)].filter(x=>x!==correct)).slice(0,count-1)]);
+}
+
+function level4Question(kind,prompt,correct,choices,category,introducedAt,accepted=null,instruction=''){
+  return lessonQuestion({kind,prompt,correct,choices,category,introducedAt,accepted,instruction});
+}
+
+function level4StructureQuestion(sentence,token,pos,knowledge){
+  const shown=sentence.tokens.map((part,i)=>i===pos?'___':part).join(' ');
+  const statement=sentence.tokens.filter(part=>part!=='か').join(' ');
+  const noun=sentence.tokens[pos+1]||sentence.tokens[pos-1]||'';
+  const settings={
+    'は':{instruction:'Kies het partikel dat het topic markeert.',prompt:`Bedoelde betekenis: ${sentence.meaning}\n${shown}`},
+    'です':{instruction:'Kies het beleefde slot van deze naamwoordzin.',prompt:`Bedoelde betekenis: ${sentence.meaning}\n${shown}`},
+    'の':{instruction:'Kies の om “van” of bezit uit te drukken.',prompt:`Bedoelde betekenis: ${sentence.meaning}\n${shown}`},
+    'か':{instruction:'Maak van de mededeling een ja/nee-vraag met か.',prompt:`Mededeling: ${statement}\nVraag: ${shown}`},
+    'も':{instruction:'Kies も om in de tweede zin “ook” aan te geven.',prompt:`Eerder: これは ${noun} です\nNu: ${sentence.meaning}\n${shown}`},
+    'を':{instruction:'Kies het partikel dat het object van de handeling markeert.',prompt:`Bedoelde betekenis: ${sentence.meaning}\n${shown}`},
+    'に':{instruction:'Kies het partikel dat de bestemming “naar” markeert.',prompt:`Bedoelde betekenis: ${sentence.meaning}\n${shown}`}
+  };
+  const setting=settings[token];
+  if(!setting)return null;
+  const choices=level4Choices(token,knowledge.grammar,3);
+  if(choices.length<2)return null;
+  const grammarLesson=Math.max(0,level4LessonMetadata.findIndex(meta=>meta.introducedGrammar.includes(token)));
+  return level4Question('fill',setting.prompt,token,choices,'structure',Math.max(sentence.introducedAt,grammarLesson),null,setting.instruction);
+}
+
+function level4QuestionBank(index){
+  const knowledge=level4Knowledge(index),sentences=level4SentencePool(index),questions=[];
+  knowledge.vocabulary.forEach(word=>{
+    const meanings=knowledge.vocabulary.map(v=>v.meaning),forms=knowledge.vocabulary.map(v=>v.jp);
+    questions.push(level4Question('mc',word.jp,word.meaning,level4Choices(word.meaning,meanings),'vocab',level4WordInfo[word.jp].lessonIndex,null,'Kies de Nederlandse betekenis van dit woord.'));
+    questions.push(level4Question('mc',word.meaning,word.jp,level4Choices(word.jp,forms),'vocab',level4WordInfo[word.jp].lessonIndex,null,`Kies het Japanse woord voor “${word.meaning}”.`));
+  });
+  sentences.forEach(sentence=>{
+    const samePattern=sentences.filter(s=>s.pattern===sentence.pattern);
+    const at=sentence.reviewAt??sentence.introducedAt,answer=sentence.tokens.join(' ');
+    questions.push(level4Question('meaning',answer,sentence.meaning,level4Choices(sentence.meaning,samePattern.map(s=>s.meaning)),'meaning',at,null,'Kies de Nederlandse betekenis van deze Japanse zin.'));
+    questions.push(level4Question('order',sentence.meaning,answer,level4Choices(answer,samePattern.map(s=>s.tokens.join(' '))),'integration',at,null,'Kies de Japanse zin die precies de getoonde betekenis heeft.'));
+    questions.push(level4Question('build',sentence.meaning,answer,shuffle(sentence.tokens),'build',at,null,'Bouw met de blokken de getoonde Nederlandse zin.'));
+    const grammarPositions=sentence.tokens.map((token,pos)=>({token,pos})).filter(x=>knowledge.grammar.includes(x.token));
+    grammarPositions.forEach(({token,pos})=>{
+      const question=level4StructureQuestion(sentence,token,pos,knowledge);
+      if(question)questions.push(question);
+    });
+  });
+  const free=level4FreeBuilder(index,sentences);
+  if(free)questions.push(level4Question('build',free[0],free[1][0],free[2],'build',index,free[1],'Bouw één geldige zin met de bekende blokken. Niet alle blokken hoeven op.'));
+  return questions;
+}
+
+function level4FreeBuilder(index,sentences=level4SentencePool(index)){
+  let preferred=index>=8?'destination':index>=6?'object-action':index>=5?'also':index>=4?'question':index>=3?'possession':index>=2?'topic-description':'copula';
+  if(index===9){
+    const available=[...new Set(sentences.map(s=>s.pattern))].filter(pattern=>sentences.filter(s=>s.pattern===pattern).length>1);
+    preferred=shuffle(available)[0]||'copula';
+  }
+  let valid=sentences.filter(s=>s.pattern===preferred);
+  if(valid.length<2)valid=sentences;
+  if(!valid.length)return null;
+  const accepted=valid.map(s=>s.tokens.join(' '));
+  const blocks=shuffle([...new Set(valid.flatMap(s=>s.tokens))]);
+  return['Bouw zelf één geldige zin met bekende blokken. Niet alle blokken hoeven op.',accepted,blocks];
+}
+
+function level4Weight(question,index){
+  const age=index-(question.introducedAt??0);
+  return age<=0?5:age<=2?3:1;
+}
+
+function weightedLevel4Pick(pool,count,index){
+  const remaining=[...pool],picked=[];
+  while(remaining.length&&picked.length<count){
+    const total=remaining.reduce((sum,q)=>sum+level4Weight(q,index),0);
+    let roll=Math.random()*total,chosen=0;
+    for(let i=0;i<remaining.length;i++){roll-=level4Weight(remaining[i],index);if(roll<=0){chosen=i;break}}
+    picked.push(remaining.splice(chosen,1)[0]);
+  }
+  return picked;
+}
+
+function balancedLevel4Questions(index,count,categories=null){
+  let bank=level4QuestionBank(index);
+  if(categories)bank=bank.filter(q=>categories.includes(q.category));
+  const current=bank.filter(q=>(q.introducedAt??0)===index),review=bank.filter(q=>(q.introducedAt??0)<index);
+  const currentCount=index===0?count:Math.ceil(count*.7),chosen=[];
+  const takeBalanced=(pool,wanted)=>{
+    const result=[],groups=[...new Set(pool.map(q=>q.category))];
+    while(result.length<wanted&&pool.length){
+      const category=groups[result.length%groups.length];
+      const candidates=pool.filter(q=>q.category===category&&!result.includes(q));
+      const fallback=pool.filter(q=>!result.includes(q));
+      const next=weightedLevel4Pick(candidates.length?candidates:fallback,1,index)[0];
+      if(!next)break;
+      result.push(next);
+    }
+    return result;
+  };
+  chosen.push(...takeBalanced(current,currentCount));
+  chosen.push(...takeBalanced(review,count-chosen.length));
+  chosen.push(...takeBalanced(bank.filter(q=>!chosen.includes(q)),count-chosen.length));
+  return shuffle(chosen);
+}
+
+function cumulativeLevel4Builders(index){
+  const sentences=level4SentencePool(index),current=sentences.filter(s=>(s.reviewAt??s.introducedAt)===index);
+  const exact=weightedLevel4Pick((current.length?current:sentences).map(s=>({
+    introducedAt:s.reviewAt??s.introducedAt,sentence:s
+  })),2,index).map(({sentence})=>[sentence.meaning,sentence.tokens.join(' '),shuffle(sentence.tokens)]);
+  const free=level4FreeBuilder(index,sentences);
+  return free?[...exact,[free[0],free[1][0],free[2],free[1]]]:exact;
+}
 const smallLessons=[
 {id:'l5-1',title:'Kleine ゃゅょ bij K',goal:'Bekende kana combineren tot きゃ / きゅ / きょ en Katakana-equivalenten.',newItems:[['きゃ','kya'],['きゅ','kyu'],['きょ','kyo'],['キャ','kya'],['キョ','kyo']],apply:['きゃく','きょく'],note:'Je leert geen nieuw alfabet: き + kleine ゃ wordt één klankgroep.',check:[['mc','きゃ','kya',['kya','kiya','ka']],['mc','kyu','きゅ',['きゃ','きゅ','きょ']],['mc','キョ','kyo',['kya','kyu','kyo']],['meaning','きゃく','gast',['gast','boek','winkel']],['fill','これは ___ です','きゃく',['きゃく','ねこ','みず']]]},
 {id:'l5-2',title:'しゃ / しゅ / しょ',goal:'Dezelfde kleine-kana-regel toepassen op de S-klank.',newItems:[['しゃ','sha'],['しゅ','shu'],['しょ','sho'],['シャ','sha'],['ショ','sho']],apply:['しゃしん','しゅみ','しょくじ'],note:'Oude regel, nieuwe toepassing: kleine ゃゅょ verandert de klankgroep.',check:[['mc','しゃ','sha',['sha','sa','shiya']],['mc','sho','しょ',['しゃ','しゅ','しょ']],['meaning','しゃしん','foto',['foto','familie','zee']],['meaning','しゅみ','hobby',['hobby','sushi','hotel']],['order','Zet goed: これは / しゃしん / です','これは しゃしん です',['これは しゃしん です','しゃしん これは です','これは です しゃしん']]]},
@@ -3106,23 +3327,23 @@ function renderLanguageLessonCard(l,index){
   $('backLangLessons').onclick=()=>{if(state.studyTracker.active?.source==='lesson:lang')completeStudySession({status:'verlaten'});state.langView='list';state.langStep='overview';scheduleSave();renderMain()};bindLanguageStepper();
   if(state.langStep==='overview')renderLanguageLessonOverview(l,index);else if(state.langStep==='words')renderLanguageWords(l,index);else if(state.langStep==='model')renderLanguageModel(l,index);else if(state.langStep==='understand')renderLanguageUnderstand(l,index);else if(state.langStep==='build')renderLanguageBuild(l,index);else renderLanguageCheck(l,index)
 }
-function renderLanguageLessonOverview(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="h2">Lesoverzicht</div><div class="panel" style="margin-top:10px"><strong>${l.pattern}</strong><div class="small" style="margin-top:5px">${l.grammar}</div></div>${l.id==='l4-3'?introductionDialogueHtml():''}<button id="startLangRoute" class="btn primary" style="width:100%;margin-top:12px">Start leerroute</button></section>`;$('startLangRoute').onclick=()=>{beginStudySession({title:`Level 4 · Les ${index+1} · ${l.title}`,activityType:'les',category:'app',source:'lesson:lang',level:4,tags:['leerroute'],skills:['grammatica','woordenschat']});state.langStep='words';scheduleSave();renderMain()}}
+function renderLanguageLessonOverview(l,index){const known=level4Knowledge(index),didactic=level4Didactics[index];$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Lesoverzicht</div><div class="h2">${l.pattern}</div><div class="muted" style="margin-top:6px">${l.goal}</div><div class="panel" style="margin-top:10px"><strong>Waar je op let</strong><div class="small" style="margin-top:4px">${didactic.focus}</div><div class="small" style="margin-top:4px"><strong>Let op:</strong> ${didactic.watch}</div></div><div class="small" style="margin-top:9px">Je oefent met ${known.vocabulary.length} bekende woorden en ${known.grammar.length} grammaticale bouwstenen. Eerdere stof blijft terugkomen.</div>${l.id==='l4-3'?introductionDialogueHtml():''}<button id="startLangRoute" class="btn primary" style="width:100%;margin-top:12px">Start met woorden →</button></section>`;$('startLangRoute').onclick=()=>{beginStudySession({title:`Level 4 · Les ${index+1} · ${l.title}`,activityType:'les',category:'app',source:'lesson:lang',level:4,tags:['leerroute'],skills:['grammatica','woordenschat']});state.langStep='words';scheduleSave();renderMain()}}
 function introduceLessonWords(l){const ids=new Set(state.introducedVocabIds);l.words.forEach(([jp])=>{const v=vocabCatalog.find(x=>x.jp===jp);if(v)ids.add(v.id)});state.introducedVocabIds=[...ids];scheduleSave()}
-function wordLearningQuestions(l){if(!l.words.length)return[];const all=langLessons.slice(0,state.langLesson+1).flatMap(x=>x.words);return shuffle(l.words.flatMap(([jp,nl])=>{const others=shuffle(all.filter(x=>x[0]!==jp));return[['mc',jp,nl,shuffle([nl,...others.slice(0,2).map(x=>x[1])])],['mc',nl,jp,shuffle([jp,...others.slice(0,2).map(x=>x[0])])]]})).map(raw=>lessonQuestion(raw,l))}
-function renderLanguageWords(l,index){introduceLessonWords(l);const body=$('langStepBody');body.innerHTML=`<section class="card"><div class="eyebrow">Stap 1</div><div class="h2">Woorden leren</div><div class="muted">Bekijk eerst vorm, uitspraak en betekenis. Daarna herken je beide richtingen.</div><div id="learnWords" class="vocab-grid" style="margin-top:10px"></div><div class="route-actions"><button id="practiceLangWords" class="btn primary">${l.words.length?'Oefen woordherkenning':'Ga door naar de basiszin'}</button><button id="wordsNext" class="btn">Basiszin →</button></div></section>`;const host=$('learnWords');if(!l.words.length)host.innerHTML='<div class="panel">Geen nieuwe woorden in deze les. Je gebruikt bekende woorden opnieuw.</div>';l.words.forEach(([jp,nl,ro])=>{const d=document.createElement('div');d.className='vocab';d.innerHTML=`<div class="jp">${jp}</div><div class="word-romaji">${ro}</div><div class="small">${nl}</div>`;host.appendChild(d)});const go=()=>{markLanguageStep(l.id,'words');state.langStep='model';renderMain()};$('wordsNext').onclick=go;$('practiceLangWords').onclick=()=>{const qs=wordLearningQuestions(l);if(!qs.length)return go();startQuiz({source:'lang',title:`Les ${index+1} · woorden leren`,official:false,pool:[],questions:qs,choices:3,next:{kind:'langStep',index,step:'model',complete:'words'}})}}
+function wordLearningQuestions(l){if(!l.words.length)return[];const all=langLessons.slice(0,state.langLesson+1).flatMap(x=>x.words);return shuffle(l.words.flatMap(([jp,nl])=>{const others=shuffle(all.filter(x=>x[0]!==jp));return[{kind:'mc',prompt:jp,correct:nl,choices:shuffle([nl,...others.slice(0,2).map(x=>x[1])]),category:'vocab',instruction:'Kies de Nederlandse betekenis van dit woord.'},{kind:'mc',prompt:nl,correct:jp,choices:shuffle([jp,...others.slice(0,2).map(x=>x[0])]),category:'vocab',instruction:`Kies het Japanse woord voor “${nl}”.`}]})).map(raw=>lessonQuestion(raw,l))}
+function renderLanguageWords(l,index){introduceLessonWords(l);const body=$('langStepBody');body.innerHTML=`<section class="card"><div class="eyebrow">Stap 1</div><div class="h2">${l.words.length?'Woorden leren':'Bekende woorden hergebruiken'}</div><div class="muted">${l.words.length?'Bekijk vorm, uitspraak en betekenis. Daarna herken je de woorden in beide richtingen.':'Deze les voegt geen woorden toe. Je past bekende woorden toe in een nieuw patroon.'}</div><div id="learnWords" class="vocab-grid" style="margin-top:10px"></div><button id="practiceLangWords" class="btn primary" style="width:100%;margin-top:12px">${l.words.length?'Oefen woordherkenning':'Naar de basiszin →'}</button></section>`;const host=$('learnWords');if(!l.words.length)host.innerHTML=`<div class="panel"><strong>${l.pattern}</strong><div class="small" style="margin-top:4px">De betekenis van de bekende woorden verandert niet.</div></div>`;l.words.forEach(([jp,nl,ro])=>{const d=document.createElement('div');d.className='vocab';d.innerHTML=`<div class="jp">${jp}</div><div class="word-romaji">${ro}</div><div class="small">${nl}</div>`;host.appendChild(d)});const go=()=>{markLanguageStep(l.id,'words');state.langStep='model';renderMain()};$('practiceLangWords').onclick=()=>{const qs=wordLearningQuestions(l);if(!qs.length)return go();startQuiz({source:'lang',title:`Les ${index+1} · woorden leren`,official:false,pool:[],questions:qs,choices:3,next:{kind:'langStep',index,step:'model',complete:'words'}})}}
 function modelAnalysisHtml(model){return`<div class="model-sentence">${model.sentence}</div><div class="sentence-analysis">${model.parts.map(([token,role,gloss])=>`<div class="sentence-part"><div class="token">${token}</div><div class="role">${role}</div><div class="gloss">${gloss}</div></div>`).join('')}</div><div class="small" style="text-align:center;margin-top:9px">${model.meaning}</div>`}
-function renderLanguageModel(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 2 · korte uitleg</div><div class="h2">Basiszin leren</div><div class="notice" style="margin-top:9px">${l.grammar}</div>${l.spaceNote?'<div class="small" style="margin-top:8px">De spaties zijn een leerhulpmiddel. Gewone Japanse tekst gebruikt ze meestal niet.</div>':''}<div id="modelList" class="stack" style="margin-top:10px"></div><button id="modelNext" class="btn primary" style="width:100%;margin-top:12px">Direct oefenen →</button></section>`;const host=$('modelList');l.models.slice(0,MAX_LEVEL4_MODEL_SENTENCES).forEach(model=>{const d=document.createElement('div');d.className='panel';d.innerHTML=modelAnalysisHtml(model);host.appendChild(d)});$('modelNext').onclick=()=>{markLanguageStep(l.id,'model');state.langStep='understand';scheduleSave();renderMain()}}
-function understandingQuestions(l){return shuffle(l.check.filter(q=>['meaning','structure'].includes(q[4])).map(q=>lessonQuestion(q,l))).slice(0,5)}
-function renderLanguageUnderstand(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 3</div><div class="h2">Begrijpen en toepassen</div><div class="muted">Nu de woorden en modelzinnen bekend zijn, controleer je betekenis en rollen van de zinsblokken.</div><button id="understandStart" class="btn primary" style="width:100%;margin-top:12px">Start begripsoefeningen</button></section>`;$('understandStart').onclick=()=>startQuiz({source:'lang',title:`Les ${index+1} · begrijpen`,official:false,pool:[],questions:understandingQuestions(l),choices:3,next:{kind:'langStep',index,step:'build',complete:'understand'}})}
-function renderLanguageBuild(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 4</div><div class="h2">Zelf zinnen bouwen</div><div class="muted">Tik de blokken in de juiste volgorde. Tik een geplaatst blok aan om het terug te zetten.</div><div id="lessonBuilder" style="margin-top:10px"></div></section>`;renderSentenceBuilder($('lessonBuilder'),l.builders,()=>{markLanguageStep(l.id,'build');state.langStep='check';scheduleSave();renderMain()})}
+function renderLanguageModel(l,index){const didactic=level4Didactics[index];$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 2 · korte uitleg</div><div class="h2">Begrijp het patroon</div><div class="notice" style="margin-top:9px">${l.grammar}</div><div class="small" style="margin-top:8px"><strong>Controle:</strong> ${didactic.watch}</div>${l.spaceNote?'<div class="small" style="margin-top:5px">De spaties zijn een leerhulpmiddel; gewone Japanse tekst gebruikt ze meestal niet.</div>':''}<div id="modelList" class="stack" style="margin-top:10px"></div><button id="modelNext" class="btn primary" style="width:100%;margin-top:12px">Pas dit direct toe →</button></section>`;const host=$('modelList');l.models.slice(0,MAX_LEVEL4_MODEL_SENTENCES).forEach(model=>{const d=document.createElement('div');d.className='panel';d.innerHTML=modelAnalysisHtml(model);host.appendChild(d)});$('modelNext').onclick=()=>{markLanguageStep(l.id,'model');state.langStep='understand';scheduleSave();renderMain()}}
+function understandingQuestions(l,index=langLessons.indexOf(l)){return balancedLevel4Questions(index,5,['meaning','structure','integration'])}
+function renderLanguageUnderstand(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 3</div><div class="h2">Begrijpen en toepassen</div><div class="muted">Je krijgt vijf gesloten vragen. Iedere vraag noemt precies welke betekenis, rol of structuur je moet herkennen.</div><button id="understandStart" class="btn primary" style="width:100%;margin-top:12px">Start 5 begripvragen</button></section>`;$('understandStart').onclick=()=>startQuiz({source:'lang',title:`Les ${index+1} · begrijpen`,official:false,pool:[],questions:understandingQuestions(l,index),choices:3,next:{kind:'langStep',index,step:'build',complete:'understand'}})}
+function renderLanguageBuild(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 4</div><div class="h2">Zelf zinnen bouwen</div><div class="muted">Combineer bekende blokken. Bij de vrije opdracht zijn meerdere correcte zinnen mogelijk en hoef je niet ieder blok te gebruiken.</div><div id="lessonBuilder" style="margin-top:10px"></div></section>`;renderSentenceBuilder($('lessonBuilder'),cumulativeLevel4Builders(index),()=>{markLanguageStep(l.id,'build');state.langStep='check';scheduleSave();renderMain()})}
 function renderSentenceBuilder(host,items,onComplete){
   let index=0,selected=[];
-  const draw=()=>{const [prompt,correct,blocks]=items[index];host.innerHTML=`<div class="panel"><div class="between"><strong>Zin ${index+1} van ${items.length}</strong><span class="small">${prompt}</span></div><div id="builderAnswer" class="builder-answer"></div><div id="builderBank" class="builder-bank"></div><div id="builderFeedback" class="builder-feedback"></div><button id="builderCheck" class="btn primary" style="width:100%;margin-top:6px" ${selected.length?'':'disabled'}>Controleer</button></div>`;const answer=$('builderAnswer'),bank=$('builderBank');if(!selected.length)answer.innerHTML='<span class="builder-placeholder">Je zin verschijnt hier…</span>';selected.forEach((entry,pos)=>{const b=document.createElement('button');b.className='sentence-chip placed';b.textContent=entry.text;b.onclick=()=>{selected.splice(pos,1);draw()};answer.appendChild(b)});blocks.forEach((text,pos)=>{if(selected.some(x=>x.pos===pos))return;const b=document.createElement('button');b.className='sentence-chip';b.textContent=text;b.onclick=()=>{selected.push({text,pos});draw()};bank.appendChild(b)});$('builderCheck').onclick=()=>{const made=selected.map(x=>x.text).join(' ');if(made===correct){$('builderFeedback').textContent='✓ Goed opgebouwd.';setTimeout(()=>{index++;selected=[];if(index>=items.length)onComplete();else draw()},650)}else{$('builderFeedback').innerHTML=`Nog niet. De juiste volgorde is: <strong>${correct}</strong>`}}};draw()
+  const draw=()=>{const [prompt,correct,blocks,alternatives]=items[index],accepted=alternatives?.length?alternatives:[correct];host.innerHTML=`<div class="panel"><div class="between"><strong>Zin ${index+1} van ${items.length}</strong><span class="small">${prompt}</span></div><div id="builderAnswer" class="builder-answer"></div><div id="builderBank" class="builder-bank"></div><div id="builderFeedback" class="builder-feedback"></div><button id="builderCheck" class="btn primary" style="width:100%;margin-top:6px" ${selected.length?'':'disabled'}>Controleer</button></div>`;const answer=$('builderAnswer'),bank=$('builderBank');if(!selected.length)answer.innerHTML='<span class="builder-placeholder">Je zin verschijnt hier…</span>';selected.forEach((entry,pos)=>{const b=document.createElement('button');b.className='sentence-chip placed';b.textContent=entry.text;b.onclick=()=>{selected.splice(pos,1);draw()};answer.appendChild(b)});blocks.forEach((text,pos)=>{if(selected.some(x=>x.pos===pos))return;const b=document.createElement('button');b.className='sentence-chip';b.textContent=text;b.onclick=()=>{selected.push({text,pos});draw()};bank.appendChild(b)});$('builderCheck').onclick=()=>{const made=selected.map(x=>x.text).join(' ');if(accepted.includes(made)){$('builderFeedback').textContent='✓ Geldige zin. Goed gecombineerd.';setTimeout(()=>{index++;selected=[];if(index>=items.length)onComplete();else draw()},650)}else{$('builderFeedback').innerHTML=`Nog niet. Een geldig voorbeeld is: <strong>${correct}</strong>`}}};draw()
 }
-function renderLanguageCheck(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 5</div><div class="h2">Mini-check</div><div class="muted">8 vragen over kennis die in deze leerroute is uitgelegd. Een score van 80% of hoger verhoogt de lesrank maximaal één stap.</div><button id="miniCheckStart" class="btn primary" style="width:100%;margin-top:12px">Start mini-check · 8 vragen</button></section>`;$('miniCheckStart').onclick=()=>startLanguageLesson(l,index,false)}
+function renderLanguageCheck(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 5</div><div class="h2">Mini-check</div><div class="muted">8 gevarieerde vragen: ongeveer 70% actuele stof en 30% eerdere Level 4-kennis. Een score van 80% of hoger verhoogt de lesrank maximaal één stap.</div><button id="miniCheckStart" class="btn primary" style="width:100%;margin-top:12px">Start mini-check · 8 vragen</button></section>`;$('miniCheckStart').onclick=()=>startLanguageLesson(l,index,false)}
 function renderLanguageQuick(){
   const bankCount=(state.errorBank.lang||[]).reduce((n,e)=>n+(e.count||1),0);
-  $('langBody').innerHTML=`<section class="card"><div class="h2">Snelle checks</div><div class="muted">Controleer in enkele minuten of een oude les nog herkenbaar is.</div></section><div id="langQuickList" class="stack"></div><section class="card error-bank-card"><div class="between"><div><div class="h2">Bewaarde fouten</div><div class="small">Moeilijke woorden en zinnen uit eerdere sessies.</div></div><span class="rank">${bankCount}</span></div><button id="langSavedErrors" class="btn" style="width:100%;margin-top:10px" ${bankCount?'':'disabled'}>Oefen moeilijke punten</button></section>`;
+  $('langBody').innerHTML=`<section class="card"><div class="h2">Snelle checks</div><div class="muted">Kies een lesgrens. De oefening gebruikt automatisch alle woorden, grammatica en patronen tot en met die les, nooit toekomstige stof.</div></section><div id="langQuickList" class="stack"></div><section class="card error-bank-card"><div class="between"><div><div class="h2">Bewaarde fouten</div><div class="small">Moeilijke woorden en zinnen uit eerdere sessies.</div></div><span class="rank">${bankCount}</span></div><button id="langSavedErrors" class="btn" style="width:100%;margin-top:10px" ${bankCount?'':'disabled'}>Oefen moeilijke punten</button></section>`;
   langLessons.forEach((l,i)=>{
     const m=rankState[l.id],d=document.createElement('section');
     d.className=`card ${rankClass(m.rank)}`;
@@ -3302,22 +3523,27 @@ function startDakCluster(i,quick){const pool=dakutenClusters[i].patterns.flatMap
 function startDakExam(id){if(!['dak-examA','dak-examB'].includes(id))return;const pool=allDakItems();const questions=id==='dak-examA'?exactKanaQuestions(pool,'forward'):shuffle(pool.map(item=>({type:'scriptReverse',item,script:item.script==='hiragana'?'Hiragana':'Katakana'})));startQuiz({source:'dakuten',title:id==='dak-examA'?'Examen A · kana → klank':'Examen B · bronkana + teken → kana',rankId:id,official:true,pool,questions,choices:9})}
 
 function lessonQuestion(raw,lesson=null){
-  const[kind,prompt,correct,choices,category]=raw;
+  const data=Array.isArray(raw)?{kind:raw[0],prompt:raw[1],correct:raw[2],choices:raw[3],category:raw[4],accepted:raw[5]}:raw;
+  const{kind,prompt,correct,choices,category,accepted,introducedAt,instruction}=data;
   const vocabIds=inferVocabIds(prompt,correct,lesson);
+  const vocabDirection=vocabDirectionFor(prompt,correct,vocabIds);
   return{
     type:'lesson',
     kind,
     prompt,
     correct,
-    choices:shuffle([...choices]),
+    choices:shuffle([...new Set(choices)]),
     category:category||kind,
+    accepted:accepted?.length?[...accepted]:null,
+    instruction:instruction||'',
+    introducedAt,
     vocabIds,
-    vocabDirection:vocabDirectionFor(prompt,correct,vocabIds)
+    vocabDirection
   };
 }
 function cumulativeChecks(arr,index){return arr.slice(0,index+1).flatMap(l=>l.check.map(raw=>lessonQuestion(raw,l)))}
-function startLanguageLesson(l,index,quick){const own=l.check.map(raw=>lessonQuestion(raw,l)),questions=quick?shuffle(own).slice(0,5):shuffle(own).slice(0,8);startQuiz({source:'lang',title:`Les ${index+1} · ${l.title}${quick?' · snelle check':''}`,rankId:quick?null:l.id,rankThreshold:.8,official:!quick,pool:[],questions,choices:3,next:quick?null:{kind:'langLesson',index:index+1,complete:'check'}})}
-function startLanguageExam(){const pool=langLessons.flatMap(l=>l.check.map(raw=>lessonQuestion(raw,l))),groups=['vocab','meaning','structure','build','integration'],questions=[];groups.forEach(category=>{let group=shuffle(pool.filter(q=>q.category===category));if(group.length<6)group=shuffle([...group,...pool.filter(q=>category==='build'?q.kind==='order':q.category==='integration')]);questions.push(...group.slice(0,6))});startQuiz({source:'lang',title:'Level 4 examen',rankId:'l4-exam',official:true,pool:[],questions:shuffle(questions),choices:3})}
+function startLanguageLesson(l,index,quick){const questions=balancedLevel4Questions(index,quick?5:8);startQuiz({source:'lang',title:`Les ${index+1} · ${l.title}${quick?' · snelle check':''}`,rankId:quick?null:l.id,rankThreshold:.8,official:!quick,pool:[],questions,choices:3,next:quick?null:{kind:'langLesson',index:index+1,complete:'check'}})}
+function startLanguageExam(){const groups=['vocab','meaning','structure','build','integration'],questions=[];groups.forEach(category=>questions.push(...balancedLevel4Questions(9,6,[category])));startQuiz({source:'lang',title:'Level 4 examen',rankId:'l4-exam',official:true,pool:[],questions:shuffle(questions),choices:3})}
 function startSmallLesson(l,index,quick){const own=l.check.map(raw=>lessonQuestion(raw)),prev=smallLessons.slice(0,index).flatMap(x=>x.check.map(raw=>lessonQuestion(raw))),review=shuffle(langLessons.flatMap(x=>x.check.map(raw=>lessonQuestion(raw,x)))).slice(0,2),qs=quick?shuffle(own).slice(0,5):shuffle([...own,...shuffle(prev).slice(0,2),...review]);startQuiz({source:'small',title:`Les ${index+1} · ${l.title}${quick?' · snelle check':''}`,rankId:quick?null:l.id,rankThreshold:.8,official:!quick,pool:[],questions:qs,choices:3,next:quick?null:{kind:'smallLesson',index:index+1}})}
 function startSmallExam(){const own=smallLessons.flatMap(l=>l.check.map(raw=>lessonQuestion(raw))),review=shuffle(langLessons.flatMap(l=>l.check.map(raw=>lessonQuestion(raw,l)))).slice(0,6);startQuiz({source:'small',title:'Level 5 examen',rankId:'l5-exam',official:true,pool:[],questions:shuffle([...own,...review]).slice(0,28),choices:3})}
 
@@ -3461,8 +3687,16 @@ function renderKanaQ(c,q,box){
 function renderScriptReverseQ(c,q,box){const explicitDakuten=hasDakutenSourceContext(q);$('qHint').textContent=explicitDakuten?`${q.script} · ${dakutenPatterns.find(p=>p.id===q.item.pattern)?.name||'transformatie'}`:`${q.item.back} — kies ${q.script}`;$('qPrompt').textContent=explicitDakuten?dakutenReversePrompt(q.item):q.item.back;const same=c.pool.filter(x=>x.script===q.item.script&&x.id!==q.item.id),opts=shuffle([q.item,...shuffle(same).slice(0,8)]);opts.forEach(it=>addChoice(box,it.front,explicitDakuten?it.id===q.item.id:it.id===q.item.id||it.back===q.item.back))}
 function renderNumberQ(c,q,box){$('qHint').textContent=`${q.from} → ${q.to}`;$('qPrompt').textContent=fieldText(q.item,q.from);const others=shuffle(c.pool.filter(x=>x.id!==q.item.id)),opts=shuffle([q.item,...others.slice(0,Math.max(0,Math.min(c.choices,c.pool.length)-1))]);opts.forEach(it=>addChoice(box,fieldText(it,q.to),it.id===q.item.id))}
 function renderMathQ(c,q,box){$('qHint').textContent='Kies het juiste Japanse antwoordteken';$('qPrompt').textContent=`${numberSymbol(q.a)} ${q.op} ${numberSymbol(q.b)}`;const vals=[q.answer],max=Math.max(5,q.a,q.b,q.answer);while(vals.length<Math.min(c.choices||6,max+1)){const n=Math.floor(Math.random()*(max+1));if(!vals.includes(n))vals.push(n)}shuffle(vals).forEach(n=>addChoice(box,numberSymbol(n),n===q.answer))}
-function renderLessonQ(c,q,box){if(q.kind==='build')return renderBuilderQuizQ(c,q,box);box.classList.add('choices-text');const labels={mc:'Kies de juiste betekenis / vorm',fill:'Vul het ontbrekende onderdeel aan',order:'Kies de juiste volgorde',meaning:'Kies de betekenis'};$('qHint').textContent=labels[q.kind]||'Kies het juiste antwoord';$('qPrompt').style.fontSize=q.kind==='mc'?'52px':'30px';$('qPrompt').textContent=q.prompt;q.choices.forEach(ch=>addChoice(box,ch,ch===q.correct))}
-function renderBuilderQuizQ(c,q,box){let selected=[];$('qHint').textContent='Tik de zinsblokken in de juiste volgorde';$('qPrompt').style.fontSize='24px';$('qPrompt').textContent=q.prompt;box.className='';const draw=()=>{box.innerHTML='<div id="quizBuilderAnswer" class="builder-answer"></div><div id="quizBuilderBank" class="builder-bank"></div><button id="quizBuilderCheck" class="btn primary" style="width:100%;margin-top:10px">Controleer</button>';const answerBox=$('quizBuilderAnswer'),bank=$('quizBuilderBank');if(!selected.length)answerBox.innerHTML='<span class="builder-placeholder">Je zin verschijnt hier…</span>';selected.forEach((entry,i)=>{const b=document.createElement('button');b.className='sentence-chip placed';b.textContent=entry.text;b.onclick=()=>{selected.splice(i,1);draw()};answerBox.appendChild(b)});q.choices.forEach((text,pos)=>{if(selected.some(x=>x.pos===pos))return;const b=document.createElement('button');b.className='sentence-chip';b.textContent=text;b.onclick=()=>{selected.push({text,pos});draw()};bank.appendChild(b)});$('quizBuilderCheck').disabled=!selected.length;$('quizBuilderCheck').onclick=()=>{const made=selected.map(x=>x.text).join(' ');answer(made===q.correct,$('quizBuilderCheck'),made||'geen antwoord')}};draw()}
+function lessonQuestionInstruction(q){
+  if(q.instruction)return q.instruction;
+  if(q.category==='vocab'||q.vocabDirection==='meaning'||q.vocabDirection==='production')return q.vocabDirection==='meaning'?'Kies de Nederlandse betekenis van dit woord.':'Kies het passende Japanse woord.';
+  if(q.kind==='meaning')return'Kies de Nederlandse betekenis van de getoonde zin.';
+  if(q.kind==='order')return'Kies het antwoord dat precies bij de opdracht past.';
+  if(q.kind==='fill')return'Kies het blok dat de getoonde betekenis compleet maakt.';
+  return'Kies het juiste antwoord.';
+}
+function renderLessonQ(c,q,box){if(q.kind==='build')return renderBuilderQuizQ(c,q,box);box.classList.add('choices-text');$('qHint').textContent=lessonQuestionInstruction(q);$('qPrompt').style.fontSize=q.kind==='mc'?'clamp(34px,10vw,52px)':'clamp(24px,7vw,30px)';$('qPrompt').textContent=q.prompt;const accepted=q.accepted?.length?q.accepted:[q.correct];q.choices.forEach(ch=>addChoice(box,ch,accepted.includes(ch)))}
+function renderBuilderQuizQ(c,q,box){let selected=[];$('qHint').textContent=q.instruction||(q.accepted?.length>1?'Bouw één geldige zin; je hoeft niet alle blokken te gebruiken.':'Bouw met de blokken de getoonde zin.');$('qPrompt').style.fontSize='24px';$('qPrompt').textContent=q.prompt;box.className='';const draw=()=>{box.innerHTML='<div id="quizBuilderAnswer" class="builder-answer"></div><div id="quizBuilderBank" class="builder-bank"></div><button id="quizBuilderCheck" class="btn primary" style="width:100%;margin-top:10px">Controleer</button>';const answerBox=$('quizBuilderAnswer'),bank=$('quizBuilderBank');if(!selected.length)answerBox.innerHTML='<span class="builder-placeholder">Je zin verschijnt hier…</span>';selected.forEach((entry,i)=>{const b=document.createElement('button');b.className='sentence-chip placed';b.textContent=entry.text;b.onclick=()=>{selected.splice(i,1);draw()};answerBox.appendChild(b)});q.choices.forEach((text,pos)=>{if(selected.some(x=>x.pos===pos))return;const b=document.createElement('button');b.className='sentence-chip';b.textContent=text;b.onclick=()=>{selected.push({text,pos});draw()};bank.appendChild(b)});$('quizBuilderCheck').disabled=!selected.length;$('quizBuilderCheck').onclick=()=>{const made=selected.map(x=>x.text).join(' '),accepted=q.accepted?.length?q.accepted:[q.correct];answer(accepted.includes(made),$('quizBuilderCheck'),made||'geen antwoord')}};draw()}
 function addChoice(box,text,ok){const b=document.createElement('button');b.className='choice';b.dataset.correct=ok?'1':'0';b.textContent=text;b.onclick=()=>answer(ok,b,text);box.appendChild(b)}
 function qData(q){if(q.type==='kana')return{asked:q.mode==='forward'?q.item.front:hasDakutenSourceContext(q)?dakutenReversePrompt(q.item):q.item.back,correct:q.mode==='forward'?q.item.back:q.item.front,detail:`${q.item.base?`${q.item.base} → `:''}${q.item.front} ↔ ${q.item.back}`};if(q.type==='scriptReverse')return{asked:hasDakutenSourceContext(q)?dakutenReversePrompt(q.item):`${q.item.back} · ${q.script}`,correct:q.item.front,detail:`${q.item.base?`${q.item.base} → `:''}${q.item.front} ↔ ${q.item.back}`};if(q.type==='number')return{asked:fieldText(q.item,q.from),correct:fieldText(q.item,q.to),detail:`${q.item.symbol} ↔ ${q.item.valueText} ↔ ${q.item.reading}`};if(q.type==='math')return{asked:`${numberSymbol(q.a)} ${q.op} ${numberSymbol(q.b)}`,correct:numberSymbol(q.answer),detail:`${numberSymbol(q.answer)} ↔ ${q.answer} ↔ ${numberReading(q.answer)}`};return{asked:q.prompt,correct:q.correct,detail:q.correct}}
 function answer(ok,b,chosen){const c=state.quiz,q=currentQ();[...$('qChoices').querySelectorAll('button')].forEach(x=>x.disabled=true);recordQuestionMastery(q,ok,c);if(ok){c.score++;if(c.errorBankPractice)resolveErrorBank(c.source,q);b.classList.add('correct');$('qFeedback').textContent='✓ Goed';c.index++;setTimeout(nextQuestion,550)}else{const d=qData(q);c.mistakes.push({number:c.index+1,chosen,...d,source:c.source,question:q});[...$('qChoices').querySelectorAll('button')].forEach(x=>{if(x.dataset.correct==='1')x.classList.add('correct')});$('qFeedback').innerHTML=`Niet goed · <strong>${d.correct}</strong>`;c.index++;setTimeout(nextQuestion,1700)}$('qBar').style.width=(c.index/c.questions.length*100)+'%';scheduleSave()}
