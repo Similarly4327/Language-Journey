@@ -2685,14 +2685,14 @@ function updateHeader(){
   learn.classList.toggle('active',!progressOpen&&!cardsOpen);
   cards.classList.toggle('active',cardsOpen&&!progressOpen);
   progress.classList.toggle('active',progressOpen);
-  if(progressOpen||state.screen==='levels'){
+  if(cardsOpen&&!progressOpen){
+    back.classList.add('hidden');
+    ey.textContent='Vrij oefenen';
+    title.textContent='Flashcards';
+  }else if(progressOpen||state.screen==='levels'){
     back.classList.add('hidden');
     ey.textContent='日本語';
     title.textContent='Language Journey';
-  }else if(cardsOpen){
-    back.classList.remove('hidden');
-    ey.textContent='Vrij oefenen';
-    title.textContent='Flashcards';
   }else{
     back.classList.remove('hidden');
     const lv=levels[state.level];
@@ -4112,9 +4112,9 @@ function flashcardRate(grade){
   scheduleSave();renderFlashcardsScreen();
 }
 function renderFlashcardScope(box){
-  const groups=flashcardGroups(),selected=flashcardSelectedLessons();
-  box.innerHTML=`<section class="card"><div class="between"><div><div class="h2">Kies je woorden</div><div class="muted">Kies één of meer levels en lessen. Ook toekomstige woorden zijn vrij te bekijken als voorproefje.</div></div><button id="fcSelectAll" class="btn tiny">Alles kiezen</button></div><div class="flashcard-scope" style="margin-top:10px">${groups.map(group=>{const ids=group.lessons.map(x=>x.id),checked=ids.every(id=>selected.has(id));return`<section class="flashcard-level"><div class="flashcard-level-head"><label class="flashcard-check"><input type="checkbox" data-fc-level="${group.level}" ${checked?'checked':''}><strong>Level ${group.level}</strong></label><span class="small">${group.lessons.reduce((n,l)=>n+l.words.length,0)} woorden</span></div><div class="flashcard-lesson-list">${group.lessons.map(lesson=>`<label class="flashcard-check"><input type="checkbox" data-fc-lesson="${lesson.id}" ${selected.has(lesson.id)?'checked':''}><span>${lesson.title} <span class="muted">· ${lesson.words.length}</span></span></label>`).join('')}</div></section>`}).join('')}</div><label class="profile-field" style="margin-top:10px"><span>Oefenrichting</span><select id="fcDirection" class="select"><option value="jp-nl" ${state.flashcardSelection.direction==='jp-nl'?'selected':''}>Japans → Nederlands</option><option value="nl-jp" ${state.flashcardSelection.direction==='nl-jp'?'selected':''}>Nederlands → Japans</option><option value="both" ${state.flashcardSelection.direction==='both'?'selected':''}>Beide richtingen · apart herhaald</option></select></label></section>`;
-  $('fcSelectAll').onclick=()=>{state.flashcardSelection.lessonIds=null;scheduleSave();renderFlashcardsScreen()};
+  const groups=flashcardGroups(),selected=flashcardSelectedLessons(),allLessonIds=[...new Set(vocabCatalog.map(v=>v.lessonId))],allSelected=allLessonIds.every(id=>selected.has(id));
+  box.innerHTML=`<section class="card"><div class="between"><div><div class="h2">Kies je woorden</div><div class="muted">Kies één of meer levels en lessen. Ook toekomstige woorden zijn vrij te bekijken als voorproefje.</div></div><button id="fcSelectAll" class="btn tiny">${allSelected?'Alles deselecteren':'Alles kiezen'}</button></div><div class="flashcard-scope" style="margin-top:10px">${groups.map(group=>{const ids=group.lessons.map(x=>x.id),checked=ids.every(id=>selected.has(id));return`<section class="flashcard-level"><div class="flashcard-level-head"><label class="flashcard-check"><input type="checkbox" data-fc-level="${group.level}" ${checked?'checked':''}><strong>Level ${group.level}</strong></label><span class="small">${group.lessons.reduce((n,l)=>n+l.words.length,0)} woorden</span></div><div class="flashcard-lesson-list">${group.lessons.map(lesson=>`<label class="flashcard-check"><input type="checkbox" data-fc-lesson="${lesson.id}" ${selected.has(lesson.id)?'checked':''}><span>${lesson.title} <span class="muted">· ${lesson.words.length}</span></span></label>`).join('')}</div></section>`}).join('')}</div><label class="profile-field" style="margin-top:10px"><span>Oefenrichting</span><select id="fcDirection" class="select"><option value="jp-nl" ${state.flashcardSelection.direction==='jp-nl'?'selected':''}>Japans → Nederlands</option><option value="nl-jp" ${state.flashcardSelection.direction==='nl-jp'?'selected':''}>Nederlands → Japans</option><option value="both" ${state.flashcardSelection.direction==='both'?'selected':''}>Beide richtingen · apart herhaald</option></select></label></section>`;
+  $('fcSelectAll').onclick=()=>{state.flashcardSelection.lessonIds=allSelected?[]:null;scheduleSave();renderFlashcardsScreen()};
   $('fcDirection').onchange=()=>{state.flashcardSelection.direction=$('fcDirection').value;scheduleSave();renderFlashcardsScreen()};
   root.querySelectorAll('[data-fc-lesson]').forEach(input=>input.onchange=()=>{let ids=state.flashcardSelection.lessonIds===null?vocabCatalog.map(v=>v.lessonId):[...state.flashcardSelection.lessonIds];const id=input.dataset.fcLesson;ids=input.checked?[...new Set([...ids,id])]:ids.filter(x=>x!==id);setFlashcardLessonSelection(ids)});
   root.querySelectorAll('[data-fc-level]').forEach(input=>input.onchange=()=>{let ids=state.flashcardSelection.lessonIds===null?vocabCatalog.map(v=>v.lessonId):[...state.flashcardSelection.lessonIds];const group=groups.find(x=>String(x.level)===input.dataset.fcLevel);group.lessons.map(x=>x.id).forEach(id=>{ids= input.checked?[...new Set([...ids,id])]:ids.filter(x=>x!==id)});setFlashcardLessonSelection(ids)});
