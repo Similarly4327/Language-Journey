@@ -35,3 +35,11 @@
 - Preserve personal profile fields and their backward-compatible localStorage defaults. Ren / レン is the default male companion and Miku / ミク the default female companion; users may rename either without affecting progress or skins.
 - Keep avatar variant, avatar name, and selected skin as separate data. Skin changes never rename the companion or affect mastery.
 - Resolve future personalized lesson copy through the shared profile placeholder helper instead of hardcoding learner or companion names.
+
+## Flashcards
+
+- Use the shared vocabulary catalog as the source for course words and flashcards; avoid maintaining a second disconnected word list.
+- Keep flashcards optional and available from the home navigation, level overviews, and vocabulary progress view. Preview words may be practiced without changing course rank or introduction status.
+- Store spaced-repetition history separately per word and direction (`jp-nl` / `nl-jp`). Flashcard practice must not alter lesson completion, ranks, mastery, error history, or introduced vocabulary.
+- Preserve flashcard selection, active/paused session, and review history when saving or migrating localStorage. Older saved versions must load without resetting any existing progress.
+- When extending the flashcard system, verify mobile layout, resume after interruption, due/new card selection, separate direction history, and one-time requeueing of missed cards.
