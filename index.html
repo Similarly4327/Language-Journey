@@ -1252,6 +1252,48 @@ body[data-scene="classroom"]::after{
 .avatar-skin-card .avatar-sprite{width:58px;height:97px;filter:none}
 .avatar-skin-card .skin-label{font-size:10px;font-weight:800;margin-top:2px}
 .avatar-skin-card .skin-state{font-size:9px;color:var(--muted);margin-top:1px}
+.avatar-figure{display:block;width:90px;height:150px;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 8px 13px rgba(49,39,34,.16))}
+.avatar-figure.avatar-settings-preview{width:76px;height:127px}
+.avatar-skin-card .avatar-figure{width:58px;height:97px;filter:none}
+.avatar-assist{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;padding:10px 12px;border:1px solid var(--border);border-radius:14px;background:var(--panel)}
+.avatar-assist-copy{min-width:0;flex:1}
+.avatar-assist-copy strong{display:block;font-size:13px;line-height:1.3}
+.avatar-assist-copy .small{margin-top:3px}
+.avatar-assist-figure{width:58px;height:96px;flex:0 0 58px;display:grid;place-items:end center;overflow:hidden}
+.avatar-assist-figure .avatar-figure,.avatar-assist-figure .avatar-sprite{width:58px;height:96px;filter:none}
+.avatar-assist--medium .avatar-assist-figure{width:72px;height:120px;flex-basis:72px}
+.avatar-assist--medium .avatar-assist-figure .avatar-figure,.avatar-assist--medium .avatar-assist-figure .avatar-sprite{width:72px;height:120px}
+.avatar-assist--large .avatar-assist-figure{width:90px;height:150px;flex-basis:90px}
+.avatar-assist--large .avatar-assist-figure .avatar-figure,.avatar-assist--large .avatar-assist-figure .avatar-sprite{width:90px;height:150px}
+.avatar-assist--top-right,.avatar-assist--bottom-right{margin-top:10px}
+.avatar-assist--bottom-right{align-items:end}
+.avatar-outfit-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:11px}
+.avatar-outfit-card{min-width:0;min-height:152px;padding:8px 5px;border:1px solid var(--border);border-radius:13px;background:var(--panel);color:var(--text);display:grid;justify-items:center;align-content:start;text-align:center;cursor:pointer}
+.avatar-outfit-card.active{border-color:var(--accent);box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 32%,transparent)}
+.avatar-outfit-card.locked{opacity:.58;cursor:default}
+.avatar-outfit-card .avatar-figure,.avatar-outfit-card .avatar-sprite{width:62px;height:98px;filter:none}
+.avatar-outfit-card strong{font-size:11px;line-height:1.25}
+.avatar-outfit-card .small{font-size:10px;line-height:1.25}
+.avatar-unlock{margin-top:10px;border-color:color-mix(in srgb,var(--accent) 35%,var(--border));background:color-mix(in srgb,var(--accent) 7%,var(--panel))}
+.avatar-unlock-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.avatar-legacy-details{margin-top:14px}
+.avatar-legacy-details summary{cursor:pointer;font-size:12px;font-weight:750;color:var(--muted)}
+.quiz-avatar-assist:not(:empty){margin-top:10px}
+.quiz-avatar-assist .avatar-assist{padding:6px 9px}
+.quiz-avatar-assist .avatar-assist-figure{height:62px}
+.quiz-avatar-assist .avatar-assist-figure .avatar-figure,.quiz-avatar-assist .avatar-assist-figure .avatar-sprite{height:62px}
+@media(max-width:640px){
+  .journey-avatar .avatar-figure{width:66px;height:110px}
+  .journey-avatar-level .outfit-name{display:none}
+  .avatar-outfit-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .avatar-assist{gap:8px;padding:8px 10px}
+  .avatar-assist-figure{width:48px;height:80px;flex-basis:48px}
+  .avatar-assist-figure .avatar-figure,.avatar-assist-figure .avatar-sprite{width:48px;height:80px}
+  .avatar-assist--medium .avatar-assist-figure{width:56px;height:92px;flex-basis:56px}
+  .avatar-assist--medium .avatar-assist-figure .avatar-figure,.avatar-assist--medium .avatar-assist-figure .avatar-sprite{width:56px;height:92px}
+  .avatar-assist--large .avatar-assist-figure{width:64px;height:106px;flex-basis:64px}
+  .avatar-assist--large .avatar-assist-figure .avatar-figure,.avatar-assist--large .avatar-assist-figure .avatar-sprite{width:64px;height:106px}
+}
 .menu-section-head{
   display:grid;
   gap:3px;
@@ -1505,8 +1547,8 @@ body[data-scene="journey"][data-view="main"] #mainView{
 </section>
 <main id="mainView" class="stack"></main>
 <section id="flashcardView" class="stack hidden"></section>
-<section id="quizView" class="stack hidden"><div class="card"><div class="between"><div><div id="quizTitle" class="h2"></div><div id="quizMeta" class="small"></div></div><div><span id="qNow">1</span>/<span id="qTotal">10</span></div></div><div class="progress" style="margin-top:9px"><div id="qBar"></div></div></div><div class="card question"><div id="qHint" class="muted"></div><div id="qPrompt" class="prompt"></div><div id="qChoices" class="choices"></div><div id="qFeedback" class="feedback"></div><div class="between" style="align-items:center;margin-top:8px"><span id="qScore" class="small">Goed: 0</span><button id="quitQuiz" class="btn tiny">Stop</button></div></div></section>
-<section id="resultView" class="stack hidden"><div class="card question"><div id="resultTitle" class="h2"></div><div id="resultScore" style="font-size:40px;font-weight:800;margin-top:8px"></div><div id="resultStats" class="muted"></div><div id="resultRank" class="panel hidden" style="margin-top:10px"></div></div><div class="card"><div class="h2">Fouten</div><div id="errorIntro" class="small"></div><div id="errorList" class="stack" style="margin-top:9px"></div></div><div class="grid2"><button id="practiceErrors" class="btn">Oefen mijn fouten</button><button id="retryBtn" class="btn">Opnieuw</button><button id="nextBtn" class="btn primary hidden">Volgende →</button><button id="backBtn" class="btn">Terug naar overzicht</button></div></section>
+<section id="quizView" class="stack hidden"><div class="card"><div class="between"><div><div id="quizTitle" class="h2"></div><div id="quizMeta" class="small"></div></div><div><span id="qNow">1</span>/<span id="qTotal">10</span></div></div><div class="progress" style="margin-top:9px"><div id="qBar"></div></div></div><div class="card question"><div id="qHint" class="muted"></div><div id="qPrompt" class="prompt"></div><div id="qChoices" class="choices"></div><div id="qFeedback" class="feedback"></div><div id="quizAvatarAssist" class="quiz-avatar-assist"></div><div class="between" style="align-items:center;margin-top:8px"><span id="qScore" class="small">Goed: 0</span><button id="quitQuiz" class="btn tiny">Stop</button></div></div></section>
+<section id="resultView" class="stack hidden"><div class="card question"><div id="resultTitle" class="h2"></div><div id="resultScore" style="font-size:40px;font-weight:800;margin-top:8px"></div><div id="resultStats" class="muted"></div><div id="resultRank" class="panel hidden" style="margin-top:10px"></div><div id="resultAvatarAssist"></div></div><div class="card"><div class="h2">Fouten</div><div id="errorIntro" class="small"></div><div id="errorList" class="stack" style="margin-top:9px"></div></div><div class="grid2"><button id="practiceErrors" class="btn">Oefen mijn fouten</button><button id="retryBtn" class="btn">Opnieuw</button><button id="nextBtn" class="btn primary hidden">Volgende →</button><button id="backBtn" class="btn">Terug naar overzicht</button></div></section>
 <section id="sessionView" class="stack hidden"><div class="card"><div class="h1">Mijn Japanse leerreis</div><div class="muted">Je profiel, groei en bekende bouwstenen.</div></div><div id="sessionContent" class="stack"></div><button id="sessionBack" class="btn primary">Terug</button></section>
 </div>
 <script>
@@ -1525,6 +1567,22 @@ const avatarSkins=[
   {id:'skin-9',level:9,name:'Reiziger'},
   {id:'skin-10',level:10,name:'Festival'}
 ];
+const avatarOutfits=[
+  {id:'starter',name:'Starter',unlockLevel:1,theme:'basis',skinId:'skin-1',asset:{female:'avatar-female_starter_greeting_bun.webp',male:'avatar-male_starter_greeting.webp'}},
+  {id:'school',name:'School',unlockLevel:6,theme:'school',skinId:'skin-2',asset:{female:'avatar-female_school_greeting_bun.webp',male:'avatar-male_school_greeting.webp'}},
+  {id:'supermarket',name:'Supermarkt',unlockLevel:11,theme:'winkel',skinId:'skin-5',asset:{female:'avatar-female_supermarket_explain_bun.webp',male:'avatar-male_supermarket_explain.webp'}},
+  {id:'shipCrew',name:'Scheepscrew',unlockLevel:16,theme:'reis',skinId:'skin-8',asset:{female:'avatar-female_shipcrew_welcome_bun.webp',male:'avatar-male_shipcrew_welcome.webp'}}
+];
+const avatarPoseAssets={
+  female:{
+    bun:{greeting:'avatar-female_starter_greeting_bun.webp',welcome:'avatar-female_starter_greeting_bun.webp',tip:'avatar-female_starter_tip_ponytail.webp',explain:'avatar-female_starter_tip_ponytail.webp',celebrate:'avatar-female_starter_celebrate_bun.webp',encourage:'avatar-female_starter_encourage_bun.webp'},
+    loose:{greeting:'avatar-female_starter_greeting_loose.webp',welcome:'avatar-female_starter_greeting_loose.webp'},
+    ponytail:{tip:'avatar-female_starter_tip_ponytail.webp',explain:'avatar-female_starter_tip_ponytail.webp'}
+  },
+  male:{greeting:'avatar-male_starter_greeting.webp',welcome:'avatar-male_starter_greeting.webp',tip:'avatar-male_starter_tip.webp',explain:'avatar-male_starter_tip.webp',celebrate:'avatar-male_starter_celebrate.webp',encourage:'avatar-male_starter_encourage.webp'}
+};
+const avatarPoseIds=['neutral','greeting','explain','confident','tip','welcome','celebrate','encourage'];
+const avatarHairstyles=[{id:'bun',name:'Huidig kapsel'},{id:'loose',name:'Haar los'},{id:'ponytail',name:'Staart'}];
 const rowNames=['Klinkers','K-rij','S-rij','T-rij','N-rij','H-rij','M-rij','Y-rij','R-rij','W + ん'];
 const hira=[[['あ','a'],['い','i'],['う','u'],['え','e'],['お','o']],[['か','ka'],['き','ki'],['く','ku'],['け','ke'],['こ','ko']],[['さ','sa'],['し','shi'],['す','su'],['せ','se'],['そ','so']],[['た','ta'],['ち','chi'],['つ','tsu'],['て','te'],['と','to']],[['な','na'],['に','ni'],['ぬ','nu'],['ね','ne'],['の','no']],[['は','ha'],['ひ','hi'],['ふ','fu'],['へ','he'],['ほ','ho']],[['ま','ma'],['み','mi'],['む','mu'],['め','me'],['も','mo']],[['や','ya'],['ゆ','yu'],['よ','yo']],[['ら','ra'],['り','ri'],['る','ru'],['れ','re'],['ろ','ro']],[['わ','wa'],['を','wo'],['ん','n']]];
 const kata=[[['ア','a'],['イ','i'],['ウ','u'],['エ','e'],['オ','o']],[['カ','ka'],['キ','ki'],['ク','ku'],['ケ','ke'],['コ','ko']],[['サ','sa'],['シ','shi'],['ス','su'],['セ','se'],['ソ','so']],[['タ','ta'],['チ','chi'],['ツ','tsu'],['テ','te'],['ト','to']],[['ナ','na'],['ニ','ni'],['ヌ','nu'],['ネ','ne'],['ノ','no']],[['ハ','ha'],['ヒ','hi'],['フ','fu'],['ヘ','he'],['ホ','ho']],[['マ','ma'],['ミ','mi'],['ム','mu'],['メ','me'],['モ','mo']],[['ヤ','ya'],['ユ','yu'],['ヨ','yo']],[['ラ','ra'],['リ','ri'],['ル','ru'],['レ','re'],['ロ','ro']],[['ワ','wa'],['ヲ','wo'],['ン','n']]];
@@ -2353,6 +2411,11 @@ const state={screen:'levels',level:0,currentLevel:1,userName:'',userNameJapanese
 state.flashcardProgress={version:1,cards:{}};
 state.flashcardSelection={lessonIds:null,direction:'jp-nl'};
 state.flashcardSession=null;
+state.selectedAvatarOutfit=null;
+state.avatarHairstyle='bun';
+state.unlockedAvatarOutfits=['starter'];
+state.seenAvatarOutfits=['starter'];
+state.pendingAvatarOutfit=null;
 
 function avatarDefaults(gender=state.avatarGender){return gender==='male'?{name:'Ren',japanese:'レン'}:{name:'Miku',japanese:'ミク'}}
 function cleanProfileValue(value){return typeof value==='string'?value.trim().slice(0,40):''}
@@ -2391,6 +2454,15 @@ function introductionDialogueHtml(){
 }
 
 function avatarSkinId(level){return`skin-${Math.max(1,Math.min(avatarSkins.length,level))}`}
+function unlockedAvatarOutfits(){return avatarOutfits.filter(outfit=>state.unlockedAvatarOutfits.includes(outfit.id))}
+function activeAvatarOutfit(){
+  syncAvatarState();
+  if(state.avatarMode==='manual'&&state.selectedAvatarOutfit){
+    const selected=avatarOutfits.find(outfit=>outfit.id===state.selectedAvatarOutfit&&state.unlockedAvatarOutfits.includes(outfit.id));
+    if(selected)return selected;
+  }
+  return unlockedAvatarOutfits().filter(outfit=>outfit.unlockLevel<=state.currentLevel).at(-1)||avatarOutfits[0];
+}
 function syncAvatarState(){
   syncProfileState();
   state.currentLevel=Math.max(1,Math.min(levels.length,state.level+1));
@@ -2400,6 +2472,12 @@ function syncAvatarState(){
   unlocked.add('skin-1');
   state.unlockedAvatarSkins=[...unlocked].sort((a,b)=>Number(a.split('-')[1])-Number(b.split('-')[1]));
   if(state.selectedAvatarSkin&&!unlocked.has(state.selectedAvatarSkin))state.selectedAvatarSkin=null;
+  const unlockedOutfits=new Set((state.unlockedAvatarOutfits||[]).filter(id=>avatarOutfits.some(outfit=>outfit.id===id)));
+  const highestOpenedSkin=Math.max(state.currentLevel,...state.unlockedAvatarSkins.map(id=>Number(id.split('-')[1])||1));
+  avatarOutfits.filter(outfit=>outfit.unlockLevel<=highestOpenedSkin).forEach(outfit=>unlockedOutfits.add(outfit.id));
+  state.unlockedAvatarOutfits=avatarOutfits.map(outfit=>outfit.id).filter(id=>unlockedOutfits.has(id));
+  if(state.selectedAvatarOutfit&&!unlockedOutfits.has(state.selectedAvatarOutfit))state.selectedAvatarOutfit=null;
+  if(!avatarHairstyles.some(hair=>hair.id===state.avatarHairstyle))state.avatarHairstyle='bun';
 }
 function activeAvatarSkin(){
   syncAvatarState();
@@ -2412,6 +2490,39 @@ function avatarSpriteStyle(skin,gender=state.avatarGender){
 }
 function avatarSpriteHtml(skin,extraClass=''){
   return`<div class="avatar-sprite ${extraClass}" style="${avatarSpriteStyle(skin)}" role="img" aria-label="${escapeHtml(avatarDisplayName())}, avatar-skin voor Level ${skin.level}: ${skin.name}"></div>`;
+}
+function avatarAssetFor(outfit,pose,gender=state.avatarGender,hairstyle=state.avatarHairstyle){
+  if(outfit.id!=='starter')return outfit.asset?.[gender]||null;
+  const assets=avatarPoseAssets[gender];
+  if(gender==='female'){
+    const hairAssets=assets[hairstyle]||assets.bun;
+    return hairAssets[pose]||hairAssets.greeting||hairAssets.tip||assets.bun[pose]||assets.bun.greeting;
+  }
+  return assets[pose]||assets.greeting;
+}
+function avatarVisualHtml({pose='neutral',outfit=null,hairstyle=state.avatarHairstyle,extraClass='',decorative=true,priority=false}={}){
+  const chosen=outfit||activeAvatarOutfit();
+  const legacy=state.avatarMode==='manual'&&state.selectedAvatarSkin&&!state.selectedAvatarOutfit&&!outfit;
+  const src=legacy?null:avatarAssetFor(chosen,pose,state.avatarGender,hairstyle);
+  if(src)return`<img class="avatar-figure ${extraClass}" src="assets/${src}" width="90" height="150" alt="${decorative?'':escapeHtml(avatarDisplayName()+', '+chosen.name)}" loading="${priority?'eager':'lazy'}" decoding="async" data-fallback-skin="${chosen.skinId}">`;
+  return avatarSpriteHtml(legacy?activeAvatarSkin():avatarSkins.find(skin=>skin.id===chosen.skinId)||avatarSkins[0],extraClass);
+}
+root.addEventListener('error',event=>{
+  const img=event.target;
+  if(!(img instanceof HTMLImageElement)||!img.classList.contains('avatar-figure'))return;
+  const skin=avatarSkins.find(item=>item.id===img.dataset.fallbackSkin)||avatarSkins[0];
+  const fallback=document.createElement('div');
+  fallback.className=img.className.replace('avatar-figure','avatar-sprite');
+  fallback.style.cssText=avatarSpriteStyle(skin);
+  fallback.setAttribute('role','img');
+  fallback.setAttribute('aria-label',img.alt||`${avatarDisplayName()}, ${skin.name}`);
+  img.replaceWith(fallback);
+},true);
+function avatarAssistHtml({pose='neutral',outfit=null,hairstyle=state.avatarHairstyle,placement='inline',size='small',message='',detail=''}={}){
+  if(!state.avatarEnabled||!avatarPoseIds.includes(pose))return'';
+  const safePlacement=['inline','top-right','bottom-right'].includes(placement)?placement:'inline';
+  const safeSize=['small','medium','large'].includes(size)?size:'small';
+  return`<div class="avatar-assist avatar-assist--${safePlacement} avatar-assist--${safeSize}"><div class="avatar-assist-copy"><strong>${escapeHtml(message)}</strong>${detail?`<div class="small">${escapeHtml(detail)}</div>`:''}</div><div class="avatar-assist-figure" aria-hidden="true">${avatarVisualHtml({pose,outfit,hairstyle})}</div></div>`;
 }
 
 const STORAGE_KEY='taal-japanse-leerapp-v1';
@@ -2465,6 +2576,10 @@ function storageStateSnapshot(){
     avatarMode:state.avatarMode,
     selectedAvatarSkin:state.selectedAvatarSkin,
     unlockedAvatarSkins:state.unlockedAvatarSkins,
+    selectedAvatarOutfit:state.selectedAvatarOutfit,
+    avatarHairstyle:state.avatarHairstyle,
+    unlockedAvatarOutfits:state.unlockedAvatarOutfits,
+    seenAvatarOutfits:state.seenAvatarOutfits,
     basisModule:state.basisModule,
     tabs:{...state.tabs},
     row:{...state.row},
@@ -2552,6 +2667,10 @@ function loadProgress(){
     if(['auto','manual'].includes(s.avatarMode))state.avatarMode=s.avatarMode;
     if(typeof s.selectedAvatarSkin==='string')state.selectedAvatarSkin=s.selectedAvatarSkin;
     if(Array.isArray(s.unlockedAvatarSkins))state.unlockedAvatarSkins=s.unlockedAvatarSkins;
+    if(typeof s.selectedAvatarOutfit==='string')state.selectedAvatarOutfit=s.selectedAvatarOutfit;
+    if(typeof s.avatarHairstyle==='string')state.avatarHairstyle=s.avatarHairstyle;
+    if(Array.isArray(s.unlockedAvatarOutfits))state.unlockedAvatarOutfits=s.unlockedAvatarOutfits.filter(id=>avatarOutfits.some(outfit=>outfit.id===id));
+    if(Array.isArray(s.seenAvatarOutfits))state.seenAvatarOutfits=s.seenAvatarOutfits.filter(id=>avatarOutfits.some(outfit=>outfit.id===id));
     if(['hiragana','numbers','katakana'].includes(s.basisModule))state.basisModule=s.basisModule;
     if(s.tabs&&typeof s.tabs==='object')Object.assign(state.tabs,s.tabs);
     if(s.row&&typeof s.row==='object')Object.assign(state.row,s.row);
@@ -2736,7 +2855,15 @@ function navigateBack(){
   if(state.screen==='module'){state.screen='level';scheduleSave();return renderMain()}
   if(state.screen==='level'){state.screen='levels';scheduleSave();return renderMain()}
 }
-function openLevel(i){state.level=i;syncAvatarState();state.screen='level';scheduleSave();renderMain()}
+function openLevel(i){
+  state.level=i;
+  syncAvatarState();
+  const unlocked=avatarOutfits.find(outfit=>outfit.unlockLevel===i+1&&!state.seenAvatarOutfits.includes(outfit.id));
+  if(unlocked){state.seenAvatarOutfits.push(unlocked.id);state.pendingAvatarOutfit=unlocked.id}
+  state.screen='level';
+  scheduleSave();
+  renderMain();
+}
 function openModule(level,setup){
   state.level=level;
   syncAvatarState();
@@ -2868,10 +2995,10 @@ function renderCoursePhase(phase,index){
 function renderLevelMenu(box){
   updateHeader();
   const plan=continueJourneyPlan();
-  const avatar=activeAvatarSkin();
+  const avatar=activeAvatarOutfit();
   const intro=document.createElement('section');
   intro.className='card journey-hero';
-  intro.innerHTML=`<div class="journey-hero-copy"><div class="hero-kicker">日本語への道 · jouw route</div><div class="h1 continue-title">${plan.title}</div><div class="continue-detail">${plan.detail}</div><button class="btn primary continue-action" type="button">${plan.button}</button></div>${state.avatarEnabled?`<div class="journey-avatar"><div class="journey-avatar-name">${escapeHtml(avatarDisplayName())}</div>${avatarSpriteHtml(avatar)}<div class="journey-avatar-level">Lv. ${state.currentLevel}</div></div>`:'<span class="hero-mark" aria-hidden="true">旅</span>'}`;
+  intro.innerHTML=`<div class="journey-hero-copy"><div class="hero-kicker">日本語への道 · jouw route</div><div class="h1 continue-title">${plan.title}</div><div class="continue-detail">${plan.detail}</div><button class="btn primary continue-action" type="button">${plan.button}</button></div>${state.avatarEnabled?`<div class="journey-avatar"><div class="journey-avatar-name">${escapeHtml(avatarDisplayName())}</div>${avatarVisualHtml({pose:'welcome',outfit:avatar,priority:true})}<div class="journey-avatar-level"><span class="outfit-name">${escapeHtml(avatar.name)} · </span>Lv. ${state.currentLevel}</div></div>`:'<span class="hero-mark" aria-hidden="true">旅</span>'}`;
   intro.querySelector('.continue-action').onclick=plan.action;
   box.appendChild(intro);
 
@@ -2898,10 +3025,21 @@ function overviewAction(label,desc,fn,rank=null){
   d.onclick=fn;
   return d;
 }
+function renderAvatarUnlock(box){
+  const outfit=avatarOutfits.find(item=>item.id===state.pendingAvatarOutfit);
+  if(!outfit||!state.avatarEnabled)return;
+  const notice=document.createElement('section');
+  notice.className='avatar-assist avatar-assist--medium avatar-unlock';
+  notice.innerHTML=`<div class="avatar-assist-copy"><strong>Nieuw outfit vrijgespeeld: ${escapeHtml(outfit.name)}</strong><div class="small">Je kunt het bekijken of later verder leren.</div><div class="avatar-unlock-actions"><button class="btn tiny" type="button" data-avatar-unlock="view">Bekijken</button><button class="btn tiny" type="button" data-avatar-unlock="later">Later</button></div></div><div class="avatar-assist-figure" aria-hidden="true">${avatarVisualHtml({pose:'celebrate',outfit})}</div>`;
+  notice.querySelector('[data-avatar-unlock="view"]').onclick=()=>{state.pendingAvatarOutfit=null;state.progressTab='profile';scheduleSave();renderSession()};
+  notice.querySelector('[data-avatar-unlock="later"]').onclick=()=>{state.pendingAvatarOutfit=null;notice.remove()};
+  box.prepend(notice);
+}
 function renderLevelOverview(box,i){
   updateHeader();
   const [goal,how]=levelIntro(i);
-  box.innerHTML=`<section class="card"><div class="eyebrow">${levels[i][0]}</div><div class="h1">${levels[i][1]}</div><div class="overview-note"><div><strong>Wat leer je?</strong><br><span class="muted">${goal}</span></div><div><strong>Hoe?</strong><br><span class="muted">${how}</span></div></div></section><div id="levelOverviewList" class="module-list"></div>`;
+  box.innerHTML=`<section class="card"><div class="eyebrow">${levels[i][0]}</div><div class="h1">${levels[i][1]}</div><div class="overview-note"><div><strong>Wat leer je?</strong><br><span class="muted">${goal}</span></div><div><strong>Hoe?</strong><br><span class="muted">${how}</span></div></div>${avatarAssistHtml({pose:'explain',message:'Een kleine stap tegelijk.',detail:'Kies hieronder waarmee je wilt beginnen.'})}</section><div id="levelOverviewList" class="module-list"></div>`;
+  renderAvatarUnlock(box);
   const list=$('levelOverviewList');
   if(i===0){
     [['hiragana','Hiragana','46 basiskana leren en herkennen.'],['numbers','Cijfers','Teken ↔ waarde ↔ uitspraak en eenvoudig rekenen.'],['katakana','Katakana','Dezelfde klanken in een tweede schrift.']].forEach(([key,title,desc])=>{
@@ -3726,7 +3864,13 @@ function quizStudyMeta(cfg){
 }
 function startQuiz(cfg){beginStudySession(quizStudyMeta(cfg));state.lastConfig=cfg;state.quiz={...cfg,index:0,score:0,mistakes:[]};show('quiz');updateHeader();renderQuestion()}
 function currentQ(){return state.quiz.questions[state.quiz.index]}
-function renderQuestion(){const c=state.quiz,q=currentQ();(q.vocabIds||[]).forEach(recordVocabEncounter);$('quizTitle').textContent=c.title;$('quizMeta').textContent=c.official?'Deze toets kan de sessierank maximaal één stap verhogen.':'Vrij oefenen / snelle check · geen rankstap.';$('qNow').textContent=c.index+1;$('qTotal').textContent=c.questions.length;$('qBar').style.width=(c.index/c.questions.length*100)+'%';$('qScore').textContent='Goed: '+c.score;$('qFeedback').textContent='';$('qPrompt').style.fontSize='';const box=$('qChoices');box.className='choices';box.removeAttribute('style');box.innerHTML='';if(q.type==='kana')renderKanaQ(c,q,box);else if(q.type==='scriptReverse')renderScriptReverseQ(c,q,box);else if(q.type==='number')renderNumberQ(c,q,box);else if(q.type==='math')renderMathQ(c,q,box);else renderLessonQ(c,q,box)}
+function renderQuestion(){const c=state.quiz,q=currentQ();(q.vocabIds||[]).forEach(recordVocabEncounter);$('quizTitle').textContent=c.title;$('quizMeta').textContent=c.official?'Deze toets kan de sessierank maximaal één stap verhogen.':'Vrij oefenen / snelle check · geen rankstap.';$('qNow').textContent=c.index+1;$('qTotal').textContent=c.questions.length;$('qBar').style.width=(c.index/c.questions.length*100)+'%';$('qScore').textContent='Goed: '+c.score;$('qFeedback').textContent='';$('qPrompt').style.fontSize='';const box=$('qChoices');box.className='choices';box.removeAttribute('style');box.innerHTML='';if(q.type==='kana')renderKanaQ(c,q,box);else if(q.type==='scriptReverse')renderScriptReverseQ(c,q,box);else if(q.type==='number')renderNumberQ(c,q,box);else if(q.type==='math')renderMathQ(c,q,box);else renderLessonQ(c,q,box);updateQuizAvatar()}
+function updateQuizAvatar(ok=null){
+  const host=$('quizAvatarAssist');
+  if(!host)return;
+  if(ok===null){host.innerHTML=state.quiz?.index===0?avatarAssistHtml({pose:'tip',message:'Neem rustig de tijd.'}):'';return}
+  host.innerHTML=ok?(state.quiz.index%5===0||state.quiz.index===state.quiz.questions.length?avatarAssistHtml({pose:'celebrate',message:'Goed bezig!'}):''):avatarAssistHtml({pose:'encourage',message:'Geen probleem. Je leert bij elke poging.'});
+}
 function renderKanaQ(c,q,box){
   box.className='choices';
   const explicitDakuten=q.mode==='reverse'&&hasDakutenSourceContext(q);
@@ -3808,9 +3952,9 @@ function renderLessonQ(c,q,box){if(q.kind==='build')return renderBuilderQuizQ(c,
 function renderBuilderQuizQ(c,q,box){let selected=[];$('qHint').textContent=q.instruction||(q.accepted?.length>1?'Bouw één geldige zin; je hoeft niet alle blokken te gebruiken.':'Bouw met de blokken de getoonde zin.');$('qPrompt').style.fontSize='24px';$('qPrompt').textContent=q.prompt;box.className='';const draw=()=>{box.innerHTML='<div id="quizBuilderAnswer" class="builder-answer"></div><div id="quizBuilderBank" class="builder-bank"></div><button id="quizBuilderCheck" class="btn primary" style="width:100%;margin-top:10px">Controleer</button>';const answerBox=$('quizBuilderAnswer'),bank=$('quizBuilderBank');if(!selected.length)answerBox.innerHTML='<span class="builder-placeholder">Je zin verschijnt hier…</span>';selected.forEach((entry,i)=>{const b=document.createElement('button');b.className='sentence-chip placed';b.textContent=entry.text;b.onclick=()=>{selected.splice(i,1);draw()};answerBox.appendChild(b)});q.choices.forEach((text,pos)=>{if(selected.some(x=>x.pos===pos))return;const b=document.createElement('button');b.className='sentence-chip';b.textContent=text;b.onclick=()=>{selected.push({text,pos});draw()};bank.appendChild(b)});$('quizBuilderCheck').disabled=!selected.length;$('quizBuilderCheck').onclick=()=>{const made=selected.map(x=>x.text).join(' '),accepted=q.accepted?.length?q.accepted:[q.correct];answer(accepted.includes(made),$('quizBuilderCheck'),made||'geen antwoord')}};draw()}
 function addChoice(box,text,ok){const b=document.createElement('button');b.className='choice';b.dataset.correct=ok?'1':'0';b.textContent=text;b.onclick=()=>answer(ok,b,text);box.appendChild(b)}
 function qData(q){if(q.type==='kana')return{asked:q.mode==='forward'?q.item.front:hasDakutenSourceContext(q)?dakutenReversePrompt(q.item):q.item.back,correct:q.mode==='forward'?q.item.back:q.item.front,detail:`${q.item.base?`${q.item.base} → `:''}${q.item.front} ↔ ${q.item.back}`};if(q.type==='scriptReverse')return{asked:hasDakutenSourceContext(q)?dakutenReversePrompt(q.item):`${q.item.back} · ${q.script}`,correct:q.item.front,detail:`${q.item.base?`${q.item.base} → `:''}${q.item.front} ↔ ${q.item.back}`};if(q.type==='number')return{asked:fieldText(q.item,q.from),correct:fieldText(q.item,q.to),detail:`${q.item.symbol} ↔ ${q.item.valueText} ↔ ${q.item.reading}`};if(q.type==='math')return{asked:`${numberSymbol(q.a)} ${q.op} ${numberSymbol(q.b)}`,correct:numberSymbol(q.answer),detail:`${numberSymbol(q.answer)} ↔ ${q.answer} ↔ ${numberReading(q.answer)}`};return{asked:q.prompt,correct:q.correct,detail:q.correct}}
-function answer(ok,b,chosen){const c=state.quiz,q=currentQ();[...$('qChoices').querySelectorAll('button')].forEach(x=>x.disabled=true);recordQuestionMastery(q,ok,c);if(ok){c.score++;if(c.errorBankPractice)resolveErrorBank(c.source,q);b.classList.add('correct');$('qFeedback').textContent='✓ Goed';c.index++;setTimeout(nextQuestion,550)}else{const d=qData(q);c.mistakes.push({number:c.index+1,chosen,...d,source:c.source,question:q});[...$('qChoices').querySelectorAll('button')].forEach(x=>{if(x.dataset.correct==='1')x.classList.add('correct')});$('qFeedback').innerHTML=`Niet goed · <strong>${d.correct}</strong>`;c.index++;setTimeout(nextQuestion,1700)}$('qBar').style.width=(c.index/c.questions.length*100)+'%';scheduleSave()}
+function answer(ok,b,chosen){const c=state.quiz,q=currentQ();[...$('qChoices').querySelectorAll('button')].forEach(x=>x.disabled=true);recordQuestionMastery(q,ok,c);if(ok){c.score++;if(c.errorBankPractice)resolveErrorBank(c.source,q);b.classList.add('correct');$('qFeedback').textContent='✓ Goed';c.index++;setTimeout(nextQuestion,700)}else{const d=qData(q);c.mistakes.push({number:c.index+1,chosen,...d,source:c.source,question:q});[...$('qChoices').querySelectorAll('button')].forEach(x=>{if(x.dataset.correct==='1')x.classList.add('correct')});$('qFeedback').innerHTML=`Niet goed · <strong>${d.correct}</strong>`;c.index++;setTimeout(nextQuestion,1700)}updateQuizAvatar(ok);$('qBar').style.width=(c.index/c.questions.length*100)+'%';scheduleSave()}
 function nextQuestion(){if(state.quiz.index>=state.quiz.questions.length)finishQuiz();else renderQuestion()}
-function finishQuiz(){const c=state.quiz,acc=c.score/c.questions.length;c.passed=acc>=(c.rankThreshold??.9);let rr=null;if(c.official&&c.rankId)rr=applyRank(c.rankId,acc,c.rankThreshold??.9);if(state.lastErrors[c.source])state.lastErrors[c.source]=[...c.mistakes];mergeErrorBank(c.source,c.mistakes);const study=completeStudySession({status:'afgerond',result:{score:c.score,total:c.questions.length,accuracy:acc,passed:c.passed}});show('result');$('resultTitle').textContent=c.title;$('resultScore').textContent=`${c.score} / ${c.questions.length}`;$('resultStats').textContent=`Goed: ${c.score} · Fout: ${c.questions.length-c.score} · Nauwkeurigheid: ${pct(acc)}`;if(rr){$('resultRank').classList.remove('hidden');$('resultRank').innerHTML=`${c.rankId&&/-row-/.test(c.rankId)?'Rijrank':'Sessierank'}: <strong>${rankText(rr.next)}</strong>${rr.prev!==rr.next?` · vorige: ${rankText(rr.prev)}`:''}. Een succesvolle volledige toets stijgt maximaal één stap.`}else $('resultRank').classList.add('hidden');renderErrors(c.mistakes);$('practiceErrors').disabled=!c.mistakes.length;configureNext(c);if(study)renderStudyAdjustment(study.id);saveProgress()}
+function finishQuiz(){const c=state.quiz,acc=c.score/c.questions.length;c.passed=acc>=(c.rankThreshold??.9);let rr=null;if(c.official&&c.rankId)rr=applyRank(c.rankId,acc,c.rankThreshold??.9);if(state.lastErrors[c.source])state.lastErrors[c.source]=[...c.mistakes];mergeErrorBank(c.source,c.mistakes);const study=completeStudySession({status:'afgerond',result:{score:c.score,total:c.questions.length,accuracy:acc,passed:c.passed}});show('result');$('resultTitle').textContent=c.title;$('resultScore').textContent=`${c.score} / ${c.questions.length}`;$('resultStats').textContent=`Goed: ${c.score} · Fout: ${c.questions.length-c.score} · Nauwkeurigheid: ${pct(acc)}`;if(rr){$('resultRank').classList.remove('hidden');$('resultRank').innerHTML=`${c.rankId&&/-row-/.test(c.rankId)?'Rijrank':'Sessierank'}: <strong>${rankText(rr.next)}</strong>${rr.prev!==rr.next?` · vorige: ${rankText(rr.prev)}`:''}. Een succesvolle volledige toets stijgt maximaal één stap.`}else $('resultRank').classList.add('hidden');$('resultAvatarAssist').innerHTML=avatarAssistHtml({pose:c.passed?'celebrate':'encourage',size:'medium',message:c.passed?'Mooi gedaan!':'Je bent aan het leren.',detail:c.passed?'Neem je resultaat even in je op.':'Bekijk je fouten en probeer het opnieuw.'});renderErrors(c.mistakes);$('practiceErrors').disabled=!c.mistakes.length;configureNext(c);if(study)renderStudyAdjustment(study.id);saveProgress()}
 function renderErrors(errors){const box=$('errorList');box.innerHTML='';$('errorIntro').textContent=errors.length?'Score blijft staan. Bekijk kort wat misging.':'Geen fouten.';if(!errors.length){box.innerHTML='<div class="panel">Alles correct.</div>';return}errors.forEach(e=>{const d=document.createElement('div');d.className='error';d.innerHTML=`<div class="small">Vraag ${e.number}</div><div style="font-weight:750;margin-top:4px">${e.asked}</div><div style="margin-top:5px">Jouw antwoord: ${e.chosen}</div><div>Correct: <strong>${e.correct}</strong></div><div class="small" style="margin-top:4px">${e.detail}</div>`;box.appendChild(d)})}
 function configureNext(c){const b=$('nextBtn');b.classList.add('hidden');b.onclick=null;const n=c.next;if(!n)return;if(n.kind==='kanaStep'){const chunks=kanaChunks(kanaModules[n.key].rows[n.row]);if(n.step<=chunks.length){b.classList.remove('hidden');b.textContent='Volgende stap →';b.onclick=()=>{state.row[n.key]=n.row;state.step[n.key]=n.step;state.tabs[n.key]='learn';setMain()}}}if(n.kind==='kanaRow'&&n.row<kanaModules[n.key].rows.length){b.classList.remove('hidden');b.textContent=`Volgende rij · ${kanaModules[n.key].rows[n.row].name} →`;b.onclick=()=>{state.row[n.key]=n.row;state.step[n.key]=0;state.tabs[n.key]='learn';setMain()}}if(n.kind==='numberLesson'&&n.index<numberLessons.length){b.classList.remove('hidden');b.textContent='Volgende cijferles →';b.onclick=()=>{state.numberLesson=n.index;state.tabs.numbers='learn';setMain()}}if(n.kind==='dakStep'&&n.step<=2){b.classList.remove('hidden');b.textContent=n.step===2?'Naar volledige rij ›':'Naar volgende stap ›';b.onclick=()=>{state.dakStep=n.step;state.tabs.dakuten='learn';setMain()}}if(n.kind==='dakNextPattern'&&state.dakPattern<dakutenPatterns.length-1){b.classList.remove('hidden');b.textContent=`Volgend onderdeel: ${dakutenPatterns[state.dakPattern+1].name} ›`;b.onclick=()=>{state.dakPattern++;state.dakStep=0;state.tabs.dakuten='learn';setMain()}}if(n.kind==='langStep'){b.classList.remove('hidden');b.textContent=`Volgende stap · ${langStepDefs.find(x=>x[0]===n.step)?.[1]||'leerroute'} →`;b.onclick=()=>{if(n.complete)markLanguageStep(langLessons[n.index].id,n.complete);state.langLesson=n.index;state.langView='lesson';state.langStep=n.step;state.tabs.lang='learn';setMain()}}if(n.kind==='langLesson'){if(!c.passed)return;if(n.complete)markLanguageStep(langLessons[Math.max(0,n.index-1)].id,n.complete);b.classList.remove('hidden');if(n.index<langLessons.length){b.textContent=`Volgende les · ${langLessons[n.index].title} →`;b.onclick=()=>{state.langLesson=n.index;state.langView='lesson';state.langStep='overview';state.tabs.lang='learn';setMain()}}else{b.textContent='Naar Level 4 examen →';b.onclick=()=>{state.tabs.lang='exams';state.langView='list';setMain()}}}if(n.kind==='smallLesson'&&n.index<smallLessons.length){b.classList.remove('hidden');b.textContent=`Volgende les · ${smallLessons[n.index].title} →`;b.onclick=()=>{state.smallLesson=n.index;state.tabs.small='learn';setMain()}}if(n.kind==='advancedStep'){const course=advancedCourses[n.level],l=course.lessons[n.index];b.classList.remove('hidden');b.textContent='Volgende stap · zelf bouwen →';b.onclick=()=>{if(n.complete)markAdvancedStep(l.id,n.complete);state.advancedLesson[n.level]=n.index;state.advancedView[n.level]='lesson';state.advancedStep[n.level]=n.step;state.tabs.advanced='learn';setMain()}}if(n.kind==='advancedLesson'){if(!c.passed)return;const course=advancedCourses[n.level];markAdvancedStep(course.lessons[Math.max(0,n.index-1)].id,'check');b.classList.remove('hidden');if(n.index<course.lessons.length){b.textContent=`Volgende les · ${course.lessons[n.index].title} →`;b.onclick=()=>{state.advancedLesson[n.level]=n.index;state.advancedView[n.level]='lesson';state.advancedStep[n.level]='overview';state.tabs.advanced='learn';setMain()}}else{b.textContent=`Naar Level ${course.number} examen →`;b.onclick=()=>{state.tabs.advanced='exams';state.advancedView[n.level]='list';setMain()}}}}
 
@@ -3965,6 +4109,7 @@ function renderProgressLevelTab(box){
       <div class="progress-stat"><div class="value">${rankText(levelRank(current))}</div><div class="label">Huidige levelrank</div></div>
     </div>
     <div class="progress-note" style="margin-top:10px"><strong>Volgende aanbevolen stap:</strong> ${recommendedNextStep()}</div>
+    ${avatarAssistHtml({pose:finished?'confident':'encourage',message:finished?'Kijk hoe ver je al bent.':'Elke les telt mee.',detail:finished?`${finished} van ${activeLevels} levels met een rank.`:'Je voortgang groeit stap voor stap.'})}
   </section>
   <div id="progressLevelCards" class="stack"></div>`;
 
@@ -4188,7 +4333,7 @@ function renderFlashcardSession(){
 }
 function renderFlashcardSummary(){
   const s=state.flashcardSession,next=Object.entries(state.flashcardProgress.cards).filter(([,v])=>v.dueAt>Date.now()).sort((a,b)=>a[1].dueAt-b[1].dueAt)[0],total=s.knew+s.again;
-  $('flashcardView').innerHTML=`<section class="card"><div class="eyebrow">Sessie afgerond</div><div class="h2">Goed gedaan</div><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${total}</strong><span>Beoordelingen</span></div><div class="flashcard-stat"><strong>${s.knew}</strong><span>Wist ik</span></div><div class="flashcard-stat"><strong>${s.again}</strong><span>Komt eerder terug</span></div></div>${next?`<div class="flashcard-next-due" style="margin-top:12px">Eerstvolgende herhaling: <strong>${flashcardDueText(next[1].dueAt)}</strong> · ${escapeHtml(vocabById[next[0].split('::')[0]]?.kana||'woord')}</div>`:'<div class="small" style="margin-top:10px">Nieuwe woorden verschijnen meteen in je volgende selectie.</div>'}<div class="grid2" style="margin-top:13px"><button id="fcSummaryDone" class="btn">Terug naar selectie</button><button id="fcSummaryLevels" class="btn primary">Terug naar levels</button></div></section>`;
+  $('flashcardView').innerHTML=`<section class="card"><div class="eyebrow">Sessie afgerond</div><div class="h2">Goed gedaan</div><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${total}</strong><span>Beoordelingen</span></div><div class="flashcard-stat"><strong>${s.knew}</strong><span>Wist ik</span></div><div class="flashcard-stat"><strong>${s.again}</strong><span>Komt eerder terug</span></div></div>${next?`<div class="flashcard-next-due" style="margin-top:12px">Eerstvolgende herhaling: <strong>${flashcardDueText(next[1].dueAt)}</strong> · ${escapeHtml(vocabById[next[0].split('::')[0]]?.kana||'woord')}</div>`:'<div class="small" style="margin-top:10px">Nieuwe woorden verschijnen meteen in je volgende selectie.</div>'}${avatarAssistHtml({pose:'celebrate',message:'Mooi geoefend!',detail:'Je volgende herhaling staat klaar wanneer het tijd is.'})}<div class="grid2" style="margin-top:13px"><button id="fcSummaryDone" class="btn">Terug naar selectie</button><button id="fcSummaryLevels" class="btn primary">Terug naar levels</button></div></section>`;
   $('fcSummaryDone').onclick=()=>{state.flashcardSession=null;scheduleSave();renderFlashcardsScreen()};$('fcSummaryLevels').onclick=goToLearningHome;
 }
 function renderFlashcardsScreen(){
@@ -4284,6 +4429,39 @@ function renderAvatarSettings(box){
   syncAvatarState();
   const active=activeAvatarSkin(),unlocked=new Set(state.unlockedAvatarSkins),avatarName=avatarDisplayName();
   box.innerHTML=`<section class="card"><div class="between"><div><div class="h2">Persoonlijk profiel</div><div class="muted">Jouw naam en vaste reisgenoot voor toekomstige dialogen en rollenspellen.</div></div><div class="profile-avatar-preview"><div id="profilePreviewName" class="journey-avatar-name">${escapeHtml(avatarName)}</div>${avatarSpriteHtml(active,'avatar-settings-preview')}<div class="journey-avatar-level">Lv. ${state.currentLevel}</div></div></div><div class="profile-summary"><div class="profile-summary-item"><span class="small">Leerling</span><strong id="profileUserSummary">${escapeHtml(state.userName||'Nog niet ingesteld')}</strong></div><div class="profile-summary-item"><span class="small">Reisgenoot</span><strong id="profileCompanionName">${escapeHtml(avatarName)}</strong></div><div class="profile-summary-item"><span class="small">Level · rank</span><strong>Level ${state.currentLevel} · ${rankText(levelRank(state.currentLevel-1))}</strong></div></div><div class="profile-fields"><label class="profile-field"><span>Mijn naam</span><input id="profileUserName" class="profile-input" type="text" maxlength="40" autocomplete="name" placeholder="Bijvoorbeeld Sven" value="${escapeHtml(state.userName)}"></label><label class="profile-field"><span>Mijn naam in het Japans · optioneel</span><input id="profileUserNameJapanese" class="profile-input" type="text" maxlength="40" lang="ja" placeholder="Zelf bevestigde schrijfwijze" value="${escapeHtml(state.userNameJapanese)}"></label><label class="profile-field"><span>Naam avatar</span><input id="profileAvatarName" class="profile-input" type="text" maxlength="40" placeholder="${escapeHtml(avatarDefaults().name)}" value="${escapeHtml(avatarName)}"></label><label class="profile-field"><span>Avatarnaam in het Japans · optioneel</span><input id="profileAvatarNameJapanese" class="profile-input" type="text" maxlength="40" lang="ja" placeholder="${escapeHtml(avatarDefaults().japanese)}" value="${escapeHtml(state.avatarNameJapanese)}"></label></div><div class="small" style="margin-top:8px">Japanse schrijfwijzen worden niet automatisch geraden. Je kunt ze zelf bevestigen of later invullen.</div><div class="avatar-settings-grid"><div class="avatar-setting-row"><div><strong>Avatar tonen</strong><div class="small">Toon je reisgenoot op de Ga verder-kaart.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarEnabled?'active':''}" data-avatar-enabled="true">Aan</button><button class="avatar-choice ${!state.avatarEnabled?'active':''}" data-avatar-enabled="false">Uit</button></div></div><div class="avatar-setting-row"><div><strong>Avatarvariant</strong><div class="small">De variant, naam en skin blijven aparte instellingen.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarGender==='male'?'active':''}" data-avatar-gender="male">Man · Ren</button><button class="avatar-choice ${state.avatarGender==='female'?'active':''}" data-avatar-gender="female">Vrouw · Miku</button></div></div><div class="avatar-setting-row"><div><strong>Skin-modus</strong><div class="small">Auto volgt je huidige level; Handmatig blijft op jouw keuze.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarMode==='auto'?'active':''}" data-avatar-mode="auto">Auto</button><button class="avatar-choice ${state.avatarMode==='manual'?'active':''}" data-avatar-mode="manual">Handmatig</button></div></div></div><div class="progress-note" style="margin-top:12px">Een skin wordt vrijgespeeld zodra je dat level voor het eerst opent. Skins zijn alleen cosmetisch en veranderen je naam of voortgang niet.</div></section>${state.avatarMode==='manual'?'<section class="card"><div class="h2">Kies skin</div><div class="muted">Alleen skins van bereikte levels zijn selecteerbaar.</div><div id="avatarSkinGrid" class="avatar-skin-grid"></div></section>':''}`;
+  const preview=box.querySelector('.profile-avatar-preview .avatar-sprite');
+  if(preview)preview.outerHTML=avatarVisualHtml({pose:'greeting',extraClass:'avatar-settings-preview'});
+  const settings=box.querySelector('.avatar-settings-grid');
+  const modeRow=settings.querySelectorAll('.avatar-setting-row')[2];
+  modeRow.querySelector('strong').textContent='Outfit-modus';
+  modeRow.querySelector('.small').textContent='Auto volgt je huidige level; Handmatig gebruikt jouw keuze.';
+  box.querySelector('.progress-note').textContent='Outfits zijn cosmetisch en komen per vijf levels vrij. Je eerder vrijgespeelde skins blijven bewaard.';
+  if(state.avatarGender==='female'){
+    settings.insertAdjacentHTML('beforeend',`<div class="avatar-setting-row"><div><strong>Kapsel</strong><div class="small">Bij Starter kun je Miku ook met los haar of een staart zien.</div></div><div class="avatar-choice-group">${avatarHairstyles.map(hair=>`<button class="avatar-choice ${state.avatarHairstyle===hair.id?'active':''}" type="button" data-avatar-hair="${hair.id}">${hair.name}</button>`).join('')}</div></div>`);
+  }
+  const legacyGrid=$('avatarSkinGrid'),legacyCard=legacyGrid?.closest('.card');
+  const outfitCard=document.createElement('section');
+  outfitCard.className='card';
+  outfitCard.innerHTML='<div class="h2">Outfits</div><div class="muted">Vanaf level 6 komt er om de vijf levels een nieuwe stijl vrij. Tik op een vrijgespeeld outfit om handmatig te kiezen.</div><div class="avatar-outfit-grid"></div>';
+  if(legacyCard)legacyCard.before(outfitCard);else box.appendChild(outfitCard);
+  const outfitGrid=outfitCard.querySelector('.avatar-outfit-grid');
+  avatarOutfits.forEach(outfit=>{
+    const available=state.unlockedAvatarOutfits.includes(outfit.id),button=document.createElement('button');
+    button.type='button';button.disabled=!available;
+    button.className=`avatar-outfit-card ${state.avatarMode==='manual'&&state.selectedAvatarOutfit===outfit.id?'active':''} ${available?'':'locked'}`;
+    button.setAttribute('aria-label',`${outfit.name}, ${available?'vrijgespeeld':`vergrendeld tot level ${outfit.unlockLevel}`}`);
+    button.innerHTML=`${avatarVisualHtml({pose:'greeting',outfit,hairstyle:'bun'})}<strong>${escapeHtml(outfit.name)}</strong><span class="small">${available?'Vrijgespeeld':`Vanaf level ${outfit.unlockLevel}`}</span>`;
+    if(available)button.onclick=()=>{state.avatarMode='manual';state.selectedAvatarOutfit=outfit.id;state.selectedAvatarSkin=null;scheduleSave();renderAvatarSettings(box)};
+    outfitGrid.appendChild(button);
+  });
+  if(legacyGrid&&legacyCard){
+    const details=document.createElement('details');
+    details.className='card avatar-legacy-details';
+    details.open=!!state.selectedAvatarSkin&&!state.selectedAvatarOutfit;
+    details.innerHTML='<summary>Mijn eerder vrijgespeelde skins</summary><div class="small" style="margin-top:6px">Je bestaande skins en keuzes blijven beschikbaar.</div>';
+    details.appendChild(legacyGrid);
+    legacyCard.replaceWith(details);
+  }
   const bindProfileInput=(id,key,after)=>{$(id).oninput=event=>{state[key]=event.target.value.slice(0,40);if(typeof after==='function')after();scheduleSave()}};
   bindProfileInput('profileUserName','userName',()=>{$('profileUserSummary').textContent=state.userName.trim()||'Nog niet ingesteld'});
   bindProfileInput('profileUserNameJapanese','userNameJapanese');
@@ -4291,7 +4469,8 @@ function renderAvatarSettings(box){
   bindProfileInput('profileAvatarNameJapanese','avatarNameJapanese',()=>{state.avatarNameJapaneseCustom=true});
   root.querySelectorAll('[data-avatar-enabled]').forEach(b=>b.onclick=()=>{state.avatarEnabled=b.dataset.avatarEnabled==='true';scheduleSave();renderAvatarSettings(box)});
   root.querySelectorAll('[data-avatar-gender]').forEach(b=>b.onclick=()=>{setAvatarGender(b.dataset.avatarGender);scheduleSave();renderAvatarSettings(box)});
-  root.querySelectorAll('[data-avatar-mode]').forEach(b=>b.onclick=()=>{state.avatarMode=b.dataset.avatarMode;if(state.avatarMode==='manual'&&!state.selectedAvatarSkin)state.selectedAvatarSkin=avatarSkinId(state.currentLevel);scheduleSave();renderAvatarSettings(box)});
+  root.querySelectorAll('[data-avatar-hair]').forEach(b=>b.onclick=()=>{state.avatarHairstyle=b.dataset.avatarHair;scheduleSave();renderAvatarSettings(box)});
+  root.querySelectorAll('[data-avatar-mode]').forEach(b=>b.onclick=()=>{state.avatarMode=b.dataset.avatarMode;if(state.avatarMode==='manual'&&!state.selectedAvatarSkin&&!state.selectedAvatarOutfit)state.selectedAvatarOutfit=activeAvatarOutfit().id;scheduleSave();renderAvatarSettings(box)});
   const grid=$('avatarSkinGrid');
   if(grid)avatarSkins.forEach(skin=>{
     const available=unlocked.has(skin.id),b=document.createElement('button');
@@ -4299,7 +4478,7 @@ function renderAvatarSettings(box){
     b.disabled=!available;
     b.className=`avatar-skin-card ${state.selectedAvatarSkin===skin.id?'active':''} ${available?'':'locked'}`;
     b.innerHTML=`${avatarSpriteHtml(skin)}<span class="skin-label">Level ${skin.level}</span><span class="skin-state">${available?skin.name:'Nog vergrendeld'}</span>`;
-    if(available)b.onclick=()=>{state.selectedAvatarSkin=skin.id;scheduleSave();renderAvatarSettings(box)};
+    if(available)b.onclick=()=>{state.selectedAvatarSkin=skin.id;state.selectedAvatarOutfit=null;scheduleSave();renderAvatarSettings(box)};
     grid.appendChild(b);
   });
 }
