@@ -1082,6 +1082,11 @@ body[data-scene="classroom"]::after{
 .flashcard-front{min-height:210px;display:grid;place-items:center;text-align:center;padding:20px 8px}
 .flashcard-face-main{font-size:clamp(28px,8vw,46px);font-weight:800;line-height:1.25;overflow-wrap:anywhere}
 .flashcard-face-sub{font-size:14px;color:var(--muted);margin-top:8px}
+.flashcard-answer-options{display:grid;gap:7px;margin-top:12px}
+.flashcard-answer-choice{width:100%;min-height:44px;text-align:left;white-space:normal}
+.flashcard-avatar{margin:0 0 10px}
+.flashcard-avatar .avatar-assist{padding:4px 9px}
+.flashcard-avatar .avatar-assist-figure,.flashcard-avatar .avatar-figure,.flashcard-avatar .avatar-sprite{height:62px}
 .flashcard-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
 .flashcard-next-due{padding:10px;background:var(--panel);border-radius:11px}
 .card,
@@ -1581,12 +1586,22 @@ const avatarOutfits=[
   {id:'shipCrew',name:'Scheepscrew',unlockLevel:16,theme:'reis',skinId:'skin-8',asset:{female:'avatar-female_shipcrew_welcome_bun.webp',male:'avatar-male_shipcrew_welcome.webp'}}
 ];
 const avatarPoseAssets={
-  female:{
-    bun:{greeting:'avatar-female_starter_greeting_bun.webp',welcome:'avatar-female_starter_greeting_bun.webp',tip:'avatar-female_starter_tip_ponytail.webp',explain:'avatar-female_starter_tip_ponytail.webp',celebrate:'avatar-female_starter_celebrate_bun.webp',encourage:'avatar-female_starter_encourage_bun.webp'},
-    loose:{greeting:'avatar-female_starter_greeting_loose.webp',welcome:'avatar-female_starter_greeting_loose.webp'},
-    ponytail:{tip:'avatar-female_starter_tip_ponytail.webp',explain:'avatar-female_starter_tip_ponytail.webp'}
+  starter:{
+    female:{
+      bun:{greeting:'avatar-female_starter_greeting_bun.webp',tip:'avatar-female_starter_encourage_bun.webp',celebrate:'avatar-female_starter_celebrate_bun.webp',encourage:'avatar-female_starter_encourage_bun.webp'},
+      loose:{greeting:'avatar-female_starter_greeting_loose.webp',tip:'avatar-female_starter_tip_loose.webp',celebrate:'avatar-female_starter_celebrate_loose.webp'},
+      ponytail:{greeting:'avatar-female_starter_greeting_ponytail.webp',tip:'avatar-female_starter_tip_ponytail.webp',celebrate:'avatar-female_starter_celebrate_ponytail.webp'}
+    },
+    male:{greeting:'avatar-male_starter_greeting.webp',tip:'avatar-male_starter_tip.webp',celebrate:'avatar-male_starter_celebrate_jump.webp',encourage:'avatar-male_starter_encourage.webp'}
   },
-  male:{greeting:'avatar-male_starter_greeting.webp',welcome:'avatar-male_starter_greeting.webp',tip:'avatar-male_starter_tip.webp',explain:'avatar-male_starter_tip.webp',celebrate:'avatar-male_starter_celebrate.webp',encourage:'avatar-male_starter_encourage.webp'}
+  school:{
+    female:{
+      bun:{greeting:'avatar-female_school_greeting_bun.webp',tip:'avatar-female_school_tip_bun.webp',celebrate:'avatar-female_school_celebrate_bun.webp'},
+      loose:{greeting:'avatar-female_school_greeting_loose.webp',tip:'avatar-female_school_tip_loose.webp',celebrate:'avatar-female_school_celebrate_loose.webp'},
+      ponytail:{greeting:'avatar-female_school_greeting_ponytail.webp',tip:'avatar-female_school_tip_ponytail.webp',celebrate:'avatar-female_school_celebrate_ponytail.webp'}
+    },
+    male:{greeting:'avatar-male_school_greeting.webp',tip:'avatar-male_school_tip.webp',celebrate:'avatar-male_school_celebrate.webp'}
+  }
 };
 const avatarPoseIds=['neutral','greeting','explain','confident','tip','welcome','celebrate','encourage'];
 const avatarHairstyles=[{id:'bun',name:'Huidig kapsel'},{id:'loose',name:'Haar los'},{id:'ponytail',name:'Staart'}];
@@ -2499,13 +2514,20 @@ function avatarSpriteHtml(skin,extraClass=''){
   return`<div class="avatar-sprite ${extraClass}" style="${avatarSpriteStyle(skin)}" role="img" aria-label="${escapeHtml(avatarDisplayName())}, avatar-skin voor Level ${skin.level}: ${skin.name}"></div>`;
 }
 function avatarAssetFor(outfit,pose,gender=state.avatarGender,hairstyle=state.avatarHairstyle){
-  if(outfit.id!=='starter')return outfit.asset?.[gender]||null;
-  const assets=avatarPoseAssets[gender];
-  if(gender==='female'){
-    const hairAssets=assets[hairstyle]||assets.bun;
-    return hairAssets[pose]||hairAssets.greeting||hairAssets.tip||assets.bun[pose]||assets.bun.greeting;
-  }
-  return assets[pose]||assets.greeting;
+  const outfitAssets=avatarPoseAssets[outfit.id];
+  if(!outfitAssets)return outfit.asset?.[gender]||null;
+  const genderAssets=outfitAssets[gender];
+  const assets=gender==='female'?(genderAssets[hairstyle]||genderAssets.bun):genderAssets;
+  const preferred=pose==='welcome'?'greeting':pose==='explain'||pose==='confident'?'tip':pose;
+  return assets[preferred]||assets.greeting||outfit.asset?.[gender]||null;
+}
+const avatarMoodKey='language-journey-avatar-mood';
+let avatarMoodCursor=null;
+function nextAvatarMood(){
+  if(avatarMoodCursor===null){try{avatarMoodCursor=Number(localStorage.getItem(avatarMoodKey))||0}catch{avatarMoodCursor=0}}
+  avatarMoodCursor++;
+  try{localStorage.setItem(avatarMoodKey,String(avatarMoodCursor))}catch{}
+  return avatarMoodCursor%2?'greeting':'tip';
 }
 function avatarVisualHtml({pose='neutral',outfit=null,hairstyle=state.avatarHairstyle,extraClass='',decorative=true,priority=false}={}){
   const chosen=outfit||activeAvatarOutfit();
@@ -2691,7 +2713,7 @@ function loadProgress(){
     if(Array.isArray(s.introducedVocabIds))state.introducedVocabIds=s.introducedVocabIds.filter(id=>!!vocabById[id]);
     if(s.flashcardProgress&&typeof s.flashcardProgress==='object'&&s.flashcardProgress.cards&&typeof s.flashcardProgress.cards==='object')state.flashcardProgress={version:1,cards:Object.fromEntries(Object.entries(s.flashcardProgress.cards).filter(([key,value])=>/^(vocab-.+)::(jp-nl|nl-jp)$/.test(key)&&!!vocabById[key.split('::')[0]]&&value&&typeof value==='object').map(([key,value])=>[key,{dueAt:Number(value.dueAt)||0,intervalDays:Number(value.intervalDays)||0,repetitions:Math.max(0,Math.floor(Number(value.repetitions)||0)),lapses:Math.max(0,Math.floor(Number(value.lapses)||0)),lastReviewedAt:Number(value.lastReviewedAt)||0,lastGrade:value.lastGrade==='again'?'again':'knew'}]))};
     if(s.flashcardSelection&&typeof s.flashcardSelection==='object')state.flashcardSelection={lessonIds:Array.isArray(s.flashcardSelection.lessonIds)?s.flashcardSelection.lessonIds.filter(id=>vocabCatalog.some(v=>v.lessonId===id)):null,direction:['jp-nl','nl-jp','both'].includes(s.flashcardSelection.direction)?s.flashcardSelection.direction:'jp-nl'};
-    if(s.flashcardSession&&typeof s.flashcardSession==='object'&&Array.isArray(s.flashcardSession.queue))state.flashcardSession={queue:s.flashcardSession.queue.filter(x=>x&&vocabById[x.cardId]&&['jp-nl','nl-jp'].includes(x.direction)),position:Math.max(0,Math.floor(Number(s.flashcardSession.position)||0)),status:['active','paused','complete'].includes(s.flashcardSession.status)?s.flashcardSession.status:'paused',revealed:!!s.flashcardSession.revealed,knew:Math.max(0,Math.floor(Number(s.flashcardSession.knew)||0)),again:Math.max(0,Math.floor(Number(s.flashcardSession.again)||0)),requeued:Array.isArray(s.flashcardSession.requeued)?s.flashcardSession.requeued:[],startedAt:Number(s.flashcardSession.startedAt)||Date.now()};
+    if(s.flashcardSession&&typeof s.flashcardSession==='object'&&Array.isArray(s.flashcardSession.queue))state.flashcardSession={queue:s.flashcardSession.queue.filter(x=>x&&vocabById[x.cardId]&&['jp-nl','nl-jp'].includes(x.direction)).map(x=>({cardId:x.cardId,direction:x.direction,answerChoices:Array.isArray(x.answerChoices)?[...new Set(x.answerChoices.filter(v=>typeof v==='string'&&v.length<200))].slice(0,4):null,round:Math.max(0,Math.floor(Number(x.round)||0))})),position:Math.max(0,Math.floor(Number(s.flashcardSession.position)||0)),status:['active','paused','complete'].includes(s.flashcardSession.status)?s.flashcardSession.status:'paused',revealed:!!s.flashcardSession.revealed,knew:Math.max(0,Math.floor(Number(s.flashcardSession.knew)||0)),again:Math.max(0,Math.floor(Number(s.flashcardSession.again)||0)),requeued:Array.isArray(s.flashcardSession.requeued)?s.flashcardSession.requeued:[],feedback:s.flashcardSession.feedback&&['knew','again'].includes(s.flashcardSession.feedback.grade)?{grade:s.flashcardSession.feedback.grade,chosen:typeof s.flashcardSession.feedback.chosen==='string'?s.flashcardSession.feedback.chosen.slice(0,200):null}:null,startedAt:Number(s.flashcardSession.startedAt)||Date.now()};
     ['advancedLesson','advancedView','advancedStep','advancedStepProgress'].forEach(k=>{if(s[k]&&typeof s[k]==='object')Object.assign(state[k],s[k])});
     if(['hiragana','katakana'].includes(s.dakScript))state.dakScript=s.dakScript;
     if(['profile','progress','knowledge'].includes(s.progressTab))state.progressTab=s.progressTab;
@@ -3005,7 +3027,7 @@ function renderLevelMenu(box){
   const avatar=activeAvatarOutfit();
   const intro=document.createElement('section');
   intro.className='card journey-hero';
-  intro.innerHTML=`<div class="journey-hero-copy"><div class="hero-kicker">日本語への道 · jouw route</div><div class="h1 continue-title">${plan.title}</div><div class="continue-detail">${plan.detail}</div><button class="btn primary continue-action" type="button">${plan.button}</button></div>${state.avatarEnabled?`<div class="journey-avatar"><div class="journey-avatar-name">${escapeHtml(avatarDisplayName())}</div>${avatarVisualHtml({pose:'welcome',outfit:avatar,priority:true})}<div class="journey-avatar-level"><span class="outfit-name">${escapeHtml(avatar.name)} · </span>Lv. ${state.currentLevel}</div></div>`:'<span class="hero-mark" aria-hidden="true">旅</span>'}`;
+  intro.innerHTML=`<div class="journey-hero-copy"><div class="hero-kicker">日本語への道 · jouw route</div><div class="h1 continue-title">${plan.title}</div><div class="continue-detail">${plan.detail}</div><button class="btn primary continue-action" type="button">${plan.button}</button></div>${state.avatarEnabled?`<div class="journey-avatar"><div class="journey-avatar-name">${escapeHtml(avatarDisplayName())}</div>${avatarVisualHtml({pose:nextAvatarMood(),outfit:avatar,priority:true})}<div class="journey-avatar-level"><span class="outfit-name">${escapeHtml(avatar.name)} · </span>Lv. ${state.currentLevel}</div></div>`:'<span class="hero-mark" aria-hidden="true">旅</span>'}`;
   intro.querySelector('.continue-action').onclick=plan.action;
   box.appendChild(intro);
 
@@ -3045,7 +3067,7 @@ function renderAvatarUnlock(box){
 function renderLevelOverview(box,i){
   updateHeader();
   const [goal,how]=levelIntro(i);
-  box.innerHTML=`<section class="card"><div class="eyebrow">${levels[i][0]}</div><div class="h1">${levels[i][1]}</div><div class="overview-note"><div><strong>Wat leer je?</strong><br><span class="muted">${goal}</span></div><div><strong>Hoe?</strong><br><span class="muted">${how}</span></div></div>${avatarAssistHtml({pose:'explain',message:'Een kleine stap tegelijk.',detail:'Kies hieronder waarmee je wilt beginnen.'})}</section><div id="levelOverviewList" class="module-list"></div>`;
+  box.innerHTML=`<section class="card"><div class="eyebrow">${levels[i][0]}</div><div class="h1">${levels[i][1]}</div><div class="overview-note"><div><strong>Wat leer je?</strong><br><span class="muted">${goal}</span></div><div><strong>Hoe?</strong><br><span class="muted">${how}</span></div></div>${avatarAssistHtml({pose:nextAvatarMood(),message:'Een kleine stap tegelijk.',detail:'Kies hieronder waarmee je wilt beginnen.'})}</section><div id="levelOverviewList" class="module-list"></div>`;
   renderAvatarUnlock(box);
   const list=$('levelOverviewList');
   if(i===0){
@@ -3875,8 +3897,8 @@ function renderQuestion(){const c=state.quiz,q=currentQ();(q.vocabIds||[]).forEa
 function updateQuizAvatar(ok=null){
   const host=$('quizAvatarAssist');
   if(!host)return;
-  if(ok===null){host.innerHTML=state.quiz?.index===0?avatarAssistHtml({pose:'tip',message:'Neem rustig de tijd.'}):'';return}
-  host.innerHTML=ok?(state.quiz.index%5===0||state.quiz.index===state.quiz.questions.length?avatarAssistHtml({pose:'celebrate',message:'Goed bezig!'}):''):avatarAssistHtml({pose:'encourage',message:'Geen probleem. Je leert bij elke poging.'});
+  if(ok===null){host.innerHTML=avatarAssistHtml({pose:nextAvatarMood(),message:'Neem rustig de tijd.'});return}
+  host.innerHTML=ok?avatarAssistHtml({pose:'tip',message:'Goed bezig!'}):avatarAssistHtml({pose:'encourage',message:'Geen probleem. Je leert bij elke poging.'});
 }
 function renderKanaQ(c,q,box){
   box.className='choices';
@@ -4282,20 +4304,24 @@ function flashcardDueText(timestamp){
   return new Date(timestamp).toLocaleDateString('nl-NL',{day:'numeric',month:'short'});
 }
 function setFlashcardLessonSelection(ids){const all=new Set(vocabCatalog.map(v=>v.lessonId)),selected=new Set(ids);state.flashcardSelection.lessonIds=selected.size===all.size?null:[...selected];scheduleSave();renderFlashcardsScreen()}
+function flashcardCorrectAnswers(card,direction){const answers=direction==='jp-nl'?(card.meanings?.length?card.meanings:[card.meaning]):[card.kana];return[...new Set(answers.filter(x=>typeof x==='string'&&x.trim()))]}
+function flashcardAnswerChoices(card,direction){const answers=flashcardCorrectAnswers(card,direction),correct=shuffle(answers)[0]||card.meaning,candidates=[...new Set(vocabCatalog.filter(v=>v.id!==card.id).flatMap(v=>flashcardCorrectAnswers(v,direction)).filter(x=>x!==correct))];return shuffle([correct,...shuffle(candidates).slice(0,3)])}
 function startFlashcardSession(){
   const directions=flashcardDirections(),now=Date.now(),queue=[];
-  flashcardSelectedCards().forEach(card=>directions.forEach(direction=>{if(flashcardDue(flashcardRecord(card.id,direction),now))queue.push({cardId:card.id,direction})}));
+  flashcardSelectedCards().forEach(card=>directions.forEach(direction=>{if(flashcardDue(flashcardRecord(card.id,direction),now))queue.push({cardId:card.id,direction,answerChoices:flashcardAnswerChoices(card,direction),round:0})}));
   if(!queue.length)return;
-  state.flashcardSession={queue:shuffle(queue),position:0,status:'active',revealed:false,knew:0,again:0,requeued:[],startedAt:now};
+  const ordered=shuffle(queue).sort((a,b)=>(flashcardRecord(a.cardId,a.direction)?.repetitions||0)-(flashcardRecord(b.cardId,b.direction)?.repetitions||0));
+  state.flashcardSession={queue:ordered,position:0,status:'active',revealed:false,knew:0,again:0,requeued:[],feedback:null,startedAt:now};
   scheduleSave();renderFlashcardsScreen();
 }
 function pauseFlashcardSession(){if(!state.flashcardSession||state.flashcardSession.status!=='active')return;state.flashcardSession.status='paused';scheduleSave();renderFlashcardsScreen()}
 function resumeFlashcardSession(){if(!state.flashcardSession)return;state.flashcardSession.status='active';scheduleSave();renderFlashcardsScreen()}
 /* SRS: Again returns after 6 hours. Successful intervals progress 1, 3, 7 days,
    then double after each success, capped at 180 days. Directions keep separate records. */
-function flashcardRate(grade){
-  const session=state.flashcardSession;if(!session||session.status!=='active'||!session.revealed)return;
+function flashcardRate(grade,chosen=null){
+  const session=state.flashcardSession;if(!session||session.status!=='active'||!session.revealed||session.feedback)return;
   const item=session.queue[session.position],card=vocabById[item.cardId],key=flashcardProgressKey(item.cardId,item.direction),old=state.flashcardProgress.cards[key]||{repetitions:0,lapses:0,intervalDays:0},now=Date.now();
+  recordVocabEncounter(card.id);
   let repetitions=old.repetitions||0,intervalDays;
   if(grade==='knew'){
     intervalDays=repetitions===0?1:repetitions===1?3:repetitions===2?7:Math.min(180,Math.max(1,old.intervalDays||7)*2);
@@ -4309,12 +4335,12 @@ function flashcardRate(grade){
   }
   state.flashcardProgress.cards[key]={dueAt:now+intervalDays*86400000,intervalDays,repetitions,lapses:old.lapses||0,lastReviewedAt:now,lastGrade:grade};
   const repeatKey=key;
-  if(grade==='again'&&!session.requeued.includes(repeatKey)){session.requeued.push(repeatKey);session.queue.push({cardId:item.cardId,direction:item.direction})}
-  session.position++;
+  if(grade==='again'&&!session.requeued.includes(repeatKey)){session.requeued.push(repeatKey);session.queue.push({...item,round:0})}
+  session.feedback={grade,chosen:typeof chosen==='string'?chosen:null};
   session.revealed=false;
-  if(session.position>=session.queue.length)session.status='complete';
   scheduleSave();renderFlashcardsScreen();
 }
+function flashcardNextCard(){const session=state.flashcardSession;if(!session||!session.feedback)return;session.feedback=null;session.position++;session.revealed=false;if(session.position>=session.queue.length)session.status='complete';scheduleSave();renderFlashcardsScreen()}
 function renderFlashcardScope(box){
   const groups=flashcardGroups(),selected=flashcardSelectedLessons(),allLessonIds=[...new Set(vocabCatalog.map(v=>v.lessonId))],allSelected=allLessonIds.every(id=>selected.has(id));
   box.innerHTML=`<section class="card"><div class="between"><div><div class="h2">Kies je woorden</div><div class="muted">Kies één of meer levels en lessen. Ook toekomstige woorden zijn vrij te bekijken als voorproefje.</div></div><button id="fcSelectAll" class="btn tiny">${allSelected?'Alles deselecteren':'Alles kiezen'}</button></div><div class="flashcard-scope" style="margin-top:10px">${groups.map(group=>{const ids=group.lessons.map(x=>x.id),checked=ids.every(id=>selected.has(id));return`<section class="flashcard-level"><div class="flashcard-level-head"><label class="flashcard-check"><input type="checkbox" data-fc-level="${group.level}" ${checked?'checked':''}><strong>Level ${group.level}</strong></label><span class="small">${group.lessons.reduce((n,l)=>n+l.words.length,0)} woorden</span></div><div class="flashcard-lesson-list">${group.lessons.map(lesson=>`<label class="flashcard-check"><input type="checkbox" data-fc-lesson="${lesson.id}" ${selected.has(lesson.id)?'checked':''}><span>${lesson.title} <span class="muted">· ${lesson.words.length}</span></span></label>`).join('')}</div></section>`}).join('')}</div><label class="profile-field" style="margin-top:10px"><span>Oefenrichting</span><select id="fcDirection" class="select"><option value="jp-nl" ${state.flashcardSelection.direction==='jp-nl'?'selected':''}>Japans → Nederlands</option><option value="nl-jp" ${state.flashcardSelection.direction==='nl-jp'?'selected':''}>Nederlands → Japans</option><option value="both" ${state.flashcardSelection.direction==='both'?'selected':''}>Beide richtingen · apart herhaald</option></select></label></section>`;
@@ -4331,12 +4357,22 @@ function renderFlashcardSession(){
     $('flashcardView').innerHTML=`<section class="card"><div class="eyebrow">Sessie onderbroken</div><div class="h2">Je kaarten zijn bewaard</div><div class="muted">Je kunt verdergaan bij dezelfde kaart of later een nieuwe selectie starten.</div>${card?`<div class="flashcard-next-due" style="margin-top:10px">Volgende kaart: ${card.kana} · Level ${card.level} · ${card.lessonTitle}</div>`:''}<div class="grid2" style="margin-top:12px"><button id="fcResume" class="btn primary">Hervat sessie</button><button id="fcNew" class="btn">Nieuwe selectie</button></div></section>`;
     $('fcResume').onclick=resumeFlashcardSession;$('fcNew').onclick=()=>{state.flashcardSession=null;scheduleSave();renderFlashcardsScreen()};return;
   }
+  if(s.feedback)return renderFlashcardFeedback();
   if(s.position>=s.queue.length){s.status='complete';scheduleSave();return renderFlashcardSummary()}
-  const item=s.queue[s.position],card=vocabById[item.cardId],direction=item.direction,front=direction==='jp-nl'?card.kana:card.meaning,back=direction==='jp-nl'?card.meaning:card.kana,preview=flashcardPreview(card),record=flashcardRecord(card.id,direction),done=s.knew+s.again;if(direction==='jp-nl'||s.revealed)recordVocabEncounter(card.id);
-  $('flashcardView').innerHTML=`<section class="card"><div class="between"><div><div class="eyebrow">Vrij oefenen · Level ${card.level} · ${card.lessonTitle}</div><div class="small">Kaart ${Math.min(s.position+1,s.queue.length)} van ${s.queue.length} · ${done} beoordeeld</div></div>${preview?'<span class="rank">Voorproefje</span>':''}</div><div class="progress" style="margin-top:9px"><div style="width:${Math.min(100,done/Math.max(1,s.queue.length)*100)}%"></div></div></section><section class="card"><div class="flashcard-front"><div><div class="flashcard-face-main">${escapeHtml(front)}</div><div class="flashcard-face-sub">${direction==='jp-nl'?'Kies de Nederlandse betekenis':'Kies het Japanse woord in kana'}</div></div></div>${s.revealed?`<div class="notice" style="text-align:center"><div class="flashcard-face-main" style="font-size:clamp(24px,7vw,36px)">${escapeHtml(back)}</div>${card.romaji?`<div class="flashcard-face-sub">${escapeHtml(card.romaji)}</div>`:''}</div>`:`<button id="fcReveal" class="btn primary" style="width:100%">Toon antwoord</button>`}<div class="flashcard-actions" style="margin-top:12px">${s.revealed?'<button id="fcAgain" class="btn">Opnieuw oefenen · komt eerder terug</button><button id="fcKnew" class="btn primary">Ik wist het</button>':''}<button id="fcPause" class="btn" style="grid-column:1/-1">Onderbreek sessie</button></div>${record?`<div class="small" style="text-align:center;margin-top:9px">Vorige herhaling: ${flashcardDueText(record.dueAt)}</div>`:''}</section>`;
+  const item=s.queue[s.position],card=vocabById[item.cardId],direction=item.direction,front=direction==='jp-nl'?card.kana:card.meaning,back=direction==='jp-nl'?card.meaning:card.kana,preview=flashcardPreview(card),record=flashcardRecord(card.id,direction),done=s.knew+s.again,choices=item.answerChoices?.length?item.answerChoices:flashcardAnswerChoices(card,direction);if(direction==='jp-nl'||s.revealed)recordVocabEncounter(card.id);
+  $('flashcardView').innerHTML=`<section class="card"><div class="between"><div><div class="eyebrow">Vrij oefenen · Level ${card.level} · ${card.lessonTitle}</div><div class="small">Kaart ${Math.min(s.position+1,s.queue.length)} van ${s.queue.length} · ${done} beoordeeld</div></div>${preview?'<span class="rank">Voorproefje</span>':''}</div><div class="progress" style="margin-top:9px"><div style="width:${Math.min(100,done/Math.max(1,s.queue.length)*100)}%"></div></div></section><section class="card"><div class="flashcard-front"><div><div class="flashcard-face-main">${escapeHtml(front)}</div><div class="flashcard-face-sub">${direction==='jp-nl'?'Kies de Nederlandse betekenis':'Kies het Japanse woord in kana'}</div></div></div>${s.revealed?`<div class="notice" style="text-align:center"><div class="flashcard-face-main" style="font-size:clamp(24px,7vw,36px)">${escapeHtml(back)}</div>${card.romaji?`<div class="flashcard-face-sub">${escapeHtml(card.romaji)}</div>`:''}</div><div class="flashcard-actions" style="margin-top:12px"><button id="fcAgain" class="btn">Opnieuw oefenen · komt eerder terug</button><button id="fcKnew" class="btn primary">Ik wist het</button></div>`:`<div class="flashcard-answer-options"><div class="small">Kies je antwoord:</div>${choices.map((answer,index)=>`<button class="btn flashcard-answer-choice" data-fc-answer="${index}">${escapeHtml(answer)}</button>`).join('')}</div><button id="fcReveal" class="btn" style="width:100%;margin-top:9px">Toon het antwoord zonder te kiezen</button>`}<div class="flashcard-actions" style="margin-top:12px"><button id="fcPause" class="btn" style="grid-column:1/-1">Onderbreek sessie</button></div>${record?`<div class="small" style="text-align:center;margin-top:9px">Vorige herhaling: ${flashcardDueText(record.dueAt)}</div>`:''}</section>`;
+  $('flashcardView').querySelector('.flashcard-front').insertAdjacentHTML('afterend',`<div class="flashcard-avatar">${avatarAssistHtml({pose:nextAvatarMood(),message:s.revealed?'Hoe ging deze kaart?':'Denk rustig na over dit woord.'})}</div>`);
   if(!s.revealed)$('fcReveal').onclick=()=>{s.revealed=true;scheduleSave();renderFlashcardsScreen()};
+  if(!s.revealed)root.querySelectorAll('[data-fc-answer]').forEach(button=>button.onclick=()=>{const choice=choices[Number(button.dataset.fcAnswer)],correct=flashcardCorrectAnswers(card,direction).includes(choice);s.revealed=true;flashcardRate(correct?'knew':'again',choice)});
   if(s.revealed){$('fcAgain').onclick=()=>flashcardRate('again');$('fcKnew').onclick=()=>flashcardRate('knew')}
   $('fcPause').onclick=pauseFlashcardSession;
+}
+function renderFlashcardFeedback(){
+  const s=state.flashcardSession,item=s.queue[s.position],card=item&&vocabById[item.cardId];if(!card){s.feedback=null;return flashcardNextCard()}
+  const correct=item.direction==='jp-nl'?card.meaning:card.kana,front=item.direction==='jp-nl'?card.kana:card.meaning,feedback=s.feedback,known=feedback.grade==='knew';
+  $('flashcardView').innerHTML=`<section class="card"><div class="eyebrow">Kaart ${Math.min(s.position+1,s.queue.length)} · feedback</div><div class="h2">${known?'Goed!':'Nog eens oefenen'}</div><div class="flashcard-next-due" style="margin-top:10px"><div class="small">Vraag</div><div><strong>${escapeHtml(front)}</strong></div>${feedback.chosen?`<div class="small" style="margin-top:8px">Jouw keuze: ${escapeHtml(feedback.chosen)}</div>`:`<div class="small" style="margin-top:8px">Zelfbeoordeling: ${known?'Ik wist het':'Opnieuw oefenen'}</div>`}<div class="small" style="margin-top:8px">Juiste antwoord</div><div><strong>${escapeHtml(correct)}</strong></div>${item.direction==='jp-nl'&&card.romaji?`<div class="small">${escapeHtml(card.romaji)}</div>`:''}</div><div class="small" style="margin-top:10px">${known?`Deze kaart komt later terug (${flashcardDueText(flashcardRecord(card.id,item.direction)?.dueAt)}). Kaarten die je vaker goed hebt, schuiven verder naar achteren in de rij.`:'Je krijgt deze kaart later in deze sessie nog eens. Over ongeveer 6 uur staat hij weer gepland; na een fout komt hij vooraan in de herhaalvolgorde.'}</div><button id="fcNextCard" class="btn primary" style="width:100%;margin-top:12px">Volgende kaart</button></section>`;
+  $('fcNextCard').insertAdjacentHTML('beforebegin',`<div class="flashcard-avatar" style="margin-top:10px">${avatarAssistHtml({pose:known?'celebrate':'encourage',message:known?'Goed gedaan!':'Samen oefenen we verder.'})}</div>`);
+  $('fcNextCard').onclick=flashcardNextCard;
 }
 function renderFlashcardSummary(){
   const s=state.flashcardSession,next=Object.entries(state.flashcardProgress.cards).filter(([,v])=>v.dueAt>Date.now()).sort((a,b)=>a[1].dueAt-b[1].dueAt)[0],total=s.knew+s.again;
@@ -4348,7 +4384,7 @@ function renderFlashcardsScreen(){
   const box=$('flashcardView');
   if(state.flashcardSession&&['active','paused','complete'].includes(state.flashcardSession.status))return renderFlashcardSession();
   const cards=flashcardSelectedCards(),counts=flashcardCounts(cards),current=state.flashcardSession;
-  box.innerHTML=`<section class="card flashcard-intro"><div><div class="eyebrow">Vrijwillige woordherhaling</div><div class="h1">Flashcards</div><div class="muted">Kies woorden vooruit of herhaal wat aan de beurt is. Kaarten veranderen je lesvoortgang en ranks niet.</div></div><span class="rank">${vocabCatalog.length} woorden</span></section><section class="card"><div class="between"><div><div class="h2">Jouw selectie</div><div class="small">${counts.total} kaart${counts.total===1?'':'en'} · ${counts.ready} nu beschikbaar</div></div><button id="fcStart" class="btn primary" ${counts.ready?'':'disabled'}>Start sessie</button></div><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${counts.new}</strong><span>Nieuw · direct</span></div><div class="flashcard-stat"><strong>${counts.due}</strong><span>Aan de beurt</span></div><div class="flashcard-stat"><strong>${counts.mastered}</strong><span>Beheerst</span></div></div><div class="small" style="margin-top:8px">${counts.upcoming} kaart${counts.upcoming===1?' staat':'en staan'} later gepland. Een fout komt na ongeveer 6 uur terug; goede antwoorden schuiven naar 1, 3, 7 en daarna langere dagen.</div></section><div id="flashcardScope"></div>${current?.status==='paused'?'<section class="card"><div class="between"><div><strong>Je hebt een onderbroken sessie</strong><div class="small">Hervat bij dezelfde kaart.</div></div><button id="fcContinue" class="btn primary">Hervat</button></div></section>':''}<section class="card"><div class="h2">Zo werkt het herhalen</div><div class="small">Kijk naar de vraag, toon het antwoord en kies eerlijk. Een nieuw woord is meteen beschikbaar. Kaarten die nog niet in de les zijn behandeld, krijgen het label “Voorproefje”.</div></section>`;
+  box.innerHTML=`<section class="card flashcard-intro"><div><div class="eyebrow">Vrijwillige woordherhaling</div><div class="h1">Flashcards</div><div class="muted">Kies woorden vooruit of herhaal wat aan de beurt is. Kaarten veranderen je lesvoortgang en ranks niet.</div></div><span class="rank">${vocabCatalog.length} woorden</span></section><section class="card"><div class="between"><div><div class="h2">Jouw selectie</div><div class="small">${counts.total} kaart${counts.total===1?'':'en'} · ${counts.ready} nu beschikbaar</div></div><button id="fcStart" class="btn primary" ${counts.ready?'':'disabled'}>Start sessie</button></div><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${counts.new}</strong><span>Nieuw · direct</span></div><div class="flashcard-stat"><strong>${counts.due}</strong><span>Aan de beurt</span></div><div class="flashcard-stat"><strong>${counts.mastered}</strong><span>Beheerst</span></div></div><div class="small" style="margin-top:8px">${counts.upcoming} kaart${counts.upcoming===1?' staat':'en staan'} later gepland. Een fout komt na ongeveer 6 uur terug. Goede antwoorden plannen de herhaling steeds verder vooruit (1, 3, 7 dagen en daarna langer) en zetten die woorden later in de rij.</div></section><div id="flashcardScope"></div>${current?.status==='paused'?'<section class="card"><div class="between"><div><strong>Je hebt een onderbroken sessie</strong><div class="small">Hervat bij dezelfde kaart.</div></div><button id="fcContinue" class="btn primary">Hervat</button></div></section>':''}<section class="card"><div class="h2">Zo werkt het herhalen</div><div class="small">Kies een antwoord uit de opties, of toon eerst de oplossing en beoordeel jezelf. Nieuwe woorden zijn meteen beschikbaar. Woorden die je vaker goed hebt, komen later terug; woorden die lastig zijn komen eerder terug. Kaarten die nog niet in de les zijn behandeld, krijgen het label “Voorproefje”.</div></section>`;
   $('fcStart').onclick=startFlashcardSession;
   const continueButton=$('fcContinue');if(continueButton)continueButton.onclick=resumeFlashcardSession;
   renderFlashcardScope($('flashcardScope'));
@@ -4437,14 +4473,15 @@ function renderAvatarSettings(box){
   const active=activeAvatarSkin(),unlocked=new Set(state.unlockedAvatarSkins),avatarName=avatarDisplayName();
   box.innerHTML=`<section class="card"><div class="between"><div><div class="h2">Persoonlijk profiel</div><div class="muted">Jouw naam en vaste reisgenoot voor toekomstige dialogen en rollenspellen.</div></div><div class="profile-avatar-preview"><div id="profilePreviewName" class="journey-avatar-name">${escapeHtml(avatarName)}</div>${avatarSpriteHtml(active,'avatar-settings-preview')}<div class="journey-avatar-level">Lv. ${state.currentLevel}</div></div></div><div class="profile-summary"><div class="profile-summary-item"><span class="small">Leerling</span><strong id="profileUserSummary">${escapeHtml(state.userName||'Nog niet ingesteld')}</strong></div><div class="profile-summary-item"><span class="small">Reisgenoot</span><strong id="profileCompanionName">${escapeHtml(avatarName)}</strong></div><div class="profile-summary-item"><span class="small">Level · rank</span><strong>Level ${state.currentLevel} · ${rankText(levelRank(state.currentLevel-1))}</strong></div></div><div class="profile-fields"><label class="profile-field"><span>Mijn naam</span><input id="profileUserName" class="profile-input" type="text" maxlength="40" autocomplete="name" placeholder="Bijvoorbeeld Sven" value="${escapeHtml(state.userName)}"></label><label class="profile-field"><span>Mijn naam in het Japans · optioneel</span><input id="profileUserNameJapanese" class="profile-input" type="text" maxlength="40" lang="ja" placeholder="Zelf bevestigde schrijfwijze" value="${escapeHtml(state.userNameJapanese)}"></label><label class="profile-field"><span>Naam avatar</span><input id="profileAvatarName" class="profile-input" type="text" maxlength="40" placeholder="${escapeHtml(avatarDefaults().name)}" value="${escapeHtml(avatarName)}"></label><label class="profile-field"><span>Avatarnaam in het Japans · optioneel</span><input id="profileAvatarNameJapanese" class="profile-input" type="text" maxlength="40" lang="ja" placeholder="${escapeHtml(avatarDefaults().japanese)}" value="${escapeHtml(state.avatarNameJapanese)}"></label></div><div class="small" style="margin-top:8px">Japanse schrijfwijzen worden niet automatisch geraden. Je kunt ze zelf bevestigen of later invullen.</div><div class="avatar-settings-grid"><div class="avatar-setting-row"><div><strong>Avatar tonen</strong><div class="small">Toon je reisgenoot op de Ga verder-kaart.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarEnabled?'active':''}" data-avatar-enabled="true">Aan</button><button class="avatar-choice ${!state.avatarEnabled?'active':''}" data-avatar-enabled="false">Uit</button></div></div><div class="avatar-setting-row"><div><strong>Avatarvariant</strong><div class="small">De variant, naam en skin blijven aparte instellingen.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarGender==='male'?'active':''}" data-avatar-gender="male">Man · Ren</button><button class="avatar-choice ${state.avatarGender==='female'?'active':''}" data-avatar-gender="female">Vrouw · Miku</button></div></div><div class="avatar-setting-row"><div><strong>Skin-modus</strong><div class="small">Auto volgt je huidige level; Handmatig blijft op jouw keuze.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarMode==='auto'?'active':''}" data-avatar-mode="auto">Auto</button><button class="avatar-choice ${state.avatarMode==='manual'?'active':''}" data-avatar-mode="manual">Handmatig</button></div></div></div><div class="progress-note" style="margin-top:12px">Een skin wordt vrijgespeeld zodra je dat level voor het eerst opent. Skins zijn alleen cosmetisch en veranderen je naam of voortgang niet.</div></section>${state.avatarMode==='manual'?'<section class="card"><div class="h2">Kies skin</div><div class="muted">Alleen skins van bereikte levels zijn selecteerbaar.</div><div id="avatarSkinGrid" class="avatar-skin-grid"></div></section>':''}`;
   const preview=box.querySelector('.profile-avatar-preview .avatar-sprite');
-  if(preview)preview.outerHTML=avatarVisualHtml({pose:'greeting',extraClass:'avatar-settings-preview'});
+  if(preview)preview.outerHTML=avatarVisualHtml({pose:nextAvatarMood(),extraClass:'avatar-settings-preview'});
   const settings=box.querySelector('.avatar-settings-grid');
+  settings.querySelector('.avatar-setting-row .small').textContent='Toon je reisgenoot bij menu, oefening en voortgang.';
   const modeRow=settings.querySelectorAll('.avatar-setting-row')[2];
   modeRow.querySelector('strong').textContent='Outfit-modus';
   modeRow.querySelector('.small').textContent='Auto volgt je huidige level; Handmatig gebruikt jouw keuze.';
   box.querySelector('.progress-note').textContent='Outfits zijn cosmetisch en komen per vijf levels vrij. Je eerder vrijgespeelde skins blijven bewaard.';
   if(state.avatarGender==='female'){
-    settings.insertAdjacentHTML('beforeend',`<div class="avatar-setting-row"><div><strong>Kapsel</strong><div class="small">Bij Starter kun je Miku ook met los haar of een staart zien.</div></div><div class="avatar-choice-group">${avatarHairstyles.map(hair=>`<button class="avatar-choice ${state.avatarHairstyle===hair.id?'active':''}" type="button" data-avatar-hair="${hair.id}">${hair.name}</button>`).join('')}</div></div>`);
+    settings.insertAdjacentHTML('beforeend',`<div class="avatar-setting-row"><div><strong>Kapsel</strong><div class="small">Kies Miku's kapsel; dit blijft zichtbaar in Starter en School.</div></div><div class="avatar-choice-group">${avatarHairstyles.map(hair=>`<button class="avatar-choice ${state.avatarHairstyle===hair.id?'active':''}" type="button" data-avatar-hair="${hair.id}">${hair.name}</button>`).join('')}</div></div>`);
   }
   const legacyGrid=$('avatarSkinGrid'),legacyCard=legacyGrid?.closest('.card');
   const outfitCard=document.createElement('section');
@@ -4476,7 +4513,7 @@ function renderAvatarSettings(box){
   bindProfileInput('profileAvatarNameJapanese','avatarNameJapanese',()=>{state.avatarNameJapaneseCustom=true});
   root.querySelectorAll('[data-avatar-enabled]').forEach(b=>b.onclick=()=>{state.avatarEnabled=b.dataset.avatarEnabled==='true';scheduleSave();renderAvatarSettings(box)});
   root.querySelectorAll('[data-avatar-gender]').forEach(b=>b.onclick=()=>{setAvatarGender(b.dataset.avatarGender);scheduleSave();renderAvatarSettings(box)});
-  root.querySelectorAll('[data-avatar-hair]').forEach(b=>b.onclick=()=>{state.avatarHairstyle=b.dataset.avatarHair;scheduleSave();renderAvatarSettings(box)});
+  root.querySelectorAll('[data-avatar-hair]').forEach(b=>b.onclick=()=>{state.avatarHairstyle=b.dataset.avatarHair;if(state.avatarMode==='manual'&&state.selectedAvatarSkin&&!state.selectedAvatarOutfit){state.selectedAvatarOutfit=activeAvatarOutfit().id;state.selectedAvatarSkin=null}scheduleSave();renderAvatarSettings(box)});
   root.querySelectorAll('[data-avatar-mode]').forEach(b=>b.onclick=()=>{state.avatarMode=b.dataset.avatarMode;if(state.avatarMode==='manual'&&!state.selectedAvatarSkin&&!state.selectedAvatarOutfit)state.selectedAvatarOutfit=activeAvatarOutfit().id;scheduleSave();renderAvatarSettings(box)});
   const grid=$('avatarSkinGrid');
   if(grid)avatarSkins.forEach(skin=>{
@@ -4597,7 +4634,7 @@ function renderStudyActivities(box){
 }
 function setStudyDisclosure(buttonId,panelId,open){const button=$(buttonId),panel=$(panelId);if(!button||!panel)return;button.setAttribute('aria-expanded',String(open));panel.hidden=!open}
 function bindStudyDisclosure(buttonId,panelId){const button=$(buttonId);if(button)button.onclick=()=>setStudyDisclosure(buttonId,panelId,button.getAttribute('aria-expanded')!=='true')}
-function renderProgressSectionSafely(hostId,label,render){try{render()}catch(error){console.error(`Voortgangsonderdeel niet geladen: ${label}`,error);const host=$(hostId);if(host)host.innerHTML=`<div class="panel" role="alert">${label} kon niet worden geladen. Je opgeslagen voortgang is behouden.</div>`}}
+function renderProgressSectionSafely(hostId,label,render){try{render()}catch(error){console.error(`Voortgangsonderdeel niet geladen: ${label}`,error);const host=$(hostId);if(host){host.dataset.renderError=String(error?.message||error);host.innerHTML=`<div class="panel" role="alert">${label} kon niet worden geladen. Je opgeslagen voortgang is behouden.</div>`}}}
 function renderProgressDashboard(box){
   const sessions=studySessions(),totals=studyTotals(sessions),groups=[['exam','Examens'],['practice','Oefenen'],['app','App-lessen']],recent=[...sessions].sort((a,b)=>new Date(b.startedAt)-new Date(a.startedAt));
   box.innerHTML=`${legacyStudyNotice()}<section class="card"><div class="between"><div><div class="h2">Voortgang</div><div class="muted">Effectieve tijd is leidend; studietijd verandert geen rank of mastery.</div></div><strong>${formatDuration(totals.total)}</strong></div><div class="category-breakdown">${groups.map(([key,label])=>`<div class="category-bar"><span>${label}</span><div class="category-bar-track"><span style="width:${totals.total?((totals.byCategory[key]||0)/totals.total*100):0}%"></span></div><strong>${formatDuration(totals.byCategory[key]||0,true)}</strong></div>`).join('')}</div></section><section class="card"><div class="h2">Studietijd door de tijd</div>${studyLineChart(sessions)}</section><div id="knowledgeGrowth"></div><section class="card study-disclosure-card"><button id="recentActivitiesToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="recentActivitiesPanel"><span class="h2">Recente activiteiten (${sessions.length})</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="recentActivitiesPanel" class="study-disclosure-panel" hidden><div class="small">Nieuwste eerst · ${Math.min(state.progressActivityLimit,recent.length)} van ${recent.length}</div><div id="recentActivities" class="stack" style="margin-top:8px"></div><button id="moreActivities" class="btn tiny" style="width:100%;margin-top:8px" ${recent.length>state.progressActivityLimit?'':'hidden'}>Meer tonen</button><button id="activityManagerToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="activityManagerPanel" style="margin-top:14px"><span class="small">Activiteiten beheren en geschiedenis filteren</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="activityManagerPanel" class="study-disclosure-panel" hidden><div id="activityManager"></div></div></div></section><section class="card study-disclosure-card"><button id="studyAnalysisToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="studyAnalysisPanel"><span class="h2">Urenanalyse</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="studyAnalysisPanel" class="study-disclosure-panel" hidden><div id="studyAnalysisBody"></div></div></section><section class="card study-disclosure-card"><button id="studyTimelineToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="studyTimelinePanel"><span class="h2">Tijdlijn</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="studyTimelinePanel" class="study-disclosure-panel" hidden><div id="studyTimelineBody"></div></div></section>`;
