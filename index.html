@@ -1343,7 +1343,11 @@ body[data-scene="classroom"]::after{
 .phase-progress{height:7px;margin-top:10px;border-radius:999px;background:var(--panel);overflow:hidden}
 .phase-progress>div{height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--accent),#e68b72)}
 .phase-details{padding:0 14px 15px}
+.phase-intro{display:flex;align-items:center;gap:12px}
 .phase-goal{padding:10px 11px;border-radius:12px;background:var(--panel);font-size:13px}
+.phase-intro .phase-goal{flex:1;min-width:0}
+.phase-avatar{width:66px;height:100px;flex:0 0 66px;display:grid;place-items:end center;overflow:hidden}
+.phase-avatar .avatar-figure,.phase-avatar .avatar-sprite{width:66px;height:100px;filter:none}
 .phase-levels{margin-top:10px}
 .phase-level-card.placeholder{opacity:.82;border-style:dashed;cursor:default}
 .phase-level-card .level-status{margin-top:auto;font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
@@ -1451,6 +1455,8 @@ body[data-scene="journey"][data-view="main"] #mainView{
   .course-phase-summary{padding:14px 48px 13px 13px}
   .phase-title{font-size:18px}
   .phase-details{padding:0 10px 12px}
+  .phase-avatar{width:50px;height:76px;flex-basis:50px}
+  .phase-avatar .avatar-figure,.phase-avatar .avatar-sprite{width:50px;height:76px}
   .milestone-grid{grid-template-columns:1fr}
   #quizView .card,#resultView .card{background:rgba(255,255,255,.9)}
 }
@@ -1562,7 +1568,7 @@ body[data-scene="journey"][data-view="main"] #mainView{
   <div class="between" style="align-items:center">
     <div class="header-left">
       <button id="navBack" class="nav-back hidden" type="button" aria-label="Terug">←</button>
-      <button id="navHome" class="nav-back hidden" type="button" aria-label="Cursus-home" title="Cursus-home">⌂</button>
+      <button id="navHome" class="nav-back hidden" type="button" aria-label="Verder leren" title="Verder leren">⌂</button>
       <div class="header-copy">
         <div id="headerEyebrow" class="eyebrow">日本語</div>
         <div id="headerTitle" class="h1">Language Journey</div>
@@ -2795,10 +2801,10 @@ function updateHeader(){
   const back=$('navBack'),home=$('navHome'),ey=$('headerEyebrow'),title=$('headerTitle'),learn=$('learnNav'),cards=$('flashcardsNav'),progress=$('sessionBtn');
   const progressOpen=!$('sessionView').classList.contains('hidden');
   const cardsOpen=!$('flashcardView').classList.contains('hidden')||state.screen==='flashcards';
-  learn.classList.toggle('active',!progressOpen&&!cardsOpen);
+  learn.classList.toggle('active',!progressOpen&&!cardsOpen&&state.screen!=='home');
   cards.classList.toggle('active',cardsOpen&&!progressOpen);
   progress.classList.toggle('active',progressOpen);
-  home.classList.toggle('hidden',!progressOpen&&state.screen!=='home'&&state.screen!=='levels'&&state.screen!=='flashcards');
+  home.classList.remove('hidden');
   ey.classList.add('hidden');title.classList.add('hidden');
   if(cardsOpen&&!progressOpen){
     back.classList.add('hidden');
@@ -2972,7 +2978,7 @@ function renderCoursePhase(phase,index){
   details.className='course-phase';
   if(phase.status==='active')details.open=true;
   const key=`course.${state.courseId}.phase.${phase.id}`,phaseTitle=t(`${key}.title`);
-  details.innerHTML=`<summary class="course-phase-summary"><div class="phase-kicker">${phaseTitle}</div><div class="phase-title">${t(`${key}.subtitle`)}</div><div class="phase-subtitle">${t(`${key}.description`)}</div><div class="phase-meta"><span>Level ${phase.startLevel}–${phase.endLevel}</span><span>${phase.status==='active'?t('levels.ranks',{done:p.done,total:p.total}):phase.status==='planned'?t('levels.planned'):t('levels.concept')}</span>${p.current?`<span>${t('levels.now',{number:p.current.number,total:p.total})}</span>`:''}</div><div class="phase-progress"><div style="width:${p.pct}%"></div></div></summary><div class="phase-details"><div class="phase-goal"><strong>${t('levels.goal')}</strong><div class="small" style="margin-top:4px">${t(`${key}.goal`)}</div></div><div class="level-menu-grid phase-levels" role="region" aria-label="${phaseTitle}"></div></div>`;
+  details.innerHTML=`<summary class="course-phase-summary"><div class="phase-kicker">${phaseTitle}</div><div class="phase-title">${t(`${key}.subtitle`)}</div><div class="phase-subtitle">${t(`${key}.description`)}</div><div class="phase-meta"><span>Level ${phase.startLevel}–${phase.endLevel}</span><span>${phase.status==='active'?t('levels.ranks',{done:p.done,total:p.total}):phase.status==='planned'?t('levels.planned'):t('levels.concept')}</span>${p.current?`<span>${t('levels.now',{number:p.current.number,total:p.total})}</span>`:''}</div><div class="phase-progress"><div style="width:${p.pct}%"></div></div></summary><div class="phase-details"><div class="phase-intro"><div class="phase-goal"><strong>${t('levels.goal')}</strong><div class="small" style="margin-top:4px">${t(`${key}.goal`)}</div></div>${state.avatarEnabled?`<div class="phase-avatar" aria-hidden="true">${avatarVisualHtml({pose:'greeting'})}</div>`:''}</div><div class="level-menu-grid phase-levels" role="region" aria-label="${phaseTitle}"></div></div>`;
   const grid=details.querySelector('.phase-levels');
   phase.levels.forEach(level=>grid.appendChild(phaseLevelCard(level)));
   addDesktopSliderControls(grid,phaseTitle);
@@ -4391,7 +4397,7 @@ function renderFlashcardSummary(){
   const next=Object.entries(state.flashcardProgress.cards).filter(([key,value])=>selected.has(key.split('::')[0])&&directions.has(key.split('::')[1])&&value.dueAt>Date.now()).sort((a,b)=>a[1].dueAt-b[1].dueAt)[0],total=s.knew+s.again,free=s.mode==='free';
   const stats=free?`<div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${s.viewed||0}</strong><span>Bekeken</span></div><div class="flashcard-stat"><strong>${s.skipped||0}</strong><span>Overgeslagen</span></div><div class="flashcard-stat"><strong>0</strong><span>SRS-beoordelingen</span></div></div>`:`<div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${total}</strong><span>Beoordelingen</span></div><div class="flashcard-stat"><strong>${s.knew}</strong><span>Wist ik</span></div><div class="flashcard-stat"><strong>${s.again}</strong><span>Komt eerder terug</span></div></div><div class="small" style="margin-top:6px">${s.skipped||0} overgeslagen · niet meegenomen in SRS.</div>`;
   $('flashcardView').innerHTML=`<section class="card"><div class="eyebrow">Sessie afgerond · ${free?'vrije oefening':'SRS-herhaling'}</div><div class="h2">Goed gedaan</div>${stats}${next?`<div class="flashcard-next-due" style="margin-top:12px">Eerstvolgende herhaling: <strong>${flashcardDueText(next[1].dueAt)}</strong> · ${escapeHtml(vocabById[next[0].split('::')[0]]?.kana||'woord')}</div>`:'<div class="small" style="margin-top:10px">Nieuwe woorden verschijnen meteen in je volgende selectie.</div>'}${avatarAssistHtml({pose:'celebrate',message:'Mooi geoefend!',detail:free?'Vrij oefenen heeft je SRS-planning niet aangepast.':'Je volgende herhaling staat klaar wanneer het tijd is.'})}<div class="grid2" style="margin-top:13px"><button id="fcSummaryDone" class="btn">Terug naar selectie</button><button id="fcSummaryLevels" class="btn primary">Terug naar levels</button></div></section>`;
-  $('fcSummaryDone').onclick=()=>{state.flashcardSession=null;scheduleSave();renderFlashcardsScreen()};$('fcSummaryLevels').onclick=()=>{state.flashcardSession=null;scheduleSave();goToLearningHome()};
+  $('fcSummaryDone').onclick=()=>{state.flashcardSession=null;scheduleSave();renderFlashcardsScreen()};$('fcSummaryLevels').onclick=()=>{state.flashcardSession=null;scheduleSave();goToLevels()};
 }
 function renderFlashcardsScreen(){
   show('flashcards');document.body.dataset.scene='journey';updateHeader();
@@ -4670,8 +4676,14 @@ function goToLearningHome(){
   scheduleSave();
   renderMain();
 }
+function goToLevels(){
+  if(state.studyTracker.active)completeStudySession({status:'verlaten'});
+  state.screen='levels';
+  scheduleSave();
+  renderMain();
+}
 $('sessionBtn').onclick=toggleProgress;
-$('learnNav').onclick=goToLearningHome;
+$('learnNav').onclick=goToLevels;
 $('flashcardsNav').onclick=openFlashcards;
 $('sessionBack').onclick=navigateBack;
 $('navBack').onclick=navigateBack;
