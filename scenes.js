@@ -4,10 +4,11 @@
     journey:{titleKey:'location.journey',arrival:'assets/japan-journey-home.webp',interior:'assets/japan-journey-home.webp',bodyScene:'journey'},
     school:{titleKey:'location.school',arrival:'assets/scene-school-arrival.webp',interior:'assets/anime-classroom.webp',bodyScene:'classroom'},
     home:{titleKey:'location.home',arrival:'assets/scene-home-arrival.webp',interior:'assets/scene-home-interior.webp',bodyScene:'home'},
-    market:{titleKey:'location.market',arrival:'assets/scene-market-arrival.webp',interior:'assets/scene-market-interior.webp',bodyScene:'market'}
+    market:{titleKey:'location.market',arrival:'assets/scene-market-arrival.webp',interior:'assets/scene-market-interior.webp',bodyScene:'market'},
+    airport:{titleKey:'location.airport',arrival:'assets/scene-airport-arrival.png',interior:'assets/scene-airport-interior.png',bodyScene:'airport'}
   };
-  const levelThemes=['school','school','school','school','school','home','market','journey','journey','market'];
-  const moduleThemes={family:'home',supermarket:'market'};
+  const levelThemes=['school','school','school','school','school','home','market','journey','journey','market','market','airport'];
+  const moduleThemes={family:'home',supermarket:'market',airport:'airport'};
   const imageCache=new Map();
   let activeToken=0,enterTimer=null,hideTimer=null;
   function resolve({level,moduleId}={}){

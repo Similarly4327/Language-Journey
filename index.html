@@ -1608,7 +1608,7 @@ body[data-scene="journey"][data-view="main"] #mainView{
 <script>
 (() => {
 const platform=window.LanguageJourneyPlatform,preferences=platform.preferences(),i18n=window.LanguageJourneyI18n,scenes=window.LanguageJourneyScenes,navigation=window.LanguageJourneyNavigation;
-const {levels,rowNames,hira,kata,kanaClusters,digitData,numberLessons,dakutenPatterns,dakutenClusters,langLessons,smallLessons,advancedCourses,level4LessonMetadata,level4Didactics,coursePhases,journeyMilestones,languageSkills,profileDialogueTemplates,vocabCatalog,vocabById}=platform.content(preferences.courseId);
+const {levels,rowNames,hira,kata,kanaClusters,digitData,numberLessons,dakutenPatterns,dakutenClusters,langLessons,smallLessons,advancedCourses,thematicCourses,level4LessonMetadata,level4Didactics,coursePhases,journeyMilestones,languageSkills,profileDialogueTemplates,vocabCatalog,vocabById}=platform.content(preferences.courseId);
 const makeRows=raw=>raw.map((kana,i)=>({name:rowNames[i],kana})),kanaModules={hiragana:{label:'Hiragana',rows:makeRows(hira)},katakana:{label:'Katakana',rows:makeRows(kata)}};
 const basicSymbols={0:'〇',1:'一',2:'二',3:'三',4:'四',5:'五',6:'六',7:'七',8:'八',9:'九'},basicRead={0:'zero',1:'ichi',2:'ni',3:'san',4:'yon',5:'go',6:'roku',7:'nana',8:'hachi',9:'kyū'},range=(a,b)=>Array.from({length:b-a+1},(_,i)=>a+i);
 function numberSymbol(n){if(n===0)return'〇';if(n<=10)return digitData[n].symbol;if(n<20)return'十'+basicSymbols[n-10];if(n<100){const t=Math.floor(n/10),u=n%10;return basicSymbols[t]+'十'+(u?basicSymbols[u]:'')}if(n<1000){const h=Math.floor(n/100),r=n%100;return(h===1?'':basicSymbols[h])+'百'+(r?numberSymbol(r):'')}if(n<10000){const t=Math.floor(n/1000),r=n%1000;return(t===1?'':basicSymbols[t])+'千'+(r?numberSymbol(r):'')}return n===10000?'一万':String(n)}
@@ -1631,6 +1631,7 @@ const avatarOutfits=[
   {id:'starter',name:'Starter',unlockLevel:1,theme:'basis',skinId:'skin-1',asset:{female:'avatar-female_starter_greeting_bun.webp',male:'avatar-male_starter_greeting.webp'}},
   {id:'school',name:'School',unlockLevel:6,theme:'school',skinId:'skin-2',asset:{female:'avatar-female_school_greeting_bun.webp',male:'avatar-male_school_greeting.webp'}},
   {id:'supermarket',name:'Supermarkt',unlockLevel:11,theme:'winkel',skinId:'skin-5',asset:{female:'avatar-female_supermarket_explain_bun.webp',male:'avatar-male_supermarket_explain.webp'}},
+  {id:'airport',name:'Luchthavenreiziger',unlockLevel:12,theme:'luchthaven',skinId:'skin-10',asset:{female:'avatar-female_airport_greeting_bun.png',male:'avatar-male_airport_greeting.png'}},
   {id:'shipCrew',name:'Scheepscrew',unlockLevel:16,theme:'reis',skinId:'skin-8',asset:{female:'avatar-female_shipcrew_welcome_bun.webp',male:'avatar-male_shipcrew_welcome.webp'}}
 ];
 const avatarPoseAssets={
@@ -1843,7 +1844,7 @@ function cumulativeLevel4Builders(index){
   const free=level4FreeBuilder(index,sentences);
   return free?[...exact,[free[0],free[1][0],free[2],free[1]]]:exact;
 }
-function rankDefs(){const o={};['hiragana','katakana'].forEach(k=>{kanaModules[k].rows.forEach((r,i)=>o[`${k}-row-${i}`]={name:`${kanaModules[k].label} · ${r.name}`});kanaClusters.forEach((c,i)=>o[`${k}-cluster-${i}`]={name:`${kanaModules[k].label} · ${c.name}`});['exam1','exam2','exam3'].forEach(id=>o[`${k}-${id}`]={name:`${kanaModules[k].label} · ${id}`})});['num-basic','num-midterm','num-triangle','num-math','num-teens','num-tens','num-under100','num-hundreds','num-thousands','num-exam1','num-exam2'].forEach(id=>o[id]={name:id});['mix-exam1','mix-exam2'].forEach(id=>o[id]={name:id});dakutenPatterns.forEach(p=>['hiragana','katakana'].forEach(s=>o[`dak-${s}-${p.id}`]={name:`${s} ${p.name}`}));dakutenClusters.forEach((c,i)=>o[`dak-cluster-${i}`]={name:c.name});['dak-examA','dak-examB','dak-examC'].forEach(id=>o[id]={name:id});langLessons.forEach(l=>o[l.id]={name:l.title});o['l4-exam']={name:'Level 4 examen'};smallLessons.forEach(l=>o[l.id]={name:l.title});o['l5-exam']={name:'Level 5 examen'};Object.values(advancedCourses).forEach(c=>{c.lessons.forEach(l=>o[l.id]={name:`Level ${c.number} · ${l.title}`});o[`l${c.number}-exam`]={name:`Level ${c.number} examen`}});return o}
+function rankDefs(){const o={};['hiragana','katakana'].forEach(k=>{kanaModules[k].rows.forEach((r,i)=>o[`${k}-row-${i}`]={name:`${kanaModules[k].label} · ${r.name}`});kanaClusters.forEach((c,i)=>o[`${k}-cluster-${i}`]={name:`${kanaModules[k].label} · ${c.name}`});['exam1','exam2','exam3'].forEach(id=>o[`${k}-${id}`]={name:`${kanaModules[k].label} · ${id}`})});['num-basic','num-midterm','num-triangle','num-math','num-teens','num-tens','num-under100','num-hundreds','num-thousands','num-exam1','num-exam2'].forEach(id=>o[id]={name:id});['mix-exam1','mix-exam2'].forEach(id=>o[id]={name:id});dakutenPatterns.forEach(p=>['hiragana','katakana'].forEach(s=>o[`dak-${s}-${p.id}`]={name:`${s} ${p.name}`}));dakutenClusters.forEach((c,i)=>o[`dak-cluster-${i}`]={name:c.name});['dak-examA','dak-examB','dak-examC'].forEach(id=>o[id]={name:id});langLessons.forEach(l=>o[l.id]={name:l.title});o['l4-exam']={name:'Level 4 examen'};smallLessons.forEach(l=>o[l.id]={name:l.title});o['l5-exam']={name:'Level 5 examen'};[...Object.values(advancedCourses),...Object.values(thematicCourses)].forEach(c=>{c.lessons.forEach(l=>o[l.id]={name:`Level ${c.number} · ${l.title}`});o[`l${c.number}-exam`]={name:`Level ${c.number} examen`}});return o}
 const defsCache=rankDefs(),rankState={};Object.keys(defsCache).forEach(id=>rankState[id]={rank:null,last:null,attempts:0});
 
 const MASTERY_CONFIG={
@@ -2378,7 +2379,7 @@ function levelRankIds(level){
   if(level===2)return['dak-examA','dak-examB'];
   if(level===3)return['l4-exam'];
   if(level===4)return['l5-exam'];
-  if(level>=5&&level<=9)return[`l${level+1}-exam`];
+  if(level>=5&&level<=11)return[`l${level+1}-exam`];
   return[];
 }
 function levelRank(level){return minRankForIds(levelRankIds(level))}
@@ -2407,6 +2408,9 @@ function setUiLanguage(language){state.uiLanguage=i18n.language(language);docume
 state.flashcardProgress={version:1,cards:{}};
 state.flashcardSelection={lessonIds:null,direction:'jp-nl'};
 state.flashcardSession=null;
+state.thematic={level:11,lessonIndex:0,part:'A',step:'list',questionIndex:0,correct:0,answered:false,selected:null};
+state.thematicCompleted={};
+state.thematicScores={};
 state.dictionaryQuery='';
 state.dictionarySelectedId=null;
 state.selectedAvatarOutfit=null;
@@ -2604,6 +2608,9 @@ function storageStateSnapshot(){
     flashcardProgress:state.flashcardProgress,
     flashcardSelection:state.flashcardSelection,
     flashcardSession:state.flashcardSession,
+    thematic:state.thematic,
+    thematicCompleted:state.thematicCompleted,
+    thematicScores:state.thematicScores,
     vocabFirstSeen:state.vocabFirstSeen,
     kanaFirstSeen:state.kanaFirstSeen,
     smallLesson:state.smallLesson,
@@ -2698,6 +2705,9 @@ function loadProgress(){
     if(s.flashcardSession&&typeof s.flashcardSession==='object'&&Array.isArray(s.flashcardSession.queue))state.flashcardSession={mode:s.flashcardSession.mode==='free'?'free':'scheduled',queue:s.flashcardSession.queue.filter(x=>x&&vocabById[x.cardId]&&['jp-nl','nl-jp'].includes(x.direction)).map(x=>({cardId:x.cardId,direction:x.direction,answerChoices:Array.isArray(x.answerChoices)?[...new Set(x.answerChoices.filter(v=>typeof v==='string'&&v.length<200))].slice(0,4):null,round:Math.max(0,Math.floor(Number(x.round)||0))})),position:Math.max(0,Math.floor(Number(s.flashcardSession.position)||0)),status:['active','paused','complete'].includes(s.flashcardSession.status)?s.flashcardSession.status:'paused',revealed:!!s.flashcardSession.revealed,knew:Math.max(0,Math.floor(Number(s.flashcardSession.knew)||0)),again:Math.max(0,Math.floor(Number(s.flashcardSession.again)||0)),skipped:Math.max(0,Math.floor(Number(s.flashcardSession.skipped)||0)),viewed:Math.max(0,Math.floor(Number(s.flashcardSession.viewed)||0)),requeued:Array.isArray(s.flashcardSession.requeued)?s.flashcardSession.requeued:[],feedback:s.flashcardSession.feedback&&['knew','again','viewed'].includes(s.flashcardSession.feedback.grade)?{grade:s.flashcardSession.feedback.grade,chosen:typeof s.flashcardSession.feedback.chosen==='string'?s.flashcardSession.feedback.chosen.slice(0,200):null,until:Number(s.flashcardSession.feedback.until)||null,ungraded:!!s.flashcardSession.feedback.ungraded}:null,startedAt:Number(s.flashcardSession.startedAt)||Date.now()};
     if(state.flashcardSession)state.flashcardSession.optionsRevealed=!!s.flashcardSession.optionsRevealed;
     ['advancedLesson','advancedView','advancedStep','advancedStepProgress'].forEach(k=>{if(s[k]&&typeof s[k]==='object')Object.assign(state[k],s[k])});
+    if(s.thematic&&typeof s.thematic==='object'&&[11,12].includes(s.thematic.level))state.thematic={level:s.thematic.level,lessonIndex:Math.max(0,Math.min(4,Number(s.thematic.lessonIndex)||0)),part:s.thematic.part==='B'?'B':'A',step:['list','lesson','words','practice','reading','questions','done'].includes(s.thematic.step)?s.thematic.step:'list',questionIndex:Math.max(0,Math.floor(Number(s.thematic.questionIndex)||0)),correct:Math.max(0,Math.floor(Number(s.thematic.correct)||0)),answered:!!s.thematic.answered,selected:typeof s.thematic.selected==='string'?s.thematic.selected:null};
+    if(s.thematicCompleted&&typeof s.thematicCompleted==='object')for(const [id,parts] of Object.entries(s.thematicCompleted))if(/^l1[12]-[1-5]$/.test(id)&&parts&&typeof parts==='object')state.thematicCompleted[id]={A:!!parts.A,B:!!parts.B};
+    if(s.thematicScores&&typeof s.thematicScores==='object')for(const [id,scores] of Object.entries(s.thematicScores))if(/^l1[12]-[1-5]$/.test(id)&&scores&&typeof scores==='object')state.thematicScores[id]={A:Math.max(0,Number(scores.A)||0),B:Math.max(0,Number(scores.B)||0)};
     if(['hiragana','katakana'].includes(s.dakScript))state.dakScript=s.dakScript;
     if(['profile','progress','knowledge'].includes(s.progressTab))state.progressTab=s.progressTab;
     else if(['analysis','timeline','activities','overview'].includes(s.progressTab))state.progressTab='progress';
@@ -2847,6 +2857,12 @@ function navigateBack(){
   // De onderliggende module-/lesstaat blijft intact, dus keer daar direct naar terug.
   if(!$('quizView').classList.contains('hidden')){completeStudySession({status:'afgebroken'});return setMain()}
   if(!$('resultView').classList.contains('hidden'))return setMain();
+  if(state.screen==='module'&&state.level>=10){
+    if(state.studyTracker.active?.source==='lesson:thematic')completeStudySession({status:'verlaten'});
+    state.thematic.step=state.thematic.step==='lesson'?'list':state.thematic.step==='list'?'list':'lesson';
+    if(state.thematic.step==='list')state.screen='level';
+    scheduleSave();return renderMain();
+  }
   // Level 4 heeft een extra hiërarchie: lesstap → lesoverzicht → lessenlijst.
   if(state.screen==='module'&&state.level===3&&state.tabs.lang==='learn'&&state.langView==='lesson'){
     if(state.studyTracker.active?.source==='lesson:lang')completeStudySession({status:'verlaten'});
@@ -2927,6 +2943,12 @@ function continueJourneyPlan(){
   if(level===2)return{title:'Ga verder met Dakuten',detail:`Level 3 · ${dakutenPatterns[state.dakPattern]?.name||'Klankmodificaties'}`,button:'Verder leren →',action:()=>openModule(2)};
   if(level===3)return{title:'Ga verder met Eerste taalbasis',detail:`Les ${state.langLesson+1} · ${langLessons[state.langLesson]?.title||'Eerste zinnen'}`,button:'Verder leren →',action:()=>openModule(3)};
   if(level===4)return{title:'Ga verder met Kana compleet',detail:`Les ${state.smallLesson+1} · ${smallLessons[state.smallLesson]?.title||'Kleine kana'}`,button:'Verder leren →',action:()=>openModule(4)};
+  if(level>=10){
+    const course=thematicCourses[level],next=course?.lessons.findIndex(lesson=>thematicProgress(lesson)<2);
+    if(next===-1)return{title:`${levels[level][1]} · alle lessen gedaan`,detail:levelRank(level)?'Levelcheck behaald · bekijk je lessen opnieuw of kies een volgend level.':'De levelcheck staat nu klaar.',button:levelRank(level)?'Bekijk het level →':'Naar de levelcheck →',action:()=>openLevel(level)};
+    const index=Math.max(0,next??0),lesson=course?.lessons[index];
+    return{title:`Ga verder met ${levels[level][1]}`,detail:`Les ${index+1} · ${lesson?.title||levels[level][2]}`,button:'Verder leren →',action:()=>openModule(level,()=>{state.thematic={level:level+1,lessonIndex:index,part:'A',step:'lesson',questionIndex:0,correct:0,answered:false,selected:null}})};
+  }
   const course=advancedCourses[level],lesson=course?.lessons[state.advancedLesson[level]||0];
   return{title:`Ga verder met ${levels[level][1]}`,detail:`Les ${(state.advancedLesson[level]||0)+1} · ${lesson?.title||levels[level][2]}`,button:'Verder leren →',action:()=>openModule(level)};
 }
@@ -3045,6 +3067,7 @@ function renderAvatarUnlock(box){
   box.prepend(notice);
 }
 function renderLevelOverview(box,i){
+  if(i>=10)return renderThematicCourse(box);
   updateHeader();
   const [goal,how]=levelIntro(i);
   const [number,title]=localizedLevel(i);
@@ -3105,8 +3128,8 @@ function bindTabs(key){$('tabA').onclick=()=>{state.tabs[key]='learn';scheduleSa
 function renderLevels(){/* v7: levels are rendered in the dedicated level menu */}
 function renderHomeMenu(box){
   const level=localizedLevel(state.level);
-  const plan=continueJourneyPlan(),courseLessons=state.level===3?langLessons:state.level===4?smallLessons:advancedCourses[state.level]?.lessons;
-  const progress=courseLessons?lessonProgress(courseLessons):null;
+  const plan=continueJourneyPlan(),courseLessons=state.level===3?langLessons:state.level===4?smallLessons:state.level>=10?thematicCourses[state.level]?.lessons:advancedCourses[state.level]?.lessons;
+  const progress=courseLessons?(state.level>=10?{done:courseLessons.filter(lesson=>thematicProgress(lesson)===2).length,total:courseLessons.length,pct:courseLessons.filter(lesson=>thematicProgress(lesson)===2).length/courseLessons.length*100}:lessonProgress(courseLessons)):null;
   box.innerHTML=`<section class="card platform-home"><div class="eyebrow">${t('course.japanese.short')} · ${t('course.japanese.name')}</div><div class="h1">${plan.title}</div><div class="muted">${plan.detail}</div>${progress?`<div class="progress" style="margin-top:12px"><div style="width:${progress.pct}%"></div></div><div class="small">${progress.done}/${progress.total} lessen afgerond</div>`:''}<div class="platform-home-actions"><button id="homeContinue" class="btn primary" type="button">${plan.button}</button><button id="homeLevels" class="btn" type="button">${t('home.openLevels')}</button></div>${state.avatarEnabled?avatarAssistHtml({pose:nextAvatarMood(),message:t('levels.smallStep')}):''}</section>`;
   $('homeLevels').onclick=()=>{state.screen='levels';scheduleSave();renderMain()};
   $('homeContinue').onclick=continueJourneyPlan().action;
@@ -3126,7 +3149,115 @@ function renderMain(){
   if(state.level===2)return renderDakuten(box);
   if(state.level===3)return renderLanguage(box);
   if(state.level===4)return renderSmallKana(box);
+  if(state.level>=10)return renderThematicCourse(box);
   return renderAdvancedCourse(box,state.level);
+}
+const thematicReadingById=Object.fromEntries(window.LanguageJourneyContent.manifest.readings.map(reading=>[reading.id,reading]));
+const thematicBonusById=Object.fromEntries(window.LanguageJourneyContent.manifest.bonus.map(bonus=>[bonus.id,bonus]));
+function thematicCourse(){return thematicCourses[state.level]}
+function thematicLesson(){return thematicCourse()?.lessons[state.thematic.lessonIndex]}
+function thematicPart(){return thematicLesson()?.applications?.find(part=>part.part===state.thematic.part)}
+function thematicProgress(lesson){const done=state.thematicCompleted[lesson.id]||{};return Number(!!done.A)+Number(!!done.B)}
+function thematicQuestions(lesson){return lesson.applications.flatMap((part,partIndex)=>part.questions.map((q,index)=>({kind:'order',instruction:'Kies het antwoord dat bij de tekst past.',prompt:q.prompt,correct:q.answer,choices:q.choices.slice((index+partIndex+1)%q.choices.length).concat(q.choices.slice(0,(index+partIndex+1)%q.choices.length))}))) }
+function openThematicLesson(index){state.thematic={level:state.level+1,lessonIndex:index,part:'A',step:'lesson',questionIndex:0,correct:0,answered:false,selected:null};state.screen='module';scheduleSave();renderMain()}
+function startThematicPart(part){
+  const lesson=thematicLesson();if(!lesson)return;
+  state.thematic={level:state.level+1,lessonIndex:state.thematic.lessonIndex,part,step:'words',questionIndex:0,correct:0,answered:false,selected:null};
+  beginStudySession({title:`Level ${state.level+1} · ${lesson.title} · ${part}`,activityType:'les',category:'app',source:'lesson:thematic',level:state.level+1,tags:['verhaal','praktische bron'],skills:['lezen','woordenschat']});
+  for(const id of thematicPart().wordIds){if(!state.introducedVocabIds.includes(id))state.introducedVocabIds.push(id);recordVocabEncounter(id)}
+  scheduleSave();renderMain();
+}
+function thematicAdvance(step){state.thematic.step=step;state.thematic.questionIndex=0;state.thematic.answered=false;state.thematic.selected=null;scheduleSave();renderMain()}
+function thematicFinishPart(){
+  const lesson=thematicLesson(),part=state.thematic.part;
+  if(!state.thematicCompleted[lesson.id])state.thematicCompleted[lesson.id]={A:false,B:false};
+  state.thematicCompleted[lesson.id][part]=true;
+  if(!state.thematicScores[lesson.id])state.thematicScores[lesson.id]={A:0,B:0};
+  state.thematicScores[lesson.id][part]=state.thematic.correct;
+  completeStudySession({status:'afgerond',result:{score:state.thematic.correct,total:thematicPart().wordIds.length+thematicPart().questions.length}});
+  thematicAdvance('done');
+}
+function thematicAnswer(answer,correct){
+  if(state.thematic.answered)return;
+  state.thematic.answered=true;state.thematic.selected=answer;
+  if(answer===correct)state.thematic.correct++;
+  scheduleSave();renderMain();
+}
+function thematicNextQuestion(length,nextStep){
+  state.thematic.answered=false;state.thematic.selected=null;state.thematic.questionIndex++;
+  if(state.thematic.questionIndex>=length){if(nextStep==='done')return thematicFinishPart();state.thematic.step=nextStep;state.thematic.questionIndex=0}
+  scheduleSave();renderMain();
+}
+function thematicOrderedChoices(choices){
+  const offset=(state.thematic.questionIndex+state.thematic.lessonIndex+(state.thematic.part==='B'?2:1))%choices.length;
+  return choices.slice(offset).concat(choices.slice(0,offset));
+}
+function thematicChoiceHtml(question,kind){
+  const answered=state.thematic.answered,chosen=state.thematic.selected;
+  return`<section class="card"><div class="eyebrow">${kind}</div><div class="h2">${escapeHtml(question.prompt)}</div><div class="thematic-choices">${question.choices.map((choice,index)=>`<button class="btn thematic-choice ${answered&&choice===question.answer?'is-correct':answered&&choice===chosen?'is-incorrect':''}" data-thematic-choice="${index}" ${answered?'disabled':''}>${escapeHtml(choice)}</button>`).join('')}</div>${answered?`<div class="notice" role="status">${chosen===question.answer?'Goed!':`Het juiste antwoord is: ${escapeHtml(question.answer)}.`}</div><button class="btn primary" id="thematicNext" style="width:100%;margin-top:10px">Volgende →</button>`:''}</section>`;
+}
+function thematicReadingHtml(text){
+  return text.split(/(\s+|[。、：])/u).map(token=>{
+    if(!token.trim())return token.includes('\n')?token.replace(/\n/g,'<br>'):' ';
+    const word=vocabCatalog.find(item=>!item.legacy&&item.jp===token);
+    return word?`<button type="button" class="thematic-token" data-dictionary-open="${escapeHtml(word.id)}">${escapeHtml(token)}</button>`:escapeHtml(token);
+  }).join('');
+}
+function renderThematicCourse(box){
+  const course=thematicCourse();if(!course)return;
+  if(state.thematic.level!==course.number)state.thematic={level:course.number,lessonIndex:0,part:'A',step:'list',questionIndex:0,correct:0,answered:false,selected:null};
+  if(state.screen==='level')state.thematic.step='list';
+  if(state.thematic.step==='list')return renderThematicList(box,course);
+  return renderThematicLesson(box,course);
+}
+function renderThematicList(box,course){
+  const done=course.lessons.filter(lesson=>thematicProgress(lesson)===2).length;
+  box.innerHTML=`<section class="card"><div class="eyebrow">Level ${course.number} · thematische module</div><div class="h1">${escapeHtml(course.title)}</div><div class="muted">${escapeHtml(course.competency)}</div><div class="progress" style="margin-top:12px"><div style="width:${done*20}%"></div></div><div class="small">${done}/5 lessen afgerond</div>${course.number===11?'<div class="notice" style="margin-top:10px">Level 1–10 was de basis. Vanaf nu lees je per les een kort verhaal én een praktische bron. Reken op ongeveer 20–25 minuten als richttempo; sneller of langzamer is allebei goed. Bonus is vrijwillig.</div>':''}</section><div id="thematicLessonList" class="stack"></div><section class="card"><div class="between"><strong>Level ${course.number} · integratie</strong><span class="rank ${rankClass(levelRank(state.level))}">${rankText(levelRank(state.level))}</span></div><div class="small" style="margin-top:6px">Twintig begripsvragen uit beide onderdelen van de vijf lessen. Bonus is niet verplicht.</div><button id="thematicExam" class="btn primary" style="width:100%;margin-top:10px" ${done===5?'':'disabled'}>Start levelcheck</button></section>`;
+  renderAvatarUnlock(box);
+  course.lessons.forEach((lesson,index)=>{const card=document.createElement('button');card.type='button';card.className=`lang-lesson-card ${rankClass(rankState[lesson.id]?.rank)}`;card.innerHTML=`<div class="between"><div><div class="eyebrow">Les ${index+1}</div><div class="h2">${escapeHtml(lesson.title)}</div></div><span class="rank ${rankClass(rankState[lesson.id]?.rank)}">${rankText(rankState[lesson.id]?.rank)}</span></div><div class="small">${escapeHtml(lesson.goal)} · ${thematicProgress(lesson)}/2 onderdelen</div>`;card.onclick=()=>openThematicLesson(index);$('thematicLessonList').appendChild(card)});
+  if(done===5)$('thematicExam').onclick=()=>startQuiz({source:'advanced',title:`Level ${course.number} · integratie`,rankId:`l${course.number}-exam`,rankThreshold:.8,official:true,pool:[],questions:shuffle(course.lessons.flatMap(thematicQuestions)),choices:3});
+}
+function renderThematicLesson(box,course){
+  const lesson=thematicLesson(),step=state.thematic.step,part=thematicPart(),reading=thematicReadingById[part.readingId],done=state.thematicCompleted[lesson.id]||{};
+  box.innerHTML=`<section class="card"><div class="eyebrow">Level ${course.number} · Les ${state.thematic.lessonIndex+1} van 5</div><div class="h1">${escapeHtml(lesson.title)}</div><div class="muted">${escapeHtml(lesson.goal)}</div><div class="small" style="margin-top:8px">A · verhaal ${done.A?'✓':''}　B · praktische bron ${done.B?'✓':''} · geen kalenderdruk</div></section><div id="thematicBody" class="stack"></div>`;
+  const host=$('thematicBody');
+  if(step==='lesson'||step==='bonus'){
+    if(step==='bonus')return renderThematicBonus(host,lesson);
+    host.innerHTML=`${lesson.grammarIds.length?`<section class="card"><div class="eyebrow">Nieuwe bouwsteen</div><div class="h2">${escapeHtml(window.LanguageJourneyContent.manifest.grammar.find(g=>g.id===lesson.grammarIds[0]).title)}</div><div class="muted">${escapeHtml(window.LanguageJourneyContent.manifest.grammar.find(g=>g.id===lesson.grammarIds[0]).shortExplanation)}</div></section>`:''}<section class="card thematic-module"><div><div class="eyebrow">Module A · verhalende context</div><div class="h2">Kort verhaal</div><div class="small">Nieuwe woorden → korte recall → verhaal → begrip</div></div><button id="thematicStartA" class="btn primary">${done.A?'Opnieuw lezen':'Start A'}</button></section><section class="card thematic-module"><div><div class="eyebrow">Module B · real-world context</div><div class="h2">${escapeHtml(lesson.applications[1].label)}</div><div class="small">Extra woorden → korte recall → praktische bron → toepassing${done.A?'':' · open na A'}</div></div><button id="thematicStartB" class="btn primary" ${done.A?'':'disabled'}>${done.B?'Opnieuw oefenen':'Start B'}</button></section><section class="card"><div class="between"><strong>Lescheck</strong><span class="rank ${rankClass(rankState[lesson.id]?.rank)}">${rankText(rankState[lesson.id]?.rank)}</span></div><div class="small">Vier begripsvragen uit A en B. Een herkansing blijft mogelijk.</div><button id="thematicCheck" class="btn" style="width:100%;margin-top:10px" ${done.A&&done.B?'':'disabled'}>Start lescheck</button></section>${lesson.bonusIds?.length&&done.A&&done.B?'<section class="card"><div class="eyebrow">Vrijwillige extra</div><div class="h2">Bonuslezen</div><div class="small">Geen voorwaarde voor les- of levelrank.</div><button id="thematicBonus" class="btn" style="width:100%;margin-top:9px">Bekijk bonus</button></section>':''}`;
+    $('thematicStartA').onclick=()=>startThematicPart('A');if(done.A)$('thematicStartB').onclick=()=>startThematicPart('B');
+    if(done.A&&done.B)$('thematicCheck').onclick=()=>startQuiz({source:'advanced',title:`Level ${course.number} · ${lesson.title} · lescheck`,rankId:lesson.id,rankThreshold:.75,official:true,pool:[],questions:shuffle(thematicQuestions(lesson)),choices:3});
+    if($('thematicBonus'))$('thematicBonus').onclick=()=>{state.thematic.step='bonus';beginStudySession({title:`Bonus · ${lesson.title}`,activityType:'bonuslezen',category:'reading',source:'bonus:thematic',level:course.number,skills:['lezen']});scheduleSave();renderMain()};
+    return;
+  }
+  if(step==='words'){
+    host.innerHTML=`<section class="card"><div class="eyebrow">${part.part} · woordintroductie</div><div class="h2">${part.wordIds.length} woorden in kleine stappen</div><div class="thematic-words">${part.wordIds.map(id=>{const v=vocabById[id];return`<div class="panel"><strong lang="ja">${escapeHtml(v.kana)}</strong><div class="small">${escapeHtml(v.romaji)} · ${escapeHtml(v.meaning)}</div></div>`}).join('')}</div><div class="notice" style="margin-top:10px">${escapeHtml(part.example)}</div><button id="thematicPracticeStart" class="btn primary" style="width:100%;margin-top:12px">Korte woordtraining →</button></section>`;
+    $('thematicPracticeStart').onclick=()=>thematicAdvance('practice');return;
+  }
+  if(step==='practice'){
+    const id=part.wordIds[state.thematic.questionIndex],v=vocabById[id],others=part.wordIds.filter(wordId=>wordId!==id).map(wordId=>vocabById[wordId].meaning).filter(meaning=>meaning!==v.meaning),choices=thematicOrderedChoices([v.meaning,...others].slice(0,4)),question={prompt:v.kana,answer:v.meaning,choices};
+    host.innerHTML=`<section class="card"><div class="small">Woord ${state.thematic.questionIndex+1}/${part.wordIds.length}</div><div class="muted">Kies de betekenis.</div></section>${thematicChoiceHtml(question,'Actieve recall')}`;
+    host.querySelectorAll('[data-thematic-choice]').forEach(button=>button.onclick=()=>thematicAnswer(choices[Number(button.dataset.thematicChoice)],question.answer));
+    if(state.thematic.answered)$('thematicNext').onclick=()=>thematicNextQuestion(part.wordIds.length,'reading');return;
+  }
+  if(step==='reading'){
+    host.innerHTML=`<section class="card"><div class="eyebrow">${part.part} · ${part.kind==='story'?'kort chronologisch verhaal':escapeHtml(part.label)}</div><div class="thematic-reading" lang="ja">${thematicReadingHtml(reading.text)}</div><div class="small" style="margin-top:9px">Tik op een bekend woord voor naslag. Hulp gebruiken kost geen punten.</div><details class="thematic-hint"><summary>Woordhulp</summary>${part.wordIds.map(id=>`<div>${escapeHtml(vocabById[id].kana)} · ${escapeHtml(vocabById[id].meaning)}</div>`).join('')}</details><details class="thematic-hint"><summary>Grammatica-hint</summary><div>${escapeHtml(part.grammarHint)}</div></details><details class="thematic-hint"><summary>Volledige vertaling</summary><div>${escapeHtml(reading.translation)}</div></details><button id="thematicQuestionsStart" class="btn primary" style="width:100%;margin-top:12px">Begripsvragen →</button></section>`;
+    $('thematicQuestionsStart').onclick=()=>thematicAdvance('questions');return;
+  }
+  if(step==='questions'){
+    const base=part.questions[state.thematic.questionIndex],question={...base,choices:thematicOrderedChoices(base.choices)};host.innerHTML=`<section class="card"><div class="small">Vraag ${state.thematic.questionIndex+1}/${part.questions.length} · Je mag de tekst opnieuw bekijken</div><details class="thematic-hint"><summary>Tekst opnieuw bekijken</summary><div class="thematic-reading" lang="ja">${thematicReadingHtml(reading.text)}</div></details></section>${thematicChoiceHtml(question,'Begrijpend lezen')}`;
+    host.querySelectorAll('[data-thematic-choice]').forEach(button=>button.onclick=()=>thematicAnswer(question.choices[Number(button.dataset.thematicChoice)],question.answer));
+    if(state.thematic.answered)$('thematicNext').onclick=()=>thematicNextQuestion(part.questions.length,'done');return;
+  }
+  if(step==='done'){
+    host.innerHTML=`<section class="card"><div class="eyebrow">Onderdeel ${part.part} afgerond</div><div class="h2">Je hebt ${part.kind==='story'?'een verhaal gevolgd':'praktische informatie gebruikt'}.</div><div class="small">${state.thematic.correct} van ${part.wordIds.length+part.questions.length} vragen goed. Hulp of een fout blokkeert je niet.</div><button id="thematicDoneNext" class="btn primary" style="width:100%;margin-top:12px">${part.part==='A'?'Naar onderdeel B →':'Terug naar de les'}</button></section>`;
+    $('thematicDoneNext').onclick=()=>{if(part.part==='A')startThematicPart('B');else thematicAdvance('lesson')};
+  }
+}
+function renderThematicBonus(host,lesson){
+  const bonus=thematicBonusById[lesson.bonusIds[0]];
+  host.innerHTML=`<section class="card"><div class="eyebrow">Bonus · vrijwillig</div><div class="h2">Extra lezen</div><div class="small">Deze tekst gebruikt bekende woorden tot en met deze les. Bonus verandert geen rank en is nooit verplicht.</div><div class="thematic-reading" lang="ja" style="margin-top:12px">${thematicReadingHtml(bonus.text)}</div><details class="thematic-hint"><summary>Vertaling bekijken</summary><div>${escapeHtml(bonus.translation)}</div></details><div class="panel" style="margin-top:10px"><strong>${escapeHtml(bonus.question)}</strong><div class="thematic-choices">${bonus.choices.map((choice,index)=>`<button class="btn thematic-choice" data-bonus-answer="${index}">${escapeHtml(choice)}</button>`).join('')}</div><div id="bonusFeedback" class="small" role="status" style="margin-top:8px"></div></div><button id="thematicBonusDone" class="btn primary" style="width:100%;margin-top:12px">Terug naar de les</button></section>`;
+  host.querySelectorAll('[data-bonus-answer]').forEach(button=>button.onclick=()=>{const choice=bonus.choices[Number(button.dataset.bonusAnswer)];$('bonusFeedback').textContent=choice===bonus.answer?'Goed gelezen!':`Het antwoord is: ${bonus.answer}.`;host.querySelectorAll('[data-bonus-answer]').forEach(item=>item.disabled=true)});
+  $('thematicBonusDone').onclick=()=>{completeStudySession({status:'afgerond'});thematicAdvance('lesson')};
 }
 
 function renderBasis(box){
@@ -4088,6 +4219,7 @@ function levelLessonIds(level){
   if(level===3)return langLessons.map(x=>x.id);
   if(level===4)return smallLessons.map(x=>x.id);
   if(level>=5&&level<=9)return advancedCourses[level].lessons.map(x=>x.id);
+  if(level>=10&&level<=11)return thematicCourses[level].lessons.map(x=>x.id);
   return[];
 }
 function completedLessonCount(level){
@@ -4135,7 +4267,12 @@ function recommendedNextStep(){
     if(lesson)return`Level ${course.number} · ${lesson.title}.`;
     if(!rankState[`l${course.number}-exam`]?.rank)return`Level ${course.number} · level-examen.`;
   }
-  return'De absolute basis is afgerond. Kies daarna een specialisatieroute.';
+  for(let level=10;level<=11;level++){
+    const course=thematicCourses[level],lesson=course.lessons.find(l=>thematicProgress(l)<2);
+    if(lesson)return`Level ${course.number} · ${lesson.title}.`;
+    if(!rankState[`l${course.number}-exam`]?.rank)return`Level ${course.number} · levelcheck.`;
+  }
+  return'De huidige route is afgerond. Oudere lessen blijven beschikbaar om opnieuw te lezen.';
 }
 function examRowsForLevel(level){
   return levelRankIds(level).map(id=>({
@@ -4146,7 +4283,7 @@ function examRowsForLevel(level){
   }));
 }
 function renderProgressLevelTab(box){
-  const activeLevels=10;
+  const activeLevels=12;
   const finished=Array.from({length:activeLevels},(_,i)=>levelRank(i)).filter(Boolean).length;
   const current=Math.min(state.level,activeLevels-1);
   box.innerHTML=`<section class="card">

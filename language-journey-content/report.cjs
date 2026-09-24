@@ -9,7 +9,7 @@ for(const level of m.levels){
   lines.push(`Level ${level.number}: ${level.theme} · ${lessons.length} lessons · ${words.length} core words · ${grammar.length} grammar entries`);
   for(const lesson of lessons){
     const point=`${lesson.level}-${lesson.order}`;
-    const fresh=(lesson.wordIds||lesson.exampleIds||[]).filter(id=>m.vocabulary.find(v=>v.id===id)?.introducedAt===point);
+    const fresh=(lesson.wordIds||lesson.exampleIds||[]).filter(id=>m.vocabulary.find(v=>v.id===id)?.introducedAt?.startsWith(point));
     lines.push(`  ${lesson.id} ${lesson.title} · ${fresh.length} new words · ${(lesson.grammarIds||[]).length} grammar refs · ${(lesson.patternIds||[]).length} pattern refs`);
   }
 }

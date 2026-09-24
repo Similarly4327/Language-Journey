@@ -86,7 +86,7 @@ function validate(manifest = content.manifest, options = {}) {
     const lesson=maps.lessons.get(reading.lessonId);
     if(!lesson){add('ERROR','UNKNOWN_REFERENCE',`Reading ${reading.id} has unknown lesson ${reading.lessonId}`,reading.id);continue}
     if(!['story','micro-story','dialogue','shopping-list','menu','sign','notice'].includes(reading.type))add('ERROR','READING_TYPE',`${reading.type} is unsupported`,reading.id);
-    const at=`${lesson.level}-${lesson.order}`;
+    const at=reading.introducedAt||`${lesson.level}-${lesson.order}`;
     for(const id of reading.requiredVocabIds||[])known('vocabulary',id,at,reading.id);
     for(const id of reading.contextVocabIds||[]){
       known('vocabulary',id,at,reading.id,{context:true});

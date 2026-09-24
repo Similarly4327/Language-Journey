@@ -10,11 +10,12 @@ const copy=()=>structuredClone(content.manifest);
 const codes=result=>result.diagnostics.map(d=>d.code);
 
 test('current curriculum validates with no errors',()=>assert.equal(validate().counts.ERROR,0));
-test('all ten levels have renderable adapter data',()=>{
-  assert.equal(content.levels.length,10);
+test('foundation and thematic levels have renderable adapter data',()=>{
+  assert.equal(content.levels.length,12);
   assert.equal(content.langLessons.length,10);
   assert.equal(content.smallLessons.length,5);
   for(let n=6;n<=10;n++)assert.ok(content.advancedCourses[n-1].lessons.length>=5);
+  for(let n=11;n<=12;n++)assert.equal(content.thematicCourses[n-1].lessons.length,5);
   assert.equal(content.hira.flat().length,46);
   assert.equal(content.kata.flat().length,46);
   assert.ok(content.numberLessons.length>0);
@@ -53,7 +54,7 @@ test('future vocabulary and grammar are rejected',()=>{
 });
 test('explicit context vocabulary is allowed in a reading, but not a core reference',()=>{
   const m=copy(),reading=m.readings[0];
-  reading.lessonId='l4-1';reading.contextVocabIds=['vocab-あれ'];reading.contextIntroductions=[{vocabId:'vocab-あれ',kana:'あれ',romaji:'are',meaning:'dat daar'}];
+  reading.lessonId='l4-1';reading.introducedAt='4-1';reading.contextVocabIds=['vocab-あれ'];reading.contextIntroductions=[{vocabId:'vocab-あれ',kana:'あれ',romaji:'are',meaning:'dat daar'}];
   assert.ok(!codes(validate(m,{checkFiles:false})).includes('FUTURE_KNOWLEDGE'));
   reading.requiredVocabIds=['vocab-あれ'];
   assert.ok(codes(validate(m,{checkFiles:false})).includes('FUTURE_KNOWLEDGE'));
@@ -75,14 +76,14 @@ test('kanji can follow a known word but not precede it',()=>{
 });
 test('optional bonus is linked without changing core lesson IDs',()=>{
   const m=copy();
-  m.bonus.push({id:'bonus-l11-1',lessonId:'l4-1',type:'dialogue',optional:true});
-  m.lessons[0].bonusIds=['bonus-l11-1'];
+  m.bonus.push({id:'bonus-test-l4-1',lessonId:'l4-1',type:'dialogue',optional:true,availableFrom:'4-1'});
+  m.lessons[0].bonusIds=['bonus-test-l4-1'];
   assert.ok(!codes(validate(m,{checkFiles:false})).includes('UNKNOWN_REFERENCE'));
   assert.equal(content.manifest.levels[3].lessonIds[0],'l4-1');
 });
 test('a playable Level 11 needs five lessons and both modules',()=>{
   const m=copy();
-  m.levels.push({number:11,title:'Level 11',theme:'Draft',status:'playable',lessonIds:[]});
+  m.levels.find(l=>l.number===11).lessonIds=[];
   assert.ok(codes(validate(m,{checkFiles:false})).includes('FUTURE_LEVEL_STRUCTURE'));
 });
 test('audio references and missing files have distinct severities',()=>{
@@ -96,6 +97,35 @@ test('audio references and missing files have distinct severities',()=>{
 });
 test('report has human-readable summary',()=>{
   const output=format(validate());
-  assert.match(output,/SUMMARY 10 levels/);
+  assert.match(output,/SUMMARY 12 levels/);
   assert.match(output,/0 errors/);
+});
+test('Levels 11 and 12 have five two-part lessons with staged words and optional bonus',()=>{
+  for(const number of [11,12]){
+    const level=content.manifest.levels.find(l=>l.number===number);
+    assert.equal(level.status,'playable');
+    assert.equal(level.lessonIds.length,5);
+    for(const lessonId of level.lessonIds){
+      const lesson=content.manifest.lessons.find(l=>l.id===lessonId);
+      assert.equal(lesson.applications.length,2);
+      assert.equal(lesson.applications[0].kind,'story');
+      assert.equal(lesson.applications[1].kind,'real-world');
+      assert.notEqual(lesson.applications[0].readingId,lesson.applications[1].readingId);
+      for(const app of lesson.applications){
+        assert.ok(app.wordIds.length>=2);
+        assert.ok(app.questions.length>=2);
+        assert.ok(content.manifest.readings.some(r=>r.id===app.readingId&&r.translation));
+      }
+      for(const bonusId of lesson.bonusIds){
+        const bonus=content.manifest.bonus.find(b=>b.id===bonusId);
+        assert.equal(bonus.optional,true);
+        assert.ok(bonus.text);
+      }
+    }
+  }
+  const a=content.getKnowledgeState('11-1-A'),b=content.getKnowledgeState('11-1-B');
+  assert.ok(a.vocabulary.some(v=>v.japanese==='りんご'));
+  assert.ok(!a.vocabulary.some(v=>v.japanese==='ねだん'));
+  assert.ok(b.vocabulary.some(v=>v.japanese==='ねだん'));
+  assert.equal(new Set(content.manifest.vocabulary.map(v=>v.id)).size,content.manifest.vocabulary.length);
 });
