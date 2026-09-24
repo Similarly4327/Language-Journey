@@ -17,7 +17,7 @@ function fakeElement(id=''){
 function createRecallApp({savedState={},now=new Date(2026,2,20,12).getTime()}={}){
   const clock={now};
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
-  const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,`globalThis.__probe={state,rankState,vocabCatalog,vocabById,flashcardDue,flashcardDueText,flashcardNextDueAt,flashcardCounts,flashcardSelectedCards,flashcardAnswerChoices,flashcardRate,flashcardSkip,flashcardNextCard,startFlashcardSession,pauseFlashcardSession,resumeFlashcardSession,recordVocabEncounter,renderFlashcardsScreen,viewMarkup(){return $('flashcardView').innerHTML},setNow(value){clock.now=value},disableRender(){renderFlashcardsScreen=()=>{}}};})();`);
+  const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,`globalThis.__probe={state,rankState,vocabCatalog,vocabById,flashcardDue,flashcardDueText,flashcardNextDueAt,flashcardCounts,flashcardSelectedCards,flashcardAnswerChoices,flashcardAnswerFeedback,flashcardAnswerState,flashcardAnswerFeedbackText,flashcardRate,flashcardSkip,flashcardNextCard,startFlashcardSession,pauseFlashcardSession,resumeFlashcardSession,recordVocabEncounter,renderFlashcardsScreen,viewMarkup(){return $('flashcardView').innerHTML},setNow(value){clock.now=value},disableRender(){renderFlashcardsScreen=()=>{}}};})();`);
   const elements=new Map(),get=id=>{if(!elements.has(id))elements.set(id,fakeElement(id));return elements.get(id)};
   const document={body:fakeElement('body'),documentElement:fakeElement('html'),hidden:false,getElementById:get,createElement:()=>fakeElement(),querySelectorAll:()=>[],querySelector:()=>fakeElement(),addEventListener(){}};
   const storage=new Map();
@@ -189,4 +189,20 @@ test('Future free-practice cards have useful choices on a fresh profile',()=>{
   assert.equal(app.flashcardAnswerChoices(card,'nl-jp').length,4);
   assert.equal(state.introducedVocabIds.length,0);
   assert.equal(Object.keys(state.flashcardProgress.cards).length,0);
+});
+
+test('Recall answer feedback marks wrong, correct, and remaining options consistently',()=>{
+  const app=createRecallApp();
+  const choices=['muziekstuk','lied','boek','hond'],correctAnswers=['lied','muziekstuk betekenis'];
+  const before=app.flashcardAnswerFeedback(choices,correctAnswers,null);
+  assert.deepEqual(choices.map(answer=>app.flashcardAnswerState(answer,before)),['neutral','neutral','neutral','neutral']);
+  const incorrect=app.flashcardAnswerFeedback(choices,correctAnswers,{chosen:'muziekstuk',grade:'again'});
+  assert.equal(incorrect.correctAnswer,'lied','correct option is selected from the presented choices, not meaning-list order');
+  assert.deepEqual(choices.map(answer=>app.flashcardAnswerState(answer,incorrect)),['incorrect','correct','neutral','neutral']);
+  assert.equal(app.flashcardAnswerFeedbackText(incorrect),'Niet goed · Juiste antwoord: lied');
+  const correct=app.flashcardAnswerFeedback(choices,correctAnswers,{chosen:'lied',grade:'knew'});
+  assert.deepEqual(choices.map(answer=>app.flashcardAnswerState(answer,correct)),['neutral','correct','neutral','neutral']);
+  assert.equal(app.flashcardAnswerFeedbackText(correct),'Goed!');
+  const freeIncorrect=app.flashcardAnswerFeedback(choices,correctAnswers,{chosen:'muziekstuk',grade:'viewed',ungraded:true});
+  assert.deepEqual(choices.map(answer=>app.flashcardAnswerState(answer,freeIncorrect)),['incorrect','correct','neutral','neutral']);
 });
