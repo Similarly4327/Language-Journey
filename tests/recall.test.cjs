@@ -17,7 +17,7 @@ function fakeElement(id=''){
 function createRecallApp({savedState={},now=new Date(2026,2,20,12).getTime()}={}){
   const clock={now};
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
-  const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,`globalThis.__probe={state,rankState,vocabCatalog,vocabById,flashcardDue,flashcardDueText,flashcardNextDueAt,flashcardCounts,flashcardSelectedCards,flashcardRate,flashcardSkip,flashcardNextCard,startFlashcardSession,pauseFlashcardSession,resumeFlashcardSession,recordVocabEncounter,renderFlashcardsScreen,viewMarkup(){return $('flashcardView').innerHTML},setNow(value){clock.now=value},disableRender(){renderFlashcardsScreen=()=>{}}};})();`);
+  const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,`globalThis.__probe={state,rankState,vocabCatalog,vocabById,flashcardDue,flashcardDueText,flashcardNextDueAt,flashcardCounts,flashcardSelectedCards,flashcardAnswerChoices,flashcardRate,flashcardSkip,flashcardNextCard,startFlashcardSession,pauseFlashcardSession,resumeFlashcardSession,recordVocabEncounter,renderFlashcardsScreen,viewMarkup(){return $('flashcardView').innerHTML},setNow(value){clock.now=value},disableRender(){renderFlashcardsScreen=()=>{}}};})();`);
   const elements=new Map(),get=id=>{if(!elements.has(id))elements.set(id,fakeElement(id));return elements.get(id)};
   const document={body:fakeElement('body'),documentElement:fakeElement('html'),hidden:false,getElementById:get,createElement:()=>fakeElement(),querySelectorAll:()=>[],querySelector:()=>fakeElement(),addEventListener(){}};
   const storage=new Map();
@@ -161,4 +161,32 @@ test('Recall start screen clearly separates due SRS cards from free practice',()
   assert.match(markup,/Start SRS-herhaling/);
   assert.match(markup,/Vrij oefenen/);
   assert.match(markup,/Kies andere levels of lessen/);
+});
+
+test('A saved review is not hidden when old lesson-encounter flags are missing',()=>{
+  const app=createRecallApp(),{state}=app,card=app.vocabCatalog.find(v=>!v.legacy&&!state.introducedVocabIds.includes(v.id));
+  assert.ok(card);
+  assert.ok(!app.flashcardSelectedCards().some(v=>v.id===card.id));
+  state.flashcardProgress.cards[`${card.id}::jp-nl`]={dueAt:Date.now()-1,intervalDays:1,repetitions:1,lapses:0,lastReviewedAt:Date.now()-86400000,lastGrade:'knew'};
+  assert.ok(app.flashcardSelectedCards().some(v=>v.id===card.id));
+});
+
+test('Dutch to Japanese choices do not offer another word with the same Dutch meaning',()=>{
+  const app=createRecallApp(),{state}=app,women=app.vocabCatalog.filter(v=>!v.legacy&&v.meaning==='vrouw');
+  assert.equal(women.length,2);
+  state.introducedVocabIds.push(...women.map(v=>v.id));
+  for(const card of women){
+    const other=women.find(v=>v.id!==card.id);
+    for(let repeat=0;repeat<30;repeat++)assert.ok(!app.flashcardAnswerChoices(card,'nl-jp').includes(other.kana));
+  }
+});
+
+test('Future free-practice cards have useful choices on a fresh profile',()=>{
+  const app=createRecallApp(),{state}=app,card=app.vocabCatalog.find(v=>!v.legacy&&!state.introducedVocabIds.includes(v.id));
+  assert.ok(card);
+  assert.equal(state.introducedVocabIds.length,0);
+  assert.equal(app.flashcardAnswerChoices(card,'jp-nl').length,4);
+  assert.equal(app.flashcardAnswerChoices(card,'nl-jp').length,4);
+  assert.equal(state.introducedVocabIds.length,0);
+  assert.equal(Object.keys(state.flashcardProgress.cards).length,0);
 });
