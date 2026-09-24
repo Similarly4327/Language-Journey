@@ -17,7 +17,7 @@ function fakeElement(id=''){
 function createRecallApp({savedState={},now=new Date(2026,2,20,12).getTime()}={}){
   const clock={now};
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
-  const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,`globalThis.__probe={state,rankState,vocabCatalog,vocabById,flashcardDue,flashcardDueText,flashcardNextDueAt,flashcardCounts,flashcardSelectedCards,flashcardAnswerChoices,flashcardAnswerFeedback,flashcardAnswerState,flashcardAnswerFeedbackText,flashcardRate,flashcardSkip,flashcardNextCard,startFlashcardSession,pauseFlashcardSession,resumeFlashcardSession,recordVocabEncounter,renderFlashcardsScreen,viewMarkup(){return $('flashcardView').innerHTML},setNow(value){clock.now=value},disableRender(){renderFlashcardsScreen=()=>{}}};})();`);
+  const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,`globalThis.__probe={state,rankState,vocabCatalog,vocabById,flashcardDue,flashcardDueText,flashcardNextDueAt,flashcardCounts,flashcardSelectedCards,flashcardAnswerChoices,flashcardAnswerFeedback,flashcardAnswerState,flashcardAnswerFeedbackText,flashcardRate,flashcardSkip,flashcardNextCard,revealFlashcardOptions,startFlashcardSession,pauseFlashcardSession,resumeFlashcardSession,recordVocabEncounter,renderFlashcardsScreen,viewMarkup(){return $('flashcardView').innerHTML},setNow(value){clock.now=value},disableRender(){renderFlashcardsScreen=()=>{}}};})();`);
   const elements=new Map(),get=id=>{if(!elements.has(id))elements.set(id,fakeElement(id));return elements.get(id)};
   const document={body:fakeElement('body'),documentElement:fakeElement('html'),hidden:false,getElementById:get,createElement:()=>fakeElement(),querySelectorAll:()=>[],querySelector:()=>fakeElement(),addEventListener(){}};
   const storage=new Map();
@@ -205,4 +205,26 @@ test('Recall answer feedback marks wrong, correct, and remaining options consist
   assert.equal(app.flashcardAnswerFeedbackText(correct),'Goed!');
   const freeIncorrect=app.flashcardAnswerFeedback(choices,correctAnswers,{chosen:'muziekstuk',grade:'viewed',ungraded:true});
   assert.deepEqual(choices.map(answer=>app.flashcardAnswerState(answer,freeIncorrect)),['incorrect','correct','neutral','neutral']);
+});
+
+test('Recall options reveal without selecting and reset for the next card',()=>{
+  const app=createRecallApp(),{state}=app,[first,second]=app.vocabCatalog.filter(v=>!v.legacy);
+  state.flashcardSession={mode:'scheduled',queue:[{cardId:first.id,direction:'jp-nl'},{cardId:second.id,direction:'nl-jp'}],position:0,status:'active',revealed:false,optionsRevealed:false,knew:0,again:0,skipped:0,requeued:[],feedback:null};
+  app.revealFlashcardOptions();
+  assert.equal(state.flashcardSession.optionsRevealed,true);
+  assert.equal(state.flashcardSession.feedback,null,'the reveal tap does not submit an answer');
+  app.revealFlashcardOptions();
+  assert.equal(state.flashcardSession.optionsRevealed,true,'the same card stays revealed');
+  app.flashcardSkip();
+  assert.equal(state.flashcardSession.position,1);
+  assert.equal(state.flashcardSession.optionsRevealed,false,'the next card starts blurred again');
+});
+
+test('Recall keeps a revealed card revealed after reload and exposes a labeled reveal control',()=>{
+  const app=createRecallApp({savedState:{flashcardSession:{queue:[],position:0,status:'paused',optionsRevealed:true}}});
+  assert.equal(app.state.flashcardSession.optionsRevealed,true);
+  const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
+  assert.match(html,/\.flashcard-answer-options\.is-hidden \.flashcard-answer-choice\{filter:blur\(7px\)/);
+  assert.match(html,/reveal\.setAttribute\('aria-label','Toon antwoordopties'\)/);
+  assert.match(html,/querySelector\('\.flashcard-face-sub'\)\?\.remove\(\)/,'Recall removes the redundant direction hint from the rendered card');
 });
