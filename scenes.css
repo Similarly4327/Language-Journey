@@ -24,6 +24,12 @@ body[data-scene="home"]::after,body[data-scene="market"]::after,body[data-scene=
 .level-compact-hero{display:grid;gap:5px}
 .level-compact-hero .h1{margin:0}
 .level-compact-hero .small{margin-top:3px}
+.level-new-shortcuts{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 14px;border:1px solid var(--border);border-radius:14px;background:var(--glass-strong)}
+.level-new-shortcuts>strong{font-size:13px}
+.level-new-shortcut-actions{display:flex;flex-wrap:wrap;gap:8px}
+.level-new-shortcut-actions .btn{min-height:44px;white-space:normal}
+@media(max-width:640px){.level-new-shortcuts{display:grid}.level-new-shortcut-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.level-new-shortcut-actions .btn{width:100%}}
+@media(max-width:380px){.level-new-shortcut-actions{grid-template-columns:1fr}}
 .level-lesson-list{display:grid;gap:8px}
 .level-lesson-item{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:10px;width:100%;min-height:72px;text-align:left;padding:10px 12px;border:2px solid var(--border);border-radius:15px;background:var(--glass-strong);color:var(--text);cursor:pointer}
 .level-lesson-item.rank-Copper{border-color:var(--copper)}

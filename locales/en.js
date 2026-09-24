@@ -4,6 +4,7 @@ window.LanguageJourneyLocales.en={
   'nav.learn':'Learn','nav.cards':'Recall','nav.progress':'Progress','nav.home':'Course home','nav.levels':'All levels','nav.backToOverview':'Back to overview',
   'home.kicker':'日本語への道 · your journey','home.title':'Your learning journey','home.intro':'Choose where to continue learning.','home.openLevels':'Browse all levels','home.continue':'Continue','home.course':'Course','home.uiLanguage':'App language',
   'levels.routeTitle':'Your long learning journey','levels.routeIntro':'Ten levels make up each larger stage. Open the stage you need now.','levels.milestoneTitle':'Milestones ahead','levels.milestoneIntro':'Long-term goals without a fixed level number or a false finish line.','levels.goal':'Larger goal','levels.planned':'Tentative route','levels.concept':'Outline route','levels.now':'Now: level {number} of {total}','levels.ranks':'{done}/{total} level ranks','levels.learnWhat':'What will you learn?','levels.learnHow':'How?','levels.choose':'Choose what to start with below.','levels.smallStep':'One small step at a time.',
+  'levels.newAvailable':'New in stage 2',
   'location.journey':'On the way','location.school':'To school','location.home':'At home','location.market':'Grocery shopping','location.airport':'To the airport',
   'course.japanese.name':'Japanese','course.japanese.short':'日本語','course.japanese.targetLanguage':'Japanese',
   'course.japanese.level.1.title':'Writing foundations','course.japanese.level.1.description':'Hiragana · Numbers · Katakana','course.japanese.level.1.numbers':'Numbers',

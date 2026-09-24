@@ -12,7 +12,7 @@ function fakeElement(id=''){
     setAttribute(){},getAttribute(){return null},removeAttribute(){},appendChild(){},prepend(){},remove(){},addEventListener(){},querySelector(){return fakeElement()},querySelectorAll(){return []},scrollIntoView(){},focus(){},getBoundingClientRect(){return{width:300,height:200,top:0,left:0}}};
 }
 
-test('all ten level screens render through the imported content adapter',()=>{
+test('all level screens render through the imported content adapter',()=>{
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
   const source=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/, 'globalThis.__probe={state,rankState,vocabMastery,itemMastery,renderMain,advancedPracticeQuestions,languagePracticeQuestions,advancedCourses,langLessons};})();');
   const elements=new Map();
@@ -36,7 +36,7 @@ test('all ten level screens render through the imported content adapter',()=>{
   assert.equal(context.__probe.state.flashcardProgress.cards['vocab-ねこ::jp-nl'].repetitions,2);
   assert.equal(context.__probe.vocabMastery['vocab-ねこ'].score,40);
   assert.equal(context.__probe.itemMastery['hiragana-あ'].score,20);
-  for(let level=0;level<10;level++){
+  for(let level=0;level<content.levels.length;level++){
     context.__probe.state.screen='module';
     context.__probe.state.level=level;
     assert.doesNotThrow(()=>context.__probe.renderMain(),`Level ${level+1} failed`);

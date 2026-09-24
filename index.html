@@ -3035,6 +3035,22 @@ function renderLevelMenu(box){
   routeHead.className='menu-section-head';
   routeHead.innerHTML=`<div class="h1">${t('nav.levels')}</div><div class="muted">${t('levels.routeIntro')}</div>`;
   box.appendChild(routeHead);
+  if(thematicCourses[10]&&thematicCourses[11]){
+    const shortcuts=document.createElement('section'),label=document.createElement('strong'),actions=document.createElement('div');
+    shortcuts.className='level-new-shortcuts';
+    label.textContent=t('levels.newAvailable');
+    actions.className='level-new-shortcut-actions';
+    [10,11].forEach(index=>{
+      const button=document.createElement('button');
+      button.type='button';
+      button.className='btn';
+      button.textContent=`${t('common.level',{number:index+1})} · ${localizedLevel(index)[1]}`;
+      button.onclick=()=>openLevel(index);
+      actions.appendChild(button);
+    });
+    shortcuts.append(label,actions);
+    box.appendChild(shortcuts);
+  }
   coursePhases.forEach((phase,index)=>box.appendChild(renderCoursePhase(phase,index)));
   const current=box.querySelector(`[data-level-index="${state.level}"]`);
   if(current){current.closest('details')?.setAttribute('open','');requestAnimationFrame(()=>centerPhaseLevel(current.closest('.phase-levels'),state.level))}
