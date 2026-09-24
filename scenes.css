@@ -15,3 +15,36 @@ body[data-scene="home"]::after,body[data-scene="market"]::after{background:linea
 .platform-home-actions{display:flex;flex-wrap:wrap;gap:9px}
 .platform-home-actions .btn{min-height:44px}
 @media(max-width:520px){.platform-home-actions{display:grid;grid-template-columns:1fr}.platform-home-actions .btn{width:100%}}
+.app-header .header-copy{display:none}
+.app-header>.between{gap:8px}
+.app-header .header-actions{margin-left:auto;min-width:0}
+.app-header .app-nav{white-space:nowrap}
+.app-header .nav-back{min-width:40px;min-height:40px}
+.level-compact-hero{display:grid;gap:5px}
+.level-compact-hero .h1{margin:0}
+.level-compact-hero .small{margin-top:3px}
+.level-lesson-list{display:grid;gap:8px}
+.level-lesson-item{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:10px;width:100%;min-height:72px;text-align:left;padding:10px 12px;border:2px solid var(--border);border-radius:15px;background:var(--glass-strong);color:var(--text);cursor:pointer}
+.level-lesson-item.rank-Copper{border-color:var(--copper)}
+.level-lesson-item.rank-Silver{border-color:var(--silver)}
+.level-lesson-item.rank-Gold{border-color:var(--gold)}
+.level-lesson-item.rank-Platinum{border-color:var(--platinum);box-shadow:0 0 0 2px color-mix(in srgb,var(--platinum) 16%,transparent)}
+.level-lesson-item.is-next{background:color-mix(in srgb,var(--accent) 9%,var(--glass-strong))}
+.level-lesson-number{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--panel);font-weight:800}
+.level-lesson-copy{display:grid;gap:3px;min-width:0}
+.level-lesson-copy strong,.level-lesson-copy span{overflow-wrap:anywhere}
+.level-lesson-copy span{font-size:12px;color:var(--muted)}
+.level-lesson-rank{font-size:11px;font-weight:800;color:var(--muted)}
+.level-secondary-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.compact-lesson-stepper{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible}
+.recall-start{display:grid;gap:10px}
+.recall-start .h1,.recall-start .h2{margin:0}
+.recall-start .btn{width:100%;min-height:48px}
+.recall-custom summary,.recall-info summary{cursor:pointer;min-height:42px;display:flex;align-items:center;font-weight:800}
+.recall-custom summary::after,.recall-info summary::after{content:'⌄';margin-left:auto;font-size:20px;line-height:1}
+.recall-custom[open] summary::after,.recall-info[open] summary::after{transform:rotate(180deg)}
+.recall-custom #flashcardScope{padding-top:12px}
+.recall-info{padding:0 12px;color:var(--muted);background:var(--glass);border:1px solid var(--glass-border);border-radius:13px}
+.recall-info p{margin:0 0 12px;font-size:13px;line-height:1.5}
+@media(max-width:380px){.app-header{padding:6px!important}.app-header .app-nav-item{padding:5px 6px;font-size:11px}.level-lesson-rank{font-size:10px}}
+@media(max-width:640px){.phase-levels .level-menu-card{scroll-snap-align:center}}

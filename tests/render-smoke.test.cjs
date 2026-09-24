@@ -14,7 +14,7 @@ function fakeElement(id=''){
 
 test('all ten level screens render through the imported content adapter',()=>{
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
-  const source=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/, 'globalThis.__probe={state,rankState,vocabMastery,itemMastery,renderMain};})();');
+  const source=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/, 'globalThis.__probe={state,rankState,vocabMastery,itemMastery,renderMain,advancedPracticeQuestions,languagePracticeQuestions,advancedCourses,langLessons};})();');
   const elements=new Map();
   const get=id=>{if(!elements.has(id))elements.set(id,fakeElement(id));return elements.get(id)};
   const document={body:fakeElement('body'),documentElement:fakeElement('html'),hidden:false,getElementById:get,createElement:()=>fakeElement(),querySelectorAll:()=>[],querySelector:()=>fakeElement(),addEventListener(){}};
@@ -40,5 +40,17 @@ test('all ten level screens render through the imported content adapter',()=>{
     context.__probe.state.screen='module';
     context.__probe.state.level=level;
     assert.doesNotThrow(()=>context.__probe.renderMain(),`Level ${level+1} failed`);
+  }
+  for(let index=0;index<context.__probe.langLessons.length;index++){
+    const questions=context.__probe.languagePracticeQuestions(context.__probe.langLessons[index],index);
+    assert.equal(questions.length,10,`Level 4 lesson ${index+1} practice count`);
+    assert.equal(questions.filter(question=>question.kind==='build').length,2);
+  }
+  for(const [level,course] of Object.entries(context.__probe.advancedCourses)){
+    course.lessons.forEach((lesson,index)=>{
+      const questions=context.__probe.advancedPracticeQuestions(course,lesson,index);
+      assert.equal(questions.length,10,`Level ${course.number} lesson ${index+1} practice count`);
+      assert.equal(questions.filter(question=>question.kind==='build').length,2);
+    });
   }
 });

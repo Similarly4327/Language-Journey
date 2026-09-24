@@ -1,7 +1,7 @@
 window.LanguageJourneyLocales=window.LanguageJourneyLocales||{};
 window.LanguageJourneyLocales.nl={
   'common.back':'Terug','common.next':'Volgende','common.close':'Sluiten','common.start':'Start','common.save':'Opslaan','common.cancel':'Annuleren','common.more':'Meer tonen','common.level':'Level {number}','common.lesson':'Les {number}','common.notYet':'Nog niet ingesteld',
-  'nav.learn':'Leren','nav.cards':'Kaarten','nav.progress':'Voortgang','nav.home':'Hoofdmenu','nav.levels':'Levelselectie','nav.backToOverview':'Terug naar overzicht',
+  'nav.learn':'Leren','nav.cards':'Recall','nav.progress':'Voortgang','nav.home':'Cursus-home','nav.levels':'Alle levels','nav.backToOverview':'Terug naar overzicht',
   'home.kicker':'日本語への道 · jouw route','home.title':'Jouw leerreis','home.intro':'Kies waar je verder wilt leren.','home.openLevels':'Bekijk alle levels','home.continue':'Ga verder','home.course':'Cursus','home.uiLanguage':'App-taal',
   'levels.routeTitle':'Jouw lange leerreis','levels.routeIntro':'Tien levels vormen steeds één grotere fase. Open alleen de fase die je nu nodig hebt.','levels.milestoneTitle':'Grote mijlpalen in de verte','levels.milestoneIntro':'Richtinggevers zonder vast levelnummer of valse eindbelofte.','levels.goal':'Groter doel','levels.planned':'Voorlopige route','levels.concept':'Conceptuele route','levels.now':'Nu: Level {number} van {total}','levels.ranks':'{done}/{total} levelranks','levels.learnWhat':'Wat leer je?','levels.learnHow':'Hoe?','levels.choose':'Kies hieronder waarmee je wilt beginnen.','levels.smallStep':'Een kleine stap tegelijk.',
   'location.journey':'Onderweg','location.school':'Naar school','location.home':'Thuis','location.market':'Boodschappen doen',
@@ -35,6 +35,6 @@ window.LanguageJourneyLocales.nl={
   'course.japanese.milestone.general-news.title':'De hoofdlijn van algemeen nieuws volgen','course.japanese.milestone.general-news.description':'Een verre mijlpaal voor formeel taalgebruik en algemeen begrip; zonder vast levelnummer.',
   'profile.title':'Persoonlijk profiel','profile.uiLanguage':'Taal van de app','profile.targetLanguage':'Taal die je leert','profile.course':'Cursus','profile.languageHelp':'De app-taal verandert alleen de begeleiding. Je cursusvoortgang blijft gelijk.','profile.languageDutch':'Nederlands','profile.languageEnglish':'Engels','profile.languageGerman':'Duits',
   'progress.title':'Voortgang','progress.profile':'Profiel','progress.knowledge':'Kennis','progress.heroTitle':'Mijn Japanse leerreis','progress.heroIntro':'Je profiel, groei en bekende bouwstenen.','progress.recent':'Recente activiteiten','progress.analysis':'Urenanalyse','progress.timeline':'Tijdlijn',
-  'flashcards.title':'Flashcards','flashcards.correct':'Goed!','flashcards.incorrect':'Het juiste antwoord is geselecteerd.','flashcards.next':'Volgende kaart',
+  'flashcards.title':'Recall','flashcards.correct':'Goed!','flashcards.incorrect':'Het juiste antwoord is geselecteerd.','flashcards.next':'Volgende kaart',
   'errors.generic':'Er ging iets mis. Probeer het opnieuw.'
 };

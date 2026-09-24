@@ -1,7 +1,7 @@
 window.LanguageJourneyLocales=window.LanguageJourneyLocales||{};
 window.LanguageJourneyLocales.de={
   'common.back':'Zurück','common.next':'Weiter','common.close':'Schließen','common.start':'Starten','common.save':'Speichern','common.cancel':'Abbrechen','common.more':'Mehr anzeigen','common.level':'Level {number}','common.lesson':'Lektion {number}','common.notYet':'Noch nicht festgelegt',
-  'nav.learn':'Lernen','nav.cards':'Karten','nav.progress':'Fortschritt','nav.home':'Hauptmenü','nav.levels':'Level auswählen','nav.backToOverview':'Zurück zur Übersicht',
+  'nav.learn':'Lernen','nav.cards':'Recall','nav.progress':'Fortschritt','nav.home':'Kursstart','nav.levels':'Alle Level','nav.backToOverview':'Zurück zur Übersicht',
   'home.kicker':'日本語への道 · dein Weg','home.title':'Dein Lernweg','home.intro':'Wähle aus, wo du weiterlernen möchtest.','home.openLevels':'Alle Level ansehen','home.continue':'Weiterlernen','home.course':'Kurs','home.uiLanguage':'App-Sprache',
   'levels.routeTitle':'Dein langer Lernweg','levels.routeIntro':'Je zehn Level bilden einen größeren Abschnitt. Öffne den Abschnitt, den du gerade brauchst.','levels.milestoneTitle':'Meilensteine in der Ferne','levels.milestoneIntro':'Langfristige Ziele ohne feste Levelnummer oder falsches Endversprechen.','levels.goal':'Größeres Ziel','levels.planned':'Vorläufiger Weg','levels.concept':'Geplanter Weg','levels.now':'Jetzt: Level {number} von {total}','levels.ranks':'{done}/{total} Level-Ränge','levels.learnWhat':'Was lernst du?','levels.learnHow':'Wie?','levels.choose':'Wähle unten, womit du anfangen möchtest.','levels.smallStep':'Ein kleiner Schritt nach dem anderen.',
   'location.journey':'Unterwegs','location.school':'Zur Schule','location.home':'Zu Hause','location.market':'Einkaufen',
@@ -35,6 +35,6 @@ window.LanguageJourneyLocales.de={
   'course.japanese.milestone.general-news.title':'Die Hauptaussage allgemeiner Nachrichten verstehen','course.japanese.milestone.general-news.description':'Ein fernes Ziel für formelle Sprache und breites Verständnis ohne feste Levelnummer.',
   'profile.title':'Persönliches Profil','profile.uiLanguage':'App-Sprache','profile.targetLanguage':'Sprache, die du lernst','profile.course':'Kurs','profile.languageHelp':'Die App-Sprache ändert nur die Begleitung. Dein Kursfortschritt bleibt gleich.','profile.languageDutch':'Niederländisch','profile.languageEnglish':'Englisch','profile.languageGerman':'Deutsch',
   'progress.title':'Fortschritt','progress.profile':'Profil','progress.knowledge':'Wissen','progress.heroTitle':'Mein Weg zum Japanischen','progress.heroIntro':'Dein Profil, deine Entwicklung und bekannte Bausteine.','progress.recent':'Letzte Aktivitäten','progress.analysis':'Lernzeitanalyse','progress.timeline':'Zeitleiste',
-  'flashcards.title':'Karteikarten','flashcards.correct':'Richtig!','flashcards.incorrect':'Die richtige Antwort ist markiert.','flashcards.next':'Nächste Karte',
+  'flashcards.title':'Recall','flashcards.correct':'Richtig!','flashcards.incorrect':'Die richtige Antwort ist markiert.','flashcards.next':'Nächste Karte',
   'errors.generic':'Etwas ist schiefgegangen. Bitte versuche es erneut.'
 };

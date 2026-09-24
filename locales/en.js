@@ -1,7 +1,7 @@
 window.LanguageJourneyLocales=window.LanguageJourneyLocales||{};
 window.LanguageJourneyLocales.en={
   'common.back':'Back','common.next':'Next','common.close':'Close','common.start':'Start','common.save':'Save','common.cancel':'Cancel','common.more':'Show more','common.level':'Level {number}','common.lesson':'Lesson {number}','common.notYet':'Not set yet',
-  'nav.learn':'Learn','nav.cards':'Cards','nav.progress':'Progress','nav.home':'Home','nav.levels':'Choose a level','nav.backToOverview':'Back to overview',
+  'nav.learn':'Learn','nav.cards':'Recall','nav.progress':'Progress','nav.home':'Course home','nav.levels':'All levels','nav.backToOverview':'Back to overview',
   'home.kicker':'日本語への道 · your journey','home.title':'Your learning journey','home.intro':'Choose where to continue learning.','home.openLevels':'Browse all levels','home.continue':'Continue','home.course':'Course','home.uiLanguage':'App language',
   'levels.routeTitle':'Your long learning journey','levels.routeIntro':'Ten levels make up each larger stage. Open the stage you need now.','levels.milestoneTitle':'Milestones ahead','levels.milestoneIntro':'Long-term goals without a fixed level number or a false finish line.','levels.goal':'Larger goal','levels.planned':'Tentative route','levels.concept':'Outline route','levels.now':'Now: level {number} of {total}','levels.ranks':'{done}/{total} level ranks','levels.learnWhat':'What will you learn?','levels.learnHow':'How?','levels.choose':'Choose what to start with below.','levels.smallStep':'One small step at a time.',
   'location.journey':'On the way','location.school':'To school','location.home':'At home','location.market':'Grocery shopping',
@@ -35,6 +35,6 @@ window.LanguageJourneyLocales.en={
   'course.japanese.milestone.general-news.title':'Follow the gist of general news','course.japanese.milestone.general-news.description':'A distant goal for formal language and broad understanding, without a fixed level number.',
   'profile.title':'Personal profile','profile.uiLanguage':'App language','profile.targetLanguage':'Language you are learning','profile.course':'Course','profile.languageHelp':'The app language only changes the guidance. Your course progress stays the same.','profile.languageDutch':'Dutch','profile.languageEnglish':'English','profile.languageGerman':'German',
   'progress.title':'Progress','progress.profile':'Profile','progress.knowledge':'Knowledge','progress.heroTitle':'My Japanese learning journey','progress.heroIntro':'Your profile, growth and familiar building blocks.','progress.recent':'Recent activities','progress.analysis':'Study time analysis','progress.timeline':'Timeline',
-  'flashcards.title':'Flashcards','flashcards.correct':'Correct!','flashcards.incorrect':'The correct answer is selected.','flashcards.next':'Next card',
+  'flashcards.title':'Recall','flashcards.correct':'Correct!','flashcards.incorrect':'The correct answer is selected.','flashcards.next':'Next card',
   'errors.generic':'Something went wrong. Please try again.'
 };

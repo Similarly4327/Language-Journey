@@ -94,6 +94,18 @@ section{
   gap:10px;
   align-content:start; /* Prevent quiz cards from stretching to viewport height */
 }
+.dictionary-search{width:100%;min-height:48px;border:1px solid var(--border);border-radius:12px;background:var(--panel);padding:10px 12px}
+.dictionary-results{display:grid;gap:7px;max-height:min(48vh,420px);overflow:auto}
+.dictionary-result{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;min-height:54px;padding:9px 11px;border:1px solid var(--border);border-radius:12px;background:var(--card);text-align:left}
+.dictionary-result small{display:block;color:var(--muted);margin-top:2px}
+.dictionary-kind{font-size:11px;color:var(--muted);white-space:nowrap}
+.dictionary-entry-title{font-size:34px;font-weight:800;line-height:1.2}
+.dictionary-link{border:0;background:none;color:var(--accent);font:inherit;font-weight:650;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--accent) 45%,transparent);text-underline-offset:3px;padding:0 2px;cursor:pointer}
+.dictionary-modal{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom));background:#0008}
+.dictionary-modal.hidden{display:none}
+.dictionary-modal-card{width:min(620px,100%);max-height:88dvh;overflow:auto;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:18px;padding:16px;box-shadow:0 20px 60px #0004}
+.dictionary-inline-context{border-left:3px solid var(--accent);padding:8px 10px;background:var(--panel);border-radius:0 10px 10px 0}
+@media(max-width:520px){.dictionary-entry-title{font-size:30px}.dictionary-modal-card{padding:13px}}
 .card{
   width:100%;
   min-width:0;
@@ -1550,6 +1562,7 @@ body[data-scene="journey"][data-view="main"] #mainView{
   <div class="between" style="align-items:center">
     <div class="header-left">
       <button id="navBack" class="nav-back hidden" type="button" aria-label="Terug">←</button>
+      <button id="navHome" class="nav-back hidden" type="button" aria-label="Cursus-home" title="Cursus-home">⌂</button>
       <div class="header-copy">
         <div id="headerEyebrow" class="eyebrow">日本語</div>
         <div id="headerTitle" class="h1">Language Journey</div>
@@ -1558,7 +1571,7 @@ body[data-scene="journey"][data-view="main"] #mainView{
     <div class="header-actions">
       <nav class="app-nav" aria-label="Hoofdnavigatie">
         <button id="learnNav" class="app-nav-item active" type="button">Leren</button>
-        <button id="flashcardsNav" class="app-nav-item" type="button">Kaarten</button>
+        <button id="flashcardsNav" class="app-nav-item" type="button">Recall</button>
         <button id="sessionBtn" class="app-nav-item" type="button">Voortgang</button>
       </nav>
     </div>
@@ -1570,6 +1583,7 @@ body[data-scene="journey"][data-view="main"] #mainView{
 <section id="resultView" class="stack hidden"><div class="card question"><div id="resultTitle" class="h2"></div><div id="resultScore" style="font-size:40px;font-weight:800;margin-top:8px"></div><div id="resultStats" class="muted"></div><div id="resultRank" class="panel hidden" style="margin-top:10px"></div><div id="resultAvatarAssist"></div></div><div class="card"><div class="h2">Fouten</div><div id="errorIntro" class="small"></div><div id="errorList" class="stack" style="margin-top:9px"></div></div><div class="grid2"><button id="practiceErrors" class="btn">Oefen mijn fouten</button><button id="retryBtn" class="btn">Opnieuw</button><button id="nextBtn" class="btn primary hidden">Volgende →</button><button id="backBtn" class="btn">Terug naar overzicht</button></div></section>
 <section id="sessionView" class="stack hidden"><div class="card"><div class="h1">Mijn Japanse leerreis</div><div class="muted">Je profiel, groei en bekende bouwstenen.</div></div><div id="sessionContent" class="stack"></div><button id="sessionBack" class="btn primary">Terug</button></section>
 </div>
+<div id="dictionaryModal" class="dictionary-modal hidden" role="presentation"><section class="dictionary-modal-card" role="dialog" aria-modal="true" aria-labelledby="dictionaryModalTitle"><div class="between" style="align-items:center"><span class="eyebrow">Dictionary · naslag</span><button id="dictionaryClose" class="btn tiny" type="button" aria-label="Dictionary sluiten">Sluiten ×</button></div><div id="dictionaryModalBody" style="margin-top:12px"></div></section></div>
 <div id="sceneTransition" class="scene-transition" role="status" aria-live="polite" hidden><div class="scene-transition-image" aria-hidden="true"></div><div id="sceneTransitionLabel" class="scene-transition-label"></div></div>
 <script src="./locales/nl.js"></script>
 <script src="./locales/en.js"></script>
@@ -1836,6 +1850,110 @@ const MASTERY_CONFIG={
 };
 const itemMastery={};
 const vocabMastery={};
+
+/* Dictionary content follows the course catalog and keeps its stable vocab-* IDs.
+   Kana, lexical words and grammar particles are intentionally separate entries.
+   Particle readings/functions cross-checked against Japan Foundation IRODORI
+   Grammar_all.pdf (https://www.irodori.jpf.go.jp/assets/data/Grammar_all.pdf)
+   and IRODORI Starter Lesson 1 kana chart. */
+const dictionaryGrammar=[
+  {id:'grammar-particle-ha',jp:'は',kana:'は',romaji:'wa',kind:'grammatica',label:'Partikel · topic',meaning:'Markeert waar de zin over gaat. De Nederlandse vertaling hangt af van de zin.',synonyms:['topic','onderwerp','wa'],level:4,lessonId:'l4-3',examples:[['わたし は ひと です','Ik ben een persoon.','は markeert hier わたし als topic.']]},
+  {id:'grammar-particle-he',jp:'へ',kana:'へ',romaji:'e',kind:'grammatica',label:'Partikel · richting',meaning:'Kan de richting markeren waarheen iemand gaat. Als partikel wordt へ als e uitgesproken; als los kana lees je he.',synonyms:['richting','naar','e'],level:9,lessonId:null,examples:[['にほん へ いきます','Ik ga naar Japan.','へ markeert hier de richting.']]},
+  {id:'grammar-particle-wo',jp:'を',kana:'を',romaji:'o',kind:'grammatica',label:'Partikel · object',meaning:'Markeert in deze cursus het object: datgene waarop de handeling gericht is. In deze partikelrol lees je を als o.',synonyms:['object','lijdend voorwerp','o','wo'],level:4,lessonId:'l4-7',examples:[['みず を のみます','Ik drink water.','を markeert hier wat wordt gedronken.']]},
+  {id:'grammar-particle-ka',jp:'か',kana:'か',romaji:'ka',kind:'grammatica',label:'Partikel · vraag',meaning:'Aan het einde van een eenvoudige zin markeert か een vraag. Het is een grammaticale functie, geen vertaling van het kana zelf.',synonyms:['vraagpartikel','vraag','question particle'],level:4,lessonId:'l4-5',examples:[['これは ねこ です か','Is dit een kat?','か maakt de zin tot een vraag.']]},
+  {id:'grammar-particle-mo',jp:'も',kana:'も',romaji:'mo',kind:'grammatica',label:'Partikel · ook',meaning:'Voegt een persoon of ding toe als “ook”. In dit eenvoudige patroon neemt も de plaats van は in.',synonyms:['ook','eveneens','too','also'],level:4,lessonId:'l4-6',examples:[['それ も ねこ です','Dat is ook een kat.','も voegt “dat” toe aan dezelfde uitspraak.']]}
+];
+function dictionaryKanaEntries(){
+  const basic=Object.entries(kanaModules).flatMap(([script,module])=>module.rows.flatMap(row=>row.kana.map(([jp,romaji])=>({id:`kana-${script}-${jp}`,jp,kana:jp,romaji:jp==='を'?'o':romaji,kind:'kana',label:`${module.label} · schriftteken`,meaning:'Dit is een kana: een schriftteken dat een klank weergeeft. Het heeft op zichzelf geen Nederlandse woordbetekenis.',synonyms:jp==='を'?['wo']:[],level:1,lessonId:null,script,lexical:false}))));
+  const voiced=dakutenPatterns.flatMap(pattern=>[['hiragana',pattern.newH],['katakana',pattern.newK]].flatMap(([script,items])=>items.map(([jp,romaji])=>({id:`kana-${script}-${jp}`,jp,kana:jp,romaji,kind:'kana',label:`${kanaModules[script].label} · dakuten`,meaning:'Dit is een kana met een stemteken. Het teken verandert de klank van de basis-kana; op zichzelf is het geen Nederlands woord.',synonyms:[],level:3,lessonId:null,script,lexical:false}))));
+  const combos=new Map();
+  smallLessons.forEach(lesson=>lesson.newItems.forEach(([jp,romaji,formula])=>{
+    if(jp==='ー')combos.set(jp,{id:'writing-long-vowel-mark',jp,kana:jp,romaji:'',kind:'schrijfregel',label:'Katakana · klinkerteken · Level 5',meaning:'De lange streep verlengt de klinker ervoor. Het is een schrijfregel, geen zelfstandig woord.',synonyms:['lange klinker','klinkerteken','lang teken'],level:5,lessonId:lesson.id,lessonTitle:lesson.title});
+    else if(['っ','ッ'].includes(jp))combos.set(jp,{id:`kana-small-${jp}`,jp,kana:jp,romaji:'small tsu',kind:'kana',label:'Kleine kana · Level 5',meaning:'Kleine っ/ッ maakt een korte stop vóór de volgende medeklinker. Je spreekt hem niet uit als de gewone つ/ツ.',synonyms:['kleine tsu','korte stop'],level:5,lessonId:lesson.id,lessonTitle:lesson.title});
+    else combos.set(jp,{id:`kana-combo-${jp}`,jp,kana:jp,romaji,kind:'klankcombinatie',label:`${/[\u30A0-\u30FF]/.test(jp)?'Katakana':'Hiragana'} · Level 5`,meaning:`Eén klankgroep: ${formula}. De combinatie heeft geen zelfstandige Nederlandse woordbetekenis.`,synonyms:[formula],level:5,lessonId:lesson.id,lessonTitle:lesson.title});
+  }));
+  return [...basic,...voiced,...combos.values()]
+}
+const dictionaryWordSenseNotes={
+  'みます':['Hier: kijken naar iets.','Ook: iets zien of waarnemen.'],
+  'うち':['Letterlijk een huis of eigen thuis.','Als bestemming betekent het “naar huis”; als plaats kan het “thuis” betekenen.'],
+  'じゃま':['Een hindernis of iets dat stoort.','In de weg staan: de situatie waarin iets/iemand hindert.'],
+  'おとうさん':['Beleefde vorm voor vader.','Vaak gebruikt voor de vader van een ander; voor je eigen vader gebruik je in deze les ちち wanneer je erover praat.'],
+  'おかあさん':['Beleefde vorm voor moeder.','Vaak gebruikt voor de moeder van een ander; voor je eigen moeder gebruik je in deze les はは wanneer je erover praat.'],
+  'うえ':['Hoger dan iets.','Boven op iets; の verbindt het referentiepunt met deze positie.'],
+  'ください':['Beleefd “alstublieft”.','In “X を ください” vraag je om X: “X, alstublieft.”'],
+  'のります':['Instappen of opstappen.','Met een vervoermiddel reizen/nemen; het vervoermiddel krijgt in het aangeleerde patroon に.'],
+  'ごはん':['Gekookte rijst.','Ook: een maaltijd of eten in het algemeen.']
+};
+function dictionaryEntries(){
+  const words=vocabCatalog.map(v=>({id:v.id,jp:v.jp,kana:v.kana,romaji:v.romaji,kind:'woord',label:`Woord · Level ${v.level} · Les ${v.lessonIndex+1}`,meaning:v.meanings?.[0]||v.meaning,synonyms:[...new Set((v.meanings||[]).slice(1))],level:v.level,lessonId:v.lessonId,lessonIndex:v.lessonIndex,lessonTitle:v.lessonTitle,kanji:v.kanji,kanjiReading:v.kanjiReading,legacy:!!v.legacy,senses:(v.meanings||[v.meaning]).map((meaning,index)=>({id:`${v.id}-sense-${index+1}`,meaning,description:dictionaryWordSenseNotes[v.jp]?.[index]||`Betekenis in de context van ${v.lessonTitle}.`}))}));
+  return [...words,...dictionaryKanaEntries(),...dictionaryGrammar]
+}
+const dictionaryById=Object.fromEntries(dictionaryEntries().map(entry=>[entry.id,entry]));
+function dictionaryNormalize(value){return String(value||'').normalize('NFKC').toLocaleLowerCase('nl-NL').replace(/[\s・·.,!?。、「」『』]/g,'')}
+function dictionaryNormalizeRomaji(value){return String(value||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('nl-NL').replace(/[\s・·.,!?。、「」『』]/g,'')}
+function dictionaryRomajiVariants(value){
+  const base=dictionaryNormalizeRomaji(value),variants=new Set([base]);
+  const doubled=base.replace(/ou/g,'oo');variants.add(doubled);
+  variants.add(base.replace(/([aeiou])\1/g,'$1'));
+  if(/[āīūēō]/i.test(value))variants.add(dictionaryNormalizeRomaji(String(value).toLocaleLowerCase('nl-NL').replaceAll('ā','aa').replaceAll('ī','ii').replaceAll('ū','uu').replaceAll('ē','ee').replaceAll('ō','ou')));
+  return[...variants].filter(Boolean)
+}
+function dictionarySearch(query){
+  const q=dictionaryNormalize(query);if(!q)return[];
+  const qVariants=/[a-zāīūēō]/i.test(query)&&!/[\u3040-\u30ff\u3400-\u9fff]/.test(query)?dictionaryRomajiVariants(query):[q];
+  return Object.values(dictionaryById).map(entry=>{
+    const fields=[entry.jp,entry.kana,entry.meaning,entry.synonyms?.join(' '),entry.label,entry.kanji,entry.kanjiReading].filter(Boolean).map(dictionaryNormalize);fields.push(...dictionaryRomajiVariants(entry.romaji||''));
+    const rank=fields.some(x=>qVariants.includes(x))?0:fields.some(x=>qVariants.some(qv=>x.startsWith(qv)))?1:fields.some(x=>qVariants.some(qv=>x.includes(qv)))?2:99;
+    return{entry,rank}
+  }).filter(x=>x.rank<99).sort((a,b)=>a.rank-b.rank||a.entry.level-b.entry.level||a.entry.jp.localeCompare(b.entry.jp,'ja')).map(x=>x.entry)
+}
+function dictionaryEntryForToken(token,lessonId){
+  const candidates=Object.values(dictionaryById);
+  const grammar=candidates.find(e=>e.kind==='grammatica'&&e.jp===token);
+  if(grammar&&['は','へ','を','か','も'].includes(token))return grammar;
+  const word=candidates.find(e=>e.kind==='woord'&&e.jp===token&&(!lessonId||e.lessonId===lessonId))||candidates.find(e=>e.kind==='woord'&&e.jp===token);
+  return word||candidates.find(e=>e.kind==='kana'&&e.jp===token&&e.script==='hiragana')||null
+}
+function dictionaryButton(entryId,lessonId='',sentence='',meaning=''){
+  const entry=dictionaryById[entryId];if(!entry)return'';
+  return`<button type="button" class="dictionary-link" data-dictionary-open="${escapeHtml(entry.id)}" data-dictionary-lesson="${escapeHtml(lessonId||'')}" data-dictionary-sentence="${escapeHtml(sentence||'')}" data-dictionary-meaning="${escapeHtml(meaning||'')}" aria-label="Open Dictionary: ${escapeHtml(entry.jp)}">${escapeHtml(entry.jp)}</button>`
+}
+function dictionaryLessonLabel(entry){
+  if(!entry.lessonId)return entry.kind==='woord'?`Vooruitblik · Level ${entry.level}`:`Naslag · Level ${entry.level}`;
+  return`Level ${entry.level} · Les ${(entry.lessonIndex??(langLessons.findIndex(l=>l.id===entry.lessonId)))+1}`
+}
+function dictionaryArticleHtml(entry,context={}){
+  const taught=entry.kind==='woord'&&state.introducedVocabIds.includes(entry.id);
+  const available=entry.kind==='woord'&&!!rankState[entry.lessonId]?.rank;
+  const future=entry.kind==='woord'&&!taught&&!available;
+  const contextHtml=context.sentence?`<div class="dictionary-inline-context" style="margin-top:12px"><strong>In deze zin${context.lessonLabel?` · ${escapeHtml(context.lessonLabel)}`:''}</strong><div lang="ja" style="margin-top:4px">${escapeHtml(context.sentence)}</div>${context.meaning?`<div class="small" style="margin-top:3px">${escapeHtml(context.meaning)}</div>`:''}</div>`:'';
+  const romaji=entry.kind==='kana'&&entry.jp==='を'?'o':entry.romaji;
+  const senses=entry.senses?.length>1?`<section style="margin-top:12px"><strong>Betekenissen in de cursus</strong><div class="stack" style="margin-top:6px">${entry.senses.map(s=>`<div class="panel"><strong>${escapeHtml(s.meaning)}</strong><div class="small">${escapeHtml(s.description)}</div></div>`).join('')}</div><div class="small" style="margin-top:6px">Kies de betekenis die past bij de zin.</div></section>`:'';
+  const examples=entry.examples?.length?`<section style="margin-top:12px"><strong>Voorbeeld uit de cursus</strong><div class="stack" style="margin-top:6px">${entry.examples.map(([jp,nl,note])=>`<div class="panel"><div lang="ja" style="font-weight:700">${escapeHtml(jp)}</div><div>${escapeHtml(nl)}</div><div class="small">${escapeHtml(note)}</div></div>`).join('')}</div></section>`:'';
+  const kanji=entry.kanji?`<div class="small" style="margin-top:4px">Kanji: ${escapeHtml(entry.kanji)} · lezing: ${escapeHtml(entry.kanjiReading||entry.kana)}</div>`:'';
+  const kindLabel=entry.kind==='kana'?'Schriftteken / klank':entry.kind==='klankcombinatie'?'Klankcombinatie':entry.kind==='schrijfregel'?'Schrijfregel':entry.kind==='grammatica'?'Grammaticale functie':'Cursuswoord';
+  const readingLabel=entry.kind==='kana'||entry.kind==='klankcombinatie'?'Lezen':entry.kind==='grammatica'?'Uitspraak in deze grammaticale rol':'Kana-lezing / romaji';
+  const readingText=entry.kind==='grammatica'?`${romaji}${entry.jp==='は'?' · los kana: ha':entry.jp==='へ'?' · los kana: he':''}`:entry.kind==='kana'||entry.kind==='klankcombinatie'?romaji:`${entry.kana}${entry.kana!==entry.jp?` · ${entry.kana}`:''} · ${romaji}`;
+  return`<article><div class="eyebrow">${escapeHtml(entry.label)}</div><h2 id="dictionaryModalTitle" class="dictionary-entry-title" lang="ja">${escapeHtml(entry.jp)}</h2><div class="muted">${escapeHtml(kindLabel)}</div><div style="margin-top:9px"><strong>${escapeHtml(entry.meaning)}</strong></div>${romaji?`<div style="margin-top:5px"><span class="small">${readingLabel}:</span> <strong>${escapeHtml(readingText)}</strong></div>`:''}${kanji}${contextHtml}${future?`<div class="notice" style="margin-top:10px">Vooruitblik · dit woord staat in een latere les en is nog niet als geleerd gemarkeerd.</div>`:''}${entry.kind==='woord'&&entry.lessonId?`<div class="small" style="margin-top:8px">${escapeHtml(dictionaryLessonLabel(entry))}${entry.lessonTitle?` · ${escapeHtml(entry.lessonTitle)}`:''}${entry.legacy?' · bewaarde woorden uit een oudere lesversie':''}</div>`:''}${senses}${entry.synonyms?.length?`<div class="small" style="margin-top:10px"><strong>Ook zoeken op:</strong> ${entry.synonyms.map(escapeHtml).join(' · ')}</div>`:''}${examples}</article>`
+}
+function renderDictionaryTab(box){
+  const known=state.introducedVocabIds.map(id=>vocabById[id]).filter(Boolean);
+  box.innerHTML=`<section class="card"><div class="h2">Dictionary · woorden en grammatica</div><div class="muted">Zoek in cursuswoorden, kana en grammaticale tekens. Opzoeken verandert je leer- of herhaalvoortgang niet.</div><label for="dictionarySearch" class="small" style="display:block;margin-top:11px">Zoeken op Japans, kana, romaji of Nederlands</label><input id="dictionarySearch" class="dictionary-search" type="search" autocomplete="off" enterkeyhint="search" aria-controls="dictionaryResults" aria-describedby="dictionarySearchHint" placeholder="Bijv. か · ka · ook · water"><div id="dictionarySearchHint" class="small" style="margin-top:6px">Ook niet-aangeleerde cursuswoorden zijn vindbaar; die herken je aan het label ‘Vooruitblik’.</div></section><section class="card"><div id="dictionaryArticle"></div></section><section class="card"><div class="between"><div><div class="h2">Resultaten</div><div id="dictionaryResultCount" class="small" aria-live="polite"></div></div></div><div id="dictionaryResults" class="dictionary-results" role="region" aria-label="Dictionary-resultaten" style="margin-top:9px"></div></section>`;
+  const input=$('dictionarySearch'),results=$('dictionaryResults'),article=$('dictionaryArticle');
+  const showArticle=id=>{const entry=dictionaryById[id];if(entry){article.innerHTML=dictionaryArticleHtml(entry);state.dictionarySelectedId=id}};
+  const draw=()=>{const q=input.value.trim(),list=q?dictionarySearch(q):[...dictionaryGrammar,...known.map(v=>dictionaryById[v.id]).filter(Boolean)];$('dictionaryResultCount').textContent=`${list.length} ${list.length===1?'resultaat':'resultaten'}${q?' voor “'+q+'”':''}`;results.innerHTML=list.length?list.slice(0,80).map(e=>`<button type="button" aria-pressed="${e.id===state.dictionarySelectedId}" class="dictionary-result" data-dictionary-select="${escapeHtml(e.id)}"><span><strong lang="ja">${escapeHtml(e.jp)}</strong> · ${escapeHtml(e.meaning)}<small>${escapeHtml(e.label)}${e.kind==='woord'&&!state.introducedVocabIds.includes(e.id)?' · Vooruitblik':''}</small></span><span class="dictionary-kind">${escapeHtml(e.kind)}</span></button>`).join(''):'<div class="panel">Geen treffers. Probeer de Japanse schrijfwijze, romaji of een andere Nederlandse betekenis.</div>';results.querySelectorAll('[data-dictionary-select]').forEach(b=>b.onclick=()=>showArticle(b.dataset.dictionarySelect));if(!state.dictionarySelectedId||!dictionaryById[state.dictionarySelectedId])article.innerHTML='<div class="muted">Kies een resultaat om de betekenis en lescontext te bekijken.</div>';else showArticle(state.dictionarySelectedId)};
+  input.value=state.dictionaryQuery||'';input.oninput=()=>{state.dictionaryQuery=input.value;state.dictionarySelectedId=null;draw()};draw()
+}
+let dictionaryReturnFocus=null,dictionaryReturnScroll=null;
+function openDictionaryModal(id,lessonId='',sentence='',meaning=''){
+  const entry=dictionaryById[id],modal=$('dictionaryModal');if(!entry||!modal)return;
+  dictionaryReturnFocus=document.activeElement;dictionaryReturnScroll={x:window.scrollX,y:window.scrollY};
+  const lesson=lessonId?langLessons.find(l=>l.id===lessonId)||smallLessons.find(l=>l.id===lessonId)||Object.values(advancedCourses).flatMap(c=>c.lessons).find(l=>l.id===lessonId):null;
+  $('dictionaryModalBody').innerHTML=dictionaryArticleHtml(entry,{sentence,meaning,lessonLabel:lesson?.title||''});
+  modal.classList.remove('hidden');document.body.style.overflow='hidden';$('dictionaryClose').focus()
+}
+function closeDictionaryModal(){const modal=$('dictionaryModal');if(!modal||modal.classList.contains('hidden'))return;modal.classList.add('hidden');document.body.style.overflow='';if(dictionaryReturnScroll)window.scrollTo(dictionaryReturnScroll.x,dictionaryReturnScroll.y);if(dictionaryReturnFocus?.isConnected)dictionaryReturnFocus.focus({preventScroll:true});dictionaryReturnFocus=null;dictionaryReturnScroll=null}
 
 function blankDirectionStats(){
   return{
@@ -2272,6 +2390,8 @@ function setUiLanguage(language){state.uiLanguage=i18n.language(language);docume
 state.flashcardProgress={version:1,cards:{}};
 state.flashcardSelection={lessonIds:null,direction:'jp-nl'};
 state.flashcardSession=null;
+state.dictionaryQuery='';
+state.dictionarySelectedId=null;
 state.selectedAvatarOutfit=null;
 state.avatarHairstyle='bun';
 state.unlockedAvatarOutfits=['starter'];
@@ -2476,6 +2596,8 @@ function storageStateSnapshot(){
     progressTab:state.progressTab,
     progressActivityLimit:state.progressActivityLimit,
     progressKnowledgeTab:state.progressKnowledgeTab,
+    dictionaryQuery:state.dictionaryQuery,
+    dictionarySelectedId:state.dictionarySelectedId,
     progressKanaGroup:state.progressKanaGroup,
     progressDetailId:state.progressDetailId,
     progressVocabDetailId:state.progressVocabDetailId,
@@ -2555,7 +2677,7 @@ function loadProgress(){
     if(Array.isArray(s.introducedVocabIds))state.introducedVocabIds=s.introducedVocabIds.filter(id=>!!vocabById[id]);
     if(s.flashcardProgress&&typeof s.flashcardProgress==='object'&&s.flashcardProgress.cards&&typeof s.flashcardProgress.cards==='object')state.flashcardProgress={version:1,cards:Object.fromEntries(Object.entries(s.flashcardProgress.cards).filter(([key,value])=>/^(vocab-.+)::(jp-nl|nl-jp)$/.test(key)&&!!vocabById[key.split('::')[0]]&&value&&typeof value==='object').map(([key,value])=>[key,{dueAt:Number(value.dueAt)||0,intervalDays:Number(value.intervalDays)||0,repetitions:Math.max(0,Math.floor(Number(value.repetitions)||0)),lapses:Math.max(0,Math.floor(Number(value.lapses)||0)),lastReviewedAt:Number(value.lastReviewedAt)||0,lastGrade:value.lastGrade==='again'?'again':'knew'}]))};
     if(s.flashcardSelection&&typeof s.flashcardSelection==='object')state.flashcardSelection={lessonIds:Array.isArray(s.flashcardSelection.lessonIds)?s.flashcardSelection.lessonIds.filter(id=>vocabCatalog.some(v=>v.lessonId===id)):null,direction:['jp-nl','nl-jp','both'].includes(s.flashcardSelection.direction)?s.flashcardSelection.direction:'jp-nl'};
-    if(s.flashcardSession&&typeof s.flashcardSession==='object'&&Array.isArray(s.flashcardSession.queue))state.flashcardSession={queue:s.flashcardSession.queue.filter(x=>x&&vocabById[x.cardId]&&['jp-nl','nl-jp'].includes(x.direction)).map(x=>({cardId:x.cardId,direction:x.direction,answerChoices:Array.isArray(x.answerChoices)?[...new Set(x.answerChoices.filter(v=>typeof v==='string'&&v.length<200))].slice(0,4):null,round:Math.max(0,Math.floor(Number(x.round)||0))})),position:Math.max(0,Math.floor(Number(s.flashcardSession.position)||0)),status:['active','paused','complete'].includes(s.flashcardSession.status)?s.flashcardSession.status:'paused',revealed:!!s.flashcardSession.revealed,knew:Math.max(0,Math.floor(Number(s.flashcardSession.knew)||0)),again:Math.max(0,Math.floor(Number(s.flashcardSession.again)||0)),requeued:Array.isArray(s.flashcardSession.requeued)?s.flashcardSession.requeued:[],feedback:s.flashcardSession.feedback&&['knew','again'].includes(s.flashcardSession.feedback.grade)?{grade:s.flashcardSession.feedback.grade,chosen:typeof s.flashcardSession.feedback.chosen==='string'?s.flashcardSession.feedback.chosen.slice(0,200):null,until:Number(s.flashcardSession.feedback.until)||null}:null,startedAt:Number(s.flashcardSession.startedAt)||Date.now()};
+    if(s.flashcardSession&&typeof s.flashcardSession==='object'&&Array.isArray(s.flashcardSession.queue))state.flashcardSession={mode:s.flashcardSession.mode==='free'?'free':'scheduled',queue:s.flashcardSession.queue.filter(x=>x&&vocabById[x.cardId]&&['jp-nl','nl-jp'].includes(x.direction)).map(x=>({cardId:x.cardId,direction:x.direction,answerChoices:Array.isArray(x.answerChoices)?[...new Set(x.answerChoices.filter(v=>typeof v==='string'&&v.length<200))].slice(0,4):null,round:Math.max(0,Math.floor(Number(x.round)||0))})),position:Math.max(0,Math.floor(Number(s.flashcardSession.position)||0)),status:['active','paused','complete'].includes(s.flashcardSession.status)?s.flashcardSession.status:'paused',revealed:!!s.flashcardSession.revealed,knew:Math.max(0,Math.floor(Number(s.flashcardSession.knew)||0)),again:Math.max(0,Math.floor(Number(s.flashcardSession.again)||0)),skipped:Math.max(0,Math.floor(Number(s.flashcardSession.skipped)||0)),viewed:Math.max(0,Math.floor(Number(s.flashcardSession.viewed)||0)),requeued:Array.isArray(s.flashcardSession.requeued)?s.flashcardSession.requeued:[],feedback:s.flashcardSession.feedback&&['knew','again','viewed'].includes(s.flashcardSession.feedback.grade)?{grade:s.flashcardSession.feedback.grade,chosen:typeof s.flashcardSession.feedback.chosen==='string'?s.flashcardSession.feedback.chosen.slice(0,200):null,until:Number(s.flashcardSession.feedback.until)||null,ungraded:!!s.flashcardSession.feedback.ungraded}:null,startedAt:Number(s.flashcardSession.startedAt)||Date.now()};
     ['advancedLesson','advancedView','advancedStep','advancedStepProgress'].forEach(k=>{if(s[k]&&typeof s[k]==='object')Object.assign(state[k],s[k])});
     if(['hiragana','katakana'].includes(s.dakScript))state.dakScript=s.dakScript;
     if(['profile','progress','knowledge'].includes(s.progressTab))state.progressTab=s.progressTab;
@@ -2565,7 +2687,9 @@ function loadProgress(){
     if(Number.isInteger(s.progressActivityLimit))state.progressActivityLimit=Math.max(5,Math.min(1000,s.progressActivityLimit));
     if(s.vocabFirstSeen&&typeof s.vocabFirstSeen==='object')Object.entries(s.vocabFirstSeen).forEach(([id,date])=>{if(vocabById[id]&&typeof date==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(date))state.vocabFirstSeen[id]=date});
     if(s.kanaFirstSeen&&typeof s.kanaFirstSeen==='object')Object.entries(s.kanaFirstSeen).forEach(([id,date])=>{if(typeof id==='string'&&typeof date==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(date))state.kanaFirstSeen[id]=date});
-    if(['levels','kana','vocab','skills','avatar'].includes(s.progressKnowledgeTab))state.progressKnowledgeTab=s.progressKnowledgeTab;
+    if(['levels','kana','vocab','dictionary','skills','avatar'].includes(s.progressKnowledgeTab))state.progressKnowledgeTab=s.progressKnowledgeTab;
+    if(typeof s.dictionaryQuery==='string')state.dictionaryQuery=s.dictionaryQuery.slice(0,120);
+    if(typeof s.dictionarySelectedId==='string'&&dictionaryById[s.dictionarySelectedId])state.dictionarySelectedId=s.dictionarySelectedId;
     if(['hiragana','katakana','dakuten'].includes(s.progressKanaGroup))state.progressKanaGroup=s.progressKanaGroup;
     state.progressDetailId=typeof s.progressDetailId==='string'?s.progressDetailId:null;
     state.progressVocabDetailId=typeof s.progressVocabDetailId==='string'?s.progressVocabDetailId:null;
@@ -2668,12 +2792,14 @@ function setMain(){show('main');renderMain()}
 const pct=x=>Math.round(x*100)+'%';
 
 function updateHeader(){
-  const back=$('navBack'),ey=$('headerEyebrow'),title=$('headerTitle'),learn=$('learnNav'),cards=$('flashcardsNav'),progress=$('sessionBtn');
+  const back=$('navBack'),home=$('navHome'),ey=$('headerEyebrow'),title=$('headerTitle'),learn=$('learnNav'),cards=$('flashcardsNav'),progress=$('sessionBtn');
   const progressOpen=!$('sessionView').classList.contains('hidden');
   const cardsOpen=!$('flashcardView').classList.contains('hidden')||state.screen==='flashcards';
   learn.classList.toggle('active',!progressOpen&&!cardsOpen);
   cards.classList.toggle('active',cardsOpen&&!progressOpen);
   progress.classList.toggle('active',progressOpen);
+  home.classList.toggle('hidden',!progressOpen&&state.screen!=='home'&&state.screen!=='levels'&&state.screen!=='flashcards');
+  ey.classList.add('hidden');title.classList.add('hidden');
   if(cardsOpen&&!progressOpen){
     back.classList.add('hidden');
     ey.textContent=t('nav.cards');
@@ -2683,12 +2809,12 @@ function updateHeader(){
     ey.textContent=t('course.japanese.short');
     title.textContent='Language Journey';
   }else{
-    back.classList.remove('hidden');
+    back.classList.toggle('hidden',state.screen==='levels');
     const lv=localizedLevel(state.level);
     ey.textContent=state.screen==='levels'?t('nav.home'):lv?.[0]||t('nav.levels');
     title.textContent=state.screen==='levels'?t('nav.levels'):state.screen==='module'?(moduleHeaderTitle()||lv?.[1]||t('course.japanese.name')):(lv?.[1]||t('course.japanese.name'));
   }
-  learn.textContent=t('nav.learn');cards.textContent=t('nav.cards');progress.textContent=t('nav.progress');
+  learn.textContent=t('nav.learn');cards.textContent='Recall';progress.textContent=t('nav.progress');
 }
 function moduleHeaderTitle(){
   if(state.level===0)return state.basisModule==='numbers'?t('course.japanese.level.1.numbers'):kanaModules[state.basisModule]?.label;
@@ -2850,24 +2976,27 @@ function renderCoursePhase(phase,index){
   const grid=details.querySelector('.phase-levels');
   phase.levels.forEach(level=>grid.appendChild(phaseLevelCard(level)));
   addDesktopSliderControls(grid,phaseTitle);
+  details.addEventListener('toggle',()=>{if(details.open)requestAnimationFrame(()=>centerPhaseLevel(grid))});
   return details;
+}
+function centerPhaseLevel(grid,preferred=state.level){
+  if(!grid||!grid.clientWidth)return;
+  const cards=[...grid.querySelectorAll('[data-level-index]')];
+  const target=cards.find(card=>Number(card.dataset.levelIndex)===preferred)
+    ||cards.find(card=>!levelRank(Number(card.dataset.levelIndex)))
+    ||cards[0]||grid.querySelector('.level-menu-card');
+  if(!target)return;
+  grid.scrollLeft=Math.max(0,target.offsetLeft-grid.offsetLeft-(grid.clientWidth-target.clientWidth)/2);
 }
 function renderLevelMenu(box){
   updateHeader();
-  const plan=continueJourneyPlan();
-  const avatar=activeAvatarOutfit();
-  const intro=document.createElement('section');
-  intro.className='card journey-hero';
-  intro.innerHTML=`<div class="journey-hero-copy"><div class="hero-kicker">${t('home.kicker')}</div><div class="h1 continue-title">${state.uiLanguage==='nl'?plan.title:`${t('home.continue')}: ${localizedLevel(state.level)[1]}`}</div><div class="continue-detail">${state.uiLanguage==='nl'?plan.detail:t('common.level',{number:state.level+1})}</div><button class="btn primary continue-action" type="button">${state.uiLanguage==='nl'?plan.button:t('home.continue')+' →'}</button></div>${state.avatarEnabled?`<div class="journey-avatar"><div class="journey-avatar-name">${escapeHtml(avatarDisplayName())}</div>${avatarVisualHtml({pose:nextAvatarMood(),outfit:avatar,priority:true})}<div class="journey-avatar-level"><span class="outfit-name">${escapeHtml(avatar.name)} · </span>Lv. ${state.currentLevel}</div></div>`:'<span class="hero-mark" aria-hidden="true">旅</span>'}`;
-  intro.querySelector('.continue-action').onclick=plan.action;
-  box.appendChild(intro);
-
   const routeHead=document.createElement('div');
   routeHead.className='menu-section-head';
-  routeHead.innerHTML=`<div class="h2">${t('levels.routeTitle')}</div><div class="muted">${t('levels.routeIntro')}</div>`;
+  routeHead.innerHTML=`<div class="h1">${t('nav.levels')}</div><div class="muted">${t('levels.routeIntro')}</div>`;
   box.appendChild(routeHead);
   coursePhases.forEach((phase,index)=>box.appendChild(renderCoursePhase(phase,index)));
-  if(state.level>0){const current=box.querySelector(`[data-level-index="${state.level}"]`);if(current){current.closest('details')?.setAttribute('open','');requestAnimationFrame(()=>current.scrollIntoView({block:'nearest',inline:'center'}))}}
+  const current=box.querySelector(`[data-level-index="${state.level}"]`);
+  if(current){current.closest('details')?.setAttribute('open','');requestAnimationFrame(()=>centerPhaseLevel(current.closest('.phase-levels'),state.level))}
 
   const milestoneHead=document.createElement('div');
   milestoneHead.className='menu-section-head future-head';
@@ -2900,9 +3029,34 @@ function renderLevelOverview(box,i){
   updateHeader();
   const [goal,how]=levelIntro(i);
   const [number,title]=localizedLevel(i);
-  box.innerHTML=`<section class="card"><div class="eyebrow">${number}</div><div class="h1">${title}</div><div class="overview-note"><div><strong>${t('levels.learnWhat')}</strong><br><span class="muted">${goal}</span></div><div><strong>${t('levels.learnHow')}</strong><br><span class="muted">${how}</span></div></div>${avatarAssistHtml({pose:nextAvatarMood(),message:t('levels.smallStep'),detail:t('levels.choose')})}</section><div id="levelOverviewList" class="module-list"></div>`;
+  const lessons=i===3?langLessons:i===4?smallLessons:advancedCourses[i]?.lessons;
+  const p=lessons?lessonProgress(lessons):null;
+  box.innerHTML=`<section class="card level-compact-hero"><div class="eyebrow">${number}</div><div class="h1">${title}</div><div class="muted">${goal}</div>${p?`<div class="progress" style="margin-top:12px"><div style="width:${p.pct}%"></div></div><div class="small">${p.done}/${p.total} lessen afgerond</div>`:''}</section><div id="levelOverviewList" class="module-list"></div>`;
   renderAvatarUnlock(box);
   const list=$('levelOverviewList');
+  if(lessons){
+    const next=firstIncompleteLesson(lessons),lessonList=document.createElement('div');
+    lessonList.className='level-lesson-list';
+    lessons.forEach((lesson,index)=>{
+      const rank=rankState[lesson.id]?.rank,card=document.createElement('button');
+      card.type='button';card.className=`level-lesson-item ${rankClass(rank)} ${index===next?'is-next':''}`;
+      card.innerHTML=`<span class="level-lesson-number">${index+1}</span><span class="level-lesson-copy"><strong>${escapeHtml(lesson.title)}</strong><span>${escapeHtml(lesson.goal||lesson.newLabel||'')}</span></span>${rank?`<span class="level-lesson-rank">${rankText(rank)}</span>`:''}`;
+      card.setAttribute('aria-label',`Les ${index+1}: ${lesson.title}${rank?`, ${rank}`:''}`);
+      card.onclick=()=>openModule(i,()=>{
+        if(i===3){state.langLesson=index;state.langView='lesson';state.langStep='overview';state.tabs.lang='learn'}
+        else if(i===4){state.smallLesson=index;state.tabs.small='learn'}
+        else{state.advancedLesson[i]=index;state.advancedView[i]='lesson';state.advancedStep[i]='overview';state.tabs.advanced='learn'}
+      });
+      lessonList.appendChild(card);
+    });
+    list.appendChild(lessonList);
+    const actions=document.createElement('div');actions.className='level-secondary-actions';
+    actions.innerHTML='<button class="btn" data-level-action="quick">Snelle checks</button><button class="btn" data-level-action="exam">Level-examen</button>';
+    actions.querySelector('[data-level-action="quick"]').onclick=()=>openModule(i,()=>{if(i===3)state.tabs.lang='practice';else if(i===4)state.tabs.small='practice';else state.tabs.advanced='practice'});
+    actions.querySelector('[data-level-action="exam"]').onclick=()=>openModule(i,()=>{if(i===3)state.tabs.lang='exams';else if(i===4)state.tabs.small='exams';else state.tabs.advanced='exams'});
+    list.appendChild(actions);
+    return;
+  }
   if(i===0){
     [['hiragana','Hiragana','46 basiskana leren en herkennen.'],['numbers','Cijfers','Teken ↔ waarde ↔ uitspraak en eenvoudig rekenen.'],['katakana','Katakana','Dezelfde klanken in een tweede schrift.']].forEach(([key,title,desc])=>{
       const r=moduleRank(key);
@@ -2925,32 +3079,6 @@ function renderLevelOverview(box,i){
     list.appendChild(overviewAction('Examens','Gerichte Dakuten/Handakuten-toetsen.',()=>openModule(2,()=>state.tabs.dakuten='exams'),levelRank(2)));
     return;
   }
-  if(i===3){
-    const head=document.createElement('div');
-    const next=firstIncompleteLesson(langLessons);
-    head.innerHTML=levelRouteSummary(langLessons,'l4-exam',3);
-    list.appendChild(head);
-    head.querySelector('.resume-route').onclick=()=>openModule(3,()=>{state.langLesson=next;state.langView='lesson';state.langStep='overview';state.tabs.lang='learn'});
-    list.appendChild(overviewAction('Open alle lessen','Bekijk de volledige route, lesstatus en het volgende kleine onderdeel.',()=>openModule(3,()=>{state.langView='list';state.tabs.lang='learn'})));
-    list.appendChild(overviewAction('Flashcards','Herhaal woorden uit Level 4 of bekijk alvast woorden uit andere levels.',()=>openFlashcardsForLevel(4)));
-    return;
-  }
-  if(i===4){
-    const head=document.createElement('div');
-    const next=firstIncompleteLesson(smallLessons);
-    head.innerHTML=levelRouteSummary(smallLessons,'l5-exam',4);
-    list.appendChild(head);
-    head.querySelector('.resume-route').onclick=()=>openModule(4,()=>{state.smallLesson=next;state.tabs.small='learn'});
-    list.appendChild(overviewAction('Open alle lessen','Bekijk kleine kana, kleine っ en lange klinkers als één route.',()=>openModule(4,()=>state.tabs.small='learn')));
-    list.appendChild(overviewAction('Flashcards','Herhaal woorden uit Level 5 of kies zelf andere levels.',()=>openFlashcardsForLevel(5)));
-    return;
-  }
-  const course=advancedCourses[i],next=firstIncompleteLesson(course.lessons),head=document.createElement('div');
-  head.innerHTML=levelRouteSummary(course.lessons,`l${course.number}-exam`,i);
-  list.appendChild(head);
-  head.querySelector('.resume-route').onclick=()=>openModule(i,()=>{state.advancedLesson[i]=next;state.advancedView[i]='lesson';state.advancedStep[i]='overview';state.tabs.advanced='learn'});
-  list.appendChild(overviewAction('Open alle lessen',`${course.lessons.length} compacte lessen · ${course.competency}`,()=>openModule(i,()=>{state.advancedView[i]='list';state.tabs.advanced='learn'})));
-  list.appendChild(overviewAction('Flashcards',`Herhaal woorden uit Level ${course.number} of kies andere levels.`,()=>openFlashcardsForLevel(course.number)));
 }
 
 function tabsHtml(key,labels=['Leerroute','Oefenen','Examens']){const t=state.tabs[key];return`<div class="tabs"><button id="tabA" class="tab ${t==='learn'?'active':''}">${labels[0]}</button><button id="tabB" class="tab ${t==='practice'?'active':''}">${labels[1]}</button><button id="tabC" class="tab ${t==='exams'?'active':''}">${labels[2]}</button></div>`}
@@ -2958,7 +3086,9 @@ function bindTabs(key){$('tabA').onclick=()=>{state.tabs[key]='learn';scheduleSa
 function renderLevels(){/* v7: levels are rendered in the dedicated level menu */}
 function renderHomeMenu(box){
   const level=localizedLevel(state.level);
-  box.innerHTML=`<section class="card platform-home"><div class="eyebrow">${t('course.japanese.short')} · ${t('home.course')}: ${t('course.japanese.name')}</div><div class="h1">${t('home.title')}</div><div class="muted">${t('home.intro')}</div><div class="platform-home-actions"><button id="homeLevels" class="btn primary" type="button">${t('home.openLevels')}</button><button id="homeContinue" class="btn" type="button">${t('home.continue')} · ${level[1]}</button></div>${avatarAssistHtml({pose:nextAvatarMood(),message:t('levels.smallStep')})}</section>`;
+  const plan=continueJourneyPlan(),courseLessons=state.level===3?langLessons:state.level===4?smallLessons:advancedCourses[state.level]?.lessons;
+  const progress=courseLessons?lessonProgress(courseLessons):null;
+  box.innerHTML=`<section class="card platform-home"><div class="eyebrow">${t('course.japanese.short')} · ${t('course.japanese.name')}</div><div class="h1">${plan.title}</div><div class="muted">${plan.detail}</div>${progress?`<div class="progress" style="margin-top:12px"><div style="width:${progress.pct}%"></div></div><div class="small">${progress.done}/${progress.total} lessen afgerond</div>`:''}<div class="platform-home-actions"><button id="homeContinue" class="btn primary" type="button">${plan.button}</button><button id="homeLevels" class="btn" type="button">${t('home.openLevels')}</button></div>${state.avatarEnabled?avatarAssistHtml({pose:nextAvatarMood(),message:t('levels.smallStep')}):''}</section>`;
   $('homeLevels').onclick=()=>{state.screen='levels';scheduleSave();renderMain()};
   $('homeContinue').onclick=continueJourneyPlan().action;
 }
@@ -3361,21 +3491,22 @@ function renderDakPractice(){
 function renderDakExams(){const defs=[['dak-examA','Examen A · kana → klank'],['dak-examB','Examen B · bronkana + teken → kana']];$('dakBody').innerHTML=`<section class="card"><div class="h2">Level 3 examens</div><div class="muted">Twee compacte examens over de modificaties. Hiragana en Katakana blijven binnen beide examens gemengd; ieder patroon heeft daarnaast zijn eigen rij-examen in de leerroute.</div></section><div id="dakExamList" class="stack"></div>`;defs.forEach(([id,title])=>{const m=rankState[id],d=document.createElement('section');d.className=`card ${rankClass(m.rank)}`;d.innerHTML=`<div class="between"><div class="h2">${title}</div><span class="rank ${rankClass(m.rank)}">${rankText(m.rank)}</span></div><button class="btn primary dakExam" data-id="${id}" style="width:100%;margin-top:10px">Start examen</button>`;$('dakExamList').appendChild(d)});root.querySelectorAll('.dakExam').forEach(b=>b.onclick=()=>startDakExam(b.dataset.id))}
 
 function lessonProgress(arr){const done=arr.filter(l=>rankState[l.id].rank).length;return{done,total:arr.length,pct:done/arr.length*100}}
-function renderLanguage(box){const p=lessonProgress(langLessons);box.innerHTML=`<section class="card"><div class="eyebrow">Level 4</div><div class="h1">Eerste taalbasis</div><div class="muted">Leer woorden, herken zinsblokken en bouw daarna zelf eenvoudige Japanse zinnen.</div><div class="progress" style="margin-top:10px"><div style="width:${p.pct}%"></div></div><div class="small" style="margin-top:5px">${p.done}/${p.total} lessen afgerond met een mini-check.</div>${readinessHtml('l4-exam')}</section>${tabsHtml('lang',['Leerroute','Snelle checks','Level-examen'])}<div id="langBody"></div>`;bindTabs('lang');if(state.tabs.lang==='learn')renderLanguageLessons();else if(state.tabs.lang==='practice')renderLanguageQuick();else renderLanguageExam()}
-const langStepDefs=[['words','Woorden'],['model','Basiszin'],['understand','Begrijpen'],['build','Zelf bouwen'],['check','Mini-check']];
+function renderLanguage(box){const p=lessonProgress(langLessons),inLesson=state.tabs.lang==='learn'&&state.langView==='lesson';box.innerHTML=`${inLesson?'':`<section class="card level-compact-hero"><div class="h1">Eerste taalbasis</div><div class="progress" style="margin-top:10px"><div style="width:${p.pct}%"></div></div><div class="small">${p.done}/${p.total} lessen afgerond</div></section>${tabsHtml('lang',['Leerroute','Snelle checks','Level-examen'])}`}<div id="langBody"></div>`;if(!inLesson)bindTabs('lang');if(state.tabs.lang==='learn')renderLanguageLessons();else if(state.tabs.lang==='practice')renderLanguageQuick();else renderLanguageExam()}
+const langStepDefs=[['words','Woorden'],['model','Oefenen'],['check','Mini-check']];
 const MAX_LEVEL4_MODEL_SENTENCES=2;
 function languageStepState(id){if(!state.langStepProgress[id])state.langStepProgress[id]=[];return state.langStepProgress[id]}
-function markLanguageStep(id,step){const done=new Set(languageStepState(id));done.add(step);state.langStepProgress[id]=[...done];scheduleSave()}
+function markLanguageStep(id,step){const done=new Set(languageStepState(id));(step==='practice'?['model','understand','build']:[step]).forEach(item=>done.add(item));state.langStepProgress[id]=[...done];scheduleSave()}
 function openLanguageLesson(index,step='overview'){state.langLesson=index;state.langView='lesson';state.langStep=step;scheduleSave();renderMain()}
 function renderLanguageLessons(){
   if(state.langView==='lesson')return renderLanguageLessonCard(langLessons[state.langLesson],state.langLesson);
   const next=firstIncompleteLesson(langLessons);
-  $('langBody').innerHTML=`<section class="card"><div class="h2">Tien cumulatieve lessen</div><div class="muted">Iedere les toont alleen de huidige stap. Open vragen zijn niet nodig; alle zinnen bouw je met tikbare blokken.</div><div class="notice" style="margin-top:10px"><strong>Volgende: Les ${next+1} · ${langLessons[next].title}</strong><div class="small">${langLessons[next].goal}</div></div></section><div id="langLessonList" class="lang-lesson-list"></div>`;
+  $('langBody').innerHTML='<div id="langLessonList" class="lang-lesson-list"></div>';
   langLessons.forEach((l,i)=>{const m=rankState[l.id],b=document.createElement('button');b.type='button';b.className=`lang-lesson-card ${rankClass(m.rank)}`;b.innerHTML=`<div class="between"><div><div class="eyebrow">Les ${i+1}${i===next?' · volgende':''}</div><div class="h2">${l.title}</div></div><span class="rank ${rankClass(m.rank)}">${m.rank?'✓ '+rankText(m.rank):'Nog te doen'}</span></div><div class="pattern">${l.newLabel} · Nieuw/patroon: ${l.pattern}</div>`;b.onclick=()=>openLanguageLesson(i);$('langLessonList').appendChild(b)})
 }
-function languageStepper(l){const done=new Set(languageStepState(l.id));return`<div class="lang-stepper">${langStepDefs.map(([id,label],i)=>`<button class="lang-step-btn ${state.langStep===id?'active':''} ${done.has(id)?'done':''}" data-lang-step="${id}">${i+1}<br>${label}</button>`).join('')}</div>`}
+function languageStepper(l){const done=new Set(languageStepState(l.id));return`<div class="lang-stepper compact-lesson-stepper">${langStepDefs.map(([id,label],i)=>`<button class="lang-step-btn ${state.langStep===id?'active':''} ${done.has(id)?'done':''}" data-lang-step="${id}">${i+1}<br>${label}</button>`).join('')}</div>`}
 function bindLanguageStepper(){root.querySelectorAll('[data-lang-step]').forEach(b=>b.onclick=()=>{state.langStep=b.dataset.langStep;scheduleSave();renderMain()})}
 function renderLanguageLessonCard(l,index){
+  if(['understand','build'].includes(state.langStep))state.langStep='model';
   const m=rankState[l.id];$('langBody').innerHTML=`<section class="card"><div class="between"><button id="backLangLessons" class="btn tiny">← Alle lessen</button><span class="rank ${rankClass(m.rank)}">${rankText(m.rank)}</span></div><div class="eyebrow" style="margin-top:12px">Les ${index+1}</div><div class="h1">${l.title}</div><div class="muted">${l.goal}</div>${languageStepper(l)}</section><div id="langStepBody"></div>`;
   $('backLangLessons').onclick=()=>{if(state.studyTracker.active?.source==='lesson:lang')completeStudySession({status:'verlaten'});state.langView='list';state.langStep='overview';scheduleSave();renderMain()};bindLanguageStepper();
   if(state.langStep==='overview')renderLanguageLessonOverview(l,index);else if(state.langStep==='words')renderLanguageWords(l,index);else if(state.langStep==='model')renderLanguageModel(l,index);else if(state.langStep==='understand')renderLanguageUnderstand(l,index);else if(state.langStep==='build')renderLanguageBuild(l,index);else renderLanguageCheck(l,index)
@@ -3386,17 +3517,18 @@ function recordVocabEncounter(id){if(!vocabById[id]||state.vocabFirstSeen[id])re
 function introduceLessonWords(l){const ids=new Set(state.introducedVocabIds);l.words.forEach(([jp])=>{const v=vocabCatalog.find(x=>x.jp===jp&&(x.lessonId===l.id||!x.lessonId));if(v){ids.add(v.id);recordVocabEncounter(v.id)}});state.introducedVocabIds=[...ids];scheduleSave()}
 function introduceSmallWords(l){const ids=new Set(state.introducedVocabIds);(l.examples||[]).forEach(([jp])=>{const v=vocabCatalog.find(x=>x.jp===jp);if(v){ids.add(v.id);recordVocabEncounter(v.id)}});state.introducedVocabIds=[...ids];scheduleSave()}
 function wordLearningQuestions(l){if(!l.words.length)return[];const all=langLessons.slice(0,state.langLesson+1).flatMap(x=>x.words);return shuffle(l.words.flatMap(([jp,nl])=>{const others=shuffle(all.filter(x=>x[0]!==jp));return[{kind:'mc',prompt:jp,correct:nl,choices:shuffle([nl,...others.slice(0,2).map(x=>x[1])]),category:'vocab',instruction:'Kies de Nederlandse betekenis van dit woord.'},{kind:'mc',prompt:nl,correct:jp,choices:shuffle([jp,...others.slice(0,2).map(x=>x[0])]),category:'vocab',instruction:`Kies het Japanse woord voor “${nl}”.`}]})).map(raw=>lessonQuestion(raw,l))}
-function renderLanguageWords(l,index){introduceLessonWords(l);const body=$('langStepBody');body.innerHTML=`<section class="card"><div class="eyebrow">Stap 1</div><div class="h2">${l.words.length?'Woorden leren':'Bekende woorden hergebruiken'}</div><div class="muted">${l.words.length?'Bekijk vorm, uitspraak en betekenis. Daarna herken je de woorden in beide richtingen.':'Deze les voegt geen woorden toe. Je past bekende woorden toe in een nieuw patroon.'}</div><div id="learnWords" class="vocab-grid" style="margin-top:10px"></div><button id="practiceLangWords" class="btn primary" style="width:100%;margin-top:12px">${l.words.length?'Oefen woordherkenning':'Naar de basiszin →'}</button></section>`;const host=$('learnWords');if(!l.words.length)host.innerHTML=`<div class="panel"><strong>${l.pattern}</strong><div class="small" style="margin-top:4px">De betekenis van de bekende woorden verandert niet.</div></div>`;l.words.forEach(([jp,nl,ro])=>{const d=document.createElement('div');d.className='vocab';d.innerHTML=`<div class="jp">${jp}</div><div class="word-romaji">${ro}</div><div class="small">${nl}</div>`;host.appendChild(d)});const go=()=>{markLanguageStep(l.id,'words');state.langStep='model';renderMain()};$('practiceLangWords').onclick=()=>{const qs=wordLearningQuestions(l);if(!qs.length)return go();startQuiz({source:'lang',title:`Les ${index+1} · woorden leren`,official:false,pool:[],questions:qs,choices:3,next:{kind:'langStep',index,step:'model',complete:'words'}})}}
-function modelAnalysisHtml(model){return`<div class="model-sentence">${model.sentence}</div><div class="sentence-analysis">${model.parts.map(([token,role,gloss])=>`<div class="sentence-part"><div class="token">${token}</div><div class="role">${role}</div><div class="gloss">${gloss}</div></div>`).join('')}</div><div class="small" style="text-align:center;margin-top:9px">${model.meaning}</div>`}
-function renderLanguageModel(l,index){const didactic=level4Didactics[index];$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 2 · korte uitleg</div><div class="h2">Begrijp het patroon</div><div class="notice" style="margin-top:9px">${l.grammar}</div><div class="small" style="margin-top:8px"><strong>Controle:</strong> ${didactic.watch}</div>${l.spaceNote?'<div class="small" style="margin-top:5px">De spaties zijn een leerhulpmiddel; gewone Japanse tekst gebruikt ze meestal niet.</div>':''}<div id="modelList" class="stack" style="margin-top:10px"></div><button id="modelNext" class="btn primary" style="width:100%;margin-top:12px">Pas dit direct toe →</button></section>`;const host=$('modelList');l.models.slice(0,MAX_LEVEL4_MODEL_SENTENCES).forEach(model=>{const d=document.createElement('div');d.className='panel';d.innerHTML=modelAnalysisHtml(model);host.appendChild(d)});$('modelNext').onclick=()=>{markLanguageStep(l.id,'model');state.langStep='understand';scheduleSave();renderMain()}}
+function renderLanguageWords(l,index){introduceLessonWords(l);const body=$('langStepBody');body.innerHTML=`<section class="card"><div class="eyebrow">Stap 1</div><div class="h2">${l.words.length?'Woorden leren':'Bekende woorden hergebruiken'}</div><div class="muted">${l.words.length?'Bekijk vorm, uitspraak en betekenis. Daarna herken je de woorden in beide richtingen.':'Deze les voegt geen woorden toe. Je past bekende woorden toe in een nieuw patroon.'}</div><div id="learnWords" class="vocab-grid" style="margin-top:10px"></div><button id="practiceLangWords" class="btn primary" style="width:100%;margin-top:12px">${l.words.length?'Oefen woordherkenning':'Naar de basiszin →'}</button></section>`;const host=$('learnWords');if(!l.words.length)host.innerHTML=`<div class="panel"><strong>${l.pattern}</strong><div class="small" style="margin-top:4px">De betekenis van de bekende woorden verandert niet.</div></div>`;l.words.forEach(([jp,nl,ro])=>{const d=document.createElement('div'),entry=dictionaryEntryForToken(jp,l.id);d.className='vocab';d.innerHTML=`<div class="jp">${entry?dictionaryButton(entry.id,l.id,jp,nl):escapeHtml(jp)}</div><div class="word-romaji">${escapeHtml(ro)}</div><div class="small">${escapeHtml(nl)}</div>`;host.appendChild(d)});const go=()=>{markLanguageStep(l.id,'words');state.langStep='model';renderMain()};$('practiceLangWords').onclick=()=>{const qs=wordLearningQuestions(l);if(!qs.length)return go();startQuiz({source:'lang',title:`Les ${index+1} · woorden leren`,official:false,pool:[],questions:qs,choices:3,next:{kind:'langStep',index,step:'model',complete:'words'}})}}
+function modelAnalysisHtml(model,lessonId=''){return`<div class="model-sentence">${model.sentence}</div><div class="sentence-analysis">${model.parts.map(([token,role,gloss])=>{const entry=dictionaryEntryForToken(token,lessonId);return`<div class="sentence-part"><div class="token">${entry?dictionaryButton(entry.id,lessonId,model.sentence,model.meaning):escapeHtml(token)}</div><div class="role">${escapeHtml(role)}</div><div class="gloss">${escapeHtml(gloss)}</div></div>`}).join('')}</div><div class="small" style="text-align:center;margin-top:9px">${escapeHtml(model.meaning)}</div>`}
+function renderLanguageModel(l,index){const didactic=level4Didactics[index];$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 2 · uitleg + oefenen</div><div class="h2">${l.pattern}</div><div class="notice" style="margin-top:9px">${l.grammar}</div><div class="small" style="margin-top:8px"><strong>Let op:</strong> ${didactic.watch}</div>${l.spaceNote?'<div class="small" style="margin-top:5px">De spaties zijn een leerhulpmiddel; gewone Japanse tekst gebruikt ze meestal niet.</div>':''}<div id="modelList" class="stack" style="margin-top:10px"></div><button id="modelNext" class="btn primary" style="width:100%;margin-top:12px">Oefenen · 10 vragen</button></section>`;const host=$('modelList');l.models.slice(0,MAX_LEVEL4_MODEL_SENTENCES).forEach(model=>{const d=document.createElement('div');d.className='panel';d.innerHTML=modelAnalysisHtml(model,l.id);host.appendChild(d)});$('modelNext').onclick=()=>startQuiz({source:'lang',title:`Les ${index+1} · oefenen`,official:false,pool:[],questions:languagePracticeQuestions(l,index),choices:3,next:{kind:'langStep',index,step:'check',complete:'practice'}})}
 function understandingQuestions(l,index=langLessons.indexOf(l)){return balancedLevel4Questions(index,10,['meaning','structure','integration'])}
+function languagePracticeQuestions(l,index){const recognition=understandingQuestions(l,index).filter(q=>q.kind!=='build').slice(0,8),builders=cumulativeLevel4Builders(index).slice(0,2).map(([prompt,correct,blocks,accepted])=>lessonQuestion(['build',`Bouw: ${prompt}`,correct,blocks,'build',accepted],l));return shuffle([...recognition,...builders])}
 function renderLanguageUnderstand(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 3</div><div class="h2">Begrijpen en toepassen</div><div class="muted">Je krijgt tien gesloten vragen. Iedere vraag noemt precies welke betekenis, rol of structuur je moet herkennen.</div><button id="understandStart" class="btn primary" style="width:100%;margin-top:12px">Start 10 begripvragen</button></section>`;$('understandStart').onclick=()=>startQuiz({source:'lang',title:`Les ${index+1} · begrijpen`,official:false,pool:[],questions:understandingQuestions(l,index),choices:3,next:{kind:'langStep',index,step:'build',complete:'understand'}})}
 function renderLanguageBuild(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 4</div><div class="h2">Zelf zinnen bouwen</div><div class="muted">Combineer bekende blokken. Bij de vrije opdracht zijn meerdere correcte zinnen mogelijk en hoef je niet ieder blok te gebruiken.</div><div id="lessonBuilder" style="margin-top:10px"></div></section>`;renderSentenceBuilder($('lessonBuilder'),cumulativeLevel4Builders(index),()=>{markLanguageStep(l.id,'build');state.langStep='check';scheduleSave();renderMain()})}
 function renderSentenceBuilder(host,items,onComplete){
   let index=0,selected=[];
   const draw=()=>{const [prompt,correct,blocks,alternatives]=items[index],accepted=alternatives?.length?alternatives:[correct];host.innerHTML=`<div class="panel"><div class="between"><strong>Zin ${index+1} van ${items.length}</strong><span class="small">${prompt}</span></div><div id="builderAnswer" class="builder-answer"></div><div id="builderBank" class="builder-bank"></div><div id="builderFeedback" class="builder-feedback"></div><button id="builderCheck" class="btn primary" style="width:100%;margin-top:6px" ${selected.length?'':'disabled'}>Controleer</button></div>`;const answer=$('builderAnswer'),bank=$('builderBank');if(!selected.length)answer.innerHTML='<span class="builder-placeholder">Je zin verschijnt hier…</span>';selected.forEach((entry,pos)=>{const b=document.createElement('button');b.className='sentence-chip placed';b.textContent=entry.text;b.onclick=()=>{selected.splice(pos,1);draw()};answer.appendChild(b)});blocks.forEach((text,pos)=>{if(selected.some(x=>x.pos===pos))return;const b=document.createElement('button');b.className='sentence-chip';b.textContent=text;b.onclick=()=>{selected.push({text,pos});draw()};bank.appendChild(b)});$('builderCheck').onclick=()=>{const made=selected.map(x=>x.text).join(' ');if(accepted.includes(made)){$('builderFeedback').textContent='✓ Geldige zin. Goed gecombineerd.';setTimeout(()=>{index++;selected=[];if(index>=items.length)onComplete();else draw()},650)}else{$('builderFeedback').innerHTML=`Nog niet. Een geldig voorbeeld is: <strong>${correct}</strong>`}}};draw()
 }
-function renderLanguageCheck(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 5</div><div class="h2">Mini-check</div><div class="muted">10 gevarieerde vragen: ongeveer 70% actuele stof en 30% eerdere Level 4-kennis. Een score van 80% of hoger verhoogt de lesrank maximaal één stap.</div><button id="miniCheckStart" class="btn primary" style="width:100%;margin-top:12px">Start mini-check · 10 vragen</button></section>`;$('miniCheckStart').onclick=()=>startLanguageLesson(l,index,false)}
+function renderLanguageCheck(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 3</div><div class="h2">Mini-check</div><div class="muted">10 gevarieerde vragen: ongeveer 70% actuele stof en 30% eerdere Level 4-kennis. Een score van 80% of hoger verhoogt de lesrank maximaal één stap.</div><button id="miniCheckStart" class="btn primary" style="width:100%;margin-top:12px">Start mini-check · 10 vragen</button></section>`;$('miniCheckStart').onclick=()=>startLanguageLesson(l,index,false)}
 function renderLanguageQuick(){
   const bankCount=(state.errorBank.lang||[]).reduce((n,e)=>n+(e.count||1),0);
   $('langBody').innerHTML=`<section class="card"><div class="h2">Snelle checks</div><div class="muted">Kies een lesgrens. De oefening gebruikt automatisch alle woorden, grammatica en patronen tot en met die les, nooit toekomstige stof.</div></section><div id="langQuickList" class="stack"></div><section class="card error-bank-card"><div class="between"><div><div class="h2">Bewaarde fouten</div><div class="small">Moeilijke woorden en zinnen uit eerdere sessies.</div></div><span class="rank">${bankCount}</span></div><button id="langSavedErrors" class="btn" style="width:100%;margin-top:10px" ${bankCount?'':'disabled'}>Oefen moeilijke punten</button></section>`;
@@ -3419,8 +3551,8 @@ function renderSmallLessonCard(l,index){
   l.newItems.forEach(([jp])=>{const kind=/^[っッ]$/.test(jp)?'small-tsu':jp==='ー'?'long-vowel':'small-y',id=`${kind}:${jp}`;if(!state.kanaFirstSeen[id])state.kanaFirstSeen[id]=localKnowledgeDay()});
   scheduleSave();
   host.innerHTML=`<div class="between"><div><div class="eyebrow">Les ${index+1}</div><div class="h2">${l.title}</div></div><span class="rank ${rankClass(m.rank)}">${rankText(m.rank)}</span></div><div class="notice" style="margin-top:10px">${l.note}</div><div class="small-section"><div class="small-section-title">1 · Nieuwe combinatie</div><div id="smallItems" class="small-rule-grid"></div></div><div class="small-section"><div class="small-section-title">2 · Voorbeeldwoorden</div><div id="smallExamples" class="small-example-grid"></div></div><div class="small-section"><div class="small-section-title">3 · Herkennen en toepassen</div><div id="smallObjectives" class="small-objectives"></div></div><div class="grid2" style="margin-top:14px"><button id="smallQuick" class="btn">Oefen herkenning</button><button id="smallStart" class="btn primary">Start mini-check · 8 vragen</button></div>`;
-  l.newItems.forEach(([jp,ro,formula])=>{const d=document.createElement('div');d.className='small-rule-card';d.innerHTML=`<div class="jp">${jp}</div><div class="romaji">${ro}</div><div class="formula">${formula}</div>`;$('smallItems').appendChild(d)});
-  l.examples.forEach(([jp,ro,nl])=>{const d=document.createElement('div');d.className='small-example-card';d.innerHTML=`<div class="jp">${jp}</div><div class="romaji">${ro}</div><div class="meaning">${nl}</div>`;$('smallExamples').appendChild(d)});
+  l.newItems.forEach(([jp,ro,formula])=>{const d=document.createElement('div'),entry=Object.values(dictionaryById).find(x=>x.jp===jp&&(x.kind==='klankcombinatie'||x.kind==='kana'||x.kind==='schrijfregel'));d.className='small-rule-card';d.innerHTML=`<div class="jp">${entry?dictionaryButton(entry.id,l.id,jp,formula):escapeHtml(jp)}</div><div class="romaji">${escapeHtml(ro)}</div><div class="formula">${escapeHtml(formula)}</div>`;$('smallItems').appendChild(d)});
+  l.examples.forEach(([jp,ro,nl])=>{const d=document.createElement('div'),entry=dictionaryEntryForToken(jp,l.id);d.className='small-example-card';d.innerHTML=`<div class="jp">${entry?dictionaryButton(entry.id,l.id,jp,nl):escapeHtml(jp)}</div><div class="romaji">${escapeHtml(ro)}</div><div class="meaning">${escapeHtml(nl)}</div>`;$('smallExamples').appendChild(d)});
   l.objectives.forEach(text=>{const d=document.createElement('div');d.className='small-objective';d.textContent=text;$('smallObjectives').appendChild(d)});
   $('smallQuick').onclick=()=>startSmallLesson(l,index,true);$('smallStart').onclick=()=>startSmallLesson(l,index,false)
 }
@@ -3499,21 +3631,22 @@ function advancedQuestions(course,l,index){
   return shuffle(questions.slice(0,10));
 }
 function advancedStepState(id){if(!state.advancedStepProgress[id])state.advancedStepProgress[id]=[];return state.advancedStepProgress[id]}
-function markAdvancedStep(id,step){const done=new Set(advancedStepState(id));done.add(step);state.advancedStepProgress[id]=[...done];scheduleSave()}
+function markAdvancedStep(id,step){const done=new Set(advancedStepState(id));(step==='practice'?['model','understand','build']:[step]).forEach(item=>done.add(item));state.advancedStepProgress[id]=[...done];scheduleSave()}
 function renderAdvancedCourse(box,level){
-  const c=advancedCourses[level],p=lessonProgress(c.lessons);
-  box.innerHTML=`<section class="card"><div class="eyebrow">Level ${c.number}</div><div class="h1">${c.title}</div><div class="muted">${c.competency}</div><div class="progress" style="margin-top:10px"><div style="width:${p.pct}%"></div></div><div class="small" style="margin-top:5px">${p.done}/${p.total} lessen afgerond.</div>${readinessHtml(`l${c.number}-exam`)}</section>${tabsHtml('advanced',['Leerroute','Snelle checks','Level-examen'])}<div id="advancedBody"></div>`;
-  bindTabs('advanced');
+  const c=advancedCourses[level],p=lessonProgress(c.lessons),inLesson=state.tabs.advanced==='learn'&&state.advancedView[level]==='lesson';
+  box.innerHTML=`${inLesson?'':`<section class="card level-compact-hero"><div class="h1">${c.title}</div><div class="progress" style="margin-top:10px"><div style="width:${p.pct}%"></div></div><div class="small">${p.done}/${p.total} lessen afgerond</div></section>${tabsHtml('advanced',['Leerroute','Snelle checks','Level-examen'])}`}<div id="advancedBody"></div>`;
+  if(!inLesson)bindTabs('advanced');
   if(state.tabs.advanced==='learn')renderAdvancedLessons(c,level);else if(state.tabs.advanced==='practice')renderAdvancedQuick(c,level);else renderAdvancedExam(c,level);
 }
 function renderAdvancedLessons(c,level){
   if(state.advancedView[level]==='lesson')return renderAdvancedLessonCard(c,level,state.advancedLesson[level]||0);
   const next=firstIncompleteLesson(c.lessons);
-  $('advancedBody').innerHTML=`<section class="card"><div class="h2">${c.lessons.length} cumulatieve lessen</div><div class="muted">Bekende kennis + één klein nieuw onderdeel. Alleen de geopende lesstap staat centraal.</div><div class="notice" style="margin-top:10px"><strong>Volgende: Les ${next+1} · ${c.lessons[next].title}</strong><div class="small">${c.lessons[next].goal}</div></div></section><div id="advancedLessonList" class="lang-lesson-list"></div>`;
+  $('advancedBody').innerHTML='<div id="advancedLessonList" class="lang-lesson-list"></div>';
   c.lessons.forEach((l,i)=>{const m=rankState[l.id],b=document.createElement('button');b.className=`lang-lesson-card ${rankClass(m.rank)}`;b.innerHTML=`<div class="between"><div><div class="eyebrow">Les ${i+1}${i===next?' · volgende':''}</div><div class="h2">${l.title}</div></div><span class="rank ${rankClass(m.rank)}">${m.rank?'✓ '+m.rank:'Nog te doen'}</span></div><div class="pattern">${l.newLabel} · ${l.pattern}</div>`;b.onclick=()=>{state.advancedLesson[level]=i;state.advancedView[level]='lesson';state.advancedStep[level]='overview';renderMain()};$('advancedLessonList').appendChild(b)})
 }
-function advancedStepper(l,level){const done=new Set(advancedStepState(l.id)),current=state.advancedStep[level];return`<div class="lang-stepper">${langStepDefs.map(([id,label],i)=>`<button class="lang-step-btn ${current===id?'active':''} ${done.has(id)?'done':''}" data-advanced-step="${id}">${i+1}<br>${label}</button>`).join('')}</div>`}
+function advancedStepper(l,level){const done=new Set(advancedStepState(l.id)),current=state.advancedStep[level];return`<div class="lang-stepper compact-lesson-stepper">${langStepDefs.map(([id,label],i)=>`<button class="lang-step-btn ${current===id?'active':''} ${done.has(id)?'done':''}" data-advanced-step="${id}">${i+1}<br>${label}</button>`).join('')}</div>`}
 function renderAdvancedLessonCard(c,level,index){
+  if(['understand','build'].includes(state.advancedStep[level]))state.advancedStep[level]='model';
   const l=c.lessons[index],m=rankState[l.id];
   $('advancedBody').innerHTML=`<section class="card"><div class="between"><button id="backAdvancedLessons" class="btn tiny">← Alle lessen</button><span class="rank ${rankClass(m.rank)}">${rankText(m.rank)}</span></div><div class="eyebrow" style="margin-top:12px">Les ${index+1} van ${c.lessons.length}</div><div class="h1">${l.title}</div><div class="muted">${l.goal}</div>${advancedStepper(l,level)}</section><div id="advancedStepBody"></div>`;
   $('backAdvancedLessons').onclick=()=>{if(state.studyTracker.active?.source==='lesson:advanced')completeStudySession({status:'verlaten'});state.advancedView[level]='list';state.advancedStep[level]='overview';renderMain()};
@@ -3526,13 +3659,35 @@ function introduceAdvancedWords(l){const ids=new Set(state.introducedVocabIds);l
 function renderAdvancedWords(c,l,level,index){
   introduceAdvancedWords(l);$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 1 · voorkennis en woorden</div><div class="notice">${l.review}</div><div id="advancedWords" class="vocab-grid" style="margin-top:10px"></div><button id="advancedWordsNext" class="btn primary" style="width:100%;margin-top:12px">Naar het nieuwe patroon →</button></section>`;
   if(!l.words.length)$('advancedWords').innerHTML='<div class="panel">Geen nieuwe woorden. Deze les combineert bekende kennis.</div>';
-  l.words.forEach(([jp,nl,ro])=>{const d=document.createElement('div');d.className='vocab';d.innerHTML=`<div class="jp">${jp}</div><div class="word-romaji">${ro}</div><div class="small">${nl}</div>`;$('advancedWords').appendChild(d)});
+  l.words.forEach(([jp,nl,ro])=>{const d=document.createElement('div'),entry=dictionaryEntryForToken(jp,l.id);d.className='vocab';d.innerHTML=`<div class="jp">${entry?dictionaryButton(entry.id,l.id,jp,nl):escapeHtml(jp)}</div><div class="word-romaji">${escapeHtml(ro)}</div><div class="small">${escapeHtml(nl)}</div>`;$('advancedWords').appendChild(d)});
   $('advancedWordsNext').onclick=()=>{markAdvancedStep(l.id,'words');state.advancedStep[level]='model';renderMain()}
 }
-function renderAdvancedModel(l,level){$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 2 · één nieuw principe</div><div class="h2">${l.pattern}</div><div class="notice" style="margin-top:9px">${l.grammar}</div><div class="panel" style="margin-top:10px">${modelAnalysisHtml(l.models[0])}</div><button id="advancedModelNext" class="btn primary" style="width:100%;margin-top:12px">Direct herkennen →</button></section>`;$('advancedModelNext').onclick=()=>{markAdvancedStep(l.id,'model');state.advancedStep[level]='understand';renderMain()}}
+function advancedPracticeQuestions(c,l,index){
+  const known=vocabCatalog.filter(v=>v.level<c.number||(v.level===c.number&&v.lessonIndex<=index));
+  const extra=(l.words||[]).flatMap(([jp,meaning])=>[
+    lessonQuestion(['mc',jp,meaning,level4Choices(meaning,known.map(v=>v.meaning),3),'vocab'],l),
+    lessonQuestion(['mc',meaning,jp,level4Choices(jp,known.map(v=>v.jp),3),'vocab'],l)
+  ]);
+  const contexts=advancedContextSentences(c,index);
+  const modelQuestions=(l.models||[]).flatMap(model=>[
+    lessonQuestion(['mc',`Lees: ${model.sentence}`,model.meaning,level4Choices(model.meaning,contexts.map(item=>item.meaning),3),'meaning'],l),
+    lessonQuestion(['mc',`Welke zin betekent: ${model.meaning}`,model.sentence,level4Choices(model.sentence,contexts.map(item=>item.sentence),3),'meaning'],l)
+  ]);
+  const seen=new Set(),recognition=[...advancedQuestions(c,l,index),...(l.check||[]).map(raw=>lessonQuestion(raw,l)),...extra,...modelQuestions].filter(q=>{
+    if(q.kind==='build')return false;
+    const key=`${q.kind}|${q.prompt}|${q.correct}`;
+    if(seen.has(key))return false;
+    seen.add(key);return true;
+  }).slice(0,8);
+  while(recognition.length<8&&recognition.length){const sample=recognition[recognition.length%Math.min(3,recognition.length)];recognition.push({...sample,prompt:`Nog een keer · ${sample.prompt}`})}
+  const builders=(l.builders||[]).slice(0,2).map(([prompt,correct,blocks,accepted])=>lessonQuestion(['build',`Bouw: ${prompt}`,correct,blocks,'build',accepted],l));
+  while(builders.length<2){const context=contexts.find(item=>!builders.some(question=>question.correct===item.sentence))||contexts[0];if(!context)break;builders.push(lessonQuestion(['build',`Bouw: ${context.meaning}`,context.sentence,shuffle(context.sentence.split(/\s+/)),'build'],l))}
+  return shuffle([...recognition,...builders]);
+}
+function renderAdvancedModel(l,level){const c=advancedCourses[level],index=state.advancedLesson[level]||0;$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 2 · uitleg + oefenen</div><div class="h2">${l.pattern}</div><div class="notice" style="margin-top:9px">${l.grammar}</div><div class="panel" style="margin-top:10px">${modelAnalysisHtml(l.models[0],l.id)}</div><button id="advancedModelNext" class="btn primary" style="width:100%;margin-top:12px">Oefenen · 10 vragen</button></section>`;$('advancedModelNext').onclick=()=>startQuiz({source:'advanced',title:`Level ${c.number} · ${l.title} · oefenen`,official:false,pool:[],questions:advancedPracticeQuestions(c,l,index),choices:3,next:{kind:'advancedStep',level,index,step:'check',complete:'practice'}})}
 function renderAdvancedUnderstand(c,l,level,index){const qs=advancedQuestions(c,l,index);$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 3 · herkennen en toepassen</div><div class="h2">Korte oefening</div><div class="muted">Tien gevarieerde vragen combineren nieuwe woorden met eerder bekende zinnen en bouwstenen.</div><button id="advancedUnderstandStart" class="btn primary" style="width:100%;margin-top:12px">Start ${qs.length} vragen</button></section>`;$('advancedUnderstandStart').onclick=()=>startQuiz({source:'advanced',title:`Level ${c.number} · ${l.title} · herkennen`,official:false,pool:[],questions:qs,choices:3,next:{kind:'advancedStep',level,index,step:'build',complete:'understand'}})}
 function renderAdvancedBuild(l,level,index){$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 4 · zelf bouwen</div><div class="h2">Tik de zin bij elkaar</div><div id="advancedBuilder" style="margin-top:10px"></div></section>`;renderSentenceBuilder($('advancedBuilder'),l.builders,()=>{markAdvancedStep(l.id,'build');state.advancedStep[level]='check';renderMain()})}
-function renderAdvancedCheck(c,l,level,index){const qs=advancedQuestions(c,l,index);$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 5 · mini-check</div><div class="h2">Les afronden</div><div class="muted">${qs.length} korte vragen. 80% of hoger verhoogt de lesrank maximaal één stap.</div><button id="advancedCheckStart" class="btn primary" style="width:100%;margin-top:12px">Start mini-check</button></section>`;$('advancedCheckStart').onclick=()=>startQuiz({source:'advanced',title:`Level ${c.number} · Les ${index+1} · ${l.title}`,rankId:l.id,rankThreshold:.8,official:true,pool:[],questions:shuffle(qs),choices:3,next:{kind:'advancedLesson',level,index:index+1}})}
+function renderAdvancedCheck(c,l,level,index){const qs=advancedQuestions(c,l,index);$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 3 · mini-check</div><div class="h2">Les afronden</div><div class="muted">${qs.length} korte vragen. 80% of hoger verhoogt de lesrank maximaal één stap.</div><button id="advancedCheckStart" class="btn primary" style="width:100%;margin-top:12px">Start mini-check</button></section>`;$('advancedCheckStart').onclick=()=>startQuiz({source:'advanced',title:`Level ${c.number} · Les ${index+1} · ${l.title}`,rankId:l.id,rankThreshold:.8,official:true,pool:[],questions:shuffle(qs),choices:3,next:{kind:'advancedLesson',level,index:index+1}})}
 function renderAdvancedQuick(c,level){const bankCount=(state.errorBank.advanced||[]).reduce((n,e)=>n+(e.count||1),0);$('advancedBody').innerHTML=`<section class="card"><div class="h2">Snelle checks</div><div class="muted">Herhaal één les in enkele minuten, zonder uitlegschermen.</div></section><div id="advancedQuickList" class="stack"></div><section class="card"><button id="advancedErrors" class="btn" style="width:100%" ${bankCount?'':'disabled'}>Oefen moeilijke punten · ${bankCount}</button></section>`;c.lessons.forEach((l,i)=>{const d=document.createElement('section');d.className=`card ${rankClass(rankState[l.id].rank)}`;d.innerHTML=`<div class="between"><strong>Les ${i+1} · ${l.title}</strong><span class="rank ${rankClass(rankState[l.id].rank)}">${rankText(rankState[l.id].rank)}</span></div><button class="btn advancedQuick" data-i="${i}" style="width:100%;margin-top:9px">Snelle check · 10 vragen</button>`;$('advancedQuickList').appendChild(d)});root.querySelectorAll('.advancedQuick').forEach(b=>b.onclick=()=>{const i=Number(b.dataset.i),l=c.lessons[i];startQuiz({source:'advanced',title:`Snelle check · ${l.title}`,official:false,pool:[],questions:shuffle(advancedQuestions(c,l,i)),choices:3})});$('advancedErrors').onclick=()=>practiceErrorBank('advanced')}
 function renderAdvancedExam(c,level){const id=`l${c.number}-exam`,m=rankState[id],ready=!!rankState[c.lessons.at(-1).id]?.rank;$('advancedBody').innerHTML=`<section class="card ${rankClass(m.rank)}"><div class="between"><div><div class="h2">Level ${c.number} examen</div><div class="muted">25 vragen, evenwichtig verdeeld over de lessen: woorden, betekenis, invullen, volgorde en toepassen.</div></div><span class="rank ${rankClass(m.rank)}">${rankText(m.rank)}</span></div>${ready?'':'<div class="notice" style="margin-top:10px">Rond eerst de laatste les met een succesvolle mini-check af.</div>'}<button id="advancedExamStart" class="btn primary" style="width:100%;margin-top:10px" ${ready?'':'disabled'}>Start level-examen · 25 vragen</button></section>`;if(ready)$('advancedExamStart').onclick=()=>{const qs=c.lessons.flatMap((l,i)=>shuffle(advancedQuestions(c,l,i)).slice(0,5));startQuiz({source:'advanced',title:`Level ${c.number} examen`,rankId:id,official:true,pool:[],questions:shuffle(qs),choices:3})}}
 
@@ -3827,6 +3982,12 @@ function finishQuiz(){const c=state.quiz,acc=c.score/c.questions.length;c.passed
 function renderErrors(errors){const box=$('errorList');box.innerHTML='';$('errorIntro').textContent=errors.length?'Score blijft staan. Bekijk kort wat misging.':'Geen fouten.';if(!errors.length){box.innerHTML='<div class="panel">Alles correct.</div>';return}errors.forEach(e=>{const d=document.createElement('div');d.className='error';d.innerHTML=`<div class="small">Vraag ${e.number}</div><div style="font-weight:750;margin-top:4px">${e.asked}</div><div style="margin-top:5px">Jouw antwoord: ${e.chosen}</div><div>Correct: <strong>${e.correct}</strong></div><div class="small" style="margin-top:4px">${e.detail}</div>`;box.appendChild(d)})}
 function configureNext(c){const b=$('nextBtn');b.classList.add('hidden');b.onclick=null;const n=c.next;if(!n)return;if(n.kind==='kanaStep'){const chunks=kanaChunks(kanaModules[n.key].rows[n.row]);if(n.step<=chunks.length){b.classList.remove('hidden');b.textContent='Volgende stap →';b.onclick=()=>{state.row[n.key]=n.row;state.step[n.key]=n.step;state.tabs[n.key]='learn';setMain()}}}if(n.kind==='kanaRow'&&n.row<kanaModules[n.key].rows.length){b.classList.remove('hidden');b.textContent=`Volgende rij · ${kanaModules[n.key].rows[n.row].name} →`;b.onclick=()=>{state.row[n.key]=n.row;state.step[n.key]=0;state.tabs[n.key]='learn';setMain()}}if(n.kind==='numberLesson'&&n.index<numberLessons.length){b.classList.remove('hidden');b.textContent='Volgende cijferles →';b.onclick=()=>{state.numberLesson=n.index;state.tabs.numbers='learn';setMain()}}if(n.kind==='dakStep'&&n.step<=2){b.classList.remove('hidden');b.textContent=n.step===2?'Naar volledige rij ›':'Naar volgende stap ›';b.onclick=()=>{state.dakStep=n.step;state.tabs.dakuten='learn';setMain()}}if(n.kind==='dakNextPattern'&&state.dakPattern<dakutenPatterns.length-1){b.classList.remove('hidden');b.textContent=`Volgend onderdeel: ${dakutenPatterns[state.dakPattern+1].name} ›`;b.onclick=()=>{state.dakPattern++;state.dakStep=0;state.tabs.dakuten='learn';setMain()}}if(n.kind==='langStep'){b.classList.remove('hidden');b.textContent=`Volgende stap · ${langStepDefs.find(x=>x[0]===n.step)?.[1]||'leerroute'} →`;b.onclick=()=>{if(n.complete)markLanguageStep(langLessons[n.index].id,n.complete);state.langLesson=n.index;state.langView='lesson';state.langStep=n.step;state.tabs.lang='learn';setMain()}}if(n.kind==='langLesson'){if(!c.passed)return;if(n.complete)markLanguageStep(langLessons[Math.max(0,n.index-1)].id,n.complete);b.classList.remove('hidden');if(n.index<langLessons.length){b.textContent=`Volgende les · ${langLessons[n.index].title} →`;b.onclick=()=>{state.langLesson=n.index;state.langView='lesson';state.langStep='overview';state.tabs.lang='learn';setMain()}}else{b.textContent='Naar Level 4 examen →';b.onclick=()=>{state.tabs.lang='exams';state.langView='list';setMain()}}}if(n.kind==='smallLesson'&&n.index<smallLessons.length){b.classList.remove('hidden');b.textContent=`Volgende les · ${smallLessons[n.index].title} →`;b.onclick=()=>{state.smallLesson=n.index;state.tabs.small='learn';setMain()}}if(n.kind==='advancedStep'){const course=advancedCourses[n.level],l=course.lessons[n.index];b.classList.remove('hidden');b.textContent='Volgende stap · zelf bouwen →';b.onclick=()=>{if(n.complete)markAdvancedStep(l.id,n.complete);state.advancedLesson[n.level]=n.index;state.advancedView[n.level]='lesson';state.advancedStep[n.level]=n.step;state.tabs.advanced='learn';setMain()}}if(n.kind==='advancedLesson'){if(!c.passed)return;const course=advancedCourses[n.level];markAdvancedStep(course.lessons[Math.max(0,n.index-1)].id,'check');b.classList.remove('hidden');if(n.index<course.lessons.length){b.textContent=`Volgende les · ${course.lessons[n.index].title} →`;b.onclick=()=>{state.advancedLesson[n.level]=n.index;state.advancedView[n.level]='lesson';state.advancedStep[n.level]='overview';state.tabs.advanced='learn';setMain()}}else{b.textContent=`Naar Level ${course.number} examen →`;b.onclick=()=>{state.tabs.advanced='exams';state.advancedView[n.level]='list';setMain()}}}}
 
+// Keep the legacy result navigation, but label the merged practice destination correctly.
+const configureNextForLegacySteps=configureNext;
+configureNext=function(config){
+  configureNextForLegacySteps(config);
+  if(config.next?.kind==='advancedStep'&&config.next.step==='check')$('nextBtn').textContent='Naar mini-check →';
+};
 function questionSignature(q){
   if(!q)return'unknown';
   if(q.type==='kana')return`kana|${q.mode}|${q.item?.id||q.item?.front||''}`;
@@ -4109,7 +4270,7 @@ function renderVocabDetail(box,id){
 }
 function flashcardGroups(){
   const levels=new Map();
-  vocabCatalog.forEach(v=>{
+  vocabCatalog.filter(v=>!v.legacy).forEach(v=>{
     if(!levels.has(v.level))levels.set(v.level,new Map());
     const lessons=levels.get(v.level);
     if(!lessons.has(v.lessonId))lessons.set(v.lessonId,{id:v.lessonId,title:v.lessonTitle,words:[]});
@@ -4118,48 +4279,57 @@ function flashcardGroups(){
   return [...levels.entries()].sort((a,b)=>a[0]-b[0]).map(([level,lessons])=>({level,lessons:[...lessons.values()].sort((a,b)=>a.title.localeCompare(b.title,'nl'))}));
 }
 function openFlashcards(){state.screen='flashcards';scheduleSave();renderFlashcardsScreen()}
-function openFlashcardsForLevel(level){const ids=vocabCatalog.filter(v=>v.level===level).map(v=>v.lessonId);state.flashcardSelection.lessonIds=ids;state.flashcardSelection.direction='jp-nl';openFlashcards()}
-function flashcardSelectedLessons(){const all=vocabCatalog.map(v=>v.lessonId);return new Set(state.flashcardSelection.lessonIds===null?all:state.flashcardSelection.lessonIds)}
+function openFlashcardsForLevel(level){const ids=vocabCatalog.filter(v=>!v.legacy&&v.level===level).map(v=>v.lessonId);state.flashcardSelection.lessonIds=ids;state.flashcardSelection.direction='jp-nl';openFlashcards()}
+function flashcardSelectedLessons(){const all=vocabCatalog.filter(v=>!v.legacy).map(v=>v.lessonId);return new Set(state.flashcardSelection.lessonIds===null?all:state.flashcardSelection.lessonIds)}
 function flashcardDirections(){return state.flashcardSelection.direction==='both'?['jp-nl','nl-jp']:[state.flashcardSelection.direction]}
 function flashcardProgressKey(cardId,direction){return`${cardId}::${direction}`}
 function flashcardRecord(cardId,direction){return state.flashcardProgress.cards[flashcardProgressKey(cardId,direction)]||null}
 function flashcardDue(record,now=Date.now()){return!record||!record.dueAt||record.dueAt<=now}
-function flashcardPreview(card){return!state.vocabFirstSeen[card.id]&&!state.introducedVocabIds.includes(card.id)&&!rankState[card.lessonId]?.rank}
-function flashcardSelectedCards(){
+function flashcardPreview(card){return!state.introducedVocabIds.includes(card.id)&&!rankState[card.lessonId]?.rank}
+function flashcardSelectedCards(includePreview=false){
   const selected=flashcardSelectedLessons();
-  return vocabCatalog.filter(v=>selected.has(v.lessonId));
+  return vocabCatalog.filter(v=>!v.legacy&&selected.has(v.lessonId)&&(includePreview||!flashcardPreview(v)));
 }
 function flashcardCounts(cards=flashcardSelectedCards()){
-  const now=Date.now(),directions=flashcardDirections(),counts={total:cards.length*directions.length,new:0,due:0,upcoming:0,mastered:0};
-  cards.forEach(card=>directions.forEach(direction=>{const rec=flashcardRecord(card.id,direction);if(!rec)counts.new++;else if(rec.repetitions>=3)counts.mastered++;if(flashcardDue(rec,now)&&rec)counts.due++;else if(rec&&rec.dueAt>now)counts.upcoming++}));
+  const now=Date.now(),directions=flashcardDirections(),counts={total:cards.length*directions.length,new:0,due:0,upcoming:0,repeated:0};
+  cards.forEach(card=>directions.forEach(direction=>{const rec=flashcardRecord(card.id,direction);if(!rec)counts.new++;else if(rec.repetitions>=3)counts.repeated++;if(flashcardDue(rec,now)&&rec)counts.due++;else if(rec&&rec.dueAt>now)counts.upcoming++}));
   counts.ready=counts.new+counts.due;
   return counts;
 }
-function flashcardDueText(timestamp){
+function flashcardDueText(timestamp,now=Date.now()){
   if(!timestamp)return'nu beschikbaar';
-  const hours=Math.max(0,Math.ceil((timestamp-Date.now())/3600000));
-  if(hours===0)return'nu';
-  if(hours<24)return`over ongeveer ${hours} uur`;
-  if(hours<48)return'morgen';
-  return i18n.date(timestamp,state.uiLanguage,{day:'numeric',month:'short'});
+  if(timestamp<=now)return'nu aan de beurt';
+  const due=new Date(timestamp),today=new Date(now);
+  const dayNumber=date=>Date.UTC(date.getFullYear(),date.getMonth(),date.getDate());
+  const days=Math.round((dayNumber(due)-dayNumber(today))/86400000);
+  const time=due.toLocaleTimeString(state.uiLanguage||'nl',{hour:'2-digit',minute:'2-digit'});
+  if(days===0)return`later vandaag · ${time}`;
+  if(days===1)return`morgen · ${time}`;
+  return`${i18n.date(timestamp,state.uiLanguage,{day:'numeric',month:'short'})} · ${time}`;
 }
-function setFlashcardLessonSelection(ids){const all=new Set(vocabCatalog.map(v=>v.lessonId)),selected=new Set(ids);state.flashcardSelection.lessonIds=selected.size===all.size?null:[...selected];scheduleSave();renderFlashcardsScreen()}
+function flashcardNextDueAt(now,grade,intervalDays=0){
+  const date=new Date(now);
+  if(grade==='again')return now+6*60*60*1000;
+  date.setDate(date.getDate()+intervalDays);
+  return date.getTime();
+}
+function setFlashcardLessonSelection(ids){const all=new Set(vocabCatalog.filter(v=>!v.legacy).map(v=>v.lessonId)),selected=new Set(ids.filter(id=>all.has(id)));state.flashcardSelection.lessonIds=selected.size===all.size?null:[...selected];scheduleSave();renderFlashcardsScreen()}
 function flashcardCorrectAnswers(card,direction){const answers=direction==='jp-nl'?(card.meanings?.length?card.meanings:[card.meaning]):[card.kana];return[...new Set(answers.filter(x=>typeof x==='string'&&x.trim()))]}
-function flashcardAnswerChoices(card,direction){const answers=flashcardCorrectAnswers(card,direction),correct=shuffle(answers)[0]||card.meaning,candidates=[...new Set(vocabCatalog.filter(v=>v.id!==card.id).flatMap(v=>flashcardCorrectAnswers(v,direction)).filter(x=>x!==correct))];return shuffle([correct,...shuffle(candidates).slice(0,3)])}
-function startFlashcardSession(){
-  const directions=flashcardDirections(),now=Date.now(),queue=[];
-  flashcardSelectedCards().forEach(card=>directions.forEach(direction=>{if(flashcardDue(flashcardRecord(card.id,direction),now))queue.push({cardId:card.id,direction,answerChoices:flashcardAnswerChoices(card,direction),round:0})}));
+function flashcardAnswerChoices(card,direction){const answers=flashcardCorrectAnswers(card,direction),correct=shuffle(answers)[0]||card.meaning,candidates=[...new Set(vocabCatalog.filter(v=>v.id!==card.id&&!flashcardPreview(v)).flatMap(v=>flashcardCorrectAnswers(v,direction)).filter(x=>x!==correct))];return shuffle([correct,...shuffle(candidates).slice(0,3)])}
+function startFlashcardSession(cards=flashcardSelectedCards(),directions=flashcardDirections(),mode='scheduled'){
+  const now=Date.now(),queue=[];
+  cards.forEach(card=>directions.forEach(direction=>{if(mode==='free'||flashcardDue(flashcardRecord(card.id,direction),now))queue.push({cardId:card.id,direction,answerChoices:flashcardAnswerChoices(card,direction),round:0})}));
   if(!queue.length)return;
   const ordered=shuffle(queue).sort((a,b)=>(flashcardRecord(a.cardId,a.direction)?.repetitions||0)-(flashcardRecord(b.cardId,b.direction)?.repetitions||0));
-  state.flashcardSession={queue:ordered,position:0,status:'active',revealed:false,knew:0,again:0,requeued:[],feedback:null,startedAt:now};
+  state.flashcardSession={mode:mode==='free'?'free':'scheduled',queue:ordered,position:0,status:'active',revealed:false,knew:0,again:0,skipped:0,requeued:[],feedback:null,startedAt:now};
   scheduleSave();renderFlashcardsScreen();
 }
 function pauseFlashcardSession(){if(!state.flashcardSession||state.flashcardSession.status!=='active')return;state.flashcardSession.status='paused';scheduleSave();renderFlashcardsScreen()}
 function resumeFlashcardSession(){if(!state.flashcardSession)return;state.flashcardSession.status='active';scheduleSave();renderFlashcardsScreen()}
-/* SRS: Again returns after 6 hours. Successful intervals progress 1, 3, 7 days,
-   then double after each success, capped at 180 days. Directions keep separate records. */
+/* SRS: Again returns after 6 elapsed hours. Successful intervals progress by
+   local calendar days: 1, 3, 7, then doubling, capped at 180 days. Directions stay separate. */
 function flashcardRate(grade,chosen=null){
-  const session=state.flashcardSession;if(!session||session.status!=='active'||!session.revealed||session.feedback)return;
+  const session=state.flashcardSession;if(!session||session.mode==='free'||session.status!=='active'||!session.revealed||session.feedback||!['knew','again'].includes(grade))return;
   const item=session.queue[session.position],card=vocabById[item.cardId],key=flashcardProgressKey(item.cardId,item.direction),old=state.flashcardProgress.cards[key]||{repetitions:0,lapses:0,intervalDays:0},now=Date.now();
   recordVocabEncounter(card.id);
   let repetitions=old.repetitions||0,intervalDays;
@@ -4173,21 +4343,24 @@ function flashcardRate(grade,chosen=null){
     old.lapses=(old.lapses||0)+1;
     session.again++;
   }
-  state.flashcardProgress.cards[key]={dueAt:now+intervalDays*86400000,intervalDays,repetitions,lapses:old.lapses||0,lastReviewedAt:now,lastGrade:grade};
+  state.flashcardProgress.cards[key]={dueAt:flashcardNextDueAt(now,grade,intervalDays),intervalDays,repetitions,lapses:old.lapses||0,lastReviewedAt:now,lastGrade:grade};
   const repeatKey=key;
-  if(grade==='again'&&!session.requeued.includes(repeatKey)){session.requeued.push(repeatKey);session.queue.push({...item,round:0})}
+  if(grade==='again'&&session.position<session.queue.length-1&&!session.requeued.includes(repeatKey)){session.requeued.push(repeatKey);session.queue.push({...item,round:0})}
   session.feedback={grade,chosen:typeof chosen==='string'?chosen:null,until:grade==='knew'?now+850:null};
   session.revealed=false;
   scheduleSave();renderFlashcardsScreen();
 }
-function flashcardNextCard(){const session=state.flashcardSession;if(!session||!session.feedback)return;session.feedback=null;session.position++;session.revealed=false;if(session.position>=session.queue.length)session.status='complete';scheduleSave();renderFlashcardsScreen()}
+function flashcardSkip(){const session=state.flashcardSession;if(!session||session.status!=='active'||session.feedback)return;session.skipped=(session.skipped||0)+1;session.position++;if(session.position>=session.queue.length)session.status='complete';session.revealed=false;scheduleSave();renderFlashcardsScreen()}
+function flashcardNextCard(){const session=state.flashcardSession;if(!session||!session.feedback)return;if(session.feedback.ungraded)session.viewed=(session.viewed||0)+1;session.feedback=null;session.position++;session.revealed=false;if(session.position>=session.queue.length)session.status='complete';scheduleSave();renderFlashcardsScreen()}
 function renderFlashcardScope(box){
-  const groups=flashcardGroups(),selected=flashcardSelectedLessons(),allLessonIds=[...new Set(vocabCatalog.map(v=>v.lessonId))],allSelected=allLessonIds.every(id=>selected.has(id));
-  box.innerHTML=`<section class="card"><div class="between"><div><div class="h2">Kies je woorden</div><div class="muted">Kies één of meer levels en lessen. Ook toekomstige woorden zijn vrij te bekijken als voorproefje.</div></div><button id="fcSelectAll" class="btn tiny">${allSelected?'Alles deselecteren':'Alles kiezen'}</button></div><div class="flashcard-scope" style="margin-top:10px">${groups.map(group=>{const ids=group.lessons.map(x=>x.id),checked=ids.every(id=>selected.has(id));return`<section class="flashcard-level"><div class="flashcard-level-head"><label class="flashcard-check"><input type="checkbox" data-fc-level="${group.level}" ${checked?'checked':''}><strong>Level ${group.level}</strong></label><span class="small">${group.lessons.reduce((n,l)=>n+l.words.length,0)} woorden</span></div><div class="flashcard-lesson-list">${group.lessons.map(lesson=>`<label class="flashcard-check"><input type="checkbox" data-fc-lesson="${lesson.id}" ${selected.has(lesson.id)?'checked':''}><span>${lesson.title} <span class="muted">· ${lesson.words.length}</span></span></label>`).join('')}</div></section>`}).join('')}</div><label class="profile-field" style="margin-top:10px"><span>Oefenrichting</span><select id="fcDirection" class="select"><option value="jp-nl" ${state.flashcardSelection.direction==='jp-nl'?'selected':''}>Japans → Nederlands</option><option value="nl-jp" ${state.flashcardSelection.direction==='nl-jp'?'selected':''}>Nederlands → Japans</option><option value="both" ${state.flashcardSelection.direction==='both'?'selected':''}>Beide richtingen · apart herhaald</option></select></label></section>`;
+  const groups=flashcardGroups(),selected=flashcardSelectedLessons(),allLessonIds=[...new Set(groups.flatMap(group=>group.lessons.map(lesson=>lesson.id)))],allSelected=allLessonIds.every(id=>selected.has(id));
+  const counts=flashcardCounts(),freeCount=flashcardSelectedCards(true).length*flashcardDirections().length;
+  box.innerHTML=`<div class="between"><strong>Kies levels en lessen</strong><button id="fcSelectAll" class="btn tiny">${allSelected?'Alles uit':'Alles aan'}</button></div><div class="flashcard-scope" style="margin-top:10px">${groups.map(group=>{const ids=group.lessons.map(x=>x.id),checked=ids.every(id=>selected.has(id));return`<section class="flashcard-level"><div class="flashcard-level-head"><label class="flashcard-check"><input type="checkbox" data-fc-level="${group.level}" ${checked?'checked':''}><strong>Level ${group.level}</strong></label><span class="small">${group.lessons.reduce((n,l)=>n+l.words.length,0)} woorden</span></div><div class="flashcard-lesson-list">${group.lessons.map(lesson=>`<label class="flashcard-check"><input type="checkbox" data-fc-lesson="${lesson.id}" ${selected.has(lesson.id)?'checked':''}><span>${lesson.title} <span class="muted">· ${lesson.words.length}</span></span></label>`).join('')}</div></section>`}).join('')}</div><label class="profile-field" style="margin-top:10px"><span>Oefenrichting</span><select id="fcDirection" class="select"><option value="jp-nl" ${state.flashcardSelection.direction==='jp-nl'?'selected':''}>Japans → Nederlands</option><option value="nl-jp" ${state.flashcardSelection.direction==='nl-jp'?'selected':''}>Nederlands → Japans</option><option value="both" ${state.flashcardSelection.direction==='both'?'selected':''}>Beide richtingen · apart herhaald</option></select></label><div class="grid2" style="margin-top:12px"><button id="fcCustomStart" class="btn primary" ${counts.ready?'':'disabled'}>Start SRS · ${counts.ready} aan de beurt</button><button id="fcCustomFree" class="btn" ${freeCount?'':'disabled'}>Vrij oefenen · ${freeCount} kaarten</button></div><div class="small" style="margin-top:7px">Vrij oefenen beoordeelt je antwoord niet voor SRS en verandert geen herhaaldatum. Toekomstige woorden verschijnen alleen in deze vrije modus.</div>`;
   $('fcSelectAll').onclick=()=>{state.flashcardSelection.lessonIds=allSelected?[]:null;scheduleSave();renderFlashcardsScreen()};
   $('fcDirection').onchange=()=>{state.flashcardSelection.direction=$('fcDirection').value;scheduleSave();renderFlashcardsScreen()};
-  root.querySelectorAll('[data-fc-lesson]').forEach(input=>input.onchange=()=>{let ids=state.flashcardSelection.lessonIds===null?vocabCatalog.map(v=>v.lessonId):[...state.flashcardSelection.lessonIds];const id=input.dataset.fcLesson;ids=input.checked?[...new Set([...ids,id])]:ids.filter(x=>x!==id);setFlashcardLessonSelection(ids)});
-  root.querySelectorAll('[data-fc-level]').forEach(input=>input.onchange=()=>{let ids=state.flashcardSelection.lessonIds===null?vocabCatalog.map(v=>v.lessonId):[...state.flashcardSelection.lessonIds];const group=groups.find(x=>String(x.level)===input.dataset.fcLevel);group.lessons.map(x=>x.id).forEach(id=>{ids= input.checked?[...new Set([...ids,id])]:ids.filter(x=>x!==id)});setFlashcardLessonSelection(ids)});
+  $('fcCustomStart').onclick=()=>startFlashcardSession();$('fcCustomFree').onclick=()=>startFlashcardSession(flashcardSelectedCards(true),flashcardDirections(),'free');
+  root.querySelectorAll('[data-fc-lesson]').forEach(input=>input.onchange=()=>{let ids=state.flashcardSelection.lessonIds===null?allLessonIds:[...state.flashcardSelection.lessonIds];const id=input.dataset.fcLesson;ids=input.checked?[...new Set([...ids,id])]:ids.filter(x=>x!==id);setFlashcardLessonSelection(ids)});
+  root.querySelectorAll('[data-fc-level]').forEach(input=>input.onchange=()=>{let ids=state.flashcardSelection.lessonIds===null?allLessonIds:[...state.flashcardSelection.lessonIds];const group=groups.find(x=>String(x.level)===input.dataset.fcLevel);group.lessons.map(x=>x.id).forEach(id=>{ids= input.checked?[...new Set([...ids,id])]:ids.filter(x=>x!==id)});setFlashcardLessonSelection(ids)});
 }
 function renderFlashcardSession(){
   const s=state.flashcardSession;
@@ -4198,25 +4371,31 @@ function renderFlashcardSession(){
     $('fcResume').onclick=resumeFlashcardSession;$('fcNew').onclick=()=>{state.flashcardSession=null;scheduleSave();renderFlashcardsScreen()};return;
   }
   if(s.position>=s.queue.length){s.status='complete';scheduleSave();return renderFlashcardSummary()}
-  const item=s.queue[s.position],card=vocabById[item.cardId],direction=item.direction,front=direction==='jp-nl'?card.kana:card.meaning,preview=flashcardPreview(card),record=flashcardRecord(card.id,direction),done=s.knew+s.again,choices=item.answerChoices?.length?item.answerChoices:flashcardAnswerChoices(card,direction),feedback=s.feedback,correctAnswers=flashcardCorrectAnswers(card,direction),correctChoice=feedback?(correctAnswers.includes(feedback.chosen)?feedback.chosen:correctAnswers[0]):null;if(direction==='jp-nl'||s.revealed)recordVocabEncounter(card.id);
-  $('flashcardView').innerHTML=`<section class="card"><div class="between"><div><div class="eyebrow">Vrij oefenen · Level ${card.level} · ${card.lessonTitle}</div><div class="small">Kaart ${Math.min(s.position+1,s.queue.length)} van ${s.queue.length} · ${done} beoordeeld</div></div>${preview?'<span class="rank">Voorproefje</span>':''}</div><div class="progress" style="margin-top:9px"><div style="width:${Math.min(100,done/Math.max(1,s.queue.length)*100)}%"></div></div></section><section class="card"><div class="flashcard-avatar">${avatarAssistHtml({pose:feedback?(feedback.grade==='knew'?'celebrate':'encourage'):nextAvatarMood(),message:feedback?(feedback.grade==='knew'?'Goed!':`Nog niet — ${correctChoice} is het juiste antwoord.`):'Denk rustig na over dit woord.'})}</div><div class="flashcard-front"><div><div class="flashcard-face-main">${escapeHtml(front)}</div><div class="flashcard-face-sub">${direction==='jp-nl'?'Kies de Nederlandse betekenis':'Kies het Japanse woord in kana'}</div></div></div><div class="flashcard-answer-options"><div class="small">${feedback?(feedback.grade==='knew'?'Goed gekozen!':'Het juiste antwoord staat groen geselecteerd.'):'Kies je antwoord:'}</div>${choices.map((answer,index)=>{const selected=feedback&&(feedback.grade==='knew'?answer===feedback.chosen:answer===correctChoice),wrong=feedback&&feedback.grade==='again'&&answer===feedback.chosen&&answer!==correctChoice;return`<button class="btn flashcard-answer-choice${selected?' is-correct':wrong?' is-incorrect':''}" data-fc-answer="${index}" ${feedback?'disabled':''} ${selected?'aria-pressed="true"':''}>${escapeHtml(answer)}</button>`}).join('')}</div><div class="flashcard-feedback-status" role="status" aria-live="polite">${feedback?(feedback.grade==='knew'?'Goed!':'Het juiste antwoord is geselecteerd.'):''}</div><div class="flashcard-actions" style="margin-top:12px"><button id="fcPause" class="btn" style="grid-column:1/-1" ${feedback?'disabled':''}>Onderbreek sessie</button></div>${record?`<div class="small" style="text-align:center;margin-top:9px">Vorige herhaling: ${flashcardDueText(record.dueAt)}</div>`:''}</section>`;
-  if(!feedback)root.querySelectorAll('[data-fc-answer]').forEach(button=>button.onclick=()=>{const choice=choices[Number(button.dataset.fcAnswer)],correct=correctAnswers.includes(choice);s.revealed=true;flashcardRate(correct?'knew':'again',choice)});
+  const item=s.queue[s.position],card=vocabById[item.cardId],direction=item.direction,front=direction==='jp-nl'?card.kana:card.meaning,preview=flashcardPreview(card),record=flashcardRecord(card.id,direction),choices=item.answerChoices?.length?item.answerChoices:flashcardAnswerChoices(card,direction);
+  const scheduled=s.mode!=='free',done=scheduled?s.knew+s.again:s.position-(s.skipped||0),feedback=s.feedback,correctAnswers=flashcardCorrectAnswers(card,direction),correctChoice=feedback?(correctAnswers.includes(feedback.chosen)?feedback.chosen:correctAnswers[0]):null;
+  if(direction==='jp-nl'||s.revealed)recordVocabEncounter(card.id);
+  $('flashcardView').innerHTML=`<section class="card"><div class="between"><div><div class="eyebrow">${scheduled?'SRS-herhaling':'Vrij oefenen'} · Level ${card.level} · ${card.lessonTitle}</div><div class="small">Kaart ${Math.min(s.position+1,s.queue.length)} van ${s.queue.length} · ${done} ${scheduled?'beoordeeld':'bekeken'}</div></div>${preview?'<span class="rank">Voorproefje</span>':''}</div><div class="progress" style="margin-top:9px"><div style="width:${Math.min(100,done/Math.max(1,s.queue.length)*100)}%"></div></div></section><section class="card"><div class="flashcard-avatar">${avatarAssistHtml({pose:feedback?(feedback.grade==='knew'?'celebrate':feedback.grade==='again'?'encourage':'calm'):nextAvatarMood(),message:feedback?(feedback.ungraded?'Bekeken — deze vrije oefening verandert je herhaalplanning.':feedback.grade==='knew'?'Goed!':`Nog niet — ${correctChoice} is het juiste antwoord.`):'Denk rustig na over dit woord.'})}</div><div class="flashcard-front"><div><div class="flashcard-face-main">${escapeHtml(front)}</div><div class="flashcard-face-sub">${direction==='jp-nl'?'Kies de Nederlandse betekenis':'Kies het Japanse woord in kana'}</div></div></div><div class="flashcard-answer-options"><div class="small">${feedback?(feedback.ungraded?'Je antwoord is bekeken, niet beoordeeld voor SRS.':feedback.grade==='knew'?'Goed gekozen!':'Het juiste antwoord staat groen geselecteerd.'):'Kies je antwoord:'}</div>${choices.map((answer,index)=>{const selected=feedback&&(feedback.ungraded?answer===feedback.chosen:feedback.grade==='knew'?answer===feedback.chosen:answer===correctChoice),wrong=feedback&&!feedback.ungraded&&feedback.grade==='again'&&answer===feedback.chosen&&answer!==correctChoice;return`<button class="btn flashcard-answer-choice${selected?' is-correct':wrong?' is-incorrect':''}" data-fc-answer="${index}" ${feedback?'disabled':''} ${selected?'aria-pressed="true"':''}>${escapeHtml(answer)}</button>`}).join('')}</div><div class="flashcard-feedback-status" role="status" aria-live="polite">${feedback?(feedback.ungraded?'Vrij geoefend':feedback.grade==='knew'?'Goed!':'Het juiste antwoord is geselecteerd.'):''}</div><div class="flashcard-actions" style="margin-top:12px"><button id="fcSkip" class="btn" ${feedback?'disabled':''}>Sla over</button><button id="fcPause" class="btn" style="grid-column:1/-1" ${feedback?'disabled':''}>Onderbreek sessie</button></div>${record?`<div class="small" style="text-align:center;margin-top:9px">Huidige planning: ${flashcardDueText(record.dueAt)}</div>`:''}</section>`;
+  if(!feedback)root.querySelectorAll('[data-fc-answer]').forEach(button=>button.onclick=()=>{if(s.feedback)return;const choice=choices[Number(button.dataset.fcAnswer)],correct=correctAnswers.includes(choice);s.revealed=true;if(scheduled)flashcardRate(correct?'knew':'again',choice);else{s.feedback={grade:'viewed',chosen:choice,until:null,ungraded:true};scheduleSave();renderFlashcardsScreen()}});
+  $('fcSkip').onclick=flashcardSkip;
   $('fcPause').onclick=pauseFlashcardSession;
-  if(feedback?.grade==='again'){const next=document.createElement('button');next.className='btn primary';next.textContent='Volgende kaart →';next.onclick=flashcardNextCard;$('flashcardView').querySelector('.flashcard-actions').appendChild(next)}
+  if(feedback?.grade==='again'||feedback?.ungraded){const next=document.createElement('button');next.className='btn primary';next.textContent='Volgende kaart →';next.onclick=flashcardNextCard;$('flashcardView').querySelector('.flashcard-actions').appendChild(next)}
   if(feedback?.grade==='knew'){const remaining=Math.max(0,(feedback.until||Date.now())-Date.now()),sessionRef=s,positionRef=s.position,untilRef=feedback.until;window.setTimeout(()=>{if(state.flashcardSession===sessionRef&&sessionRef.position===positionRef&&sessionRef.feedback?.until===untilRef)flashcardNextCard()},remaining)}
 }
 function renderFlashcardSummary(){
-  const s=state.flashcardSession,next=Object.entries(state.flashcardProgress.cards).filter(([,v])=>v.dueAt>Date.now()).sort((a,b)=>a[1].dueAt-b[1].dueAt)[0],total=s.knew+s.again;
-  $('flashcardView').innerHTML=`<section class="card"><div class="eyebrow">Sessie afgerond</div><div class="h2">Goed gedaan</div><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${total}</strong><span>Beoordelingen</span></div><div class="flashcard-stat"><strong>${s.knew}</strong><span>Wist ik</span></div><div class="flashcard-stat"><strong>${s.again}</strong><span>Komt eerder terug</span></div></div>${next?`<div class="flashcard-next-due" style="margin-top:12px">Eerstvolgende herhaling: <strong>${flashcardDueText(next[1].dueAt)}</strong> · ${escapeHtml(vocabById[next[0].split('::')[0]]?.kana||'woord')}</div>`:'<div class="small" style="margin-top:10px">Nieuwe woorden verschijnen meteen in je volgende selectie.</div>'}${avatarAssistHtml({pose:'celebrate',message:'Mooi geoefend!',detail:'Je volgende herhaling staat klaar wanneer het tijd is.'})}<div class="grid2" style="margin-top:13px"><button id="fcSummaryDone" class="btn">Terug naar selectie</button><button id="fcSummaryLevels" class="btn primary">Terug naar levels</button></div></section>`;
-  $('fcSummaryDone').onclick=()=>{state.flashcardSession=null;scheduleSave();renderFlashcardsScreen()};$('fcSummaryLevels').onclick=goToLearningHome;
+  const s=state.flashcardSession,selected=new Set(flashcardSelectedCards().map(card=>card.id)),directions=new Set(flashcardDirections());
+  const next=Object.entries(state.flashcardProgress.cards).filter(([key,value])=>selected.has(key.split('::')[0])&&directions.has(key.split('::')[1])&&value.dueAt>Date.now()).sort((a,b)=>a[1].dueAt-b[1].dueAt)[0],total=s.knew+s.again,free=s.mode==='free';
+  const stats=free?`<div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${s.viewed||0}</strong><span>Bekeken</span></div><div class="flashcard-stat"><strong>${s.skipped||0}</strong><span>Overgeslagen</span></div><div class="flashcard-stat"><strong>0</strong><span>SRS-beoordelingen</span></div></div>`:`<div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${total}</strong><span>Beoordelingen</span></div><div class="flashcard-stat"><strong>${s.knew}</strong><span>Wist ik</span></div><div class="flashcard-stat"><strong>${s.again}</strong><span>Komt eerder terug</span></div></div><div class="small" style="margin-top:6px">${s.skipped||0} overgeslagen · niet meegenomen in SRS.</div>`;
+  $('flashcardView').innerHTML=`<section class="card"><div class="eyebrow">Sessie afgerond · ${free?'vrije oefening':'SRS-herhaling'}</div><div class="h2">Goed gedaan</div>${stats}${next?`<div class="flashcard-next-due" style="margin-top:12px">Eerstvolgende herhaling: <strong>${flashcardDueText(next[1].dueAt)}</strong> · ${escapeHtml(vocabById[next[0].split('::')[0]]?.kana||'woord')}</div>`:'<div class="small" style="margin-top:10px">Nieuwe woorden verschijnen meteen in je volgende selectie.</div>'}${avatarAssistHtml({pose:'celebrate',message:'Mooi geoefend!',detail:free?'Vrij oefenen heeft je SRS-planning niet aangepast.':'Je volgende herhaling staat klaar wanneer het tijd is.'})}<div class="grid2" style="margin-top:13px"><button id="fcSummaryDone" class="btn">Terug naar selectie</button><button id="fcSummaryLevels" class="btn primary">Terug naar levels</button></div></section>`;
+  $('fcSummaryDone').onclick=()=>{state.flashcardSession=null;scheduleSave();renderFlashcardsScreen()};$('fcSummaryLevels').onclick=()=>{state.flashcardSession=null;scheduleSave();goToLearningHome()};
 }
 function renderFlashcardsScreen(){
   show('flashcards');document.body.dataset.scene='journey';updateHeader();
   const box=$('flashcardView');
   if(state.flashcardSession&&['active','paused','complete'].includes(state.flashcardSession.status))return renderFlashcardSession();
-  const cards=flashcardSelectedCards(),counts=flashcardCounts(cards),current=state.flashcardSession;
-  box.innerHTML=`<section class="card flashcard-intro"><div><div class="eyebrow">Vrijwillige woordherhaling</div><div class="h1">Flashcards</div><div class="muted">Kies woorden vooruit of herhaal wat aan de beurt is. Kaarten veranderen je lesvoortgang en ranks niet.</div></div><span class="rank">${vocabCatalog.length} woorden</span></section><section class="card"><div class="between"><div><div class="h2">Jouw selectie</div><div class="small">${counts.total} kaart${counts.total===1?'':'en'} · ${counts.ready} nu beschikbaar</div></div><button id="fcStart" class="btn primary" ${counts.ready?'':'disabled'}>Start sessie</button></div><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${counts.new}</strong><span>Nieuw · direct</span></div><div class="flashcard-stat"><strong>${counts.due}</strong><span>Aan de beurt</span></div><div class="flashcard-stat"><strong>${counts.mastered}</strong><span>Beheerst</span></div></div><div class="small" style="margin-top:8px">${counts.upcoming} kaart${counts.upcoming===1?' staat':'en staan'} later gepland. Een fout komt na ongeveer 6 uur terug. Goede antwoorden plannen de herhaling steeds verder vooruit (1, 3, 7 dagen en daarna langer) en zetten die woorden later in de rij.</div></section><div id="flashcardScope"></div>${current?.status==='paused'?'<section class="card"><div class="between"><div><strong>Je hebt een onderbroken sessie</strong><div class="small">Hervat bij dezelfde kaart.</div></div><button id="fcContinue" class="btn primary">Hervat</button></div></section>':''}<section class="card"><div class="h2">Zo werkt het herhalen</div><div class="small">Kies een antwoord uit de opties, of toon eerst de oplossing en beoordeel jezelf. Nieuwe woorden zijn meteen beschikbaar. Woorden die je vaker goed hebt, komen later terug; woorden die lastig zijn komen eerder terug. Kaarten die nog niet in de les zijn behandeld, krijgen het label “Voorproefje”.</div></section>`;
-  $('fcStart').onclick=startFlashcardSession;
+  const cards=flashcardSelectedCards(),freeCards=flashcardSelectedCards(true),counts=flashcardCounts(cards);
+  box.innerHTML=`<section class="card recall-start"><div class="eyebrow">Herhalen wanneer jij wilt</div><div class="h1">Recall</div><div class="muted">Recall helpt bepalen welke woorden weer aan de beurt zijn. Je selectie bevat ${counts.total} bekende ${counts.total===1?'kaart':'kaarten'}.</div><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${counts.new}</strong><span>Nieuw · beschikbaar</span></div><div class="flashcard-stat"><strong>${counts.due}</strong><span>Aan de beurt</span></div><div class="flashcard-stat"><strong>${counts.upcoming}</strong><span>Later gepland</span></div></div><button id="fcStart" class="btn primary" ${counts.ready?'':'disabled'}>${counts.ready?'Start SRS-herhaling':counts.upcoming?'Geen kaarten aan de beurt':'Geen nieuwe of verschuldigde kaarten'}</button><button id="fcFreeStart" class="btn" ${cards.length?'':'disabled'}>Vrij oefenen · ${counts.total} kaarten</button><div class="small">Vrij oefenen verandert de herhaalplanning niet. Kies hieronder andere levels of lessen om vooruit te oefenen.</div></section><details id="recallCustom" class="card recall-custom" ${state.recallCustomOpen?'open':''}><summary>Kies andere levels of lessen</summary><div id="flashcardScope"></div></details><details class="recall-info"><summary>Hoe werkt Recall?</summary><p>Herhaal woorden wanneer jij wilt; Recall helpt bepalen welke weer aan de beurt zijn. Een expliciete keuze in de SRS-sessie plant het volgende moment. Vrij oefenen en overslaan veranderen die planning niet. Recall verandert je lesrank niet.</p></details>`;
+  $('fcStart').onclick=()=>startFlashcardSession(cards,flashcardDirections());$('fcFreeStart').onclick=()=>startFlashcardSession(cards,flashcardDirections(),'free');
+  $('recallCustom').ontoggle=()=>{state.recallCustomOpen=$('recallCustom').open};
   const continueButton=$('fcContinue');if(continueButton)continueButton.onclick=resumeFlashcardSession;
   renderFlashcardScope($('flashcardScope'));
 }
@@ -4230,7 +4409,7 @@ function renderProgressVocabTab(box){
   const next=milestones.find(x=>x>learned.length)||null;
 
   box.innerHTML=`<section class="card">
-    <div class="between"><div class="h2">Vocabulaire</div><button id="openVocabFlashcards" class="btn tiny">Oefen met flashcards</button></div>
+    <div class="between"><div class="h2">Vocabulaire</div><button id="openVocabFlashcards" class="btn tiny">Oefen met Recall</button></div>
     <div class="progress-stat-grid" style="margin-top:10px">
       <div class="progress-stat"><div class="value">${learned.length}</div><div class="label">Officieel geleerde woorden</div></div>
       <div class="progress-stat"><div class="value">${counts.seen}</div><div class="label">Met individuele oefendata</div></div>
@@ -4469,8 +4648,8 @@ function renderStudyAdjustment(sessionId){
   const s=state.studyTracker.sessions.find(x=>x.id===sessionId),card=$('resultStats')?.parentElement;if(!s||!card)return;const minutes=s.effectiveSeconds>0?Math.max(1,Math.round(s.effectiveSeconds/60)):0;let host=$('studyAdjustment');if(!host){host=document.createElement('details');host.id='studyAdjustment';host.className='panel study-adjust';card.appendChild(host)}host.innerHTML=`<summary>Studietijd aanpassen · ${formatDuration(s.effectiveSeconds,true)}</summary><form id="resultStudyForm" class="study-form" style="margin-top:10px"><div class="study-form-grid"><label>Effectieve minuten<input id="resultStudyMinutes" name="minutes" type="number" min="0" value="${minutes}"></label><label>Moeilijkheid 1–5<input name="difficulty" type="number" min="1" max="5" value="${s.difficulty||''}"></label><label>Begrip 1–5<input name="comprehension" type="number" min="1" max="5" value="${s.comprehension||''}"></label></div><div class="study-toolbar"><button class="btn tiny" type="button" data-minute-delta="-5">−5 min</button><button class="btn tiny" type="button" data-minute-delta="-1">−1 min</button><button class="btn tiny" type="button" data-minute-delta="1">+1 min</button><button class="btn tiny" type="button" data-minute-delta="5">+5 min</button></div><label>Notitie<textarea name="note">${escapeHtml(s.note||'')}</textarea></label><button class="btn primary" type="submit">Aanpassing opslaan</button></form>`;root.querySelectorAll('[data-minute-delta]').forEach(b=>b.onclick=()=>{$('resultStudyMinutes').value=Math.max(0,Number($('resultStudyMinutes').value||0)+Number(b.dataset.minuteDelta))});$('resultStudyForm').onsubmit=e=>{e.preventDefault();const fd=new FormData(e.currentTarget);s.effectiveSeconds=Math.max(0,Number(fd.get('minutes'))*60);s.difficulty=Number(fd.get('difficulty'))||null;s.comprehension=Number(fd.get('comprehension'))||null;s.note=String(fd.get('note')).trim();saveProgress();renderStudyAdjustment(sessionId)};
 }
 function renderProgressKnowledge(box){
-  box.innerHTML=`<div class="progress-tabs"><button class="progress-tab ${state.progressKnowledgeTab==='levels'?'active':''}" data-knowledge="levels">Levels</button><button class="progress-tab ${state.progressKnowledgeTab==='kana'?'active':''}" data-knowledge="kana">Kana</button><button class="progress-tab ${state.progressKnowledgeTab==='vocab'?'active':''}" data-knowledge="vocab">Vocabulaire</button><button class="progress-tab ${state.progressKnowledgeTab==='skills'?'active':''}" data-knowledge="skills">Vaardigheden</button><button class="progress-tab ${state.progressKnowledgeTab==='avatar'?'active':''}" data-knowledge="avatar">Profiel</button></div><div id="knowledgeBody" class="stack"></div>`;
-  root.querySelectorAll('[data-knowledge]').forEach(b=>b.onclick=()=>{state.progressKnowledgeTab=b.dataset.knowledge;state.progressDetailId=null;state.progressVocabDetailId=null;scheduleSave();renderProgressKnowledge(box)});const body=$('knowledgeBody');if(state.progressKnowledgeTab==='kana')renderProgressKanaTab(body);else if(state.progressKnowledgeTab==='vocab')renderProgressVocabTab(body);else if(state.progressKnowledgeTab==='skills')renderProgressSkillsTab(body);else if(state.progressKnowledgeTab==='avatar')renderAvatarSettings(body);else renderProgressLevelTab(body)
+  box.innerHTML=`<div class="progress-tabs"><button class="progress-tab ${state.progressKnowledgeTab==='levels'?'active':''}" data-knowledge="levels">Levels</button><button class="progress-tab ${state.progressKnowledgeTab==='kana'?'active':''}" data-knowledge="kana">Kana</button><button class="progress-tab ${state.progressKnowledgeTab==='vocab'?'active':''}" data-knowledge="vocab">Vocabulaire</button><button class="progress-tab ${state.progressKnowledgeTab==='dictionary'?'active':''}" data-knowledge="dictionary">Dictionary</button><button class="progress-tab ${state.progressKnowledgeTab==='skills'?'active':''}" data-knowledge="skills">Vaardigheden</button><button class="progress-tab ${state.progressKnowledgeTab==='avatar'?'active':''}" data-knowledge="avatar">Profiel</button></div><div id="knowledgeBody" class="stack"></div>`;
+  root.querySelectorAll('[data-knowledge]').forEach(b=>b.onclick=()=>{state.progressKnowledgeTab=b.dataset.knowledge;state.progressDetailId=null;state.progressVocabDetailId=null;scheduleSave();renderProgressKnowledge(box)});const body=$('knowledgeBody');if(state.progressKnowledgeTab==='kana')renderProgressKanaTab(body);else if(state.progressKnowledgeTab==='vocab')renderProgressVocabTab(body);else if(state.progressKnowledgeTab==='dictionary')renderDictionaryTab(body);else if(state.progressKnowledgeTab==='skills')renderProgressSkillsTab(body);else if(state.progressKnowledgeTab==='avatar')renderAvatarSettings(body);else renderProgressLevelTab(body)
 }
 function renderSession(){
   show('session');updateHeader();$('sessionView').querySelector('.card .h1').textContent=t('progress.heroTitle');$('sessionView').querySelector('.card .muted').textContent=t('progress.heroIntro');$('sessionBack').textContent=t('common.back');const box=$('sessionContent');box.innerHTML=`<div class="progress-tabs" role="tablist" aria-label="${t('progress.title')}"><button class="progress-tab ${state.progressTab==='profile'?'active':''}" data-progress="profile" role="tab" aria-selected="${state.progressTab==='profile'}">${t('progress.profile')}</button><button class="progress-tab ${state.progressTab==='progress'?'active':''}" data-progress="progress" role="tab" aria-selected="${state.progressTab==='progress'}">${t('progress.title')}</button><button class="progress-tab ${state.progressTab==='knowledge'?'active':''}" data-progress="knowledge" role="tab" aria-selected="${state.progressTab==='knowledge'}">${t('progress.knowledge')}</button></div><div id="progressBody" class="stack"></div>`;root.querySelectorAll('[data-progress]').forEach(b=>b.onclick=()=>{state.progressTab=b.dataset.progress;state.progressDetailId=null;state.progressVocabDetailId=null;studyEditingId=null;scheduleSave();renderSession()});const body=$('progressBody');if(state.progressTab==='profile')renderProfileDashboard(body);else if(state.progressTab==='knowledge')renderKnowledgeDashboard(body);else renderProgressDashboard(body)
@@ -4491,6 +4670,11 @@ $('learnNav').onclick=goToLearningHome;
 $('flashcardsNav').onclick=openFlashcards;
 $('sessionBack').onclick=navigateBack;
 $('navBack').onclick=navigateBack;
+$('navHome').onclick=goToLearningHome;
+$('dictionaryClose').onclick=closeDictionaryModal;
+$('dictionaryModal').addEventListener('click',event=>{if(event.target===$('dictionaryModal'))closeDictionaryModal()});
+document.addEventListener('click',event=>{const button=event.target.closest('[data-dictionary-open]');if(!button)return;event.preventDefault();event.stopPropagation();openDictionaryModal(button.dataset.dictionaryOpen,button.dataset.dictionaryLesson,button.dataset.dictionarySentence,button.dataset.dictionaryMeaning)},true);
+document.addEventListener('keydown',event=>{const modal=$('dictionaryModal');if(modal.classList.contains('hidden'))return;if(event.key==='Escape'){event.preventDefault();closeDictionaryModal();return}if(event.key==='Tab'){const focusable=[...modal.querySelectorAll('button:not(:disabled),input:not(:disabled),[href],[tabindex]:not([tabindex="-1"])')].filter(el=>el.getClientRects().length);if(!focusable.length)return;const first=focusable[0],last=focusable[focusable.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}}});
 $('quitQuiz').onclick=()=>{completeStudySession({status:'afgebroken'});setMain()};
 $('backBtn').onclick=setMain;
 $('practiceErrors').onclick=practiceCurrentErrors;
@@ -4505,6 +4689,8 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseActive
 
 detectLayout();
 loadProgress();
+// A new visit starts at the active course home; the saved lesson position remains available through Continue.
+state.screen='home';
 document.documentElement.lang=state.uiLanguage;
 recoverInterruptedStudySession();
 renderMain();
