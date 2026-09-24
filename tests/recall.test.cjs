@@ -226,5 +226,6 @@ test('Recall keeps a revealed card revealed after reload and exposes a labeled r
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
   assert.match(html,/\.flashcard-answer-options\.is-hidden \.flashcard-answer-choice\{filter:blur\(7px\)/);
   assert.match(html,/reveal\.setAttribute\('aria-label','Toon antwoordopties'\)/);
+  assert.match(html,/querySelector\('\.flashcard-avatar'\)\?\.remove\(\)/,'the prompt is not preceded by an extra avatar message');
   assert.match(html,/querySelector\('\.flashcard-face-sub'\)\?\.remove\(\)/,'Recall removes the redundant direction hint from the rendered card');
 });
