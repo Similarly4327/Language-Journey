@@ -1542,6 +1542,7 @@ body[data-scene="journey"][data-view="main"] #mainView{
 }
 
 </style>
+<link rel="stylesheet" href="./scenes.css">
 </head>
 <body data-scene="journey" data-view="main">
 <div id="app" class="app stack">
@@ -1569,10 +1570,27 @@ body[data-scene="journey"][data-view="main"] #mainView{
 <section id="resultView" class="stack hidden"><div class="card question"><div id="resultTitle" class="h2"></div><div id="resultScore" style="font-size:40px;font-weight:800;margin-top:8px"></div><div id="resultStats" class="muted"></div><div id="resultRank" class="panel hidden" style="margin-top:10px"></div><div id="resultAvatarAssist"></div></div><div class="card"><div class="h2">Fouten</div><div id="errorIntro" class="small"></div><div id="errorList" class="stack" style="margin-top:9px"></div></div><div class="grid2"><button id="practiceErrors" class="btn">Oefen mijn fouten</button><button id="retryBtn" class="btn">Opnieuw</button><button id="nextBtn" class="btn primary hidden">Volgende →</button><button id="backBtn" class="btn">Terug naar overzicht</button></div></section>
 <section id="sessionView" class="stack hidden"><div class="card"><div class="h1">Mijn Japanse leerreis</div><div class="muted">Je profiel, groei en bekende bouwstenen.</div></div><div id="sessionContent" class="stack"></div><button id="sessionBack" class="btn primary">Terug</button></section>
 </div>
+<div id="sceneTransition" class="scene-transition" role="status" aria-live="polite" hidden><div class="scene-transition-image" aria-hidden="true"></div><div id="sceneTransitionLabel" class="scene-transition-label"></div></div>
+<script src="./locales/nl.js"></script>
+<script src="./locales/en.js"></script>
+<script src="./locales/de.js"></script>
+<script src="./locales/legacy-translations.js"></script>
+<script src="./locales/i18n.js"></script>
+<script src="./locales/legacy-ui.js"></script>
+<script src="./platform.js"></script>
+<script src="./navigation.js"></script>
+<script src="./scenes.js"></script>
+<script src="./language-journey-content/content.js"></script>
 <script>
 (() => {
+const platform=window.LanguageJourneyPlatform,preferences=platform.preferences(),i18n=window.LanguageJourneyI18n,scenes=window.LanguageJourneyScenes,navigation=window.LanguageJourneyNavigation;
+const {levels,rowNames,hira,kata,kanaClusters,digitData,numberLessons,dakutenPatterns,dakutenClusters,langLessons,smallLessons,advancedCourses,level4LessonMetadata,level4Didactics,coursePhases,journeyMilestones,languageSkills,profileDialogueTemplates,vocabCatalog,vocabById}=platform.content(preferences.courseId);
+const makeRows=raw=>raw.map((kana,i)=>({name:rowNames[i],kana})),kanaModules={hiragana:{label:'Hiragana',rows:makeRows(hira)},katakana:{label:'Katakana',rows:makeRows(kata)}};
+const basicSymbols={0:'〇',1:'一',2:'二',3:'三',4:'四',5:'五',6:'六',7:'七',8:'八',9:'九'},basicRead={0:'zero',1:'ichi',2:'ni',3:'san',4:'yon',5:'go',6:'roku',7:'nana',8:'hachi',9:'kyū'},range=(a,b)=>Array.from({length:b-a+1},(_,i)=>a+i);
+function numberSymbol(n){if(n===0)return'〇';if(n<=10)return digitData[n].symbol;if(n<20)return'十'+basicSymbols[n-10];if(n<100){const t=Math.floor(n/10),u=n%10;return basicSymbols[t]+'十'+(u?basicSymbols[u]:'')}if(n<1000){const h=Math.floor(n/100),r=n%100;return(h===1?'':basicSymbols[h])+'百'+(r?numberSymbol(r):'')}if(n<10000){const t=Math.floor(n/1000),r=n%1000;return(t===1?'':basicSymbols[t])+'千'+(r?numberSymbol(r):'')}return n===10000?'一万':String(n)}
+function numberReading(n){if(n<=10)return digitData[n].reading;if(n<100){const t=Math.floor(n/10),u=n%10;let s=t===1?'jū':basicRead[t]+'jū';if(u)s+='-'+basicRead[u];return s}const h={1:'hyaku',2:'nihyaku',3:'sanbyaku',4:'yonhyaku',5:'gohyaku',6:'roppyaku',7:'nanahyaku',8:'happyaku',9:'kyūhyaku'};if(n<1000){const x=Math.floor(n/100),r=n%100;return h[x]+(r?'-'+numberReading(r):'')}const th={1:'sen',2:'nisen',3:'sanzen',4:'yonsen',5:'gosen',6:'rokusen',7:'nanasen',8:'hassen',9:'kyūsen'};if(n<10000){const x=Math.floor(n/1000),r=n%1000;return th[x]+(r?'-'+numberReading(r):'')}return n===10000?'ichiman':String(n)}
+const numberItem=n=>{const d=digitData[n]||{};return{id:'num-'+n,value:n,valueText:String(n),symbol:numberSymbol(n),reading:numberReading(n),altSymbol:d.altSymbol||'',altReading:d.alt||''}},numberItems=vals=>vals.map(numberItem);
 const root=document.getElementById('app'),$=id=>document.getElementById(id);
-const levels=[['Level 1','Schriftbasis','Hiragana · Cijfers · Katakana'],['Level 2','Kana Mix','92 basiskana schakelen'],['Level 3','Dakuten & Handakuten','Bekende kana modificeren'],['Level 4','Eerste taalbasis','Woorden + eerste zinnen'],['Level 5','Kana compleet','ゃゅょ · っ · ー'],['Level 6','Mensen & relaties','Wie iemand is · bezit met の'],['Level 7','Hoeveelheden','Tellers · rangtelwoorden'],['Level 8','Tijd & agenda','Dag · datum · afspraak'],['Level 9','Plaats & richting','Waar · links · rechts'],['Level 10','Dagelijks Japans','Eerste praktijksituaties']];
 const avatarSkins=[
   {id:'skin-1',level:1,name:'Beginner'},
   {id:'skin-2',level:2,name:'Studie'},
@@ -1611,68 +1629,6 @@ const avatarPoseAssets={
 };
 const avatarPoseIds=['neutral','greeting','explain','confident','tip','welcome','celebrate','encourage'];
 const avatarHairstyles=[{id:'bun',name:'Huidig kapsel'},{id:'loose',name:'Haar los'},{id:'ponytail',name:'Staart'}];
-const rowNames=['Klinkers','K-rij','S-rij','T-rij','N-rij','H-rij','M-rij','Y-rij','R-rij','W + ん'];
-const hira=[[['あ','a'],['い','i'],['う','u'],['え','e'],['お','o']],[['か','ka'],['き','ki'],['く','ku'],['け','ke'],['こ','ko']],[['さ','sa'],['し','shi'],['す','su'],['せ','se'],['そ','so']],[['た','ta'],['ち','chi'],['つ','tsu'],['て','te'],['と','to']],[['な','na'],['に','ni'],['ぬ','nu'],['ね','ne'],['の','no']],[['は','ha'],['ひ','hi'],['ふ','fu'],['へ','he'],['ほ','ho']],[['ま','ma'],['み','mi'],['む','mu'],['め','me'],['も','mo']],[['や','ya'],['ゆ','yu'],['よ','yo']],[['ら','ra'],['り','ri'],['る','ru'],['れ','re'],['ろ','ro']],[['わ','wa'],['を','wo'],['ん','n']]];
-const kata=[[['ア','a'],['イ','i'],['ウ','u'],['エ','e'],['オ','o']],[['カ','ka'],['キ','ki'],['ク','ku'],['ケ','ke'],['コ','ko']],[['サ','sa'],['シ','shi'],['ス','su'],['セ','se'],['ソ','so']],[['タ','ta'],['チ','chi'],['ツ','tsu'],['テ','te'],['ト','to']],[['ナ','na'],['ニ','ni'],['ヌ','nu'],['ネ','ne'],['ノ','no']],[['ハ','ha'],['ヒ','hi'],['フ','fu'],['ヘ','he'],['ホ','ho']],[['マ','ma'],['ミ','mi'],['ム','mu'],['メ','me'],['モ','mo']],[['ヤ','ya'],['ユ','yu'],['ヨ','yo']],[['ラ','ra'],['リ','ri'],['ル','ru'],['レ','re'],['ロ','ro']],[['ワ','wa'],['ヲ','wo'],['ン','n']]];
-const makeRows=raw=>raw.map((kana,i)=>({name:rowNames[i],kana})),kanaModules={hiragana:{label:'Hiragana',rows:makeRows(hira)},katakana:{label:'Katakana',rows:makeRows(kata)}};
-const kanaClusters=[{name:'Oefenblok 1 · Klinkers / K / S',rows:[0,1,2]},{name:'Oefenblok 2 · T / N / H',rows:[3,4,5]},{name:'Oefenblok 3 · M / Y / R',rows:[6,7,8]},{name:'Oefenblok 4 · laatste mix',rows:[7,8,9]}];
-
-const digitData={0:{symbol:'〇',altSymbol:'零',reading:'zero',alt:'rei'},1:{symbol:'一',reading:'ichi'},2:{symbol:'二',reading:'ni'},3:{symbol:'三',reading:'san'},4:{symbol:'四',reading:'yon',alt:'shi'},5:{symbol:'五',reading:'go'},6:{symbol:'六',reading:'roku'},7:{symbol:'七',reading:'nana',alt:'shichi'},8:{symbol:'八',reading:'hachi'},9:{symbol:'九',reading:'kyū',alt:'ku'},10:{symbol:'十',reading:'jū'}},basicSymbols={0:'〇',1:'一',2:'二',3:'三',4:'四',5:'五',6:'六',7:'七',8:'八',9:'九'},basicRead={0:'zero',1:'ichi',2:'ni',3:'san',4:'yon',5:'go',6:'roku',7:'nana',8:'hachi',9:'kyū'},range=(a,b)=>Array.from({length:b-a+1},(_,i)=>a+i);
-function numberSymbol(n){if(n===0)return'〇';if(n<=10)return digitData[n].symbol;if(n<20)return'十'+basicSymbols[n-10];if(n<100){const t=Math.floor(n/10),u=n%10;return basicSymbols[t]+'十'+(u?basicSymbols[u]:'')}if(n<1000){const h=Math.floor(n/100),r=n%100;return(h===1?'':basicSymbols[h])+'百'+(r?numberSymbol(r):'')}if(n<10000){const t=Math.floor(n/1000),r=n%1000;return(t===1?'':basicSymbols[t])+'千'+(r?numberSymbol(r):'')}return n===10000?'一万':String(n)}
-function numberReading(n){if(n<=10)return digitData[n].reading;if(n<100){const t=Math.floor(n/10),u=n%10;let s=t===1?'jū':basicRead[t]+'jū';if(u)s+='-'+basicRead[u];return s}const h={1:'hyaku',2:'nihyaku',3:'sanbyaku',4:'yonhyaku',5:'gohyaku',6:'roppyaku',7:'nanahyaku',8:'happyaku',9:'kyūhyaku'};if(n<1000){const x=Math.floor(n/100),r=n%100;return h[x]+(r?'-'+numberReading(r):'')}const th={1:'sen',2:'nisen',3:'sanzen',4:'yonsen',5:'gosen',6:'rokusen',7:'nanasen',8:'hassen',9:'kyūsen'};if(n<10000){const x=Math.floor(n/1000),r=n%1000;return th[x]+(r?'-'+numberReading(r):'')}return n===10000?'ichiman':String(n)}
-const numberItem=n=>{const d=digitData[n]||{};return{id:'num-'+n,value:n,valueText:String(n),symbol:numberSymbol(n),reading:numberReading(n),altSymbol:d.altSymbol||'',altReading:d.alt||''}},numberItems=vals=>vals.map(numberItem);
-const numberLessons=[{name:'0–2',values:[0,1,2],official:false,note:'Teken, waarde en uitspraak als één geheel.'},{name:'3–5',values:[3,4,5],official:false,note:'三 = 3 = san. Voor 4 gebruiken we eerst yon.'},{name:'6–8',values:[6,7,8],official:false,note:'Voor 7 gebruiken we eerst nana.'},{name:'9–10',values:[9,10],official:false,note:'Voor 9 gebruiken we eerst kyū.'},{name:'0–10 compleet',values:range(0,10),official:true,id:'num-basic',note:'Alle representaties door elkaar.'},{name:'11–13',values:[11,12,13],official:false,note:'十三 = 13 = jū-san.'},{name:'14–16',values:[14,15,16],official:false,note:'Hetzelfde bouwpatroon.'},{name:'17–19',values:[17,18,19],official:false,note:'Bekende bouwstenen combineren.'},{name:'11–19 compleet',values:range(11,19),official:true,id:'num-teens',note:'Teken, waarde en uitspraak door elkaar.'},{name:'Tientallen',values:[20,30,40,50,60,70,80,90],official:true,id:'num-tens',note:'二十 = 20 = nijū.'},{name:'Onder 100',values:range(11,99),official:true,id:'num-under100',note:'Bijvoorbeeld 二十三 = 23 = nijū-san.'},{name:'Honderden',values:[100,200,300,400,500,600,700,800,900],official:true,id:'num-hundreds',note:'Onregelmatigheden pas hier: 三百 sanbyaku, 六百 roppyaku, 八百 happyaku.'},{name:'Duizenden & 10.000',values:[1000,2000,3000,4000,5000,6000,7000,8000,9000,10000],official:true,id:'num-thousands',note:'三千 sanzen, 八千 hassen, 一万 ichiman.'}];
-
-const dakutenPatterns=[
-{id:'g',name:'K → G',baseH:['か','き','く','け','こ'],newH:[['が','ga'],['ぎ','gi'],['ぐ','gu'],['げ','ge'],['ご','go']],baseK:['カ','キ','ク','ケ','コ'],newK:[['ガ','ga'],['ギ','gi'],['グ','gu'],['ゲ','ge'],['ゴ','go']]},
-{id:'z',name:'S → Z',baseH:['さ','し','す','せ','そ'],newH:[['ざ','za'],['じ','ji'],['ず','zu'],['ぜ','ze'],['ぞ','zo']],baseK:['サ','シ','ス','セ','ソ'],newK:[['ザ','za'],['ジ','ji'],['ズ','zu'],['ゼ','ze'],['ゾ','zo']]},
-{id:'d',name:'T → D',baseH:['た','ち','つ','て','と'],newH:[['だ','da'],['ぢ','ji'],['づ','zu'],['で','de'],['ど','do']],baseK:['タ','チ','ツ','テ','ト'],newK:[['ダ','da'],['ヂ','ji'],['ヅ','zu'],['デ','de'],['ド','do']]},
-{id:'b',name:'H → B',baseH:['は','ひ','ふ','へ','ほ'],newH:[['ば','ba'],['び','bi'],['ぶ','bu'],['べ','be'],['ぼ','bo']],baseK:['ハ','ヒ','フ','ヘ','ホ'],newK:[['バ','ba'],['ビ','bi'],['ブ','bu'],['ベ','be'],['ボ','bo']]},
-{id:'p',name:'H → P',baseH:['は','ひ','ふ','へ','ほ'],newH:[['ぱ','pa'],['ぴ','pi'],['ぷ','pu'],['ぺ','pe'],['ぽ','po']],baseK:['ハ','ヒ','フ','ヘ','ホ'],newK:[['パ','pa'],['ピ','pi'],['プ','pu'],['ペ','pe'],['ポ','po']]}
-],dakutenClusters=[{name:'G + Z',patterns:['g','z']},{name:'D + B',patterns:['d','b']},{name:'P + gemengd',patterns:['p','g','z','d','b']}];
-
-const langLessons=[
-{id:'l4-1',title:'Dit is X',goal:'Leer vijf concrete woorden en begrijp je eerste volledige Japanse zin.',newLabel:'5 nieuwe woorden',pattern:'これは X です',words:[['これ','dit','kore'],['ねこ','kat','neko'],['いぬ','hond','inu'],['みず','water','mizu'],['パン','brood','pan']],grammar:'これは X です betekent: “Dit is X.” は markeert waar de zin over gaat en klinkt hier als wa.',spaceNote:true,models:[{sentence:'これは ねこ です',meaning:'Dit is een kat.',parts:[['これ','waarover?','dit'],['は','markering','topic (wa)'],['ねこ','beschrijving','kat'],['です','predicaat','is']]}],builders:[['Dit is een hond.','これ は いぬ です',['です','いぬ','これ','は']],['Dit is water.','これ は みず です',['みず','です','は','これ']]],check:[['mc','ねこ','kat',['kat','hond','water'],'vocab'],['mc','brood','パン',['パン','みず','いぬ'],'vocab'],['meaning','これは いぬ です','Dit is een hond.',['Dit is een hond.','Dit is een kat.','Dit is water.'],'meaning'],['meaning','これは みず です','Dit is water.',['Dit is brood.','Dit is water.','Dit is een hond.'],'meaning'],['fill','これ ___ ねこ です','は',['は','を','に'],'structure'],['fill','これは パン ___','です',['です','は','を'],'structure'],['build','Bouw: Dit is een kat.','これ は ねこ です',['ねこ','です','これ','は'],'build'],['order','Welke volgorde betekent “Dit is brood”?','これ は パン です',['パン は これ です','これ は パン です','これ パン は です'],'integration']]},
-{id:'l4-2',title:'Dit en dat',goal:'Gebruik dezelfde basiszin met dit, dat bij jou en dat daar.',newLabel:'4 nieuwe woorden',pattern:'X は Y です',words:[['それ','dat bij jou','sore'],['あれ','dat daar','are'],['ほん','boek','hon'],['さかな','vis','sakana']],grammar:'これ, それ en あれ kunnen allemaal vooraan staan. De bekende structuur blijft: eerst het topic, daarna wat je erover zegt.',models:[{sentence:'それは ほん です',meaning:'Dat bij jou is een boek.',parts:[['それ','waarover?','dat bij jou'],['は','markering','topic (wa)'],['ほん','beschrijving','boek'],['です','predicaat','is']]},{sentence:'あれは いぬ です',meaning:'Dat daar is een hond.',parts:[['あれ','topic','dat daar'],['は','markering','wa'],['いぬ','beschrijving','hond'],['です','predicaat','is']]}],builders:[['Dat bij jou is een boek.','それ は ほん です',['ほん','それ','です','は']],['Dat daar is een vis.','あれ は さかな です',['です','さかな','は','あれ']]],check:[['mc','それ','dat bij jou',['dit','dat bij jou','dat daar'],'vocab'],['mc','vis','さかな',['ほん','さかな','みず'],'vocab'],['meaning','それは ほん です','Dat bij jou is een boek.',['Dat bij jou is een boek.','Dit is water.','Dat daar is een vis.'],'meaning'],['meaning','あれは いぬ です','Dat daar is een hond.',['Dat bij jou is een hond.','Dat daar is een hond.','Dit is een hond.'],'meaning'],['fill','あれ ___ さかな です','は',['は','を','に'],'structure'],['fill','それは ___ です','ほん',['ほん','ねこ','みず'],'structure'],['build','Bouw: Dat daar is een vis.','あれ は さかな です',['さかな','です','あれ','は'],'build'],['order','Kies de juiste beginnersvolgorde.','それ は みず です',['みず は それ です','それ は みず です','それ みず です は'],'integration']]},
-{id:'l4-3',title:'Topicstructuur',goal:'Herken expliciet: eerst waar de zin over gaat, daarna wat je daarover zegt.',newLabel:'3 nieuwe woorden',pattern:'[topic] は [beschrijving] です',words:[['わたし','ik','watashi'],['ひと','persoon','hito'],['ともだち','vriend','tomodachi']],grammar:'は wordt als wa uitgesproken wanneer het de topicmarkering is. Het blok vóór は is waar de zin over gaat; het predicaat staat achteraan.',models:[{sentence:'わたし は ひと です',meaning:'Ik ben een persoon.',parts:[['わたし','topic','ik'],['は','markering','wa'],['ひと','beschrijving','persoon'],['です','predicaat','ben/is']]},{sentence:'わたし は ともだち です',meaning:'Ik ben een vriend.',parts:[['わたし','topic','ik'],['は','markering','wa'],['ともだち','beschrijving','vriend'],['です','predicaat','ben/is']]}],builders:[['Ik ben een persoon.','わたし は ひと です',['です','ひと','は','わたし']],['Ik ben een vriend.','わたし は ともだち です',['ともだち','わたし','です','は']]],check:[['mc','わたし','ik',['ik','persoon','vriend'],'vocab'],['mc','vriend','ともだち',['ひと','ともだち','わたし'],'vocab'],['meaning','わたし は ひと です','Ik ben een persoon.',['Ik ben een persoon.','Dit is een persoon.','Een persoon is water.'],'meaning'],['meaning','わたし は ともだち です','Ik ben een vriend.',['Dat is een vriend.','Ik ben een vriend.','Ik ben een hond.'],'meaning'],['fill','わたし ___ ひと です','は',['は','を','に'],'structure'],['fill','In わたし は ひと です, wat is het topic?','わたし',['わたし','ひと','です'],'structure'],['build','Bouw: Ik ben een vriend.','わたし は ともだち です',['です','は','ともだち','わたし'],'build'],['order','Waar staat het predicaat in de beginnerszin?','achteraan',['vooraan','achteraan','direct vóór は'],'integration']]},
-{id:'l4-4',title:'Bezit met の',goal:'Verbind twee woorden met の en zeg van wie iets is.',newLabel:'Geen nieuwe woorden',pattern:'X の Y',words:[],grammar:'X の Y betekent: Y van X. わたし の ほん is letterlijk “ik van boek” en natuurlijk Nederlands “mijn boek”.',models:[{sentence:'これは わたし の ほん です',meaning:'Dit is mijn boek.',parts:[['これ','topic','dit'],['は','markering','wa'],['わたし の ほん','beschrijving','mijn boek'],['です','predicaat','is']]},{sentence:'それは ともだち の ほん です',meaning:'Dat is het boek van een vriend.',parts:[['それ','topic','dat bij jou'],['は','markering','wa'],['ともだち の ほん','beschrijving','boek van vriend'],['です','predicaat','is']]}],builders:[['Dit is mijn boek.','これ は わたし の ほん です',['ほん','これ','です','の','わたし','は']],['Dat is het boek van een vriend.','それ は ともだち の ほん です',['ともだち','です','ほん','それ','の','は']]],check:[['meaning','わたし の ほん','mijn boek',['mijn boek','mijn vriend','dit boek'],'meaning'],['meaning','ともだち の ほん','boek van een vriend',['boek van een vriend','vriend van een boek','mijn boek'],'meaning'],['meaning','これは わたし の ほん です','Dit is mijn boek.',['Dit is mijn boek.','Dit is een vriend.','Dat is een boek.'],'meaning'],['fill','わたし ___ ほん','の',['の','は','を'],'structure'],['fill','それは ともだち ___ ほん です','の',['の','も','に'],'structure'],['order','Welke groep betekent “mijn boek”?','わたし の ほん',['ほん の わたし','わたし の ほん','わたし は ほん'],'structure'],['build','Bouw: Dit is mijn boek.','これ は わたし の ほん です',['の','ほん','これ','わたし','です','は'],'build'],['order','Kies de juiste volledige zin.','それ は ともだち の ほん です',['ともだち の それ は ほん です','それ は ともだち の ほん です','それ の ともだち は ほん です'],'integration']]},
-{id:'l4-5',title:'Vraag met か',goal:'Verander een bekende mededeling in een eenvoudige ja/nee-vraag.',newLabel:'Geen nieuwe woorden',pattern:'... です か',words:[],grammar:'Zet か achter de beleefde zin. これは ねこ です is een mededeling; これは ねこ です か is een vraag.',models:[{sentence:'これは ねこ です か',meaning:'Is dit een kat?',parts:[['これ','topic','dit'],['は','markering','wa'],['ねこ','beschrijving','kat'],['です','predicaat','is'],['か','vraag','?']]},{sentence:'それは ほん です か',meaning:'Is dat een boek?',parts:[['それ','topic','dat'],['は','markering','wa'],['ほん','beschrijving','boek'],['です','predicaat','is'],['か','vraag','?']]}],builders:[['Is dit een hond?','これ は いぬ です か',['か','いぬ','これ','です','は']],['Is dat bij jou een boek?','それ は ほん です か',['ほん','です','それ','か','は']]],check:[['meaning','これは ねこ です か','Is dit een kat?',['Dit is een kat.','Is dit een kat?','Is dat een kat?'],'meaning'],['meaning','それは ほん です','Dat is een boek.',['Is dat een boek?','Dat is een boek.','Dit is een boek.'],'meaning'],['fill','これは いぬ です ___','か',['か','の','を'],'structure'],['fill','Welk laatste blok maakt de zin een vraag?','か',['か','は','です'],'structure'],['order','Kies de vraag.','これは みず です か',['これは みず です','これは みず です か','これは か みず です'],'meaning'],['order','Kies de mededeling.','それ は ほん です',['それ は ほん です か','それ は ほん です','それ か は ほん です'],'structure'],['build','Bouw: Is dit brood?','これ は パン です か',['パン','か','は','です','これ'],'build'],['order','Wat is het verschil tussen beide vormen?','か staat achteraan bij de vraag',['は verdwijnt','か staat vooraan','か staat achteraan bij de vraag'],'integration']]},
-{id:'l4-6',title:'Ook met も',goal:'Voeg één klein concept toe terwijl je de bekende zinnen herhaalt.',newLabel:'Geen nieuwe woorden',pattern:'X も Y です',words:[],grammar:'も betekent hier “ook” en neemt in dit patroon de plaats van は in: それも ねこ です — dat is ook een kat.',models:[{sentence:'これは ねこ です',meaning:'Dit is een kat.',parts:[['これ','topic','dit'],['は','markering','topic'],['ねこ','beschrijving','kat'],['です','predicaat','is']]},{sentence:'それも ねこ です',meaning:'Dat is ook een kat.',parts:[['それ','topic','dat'],['も','markering','ook'],['ねこ','beschrijving','kat'],['です','predicaat','is']]}],builders:[['Dat is ook een kat.','それ も ねこ です',['ねこ','それ','です','も']],['Dit is ook water.','これ も みず です',['です','これ','も','みず']]],check:[['meaning','それも ねこ です','Dat is ook een kat.',['Dat is geen kat.','Dat is ook een kat.','Is dat een kat?'],'meaning'],['meaning','これも みず です','Dit is ook water.',['Dit is ook water.','Dit is brood.','Is dit water?'],'meaning'],['fill','それ ___ いぬ です','も',['も','を','に'],'structure'],['fill','Welk blok betekent hier “ook”?','も',['は','も','か'],'structure'],['order','Kies de zin met “ook”.','これ も パン です',['これ は パン です','これ も パン です','これ を パン です'],'meaning'],['order','Welke markering staat in それも ねこ です?','も',['は','も','の'],'structure'],['build','Bouw: Dit is ook brood.','これ も パン です',['パン','これ','です','も'],'build'],['order','Kies de juiste beginnersvolgorde.','それ も さかな です',['さかな も それ です','それ も さかな です','それ さかな です も'],'integration']]},
-{id:'l4-7',title:'Object + werkwoord',goal:'Bouw een handeling met topic, object en een werkwoord achteraan.',newLabel:'3 nieuwe woorden',pattern:'[topic] は [object] を [werkwoord]',words:[['のみます','drinken','nomimasu'],['たべます','eten','tabemasu'],['みます','kijken / zien','mimasu']],grammar:'を markeert het object en klinkt als o. In de beginnersvolgorde komt eerst het topic, dan het object en het werkwoord altijd achteraan.',models:[{sentence:'わたし は みず を のみます',meaning:'Ik drink water.',parts:[['わたし','topic','ik'],['は','markering','wa'],['みず','object','water'],['を','markering','o'],['のみます','werkwoord','drink']]},{sentence:'わたし は パン を たべます',meaning:'Ik eet brood.',parts:[['わたし','topic','ik'],['は','markering','wa'],['パン','object','brood'],['を','markering','o'],['たべます','werkwoord','eet']]}],builders:[['Ik drink water.','わたし は みず を のみます',['のみます','みず','は','わたし','を']],['Ik eet brood.','わたし は パン を たべます',['パン','を','わたし','たべます','は']]],check:[['mc','のみます','drinken',['drinken','eten','kijken'],'vocab'],['mc','eten','たべます',['みます','たべます','のみます'],'vocab'],['meaning','わたし は みず を のみます','Ik drink water.',['Ik eet water.','Ik drink water.','Water is van mij.'],'meaning'],['meaning','わたし は パン を たべます','Ik eet brood.',['Ik eet brood.','Ik drink brood.','Dit is brood.'],'meaning'],['fill','わたし は みず ___ のみます','を',['を','の','に'],'structure'],['fill','Wat staat achteraan? わたし は パン を たべます','たべます',['わたし','パン','たべます'],'structure'],['build','Bouw: Ik drink water.','わたし は みず を のみます',['を','のみます','わたし','みず','は'],'build'],['order','Kies topic → object → werkwoord.','わたし は パン を たべます',['パン を わたし は たべます','わたし は パン を たべます','たべます わたし は パン を'],'integration']]},
-{id:'l4-8',title:'Zinsvolgorde oefenen',goal:'Maak topic → object → werkwoord steeds herkenbaarder, zonder nieuwe grammatica.',newLabel:'1 nieuw woord',pattern:'topic → object → werkwoord',words:[['よみます','lezen','yomimasu']],grammar:'De particles vertellen de rol van elk blok. Blijf voorlopig deze heldere volgorde gebruiken; het werkwoord/predicaat staat aan het einde.',models:[{sentence:'わたし は さかな を みます',meaning:'Ik kijk naar de vis.',parts:[['わたし','topic','ik'],['は','markering','wa'],['さかな','object','vis'],['を','markering','o'],['みます','werkwoord','kijk/zie']]},{sentence:'わたし は ほん を よみます',meaning:'Ik lees een boek.',parts:[['わたし','topic','ik'],['は','markering','wa'],['ほん','object','boek'],['を','markering','o'],['よみます','werkwoord','lees']]}],builders:[['Ik kijk naar de vis.','わたし は さかな を みます',['さかな','みます','を','は','わたし']],['Ik drink water.','わたし は みず を のみます',['は','のみます','を','みず','わたし']],['Ik lees een boek.','わたし は ほん を よみます',['よみます','ほん','わたし','を','は']]],check:[['mc','よみます','lezen',['lezen','drinken','kijken'],'vocab'],['meaning','わたし は ほん を よみます','Ik lees een boek.',['Ik eet een boek.','Ik lees een boek.','Dit is mijn boek.'],'meaning'],['fill','In わたし は みず を のみます, wat is het object?','みず',['わたし','みず','のみます'],'structure'],['fill','In わたし は さかな を みます, wat is het werkwoord?','みます',['さかな','を','みます'],'structure'],['order','Welk blok markeert het object?','を',['は','を','です'],'structure'],['order','Waar staat het werkwoord in deze basisvolgorde?','achteraan',['vooraan','in het midden','achteraan'],'structure'],['build','Bouw: Ik lees een boek.','わたし は ほん を よみます',['よみます','は','ほん','わたし','を'],'build'],['order','Kies de correcte zin.','わたし は みず を のみます',['のみます みず を わたし は','わたし は みず を のみます','みず は わたし を のみます'],'integration']]},
-{id:'l4-9',title:'Bestemming met に',goal:'Zeg dat iemand naar een eenvoudige plaats gaat.',newLabel:'4 nieuwe woorden',pattern:'[topic] は [plaats] に いきます',words:[['いきます','gaan','ikimasu'],['みせ','winkel','mise'],['えき','station','eki'],['うち','huis / thuis','uchi']],grammar:'に markeert hier de bestemming. De plaats staat vóór に en het werkwoord いきます staat aan het einde.',models:[{sentence:'わたし は みせ に いきます',meaning:'Ik ga naar de winkel.',parts:[['わたし','topic','ik'],['は','markering','wa'],['みせ','bestemming','winkel'],['に','markering','naar'],['いきます','werkwoord','ga']]},{sentence:'わたし は えき に いきます',meaning:'Ik ga naar het station.',parts:[['わたし','topic','ik'],['は','markering','wa'],['えき','bestemming','station'],['に','markering','naar'],['いきます','werkwoord','ga']]}],builders:[['Ik ga naar de winkel.','わたし は みせ に いきます',['みせ','いきます','は','に','わたし']],['Ik ga naar huis.','わたし は うち に いきます',['に','うち','わたし','いきます','は']]],check:[['mc','みせ','winkel',['winkel','station','huis'],'vocab'],['mc','gaan','いきます',['のみます','いきます','みます'],'vocab'],['meaning','わたし は えき に いきます','Ik ga naar het station.',['Ik ga naar de winkel.','Ik ga naar het station.','Ik kijk naar het station.'],'meaning'],['meaning','わたし は うち に いきます','Ik ga naar huis.',['Ik ga naar huis.','Dit is mijn huis.','Ik drink thuis.'],'meaning'],['fill','わたし は みせ ___ いきます','に',['に','を','の'],'structure'],['fill','Wat staat achteraan? わたし は えき に いきます','いきます',['えき','に','いきます'],'structure'],['build','Bouw: Ik ga naar de winkel.','わたし は みせ に いきます',['いきます','わたし','に','みせ','は'],'build'],['order','Kies topic → bestemming → werkwoord.','わたし は うち に いきます',['うち に わたし は いきます','わたし は うち に いきます','いきます わたし は うち に'],'integration']]},
-{id:'l4-10',title:'Alles combineren',goal:'Pas alle bekende woorden, particles en zinstypen zelfstandig toe.',newLabel:'Geen nieuwe grammatica',pattern:'herkennen → ontleden → bouwen',words:[],grammar:'Je combineert nu です, の, か, も, を en に. Vraag steeds: waar gaat de zin over, welke rol hebben de andere blokken, en welk predicaat staat achteraan?',models:[{sentence:'これは わたし の ほん です',meaning:'Dit is mijn boek.',parts:[['これ','topic','dit'],['は','markering','wa'],['わたし の ほん','beschrijving','mijn boek'],['です','predicaat','is']]},{sentence:'わたし は みず を のみます',meaning:'Ik drink water.',parts:[['わたし','topic','ik'],['は','markering','wa'],['みず','object','water'],['を','markering','o'],['のみます','werkwoord','drink']]},{sentence:'わたし は みせ に いきます',meaning:'Ik ga naar de winkel.',parts:[['わたし','topic','ik'],['は','markering','wa'],['みせ','bestemming','winkel'],['に','markering','naar'],['いきます','werkwoord','ga']]}],builders:[['Dit is mijn boek.','これ は わたし の ほん です',['ほん','は','わたし','です','これ','の']],['Ik drink water.','わたし は みず を のみます',['を','わたし','のみます','は','みず']],['Ik ga naar het station.','わたし は えき に いきます',['いきます','に','えき','は','わたし']]],check:[['meaning','これは わたし の ほん です','Dit is mijn boek.',['Dit is mijn boek.','Is dit mijn boek?','Dat is een vriend.'],'meaning'],['meaning','これは ねこ です か','Is dit een kat?',['Dit is een kat.','Is dit een kat?','Is dat een kat?'],'meaning'],['fill','わたし は みず ___ のみます','を',['を','に','の'],'structure'],['fill','わたし は みせ ___ いきます','に',['を','に','も'],'structure'],['order','Welk blok is het predicaat? これは わたし の ほん です','です',['これ','わたし の ほん','です'],'structure'],['order','Welk blok is de bestemming? わたし は えき に いきます','えき',['わたし','えき','いきます'],'structure'],['build','Bouw: Ik drink water.','わたし は みず を のみます',['みず','は','のみます','を','わたし'],'build'],['build','Bouw: Ik ga naar de winkel.','わたし は みせ に いきます',['に','みせ','いきます','わたし','は'],'integration']]}
-];
-
-/* Level 4 has one cumulative source of truth. The original `check` arrays stay
-   in the lesson data for saved error compatibility, but new sessions are built
-   from the metadata and validated templates below. */
-const level4LessonMetadata=[
-  {introducedGrammar:['は','です'],introducedPatterns:['copula']},
-  {introducedGrammar:[],introducedPatterns:['demonstratives']},
-  {introducedGrammar:[],introducedPatterns:['topic-description']},
-  {introducedGrammar:['の'],introducedPatterns:['possession']},
-  {introducedGrammar:['か'],introducedPatterns:['question']},
-  {introducedGrammar:['も'],introducedPatterns:['also']},
-  {introducedGrammar:['を'],introducedPatterns:['object-action']},
-  {introducedGrammar:[],introducedPatterns:['verb-final-order']},
-  {introducedGrammar:['に'],introducedPatterns:['destination']},
-  {introducedGrammar:[],introducedPatterns:['integration']}
-];
-
-const level4Didactics=[
-  {focus:'Een eenvoudige mededeling heeft hier een topic, een beschrijving en een beleefd slot.',watch:'は markeert het topic en klinkt in deze rol als wa.'},
-  {focus:'これ, それ en あれ veranderen de afstand; de zinsbouw blijft hetzelfde.',watch:'Kies het aanwijzend woord op basis van dit, dat bij jou of dat daar.'},
-  {focus:'Het blok vóór は is het topic. Alles erna vertelt iets over dat topic.',watch:'Zoek eerst は; dan zie je direct waar de zin over gaat.'},
-  {focus:'X の Y betekent: Y van X. の verbindt de bezitter met wat erbij hoort.',watch:'Lees na の eerst Y en voeg daarna “van X” toe.'},
-  {focus:'Een bekende mededeling wordt een ja/nee-vraag door か achteraan toe te voegen.',watch:'De rest van de zin verandert niet.'},
-  {focus:'も betekent hier “ook” en staat op de plaats waar eerder は stond.',watch:'Gebruik も alleen wanneer de tweede zin iets toevoegt aan eerdere informatie.'},
-  {focus:'を markeert waarop de handeling gericht is. Het werkwoord staat achteraan.',watch:'Lees: topic → object met を → handeling.'},
-  {focus:'Particles tonen de rol van elk blok, ook wanneer er meerdere woorden in de zin staan.',watch:'Vind は en を; controleer daarna of het werkwoord achteraan staat.'},
-  {focus:'に markeert hier de bestemming: de plaats waar iemand naartoe gaat.',watch:'Gebruik を voor een object van een handeling en に voor een bestemming.'},
-  {focus:'Kies het patroon vanuit de betekenis: beschrijven, bezit, vraag, ook, object of bestemming.',watch:'Bepaal eerst de bedoeling; kies daarna pas het juiste partikel.'}
-];
-
 langLessons.forEach((lesson,index)=>{
   const meta=level4LessonMetadata[index];
   lesson.introducedVocabulary=lesson.words.map(([jp,meaning,reading])=>({jp,meaning,reading}));
@@ -1863,98 +1819,6 @@ function cumulativeLevel4Builders(index){
   const free=level4FreeBuilder(index,sentences);
   return free?[...exact,[free[0],free[1][0],free[2],free[1]]]:exact;
 }
-const smallLessons=[
-{id:'l5-1',title:'Kleine ゃゅょ bij K',goal:'Herken en lees きゃ / きゅ / きょ en de Katakana-varianten als één klankgroep.',newItems:[['きゃ','kya','き + kleine ゃ'],['きゅ','kyu','き + kleine ゅ'],['きょ','kyo','き + kleine ょ'],['キャ','kya','キ + kleine ャ'],['キュ','kyu','キ + kleine ュ'],['キョ','kyo','キ + kleine ョ']],examples:[['きゃく','kyaku','gast'],['きょく','kyoku','muziekstuk']],objectives:['kleine ゃゅょ herkennen','きや en きゃ onderscheiden','de combinatie in een woord lezen'],note:'き en een kleine ゃ, ゅ of ょ vormen samen één klank. Lees きゃ dus als kya, niet als ki-ya.',check:[['mc','きゃ','kya',['kya','kiya','ka'],'recognition','Herken きゃ'],['mc','kyu','きゅ',['きゃ','きゅ','きょ'],'pronunciation','Koppel kyu aan きゅ'],['mc','キョ','kyo',['kyo','kiyo','ko'],'pronunciation','Lees キョ als één klank'],['contrast','Welke schrijfwijze gebruikt een kleine ゃ en klinkt als kya?','きゃ',['きや','きゃ','きょ'],'contrast','Onderscheid きや en きゃ'],['meaning','きゃく','gast',['gast','muziekstuk','boek'],'meaning','Herken het geïntroduceerde woord きゃく'],['reading','Welke schrijfwijze hoort bij kyaku?','きゃく',['きやく','きゃく','きょく'],'application','Bouw kyaku met kleine ゃ'],['reading','Welke nieuwe combinatie staat vooraan in きょく?','きょ',['きよ','きょ','きゅ'],'recognition','Herken きょ in een woord'],['meaning','あのひとも きゃくです。','Die persoon is ook een gast.',['Die persoon is ook een gast.','Die persoon leest een boek.','Dat is een muziekstuk.'],'application','Lees きゃく in een bekende zin']]},
-{id:'l5-2',title:'しゃ / しゅ / しょ',goal:'Pas dezelfde kleine-kana-regel toe op し en シ.',newItems:[['しゃ','sha','し + kleine ゃ'],['しゅ','shu','し + kleine ゅ'],['しょ','sho','し + kleine ょ'],['シャ','sha','シ + kleine ャ'],['シュ','shu','シ + kleine ュ'],['ショ','sho','シ + kleine ョ']],examples:[['しゃしん','shashin','foto'],['しゅみ','shumi','hobby'],['しょくじ','shokuji','maaltijd']],objectives:['しゃ / しゅ / しょ herkennen','grote en kleine kana onderscheiden','voorbeeldwoorden lezen'],note:'De kleine kana werkt hetzelfde als in Les 1. し + kleine ゃ wordt samen sha.',check:[['mc','しゃ','sha',['sha','sa','shiya'],'recognition','Herken しゃ'],['mc','shu','しゅ',['しゃ','しゅ','しょ'],'pronunciation','Koppel shu aan しゅ'],['mc','ショ','sho',['sho','shiyo','so'],'pronunciation','Lees ショ als één klank'],['contrast','Welke schrijfwijze gebruikt kleine ょ en klinkt als sho?','しょ',['しよ','しょ','しょう'],'contrast','Onderscheid しよ en しょ'],['meaning','しゃしん','foto',['foto','hobby','maaltijd'],'meaning','Herken het geïntroduceerde woord しゃしん'],['meaning','しゅみ','hobby',['hobby','foto','maaltijd'],'meaning','Herken het geïntroduceerde woord しゅみ'],['reading','Welke schrijfwijze hoort bij shashin?','しゃしん',['しやしん','しゃしん','しゅみ'],'application','Schrijf shashin met kleine ゃ'],['meaning','これは しゃしんです。','Dit is een foto.',['Dit is een foto.','Dit is een hobby.','Dit is een maaltijd.'],'application','Lees しゃしん in een bekende zin']]},
-{id:'l5-3',title:'ちゃ en じゃ',goal:'Lees combinaties met kleine kana bij ち en bij じ met Dakuten.',newItems:[['ちゃ','cha','ち + kleine ゃ'],['ちゅ','chu','ち + kleine ゅ'],['ちょ','cho','ち + kleine ょ'],['じゃ','ja','じ + kleine ゃ'],['じゅ','ju','じ + kleine ゅ'],['じょ','jo','じ + kleine ょ']],examples:[['おちゃ','ocha','thee'],['ちょきん','chokin','spaargeld'],['じゃま','jama','hinder / in de weg'],['じゅう','juu','tien'],['じょせい','josei','vrouw']],objectives:['ちゃ en じゃ onderscheiden','Dakuten met kleine kana combineren','de combinaties in woorden lezen'],note:'De regel blijft gelijk. Door Dakuten wordt じ + kleine ゃ samen じゃ (ja).',check:[['mc','ちゃ','cha',['cha','ja','ta'],'recognition','Herken ちゃ'],['mc','ja','じゃ',['ちゃ','じゃ','じょ'],'pronunciation','Koppel ja aan じゃ'],['mc','じゅ','ju',['jo','ju','chu'],'pronunciation','Lees じゅ als één klank'],['contrast','Welke schrijfwijze is ち + kleine ょ?','ちょ',['ちよ','ちょ','じょ'],'contrast','Onderscheid ちよ en ちょ'],['meaning','おちゃ','thee',['thee','water','hinder'],'meaning','Herken het geïntroduceerde woord おちゃ'],['meaning','じゃま','hinder / in de weg',['hinder / in de weg','spaargeld','vrouw'],'meaning','Herken het geïntroduceerde woord じゃま'],['reading','Welke schrijfwijze hoort bij josei?','じょせい',['じよせい','じょせい','ちょせい'],'application','Schrijf josei met kleine ょ'],['meaning','わたしは おちゃを のみます。','Ik drink thee.',['Ik drink thee.','Ik lees een tijdschrift.','Ik ga naar huis.'],'application','Lees おちゃ in een bekende zin']]},
-{id:'l5-4',title:'Kleine っ',goal:'Herken de korte stop van kleine っ en lees woorden met een verdubbelde medeklinker.',newItems:[['っ','korte stop','kleine つ'],['ッ','korte stop','kleine ツ']],examples:[['きって','kitte','postzegel'],['ざっし','zasshi','tijdschrift'],['ベッド','beddo','bed']],objectives:['kleine っ herkennen','kite en kitte onderscheiden','de verdubbelde medeklinker lezen'],note:'De kleine っ spreek je niet uit als tsu. Hij maakt een korte stop vóór de volgende medeklinker: きって = kitte.',check:[['mc','きって','kitte',['kite','kitte','kitsu'],'pronunciation','Lees de stop in きって'],['mc','zasshi','ざっし',['ざし','ざっし','さっし'],'application','Schrijf zasshi met kleine っ'],['meaning','ざっし','tijdschrift',['tijdschrift','postzegel','bed'],'meaning','Herken het geïntroduceerde woord ざっし'],['meaning','きって','postzegel',['postzegel','tijdschrift','foto'],'meaning','Herken het geïntroduceerde woord きって'],['contrast','Welke schrijfwijze bevat een kleine っ?','きって',['きて','きって','きつて'],'contrast','Onderscheid きて en きって'],['reading','Welke schrijfwijze hoort bij beddo?','ベッド',['ベド','ベッド','ベツド'],'application','Schrijf beddo met kleine ッ'],['reading','Wat doet kleine っ in きって?','Een korte stop vóór de t.',['Een korte stop vóór de t.','Hij klinkt als tsu.','Hij verlengt de i.'],'recognition','Herken het effect van kleine っ'],['meaning','わたしは ざっしを よみます。','Ik lees een tijdschrift.',['Ik lees een tijdschrift.','Ik drink thee.','Dit is een postzegel.'],'application','Lees ざっし in een bekende zin']]},
-{id:'l5-5',title:'Lange klinkers in Katakana',goal:'Herken ー als klinkerverlenger en lees bekende leenwoorden met een lange klinker.',newItems:[['ー','lange klinker','verlengt de klinker ervoor']],examples:[['ケーキ','keeki','cake'],['ゲーム','geemu','spel'],['コーヒー','koohii','koffie'],['スーパー','suupaa','supermarkt'],['タクシー','takushii','taxi']],objectives:['ー herkennen','korte en lange klinkers onderscheiden','leenwoorden met ー lezen'],note:'ー verlengt de klinker die ervoor staat. In ケーキ duurt de e-klank langer: keeki.',check:[['mc','ケーキ','keeki',['keeki','keki','keiki'],'pronunciation','Lees ー in ケーキ'],['mc','geemu','ゲーム',['ゲム','ゲーム','ゲエム'],'application','Schrijf geemu met ー'],['meaning','コーヒー','koffie',['koffie','cake','taxi'],'meaning','Herken het geïntroduceerde woord コーヒー'],['meaning','スーパー','supermarkt',['supermarkt','station','hotel'],'meaning','Herken het geïntroduceerde woord スーパー'],['contrast','Welke schrijfwijze gebruikt ー om de o-klank te verlengen?','コーヒー',['コヒ','コーヒー','コオヒ'],'contrast','Herken de lange klinker in コーヒー'],['reading','Welke schrijfwijze hoort bij takushii?','タクシー',['タクシ','タクシー','タクーシ'],'application','Schrijf takushii met ー'],['reading','Wat doet ー in ゲーム?','Hij verlengt de e-klank.',['Hij verlengt de e-klank.','Hij maakt een korte stop.','Hij verandert ge in ke.'],'recognition','Herken de functie van ー'],['meaning','わたしは コーヒーを のみます。','Ik drink koffie.',['Ik drink koffie.','Ik eet cake.','Ik speel een spel.'],'application','Lees コーヒー in een bekende zin']]}
-];
-
-function advancedParts(sentence){return sentence.split(' ').map(token=>{const roles={は:['topicmarkering','wa'],の:['relatie','van'],を:['objectmarkering','o'],に:['tijd / doel','op / naar'],で:['handeling hier','op / in'],と:['met-persoon','met'],か:['vraag','?'],です:['slot','is'],います:['slot','is / zijn'],いきます:['werkwoord','gaan'],きます:['werkwoord','komen'],たべます:['werkwoord','eten'],のみます:['werkwoord','drinken'],ください:['verzoek','alstublieft'],あいます:['werkwoord','ontmoeten'],のります:['werkwoord','instappen']};return[token,...(roles[token]||['inhoud','woordblok'])]})}
-function advancedLesson(id,title,goal,review,words,pattern,grammar,sentence,meaning,focus,story=null){return{id,title,goal,review,newLabel:`${words.length} nieuwe woorden`,pattern,words,grammar,models:[{sentence,meaning,parts:advancedParts(sentence)}],builders:[[meaning,sentence,[...sentence.split(' ')].reverse()]],focus,story}}
-const advancedCourses={
-  5:{number:6,title:'Mensen & relaties',competency:'Ik kan eenvoudige personen en familierelaties benoemen.',lessons:[
-    advancedLesson('l6-1','Mensen om mij heen','Benoem jezelf, een persoon en een vriend.','Herhaling: わたし, ひと en ともだち kwamen in Level 4 al voor.',[['あなた','jij','anata'],['かぞく','familie','kazoku'],['おとこ','man','otoko'],['おんな','vrouw','onna']],'X は Y です','De bekende です-zin werkt ook voor personen. Voeg vandaag alleen vier menswoorden toe.','あなた は ともだち です','Jij bent een vriend.',['fill','あなた ___ ともだち です','は',['は','の','を'],'structure']),
-    advancedLesson('l6-2','Mijn vader en moeder','Zeg wie jouw vader of moeder is.','Herhaling: の betekent “van” en maakt een relatie tussen twee woorden.',[['ちち','mijn vader','chichi'],['はは','mijn moeder','haha'],['おとうさん','vader / iemands vader','otousan'],['おかあさん','moeder / iemands moeder','okaasan']],'X の Y','Gebruik ちち en はは voor je eigen ouders. おとうさん en おかあさん gebruik je beleefd voor die van iemand anders.','これは わたし の はは です','Dit is mijn moeder.',['fill','わたし ___ はは','の',['の','は','に'],'structure']),
-    advancedLesson('l6-3','Broer en zus','Benoem een oudere broer of zus in een bekende zin.','Herhaling: わたし の ... betekent “mijn ...”.',[['あに','mijn oudere broer','ani'],['あね','mijn oudere zus','ane'],['きょうだい','broers en zussen','kyoudai'],['だれ','wie','dare']],'だれ です か','だれ betekent “wie”. Zet か achter de bekende です-zin om naar een persoon te vragen.','これは だれ です か','Wie is dit?',['fill','これは だれ です ___','か',['か','の','を'],'structure']),
-    advancedLesson('l6-4','Jongere broer en zus','Breid dezelfde familiezinnen uit met twee nieuwe relaties.','Herhaling: je kent nu de vraag だれ です か en bezit met の.',[['おとうと','jongere broer','otouto'],['いもうと','jongere zus','imouto'],['こども','kind','kodomo'],['みんな','iedereen','minna']],'bekend patroon + nieuwe familie','Er komt geen nieuwe grammatica bij. Gebruik dezelfde blokken met nieuwe familiewoorden.','それ は ともだち の いもうと です','Dat is de jongere zus van een vriend.',['fill','ともだち ___ いもうと','の',['の','を','に'],'structure']),
-    advancedLesson('l6-5','Familiemissie','Begrijp en bouw een kort familiebericht.','Herhaling: は, の, です en か komen samen; er is geen nieuwe regel.',[],'wie → relatie → persoon','Lees steeds per blok: over wie gaat het, welke relatie staat met の, en wie is de persoon?','これは わたし の かぞく です','Dit is mijn familie.',['order','Welk blok geeft de relatie aan?','の',['は','の','です'],'integration'],['これは わたし の かぞく です。 あれは わたし の あに です。','Wie is daar?','mijn oudere broer',['mijn oudere broer','mijn vader','een vriend']])
-  ]},
-  6:{number:7,title:'Hoeveelheden',competency:'Ik kan enkele veelgebruikte dingen, mensen en dieren tellen.',lessons:[
-    advancedLesson('l7-1','Dingen tellen met つ','Tel één tot en met vier algemene dingen.','Herhaling: de getallen zijn bekend; alleen de telvorm is nieuw.',[['ひとつ','één ding','hitotsu'],['ふたつ','twee dingen','futatsu'],['みっつ','drie dingen','mittsu'],['よっつ','vier dingen','yottsu']],'aantal + zelfstandig woord','〜つ is een algemene teller. Leer eerst alleen één tot en met vier als complete klankblokken.','パン は ふたつ です','Het zijn twee broden.',['mc','みっつ','drie dingen',['één ding','twee dingen','drie dingen'],'vocab']),
-    advancedLesson('l7-2','Mensen tellen','Tel één, twee en drie personen.','Herhaling: ひと betekent persoon; nu verandert alleen de telvorm.',[['ひとり','één persoon','hitori'],['ふたり','twee personen','futari'],['さんにん','drie personen','sannin'],['よにん','vier personen','yonin']],'aantal + にん','Bij één en twee gebruik je ひとり en ふたり. Vanaf drie hoor je het bekende getal met にん.','かぞく は よにん です','Het gezin bestaat uit vier personen.',['fill','かぞく は ___ です','よにん',['よっつ','よにん','よんほん'],'structure']),
-    advancedLesson('l7-3','Kleine dieren tellen','Tel één tot en met drie kleine dieren.','Herhaling: ねこ en いぬ zijn bekend; de teller is het enige nieuwe systeem.',[['いっぴき','één klein dier','ippiki'],['にひき','twee kleine dieren','nihiki'],['さんびき','drie kleine dieren','sanbiki'],['なんびき','hoeveel kleine dieren','nanbiki']],'aantal + ひき','De uitspraak wisselt bij één en drie. Leer alleen de vormen die je nu gebruikt, niet alle uitzonderingen.','ねこ は さんびき です','Er zijn drie katten.',['fill','ねこ は ___ です','さんびき',['さんにん','みっつ','さんびき'],'structure']),
-    advancedLesson('l7-4','Lang of plat','Kies een teller op basis van de vorm.','Herhaling: je kent het principe “getal + teller”; vandaag voeg je twee vormen toe.',[['いっぽん','één lang voorwerp','ippon'],['にほん','twee lange voorwerpen','nihon'],['いちまい','één plat voorwerp','ichimai'],['にまい','twee platte voorwerpen','nimai']],'ほん of まい','Gebruik ほん voor lange cilindrische dingen en まい voor platte dingen. Oefen voorlopig alleen één en twee.','きって は にまい です','Het zijn twee postzegels.',['fill','きって は に___ です','まい',['まい','ほん','ひき'],'structure']),
-    advancedLesson('l7-5','Eerste, tweede, derde','Geef een eenvoudige positie in een rij aan.','Herhaling: bekende getallen blijven herkenbaar vooraan.',[['いちばんめ','eerste','ichibanme'],['にばんめ','tweede','nibanme'],['さんばんめ','derde','sanbanme'],['どれ','welke','dore']],'getal + ばんめ','ばんめ maakt van een getal een positie. Begin alleen met eerste, tweede en derde.','ねこ は にばんめ です','De kat is tweede.',['fill','ねこ は ___ です','にばんめ',['にひき','にばんめ','にまい'],'structure'])
-  ]},
-  7:{number:8,title:'Tijd & agenda',competency:'Ik kan eenvoudige dagen, tijden en afspraken begrijpen.',lessons:[
-    advancedLesson('l8-1','Begin van de week','Herken maandag tot en met donderdag.','Herhaling: alle kana zijn bekend; de vier weekdagen zijn de enige nieuwe informatie.',[['げつようび','maandag','getsuyoubi'],['かようび','dinsdag','kayoubi'],['すいようび','woensdag','suiyoubi'],['もくようび','donderdag','mokuyoubi']],'dag + は','Een weekdag kan gewoon vóór は staan. De rest van de zin blijft bekend.','げつようび は みせ に いきます','Maandag ga ik naar de winkel.',['mc','すいようび','woensdag',['maandag','woensdag','donderdag'],'vocab']),
-    advancedLesson('l8-2','Einde van de week','Maak de week compleet en mix alle dagen.','Herhaling: de eerste vier weekdagen komen in de oefeningen terug.',[['きんようび','vrijdag','kinyoubi'],['どようび','zaterdag','doyoubi'],['にちようび','zondag','nichiyoubi'],['なんようび','welke dag','nanyoubi']],'なんようび です か','なんようび vraagt naar de dag. De bekende vraagmarkering か blijft achteraan.','きょう は なんようび です か','Welke dag is het vandaag?',['fill','なんようび です ___','か',['か','に','を'],'structure']),
-    advancedLesson('l8-3','Vandaag, morgen, gisteren','Plaats een gebeurtenis dicht bij vandaag.','Herhaling: dagen en gaan met に zijn bekend.',[['きょう','vandaag','kyou'],['あした','morgen','ashita'],['きのう','gisteren','kinou'],['こんしゅう','deze week','konshuu']],'tijd vooraan','Een tijdswoord mag vooraan staan. Bij きょう, あした en きのう laat je in deze basiszinnen に weg.','あした えき に いきます','Morgen ga ik naar het station.',['fill','___ えき に いきます','あした',['あした','みぎ','ふたり'],'structure']),
-    advancedLesson('l8-4','Maand en datum','Herken een eenvoudige maand en de eerste drie datums.','Herhaling: cijfers helpen bij maanden; datums leer je als kleine vaste blokken.',[['いちがつ','januari','ichigatsu'],['にがつ','februari','nigatsu'],['ついたち','de eerste dag','tsuitachi'],['ふつか','de tweede dag','futsuka'],['みっか','de derde dag','mikka']],'maand + datum','Maanden volgen meestal getal + がつ. De eerste drie datums hebben eigen lezingen en worden apart geoefend.','にがつ ふつか です','Het is 2 februari.',['fill','にがつ ___ です','ふつか',['ふたつ','ふつか','ふたり'],'structure']),
-    advancedLesson('l8-5','Hele uren','Vraag en zeg een eenvoudig heel uur.','Herhaling: か maakt een vraag en bekende cijfers staan voor じ.',[['いちじ','één uur','ichiji'],['にじ','twee uur','niji'],['さんじ','drie uur','sanji'],['なんじ','hoe laat','nanji']],'getal + じ','じ betekent hier uur. Zet なんじ in de bekende vraagvorm om naar de tijd te vragen.','いま なんじ です か','Hoe laat is het nu?',['fill','いま ___ です か','なんじ',['なんじ','なんにん','なんびき'],'structure']),
-    advancedLesson('l8-6','Een afspraak','Combineer persoon, dag, tijd en plaats.','Herhaling: alle onderdelen zijn eerder apart geleerd; deze les voegt geen nieuwe grammatica toe.',[['やくそく','afspraak','yakusoku'],['らいしゅう','volgende week','raishuu'],['せんしゅう','vorige week','senshuu'],['いま','nu','ima']],'wanneer + wie + waar','Bouw de informatie in rustige blokken. Het werkwoord blijft achteraan.','あした さんじ えき に いきます','Morgen om drie uur ga ik naar het station.',['order','Wat staat in deze zin als tijd?','さんじ',['あした','さんじ','えき'],'integration'],['あした は げつようび です。 さんじ えき に いきます。','Wanneer ga je naar het station?','morgen om drie uur',['vandaag om twee uur','morgen om drie uur','maandag om één uur']])
-  ]},
-  8:{number:9,title:'Plaats & richting',competency:'Ik kan eenvoudige plaats, positie en beweging begrijpen.',lessons:[
-    advancedLesson('l9-1','Hier en daar','Wijs een plaats dichtbij of verder weg aan.','Herhaling: これ, それ en あれ worden nu plaatswoorden.',[['ここ','hier','koko'],['そこ','daar bij jou','soko'],['あそこ','daar verderop','asoko'],['どこ','waar','doko']],'どこ です か','どこ vraagt naar een plaats. De bekende です か-vraag blijft verder gelijk.','えき は どこ です か','Waar is het station?',['fill','えき は ___ です か','どこ',['だれ','どこ','どれ'],'structure']),
-    advancedLesson('l9-2','Links en rechts','Herken twee basisrichtingen.','Herhaling: ここ / そこ / あそこ geven al aan waar iets is.',[['ひだり','links','hidari'],['みぎ','rechts','migi'],['まっすぐ','rechtdoor','massugu'],['みち','weg','michi']],'richting + です','Voor een eerste routekeuze kun je de richting als beschrijving vóór です zetten.','えき は みぎ です','Het station is rechts.',['fill','えき は ___ です','みぎ',['みぎ','あした','さんじ'],'structure']),
-    advancedLesson('l9-3','Voor, achter en naast','Zeg waar iets ligt ten opzichte van iets bekends.','Herhaling: の verbindt twee woorden; nu verbindt het een plek en positie.',[['まえ','voor','mae'],['うしろ','achter','ushiro'],['となり','naast','tonari'],['なか','binnen','naka']],'X の positie','みせ の となり betekent “naast de winkel”. Het referentiepunt staat vóór の.','えき は みせ の となり です','Het station is naast de winkel.',['fill','みせ ___ となり','の',['の','を','に'],'structure']),
-    advancedLesson('l9-4','Boven en beneden','Voeg twee verticale posities toe.','Herhaling: X の positie blijft hetzelfde patroon.',[['うえ','boven / op','ue'],['した','onder','shita'],['そと','buiten','soto'],['ちかく','dichtbij','chikaku']],'X の うえ / した','Alleen de positiewoorden zijn nieuw. De relatie met の ken je al.','ねこ は ベッド の うえ です','De kat is op het bed.',['fill','ベッド の ___','うえ',['うえ','みぎ','あした'],'structure']),
-    advancedLesson('l9-5','Handeling op een plek','Zeg waar een handeling plaatsvindt.','Herhaling: に blijft voor de bestemming van gaan. Vandaag komt één andere rol erbij.',[['こうえん','park','kouen'],['がっこう','school','gakkou'],['レストラン','restaurant','resutoran'],['ちず','kaart','chizu']],'plaats + で + handeling','で markeert waar je iets doet. Vergelijk: みせ に いきます (naar) en みせ で たべます (daar eten).','レストラン で パン を たべます','Ik eet brood in het restaurant.',['fill','レストラン ___ パン を たべます','で',['で','に','の'],'structure'],['きょう こうえん に いきます。 こうえん で パン を たべます。','Waar eet je brood?','in het park',['thuis','in het park','op het station']])
-  ]},
-  9:{number:10,title:'Dagelijks Japans',competency:'Ik kan eenvoudige dagelijkse situaties combineren.',lessons:[
-    advancedLesson('l10-1','In de winkel','Combineer aanwijzen, hoeveelheid en een eenvoudige keuze.','Herhaling: これ, hoeveelheden en vragen zijn bekend.',[['ください','alstublieft / geef mij','kudasai'],['いくら','hoeveel kost het','ikura'],['おかね','geld','okane'],['かいます','kopen','kaimasu']],'X を ください','Zet wat je wilt vóór を en sluit af met ください. Dit is het enige nieuwe vaste patroon.','パン を ふたつ ください','Twee broden, alstublieft.',['fill','パン を ふたつ ___','ください',['ください','いきます','です'],'structure']),
-    advancedLesson('l10-2','Eten bestellen','Bestel eten of drinken met een hoeveelheid.','Herhaling: を ください en tellers komen direct terug.',[['メニュー','menu','menyuu'],['みせて','laat zien','misete'],['おちゃ','thee','ocha'],['ケーキ','cake','keeki']],'bekend bestelpatroon','Er komt geen nieuwe grammatica bij. Kies product en hoeveelheid en gebruik を ください.','おちゃ を ひとつ ください','Eén thee, alstublieft.',['fill','おちゃ を ___ ください','ひとつ',['ひとつ','ひとり','いっぴき'],'structure']),
-    advancedLesson('l10-3','Een afspraak maken','Combineer persoon, dag, tijd en plaats in één plan.','Herhaling: Level 6-personen en Level 8-agenda komen samen.',[['あいます','ontmoeten','aimasu'],['いつ','wanneer','itsu'],['いっしょに','samen','isshoni'],['だいじょうぶ','in orde','daijoubu']],'persoon と あいます','と betekent hier “met”. Gebruik het alleen in dit duidelijke ontmoetingspatroon.','あした さんじ ともだち と あいます','Morgen om drie uur ontmoet ik een vriend.',['fill','ともだち ___ あいます','と',['と','を','で'],'structure']),
-    advancedLesson('l10-4','Onderweg','Begrijp een korte route met plaats en tijd.','Herhaling: links, rechts, rechtdoor, に en で zijn al geleerd.',[['でんしゃ','trein','densha'],['バス','bus','basu'],['のります','instappen / nemen','norimasu'],['おります','uitstappen','orimasu']],'vervoer + に のります','Bij instappen markeert に het voertuig. Leer dit als één praktisch patroon.','えき で でんしゃ に のります','Op het station neem ik de trein.',['fill','でんしゃ ___ のります','に',['に','で','を'],'structure']),
-    advancedLesson('l10-5','Basismissie','Volg een mini-dialoog met wie, waar, wanneer en wat.','Herhaling: deze eindmissie introduceert geen nieuwe woorden of grammatica.',[],'persoon + tijd + plaats + handeling','Lees regel voor regel. Zoek eerst wie, dan tijd, plaats en als laatste de handeling.','あした ともだち と えき に いきます','Morgen ga ik met een vriend naar het station.',['order','Welk blok zegt met wie?','ともだち と',['あした','ともだち と','えき に'],'integration'],['あした は どようび です。 さんじ ともだち と えき に いきます。 えき で でんしゃ に のります。','Wat gebeurt eerst?','naar het station gaan',['de trein uitstappen','naar het station gaan','thuis eten']])
-  ]}
-};
-const futureLevel=(number,title,description)=>({number,title,description,status:'placeholder'});
-const coursePhases=[
-  {
-    id:'foundation',title:'Fase 1 — Japanse basis',subtitle:'De fundering leggen',description:'Schrift, eerste grammatica en bruikbaar dagelijks Japans vormen samen één absolute basis.',startLevel:1,endLevel:10,goal:'Na deze fase heb je een echte fundering om verder op te bouwen.',status:'active',theme:'基',
-    levels:levels.map((lv,index)=>({number:index+1,title:lv[1],description:lv[2],status:'playable',levelIndex:index}))
-  },
-  {
-    id:'usable-japanese',title:'Fase 2 — Japans gaan gebruiken',subtitle:'Van losse zinnen naar situaties en korte teksten',description:'Japans wordt steeds bruikbaarder in dialogen, routines en korte verhalen.',startLevel:11,endLevel:20,goal:'Steeds meer complete zinnen, situaties en korte teksten begrijpen en bouwen.',status:'planned',theme:'使',
-    levels:[
-      futureLevel(11,'Dagelijkse routines','Handelingen en vaste momenten van een dag.'),
-      futureLevel(12,'Eten en bestellen','Meer natuurlijke bestelsituaties en voorkeuren.'),
-      futureLevel(13,'Winkelen en geld','Prijzen, keuzes en eenvoudige winkelgesprekken.'),
-      futureLevel(14,'Onderweg en vervoer','Routes, voertuigen en praktische reisinformatie.'),
-      futureLevel(15,'Sociale gesprekken','Kennismaken en korte gesprekjes onderhouden.'),
-      futureLevel(16,'Verleden en ervaringen','Eenvoudig vertellen wat er is gebeurd.'),
-      futureLevel(17,'Plannen en afspraken','Vooruitkijken, afspreken en intenties begrijpen.'),
-      futureLevel(18,'Korte teksten en microverhalen','Van enkele regels naar samenhangende tekst.'),
-      futureLevel(19,'Natuurlijker Japans','Bekende structuren in minder schoolse formuleringen.'),
-      futureLevel(20,'Integratie bruikbaar Japans','De onderdelen van deze fase samen toepassen.')
-    ]
-  },
-  {
-    id:'reading-natural-japanese',title:'Fase 3 — Lezen & natuurlijker Japans',subtitle:'Van eenvoudige tekst naar rijkere context',description:'Langere teksten, geleidelijke kanji, informelere taal en contextueel begrip.',startLevel:21,endLevel:30,goal:'Steeds zelfstandiger eenvoudige verhalen en natuurlijke dialogen begrijpen.',status:'concept',theme:'読',
-    levels:[
-      futureLevel(21,'Korte teksten','Voorlopig format; inhoud wordt later didactisch bepaald.'),
-      futureLevel(22,'Verhaalverbanden','Voorlopig format; inhoud wordt later didactisch bepaald.'),
-      futureLevel(23,'Kanji in bekende woorden','Bekend woord → kanji-vorm → lezen in context.'),
-      futureLevel(24,'Informele basis','Voorlopig format voor alledaagse, minder formele taal.'),
-      futureLevel(25,'Dialogen in context','Wie spreekt, tegen wie en met welke bedoeling?'),
-      futureLevel(26,'Personages en spreekstijl','Voorlopig format voor verschillen tussen sprekers.'),
-      futureLevel(27,'Manga-achtige scènes','Korte tekstballonnen en contextueel lezen.'),
-      futureLevel(28,'Natuurlijker formuleren','Bekende kennis herkennen in compactere taal.'),
-      futureLevel(29,'Langer lezen','Geleidelijk van regels naar pagina’s.'),
-      futureLevel(30,'Fase-integratie','Geen eindpunt; alleen een integratie van deze fase.')
-    ]
-  }
-];
-const journeyMilestones=[
-  {id:'child-book',title:'Eerste eenvoudig kinderboek',description:'Van losse zin via microverhaal en korte tekst naar een echt eenvoudig verhaal.',status:'richting',icon:'📖'},
-  {id:'manga',title:'Manga lezen',description:'Meer kanji, informele grammatica, dialogen en spreekstijlen in context.',status:'richting',icon:'💬'},
-  {id:'anime-subtitles',title:'Anime met Japanse ondertitels',description:'Lezen en luisteren groeien samen van langzame zin naar langere scène.',status:'richting',icon:'🎧'},
-  {id:'general-news',title:'De hoofdlijn van algemeen nieuws volgen',description:'Een verre mijlpaal voor formeel taalgebruik en algemeen begrip; zonder vast levelnummer.',status:'verre richting',icon:'📰'}
-];
-
 function rankDefs(){const o={};['hiragana','katakana'].forEach(k=>{kanaModules[k].rows.forEach((r,i)=>o[`${k}-row-${i}`]={name:`${kanaModules[k].label} · ${r.name}`});kanaClusters.forEach((c,i)=>o[`${k}-cluster-${i}`]={name:`${kanaModules[k].label} · ${c.name}`});['exam1','exam2','exam3'].forEach(id=>o[`${k}-${id}`]={name:`${kanaModules[k].label} · ${id}`})});['num-basic','num-midterm','num-triangle','num-math','num-teens','num-tens','num-under100','num-hundreds','num-thousands','num-exam1','num-exam2'].forEach(id=>o[id]={name:id});['mix-exam1','mix-exam2'].forEach(id=>o[id]={name:id});dakutenPatterns.forEach(p=>['hiragana','katakana'].forEach(s=>o[`dak-${s}-${p.id}`]={name:`${s} ${p.name}`}));dakutenClusters.forEach((c,i)=>o[`dak-cluster-${i}`]={name:c.name});['dak-examA','dak-examB','dak-examC'].forEach(id=>o[id]={name:id});langLessons.forEach(l=>o[l.id]={name:l.title});o['l4-exam']={name:'Level 4 examen'};smallLessons.forEach(l=>o[l.id]={name:l.title});o['l5-exam']={name:'Level 5 examen'};Object.values(advancedCourses).forEach(c=>{c.lessons.forEach(l=>o[l.id]={name:`Level ${c.number} · ${l.title}`});o[`l${c.number}-exam`]={name:`Level ${c.number} examen`}});return o}
 const defsCache=rankDefs(),rankState={};Object.keys(defsCache).forEach(id=>rankState[id]={rank:null,last:null,attempts:0});
 
@@ -1972,40 +1836,6 @@ const MASTERY_CONFIG={
 };
 const itemMastery={};
 const vocabMastery={};
-
-const vocabCatalog=(()=>{
-  const map=new Map();
-  const addWord=(jp,meaning,romaji,lesson,lessonIndex,level,extra={})=>{
-    if(!jp||!meaning||map.has(jp))return;
-    const meanings=String(meaning).split(/\s*\/\s*/).map(x=>x.trim()).filter(Boolean);
-    map.set(jp,{id:`vocab-${jp}`,jp,kana:jp,romaji:romaji||'',meaning,meanings,lessonId:lesson.id,lessonIndex,lessonTitle:lesson.title,level,kanji:extra.kanji||null,kanjiReading:extra.kanjiReading||null});
-  };
-  langLessons.forEach((lesson,lessonIndex)=>{
-    lesson.words.forEach(([jp,meaning,romaji,kanji,kanjiReading])=>addWord(jp,meaning,romaji,lesson,lessonIndex,4,{kanji,kanjiReading}));
-  });
-  smallLessons.forEach((lesson,lessonIndex)=>{
-    (lesson.examples||[]).forEach(([jp,romaji,meaning,kanji,kanjiReading])=>addWord(jp,meaning,romaji,lesson,lessonIndex,5,{kanji,kanjiReading}));
-  });
-  Object.values(advancedCourses).forEach(course=>course.lessons.forEach((lesson,lessonIndex)=>{
-    lesson.words.forEach(([jp,meaning,romaji,kanji,kanjiReading])=>addWord(jp,meaning,romaji,lesson,lessonIndex,course.number,{kanji,kanjiReading}));
-  }));
-  // Houd mastery van woorden uit het vorige Level 4-curriculum leesbaar.
-  const legacyWords=[
-    ['l4-2',1,'Dit, dat en meer',[['かばん','tas'],['テレビ','televisie']]],
-    ['l4-3',2,'Van wie?',[['あなた','jij'],['かぞく','familie'],['もの','ding']]],
-    ['l4-4',3,'Niet X',[['にく','vlees'],['やさい','groente'],['くだもの','fruit'],['たまご','ei']]],
-    ['l4-5',4,'Een vraag maken',[['なん','wat'],['だれ','wie'],['どこ','waar'],['はい','ja'],['いいえ','nee']]],
-    ['l4-6',5,'Ook',[['すし','sushi'],['ごはん','rijst / maaltijd'],['さけ','sake'],['りんご','appel'],['バナナ','banaan']]],
-    ['l4-7',6,'Iets doen',[['ききます','luisteren']]],
-    ['l4-8',7,'Niet doen',[['きます','komen'],['かえります','teruggaan'],['ねます','slapen'],['おきます','opstaan']]],
-    ['l4-9',8,'Naar een plaats',[['いえ','huis'],['うみ','zee'],['ホテル','hotel']]]
-  ];
-  legacyWords.forEach(([lessonId,lessonIndex,lessonTitle,words])=>words.forEach(([jp,meaning])=>{
-    if(!map.has(jp)){const meanings=String(meaning).split(/\s*\/\s*/).map(x=>x.trim()).filter(Boolean);map.set(jp,{id:`vocab-${jp}`,jp,kana:jp,romaji:'',meaning,meanings,lessonId,lessonIndex,lessonTitle,level:4,kanji:null,kanjiReading:null,legacy:true})}
-  }));
-  return [...map.values()];
-})();
-const vocabById=Object.fromEntries(vocabCatalog.map(v=>[v.id,v]));
 
 function blankDirectionStats(){
   return{
@@ -2237,7 +2067,7 @@ function relativeTime(ts){
   if(h<24)return`${h} uur geleden`;
   const d=Math.floor(h/24);
   if(d<14)return`${d} dag${d===1?'':'en'} geleden`;
-  return new Date(ts).toLocaleDateString('nl-NL');
+  return i18n.date(ts,state.uiLanguage);
 }
 function masteryItemById(id){
   const all=[...allKana('hiragana').map(x=>({...x,script:'hiragana'})),...allKana('katakana').map(x=>({...x,script:'katakana'})),...allDakItems()];
@@ -2435,7 +2265,10 @@ function moduleRank(key){
 }
 
 
-const state={screen:'levels',level:0,currentLevel:1,userName:'',userNameJapanese:'',avatarId:'avatar-female',avatarName:'Miku',avatarNameJapanese:'ミク',avatarNameCustom:false,avatarNameJapaneseCustom:false,avatarEnabled:true,avatarGender:'female',avatarMode:'auto',selectedAvatarSkin:null,unlockedAvatarSkins:['skin-1'],basisModule:'hiragana',tabs:{hiragana:'learn',katakana:'learn',numbers:'learn',mix:'practice',dakuten:'learn',lang:'learn',small:'learn',advanced:'learn'},row:{hiragana:0,katakana:0},step:{hiragana:0,katakana:0},numberLesson:0,dakScript:'hiragana',dakPattern:0,dakStep:0,langLesson:0,langView:'list',langStep:'overview',langStepProgress:{},introducedVocabIds:[],vocabFirstSeen:{},kanaFirstSeen:{},smallLesson:0,advancedLesson:{5:0,6:0,7:0,8:0,9:0},advancedView:{5:'list',6:'list',7:'list',8:'list',9:'list'},advancedStep:{5:'overview',6:'overview',7:'overview',8:'overview',9:'overview'},advancedStepProgress:{},progressTab:'progress',progressActivityLimit:10,progressKnowledgeTab:'levels',progressKanaGroup:'hiragana',progressDetailId:null,progressVocabDetailId:null,studyRange:{low:0,high:100},studyCalendar:{from:'',to:''},studyFilters:{category:'',skill:'',origin:'',level:'',tag:''},studyTracker:{version:1,courseStartedAt:null,trackingStartedAt:null,sessions:[],events:[],noticeDismissed:false,active:null},practiceSelections:{hiragana:[0,1,2],katakana:[0,1,2],hiraganaChars:[],katakanaChars:[],dakuten:['g','z'],dakScripts:['hiragana','katakana'],numbers:['0-10']},errorBank:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},lastErrors:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},quiz:null,lastConfig:null};
+const state={screen:'home',courseId:preferences.courseId,targetLanguage:platform.course(preferences.courseId)?.targetLanguage||'ja',uiLanguage:preferences.uiLanguage,level:0,currentLevel:1,userName:'',userNameJapanese:'',avatarId:'avatar-female',avatarName:'Miku',avatarNameJapanese:'ミク',avatarNameCustom:false,avatarNameJapaneseCustom:false,avatarEnabled:true,avatarGender:'female',avatarMode:'auto',selectedAvatarSkin:null,unlockedAvatarSkins:['skin-1'],basisModule:'hiragana',tabs:{hiragana:'learn',katakana:'learn',numbers:'learn',mix:'practice',dakuten:'learn',lang:'learn',small:'learn',advanced:'learn'},row:{hiragana:0,katakana:0},step:{hiragana:0,katakana:0},numberLesson:0,dakScript:'hiragana',dakPattern:0,dakStep:0,langLesson:0,langView:'list',langStep:'overview',langStepProgress:{},introducedVocabIds:[],vocabFirstSeen:{},kanaFirstSeen:{},smallLesson:0,advancedLesson:{5:0,6:0,7:0,8:0,9:0},advancedView:{5:'list',6:'list',7:'list',8:'list',9:'list'},advancedStep:{5:'overview',6:'overview',7:'overview',8:'overview',9:'overview'},advancedStepProgress:{},progressTab:'progress',progressActivityLimit:10,progressKnowledgeTab:'levels',progressKanaGroup:'hiragana',progressDetailId:null,progressVocabDetailId:null,studyRange:{low:0,high:100},studyCalendar:{from:'',to:''},studyFilters:{category:'',skill:'',origin:'',level:'',tag:''},studyTracker:{version:1,courseStartedAt:null,trackingStartedAt:null,sessions:[],events:[],noticeDismissed:false,active:null},practiceSelections:{hiragana:[0,1,2],katakana:[0,1,2],hiraganaChars:[],katakanaChars:[],dakuten:['g','z'],dakScripts:['hiragana','katakana'],numbers:['0-10']},errorBank:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},lastErrors:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},quiz:null,lastConfig:null};
+const t=(key,values)=>i18n.translate(key,state.uiLanguage,values);
+function localizedLevel(index){const level=levels[index],number=index+1;return[level[0],t(`course.${state.courseId}.level.${number}.title`),t(`course.${state.courseId}.level.${number}.description`)]}
+function setUiLanguage(language){state.uiLanguage=i18n.language(language);document.documentElement.lang=state.uiLanguage;platform.savePreferences(state);scheduleSave();if(!$('sessionView').classList.contains('hidden'))renderSession();else renderMain();i18n.localizeNodes(root,state.uiLanguage)}
 state.flashcardProgress={version:1,cards:{}};
 state.flashcardSelection={lessonIds:null,direction:'jp-nl'};
 state.flashcardSession=null;
@@ -2473,7 +2306,6 @@ function avatarJapaneseName(){syncProfileState();return state.avatarNameJapanese
 function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]))}
 function profilePlaceholders(){return{userName:state.userName||'jij',userNameJapanese:state.userNameJapanese||'あなた',avatarName:avatarDisplayName(),avatarNameJapanese:avatarJapaneseName(),avatarVariant:state.avatarGender}}
 function resolveProfileText(value){const values=profilePlaceholders();return String(value??'').replace(/\{\{(userName|userNameJapanese|avatarName|avatarNameJapanese|avatarVariant)\}\}/g,(_,key)=>values[key])}
-const profileDialogueTemplates={introduction:[{speaker:'avatar',text:'こんにちは。'}]};
 function resolvedProfileDialogue(id){return(profileDialogueTemplates[id]||[]).map(line=>({...line,text:resolveProfileText(line.text)}))}
 function introductionDialogueHtml(){
   const greeting=resolvedProfileDialogue('introduction')[0];
@@ -2560,7 +2392,7 @@ function avatarAssistHtml({pose='neutral',outfit=null,hairstyle=state.avatarHair
   return`<div class="avatar-assist avatar-assist--${safePlacement} avatar-assist--${safeSize}"><div class="avatar-assist-copy"><strong>${escapeHtml(message)}</strong>${detail?`<div class="small">${escapeHtml(detail)}</div>`:''}</div><div class="avatar-assist-figure" aria-hidden="true">${avatarVisualHtml({pose,outfit,hairstyle})}</div></div>`;
 }
 
-const STORAGE_KEY='taal-japanse-leerapp-v1';
+const STORAGE_KEY=platform.progressKey(state.courseId);
 const STORAGE_VERSION=6;
 let storageOk=true;
 let lastSavedAt=null;
@@ -2587,7 +2419,7 @@ function updateStorageUI(){
       :'Lokale browseropslag is niet beschikbaar';
   }
   if(info){
-    const when=lastSavedAt?new Date(lastSavedAt).toLocaleString('nl-NL'):'nog niet opgeslagen';
+    const when=lastSavedAt?i18n.date(lastSavedAt,state.uiLanguage,{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}):'nog niet opgeslagen';
     info.textContent=storageOk
       ?`Lokale opslag actief · laatste opslag: ${when} · layout: ${layout.kind} (${layout.width}×${layout.height})`
       :'Browseropslag is hier niet beschikbaar. De app werkt wel, maar voortgang blijft niet bewaard.';
@@ -2597,6 +2429,9 @@ function storageStateSnapshot(){
   syncAvatarState();
   return {
     screen:state.screen,
+    courseId:state.courseId,
+    targetLanguage:state.targetLanguage,
+    uiLanguage:state.uiLanguage,
     level:state.level,
     currentLevel:state.currentLevel,
     userName:state.userName,
@@ -2656,6 +2491,7 @@ function storageStateSnapshot(){
 function saveProgress(){
   if(!storageOk)return;
   try{
+    platform.savePreferences(state);
     lastSavedAt=new Date().toISOString();
     const ranks={};
     Object.keys(rankState).forEach(id=>{
@@ -2688,8 +2524,8 @@ function loadProgress(){
     const saved=parsed&&[1,2,3,4,5,6].includes(parsed.version)?parsed:{version:STORAGE_VERSION,state:{},ranks:{}};
     savedVersion=saved.version;
     const s=saved.state||{};
-    if(['levels','level','module','flashcards'].includes(s.screen))state.screen=s.screen;
-    else state.screen='levels';
+    if(['home','levels','level','module','flashcards'].includes(s.screen))state.screen=s.screen;
+    else state.screen='home';
     if(Number.isInteger(s.level))state.level=Math.max(0,Math.min(levels.length-1,s.level));
     if(typeof s.userName==='string')state.userName=s.userName;
     if(typeof s.userNameJapanese==='string')state.userNameJapanese=s.userNameJapanese;
@@ -2719,7 +2555,7 @@ function loadProgress(){
     if(Array.isArray(s.introducedVocabIds))state.introducedVocabIds=s.introducedVocabIds.filter(id=>!!vocabById[id]);
     if(s.flashcardProgress&&typeof s.flashcardProgress==='object'&&s.flashcardProgress.cards&&typeof s.flashcardProgress.cards==='object')state.flashcardProgress={version:1,cards:Object.fromEntries(Object.entries(s.flashcardProgress.cards).filter(([key,value])=>/^(vocab-.+)::(jp-nl|nl-jp)$/.test(key)&&!!vocabById[key.split('::')[0]]&&value&&typeof value==='object').map(([key,value])=>[key,{dueAt:Number(value.dueAt)||0,intervalDays:Number(value.intervalDays)||0,repetitions:Math.max(0,Math.floor(Number(value.repetitions)||0)),lapses:Math.max(0,Math.floor(Number(value.lapses)||0)),lastReviewedAt:Number(value.lastReviewedAt)||0,lastGrade:value.lastGrade==='again'?'again':'knew'}]))};
     if(s.flashcardSelection&&typeof s.flashcardSelection==='object')state.flashcardSelection={lessonIds:Array.isArray(s.flashcardSelection.lessonIds)?s.flashcardSelection.lessonIds.filter(id=>vocabCatalog.some(v=>v.lessonId===id)):null,direction:['jp-nl','nl-jp','both'].includes(s.flashcardSelection.direction)?s.flashcardSelection.direction:'jp-nl'};
-    if(s.flashcardSession&&typeof s.flashcardSession==='object'&&Array.isArray(s.flashcardSession.queue))state.flashcardSession={queue:s.flashcardSession.queue.filter(x=>x&&vocabById[x.cardId]&&['jp-nl','nl-jp'].includes(x.direction)).map(x=>({cardId:x.cardId,direction:x.direction,answerChoices:Array.isArray(x.answerChoices)?[...new Set(x.answerChoices.filter(v=>typeof v==='string'&&v.length<200))].slice(0,4):null,round:Math.max(0,Math.floor(Number(x.round)||0))})),position:Math.max(0,Math.floor(Number(s.flashcardSession.position)||0)),status:['active','paused','complete'].includes(s.flashcardSession.status)?s.flashcardSession.status:'paused',revealed:!!s.flashcardSession.revealed,knew:Math.max(0,Math.floor(Number(s.flashcardSession.knew)||0)),again:Math.max(0,Math.floor(Number(s.flashcardSession.again)||0)),requeued:Array.isArray(s.flashcardSession.requeued)?s.flashcardSession.requeued:[],feedback:s.flashcardSession.feedback&&['knew','again'].includes(s.flashcardSession.feedback.grade)?{grade:s.flashcardSession.feedback.grade,chosen:typeof s.flashcardSession.feedback.chosen==='string'?s.flashcardSession.feedback.chosen.slice(0,200):null}:null,startedAt:Number(s.flashcardSession.startedAt)||Date.now()};
+    if(s.flashcardSession&&typeof s.flashcardSession==='object'&&Array.isArray(s.flashcardSession.queue))state.flashcardSession={queue:s.flashcardSession.queue.filter(x=>x&&vocabById[x.cardId]&&['jp-nl','nl-jp'].includes(x.direction)).map(x=>({cardId:x.cardId,direction:x.direction,answerChoices:Array.isArray(x.answerChoices)?[...new Set(x.answerChoices.filter(v=>typeof v==='string'&&v.length<200))].slice(0,4):null,round:Math.max(0,Math.floor(Number(x.round)||0))})),position:Math.max(0,Math.floor(Number(s.flashcardSession.position)||0)),status:['active','paused','complete'].includes(s.flashcardSession.status)?s.flashcardSession.status:'paused',revealed:!!s.flashcardSession.revealed,knew:Math.max(0,Math.floor(Number(s.flashcardSession.knew)||0)),again:Math.max(0,Math.floor(Number(s.flashcardSession.again)||0)),requeued:Array.isArray(s.flashcardSession.requeued)?s.flashcardSession.requeued:[],feedback:s.flashcardSession.feedback&&['knew','again'].includes(s.flashcardSession.feedback.grade)?{grade:s.flashcardSession.feedback.grade,chosen:typeof s.flashcardSession.feedback.chosen==='string'?s.flashcardSession.feedback.chosen.slice(0,200):null,until:Number(s.flashcardSession.feedback.until)||null}:null,startedAt:Number(s.flashcardSession.startedAt)||Date.now()};
     ['advancedLesson','advancedView','advancedStep','advancedStepProgress'].forEach(k=>{if(s[k]&&typeof s[k]==='object')Object.assign(state[k],s[k])});
     if(['hiragana','katakana'].includes(s.dakScript))state.dakScript=s.dakScript;
     if(['profile','progress','knowledge'].includes(s.progressTab))state.progressTab=s.progressTab;
@@ -2825,7 +2661,7 @@ function show(which){
   $('resultView').classList.toggle('hidden',which!=='result');
   $('sessionView').classList.toggle('hidden',which!=='session');
   document.body.dataset.view=which;
-  if(which==='quiz'||which==='result')document.body.dataset.scene='classroom';
+  if(which==='quiz'||which==='result')document.body.dataset.scene=scenes.resolve({level:state.level}).bodyScene;
   if(which==='session')document.body.dataset.scene='journey';
 }
 function setMain(){show('main');renderMain()}
@@ -2840,31 +2676,28 @@ function updateHeader(){
   progress.classList.toggle('active',progressOpen);
   if(cardsOpen&&!progressOpen){
     back.classList.add('hidden');
-    ey.textContent='Vrij oefenen';
-    title.textContent='Flashcards';
-  }else if(progressOpen||state.screen==='levels'){
+    ey.textContent=t('nav.cards');
+    title.textContent=t('flashcards.title');
+  }else if(progressOpen||state.screen==='home'){
     back.classList.add('hidden');
-    ey.textContent='日本語';
+    ey.textContent=t('course.japanese.short');
     title.textContent='Language Journey';
   }else{
     back.classList.remove('hidden');
-    const lv=levels[state.level];
-    ey.textContent=lv?.[0]||'Leerroute';
-    title.textContent=state.screen==='module' ? (moduleHeaderTitle()||lv?.[1]||'Japans') : (lv?.[1]||'Japans');
+    const lv=localizedLevel(state.level);
+    ey.textContent=state.screen==='levels'?t('nav.home'):lv?.[0]||t('nav.levels');
+    title.textContent=state.screen==='levels'?t('nav.levels'):state.screen==='module'?(moduleHeaderTitle()||lv?.[1]||t('course.japanese.name')):(lv?.[1]||t('course.japanese.name'));
   }
-  progress.textContent='Voortgang';
+  learn.textContent=t('nav.learn');cards.textContent=t('nav.cards');progress.textContent=t('nav.progress');
 }
 function moduleHeaderTitle(){
-  if(state.level===0)return state.basisModule==='numbers'?'Cijfers':kanaModules[state.basisModule]?.label;
-  if(state.level===1)return'Kana Mix';
-  if(state.level===2)return'Dakuten & Handakuten';
-  if(state.level===3)return'Eerste taalbasis';
-  if(state.level===4)return'Kana compleet';
-  return levels[state.level]?.[1]||'Japans';
+  if(state.level===0)return state.basisModule==='numbers'?t('course.japanese.level.1.numbers'):kanaModules[state.basisModule]?.label;
+  return localizedLevel(state.level)?.[1]||t('course.japanese.name');
 }
 function navigateBack(){
-  if(!$('sessionView').classList.contains('hidden'))return setMain();
-  if(!$('flashcardView').classList.contains('hidden')||state.screen==='flashcards'){state.screen='levels';scheduleSave();return renderMain()}
+  if(!$('sceneTransition').hidden){scenes.cancel();return}
+  if(!$('sessionView').classList.contains('hidden')){state.screen='home';scheduleSave();return setMain()}
+  if(!$('flashcardView').classList.contains('hidden')||state.screen==='flashcards'){state.screen='home';scheduleSave();return renderMain()}
   // Een quiz of resultaat is één tijdelijke laag boven de plek waar hij begon.
   // De onderliggende module-/lesstaat blijft intact, dus keer daar direct naar terug.
   if(!$('quizView').classList.contains('hidden')){completeStudySession({status:'afgebroken'});return setMain()}
@@ -2887,39 +2720,28 @@ function navigateBack(){
     scheduleSave();
     return renderMain();
   }
-  if(state.screen==='module'){state.screen='level';scheduleSave();return renderMain()}
-  if(state.screen==='level'){state.screen='levels';scheduleSave();return renderMain()}
+  const parent=navigation.parentOf(state.screen,{courseId:state.courseId});
+  if(parent){state.screen=parent;scheduleSave();return renderMain()}
 }
 function openLevel(i){
-  state.level=i;
-  syncAvatarState();
-  const unlocked=avatarOutfits.find(outfit=>outfit.unlockLevel===i+1&&!state.seenAvatarOutfits.includes(outfit.id));
-  if(unlocked){state.seenAvatarOutfits.push(unlocked.id);state.pendingAvatarOutfit=unlocked.id}
-  state.screen='level';
-  scheduleSave();
-  renderMain();
+  scenes.start({theme:scenes.resolve({level:i}),locale:state.uiLanguage,onEnter:()=>{
+    state.level=i;
+    syncAvatarState();
+    const unlocked=avatarOutfits.find(outfit=>outfit.unlockLevel===i+1&&!state.seenAvatarOutfits.includes(outfit.id));
+    if(unlocked){state.seenAvatarOutfits.push(unlocked.id);state.pendingAvatarOutfit=unlocked.id}
+    state.screen='level';
+    scheduleSave();
+    renderMain();
+  }});
 }
 function openModule(level,setup){
-  state.level=level;
-  syncAvatarState();
-  state.screen='module';
-  if(typeof setup==='function')setup();
-  scheduleSave();
-  renderMain();
+  const enter=()=>{state.level=level;syncAvatarState();state.screen='module';if(typeof setup==='function')setup();scheduleSave();renderMain()};
+  if(['home','levels'].includes(state.screen))scenes.start({theme:scenes.resolve({level}),locale:state.uiLanguage,onEnter:enter});
+  else enter();
 }
 function levelIntro(i){
-  return[
-    ['Je bouwt de basis: 46 Hiragana, cijfers en 46 Katakana.','Eerst leren per kleine stap, daarna gericht oefenen en toetsen.'],
-    ['Je leert zonder waarschuwing schakelen tussen Hiragana en Katakana.','Geen nieuwe tekens: dit level maakt Level 1 sneller en stabieler.'],
-    ['Je voegt Dakuten en Handakuten toe aan kana die je al kent.','Nieuwe kennis = bekende vorm + één kleine modificatie.'],
-    ['Je gaat voor het eerst echte woorden en eenvoudige zinnen bouwen.','Iedere les gebruikt woorden en patronen uit eerdere lessen opnieuw.'],
-    ['Je voegt kleine ゃゅょ, kleine っ en lange klinkers toe.','De nieuwe klanken worden meteen toegepast in bekende woorden en zinsstructuren.'],
-    ['Je beschrijft mensen, familie en relaties.','Bekende です-zinnen krijgen per les enkele woorden en daarna の als één nieuw patroon.'],
-    ['Je gebruikt bekende cijfers voor praktische hoeveelheden.','Iedere module behandelt één teller; rangtelwoorden komen pas daarna.'],
-    ['Je begrijpt eenvoudige dagen, datums, tijden en afspraken.','Cijfers worden hergebruikt; agenda-informatie groeit in kleine blokken.'],
-    ['Je begrijpt eenvoudige plaatsen, posities en richtingen.','Bekende plaatswoorden en に いきます worden rustig uitgebreid.'],
-    ['Je brengt de basis samen in korte praktijksituaties.','Bestellen, kopen, afspreken en reizen gebruiken alleen eerder geleerde bouwstenen.']
-  ][i]||['Dit level is voorbereid voor de volgende stap in de cursus.','Alles blijft toegankelijk zonder locks.'];
+  const number=i+1;
+  return[t(`course.${state.courseId}.level.${number}.goal`),t(`course.${state.courseId}.level.${number}.approach`)];
 }
 function firstIncompleteLesson(arr){const i=arr.findIndex(l=>!rankState[l.id]?.rank);return i<0?arr.length-1:i}
 function flowReady(id){const m=rankState[id];return!!m&&['Gold','Platinum'].includes(m.rank)&&m.last>=.95}
@@ -2968,7 +2790,9 @@ function levelMenuCard(lv,i){
   const b=document.createElement('button');
   b.type='button';
   b.className=`level-menu-card ${rankClass(rank)}`;
-  b.innerHTML=`<div class="level-no">${lv[0]}</div><div class="level-title">${lv[1]}</div><div class="level-desc">${lv[2]}</div>`;
+  b.dataset.levelIndex=String(i);
+  const [number,title,description]=localizedLevel(i);
+  b.innerHTML=`<div class="level-no">${number}</div><div class="level-title">${title}</div><div class="level-desc">${description}</div>`;
   b.onclick=()=>openLevel(i);
   return b;
 }
@@ -3021,10 +2845,11 @@ function renderCoursePhase(phase,index){
   const p=phaseProgressInfo(phase),details=document.createElement('details');
   details.className='course-phase';
   if(phase.status==='active')details.open=true;
-  details.innerHTML=`<summary class="course-phase-summary"><div class="phase-kicker">${phase.title}</div><div class="phase-title">${phase.subtitle}</div><div class="phase-subtitle">${phase.description}</div><div class="phase-meta"><span>Level ${phase.startLevel}–${phase.endLevel}</span><span>${phase.status==='active'?`${p.done}/${p.total} levelranks`:phase.status==='planned'?'Voorlopige route':'Conceptuele route'}</span>${p.current?`<span>Nu: Level ${p.current.number} van ${p.total}</span>`:''}</div><div class="phase-progress"><div style="width:${p.pct}%"></div></div></summary><div class="phase-details"><div class="phase-goal"><strong>Groter doel</strong><div class="small" style="margin-top:4px">${phase.goal}</div></div><div class="level-menu-grid phase-levels" role="region" aria-label="${phase.title}"></div></div>`;
+  const key=`course.${state.courseId}.phase.${phase.id}`,phaseTitle=t(`${key}.title`);
+  details.innerHTML=`<summary class="course-phase-summary"><div class="phase-kicker">${phaseTitle}</div><div class="phase-title">${t(`${key}.subtitle`)}</div><div class="phase-subtitle">${t(`${key}.description`)}</div><div class="phase-meta"><span>Level ${phase.startLevel}–${phase.endLevel}</span><span>${phase.status==='active'?t('levels.ranks',{done:p.done,total:p.total}):phase.status==='planned'?t('levels.planned'):t('levels.concept')}</span>${p.current?`<span>${t('levels.now',{number:p.current.number,total:p.total})}</span>`:''}</div><div class="phase-progress"><div style="width:${p.pct}%"></div></div></summary><div class="phase-details"><div class="phase-goal"><strong>${t('levels.goal')}</strong><div class="small" style="margin-top:4px">${t(`${key}.goal`)}</div></div><div class="level-menu-grid phase-levels" role="region" aria-label="${phaseTitle}"></div></div>`;
   const grid=details.querySelector('.phase-levels');
   phase.levels.forEach(level=>grid.appendChild(phaseLevelCard(level)));
-  addDesktopSliderControls(grid,phase.title);
+  addDesktopSliderControls(grid,phaseTitle);
   return details;
 }
 function renderLevelMenu(box){
@@ -3033,23 +2858,24 @@ function renderLevelMenu(box){
   const avatar=activeAvatarOutfit();
   const intro=document.createElement('section');
   intro.className='card journey-hero';
-  intro.innerHTML=`<div class="journey-hero-copy"><div class="hero-kicker">日本語への道 · jouw route</div><div class="h1 continue-title">${plan.title}</div><div class="continue-detail">${plan.detail}</div><button class="btn primary continue-action" type="button">${plan.button}</button></div>${state.avatarEnabled?`<div class="journey-avatar"><div class="journey-avatar-name">${escapeHtml(avatarDisplayName())}</div>${avatarVisualHtml({pose:nextAvatarMood(),outfit:avatar,priority:true})}<div class="journey-avatar-level"><span class="outfit-name">${escapeHtml(avatar.name)} · </span>Lv. ${state.currentLevel}</div></div>`:'<span class="hero-mark" aria-hidden="true">旅</span>'}`;
+  intro.innerHTML=`<div class="journey-hero-copy"><div class="hero-kicker">${t('home.kicker')}</div><div class="h1 continue-title">${state.uiLanguage==='nl'?plan.title:`${t('home.continue')}: ${localizedLevel(state.level)[1]}`}</div><div class="continue-detail">${state.uiLanguage==='nl'?plan.detail:t('common.level',{number:state.level+1})}</div><button class="btn primary continue-action" type="button">${state.uiLanguage==='nl'?plan.button:t('home.continue')+' →'}</button></div>${state.avatarEnabled?`<div class="journey-avatar"><div class="journey-avatar-name">${escapeHtml(avatarDisplayName())}</div>${avatarVisualHtml({pose:nextAvatarMood(),outfit:avatar,priority:true})}<div class="journey-avatar-level"><span class="outfit-name">${escapeHtml(avatar.name)} · </span>Lv. ${state.currentLevel}</div></div>`:'<span class="hero-mark" aria-hidden="true">旅</span>'}`;
   intro.querySelector('.continue-action').onclick=plan.action;
   box.appendChild(intro);
 
   const routeHead=document.createElement('div');
   routeHead.className='menu-section-head';
-  routeHead.innerHTML=`<div class="h2">Jouw lange leerreis</div><div class="muted">Tien levels vormen steeds één grotere fase. Open alleen de fase die je nu nodig hebt.</div>`;
+  routeHead.innerHTML=`<div class="h2">${t('levels.routeTitle')}</div><div class="muted">${t('levels.routeIntro')}</div>`;
   box.appendChild(routeHead);
   coursePhases.forEach((phase,index)=>box.appendChild(renderCoursePhase(phase,index)));
+  if(state.level>0){const current=box.querySelector(`[data-level-index="${state.level}"]`);if(current){current.closest('details')?.setAttribute('open','');requestAnimationFrame(()=>current.scrollIntoView({block:'nearest',inline:'center'}))}}
 
   const milestoneHead=document.createElement('div');
   milestoneHead.className='menu-section-head future-head';
-  milestoneHead.innerHTML=`<div class="h2">Grote mijlpalen in de verte</div><div class="muted">Richtinggevers zonder vast levelnummer of valse eindbelofte.</div>`;
+  milestoneHead.innerHTML=`<div class="h2">${t('levels.milestoneTitle')}</div><div class="muted">${t('levels.milestoneIntro')}</div>`;
   box.appendChild(milestoneHead);
   const milestoneGrid=document.createElement('div');
   milestoneGrid.className='milestone-grid';
-  journeyMilestones.forEach(m=>{const d=document.createElement('section');d.className='milestone-card';d.innerHTML=`<div class="between"><span class="milestone-icon" aria-hidden="true">${m.icon}</span><span class="rank">${m.status}</span></div><div class="h2">${m.title}</div><div class="small">${m.description}</div>`;milestoneGrid.appendChild(d)});
+  journeyMilestones.forEach(m=>{const d=document.createElement('section'),key=`course.${state.courseId}.milestone.${m.id}`;d.className='milestone-card';d.innerHTML=`<div class="between"><span class="milestone-icon" aria-hidden="true">${m.icon}</span><span class="rank">${m.status}</span></div><div class="h2">${t(`${key}.title`)}</div><div class="small">${t(`${key}.description`)}</div>`;milestoneGrid.appendChild(d)});
   box.appendChild(milestoneGrid);
 }
 function overviewAction(label,desc,fn,rank=null){
@@ -3073,7 +2899,8 @@ function renderAvatarUnlock(box){
 function renderLevelOverview(box,i){
   updateHeader();
   const [goal,how]=levelIntro(i);
-  box.innerHTML=`<section class="card"><div class="eyebrow">${levels[i][0]}</div><div class="h1">${levels[i][1]}</div><div class="overview-note"><div><strong>Wat leer je?</strong><br><span class="muted">${goal}</span></div><div><strong>Hoe?</strong><br><span class="muted">${how}</span></div></div>${avatarAssistHtml({pose:nextAvatarMood(),message:'Een kleine stap tegelijk.',detail:'Kies hieronder waarmee je wilt beginnen.'})}</section><div id="levelOverviewList" class="module-list"></div>`;
+  const [number,title]=localizedLevel(i);
+  box.innerHTML=`<section class="card"><div class="eyebrow">${number}</div><div class="h1">${title}</div><div class="overview-note"><div><strong>${t('levels.learnWhat')}</strong><br><span class="muted">${goal}</span></div><div><strong>${t('levels.learnHow')}</strong><br><span class="muted">${how}</span></div></div>${avatarAssistHtml({pose:nextAvatarMood(),message:t('levels.smallStep'),detail:t('levels.choose')})}</section><div id="levelOverviewList" class="module-list"></div>`;
   renderAvatarUnlock(box);
   const list=$('levelOverviewList');
   if(i===0){
@@ -3129,14 +2956,21 @@ function renderLevelOverview(box,i){
 function tabsHtml(key,labels=['Leerroute','Oefenen','Examens']){const t=state.tabs[key];return`<div class="tabs"><button id="tabA" class="tab ${t==='learn'?'active':''}">${labels[0]}</button><button id="tabB" class="tab ${t==='practice'?'active':''}">${labels[1]}</button><button id="tabC" class="tab ${t==='exams'?'active':''}">${labels[2]}</button></div>`}
 function bindTabs(key){$('tabA').onclick=()=>{state.tabs[key]='learn';scheduleSave();renderMain()};$('tabB').onclick=()=>{state.tabs[key]='practice';scheduleSave();renderMain()};$('tabC').onclick=()=>{state.tabs[key]='exams';scheduleSave();renderMain()}}
 function renderLevels(){/* v7: levels are rendered in the dedicated level menu */}
+function renderHomeMenu(box){
+  const level=localizedLevel(state.level);
+  box.innerHTML=`<section class="card platform-home"><div class="eyebrow">${t('course.japanese.short')} · ${t('home.course')}: ${t('course.japanese.name')}</div><div class="h1">${t('home.title')}</div><div class="muted">${t('home.intro')}</div><div class="platform-home-actions"><button id="homeLevels" class="btn primary" type="button">${t('home.openLevels')}</button><button id="homeContinue" class="btn" type="button">${t('home.continue')} · ${level[1]}</button></div>${avatarAssistHtml({pose:nextAvatarMood(),message:t('levels.smallStep')})}</section>`;
+  $('homeLevels').onclick=()=>{state.screen='levels';scheduleSave();renderMain()};
+  $('homeContinue').onclick=continueJourneyPlan().action;
+}
 function renderMain(){
   if(state.screen==='flashcards')return renderFlashcardsScreen();
-  document.body.dataset.scene=state.screen==='module'?'classroom':'journey';
+  document.body.dataset.scene=['level','module'].includes(state.screen)?scenes.resolve({level:state.level}).bodyScene:'journey';
   show('main');
   updateHeader();
   const box=$('mainView');
   box.innerHTML='';
-  if(state.screen==='levels')return renderLevelMenu(box);
+  if(state.screen==='home')return renderHomeMenu(box);
+  if(state.screen==='levels'){scenes.preload(scenes.resolve({level:state.level}));return renderLevelMenu(box)}
   if(state.screen==='level')return renderLevelOverview(box,state.level);
   if(state.level===0)return renderBasis(box);
   if(state.level===1)return renderKanaMix(box);
@@ -4307,7 +4141,7 @@ function flashcardDueText(timestamp){
   if(hours===0)return'nu';
   if(hours<24)return`over ongeveer ${hours} uur`;
   if(hours<48)return'morgen';
-  return new Date(timestamp).toLocaleDateString('nl-NL',{day:'numeric',month:'short'});
+  return i18n.date(timestamp,state.uiLanguage,{day:'numeric',month:'short'});
 }
 function setFlashcardLessonSelection(ids){const all=new Set(vocabCatalog.map(v=>v.lessonId)),selected=new Set(ids);state.flashcardSelection.lessonIds=selected.size===all.size?null:[...selected];scheduleSave();renderFlashcardsScreen()}
 function flashcardCorrectAnswers(card,direction){const answers=direction==='jp-nl'?(card.meanings?.length?card.meanings:[card.meaning]):[card.kana];return[...new Set(answers.filter(x=>typeof x==='string'&&x.trim()))]}
@@ -4342,7 +4176,7 @@ function flashcardRate(grade,chosen=null){
   state.flashcardProgress.cards[key]={dueAt:now+intervalDays*86400000,intervalDays,repetitions,lapses:old.lapses||0,lastReviewedAt:now,lastGrade:grade};
   const repeatKey=key;
   if(grade==='again'&&!session.requeued.includes(repeatKey)){session.requeued.push(repeatKey);session.queue.push({...item,round:0})}
-  session.feedback={grade,chosen:typeof chosen==='string'?chosen:null,until:now+(grade==='knew'?850:1500)};
+  session.feedback={grade,chosen:typeof chosen==='string'?chosen:null,until:grade==='knew'?now+850:null};
   session.revealed=false;
   scheduleSave();renderFlashcardsScreen();
 }
@@ -4368,7 +4202,8 @@ function renderFlashcardSession(){
   $('flashcardView').innerHTML=`<section class="card"><div class="between"><div><div class="eyebrow">Vrij oefenen · Level ${card.level} · ${card.lessonTitle}</div><div class="small">Kaart ${Math.min(s.position+1,s.queue.length)} van ${s.queue.length} · ${done} beoordeeld</div></div>${preview?'<span class="rank">Voorproefje</span>':''}</div><div class="progress" style="margin-top:9px"><div style="width:${Math.min(100,done/Math.max(1,s.queue.length)*100)}%"></div></div></section><section class="card"><div class="flashcard-avatar">${avatarAssistHtml({pose:feedback?(feedback.grade==='knew'?'celebrate':'encourage'):nextAvatarMood(),message:feedback?(feedback.grade==='knew'?'Goed!':`Nog niet — ${correctChoice} is het juiste antwoord.`):'Denk rustig na over dit woord.'})}</div><div class="flashcard-front"><div><div class="flashcard-face-main">${escapeHtml(front)}</div><div class="flashcard-face-sub">${direction==='jp-nl'?'Kies de Nederlandse betekenis':'Kies het Japanse woord in kana'}</div></div></div><div class="flashcard-answer-options"><div class="small">${feedback?(feedback.grade==='knew'?'Goed gekozen!':'Het juiste antwoord staat groen geselecteerd.'):'Kies je antwoord:'}</div>${choices.map((answer,index)=>{const selected=feedback&&(feedback.grade==='knew'?answer===feedback.chosen:answer===correctChoice),wrong=feedback&&feedback.grade==='again'&&answer===feedback.chosen&&answer!==correctChoice;return`<button class="btn flashcard-answer-choice${selected?' is-correct':wrong?' is-incorrect':''}" data-fc-answer="${index}" ${feedback?'disabled':''} ${selected?'aria-pressed="true"':''}>${escapeHtml(answer)}</button>`}).join('')}</div><div class="flashcard-feedback-status" role="status" aria-live="polite">${feedback?(feedback.grade==='knew'?'Goed!':'Het juiste antwoord is geselecteerd.'):''}</div><div class="flashcard-actions" style="margin-top:12px"><button id="fcPause" class="btn" style="grid-column:1/-1" ${feedback?'disabled':''}>Onderbreek sessie</button></div>${record?`<div class="small" style="text-align:center;margin-top:9px">Vorige herhaling: ${flashcardDueText(record.dueAt)}</div>`:''}</section>`;
   if(!feedback)root.querySelectorAll('[data-fc-answer]').forEach(button=>button.onclick=()=>{const choice=choices[Number(button.dataset.fcAnswer)],correct=correctAnswers.includes(choice);s.revealed=true;flashcardRate(correct?'knew':'again',choice)});
   $('fcPause').onclick=pauseFlashcardSession;
-  if(feedback){const remaining=Math.max(0,(feedback.until||Date.now())-Date.now()),sessionRef=s,positionRef=s.position,untilRef=feedback.until;window.setTimeout(()=>{if(state.flashcardSession===sessionRef&&sessionRef.position===positionRef&&sessionRef.feedback?.until===untilRef)flashcardNextCard()},remaining)}
+  if(feedback?.grade==='again'){const next=document.createElement('button');next.className='btn primary';next.textContent='Volgende kaart →';next.onclick=flashcardNextCard;$('flashcardView').querySelector('.flashcard-actions').appendChild(next)}
+  if(feedback?.grade==='knew'){const remaining=Math.max(0,(feedback.until||Date.now())-Date.now()),sessionRef=s,positionRef=s.position,untilRef=feedback.until;window.setTimeout(()=>{if(state.flashcardSession===sessionRef&&sessionRef.position===positionRef&&sessionRef.feedback?.until===untilRef)flashcardNextCard()},remaining)}
 }
 function renderFlashcardSummary(){
   const s=state.flashcardSession,next=Object.entries(state.flashcardProgress.cards).filter(([,v])=>v.dueAt>Date.now()).sort((a,b)=>a[1].dueAt-b[1].dueAt)[0],total=s.knew+s.again;
@@ -4429,22 +4264,6 @@ function renderProgressVocabTab(box){
     $('vocabProgressList').appendChild(b);
   });
 }
-const languageSkills=[
-  {label:'Ik kan aantallen 0–10 koppelen aan Japanse cijfers en uitspraak.',requires:['num-basic']},
-  {label:'Ik kan zeggen wat iets is met これは X です.',requires:['l4-1']},
-  {label:'Ik kan eenvoudige aanwijzende woorden gebruiken: dit / dat.',requires:['l4-2']},
-  {label:'Ik herken topic → beschrijving en weet dat は hier als wa klinkt.',requires:['l4-3']},
-  {label:'Ik kan eenvoudig bezit aangeven met の.',requires:['l4-4']},
-  {label:'Ik kan een eenvoudige vraag maken met か.',requires:['l4-5']},
-  {label:'Ik kan “ook” gebruiken met も.',requires:['l4-6']},
-  {label:'Ik begrijp de basisvolgorde topic → object → werkwoord.',requires:['l4-7','l4-8']},
-  {label:'Ik kan zeggen dat ik naar een eenvoudige plaats ga met に いきます.',requires:['l4-9']},
-  {label:'Ik kan eenvoudige personen en familierelaties benoemen.',requires:['l6-exam']},
-  {label:'Ik kan enkele veelgebruikte hoeveelheden tellen.',requires:['l7-exam']},
-  {label:'Ik kan eenvoudige dagen, tijden en afspraken begrijpen.',requires:['l8-exam']},
-  {label:'Ik kan eenvoudige plaats en richting begrijpen.',requires:['l9-exam']},
-  {label:'Ik kan simpele dagelijkse situaties combineren.',requires:['l10-exam']}
-];
 function renderProgressSkillsTab(box){
   const unlocked=languageSkills.filter(s=>s.requires.every(id=>!!rankState[id]?.rank)).length;
   box.innerHTML=`<section class="card">
@@ -4525,6 +4344,9 @@ function renderAvatarSettings(box){
 function renderProfileDashboard(box){
   const hours=totalStudySeconds();
   box.innerHTML=`<section class="card"><div class="between"><div><div class="h2">Geregistreerde studietijd</div><div class="muted">Lokale, effectieve tijd · verandert je mastery of rank niet.</div></div><strong>${formatDuration(hours)}</strong></div></section><div id="profileSettings"></div><details class="card"><summary class="h2" style="cursor:pointer">Lokale opslag en gegevens wissen</summary><div id="storageInfo" class="muted" style="margin-top:8px">Voortgang wordt lokaal in deze browser opgeslagen.</div><div class="small" style="margin-top:6px">Dit blijft op dit apparaat en in deze browser staan. Wis je browserdata of gebruik je privémodus, dan kan deze voortgang verdwijnen.</div><button id="clearStorageBtn" class="btn" style="width:100%;margin-top:10px">Wis voortgang</button></details>`;
+  const languageCard=document.createElement('section');languageCard.className='card';
+  languageCard.innerHTML=`<div class="h2">${t('profile.uiLanguage')}</div><div class="muted">${t('profile.languageHelp')}</div><div class="study-form-grid" style="margin-top:10px"><label>${t('profile.uiLanguage')}<select id="uiLanguageSelect"><option value="nl">${t('profile.languageDutch')}</option><option value="en">${t('profile.languageEnglish')}</option><option value="de">${t('profile.languageGerman')}</option></select></label><div><div class="small">${t('profile.course')}</div><strong>${t('course.japanese.name')}</strong></div><div><div class="small">${t('profile.targetLanguage')}</div><strong>${t('course.japanese.targetLanguage')}</strong></div></div>`;
+  box.prepend(languageCard);languageCard.querySelector('#uiLanguageSelect').value=state.uiLanguage;languageCard.querySelector('#uiLanguageSelect').onchange=event=>setUiLanguage(event.target.value);
   renderAvatarSettings($('profileSettings'));
   $('clearStorageBtn').onclick=clearStoredProgress;
 }
@@ -4557,8 +4379,8 @@ function renderKnowledgeGrowth(){
 }
 let studyEditingId=null;
 function cumulativeStudySessions(){let total=0;return studySessions().map(s=>{const start=total;total+=s.effectiveSeconds;return{...s,cumulativeStart:start,cumulativeEnd:total}})}
-function studyDateLabel(value){return new Date(value).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'})}
-function studyDateTimeLabel(value){return new Date(value).toLocaleString('nl-NL',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}
+function studyDateLabel(value){return i18n.date(value,state.uiLanguage,{day:'numeric',month:'short',year:'numeric'})}
+function studyDateTimeLabel(value){return i18n.date(value,state.uiLanguage,{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}
 function localInputValue(value){const d=new Date(value||Date.now());return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16)}
 function studyDayKey(value){const d=new Date(value);return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function filteredStudySessions(){const {from,to}=state.studyCalendar,f=state.studyFilters;return studySessions().filter(s=>(!from||studyDayKey(s.startedAt)>=from)&&(!to||studyDayKey(s.startedAt)<=to)&&(!f.category||s.category===f.category)&&(!f.origin||(f.origin==='manual'?s.manual:!s.manual))&&(!f.level||String(s.level)===String(f.level))&&(!f.skill||s.skills.some(x=>x.toLowerCase().includes(f.skill.toLowerCase())))&&(!f.tag||s.tags.some(x=>x.toLowerCase().includes(f.tag.toLowerCase()))))}
@@ -4572,7 +4394,7 @@ function nextStudyMilestone(hours){return studyMilestones.find(x=>x>hours)||3000
 function studyLineChart(sessions){
   const points=[...sessions].sort((a,b)=>new Date(a.endedAt||a.startedAt)-new Date(b.endedAt||b.startedAt)).map(session=>{const snapshot=session.snapshotEnd||session.snapshotStart,at=new Date(session.endedAt||session.startedAt).getTime();return snapshot&&Number.isFinite(at)?{at,words:Math.max(0,Number(snapshot.vocab)||0),kanji:Math.max(0,Number(snapshot.kanji)||0)}:null}).filter(Boolean);
   if(!points.length)return'<div class="panel">Er zijn nog geen opgeslagen momentopnames van woorden en kanji. Nieuwe studieactiviteiten worden hier zichtbaar.</div>';
-  const w=640,h=220,left=48,right=16,top=18,bottom=38,minTime=points[0].at,maxTime=points.at(-1).at,maxValue=Math.max(1,...points.flatMap(point=>[point.words,point.kanji])),x=at=>left+(maxTime===minTime?0.5:(at-minTime)/(maxTime-minTime))*(w-left-right),y=value=>h-bottom-(value/maxValue)*(h-top-bottom),polyline=key=>points.map(point=>`${x(point.at)},${y(point[key])}`).join(' '),dots=key=>points.map(point=>`<circle class="study-series-${key}" cx="${x(point.at)}" cy="${y(point[key])}" r="3.5"><title>${studyDateTimeLabel(point.at)} · ${key==='words'?`${point.words} woorden`:`${point.kanji} kanji`}</title></circle>`).join(''),dateLabel=at=>new Date(at).toLocaleDateString('nl-NL',{day:'numeric',month:'short'});
+  const w=640,h=220,left=48,right=16,top=18,bottom=38,minTime=points[0].at,maxTime=points.at(-1).at,maxValue=Math.max(1,...points.flatMap(point=>[point.words,point.kanji])),x=at=>left+(maxTime===minTime?0.5:(at-minTime)/(maxTime-minTime))*(w-left-right),y=value=>h-bottom-(value/maxValue)*(h-top-bottom),polyline=key=>points.map(point=>`${x(point.at)},${y(point[key])}`).join(' '),dots=key=>points.map(point=>`<circle class="study-series-${key}" cx="${x(point.at)}" cy="${y(point[key])}" r="3.5"><title>${studyDateTimeLabel(point.at)} · ${key==='words'?`${point.words} ${t('progress.words').toLowerCase()}`:`${point.kanji} ${t('progress.kanji').toLowerCase()}`}</title></circle>`).join(''),dateLabel=at=>i18n.date(at,state.uiLanguage,{day:'numeric',month:'short'});
   return`<svg class="study-chart study-knowledge-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="Aantal bekende woorden en kanji per datum, met tijd op de horizontale as"><line class="grid" x1="${left}" y1="${top}" x2="${w-right}" y2="${top}"/><line class="grid" x1="${left}" y1="${y(0)}" x2="${w-right}" y2="${y(0)}"/><line class="grid" x1="${left}" y1="${top}" x2="${left}" y2="${y(0)}"/><text x="${left-7}" y="${top+4}" text-anchor="end">${maxValue}</text><text x="${left-7}" y="${y(0)+4}" text-anchor="end">0</text><polyline class="study-series-words" points="${polyline('words')}"/>${dots('words')}<polyline class="study-series-kanji" points="${polyline('kanji')}"/>${dots('kanji')}<text x="${left}" y="${h-7}">${dateLabel(minTime)}</text><text x="${w-right}" y="${h-7}" text-anchor="end">${dateLabel(maxTime)}</text></svg><div class="study-knowledge-legend"><span><i class="study-series-words"></i>Woorden</span><span><i class="study-series-kanji"></i>Kanji</span></div>`;
 }
 function categoryBreakdownHtml(byCategory,total){
@@ -4651,23 +4473,23 @@ function renderProgressKnowledge(box){
   root.querySelectorAll('[data-knowledge]').forEach(b=>b.onclick=()=>{state.progressKnowledgeTab=b.dataset.knowledge;state.progressDetailId=null;state.progressVocabDetailId=null;scheduleSave();renderProgressKnowledge(box)});const body=$('knowledgeBody');if(state.progressKnowledgeTab==='kana')renderProgressKanaTab(body);else if(state.progressKnowledgeTab==='vocab')renderProgressVocabTab(body);else if(state.progressKnowledgeTab==='skills')renderProgressSkillsTab(body);else if(state.progressKnowledgeTab==='avatar')renderAvatarSettings(body);else renderProgressLevelTab(body)
 }
 function renderSession(){
-  show('session');updateHeader();const box=$('sessionContent');box.innerHTML=`<div class="progress-tabs" role="tablist" aria-label="Voortgangspagina"><button class="progress-tab ${state.progressTab==='profile'?'active':''}" data-progress="profile" role="tab" aria-selected="${state.progressTab==='profile'}">Profiel</button><button class="progress-tab ${state.progressTab==='progress'?'active':''}" data-progress="progress" role="tab" aria-selected="${state.progressTab==='progress'}">Voortgang</button><button class="progress-tab ${state.progressTab==='knowledge'?'active':''}" data-progress="knowledge" role="tab" aria-selected="${state.progressTab==='knowledge'}">Kennis</button></div><div id="progressBody" class="stack"></div>`;root.querySelectorAll('[data-progress]').forEach(b=>b.onclick=()=>{state.progressTab=b.dataset.progress;state.progressDetailId=null;state.progressVocabDetailId=null;studyEditingId=null;scheduleSave();renderSession()});const body=$('progressBody');if(state.progressTab==='profile')renderProfileDashboard(body);else if(state.progressTab==='knowledge')renderKnowledgeDashboard(body);else renderProgressDashboard(body)
+  show('session');updateHeader();$('sessionView').querySelector('.card .h1').textContent=t('progress.heroTitle');$('sessionView').querySelector('.card .muted').textContent=t('progress.heroIntro');$('sessionBack').textContent=t('common.back');const box=$('sessionContent');box.innerHTML=`<div class="progress-tabs" role="tablist" aria-label="${t('progress.title')}"><button class="progress-tab ${state.progressTab==='profile'?'active':''}" data-progress="profile" role="tab" aria-selected="${state.progressTab==='profile'}">${t('progress.profile')}</button><button class="progress-tab ${state.progressTab==='progress'?'active':''}" data-progress="progress" role="tab" aria-selected="${state.progressTab==='progress'}">${t('progress.title')}</button><button class="progress-tab ${state.progressTab==='knowledge'?'active':''}" data-progress="knowledge" role="tab" aria-selected="${state.progressTab==='knowledge'}">${t('progress.knowledge')}</button></div><div id="progressBody" class="stack"></div>`;root.querySelectorAll('[data-progress]').forEach(b=>b.onclick=()=>{state.progressTab=b.dataset.progress;state.progressDetailId=null;state.progressVocabDetailId=null;studyEditingId=null;scheduleSave();renderSession()});const body=$('progressBody');if(state.progressTab==='profile')renderProfileDashboard(body);else if(state.progressTab==='knowledge')renderKnowledgeDashboard(body);else renderProgressDashboard(body)
 }
 
 function toggleProgress(){
-  if(!$('sessionView').classList.contains('hidden'))setMain();
+  if(!$('sessionView').classList.contains('hidden'))navigateBack();
   else renderSession();
 }
 function goToLearningHome(){
   if(state.studyTracker.active)completeStudySession({status:'verlaten'});
-  state.screen='levels';
+  state.screen='home';
   scheduleSave();
   renderMain();
 }
 $('sessionBtn').onclick=toggleProgress;
 $('learnNav').onclick=goToLearningHome;
 $('flashcardsNav').onclick=openFlashcards;
-$('sessionBack').onclick=setMain;
+$('sessionBack').onclick=navigateBack;
 $('navBack').onclick=navigateBack;
 $('quitQuiz').onclick=()=>{completeStudySession({status:'afgebroken'});setMain()};
 $('backBtn').onclick=setMain;
@@ -4683,9 +4505,15 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseActive
 
 detectLayout();
 loadProgress();
+document.documentElement.lang=state.uiLanguage;
 recoverInterruptedStudySession();
 renderMain();
 updateStorageUI();
+if(typeof MutationObserver!=='undefined'&&document.createTreeWalker){
+  const localeObserver=new MutationObserver(()=>i18n.localizeNodes(root,state.uiLanguage));
+  localeObserver.observe(root,{subtree:true,childList:true,characterData:true});
+  i18n.localizeNodes(root,state.uiLanguage);
+}
 })();
 </script>
 </body>

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "NEXT_VERSION",
+  "level": {
+    "number": 11,
+    "theme": "THEME_TO_AUTHOR",
+    "competency": "LEARNER_OUTCOME_TO_AUTHOR",
+    "status": "draft",
+    "lessonIds": ["l11-1", "l11-2", "l11-3", "l11-4", "l11-5"],
+    "examId": "l11-exam"
+  },
+  "modules": [
+    {"id": "l11-module-a", "level": 11, "name": "A", "lessonIds": ["l11-1", "l11-2"], "readingIds": []},
+    {"id": "l11-module-b", "level": 11, "name": "B", "lessonIds": ["l11-3", "l11-4", "l11-5"], "readingIds": []}
+  ],
+  "lessonTemplate": {
+    "id": "l11-1",
+    "level": 11,
+    "order": 1,
+    "module": "A",
+    "title": "TITLE_TO_AUTHOR",
+    "goal": "ONE_PRIMARY_LEARNING_GOAL",
+    "wordIds": [],
+    "grammarIds": [],
+    "patternIds": [],
+    "contextVocabIds": [],
+    "readingId": null,
+    "bonusIds": [],
+    "sequence": ["introduce", "example", "visual-breakdown", "recognize", "apply", "check"],
+    "steps": [
+      {"id": "11-1-A", "kind": "introduction", "required": true},
+      {"id": "11-1-B", "kind": "application", "required": true}
+    ]
+  },
+  "readingTemplate": {
+    "id": "reading-l11-1",
+    "lessonId": "l11-1",
+    "type": "story | dialogue | shopping-list | menu | sign",
+    "text": "TEXT_TO_AUTHOR",
+    "requiredVocabIds": [],
+    "contextVocabIds": [],
+    "contextIntroductions": [],
+    "audioId": null
+  },
+  "bonusTemplate": {
+    "id": "bonus-l11-1",
+    "lessonId": "l11-1",
+    "type": "dialogue",
+    "optional": true,
+    "requiredVocabIds": []
+  },
+  "audioTemplate": {
+    "id": "audio-example",
+    "speakerId": "ren | miku",
+    "path": "audio/local-file.mp3",
+    "targetType": "vocabulary | reading | dialogue",
+    "targetId": "ID_TO_AUTHOR"
+  }
+}

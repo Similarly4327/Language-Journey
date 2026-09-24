@@ -1,0 +1,10 @@
+{
+  "name": "language-journey",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "validate-content": "node language-journey-content/validate.cjs",
+    "curriculum:report": "node language-journey-content/report.cjs",
+    "test": "node --test"
+  }
+}
