@@ -43,3 +43,13 @@
 - Store spaced-repetition history separately per word and direction (`jp-nl` / `nl-jp`). Flashcard practice must not alter lesson completion, ranks, mastery, error history, or introduced vocabulary.
 - Preserve flashcard selection, active/paused session, and review history when saving or migrating localStorage. Older saved versions must load without resetting any existing progress.
 - When extending the flashcard system, verify mobile layout, resume after interruption, due/new card selection, separate direction history, and one-time requeueing of missed cards.
+
+## Dictionary
+
+- Build word articles from `vocabCatalog` and preserve each `vocab-*` ID; do not create a parallel vocabulary list.
+- Keep kana-as-sound, lexical words, and grammar particles as separate entry kinds/IDs, even where spelling or pronunciation overlaps (for example は / wa, を / o, か / ka, and も / mo).
+- Kana entries describe spelling and sound only unless a separate, verified lexical or grammar entry applies. Do not attach invented word meanings to individual kana.
+- New lesson words must map to an existing stable word ID or add a vetted catalog entry, with reading, meaning, lesson context, and any distinct senses recorded before the word is used in practice or Recall.
+- Dictionary searches and article visits must never mutate introduced-word state, mastery, rank, errors, or flashcard SRS. Opening/closing an article from a lesson must preserve that lesson's DOM, scroll, and exercise state.
+- Keep future catalog words searchable but label them as previews until the existing lesson-introduction rule makes them learned.
+- Verify readings, particle functions, and examples against course context and reliable references; document uncertain cases rather than guessing. Current verified references: Japan Foundation IRODORI Grammar_all.pdf and Starter Lesson 1 kana chart.
