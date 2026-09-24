@@ -23,7 +23,7 @@ test('all level screens render through the imported content adapter',()=>{
   const localStorage={getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,value),removeItem:key=>storage.delete(key)};
   const window={LanguageJourneyContent:content,innerWidth:390,innerHeight:844,addEventListener(){},setTimeout(){},matchMedia:()=>({matches:false,addEventListener(){}})};
   const context={document,window,localStorage,performance:{now:()=>0},navigator:{},console,setTimeout(){},clearTimeout(){},requestAnimationFrame(){},structuredClone,URL,Date,Math,Intl,alert(){},Image:class{}};
-  for(const [,relative] of html.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)){
+  for(const [,relative] of html.matchAll(/<script src="\.\/([^"?]+)(?:\?[^"]*)?"><\/script>/g)){
     if(relative==='language-journey-content/content.js')continue;
     vm.runInNewContext(fs.readFileSync(path.join(__dirname,'..',relative),'utf8'),context,{timeout:5000});
   }

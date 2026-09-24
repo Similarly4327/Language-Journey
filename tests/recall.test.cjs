@@ -27,7 +27,7 @@ function createRecallApp({savedState={},now=new Date(2026,2,20,12).getTime()}={}
   class FixedDate extends NativeDate{constructor(...args){super(...(args.length?args:[clock.now]))}static now(){return clock.now}}
   const window={LanguageJourneyContent:content,innerWidth:390,innerHeight:844,addEventListener(){},setTimeout(){return 1},clearTimeout(){},matchMedia:()=>({matches:false,addEventListener(){}})};
   const context={document,window,localStorage,clock,performance:{now:()=>0},navigator:{},console,setTimeout(){return 1},clearTimeout(){},requestAnimationFrame(){},structuredClone,URL,Date:FixedDate,Math,Intl,alert(){},Image:class{}};
-  for(const [,relative] of html.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)){
+  for(const [,relative] of html.matchAll(/<script src="\.\/([^"?]+)(?:\?[^"]*)?"><\/script>/g)){
     if(relative==='language-journey-content/content.js')continue;
     vm.runInNewContext(fs.readFileSync(path.join(__dirname,'..',relative),'utf8'),context,{timeout:5000});
   }
