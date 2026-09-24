@@ -2378,6 +2378,13 @@ function levelRankIds(level){
   return[];
 }
 function levelRank(level){return minRankForIds(levelRankIds(level))}
+function getAvatarProgressLevel(){
+  for(let level=levels.length;level>=1;level--){
+    const rank=levelRank(level-1);
+    if(rank&&rankIndex(rank)>=rankIndex('Copper'))return level;
+  }
+  return 1;
+}
 function moduleRank(key){
   // Hiragana/Katakana stijgen als geheel pas wanneer alle drie de echte examens die rank hebben.
   if(key==='hiragana'||key==='katakana')return minRankForIds([
@@ -2440,6 +2447,7 @@ function introductionDialogueHtml(){
 }
 
 function avatarSkinId(level){return`skin-${Math.max(1,Math.min(avatarSkins.length,level))}`}
+function activeLearningLevel(){return Math.max(1,Math.min(levels.length,state.level+1))}
 function unlockedAvatarOutfits(){return avatarOutfits.filter(outfit=>state.unlockedAvatarOutfits.includes(outfit.id))}
 function activeAvatarOutfit(){
   syncAvatarState();
@@ -2447,19 +2455,19 @@ function activeAvatarOutfit(){
     const selected=avatarOutfits.find(outfit=>outfit.id===state.selectedAvatarOutfit&&state.unlockedAvatarOutfits.includes(outfit.id));
     if(selected)return selected;
   }
-  return unlockedAvatarOutfits().filter(outfit=>outfit.unlockLevel<=state.currentLevel).at(-1)||avatarOutfits[0];
+  return unlockedAvatarOutfits().filter(outfit=>outfit.unlockLevel<=activeLearningLevel()).at(-1)||avatarOutfits[0];
 }
 function syncAvatarState(){
   syncProfileState();
-  state.currentLevel=Math.max(1,Math.min(levels.length,state.level+1));
+  state.currentLevel=activeLearningLevel();
   const valid=new Set(avatarSkins.map(s=>s.id));
   const unlocked=new Set((state.unlockedAvatarSkins||[]).filter(id=>valid.has(id)));
-  for(let level=1;level<=state.currentLevel;level++)unlocked.add(avatarSkinId(level));
+  for(let level=1;level<=activeLearningLevel();level++)unlocked.add(avatarSkinId(level));
   unlocked.add('skin-1');
   state.unlockedAvatarSkins=[...unlocked].sort((a,b)=>Number(a.split('-')[1])-Number(b.split('-')[1]));
   if(state.selectedAvatarSkin&&!unlocked.has(state.selectedAvatarSkin))state.selectedAvatarSkin=null;
   const unlockedOutfits=new Set((state.unlockedAvatarOutfits||[]).filter(id=>avatarOutfits.some(outfit=>outfit.id===id)));
-  const highestOpenedSkin=Math.max(state.currentLevel,...state.unlockedAvatarSkins.map(id=>Number(id.split('-')[1])||1));
+  const highestOpenedSkin=Math.max(activeLearningLevel(),...state.unlockedAvatarSkins.map(id=>Number(id.split('-')[1])||1));
   avatarOutfits.filter(outfit=>outfit.unlockLevel<=highestOpenedSkin).forEach(outfit=>unlockedOutfits.add(outfit.id));
   state.unlockedAvatarOutfits=avatarOutfits.map(outfit=>outfit.id).filter(id=>unlockedOutfits.has(id));
   if(state.selectedAvatarOutfit&&!unlockedOutfits.has(state.selectedAvatarOutfit))state.selectedAvatarOutfit=null;
@@ -2467,7 +2475,7 @@ function syncAvatarState(){
 }
 function activeAvatarSkin(){
   syncAvatarState();
-  const id=state.avatarMode==='manual'&&state.selectedAvatarSkin?state.selectedAvatarSkin:avatarSkinId(state.currentLevel);
+  const id=state.avatarMode==='manual'&&state.selectedAvatarSkin?state.selectedAvatarSkin:avatarSkinId(activeLearningLevel());
   return avatarSkins.find(s=>s.id===id)||avatarSkins[0];
 }
 function avatarSpriteStyle(skin,gender=state.avatarGender){
@@ -4477,6 +4485,11 @@ function renderAvatarSettings(box){
   syncAvatarState();
   const active=activeAvatarSkin(),unlocked=new Set(state.unlockedAvatarSkins),avatarName=avatarDisplayName();
   box.innerHTML=`<section class="card"><div class="between"><div><div class="h2">Persoonlijk profiel</div><div class="muted">Jouw naam en vaste reisgenoot voor toekomstige dialogen en rollenspellen.</div></div><div class="profile-avatar-preview"><div id="profilePreviewName" class="journey-avatar-name">${escapeHtml(avatarName)}</div>${avatarSpriteHtml(active,'avatar-settings-preview')}<div class="journey-avatar-level">Lv. ${state.currentLevel}</div></div></div><div class="profile-summary"><div class="profile-summary-item"><span class="small">Leerling</span><strong id="profileUserSummary">${escapeHtml(state.userName||'Nog niet ingesteld')}</strong></div><div class="profile-summary-item"><span class="small">Reisgenoot</span><strong id="profileCompanionName">${escapeHtml(avatarName)}</strong></div><div class="profile-summary-item"><span class="small">Level · rank</span><strong>Level ${state.currentLevel} · ${rankText(levelRank(state.currentLevel-1))}</strong></div></div><div class="profile-fields"><label class="profile-field"><span>Mijn naam</span><input id="profileUserName" class="profile-input" type="text" maxlength="40" autocomplete="name" placeholder="Bijvoorbeeld Sven" value="${escapeHtml(state.userName)}"></label><label class="profile-field"><span>Mijn naam in het Japans · optioneel</span><input id="profileUserNameJapanese" class="profile-input" type="text" maxlength="40" lang="ja" placeholder="Zelf bevestigde schrijfwijze" value="${escapeHtml(state.userNameJapanese)}"></label><label class="profile-field"><span>Naam avatar</span><input id="profileAvatarName" class="profile-input" type="text" maxlength="40" placeholder="${escapeHtml(avatarDefaults().name)}" value="${escapeHtml(avatarName)}"></label><label class="profile-field"><span>Avatarnaam in het Japans · optioneel</span><input id="profileAvatarNameJapanese" class="profile-input" type="text" maxlength="40" lang="ja" placeholder="${escapeHtml(avatarDefaults().japanese)}" value="${escapeHtml(state.avatarNameJapanese)}"></label></div><div class="small" style="margin-top:8px">Japanse schrijfwijzen worden niet automatisch geraden. Je kunt ze zelf bevestigen of later invullen.</div><div class="avatar-settings-grid"><div class="avatar-setting-row"><div><strong>Avatar tonen</strong><div class="small">Toon je reisgenoot op de Ga verder-kaart.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarEnabled?'active':''}" data-avatar-enabled="true">Aan</button><button class="avatar-choice ${!state.avatarEnabled?'active':''}" data-avatar-enabled="false">Uit</button></div></div><div class="avatar-setting-row"><div><strong>Avatarvariant</strong><div class="small">De variant, naam en skin blijven aparte instellingen.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarGender==='male'?'active':''}" data-avatar-gender="male">Man · Ren</button><button class="avatar-choice ${state.avatarGender==='female'?'active':''}" data-avatar-gender="female">Vrouw · Miku</button></div></div><div class="avatar-setting-row"><div><strong>Skin-modus</strong><div class="small">Auto volgt je huidige level; Handmatig blijft op jouw keuze.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarMode==='auto'?'active':''}" data-avatar-mode="auto">Auto</button><button class="avatar-choice ${state.avatarMode==='manual'?'active':''}" data-avatar-mode="manual">Handmatig</button></div></div></div><div class="progress-note" style="margin-top:12px">Een skin wordt vrijgespeeld zodra je dat level voor het eerst opent. Skins zijn alleen cosmetisch en veranderen je naam of voortgang niet.</div></section>${state.avatarMode==='manual'?'<section class="card"><div class="h2">Kies skin</div><div class="muted">Alleen skins van bereikte levels zijn selecteerbaar.</div><div id="avatarSkinGrid" class="avatar-skin-grid"></div></section>':''}`;
+  // This profile badge represents mastery, not the active course navigation level.
+  const avatarProgressLevel=getAvatarProgressLevel();
+  box.innerHTML=box.innerHTML
+    .replace(`Lv. ${state.currentLevel}`,`Lv. ${avatarProgressLevel}`)
+    .replace(`Level ${state.currentLevel} · ${rankText(levelRank(state.currentLevel-1))}`,`Level ${avatarProgressLevel} · ${rankText(levelRank(avatarProgressLevel-1))}`);
   const preview=box.querySelector('.profile-avatar-preview .avatar-sprite');
   if(preview)preview.outerHTML=avatarVisualHtml({pose:nextAvatarMood(),extraClass:'avatar-settings-preview'});
   const settings=box.querySelector('.avatar-settings-grid');
