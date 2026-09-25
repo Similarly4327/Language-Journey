@@ -5,9 +5,9 @@
     school:{titleKey:'location.school',arrival:'assets/scene-school-arrival.webp',interior:'assets/anime-classroom.webp',bodyScene:'classroom'},
     home:{titleKey:'location.home',arrival:'assets/scene-home-arrival.webp',interior:'assets/scene-home-interior.webp',bodyScene:'home'},
     market:{titleKey:'location.market',arrival:'assets/scene-market-arrival.webp',interior:'assets/scene-market-interior.webp',bodyScene:'market'},
-    airport:{titleKey:'location.airport',arrival:'assets/scene-airport-arrival.png',interior:'assets/scene-airport-interior.png',bodyScene:'airport'}
+    airport:{titleKey:'course.japanese.level.12.title',subtitleKey:'course.japanese.level.12.support',arrival:'assets/scene-airport-arrival.png',interior:'assets/scene-airport-interior.png',bodyScene:'airport'}
   };
-  const levelThemes=['school','school','school','school','school','home','market','journey','journey','market','market','airport'];
+  const levelThemes=['school','school','school','school','school','home','market','journey','journey','market','home','airport'];
   const moduleThemes={family:'home',supermarket:'market',airport:'airport'};
   const imageCache=new Map();
   let activeToken=0,enterTimer=null,hideTimer=null;
@@ -34,7 +34,16 @@
     const token=activeToken,selected=theme||themes.journey;
     preload(selected);
     overlay.style.setProperty('--arrival-image',`url("${selected[phase]||selected.arrival||themes.journey.arrival}")`);
-    document.getElementById('sceneTransitionLabel').textContent=window.LanguageJourneyI18n.translate(selected.titleKey,locale);
+    const label=document.getElementById('sceneTransitionLabel');
+    label.textContent='';
+    const title=document.createElement('strong');
+    title.textContent=window.LanguageJourneyI18n.translate(selected.titleKey,locale);
+    label.appendChild(title);
+    if(selected.subtitleKey){
+      const subtitle=document.createElement('small');
+      subtitle.textContent=window.LanguageJourneyI18n.translate(selected.subtitleKey,locale);
+      label.appendChild(subtitle);
+    }
     overlay.hidden=false;
     requestAnimationFrame(()=>{if(token===activeToken)overlay.classList.add('is-visible')});
     enterTimer=setTimeout(()=>{

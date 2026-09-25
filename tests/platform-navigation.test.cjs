@@ -31,10 +31,12 @@ test('back route has a stable parent and scene themes have fallback',()=>{
   const app=load(['navigation.js','scenes.js']);
   assert.equal(app.LanguageJourneyNavigation.parentOf('module'),'level');
   assert.equal(app.LanguageJourneyNavigation.parentOf('level'),'levels');
-  assert.equal(app.LanguageJourneyNavigation.parentOf('levels'),'home');
+  assert.equal(app.LanguageJourneyNavigation.parentOf('levels'),'app-home');
   assert.equal(app.LanguageJourneyScenes.resolve({level:0}).bodyScene,'classroom');
   assert.equal(app.LanguageJourneyScenes.resolve({level:5}).bodyScene,'home');
   assert.equal(app.LanguageJourneyScenes.resolve({level:6}).bodyScene,'market');
+  assert.equal(app.LanguageJourneyScenes.resolve({level:10}).bodyScene,'home');
+  assert.equal(app.LanguageJourneyScenes.resolve({level:11}).bodyScene,'airport');
   assert.equal(app.LanguageJourneyScenes.resolve({level:99}).bodyScene,'journey');
 });
 
@@ -42,6 +44,8 @@ test('app and course routes round-trip without assuming a Japanese-only URL',()=
   const app=load(['navigation.js']);
   const nav=app.LanguageJourneyNavigation,courses={japanese:{},italian:{}};
   assert.equal(nav.formatHash({screen:'app-home',courseId:null}),'#/');
+  assert.deepEqual({...nav.parseHash('#/course/japanese/learn/home',courses)},{screen:'levels',courseId:'japanese',primaryTab:'learn'});
+  assert.equal(nav.formatHash({screen:'levels',courseId:'japanese',primaryTab:'learn'}),'#/course/japanese/learn/levels');
   assert.deepEqual({...nav.parseHash('#/course/italian/recall',courses)},{screen:'flashcards',courseId:'italian',primaryTab:'recall'});
   assert.deepEqual({...nav.parseHash('#/course/japanese/learn/module/11',courses)},{screen:'module',courseId:'japanese',primaryTab:'learn',level:10});
   assert.equal(nav.formatHash({screen:'module',courseId:'japanese',primaryTab:'learn',level:10}),'#/course/japanese/learn/module/11');

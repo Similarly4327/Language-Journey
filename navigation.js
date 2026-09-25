@@ -1,5 +1,5 @@
 (() => {
-  const parents={levels:'home',level:'levels',module:'level',flashcards:'home',session:'home',options:'app-home','options-profile':'options','options-audio':'options'};
+  const parents={levels:'app-home',level:'levels',module:'level',flashcards:'levels',session:'levels',options:'app-home','options-profile':'options','options-audio':'options'};
   function parentOf(screen,{courseId='japanese'}={}){
     // The route table belongs to the platform. Courses may add their own child routes.
     return parents[screen]||null;
@@ -13,8 +13,9 @@
     if(primaryTab==='recall')return{screen:'flashcards',courseId,primaryTab};
     if(primaryTab==='progress')return{screen:'session',courseId,primaryTab};
     if(primaryTab!=='learn')return null;
-    const page=path[3]||'home';
-    if(page==='home'||page==='levels')return{screen:page,courseId,primaryTab};
+    const page=path[3]||'levels';
+    // Oude /learn/home-links blijven werken, maar hebben geen apart scherm meer.
+    if(page==='home'||page==='levels')return{screen:'levels',courseId,primaryTab};
     if(['level','module'].includes(page)&&/^\d+$/.test(path[4]||''))return{screen:page,courseId,primaryTab,level:Number(path[4])-1};
     return null;
   }
@@ -23,7 +24,7 @@
     const base=`#/course/${encodeURIComponent(courseId)}`;
     if(primaryTab==='recall'||screen==='flashcards')return`${base}/recall`;
     if(primaryTab==='progress'||screen==='session')return`${base}/progress`;
-    return`${base}/learn${screen==='levels'?'/levels':['level','module'].includes(screen)?`/${screen}/${Number(level)+1}`:'/home'}`;
+    return`${base}/learn${['level','module'].includes(screen)?`/${screen}/${Number(level)+1}`:'/levels'}`;
   }
   window.LanguageJourneyNavigation={parents,parentOf,parseHash,formatHash};
 })();

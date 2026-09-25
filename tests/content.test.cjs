@@ -106,7 +106,7 @@ test('audio references and missing files have distinct severities',()=>{
 test('Level 11–15 travel route is chronological and preserves supermarket lesson IDs',()=>{
   const levels=content.manifest.levels;
   assert.deepEqual(levels.slice(10).map(level=>level.number),[11,12,13,14,15]);
-  assert.deepEqual(levels.slice(10).map(level=>level.theme),['Vakantiecursus thuis','Aankomst op het vliegveld','Vervoer naar het hotel','Inchecken in het hotel','Boodschappen doen']);
+  assert.deepEqual(levels.slice(10).map(level=>level.theme),['Vakantiecursus thuis','くうこう','Vervoer naar het hotel','Inchecken in het hotel','Boodschappen doen']);
   assert.deepEqual(levels.find(level=>level.number===15).lessonIds,['l11-1','l11-2','l11-3','l11-4','l11-5']);
   assert.equal(content.manifest.vocabulary.filter(word=>word.themes.includes('home-preparation')&&word.introducedAt?.startsWith('11-')).length,50);
   assert.deepEqual(content.manifest.phases.find(phase=>phase.id==='foundation').levels.map(level=>level.number),[1,2,3,4,5,6,7,8,9,10]);

@@ -9,13 +9,10 @@ body[data-scene="home"]::after,body[data-scene="market"]::after,body[data-scene=
 .scene-transition-image{position:absolute;inset:0;background-image:var(--arrival-image);background-size:cover;background-position:center;transform:scale(1.035);transition:transform 1.25s ease}
 .scene-transition.is-visible .scene-transition-image{transform:scale(1)}
 .scene-transition::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(16,28,27,.65))}
-.scene-transition-label{position:relative;z-index:1;margin:0 20px max(46px,env(safe-area-inset-bottom));font-size:clamp(21px,5vw,30px);font-weight:750;letter-spacing:.01em;text-shadow:0 2px 14px rgba(0,0,0,.45)}
+.scene-transition-label{position:relative;z-index:1;display:grid;justify-items:center;gap:3px;margin:0 20px max(46px,env(safe-area-inset-bottom));text-align:center;text-shadow:0 2px 14px rgba(0,0,0,.45)}
+.scene-transition-label strong{font-size:clamp(25px,6vw,36px);font-weight:800;letter-spacing:.03em}
+.scene-transition-label small{font-size:clamp(13px,3.4vw,17px);font-weight:650;letter-spacing:.01em}
 @media(prefers-reduced-motion:reduce){.scene-transition,.scene-transition-image{transition:none!important}}
-.platform-home{display:grid;gap:12px;min-height:210px;align-content:center}
-.platform-home .h1{margin:0}
-.platform-home-actions{display:flex;flex-wrap:wrap;gap:9px}
-.platform-home-actions .btn{min-height:44px}
-@media(max-width:520px){.platform-home-actions{display:grid;grid-template-columns:1fr}.platform-home-actions .btn{width:100%}}
 .app-header .header-copy{display:none}
 .app-header>.between{gap:8px}
 .app-header .header-actions{margin-left:auto;min-width:0}
@@ -57,21 +54,15 @@ body[data-app-shell="app"]::after{background:linear-gradient(180deg,#ffffff38,#f
 .course-flight{position:fixed;inset:0;z-index:1100;display:grid;place-items:center;padding:18px;background:#eef2f4;color:#263438;opacity:0;transition:opacity .18s ease;pointer-events:none}
 .course-flight.is-visible{opacity:1;pointer-events:auto}
 .course-flight-card{width:min(580px,100%);display:grid;justify-items:center;gap:9px}
-.course-flight-card svg{width:100%;max-height:320px;overflow:visible}
+.course-flight-card svg{width:100%;max-height:320px;overflow:hidden;border-radius:28px;filter:drop-shadow(0 20px 34px #31465026)}
 .course-flight-card strong{font-size:clamp(20px,5vw,29px);letter-spacing:-.02em}
-.course-flight .flight-plane{transform:translate(38px,251px) rotate(-17deg);transform-origin:0 0;transition:transform 1.05s ease}
-.course-flight.is-visible .flight-plane{transform:translate(370px,176px) rotate(-17deg)}
+.course-flight .flight-plane{transform:translate(42px,224px) rotate(-19deg);transform-origin:0 0;transition:transform 1.35s ease}
+.course-flight.is-visible .flight-plane{transform:translate(276px,137px) rotate(-19deg)}
 @media(max-width:520px){.course-tile{min-height:245px}.course-tile-avatars{width:68%;right:-6%}.course-tile-copy{max-width:48%}.app-landing{margin-top:36px}}
 @media(prefers-reduced-motion:reduce){.course-flight,.course-flight .flight-plane,.course-tile{transition:none!important}}
 .level-compact-hero{display:grid;gap:5px}
 .level-compact-hero .h1{margin:0}
 .level-compact-hero .small{margin-top:3px}
-.level-new-shortcuts{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 14px;border:1px solid var(--border);border-radius:14px;background:var(--glass-strong)}
-.level-new-shortcuts>strong{font-size:13px}
-.level-new-shortcut-actions{display:flex;flex-wrap:wrap;gap:8px}
-.level-new-shortcut-actions .btn{min-height:44px;white-space:normal}
-@media(max-width:640px){.level-new-shortcuts{display:grid}.level-new-shortcut-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.level-new-shortcut-actions .btn{width:100%}}
-@media(max-width:380px){.level-new-shortcut-actions{grid-template-columns:1fr}}
 .level-lesson-list{display:grid;gap:8px}
 .level-lesson-item{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:10px;width:100%;min-height:72px;text-align:left;padding:10px 12px;border:2px solid var(--border);border-radius:15px;background:var(--glass-strong);color:var(--text);cursor:pointer}
 .level-lesson-item.rank-Copper{border-color:var(--copper)}

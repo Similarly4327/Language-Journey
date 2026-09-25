@@ -1622,17 +1622,34 @@ body[data-scene="journey"][data-view="main"] #mainView{
 <div id="sceneTransition" class="scene-transition" role="status" aria-live="polite" hidden><div class="scene-transition-image" aria-hidden="true"></div><div id="sceneTransitionLabel" class="scene-transition-label"></div></div>
 <div id="courseFlight" class="course-flight" role="status" aria-label="Onderweg naar Japan" hidden>
   <div class="course-flight-card"><span class="eyebrow">Language Journey · 日本語</span><svg viewBox="0 0 480 300" aria-hidden="true" focusable="false">
-    <defs><linearGradient id="islandShade" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f6f2ed"/><stop offset="1" stop-color="#d9dce2"/></linearGradient></defs>
-    <ellipse cx="240" cy="215" rx="196" ry="68" fill="#d9e3eb" opacity=".65"/>
-    <path d="M58 192 239 104 422 192 239 273Z" fill="url(#islandShade)" stroke="#ced4dc" stroke-width="2"/>
-    <path d="M58 192v17l181 88v-24Zm364 0v17l-183 88v-24Z" fill="#c4cbd4"/>
-    <g fill="#dce7ed" stroke="#8ba2ae" stroke-width="2"><path d="m89 178 27-13 27 13-27 14Z"/><path d="m145 147 25-12 25 12-25 13Z"/><path d="m204 124 26-13 26 13-26 13Z"/></g>
-    <g fill="#a8c0ce" stroke="#7893a3" stroke-width="2"><path d="M89 178v-35l27-13v35Zm27-13v-35l27 13v35Zm29-18v-44l25-12v44Zm25-12V91l25 12v44Zm34-11V69l26-13v55Zm26-13V56l26 13v55Z"/></g>
-    <path d="M226 70v-23h7v20m17 10V53h7v27" stroke="#7893a3" stroke-width="3"/>
-    <g fill="none" stroke="#c95555" stroke-width="8" stroke-linecap="round"><path d="M310 152v56m51-31v54M302 148l35 18 36-18"/><path d="M294 145h87"/></g><path d="M302 165h72" stroke="#f4ece5" stroke-width="4"/>
-    <path d="M284 134 315 116l31 18m-49 2v-14l18-11 18 11v14" fill="none" stroke="#b8a38b" stroke-width="5" stroke-linejoin="round"/>
-    <g fill="#d98fa4"><circle cx="390" cy="132" r="5"/><circle cx="402" cy="145" r="4"/><circle cx="379" cy="145" r="4"/><circle cx="396" cy="158" r="3"/></g><path d="M370 151q22-27 38-26" fill="none" stroke="#927b79" stroke-width="3"/>
-    <path class="flight-trail" d="M36 260C92 248 87 207 136 202c54-5 87 31 135 18 33-9 47-40 91-36" fill="none" stroke="#c95555" stroke-width="3" stroke-dasharray="5 8" stroke-linecap="round"/>
+    <defs>
+      <linearGradient id="flightSky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f5d8d4"/><stop offset=".48" stop-color="#e8edf1"/><stop offset="1" stop-color="#b9d2dc"/></linearGradient>
+      <linearGradient id="fujiShade" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d8dce2"/><stop offset="1" stop-color="#9faeb7"/></linearGradient>
+      <linearGradient id="cityShade" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#728892"/><stop offset="1" stop-color="#40545c"/></linearGradient>
+    </defs>
+    <rect width="480" height="300" rx="28" fill="url(#flightSky)"/>
+    <circle cx="397" cy="57" r="26" fill="#f3c5b5" opacity=".72"/>
+    <g fill="#fff" opacity=".43"><ellipse cx="92" cy="70" rx="48" ry="13"/><ellipse cx="151" cy="98" rx="35" ry="9"/><ellipse cx="407" cy="111" rx="42" ry="11"/></g>
+    <!-- Verre achtergrond: Fuji, bewust los van de eilandenlaag. -->
+    <path d="M250 173 345 48 447 173Z" fill="url(#fujiShade)" opacity=".72"/>
+    <path d="m309 95 36-47 39 48-17-8-10 13-13-14-12 13Z" fill="#f8f5f2" opacity=".95"/>
+    <path d="M0 172q72-23 139 2t135-4 206 7v53H0Z" fill="#9bb0b8" opacity=".35"/>
+    <!-- Middenlaag: herkenbare, gestileerde Japanse eilandboog. -->
+    <g fill="#d8cbb3" stroke="#9b8f7c" stroke-width="2" stroke-linejoin="round">
+      <path d="M168 192q12-14 29-19l20-22 23-4 16-19 27-3 21-20 22 3 18-17 13 6-10 20-20 8-11 18-25 5-17 20-25 1-19 18-27 1-18 13Z"/>
+      <path d="m201 193 30-10 22 6-17 12-28 3Z"/>
+      <path d="m145 199 18-16 18 4 8 16-13 16-23-2-12-9Z"/>
+      <path d="m359 75 24-13 22 9 7 18-13 15-22-2-9-12-17-4Z"/>
+      <path d="m129 225 5-4 5 4-4 6Z"/><path d="m117 237 4-3 4 4-4 4Z"/>
+    </g>
+    <path d="M111 247C157 229 178 200 210 184c53-27 82-18 124-65" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="4 8" opacity=".72"/>
+    <!-- Voorgrond: compacte Japanse skyline voor duidelijke diepte. -->
+    <path d="M0 244h480v56H0Z" fill="#34484f"/>
+    <g fill="url(#cityShade)"><path d="M12 218h33v82H12Z"/><path d="M51 232h43v68H51Z"/><path d="M102 207h35v93h-35Z"/><path d="M146 226h48v74h-48Z"/><path d="M355 220h40v80h-40Z"/><path d="M404 203h29v97h-29Z"/><path d="M440 229h28v71h-28Z"/></g>
+    <g fill="#d8e1df" opacity=".62"><path d="M20 231h7v8h-7Zm12 0h7v8h-7Zm39 14h8v8h-8Zm41-24h8v9h-8Zm252 14h8v9h-8Zm48-17h8v9h-8Zm35 24h8v9h-8Z"/></g>
+    <g fill="none" stroke="#c95555" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M272 300v-67m36 67v-67m-44 5 26 14 26-14M258 231h64"/><path d="M270 267h39"/></g>
+    <path d="M216 300v-47h43v47m-49-47h55l-28-20Z" fill="#526871" stroke="#d7c4a4" stroke-width="4" stroke-linejoin="round"/>
+    <path class="flight-trail" d="M26 245C91 236 117 215 160 195c45-21 79-29 124-52" fill="none" stroke="#c95555" stroke-width="3" stroke-dasharray="5 8" stroke-linecap="round"/>
     <g class="flight-plane" fill="#bf4949"><path d="m0 0 33-7-12 11 3 11-8 2-8-11-14 4-5-5 17-9Z"/></g>
   </svg><strong>Op weg naar Japan</strong></div>
 </div>
@@ -2487,7 +2504,7 @@ function moduleRank(key){
 }
 
 
-const state={screen:'home',courseId:preferences.courseId,targetLanguage:platform.course(preferences.courseId)?.targetLanguage||'ja',uiLanguage:preferences.uiLanguage,level:0,currentLevel:1,userName:'',userNameJapanese:'',avatarId:'avatar-female',avatarName:'Miku',avatarNameJapanese:'ミク',avatarNameCustom:false,avatarNameJapaneseCustom:false,avatarEnabled:true,avatarGender:'female',avatarMode:'auto',selectedAvatarSkin:null,unlockedAvatarSkins:['skin-1'],audioEnabled:true,correctSoundEnabled:true,audioCoachEnabled:true,audioVolume:.65,basisModule:'hiragana',tabs:{hiragana:'learn',katakana:'learn',numbers:'learn',mix:'practice',dakuten:'learn',lang:'learn',small:'learn',advanced:'learn'},row:{hiragana:0,katakana:0},step:{hiragana:0,katakana:0},numberLesson:0,dakScript:'hiragana',dakPattern:0,dakStep:0,langLesson:0,langView:'list',langStep:'overview',langStepProgress:{},introducedVocabIds:[],instructionKnowledge:{},vocabFirstSeen:{},kanaFirstSeen:{},smallLesson:0,advancedLesson:{5:0,6:0,7:0,8:0,9:0},advancedView:{5:'list',6:'list',7:'list',8:'list',9:'list'},advancedStep:{5:'overview',6:'overview',7:'overview',8:'overview',9:'overview'},advancedStepProgress:{},progressTab:'progress',progressActivityLimit:10,progressKnowledgeTab:'levels',progressKanaGroup:'hiragana',progressDetailId:null,progressVocabDetailId:null,studyRange:{low:0,high:100},studyCalendar:{from:'',to:''},studyFilters:{category:'',skill:'',origin:'',level:'',tag:''},studyTracker:{version:1,courseStartedAt:null,trackingStartedAt:null,sessions:[],events:[],noticeDismissed:false,active:null},practiceSelections:{hiragana:[0,1,2],katakana:[0,1,2],hiraganaChars:[],katakanaChars:[],dakuten:['g','z'],dakScripts:['hiragana','katakana'],numbers:['0-10']},errorBank:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},lastErrors:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},quiz:null,lastConfig:null};
+const state={screen:'levels',courseId:preferences.courseId,targetLanguage:platform.course(preferences.courseId)?.targetLanguage||'ja',uiLanguage:preferences.uiLanguage,level:0,currentLevel:1,userName:'',userNameJapanese:'',avatarId:'avatar-female',avatarName:'Miku',avatarNameJapanese:'ミク',avatarNameCustom:false,avatarNameJapaneseCustom:false,avatarEnabled:true,avatarGender:'female',avatarMode:'auto',selectedAvatarSkin:null,unlockedAvatarSkins:['skin-1'],audioEnabled:true,correctSoundEnabled:true,audioCoachEnabled:true,audioVolume:.65,basisModule:'hiragana',tabs:{hiragana:'learn',katakana:'learn',numbers:'learn',mix:'practice',dakuten:'learn',lang:'learn',small:'learn',advanced:'learn'},row:{hiragana:0,katakana:0},step:{hiragana:0,katakana:0},numberLesson:0,dakScript:'hiragana',dakPattern:0,dakStep:0,langLesson:0,langView:'list',langStep:'overview',langStepProgress:{},introducedVocabIds:[],instructionKnowledge:{},vocabFirstSeen:{},kanaFirstSeen:{},smallLesson:0,advancedLesson:{5:0,6:0,7:0,8:0,9:0},advancedView:{5:'list',6:'list',7:'list',8:'list',9:'list'},advancedStep:{5:'overview',6:'overview',7:'overview',8:'overview',9:'overview'},advancedStepProgress:{},progressTab:'progress',progressActivityLimit:10,progressKnowledgeTab:'levels',progressKanaGroup:'hiragana',progressDetailId:null,progressVocabDetailId:null,studyRange:{low:0,high:100},studyCalendar:{from:'',to:''},studyFilters:{category:'',skill:'',origin:'',level:'',tag:''},studyTracker:{version:1,courseStartedAt:null,trackingStartedAt:null,sessions:[],events:[],noticeDismissed:false,active:null},practiceSelections:{hiragana:[0,1,2],katakana:[0,1,2],hiraganaChars:[],katakanaChars:[],dakuten:['g','z'],dakScripts:['hiragana','katakana'],numbers:['0-10']},errorBank:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},lastErrors:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},quiz:null,lastConfig:null};
 state.screen='app-home';
 state.currentCourse=null;
 state.primaryTab='learn';
@@ -2808,8 +2825,8 @@ function loadProgress(){
     const saved=parsed&&[1,2,3,4,5,6,7].includes(parsed.version)?parsed:{version:STORAGE_VERSION,state:{},ranks:{}};
     savedVersion=saved.version;
     const s=saved.state||{};
-    if(['app-home','home','levels','level','module','flashcards','options','options-profile','options-audio'].includes(s.screen))state.screen=s.screen;
-    else state.screen='home';
+    if(['app-home','home','levels','level','module','flashcards','options','options-profile','options-audio'].includes(s.screen))state.screen=s.screen==='home'?'levels':s.screen;
+    else state.screen='levels';
     state.currentCourse=Object.hasOwn(s,'currentCourse')?(platform.course(s.currentCourse)?.id||null):state.courseId;
     state.primaryTab=['learn','recall','progress'].includes(s.primaryTab)?s.primaryTab:(state.screen==='flashcards'?'recall':'learn');
     if(Number.isInteger(s.level))state.level=Math.max(0,Math.min(levels.length-1,savedVersion<=6&&s.level===10?14:s.level));
@@ -3011,8 +3028,8 @@ function moduleHeaderTitle(){
 function navigateBack(){
   if(flightTimer){clearTimeout(flightTimer);flightTimer=null;$('courseFlight').hidden=true;$('courseFlight').classList.remove('is-visible');return}
   if(!$('sceneTransition').hidden){scenes.cancel();return}
-  if(!$('sessionView').classList.contains('hidden')){state.screen='home';scheduleSave();return setMain()}
-  if(!$('flashcardView').classList.contains('hidden')||state.screen==='flashcards'){state.screen='home';scheduleSave();return renderMain()}
+  if(!$('sessionView').classList.contains('hidden')){state.screen='levels';scheduleSave();return setMain()}
+  if(!$('flashcardView').classList.contains('hidden')||state.screen==='flashcards'){state.screen='levels';scheduleSave();return renderMain()}
   // Een quiz of resultaat is één tijdelijke laag boven de plek waar hij begon.
   // De onderliggende module-/lesstaat blijft intact, dus keer daar direct naar terug.
   if(!$('quizView').classList.contains('hidden')){completeStudySession({status:'afgebroken'});return setMain()}
@@ -3071,47 +3088,6 @@ function levelRouteSummary(arr,examId,label){
   const p=lessonProgress(arr),next=firstIncompleteLesson(arr),lesson=arr[next],allDone=p.done===p.total;
   return`<section class="card"><div class="between"><div><div class="h2">${allDone?'Leerroute afgerond':'Volgende stap'}</div><div class="small">${p.done}/${p.total} lessen afgerond</div></div><span class="rank ${rankClass(levelRank(label))}">${rankText(levelRank(label))}</span></div><div class="progress" style="margin-top:10px"><div style="width:${p.pct}%"></div></div><div class="panel" style="margin-top:10px"><div class="eyebrow">Les ${next+1}</div><strong>${lesson.title}</strong><div class="small" style="margin-top:4px">${lesson.goal}</div></div>${readinessHtml(examId)}<button class="btn primary resume-route" style="width:100%;margin-top:11px">${allDone?'Bekijk leerroute':'Ga verder met deze les'} →</button></section>`
 }
-function hasJourneyActivity(){
-  return Object.values(rankState).some(x=>x.rank||x.attempts>0)
-    ||state.level>0
-    ||state.basisModule!=='hiragana'
-    ||state.row.hiragana>0
-    ||state.row.katakana>0
-    ||state.step.hiragana>0
-    ||state.step.katakana>0
-    ||state.numberLesson>0
-    ||state.dakPattern>0
-    ||state.langLesson>0
-    ||state.smallLesson>0;
-}
-function continueJourneyPlan(){
-  if(!hasJourneyActivity())return{
-    title:'Begin je Japanse leerreis',
-    detail:'Level 1 · Schriftbasis',
-    button:'Start bij Schriftbasis →',
-    action:()=>openLevel(0)
-  };
-  const level=Math.max(0,Math.min(state.level,levels.length-1));
-  if(level===0){
-    const key=state.basisModule;
-    if(key==='numbers')return{title:'Ga verder met Cijfers',detail:`Les ${state.numberLesson+1} · ${numberLessons[state.numberLesson]?.name||'Japanse cijfers'}`,button:'Verder leren →',action:()=>openModule(0)};
-    const script=key==='katakana'?'Katakana':'Hiragana';
-    const row=kanaModules[key]?.rows[state.row[key]];
-    return{title:`Ga verder met ${script}`,detail:`Rij ${state.row[key]+1} · ${row?.name||'Basis'}`,button:'Verder leren →',action:()=>openModule(0)};
-  }
-  if(level===1)return{title:'Ga verder met Kana Mix',detail:'Level 2 · 92 basiskana schakelen',button:'Verder leren →',action:()=>openModule(1)};
-  if(level===2)return{title:'Ga verder met Dakuten',detail:`Level 3 · ${dakutenPatterns[state.dakPattern]?.name||'Klankmodificaties'}`,button:'Verder leren →',action:()=>openModule(2)};
-  if(level===3)return{title:'Ga verder met Eerste taalbasis',detail:`Les ${state.langLesson+1} · ${langLessons[state.langLesson]?.title||'Eerste zinnen'}`,button:'Verder leren →',action:()=>openModule(3)};
-  if(level===4)return{title:'Ga verder met Kana compleet',detail:`Les ${state.smallLesson+1} · ${smallLessons[state.smallLesson]?.title||'Kleine kana'}`,button:'Verder leren →',action:()=>openModule(4)};
-  if(level>=10){
-    const course=thematicCourses[level],next=course?.lessons.findIndex(lesson=>thematicProgress(lesson)<2);
-    if(next===-1)return{title:`${levels[level][1]} · alle lessen gedaan`,detail:levelRank(level)?'Levelcheck behaald · bekijk je lessen opnieuw of kies een volgend level.':'De levelcheck staat nu klaar.',button:levelRank(level)?'Bekijk het level →':'Naar de levelcheck →',action:()=>openLevel(level)};
-    const index=Math.max(0,next??0),lesson=course?.lessons[index];
-    return{title:`Ga verder met ${levels[level][1]}`,detail:`Les ${index+1} · ${lesson?.title||levels[level][2]}`,button:'Verder leren →',action:()=>openModule(level,()=>{state.thematic={level:level+1,lessonIndex:index,part:'A',step:'lesson',questionIndex:0,correct:0,answered:false,selected:null}})};
-  }
-  const course=advancedCourses[level],lesson=course?.lessons[state.advancedLesson[level]||0];
-  return{title:`Ga verder met ${levels[level][1]}`,detail:`Les ${(state.advancedLesson[level]||0)+1} · ${lesson?.title||levels[level][2]}`,button:'Verder leren →',action:()=>openModule(level)};
-}
 function levelMenuCard(lv,i){
   const rank=levelRank(i);
   const b=document.createElement('button');
@@ -3142,6 +3118,7 @@ function phaseLevelCard(item){
   return d;
 }
 function addDesktopSliderControls(grid,label){
+  if(typeof grid?.replaceWith!=='function')return;
   const shell=document.createElement('div');
   shell.className='level-slider-shell';
   const previous=document.createElement('button'),next=document.createElement('button');
@@ -3196,25 +3173,9 @@ function renderLevelMenu(box){
   routeHead.className='menu-section-head';
   routeHead.innerHTML=`<div class="h1">${t('nav.levels')}</div><div class="muted">${t('levels.routeIntro')}</div>`;
   box.appendChild(routeHead);
-  if(thematicCourses[10]&&thematicCourses[11]){
-    const shortcuts=document.createElement('section'),label=document.createElement('strong'),actions=document.createElement('div');
-    shortcuts.className='level-new-shortcuts';
-    label.textContent=t('levels.newAvailable');
-    actions.className='level-new-shortcut-actions';
-    [10,11].forEach(index=>{
-      const button=document.createElement('button');
-      button.type='button';
-      button.className='btn';
-      button.textContent=`${t('common.level',{number:index+1})} · ${localizedLevel(index)[1]}`;
-      button.onclick=()=>openLevel(index);
-      actions.appendChild(button);
-    });
-    shortcuts.append(label,actions);
-    box.appendChild(shortcuts);
-  }
   coursePhases.forEach((phase,index)=>box.appendChild(renderCoursePhase(phase,index)));
   const current=box.querySelector(`[data-level-index="${state.level}"]`);
-  if(current){current.closest('details')?.setAttribute('open','');requestAnimationFrame(()=>centerPhaseLevel(current.closest('.phase-levels'),state.level))}
+  if(current&&typeof current.closest==='function'){current.closest('details')?.setAttribute('open','');requestAnimationFrame(()=>centerPhaseLevel(current.closest('.phase-levels'),state.level))}
 
   const milestoneHead=document.createElement('div');
   milestoneHead.className='menu-section-head future-head';
@@ -3322,7 +3283,7 @@ function applyBrowserRoute(route){
   routeApplying=true;
   state.currentCourse=route.courseId;
   state.primaryTab=route.primaryTab||'learn';
-  state.screen=route.screen==='session'?'home':route.screen;
+  state.screen=route.screen==='session'?'levels':route.screen==='home'?'levels':route.screen;
   if(Number.isInteger(route.level))state.level=Math.max(0,Math.min(levels.length-1,route.level));
   if(route.screen==='session')renderSession();
   else if(route.screen==='flashcards')renderFlashcardsScreen();
@@ -3339,13 +3300,13 @@ function renderAppHome(box){
 function enterCourse(courseId){
   const course=platform.course(courseId);
   if(!course||!platform.content(courseId))return;
-  const finish=()=>{flightTimer=null;$('courseFlight').classList.remove('is-visible');$('courseFlight').hidden=true;if(courseId!==state.courseId){platform.savePreferences({uiLanguage:state.uiLanguage,courseId});history.pushState(null,'',navigation.formatHash({screen:'home',courseId,primaryTab:'learn'}));location.reload();return}state.courseId=courseId;state.currentCourse=courseId;state.primaryTab='learn';state.screen='home';routePushRequested=true;scheduleSave();renderMain()};
+  const finish=()=>{flightTimer=null;$('courseFlight').classList.remove('is-visible');$('courseFlight').hidden=true;if(courseId!==state.courseId){platform.savePreferences({uiLanguage:state.uiLanguage,courseId});history.pushState(null,'',navigation.formatHash({screen:'levels',courseId,primaryTab:'learn'}));location.reload();return}state.courseId=courseId;state.currentCourse=courseId;state.primaryTab='learn';state.screen='levels';routePushRequested=true;scheduleSave();renderMain()};
   if(course.transition!=='flight-japan'){finish();return}
   const overlay=$('courseFlight');overlay.hidden=false;
   overlay.setAttribute('aria-label',t('app.flight'));
   overlay.querySelector('strong').textContent=t('app.flight');
   requestAnimationFrame(()=>overlay.classList.add('is-visible'));
-  flightTimer=setTimeout(finish,matchMedia('(prefers-reduced-motion: reduce)').matches?180:1200);
+  flightTimer=setTimeout(finish,matchMedia('(prefers-reduced-motion: reduce)').matches?180:1700);
 }
 function renderOptions(box){
   box.innerHTML=`<div class="app-options"><section class="card"><div class="eyebrow">Language Journey</div><div class="h1">${escapeHtml(t('app.options'))}</div><div class="muted">${escapeHtml(t('app.optionsIntro'))}</div></section><button class="option-entry" id="optionProfile" type="button"><span><strong>${escapeHtml(t('app.profileAvatar'))}</strong><small>${escapeHtml(state.userName||t('app.profileAvatar'))} · ${escapeHtml(avatarDisplayName())} · level ${getAvatarProgressLevel()}</small></span><span>›</span></button><button class="option-entry" id="optionAudio" type="button"><span><strong>${escapeHtml(t('app.audioSettings'))}</strong><small>${escapeHtml(t('app.audioSummary'))}</small></span><span>›</span></button><section class="card option-future"><strong>${escapeHtml(t('app.future'))}</strong><div class="small">${escapeHtml(t('app.futureIntro'))}</div></section></div>`;
@@ -3356,14 +3317,6 @@ function renderOptionsAudio(box){
   box.innerHTML=`<div class="app-options"><section class="card"><div class="eyebrow">Instellingen</div><div class="h1">Audio en geluid</div><div class="muted">Deze keuzes gelden voor je Japanse cursus en zijn altijd aanpasbaar.</div></section><section class="card"><label class="option-switch"><span><strong>Uitspraak en audio</strong><span class="small">Speel beschikbare lokale opnames af.</span></span><input type="checkbox" data-audio-option="audioEnabled" ${state.audioEnabled?'checked':''}></label><label class="option-switch"><span><strong>Avatar-audiohulp</strong><span class="small">Toon de avatar bij afspelen.</span></span><input type="checkbox" data-audio-option="audioCoachEnabled" ${state.audioCoachEnabled?'checked':''}></label><label class="option-switch"><span><strong>Geluid bij goed antwoord</strong><span class="small">Een kort, subtiel signaal.</span></span><input type="checkbox" data-audio-option="correctSoundEnabled" ${state.correctSoundEnabled?'checked':''}></label><label class="option-switch"><span><strong>Volume</strong></span><input type="range" min="0" max="1" step="0.05" value="${state.audioVolume}" id="optionsAudioVolume" aria-label="Audiovolume"></label></section></div>`;
   box.querySelectorAll('[data-audio-option]').forEach(input=>input.onchange=()=>{state[input.dataset.audioOption]=input.checked;if(!state.audioCoachEnabled)hideAvatarAudioOverlay();scheduleSave()});
   $('optionsAudioVolume').oninput=event=>{state.audioVolume=Number(event.target.value);scheduleSave()};
-}
-function renderHomeMenu(box){
-  const level=localizedLevel(state.level);
-  const plan=continueJourneyPlan(),courseLessons=state.level===3?langLessons:state.level===4?smallLessons:state.level>=10?thematicCourses[state.level]?.lessons:advancedCourses[state.level]?.lessons;
-  const progress=courseLessons?(state.level>=10?{done:courseLessons.filter(lesson=>thematicProgress(lesson)===2).length,total:courseLessons.length,pct:courseLessons.filter(lesson=>thematicProgress(lesson)===2).length/courseLessons.length*100}:lessonProgress(courseLessons)):null;
-  box.innerHTML=`<section class="card platform-home"><div class="eyebrow">${t('course.japanese.short')} · ${t('course.japanese.name')}</div><div class="h1">${plan.title}</div><div class="muted">${plan.detail}</div>${progress?`<div class="progress" style="margin-top:12px"><div style="width:${progress.pct}%"></div></div><div class="small">${progress.done}/${progress.total} lessen afgerond</div>`:''}<div class="platform-home-actions"><button id="homeContinue" class="btn primary" type="button">${plan.button}</button><button id="homeLevels" class="btn" type="button">${t('home.openLevels')}</button></div>${state.avatarEnabled?avatarAssistHtml({pose:nextAvatarMood(),message:t('levels.smallStep')}):''}</section>`;
-  $('homeLevels').onclick=()=>{state.screen='levels';scheduleSave();renderMain()};
-  $('homeContinue').onclick=continueJourneyPlan().action;
 }
 function renderMain(){
   if(state.screen==='flashcards')return renderFlashcardsScreen();
@@ -3377,7 +3330,7 @@ function renderMain(){
   if(state.screen==='options')return renderOptions(box);
   if(state.screen==='options-profile'){box.className='stack app-options';return renderProfileDashboard(box)}
   if(state.screen==='options-audio')return renderOptionsAudio(box);
-  if(state.screen==='home')return renderHomeMenu(box);
+  if(state.screen==='home')state.screen='levels';
   if(state.screen==='levels'){scenes.preload(scenes.resolve({level:state.level}));return renderLevelMenu(box)}
   if(state.screen==='level')return renderLevelOverview(box,state.level);
   if(state.level===0)return renderBasis(box);
@@ -3460,7 +3413,7 @@ function renderThematicCourse(box){
 }
 function renderThematicList(box,course){
   const done=course.lessons.filter(lesson=>thematicProgress(lesson)===2).length;
-  box.innerHTML=`<section class="card"><div class="eyebrow">${thematicLevelLabel(course.number)} · thematische module</div><div class="h1">${escapeHtml(course.title)}</div><div class="muted">${escapeHtml(course.competency)}</div><div class="progress" style="margin-top:12px"><div style="width:${done*20}%"></div></div><div class="small">${done}/5 lessen afgerond</div>${course.number===11?'<div class="notice" style="margin-top:10px">Level 1–10 was de basis. Vanaf nu lees je per les een kort verhaal én een praktische bron. Reken op ongeveer 20–25 minuten als richttempo; sneller of langzamer is allebei goed. Bonus is vrijwillig.</div>':''}</section><div id="thematicLessonList" class="stack"></div><section class="card"><div class="between"><strong>${thematicLevelLabel(course.number)} · integratie</strong><span class="rank ${rankClass(levelRank(state.level))}">${rankText(levelRank(state.level))}</span></div><div class="small" style="margin-top:6px">Twintig begripsvragen uit beide onderdelen van de vijf lessen. Bonus is niet verplicht.</div><button id="thematicExam" class="btn primary" style="width:100%;margin-top:10px" ${done===5?'':'disabled'}>Start levelcheck</button></section>`;
+  box.innerHTML=`<section class="card"><div class="eyebrow">${thematicLevelLabel(course.number)} · thematische module</div><div class="h1">${escapeHtml(course.title)}</div>${course.number===12?`<div class="small">${escapeHtml(t('course.japanese.level.12.support'))}</div>`:''}<div class="muted">${escapeHtml(course.competency)}</div><div class="progress" style="margin-top:12px"><div style="width:${done*20}%"></div></div><div class="small">${done}/5 lessen afgerond</div>${course.number===11?'<div class="notice" style="margin-top:10px">Level 1–10 was de basis. Vanaf nu lees je per les een kort verhaal én een praktische bron. Reken op ongeveer 20–25 minuten als richttempo; sneller of langzamer is allebei goed. Bonus is vrijwillig.</div>':''}</section><div id="thematicLessonList" class="stack"></div><section class="card"><div class="between"><strong>${thematicLevelLabel(course.number)} · integratie</strong><span class="rank ${rankClass(levelRank(state.level))}">${rankText(levelRank(state.level))}</span></div><div class="small" style="margin-top:6px">Twintig begripsvragen uit beide onderdelen van de vijf lessen. Bonus is niet verplicht.</div><button id="thematicExam" class="btn primary" style="width:100%;margin-top:10px" ${done===5?'':'disabled'}>Start levelcheck</button></section>`;
   renderAvatarUnlock(box);
   course.lessons.forEach((lesson,index)=>{const card=document.createElement('button');card.type='button';card.className=`lang-lesson-card ${rankClass(rankState[lesson.id]?.rank)}`;card.innerHTML=`<div class="between"><div><div class="eyebrow">Les ${index+1}</div><div class="h2">${escapeHtml(lesson.title)}</div></div><span class="rank ${rankClass(rankState[lesson.id]?.rank)}">${rankText(rankState[lesson.id]?.rank)}</span></div><div class="small">${escapeHtml(lesson.goal)} · ${thematicProgress(lesson)}/2 onderdelen</div>`;card.onclick=()=>openThematicLesson(index);$('thematicLessonList').appendChild(card)});
   if(done===5)$('thematicExam').onclick=()=>startQuiz({source:'advanced',title:`Level ${course.number} · integratie`,rankId:`l${course.number}-exam`,rankThreshold:.8,official:true,pool:[],questions:shuffle(course.lessons.flatMap(thematicQuestions)),choices:3});
@@ -4919,7 +4872,7 @@ function renderProgressSkillsTab(box){
 function renderAvatarSettings(box){
   syncAvatarState();
   const active=activeAvatarSkin(),unlocked=new Set(state.unlockedAvatarSkins),avatarName=avatarDisplayName();
-  box.innerHTML=`<section class="card"><div class="between"><div><div class="h2">Persoonlijk profiel</div><div class="muted">Jouw naam en vaste reisgenoot voor toekomstige dialogen en rollenspellen.</div></div><div class="profile-avatar-preview"><div id="profilePreviewName" class="journey-avatar-name">${escapeHtml(avatarName)}</div>${avatarSpriteHtml(active,'avatar-settings-preview')}<div class="journey-avatar-level">Lv. ${state.currentLevel}</div></div></div><div class="profile-summary"><div class="profile-summary-item"><span class="small">Leerling</span><strong id="profileUserSummary">${escapeHtml(state.userName||'Nog niet ingesteld')}</strong></div><div class="profile-summary-item"><span class="small">Reisgenoot</span><strong id="profileCompanionName">${escapeHtml(avatarName)}</strong></div><div class="profile-summary-item"><span class="small">Level · rank</span><strong>Level ${state.currentLevel} · ${rankText(levelRank(state.currentLevel-1))}</strong></div></div><div class="profile-fields"><label class="profile-field"><span>Mijn naam</span><input id="profileUserName" class="profile-input" type="text" maxlength="40" autocomplete="name" placeholder="Bijvoorbeeld Sven" value="${escapeHtml(state.userName)}"></label><label class="profile-field"><span>Mijn naam in het Japans · optioneel</span><input id="profileUserNameJapanese" class="profile-input" type="text" maxlength="40" lang="ja" placeholder="Zelf bevestigde schrijfwijze" value="${escapeHtml(state.userNameJapanese)}"></label><label class="profile-field"><span>Naam avatar</span><input id="profileAvatarName" class="profile-input" type="text" maxlength="40" placeholder="${escapeHtml(avatarDefaults().name)}" value="${escapeHtml(avatarName)}"></label><label class="profile-field"><span>Avatarnaam in het Japans · optioneel</span><input id="profileAvatarNameJapanese" class="profile-input" type="text" maxlength="40" lang="ja" placeholder="${escapeHtml(avatarDefaults().japanese)}" value="${escapeHtml(state.avatarNameJapanese)}"></label></div><div class="small" style="margin-top:8px">Japanse schrijfwijzen worden niet automatisch geraden. Je kunt ze zelf bevestigen of later invullen.</div><div class="avatar-settings-grid"><div class="avatar-setting-row"><div><strong>Avatar tonen</strong><div class="small">Toon je reisgenoot op de Ga verder-kaart.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarEnabled?'active':''}" data-avatar-enabled="true">Aan</button><button class="avatar-choice ${!state.avatarEnabled?'active':''}" data-avatar-enabled="false">Uit</button></div></div><div class="avatar-setting-row"><div><strong>Avatarvariant</strong><div class="small">De variant, naam en skin blijven aparte instellingen.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarGender==='male'?'active':''}" data-avatar-gender="male">Man · Ren</button><button class="avatar-choice ${state.avatarGender==='female'?'active':''}" data-avatar-gender="female">Vrouw · Miku</button></div></div><div class="avatar-setting-row"><div><strong>Skin-modus</strong><div class="small">Auto volgt je huidige level; Handmatig blijft op jouw keuze.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarMode==='auto'?'active':''}" data-avatar-mode="auto">Auto</button><button class="avatar-choice ${state.avatarMode==='manual'?'active':''}" data-avatar-mode="manual">Handmatig</button></div></div></div><div class="progress-note" style="margin-top:12px">Een skin wordt vrijgespeeld zodra je dat level voor het eerst opent. Skins zijn alleen cosmetisch en veranderen je naam of voortgang niet.</div></section>${state.avatarMode==='manual'?'<section class="card"><div class="h2">Kies skin</div><div class="muted">Alleen skins van bereikte levels zijn selecteerbaar.</div><div id="avatarSkinGrid" class="avatar-skin-grid"></div></section>':''}`;
+  box.innerHTML=`<section class="card"><div class="between"><div><div class="h2">Persoonlijk profiel</div><div class="muted">Jouw naam en vaste reisgenoot voor toekomstige dialogen en rollenspellen.</div></div><div class="profile-avatar-preview"><div id="profilePreviewName" class="journey-avatar-name">${escapeHtml(avatarName)}</div>${avatarSpriteHtml(active,'avatar-settings-preview')}<div class="journey-avatar-level">Lv. ${state.currentLevel}</div></div></div><div class="profile-summary"><div class="profile-summary-item"><span class="small">Leerling</span><strong id="profileUserSummary">${escapeHtml(state.userName||'Nog niet ingesteld')}</strong></div><div class="profile-summary-item"><span class="small">Reisgenoot</span><strong id="profileCompanionName">${escapeHtml(avatarName)}</strong></div><div class="profile-summary-item"><span class="small">Level · rank</span><strong>Level ${state.currentLevel} · ${rankText(levelRank(state.currentLevel-1))}</strong></div></div><div class="profile-fields"><label class="profile-field"><span>Mijn naam</span><input id="profileUserName" class="profile-input" type="text" maxlength="40" autocomplete="name" placeholder="Bijvoorbeeld Sven" value="${escapeHtml(state.userName)}"></label><label class="profile-field"><span>Mijn naam in het Japans · optioneel</span><input id="profileUserNameJapanese" class="profile-input" type="text" maxlength="40" lang="ja" placeholder="Zelf bevestigde schrijfwijze" value="${escapeHtml(state.userNameJapanese)}"></label><label class="profile-field"><span>Naam avatar</span><input id="profileAvatarName" class="profile-input" type="text" maxlength="40" placeholder="${escapeHtml(avatarDefaults().name)}" value="${escapeHtml(avatarName)}"></label><label class="profile-field"><span>Avatarnaam in het Japans · optioneel</span><input id="profileAvatarNameJapanese" class="profile-input" type="text" maxlength="40" lang="ja" placeholder="${escapeHtml(avatarDefaults().japanese)}" value="${escapeHtml(state.avatarNameJapanese)}"></label></div><div class="small" style="margin-top:8px">Japanse schrijfwijzen worden niet automatisch geraden. Je kunt ze zelf bevestigen of later invullen.</div><div class="avatar-settings-grid"><div class="avatar-setting-row"><div><strong>Avatar tonen</strong><div class="small">Toon je reisgenoot in de leerroute.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarEnabled?'active':''}" data-avatar-enabled="true">Aan</button><button class="avatar-choice ${!state.avatarEnabled?'active':''}" data-avatar-enabled="false">Uit</button></div></div><div class="avatar-setting-row"><div><strong>Avatarvariant</strong><div class="small">De variant, naam en skin blijven aparte instellingen.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarGender==='male'?'active':''}" data-avatar-gender="male">Man · Ren</button><button class="avatar-choice ${state.avatarGender==='female'?'active':''}" data-avatar-gender="female">Vrouw · Miku</button></div></div><div class="avatar-setting-row"><div><strong>Skin-modus</strong><div class="small">Auto volgt je huidige level; Handmatig blijft op jouw keuze.</div></div><div class="avatar-choice-group"><button class="avatar-choice ${state.avatarMode==='auto'?'active':''}" data-avatar-mode="auto">Auto</button><button class="avatar-choice ${state.avatarMode==='manual'?'active':''}" data-avatar-mode="manual">Handmatig</button></div></div></div><div class="progress-note" style="margin-top:12px">Een skin wordt vrijgespeeld zodra je dat level voor het eerst opent. Skins zijn alleen cosmetisch en veranderen je naam of voortgang niet.</div></section>${state.avatarMode==='manual'?'<section class="card"><div class="h2">Kies skin</div><div class="muted">Alleen skins van bereikte levels zijn selecteerbaar.</div><div id="avatarSkinGrid" class="avatar-skin-grid"></div></section>':''}`;
   // This profile badge represents mastery, not the active course navigation level.
   const avatarProgressLevel=getAvatarProgressLevel();
   box.innerHTML=box.innerHTML
@@ -5125,7 +5078,7 @@ function toggleProgress(){
 }
 function goToLearningHome(){
   if(state.studyTracker.active)completeStudySession({status:'verlaten'});
-  state.screen='home';
+  state.screen='levels';
   scheduleSave();
   renderMain();
 }
@@ -5183,7 +5136,7 @@ try{hadSavedProgress=!!localStorage.getItem(STORAGE_KEY)}catch{}
 loadProgress();
 const initialRoute=location.hash?navigation.parseHash(location.hash,platform.courses):null;
 if(initialRoute?.courseId&&initialRoute.courseId!==state.courseId){platform.savePreferences({uiLanguage:state.uiLanguage,courseId:initialRoute.courseId});location.reload();return}
-if(initialRoute){state.currentCourse=initialRoute.courseId;state.primaryTab=initialRoute.primaryTab||'learn';state.screen=initialRoute.screen==='session'?'home':initialRoute.screen;if(Number.isInteger(initialRoute.level))state.level=Math.max(0,Math.min(levels.length-1,initialRoute.level))}
+if(initialRoute){state.currentCourse=initialRoute.courseId;state.primaryTab=initialRoute.primaryTab||'learn';state.screen=initialRoute.screen==='session'?'levels':initialRoute.screen;if(Number.isInteger(initialRoute.level))state.level=Math.max(0,Math.min(levels.length-1,initialRoute.level))}
 else if(!hadSavedProgress){state.currentCourse=null;state.screen='app-home';state.primaryTab='learn'}
 else if(!state.currentCourse&&!state.screen.startsWith('options'))state.screen='app-home';
 document.documentElement.lang=state.uiLanguage;
