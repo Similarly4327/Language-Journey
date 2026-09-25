@@ -26,6 +26,16 @@
   --silver:#8c949e;
   --gold:#b88b27;
   --platinum:#67b8ef;
+  --jp-question-size:clamp(52px,6.5vw,68px);
+  --jp-answer-size:20px;
+  --jp-example-size:clamp(27px,4vw,34px);
+  --jp-reading-size:clamp(20px,4.5vw,24px);
+  --jp-kana-size:44px;
+  --jp-body-size:23px;
+  --jp-token-size:21px;
+  --jp-chip-size:19px;
+  --answer-body-size:19px;
+  --answer-compact-size:16px;
 }
 @media(prefers-color-scheme:dark){
   :root{
@@ -271,7 +281,7 @@ section{
   border-radius:12px;
   padding:11px 5px
 }
-.kana{font-size:44px;line-height:1.05}
+.kana{font-size:var(--jp-kana-size);line-height:1.15;overflow-wrap:anywhere}
 .romaji{font-weight:700;margin-top:5px}
 .rank{
   display:inline-flex;
@@ -332,13 +342,14 @@ section{
   margin:0;
   padding:16px 4px 18px;
   text-align:center;
-  font-size:68px;
+  font-size:var(--jp-question-size);
   font-weight:700;
   line-height:1.05;
   overflow-wrap:anywhere;
   white-space:pre-line;
   color:var(--text)
 }
+.prompt--example{font-size:var(--jp-example-size);line-height:1.4}
 .choices{
   display:grid!important;
   width:100%!important;
@@ -363,7 +374,7 @@ section{
   border-radius:13px;
   padding:8px 6px;
   font-weight:750;
-  font-size:19px;
+  font-size:var(--answer-body-size);
   line-height:1.18;
   text-align:center;
   overflow-wrap:anywhere;
@@ -374,8 +385,10 @@ section{
   min-height:52px;
   padding:10px 12px;
   text-align:left;
-  font-size:16px
+  font-size:var(--answer-compact-size)
 }
+.choice.choice-jp{font-size:var(--jp-answer-size)}
+.choices.choices-text .choice.choice-jp{font-size:var(--jp-answer-size)}
 .choice.correct{outline:2px solid var(--good)}
 .feedback{
   min-height:46px;
@@ -408,7 +421,7 @@ section{
   border-radius:12px;
   padding:10px
 }
-.jp{font-size:23px;font-weight:720}
+.jp{font-size:var(--jp-body-size);font-weight:720;line-height:1.35;overflow-wrap:anywhere}
 .small-section{margin-top:14px}
 .small-section-title{margin-bottom:7px;font-size:13px;font-weight:760;color:var(--muted)}
 .small-rule-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
@@ -441,16 +454,16 @@ section{
 .lang-step-btn.active{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--panel));color:var(--text)}
 .lang-step-btn.done::before{content:'✓ ';color:var(--good)}
 #langStepBody{margin-top:10px}
-.model-sentence{font-size:clamp(25px,7vw,38px);font-weight:800;text-align:center;line-height:1.35;margin:10px 0}
+.model-sentence{font-size:var(--jp-example-size);font-weight:800;text-align:center;line-height:1.4;margin:10px 0;overflow-wrap:anywhere}
 .sentence-analysis{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:10px}
 .sentence-part{min-width:68px;text-align:center;background:var(--panel);border:1px solid var(--border);border-radius:11px;padding:8px}
-.sentence-part .token{font-size:21px;font-weight:800}
+.sentence-part .token{font-size:var(--jp-token-size);font-weight:800;line-height:1.35;overflow-wrap:anywhere}
 .sentence-part .role{font-size:10px;color:var(--accent);font-weight:800;text-transform:uppercase;margin-top:3px}
 .sentence-part .gloss{font-size:11px;color:var(--muted);margin-top:2px}
 .builder-answer{display:flex;flex-wrap:wrap;gap:7px;min-height:62px;align-items:center;padding:9px;border:2px dashed var(--border);border-radius:13px;background:var(--panel);margin-top:10px}
 .builder-placeholder{color:var(--muted);font-size:13px}
 .builder-bank{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.sentence-chip{min-height:46px;border:1px solid var(--border);border-radius:999px;background:var(--card);color:var(--text);padding:8px 14px;font-size:19px;font-weight:750}
+.sentence-chip{min-height:46px;border:1px solid var(--border);border-radius:999px;background:var(--card);color:var(--text);padding:8px 14px;font-size:var(--jp-chip-size);font-weight:750;line-height:1.35;overflow-wrap:anywhere}
 .sentence-chip.placed{background:color-mix(in srgb,var(--accent) 12%,var(--card));border-color:var(--accent)}
 .builder-feedback{min-height:38px;margin-top:8px;font-weight:700}
 .word-romaji{color:var(--accent);font-size:12px;font-weight:750;margin-top:2px}
@@ -543,23 +556,19 @@ section{
   .grid3{gap:7px}
   .grid2{gap:8px}
   .kana-card{padding:9px 4px}
-  .kana{font-size:42px}
+  :root{--jp-kana-size:42px;--jp-body-size:21px;--jp-chip-size:18px}
   .romaji{font-size:14px}
 
   .vocab-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
   .vocab{padding:9px}
-  .jp{font-size:21px}
   .small-rule-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
   .small-example-grid{grid-template-columns:1fr;gap:7px}
   .lang-stepper{grid-template-columns:repeat(5,minmax(54px,1fr));overflow-x:auto;padding-bottom:3px}
-  .sentence-chip{font-size:18px;padding:8px 13px}
+  .sentence-chip{padding:8px 13px}
   .route-actions{grid-template-columns:1fr}
 
   #quizView,#resultView{max-width:100%}
-  .prompt{
-    font-size:clamp(50px,15vw,62px);
-    padding:13px 2px 15px
-  }
+  .prompt{padding:13px 2px 15px}
   .choices{
     grid-template-columns:repeat(3,minmax(0,1fr))!important;
     gap:7px
@@ -567,13 +576,13 @@ section{
   .choice{
     min-height:62px;
     padding:7px 4px;
-    font-size:18px
+    font-size:var(--answer-body-size)
   }
   .choices.choices-text{grid-template-columns:1fr!important}
   .choices.choices-text .choice{
     min-height:50px;
     padding:9px 11px;
-    font-size:16px
+    font-size:var(--answer-compact-size)
   }
   .feedback{min-height:42px}
   .progress{height:7px}
@@ -596,8 +605,8 @@ section{
   .level-nav{
     grid-template-columns:32px minmax(0,1fr) 32px
   }
+  :root{--answer-body-size:18px}
   .choices{gap:6px}
-  .choice{font-size:17px}
   .grid2{grid-template-columns:1fr}
   .vocab-grid{grid-template-columns:1fr}
 }
@@ -607,7 +616,7 @@ section{
   .app{max-width:840px;padding:16px 18px 42px}
   .level-nav{grid-template-columns:42px minmax(0,1fr) 42px}
   .level{flex-basis:150px;width:150px;min-width:150px}
-  .prompt{font-size:72px}
+  :root{--jp-question-size:clamp(52px,6.5vw,68px)}
 }
 
 /* Desktop */
@@ -620,8 +629,8 @@ section{
   .level-nav{grid-template-columns:44px minmax(0,1fr) 44px}
   .level-arrow{min-height:84px}
   .level{flex-basis:165px;width:165px;min-width:165px}
-  .prompt{font-size:82px;padding:24px 6px}
-  .choice{min-height:76px;font-size:20px}
+  .prompt{padding:24px 6px}
+  .choice{min-height:76px}
   .vocab-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 
@@ -1092,14 +1101,14 @@ body[data-scene="classroom"]::after{
 .flashcard-check{display:flex;align-items:flex-start;gap:7px;font-size:13px;min-width:0}
 .flashcard-check input{width:18px;height:18px;flex:0 0 auto;margin:0}
 .flashcard-front{min-height:110px;display:grid;place-items:center;text-align:center;padding:8px 8px 14px}
-.flashcard-face-main{font-size:clamp(28px,8vw,46px);font-weight:800;line-height:1.25;overflow-wrap:anywhere}
+.flashcard-face-main{font-size:var(--jp-question-size);font-weight:800;line-height:1.3;overflow-wrap:anywhere}
 .flashcard-face-sub{font-size:14px;color:var(--muted);margin-top:8px}
 .flashcard-answer-options{display:grid;gap:7px;margin-top:12px}
 .flashcard-answer-options.is-hidden{position:relative}
 .flashcard-answer-options.is-hidden .flashcard-answer-choice{filter:blur(7px);user-select:none;pointer-events:none}
 .flashcard-options-reveal{position:absolute;inset:0;z-index:1;width:100%;min-height:100%;border:1px solid color-mix(in srgb,var(--border) 75%,transparent);border-radius:13px;background:color-mix(in srgb,var(--panel) 76%,transparent);backdrop-filter:blur(2px);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer}
 .flashcard-options-reveal:hover{color:var(--text);background:color-mix(in srgb,var(--panel) 86%,transparent)}
-.flashcard-answer-choice{width:100%;min-height:44px;text-align:left;white-space:normal}
+.flashcard-answer-choice{width:100%;min-height:44px;text-align:left;white-space:normal;font-size:var(--jp-answer-size);line-height:1.35;overflow-wrap:anywhere}
 .flashcard-avatar{margin:0 0 2px}
 .flashcard-avatar .avatar-assist{padding:2px 8px;min-height:48px}
 .flashcard-avatar .avatar-assist-copy strong{font-size:12px}
@@ -1107,9 +1116,23 @@ body[data-scene="classroom"]::after{
 .flashcard-avatar .avatar-assist-figure .avatar-figure,.flashcard-avatar .avatar-assist-figure .avatar-sprite{width:42px;height:52px}
 .flashcard-answer-choice.is-correct{border-color:var(--good,#39865c);background:color-mix(in srgb,var(--good,#39865c) 14%,var(--panel));box-shadow:inset 0 0 0 1px var(--good,#39865c)}
 .flashcard-answer-choice.is-incorrect{border-color:var(--danger,#b84b4b);background:color-mix(in srgb,var(--danger,#b84b4b) 10%,var(--panel))}
-.flashcard-feedback-status{min-height:20px;margin-top:8px;text-align:center;font-weight:700}
+.flashcard-feedback-status{min-height:20px;margin-top:8px;text-align:center;font-weight:700;white-space:pre-line}
 .flashcard-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
 .flashcard-next-due{padding:10px;background:var(--panel);border-radius:11px}
+.audio-speaker{display:inline-grid;place-items:center;vertical-align:middle;width:34px;height:34px;margin:0 4px;border:1px solid var(--border);border-radius:50%;background:var(--panel);color:var(--text);font-size:17px;line-height:1;cursor:pointer;touch-action:manipulation}
+.audio-speaker:hover,.audio-speaker:focus-visible{border-color:var(--accent);outline:2px solid color-mix(in srgb,var(--accent) 45%,transparent);outline-offset:2px}
+.audio-speaker:disabled{opacity:.45;cursor:not-allowed}
+.audio-feedback{min-height:32px;display:flex;justify-content:center;align-items:center;gap:5px}
+.avatar-audio-overlay{position:fixed;z-index:1000;left:50%;width:min(360px,calc(100vw - 24px));transform:translateX(-50%);padding:8px;border:1px solid var(--glass-border);border-radius:14px;background:var(--glass-strong);box-shadow:var(--glass-shadow);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.avatar-audio-overlay[hidden]{display:none}
+.avatar-audio-overlay.is-top{top:calc(env(safe-area-inset-top,0px) + 8px)}
+.avatar-audio-overlay.is-bottom{bottom:calc(env(safe-area-inset-bottom,0px) + 8px)}
+.avatar-audio-overlay .avatar-assist{padding:4px 7px;border:0;background:transparent}
+.avatar-audio-overlay .avatar-assist-figure{height:52px;width:42px;flex-basis:42px}
+.avatar-audio-overlay .avatar-assist-figure .avatar-figure,.avatar-audio-overlay .avatar-assist-figure .avatar-sprite{height:52px;width:42px}
+.avatar-audio-overlay-copy{min-width:0;overflow-wrap:anywhere}
+.avatar-audio-overlay-copy [lang="ja"]{font-size:16px;font-weight:800}
+.avatar-audio-overlay-actions{display:flex;gap:5px;align-items:center}
 .card,
 .level-menu-card,
 .module-card,
@@ -1572,13 +1595,14 @@ body[data-scene="journey"][data-view="main"] #mainView{
   <div class="between" style="align-items:center">
     <div class="header-left">
       <button id="navBack" class="nav-back hidden" type="button" aria-label="Terug">←</button>
-      <button id="navHome" class="nav-back hidden" type="button" aria-label="Verder leren" title="Verder leren">⌂</button>
+      <button id="navHome" class="nav-back hidden" type="button" aria-label="App-home" title="Alle cursussen">⌂</button>
       <div class="header-copy">
         <div id="headerEyebrow" class="eyebrow">日本語</div>
         <div id="headerTitle" class="h1">Language Journey</div>
       </div>
     </div>
     <div class="header-actions">
+      <button id="navOptions" class="nav-back" type="button" aria-label="Opties openen" title="Opties" aria-expanded="false">☰</button>
       <nav class="app-nav" aria-label="Hoofdnavigatie">
         <button id="learnNav" class="app-nav-item active" type="button">Leren</button>
         <button id="flashcardsNav" class="app-nav-item" type="button">Recall</button>
@@ -1589,12 +1613,29 @@ body[data-scene="journey"][data-view="main"] #mainView{
 </section>
 <main id="mainView" class="stack"></main>
 <section id="flashcardView" class="stack hidden"></section>
-<section id="quizView" class="stack hidden"><div class="card"><div class="between"><div><div id="quizTitle" class="h2"></div><div id="quizMeta" class="small"></div></div><div><span id="qNow">1</span>/<span id="qTotal">10</span></div></div><div class="progress" style="margin-top:9px"><div id="qBar"></div></div></div><div class="card question"><div id="qHint" class="muted"></div><div id="qPrompt" class="prompt"></div><div id="qChoices" class="choices"></div><div id="qFeedback" class="feedback"></div><div id="quizAvatarAssist" class="quiz-avatar-assist"></div><div class="between" style="align-items:center;margin-top:8px"><span id="qScore" class="small">Goed: 0</span><button id="quitQuiz" class="btn tiny">Stop</button></div></div></section>
+<section id="quizView" class="stack hidden"><div class="card"><div class="between"><div><div id="quizTitle" class="h2"></div><div id="quizMeta" class="small"></div></div><div><span id="qNow">1</span>/<span id="qTotal">10</span></div></div><div class="progress" style="margin-top:9px"><div id="qBar"></div></div></div><div class="card question"><div id="qHint" class="muted"></div><div id="qPrompt" class="prompt"></div><div id="qPromptAudio" class="audio-feedback"></div><div id="qChoices" class="choices"></div><div id="qFeedback" class="feedback"></div><div id="qCorrectAudio" class="audio-feedback"></div><div id="quizAvatarAssist" class="quiz-avatar-assist"></div><div class="between" style="align-items:center;margin-top:8px"><span id="qScore" class="small">Goed: 0</span><button id="quitQuiz" class="btn tiny">Stop</button></div></div></section>
 <section id="resultView" class="stack hidden"><div class="card question"><div id="resultTitle" class="h2"></div><div id="resultScore" style="font-size:40px;font-weight:800;margin-top:8px"></div><div id="resultStats" class="muted"></div><div id="resultRank" class="panel hidden" style="margin-top:10px"></div><div id="resultAvatarAssist"></div></div><div class="card"><div class="h2">Fouten</div><div id="errorIntro" class="small"></div><div id="errorList" class="stack" style="margin-top:9px"></div></div><div class="grid2"><button id="practiceErrors" class="btn">Oefen mijn fouten</button><button id="retryBtn" class="btn">Opnieuw</button><button id="nextBtn" class="btn primary hidden">Volgende →</button><button id="backBtn" class="btn">Terug naar overzicht</button></div></section>
 <section id="sessionView" class="stack hidden"><div class="card"><div class="h1">Mijn Japanse leerreis</div><div class="muted">Je profiel, groei en bekende bouwstenen.</div></div><div id="sessionContent" class="stack"></div><button id="sessionBack" class="btn primary">Terug</button></section>
 </div>
 <div id="dictionaryModal" class="dictionary-modal hidden" role="presentation"><section class="dictionary-modal-card" role="dialog" aria-modal="true" aria-labelledby="dictionaryModalTitle"><div class="between" style="align-items:center"><span class="eyebrow">Dictionary · naslag</span><button id="dictionaryClose" class="btn tiny" type="button" aria-label="Dictionary sluiten">Sluiten ×</button></div><div id="dictionaryModalBody" style="margin-top:12px"></div></section></div>
+<div id="avatarAudioOverlay" class="avatar-audio-overlay is-bottom" role="status" aria-live="polite" hidden></div>
 <div id="sceneTransition" class="scene-transition" role="status" aria-live="polite" hidden><div class="scene-transition-image" aria-hidden="true"></div><div id="sceneTransitionLabel" class="scene-transition-label"></div></div>
+<div id="courseFlight" class="course-flight" role="status" aria-label="Onderweg naar Japan" hidden>
+  <div class="course-flight-card"><span class="eyebrow">Language Journey · 日本語</span><svg viewBox="0 0 480 300" aria-hidden="true" focusable="false">
+    <defs><linearGradient id="islandShade" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f6f2ed"/><stop offset="1" stop-color="#d9dce2"/></linearGradient></defs>
+    <ellipse cx="240" cy="215" rx="196" ry="68" fill="#d9e3eb" opacity=".65"/>
+    <path d="M58 192 239 104 422 192 239 273Z" fill="url(#islandShade)" stroke="#ced4dc" stroke-width="2"/>
+    <path d="M58 192v17l181 88v-24Zm364 0v17l-183 88v-24Z" fill="#c4cbd4"/>
+    <g fill="#dce7ed" stroke="#8ba2ae" stroke-width="2"><path d="m89 178 27-13 27 13-27 14Z"/><path d="m145 147 25-12 25 12-25 13Z"/><path d="m204 124 26-13 26 13-26 13Z"/></g>
+    <g fill="#a8c0ce" stroke="#7893a3" stroke-width="2"><path d="M89 178v-35l27-13v35Zm27-13v-35l27 13v35Zm29-18v-44l25-12v44Zm25-12V91l25 12v44Zm34-11V69l26-13v55Zm26-13V56l26 13v55Z"/></g>
+    <path d="M226 70v-23h7v20m17 10V53h7v27" stroke="#7893a3" stroke-width="3"/>
+    <g fill="none" stroke="#c95555" stroke-width="8" stroke-linecap="round"><path d="M310 152v56m51-31v54M302 148l35 18 36-18"/><path d="M294 145h87"/></g><path d="M302 165h72" stroke="#f4ece5" stroke-width="4"/>
+    <path d="M284 134 315 116l31 18m-49 2v-14l18-11 18 11v14" fill="none" stroke="#b8a38b" stroke-width="5" stroke-linejoin="round"/>
+    <g fill="#d98fa4"><circle cx="390" cy="132" r="5"/><circle cx="402" cy="145" r="4"/><circle cx="379" cy="145" r="4"/><circle cx="396" cy="158" r="3"/></g><path d="M370 151q22-27 38-26" fill="none" stroke="#927b79" stroke-width="3"/>
+    <path class="flight-trail" d="M36 260C92 248 87 207 136 202c54-5 87 31 135 18 33-9 47-40 91-36" fill="none" stroke="#c95555" stroke-width="3" stroke-dasharray="5 8" stroke-linecap="round"/>
+    <g class="flight-plane" fill="#bf4949"><path d="m0 0 33-7-12 11 3 11-8 2-8-11-14 4-5-5 17-9Z"/></g>
+  </svg><strong>Op weg naar Japan</strong></div>
+</div>
 <script src="./locales/nl.js?v=20260924-levels"></script>
 <script src="./locales/en.js?v=20260924-levels"></script>
 <script src="./locales/de.js?v=20260924-levels"></script>
@@ -1867,13 +1908,16 @@ const vocabMastery={};
    Particle readings/functions cross-checked against Japan Foundation IRODORI
    Grammar_all.pdf (https://www.irodori.jpf.go.jp/assets/data/Grammar_all.pdf)
    and IRODORI Starter Lesson 1 kana chart. */
-const dictionaryGrammar=[
-  {id:'grammar-particle-ha',jp:'は',kana:'は',romaji:'wa',kind:'grammatica',label:'Partikel · topic',meaning:'Markeert waar de zin over gaat. De Nederlandse vertaling hangt af van de zin.',synonyms:['topic','onderwerp','wa'],level:4,lessonId:'l4-3',examples:[['わたし は ひと です','Ik ben een persoon.','は markeert hier わたし als topic.']]},
-  {id:'grammar-particle-he',jp:'へ',kana:'へ',romaji:'e',kind:'grammatica',label:'Partikel · richting',meaning:'Kan de richting markeren waarheen iemand gaat. Als partikel wordt へ als e uitgesproken; als los kana lees je he.',synonyms:['richting','naar','e'],level:9,lessonId:null,examples:[['にほん へ いきます','Ik ga naar Japan.','へ markeert hier de richting.']]},
-  {id:'grammar-particle-wo',jp:'を',kana:'を',romaji:'o',kind:'grammatica',label:'Partikel · object',meaning:'Markeert in deze cursus het object: datgene waarop de handeling gericht is. In deze partikelrol lees je を als o.',synonyms:['object','lijdend voorwerp','o','wo'],level:4,lessonId:'l4-7',examples:[['みず を のみます','Ik drink water.','を markeert hier wat wordt gedronken.']]},
-  {id:'grammar-particle-ka',jp:'か',kana:'か',romaji:'ka',kind:'grammatica',label:'Partikel · vraag',meaning:'Aan het einde van een eenvoudige zin markeert か een vraag. Het is een grammaticale functie, geen vertaling van het kana zelf.',synonyms:['vraagpartikel','vraag','question particle'],level:4,lessonId:'l4-5',examples:[['これは ねこ です か','Is dit een kat?','か maakt de zin tot een vraag.']]},
-  {id:'grammar-particle-mo',jp:'も',kana:'も',romaji:'mo',kind:'grammatica',label:'Partikel · ook',meaning:'Voegt een persoon of ding toe als “ook”. In dit eenvoudige patroon neemt も de plaats van は in.',synonyms:['ook','eveneens','too','also'],level:4,lessonId:'l4-6',examples:[['それ も ねこ です','Dat is ook een kat.','も voegt “dat” toe aan dezelfde uitspraak.']]}
-];
+const grammarDictionaryIds={'grammar-ha':'grammar-particle-ha','grammar-no':'grammar-particle-no','grammar-ka':'grammar-particle-ka','grammar-mo':'grammar-particle-mo','grammar-wo':'grammar-particle-wo','grammar-ni':'grammar-particle-ni'};
+const dictionaryGrammar=window.LanguageJourneyContent.manifest.grammar.filter(item=>item.symbol).map(item=>{
+  const point=(item.availableFrom||item.introducedAt||'').match(/^(\d+)-(\d+)/),level=point?Number(point[1]):1,lessonIndex=point?Number(point[2])-1:0;
+  const exampleTranslations=item.exampleTranslations||[];
+  return{id:grammarDictionaryIds[item.id]||item.id,sourceGrammarId:item.id,jp:item.symbol,kana:item.symbol,romaji:item.romaji||'',audioKey:item.audioKey||item.audioId||'',kind:'grammatica',label:`${item.category||'Grammatica'} · Level ${level} · Les ${lessonIndex+1}`,meaning:item.dictionaryMeaning||item.shortExplanation||item.title,fullExplanation:item.fullExplanation||item.shortExplanation,pronunciationNote:item.pronunciationNote||'',synonyms:item.synonyms||[],level,lessonId:`l${level}-${lessonIndex+1}`,lessonIndex,examples:(item.examples||[]).map((example,index)=>[example,exampleTranslations[index]?.translation||'',exampleTranslations[index]?.note||''])}
+});
+dictionaryGrammar.forEach(entry=>{
+  entry.relatedPattern=window.LanguageJourneyContent.manifest.patterns.find(pattern=>pattern.dependencies?.includes(entry.sourceGrammarId))||null;
+});
+dictionaryGrammar.push({id:'grammar-particle-he',jp:'へ',kana:'へ',romaji:'e',kind:'grammatica',label:'Partikel · richting · Level 9',meaning:'Kan de richting markeren waarheen iemand gaat. Als partikel wordt へ als e uitgesproken; als los kana lees je he.',synonyms:['richting','naar','e'],level:9,lessonId:null,introducedAt:'9-1',examples:[['にほん へ いきます','Ik ga naar Japan.','へ markeert hier de richting.']]});
 function dictionaryKanaEntries(){
   const basic=Object.entries(kanaModules).flatMap(([script,module])=>module.rows.flatMap(row=>row.kana.map(([jp,romaji])=>({id:`kana-${script}-${jp}`,jp,kana:jp,romaji:jp==='を'?'o':romaji,kind:'kana',label:`${module.label} · schriftteken`,meaning:'Dit is een kana: een schriftteken dat een klank weergeeft. Het heeft op zichzelf geen Nederlandse woordbetekenis.',synonyms:jp==='を'?['wo']:[],level:1,lessonId:null,script,lexical:false}))));
   const voiced=dakutenPatterns.flatMap(pattern=>[['hiragana',pattern.newH],['katakana',pattern.newK]].flatMap(([script,items])=>items.map(([jp,romaji])=>({id:`kana-${script}-${jp}`,jp,kana:jp,romaji,kind:'kana',label:`${kanaModules[script].label} · dakuten`,meaning:'Dit is een kana met een stemteken. Het teken verandert de klank van de basis-kana; op zichzelf is het geen Nederlands woord.',synonyms:[],level:3,lessonId:null,script,lexical:false}))));
@@ -1901,6 +1945,14 @@ function dictionaryEntries(){
   return [...words,...dictionaryKanaEntries(),...dictionaryGrammar]
 }
 const dictionaryById=Object.fromEntries(dictionaryEntries().map(entry=>[entry.id,entry]));
+function dictionaryGrammarIsKnown(entry,lessonId=''){
+  const grammar=entry.sourceGrammarId?window.LanguageJourneyContent.manifest.grammar.find(item=>item.id===entry.sourceGrammarId):null;
+  const intro=grammar?.availableFrom||grammar?.introducedAt||entry.introducedAt;
+  if(!intro)return true;
+  const lesson=lessonId?window.LanguageJourneyContent.manifest.lessons.find(item=>item.id===lessonId):null;
+  const point=lesson?`${lesson.level}-${lesson.order}`:`${Math.max(1,Number(state.currentLevel)||1)}-999`;
+  try{return window.LanguageJourneyContent.pointOrder(intro)<=window.LanguageJourneyContent.pointOrder(point)}catch{return false}
+}
 function dictionaryNormalize(value){return String(value||'').normalize('NFKC').toLocaleLowerCase('nl-NL').replace(/[\s・·.,!?。、「」『』]/g,'')}
 function dictionaryNormalizeRomaji(value){return String(value||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('nl-NL').replace(/[\s・·.,!?。、「」『』]/g,'')}
 function dictionaryRomajiVariants(value){
@@ -1913,7 +1965,7 @@ function dictionaryRomajiVariants(value){
 function dictionarySearch(query){
   const q=dictionaryNormalize(query);if(!q)return[];
   const qVariants=/[a-zāīūēō]/i.test(query)&&!/[\u3040-\u30ff\u3400-\u9fff]/.test(query)?dictionaryRomajiVariants(query):[q];
-  return Object.values(dictionaryById).map(entry=>{
+  return Object.values(dictionaryById).filter(entry=>entry.kind!=='grammatica'||dictionaryGrammarIsKnown(entry)).map(entry=>{
     const fields=[entry.jp,entry.kana,entry.meaning,entry.synonyms?.join(' '),entry.label,entry.kanji,entry.kanjiReading].filter(Boolean).map(dictionaryNormalize);fields.push(...dictionaryRomajiVariants(entry.romaji||''));
     const rank=fields.some(x=>qVariants.includes(x))?0:fields.some(x=>qVariants.some(qv=>x.startsWith(qv)))?1:fields.some(x=>qVariants.some(qv=>x.includes(qv)))?2:99;
     return{entry,rank}
@@ -1921,8 +1973,8 @@ function dictionarySearch(query){
 }
 function dictionaryEntryForToken(token,lessonId){
   const candidates=Object.values(dictionaryById);
-  const grammar=candidates.find(e=>e.kind==='grammatica'&&e.jp===token);
-  if(grammar&&['は','へ','を','か','も'].includes(token))return grammar;
+  const grammar=candidates.find(e=>e.kind==='grammatica'&&e.jp===token&&dictionaryGrammarIsKnown(e,lessonId));
+  if(grammar)return grammar;
   const word=candidates.find(e=>e.kind==='woord'&&e.jp===token&&(!lessonId||e.lessonId===lessonId))||candidates.find(e=>e.kind==='woord'&&e.jp===token);
   return word||candidates.find(e=>e.kind==='kana'&&e.jp===token&&e.script==='hiragana')||null
 }
@@ -1948,12 +2000,44 @@ function dictionaryArticleHtml(entry,context={}){
   const readingText=entry.kind==='grammatica'?`${romaji}${entry.jp==='は'?' · los kana: ha':entry.jp==='へ'?' · los kana: he':''}`:entry.kind==='kana'||entry.kind==='klankcombinatie'?romaji:`${entry.kana}${entry.kana!==entry.jp?` · ${entry.kana}`:''} · ${romaji}`;
   return`<article><div class="eyebrow">${escapeHtml(entry.label)}</div><h2 id="dictionaryModalTitle" class="dictionary-entry-title" lang="ja">${escapeHtml(entry.jp)}</h2><div class="muted">${escapeHtml(kindLabel)}</div><div style="margin-top:9px"><strong>${escapeHtml(entry.meaning)}</strong></div>${romaji?`<div style="margin-top:5px"><span class="small">${readingLabel}:</span> <strong>${escapeHtml(readingText)}</strong></div>`:''}${kanji}${contextHtml}${future?`<div class="notice" style="margin-top:10px">Vooruitblik · dit woord staat in een latere les en is nog niet als geleerd gemarkeerd.</div>`:''}${entry.kind==='woord'&&entry.lessonId?`<div class="small" style="margin-top:8px">${escapeHtml(dictionaryLessonLabel(entry))}${entry.lessonTitle?` · ${escapeHtml(entry.lessonTitle)}`:''}${entry.legacy?' · bewaarde woorden uit een oudere lesversie':''}</div>`:''}${senses}${entry.synonyms?.length?`<div class="small" style="margin-top:10px"><strong>Ook zoeken op:</strong> ${entry.synonyms.map(escapeHtml).join(' · ')}</div>`:''}${examples}</article>`
 }
+function enhanceDictionaryArticle(container,entry){
+  if(entry.kind!=='grammatica')return;
+  const heading=container.querySelector('.dictionary-entry-title');
+  if(!heading)return;
+  const meaning=heading.parentElement.querySelector('div[style*="margin-top:9px"]');
+  const details=document.createElement('div');
+  details.className='dictionary-grammar-details';
+  details.style.marginTop='9px';
+  if(entry.fullExplanation&&entry.fullExplanation!==entry.meaning){
+    const explanation=document.createElement('div');
+    explanation.className='small';
+    explanation.textContent=entry.fullExplanation;
+    details.appendChild(explanation);
+  }
+  if(entry.pronunciationNote){
+    const note=document.createElement('div');
+    note.className='panel small';
+    note.style.marginTop='8px';
+    note.textContent='Uitspraak: '+entry.pronunciationNote;
+    details.appendChild(note);
+  }
+  if(entry.relatedPattern){
+    const reference=document.createElement('div');
+    reference.className='small';
+    reference.style.marginTop='8px';
+    reference.textContent='Grammaticaal patroon: '+entry.relatedPattern.title;
+    details.appendChild(reference);
+  }
+  if(details.childElementCount)meaning?.insertAdjacentElement('afterend',details);
+  const audio=speakerButtonHtml(entry.jp,entry.audioKey,'Luister naar de uitspraak van '+entry.jp);
+  if(audio)heading.insertAdjacentHTML('afterend',audio);
+}
 function renderDictionaryTab(box){
   const known=state.introducedVocabIds.map(id=>vocabById[id]).filter(Boolean);
   box.innerHTML=`<section class="card"><div class="h2">Dictionary · woorden en grammatica</div><div class="muted">Zoek in cursuswoorden, kana en grammaticale tekens. Opzoeken verandert je leer- of herhaalvoortgang niet.</div><label for="dictionarySearch" class="small" style="display:block;margin-top:11px">Zoeken op Japans, kana, romaji of Nederlands</label><input id="dictionarySearch" class="dictionary-search" type="search" autocomplete="off" enterkeyhint="search" aria-controls="dictionaryResults" aria-describedby="dictionarySearchHint" placeholder="Bijv. か · ka · ook · water"><div id="dictionarySearchHint" class="small" style="margin-top:6px">Ook niet-aangeleerde cursuswoorden zijn vindbaar; die herken je aan het label ‘Vooruitblik’.</div></section><section class="card"><div id="dictionaryArticle"></div></section><section class="card"><div class="between"><div><div class="h2">Resultaten</div><div id="dictionaryResultCount" class="small" aria-live="polite"></div></div></div><div id="dictionaryResults" class="dictionary-results" role="region" aria-label="Dictionary-resultaten" style="margin-top:9px"></div></section>`;
   const input=$('dictionarySearch'),results=$('dictionaryResults'),article=$('dictionaryArticle');
-  const showArticle=id=>{const entry=dictionaryById[id];if(entry){article.innerHTML=dictionaryArticleHtml(entry);state.dictionarySelectedId=id}};
-  const draw=()=>{const q=input.value.trim(),list=q?dictionarySearch(q):[...dictionaryGrammar,...known.map(v=>dictionaryById[v.id]).filter(Boolean)];$('dictionaryResultCount').textContent=`${list.length} ${list.length===1?'resultaat':'resultaten'}${q?' voor “'+q+'”':''}`;results.innerHTML=list.length?list.slice(0,80).map(e=>`<button type="button" aria-pressed="${e.id===state.dictionarySelectedId}" class="dictionary-result" data-dictionary-select="${escapeHtml(e.id)}"><span><strong lang="ja">${escapeHtml(e.jp)}</strong> · ${escapeHtml(e.meaning)}<small>${escapeHtml(e.label)}${e.kind==='woord'&&!state.introducedVocabIds.includes(e.id)?' · Vooruitblik':''}</small></span><span class="dictionary-kind">${escapeHtml(e.kind)}</span></button>`).join(''):'<div class="panel">Geen treffers. Probeer de Japanse schrijfwijze, romaji of een andere Nederlandse betekenis.</div>';results.querySelectorAll('[data-dictionary-select]').forEach(b=>b.onclick=()=>showArticle(b.dataset.dictionarySelect));if(!state.dictionarySelectedId||!dictionaryById[state.dictionarySelectedId])article.innerHTML='<div class="muted">Kies een resultaat om de betekenis en lescontext te bekijken.</div>';else showArticle(state.dictionarySelectedId)};
+  const showArticle=id=>{const entry=dictionaryById[id];if(entry){article.innerHTML=dictionaryArticleHtml(entry);enhanceDictionaryArticle(article,entry);state.dictionarySelectedId=id}};
+  const draw=()=>{const q=input.value.trim(),list=q?dictionarySearch(q):[...dictionaryGrammar.filter(entry=>dictionaryGrammarIsKnown(entry)),...known.map(v=>dictionaryById[v.id]).filter(Boolean)];$('dictionaryResultCount').textContent=`${list.length} ${list.length===1?'resultaat':'resultaten'}${q?' voor “'+q+'”':''}`;results.innerHTML=list.length?list.slice(0,80).map(e=>`<button type="button" aria-pressed="${e.id===state.dictionarySelectedId}" class="dictionary-result" data-dictionary-select="${escapeHtml(e.id)}"><span><strong lang="ja">${escapeHtml(e.jp)}</strong> · ${escapeHtml(e.meaning)}<small>${escapeHtml(e.label)}${e.kind==='woord'&&!state.introducedVocabIds.includes(e.id)?' · Vooruitblik':''}</small></span><span class="dictionary-kind">${escapeHtml(e.kind)}</span></button>`).join(''):'<div class="panel">Geen treffers. Probeer de Japanse schrijfwijze, romaji of een andere Nederlandse betekenis.</div>';results.querySelectorAll('[data-dictionary-select]').forEach(b=>b.onclick=()=>showArticle(b.dataset.dictionarySelect));if(!state.dictionarySelectedId||!dictionaryById[state.dictionarySelectedId])article.innerHTML='<div class="muted">Kies een resultaat om de betekenis en lescontext te bekijken.</div>';else showArticle(state.dictionarySelectedId)};
   input.value=state.dictionaryQuery||'';input.oninput=()=>{state.dictionaryQuery=input.value;state.dictionarySelectedId=null;draw()};draw()
 }
 let dictionaryReturnFocus=null,dictionaryReturnScroll=null;
@@ -1962,6 +2046,7 @@ function openDictionaryModal(id,lessonId='',sentence='',meaning=''){
   dictionaryReturnFocus=document.activeElement;dictionaryReturnScroll={x:window.scrollX,y:window.scrollY};
   const lesson=lessonId?langLessons.find(l=>l.id===lessonId)||smallLessons.find(l=>l.id===lessonId)||Object.values(advancedCourses).flatMap(c=>c.lessons).find(l=>l.id===lessonId):null;
   $('dictionaryModalBody').innerHTML=dictionaryArticleHtml(entry,{sentence,meaning,lessonLabel:lesson?.title||''});
+  enhanceDictionaryArticle($('dictionaryModalBody'),entry);
   modal.classList.remove('hidden');document.body.style.overflow='hidden';$('dictionaryClose').focus()
 }
 function closeDictionaryModal(){const modal=$('dictionaryModal');if(!modal||modal.classList.contains('hidden'))return;modal.classList.add('hidden');document.body.style.overflow='';if(dictionaryReturnScroll)window.scrollTo(dictionaryReturnScroll.x,dictionaryReturnScroll.y);if(dictionaryReturnFocus?.isConnected)dictionaryReturnFocus.focus({preventScroll:true});dictionaryReturnFocus=null;dictionaryReturnScroll=null}
@@ -2379,7 +2464,8 @@ function levelRankIds(level){
   if(level===2)return['dak-examA','dak-examB'];
   if(level===3)return['l4-exam'];
   if(level===4)return['l5-exam'];
-  if(level>=5&&level<=11)return[`l${level+1}-exam`];
+  if(level>=5&&level<=9)return[`l${level+1}-exam`];
+  if(thematicCourses[level])return[`l${thematicCourses[level].number}-exam`];
   return[];
 }
 function levelRank(level){return minRankForIds(levelRankIds(level))}
@@ -2401,7 +2487,10 @@ function moduleRank(key){
 }
 
 
-const state={screen:'home',courseId:preferences.courseId,targetLanguage:platform.course(preferences.courseId)?.targetLanguage||'ja',uiLanguage:preferences.uiLanguage,level:0,currentLevel:1,userName:'',userNameJapanese:'',avatarId:'avatar-female',avatarName:'Miku',avatarNameJapanese:'ミク',avatarNameCustom:false,avatarNameJapaneseCustom:false,avatarEnabled:true,avatarGender:'female',avatarMode:'auto',selectedAvatarSkin:null,unlockedAvatarSkins:['skin-1'],basisModule:'hiragana',tabs:{hiragana:'learn',katakana:'learn',numbers:'learn',mix:'practice',dakuten:'learn',lang:'learn',small:'learn',advanced:'learn'},row:{hiragana:0,katakana:0},step:{hiragana:0,katakana:0},numberLesson:0,dakScript:'hiragana',dakPattern:0,dakStep:0,langLesson:0,langView:'list',langStep:'overview',langStepProgress:{},introducedVocabIds:[],vocabFirstSeen:{},kanaFirstSeen:{},smallLesson:0,advancedLesson:{5:0,6:0,7:0,8:0,9:0},advancedView:{5:'list',6:'list',7:'list',8:'list',9:'list'},advancedStep:{5:'overview',6:'overview',7:'overview',8:'overview',9:'overview'},advancedStepProgress:{},progressTab:'progress',progressActivityLimit:10,progressKnowledgeTab:'levels',progressKanaGroup:'hiragana',progressDetailId:null,progressVocabDetailId:null,studyRange:{low:0,high:100},studyCalendar:{from:'',to:''},studyFilters:{category:'',skill:'',origin:'',level:'',tag:''},studyTracker:{version:1,courseStartedAt:null,trackingStartedAt:null,sessions:[],events:[],noticeDismissed:false,active:null},practiceSelections:{hiragana:[0,1,2],katakana:[0,1,2],hiraganaChars:[],katakanaChars:[],dakuten:['g','z'],dakScripts:['hiragana','katakana'],numbers:['0-10']},errorBank:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},lastErrors:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},quiz:null,lastConfig:null};
+const state={screen:'home',courseId:preferences.courseId,targetLanguage:platform.course(preferences.courseId)?.targetLanguage||'ja',uiLanguage:preferences.uiLanguage,level:0,currentLevel:1,userName:'',userNameJapanese:'',avatarId:'avatar-female',avatarName:'Miku',avatarNameJapanese:'ミク',avatarNameCustom:false,avatarNameJapaneseCustom:false,avatarEnabled:true,avatarGender:'female',avatarMode:'auto',selectedAvatarSkin:null,unlockedAvatarSkins:['skin-1'],audioEnabled:true,correctSoundEnabled:true,audioCoachEnabled:true,audioVolume:.65,basisModule:'hiragana',tabs:{hiragana:'learn',katakana:'learn',numbers:'learn',mix:'practice',dakuten:'learn',lang:'learn',small:'learn',advanced:'learn'},row:{hiragana:0,katakana:0},step:{hiragana:0,katakana:0},numberLesson:0,dakScript:'hiragana',dakPattern:0,dakStep:0,langLesson:0,langView:'list',langStep:'overview',langStepProgress:{},introducedVocabIds:[],instructionKnowledge:{},vocabFirstSeen:{},kanaFirstSeen:{},smallLesson:0,advancedLesson:{5:0,6:0,7:0,8:0,9:0},advancedView:{5:'list',6:'list',7:'list',8:'list',9:'list'},advancedStep:{5:'overview',6:'overview',7:'overview',8:'overview',9:'overview'},advancedStepProgress:{},progressTab:'progress',progressActivityLimit:10,progressKnowledgeTab:'levels',progressKanaGroup:'hiragana',progressDetailId:null,progressVocabDetailId:null,studyRange:{low:0,high:100},studyCalendar:{from:'',to:''},studyFilters:{category:'',skill:'',origin:'',level:'',tag:''},studyTracker:{version:1,courseStartedAt:null,trackingStartedAt:null,sessions:[],events:[],noticeDismissed:false,active:null},practiceSelections:{hiragana:[0,1,2],katakana:[0,1,2],hiraganaChars:[],katakanaChars:[],dakuten:['g','z'],dakScripts:['hiragana','katakana'],numbers:['0-10']},errorBank:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},lastErrors:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},quiz:null,lastConfig:null};
+state.screen='app-home';
+state.currentCourse=null;
+state.primaryTab='learn';
 const t=(key,values)=>i18n.translate(key,state.uiLanguage,values);
 function localizedLevel(index){const level=levels[index],number=index+1;return[level[0],t(`course.${state.courseId}.level.${number}.title`),t(`course.${state.courseId}.level.${number}.description`)]}
 function setUiLanguage(language){state.uiLanguage=i18n.language(language);document.documentElement.lang=state.uiLanguage;platform.savePreferences(state);scheduleSave();if(!$('sessionView').classList.contains('hidden'))renderSession();else renderMain();i18n.localizeNodes(root,state.uiLanguage)}
@@ -2533,9 +2622,50 @@ function avatarAssistHtml({pose='neutral',outfit=null,hairstyle=state.avatarHair
   const safeSize=['small','medium','large'].includes(size)?size:'small';
   return`<div class="avatar-assist avatar-assist--${safePlacement} avatar-assist--${safeSize}"><div class="avatar-assist-copy"><strong>${escapeHtml(message)}</strong>${detail?`<div class="small">${escapeHtml(detail)}</div>`:''}</div><div class="avatar-assist-figure" aria-hidden="true">${avatarVisualHtml({pose,outfit,hairstyle})}</div></div>`;
 }
+const AUDIO_FEEDBACK_MS=1500;
+const AUDIO_COACH_DISMISS_MS=5000;
+const AUDIO_COACH_REPLAY_WINDOW_MS=900;
+const CORRECT_ANSWER_SOUND='./assets/audio/correct-soft.wav';
+let quizFeedbackTimer=null,quizAnswerToken=0,recallFeedbackTimer=null,audioCoachTimer=null,audioCoachPlayback=null,audioCoachAsset=null,audioCoachText='',audioCoachPlacement='is-bottom',audioCoachCompletion=null;
+function registeredAudioAsset(key='',text=''){
+  const assets=window.LanguageJourneyContent?.manifest?.audio?.assets||[];
+  return assets.find(asset=>key&&asset.id===key)||assets.find(asset=>text&&asset.textJa===text)||null;
+}
+function speakerButtonHtml(text,key='',label='Luister naar Japanse uitspraak'){
+  if(!state.audioEnabled||!text||!registeredAudioAsset(key,text))return'';
+  return`<button class="audio-speaker" type="button" data-audio-key="${escapeHtml(key)}" data-audio-text="${escapeHtml(text)}" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}">🔊</button>`;
+}
+function stopAvatarAudio(){if(audioCoachTimer)clearTimeout(audioCoachTimer);audioCoachTimer=null;if(audioCoachPlayback){audioCoachPlayback.onended=null;audioCoachPlayback.onerror=null;audioCoachPlayback.pause();audioCoachPlayback=null}audioCoachCompletion=null}
+function hideAvatarAudioOverlay(){const completion=audioCoachCompletion;audioCoachCompletion=null;stopAvatarAudio();const overlay=$('avatarAudioOverlay');if(overlay){overlay.hidden=true;overlay.innerHTML=''}if(completion)completion()}
+function audioOverlayPlacement(source){
+  const viewportHeight=window.visualViewport?.height||window.innerHeight||document.documentElement.clientHeight||600;
+  const rect=source?.getBoundingClientRect?.();
+  const sourceY=rect?rect.top+rect.height/2:viewportHeight/2;
+  return sourceY<viewportHeight/2?'is-bottom':'is-top';
+}
+function renderAvatarAudioOverlay(text,placement,status=''){
+  if(!state.audioCoachEnabled||!state.avatarEnabled)return;
+  const overlay=$('avatarAudioOverlay');if(!overlay)return;
+  overlay.className=`avatar-audio-overlay ${placement}`;
+  overlay.innerHTML=`<div class="between" style="align-items:center;gap:6px"><div class="avatar-assist-figure" aria-hidden="true">${avatarVisualHtml({pose:'tip'})}</div><div class="avatar-audio-overlay-copy"><div class="small">${escapeHtml(avatarDisplayName())} leest voor</div><div lang="ja">${escapeHtml(text)}</div><div class="small" role="status">${escapeHtml(status)}</div></div><div class="avatar-audio-overlay-actions"><button class="audio-speaker" type="button" data-audio-replay="1" aria-label="Opnieuw afspelen">↻</button><button class="btn tiny" type="button" data-audio-close="1" aria-label="Coach sluiten">×</button></div></div>`;
+  overlay.hidden=false;
+}
+function playAvatarAudio(key,text,source,forcedPlacement=''){
+  const asset=registeredAudioAsset(key,text);if(!asset)return false;
+  stopAvatarAudio();audioCoachAsset=asset;audioCoachText=text;
+  const placement=forcedPlacement||audioOverlayPlacement(source);audioCoachPlacement=placement;
+  renderAvatarAudioOverlay(text,placement,'Afspelen…');
+  const audio=new Audio(`./${String(asset.path||'').replace(/^\.\//,'')}`);audio.preload='auto';audio.volume=Math.max(0,Math.min(1,Number(state.audioVolume)||0));audioCoachPlayback=audio;
+  const finish=(status='Klaar · tik op ↻ om nog eens te horen',delay=1800)=>{if(audioCoachPlayback!==audio)return;audioCoachPlayback=null;renderAvatarAudioOverlay(text,placement,status);audioCoachTimer=setTimeout(()=>{const completion=audioCoachCompletion;audioCoachCompletion=null;hideAvatarAudioOverlay();if(completion)completion()},audioCoachCompletion?AUDIO_COACH_REPLAY_WINDOW_MS:delay)};
+  audio.onended=()=>finish();audio.onerror=()=>finish('Audio kon niet worden afgespeeld',1000);
+  audio.play().catch(()=>finish('Audio kon niet worden afgespeeld',1000));
+  audioCoachTimer=setTimeout(()=>{if(audioCoachPlayback===audio){audio.pause();finish()}},AUDIO_COACH_DISMISS_MS);
+  return audio;
+}
+function playCorrectAnswerSound(){if(!state.correctSoundEnabled||!state.audioEnabled)return;const audio=new Audio(CORRECT_ANSWER_SOUND);audio.volume=Math.max(0,Math.min(.35,Number(state.audioVolume)||0));audio.play().catch(()=>{})}
 
 const STORAGE_KEY=platform.progressKey(state.courseId);
-const STORAGE_VERSION=6;
+const STORAGE_VERSION=7;
 let storageOk=true;
 let lastSavedAt=null;
 let saveTimer=null;
@@ -2572,6 +2702,8 @@ function storageStateSnapshot(){
   return {
     screen:state.screen,
     courseId:state.courseId,
+    currentCourse:state.currentCourse,
+    primaryTab:state.primaryTab,
     targetLanguage:state.targetLanguage,
     uiLanguage:state.uiLanguage,
     level:state.level,
@@ -2584,6 +2716,10 @@ function storageStateSnapshot(){
     avatarNameCustom:state.avatarNameCustom,
     avatarNameJapaneseCustom:state.avatarNameJapaneseCustom,
     avatarEnabled:state.avatarEnabled,
+    audioEnabled:state.audioEnabled,
+    correctSoundEnabled:state.correctSoundEnabled,
+    audioCoachEnabled:state.audioCoachEnabled,
+    audioVolume:state.audioVolume,
     avatarGender:state.avatarGender,
     avatarMode:state.avatarMode,
     selectedAvatarSkin:state.selectedAvatarSkin,
@@ -2605,6 +2741,7 @@ function storageStateSnapshot(){
     langStep:state.langStep,
     langStepProgress:state.langStepProgress,
     introducedVocabIds:state.introducedVocabIds,
+    instructionKnowledge:state.instructionKnowledge,
     flashcardProgress:state.flashcardProgress,
     flashcardSelection:state.flashcardSelection,
     flashcardSession:state.flashcardSession,
@@ -2668,12 +2805,14 @@ function loadProgress(){
   try{
     const raw=localStorage.getItem(STORAGE_KEY);
     const parsed=raw?JSON.parse(raw):null;
-    const saved=parsed&&[1,2,3,4,5,6].includes(parsed.version)?parsed:{version:STORAGE_VERSION,state:{},ranks:{}};
+    const saved=parsed&&[1,2,3,4,5,6,7].includes(parsed.version)?parsed:{version:STORAGE_VERSION,state:{},ranks:{}};
     savedVersion=saved.version;
     const s=saved.state||{};
-    if(['home','levels','level','module','flashcards'].includes(s.screen))state.screen=s.screen;
+    if(['app-home','home','levels','level','module','flashcards','options','options-profile','options-audio'].includes(s.screen))state.screen=s.screen;
     else state.screen='home';
-    if(Number.isInteger(s.level))state.level=Math.max(0,Math.min(levels.length-1,s.level));
+    state.currentCourse=Object.hasOwn(s,'currentCourse')?(platform.course(s.currentCourse)?.id||null):state.courseId;
+    state.primaryTab=['learn','recall','progress'].includes(s.primaryTab)?s.primaryTab:(state.screen==='flashcards'?'recall':'learn');
+    if(Number.isInteger(s.level))state.level=Math.max(0,Math.min(levels.length-1,savedVersion<=6&&s.level===10?14:s.level));
     if(typeof s.userName==='string')state.userName=s.userName;
     if(typeof s.userNameJapanese==='string')state.userNameJapanese=s.userNameJapanese;
     if(typeof s.avatarName==='string')state.avatarName=s.avatarName;
@@ -2681,6 +2820,10 @@ function loadProgress(){
     if(typeof s.avatarNameCustom==='boolean')state.avatarNameCustom=s.avatarNameCustom;
     if(typeof s.avatarNameJapaneseCustom==='boolean')state.avatarNameJapaneseCustom=s.avatarNameJapaneseCustom;
     if(typeof s.avatarEnabled==='boolean')state.avatarEnabled=s.avatarEnabled;
+    if(typeof s.audioEnabled==='boolean')state.audioEnabled=s.audioEnabled;
+    if(typeof s.correctSoundEnabled==='boolean')state.correctSoundEnabled=s.correctSoundEnabled;
+    if(typeof s.audioCoachEnabled==='boolean')state.audioCoachEnabled=s.audioCoachEnabled;
+    if(Number.isFinite(Number(s.audioVolume)))state.audioVolume=Math.max(0,Math.min(1,Number(s.audioVolume)));
     if(['male','female'].includes(s.avatarGender))state.avatarGender=s.avatarGender;
     if(['auto','manual'].includes(s.avatarMode))state.avatarMode=s.avatarMode;
     if(typeof s.selectedAvatarSkin==='string')state.selectedAvatarSkin=s.selectedAvatarSkin;
@@ -2705,9 +2848,10 @@ function loadProgress(){
     if(s.flashcardSession&&typeof s.flashcardSession==='object'&&Array.isArray(s.flashcardSession.queue))state.flashcardSession={mode:s.flashcardSession.mode==='free'?'free':'scheduled',queue:s.flashcardSession.queue.filter(x=>x&&vocabById[x.cardId]&&['jp-nl','nl-jp'].includes(x.direction)).map(x=>({cardId:x.cardId,direction:x.direction,answerChoices:Array.isArray(x.answerChoices)?[...new Set(x.answerChoices.filter(v=>typeof v==='string'&&v.length<200))].slice(0,4):null,round:Math.max(0,Math.floor(Number(x.round)||0))})),position:Math.max(0,Math.floor(Number(s.flashcardSession.position)||0)),status:['active','paused','complete'].includes(s.flashcardSession.status)?s.flashcardSession.status:'paused',revealed:!!s.flashcardSession.revealed,knew:Math.max(0,Math.floor(Number(s.flashcardSession.knew)||0)),again:Math.max(0,Math.floor(Number(s.flashcardSession.again)||0)),skipped:Math.max(0,Math.floor(Number(s.flashcardSession.skipped)||0)),viewed:Math.max(0,Math.floor(Number(s.flashcardSession.viewed)||0)),requeued:Array.isArray(s.flashcardSession.requeued)?s.flashcardSession.requeued:[],feedback:s.flashcardSession.feedback&&['knew','again','viewed'].includes(s.flashcardSession.feedback.grade)?{grade:s.flashcardSession.feedback.grade,chosen:typeof s.flashcardSession.feedback.chosen==='string'?s.flashcardSession.feedback.chosen.slice(0,200):null,until:Number(s.flashcardSession.feedback.until)||null,ungraded:!!s.flashcardSession.feedback.ungraded}:null,startedAt:Number(s.flashcardSession.startedAt)||Date.now()};
     if(state.flashcardSession)state.flashcardSession.optionsRevealed=!!s.flashcardSession.optionsRevealed;
     ['advancedLesson','advancedView','advancedStep','advancedStepProgress'].forEach(k=>{if(s[k]&&typeof s[k]==='object')Object.assign(state[k],s[k])});
-    if(s.thematic&&typeof s.thematic==='object'&&[11,12].includes(s.thematic.level))state.thematic={level:s.thematic.level,lessonIndex:Math.max(0,Math.min(4,Number(s.thematic.lessonIndex)||0)),part:s.thematic.part==='B'?'B':'A',step:['list','lesson','words','practice','reading','questions','done'].includes(s.thematic.step)?s.thematic.step:'list',questionIndex:Math.max(0,Math.floor(Number(s.thematic.questionIndex)||0)),correct:Math.max(0,Math.floor(Number(s.thematic.correct)||0)),answered:!!s.thematic.answered,selected:typeof s.thematic.selected==='string'?s.thematic.selected:null};
-    if(s.thematicCompleted&&typeof s.thematicCompleted==='object')for(const [id,parts] of Object.entries(s.thematicCompleted))if(/^l1[12]-[1-5]$/.test(id)&&parts&&typeof parts==='object')state.thematicCompleted[id]={A:!!parts.A,B:!!parts.B};
-    if(s.thematicScores&&typeof s.thematicScores==='object')for(const [id,scores] of Object.entries(s.thematicScores))if(/^l1[12]-[1-5]$/.test(id)&&scores&&typeof scores==='object')state.thematicScores[id]={A:Math.max(0,Number(scores.A)||0),B:Math.max(0,Number(scores.B)||0)};
+    if(s.instructionKnowledge&&typeof s.instructionKnowledge==='object')for(const [id,value] of Object.entries(s.instructionKnowledge))if(window.LanguageJourneyContent.manifest.instructions.some(item=>item.id===id))state.instructionKnowledge[id]={attempts:Math.max(0,Math.floor(Number(value?.attempts)||0)),correct:Math.max(0,Math.floor(Number(value?.correct)||0))};
+    if(s.thematic&&typeof s.thematic==='object'&&[11,12,13,14,15].includes(savedVersion<=6&&s.thematic.level===11?15:s.thematic.level)){const thematicLevel=savedVersion<=6&&s.thematic.level===11?15:s.thematic.level;state.thematic={level:thematicLevel,lessonIndex:Math.max(0,Math.min(4,Number(s.thematic.lessonIndex)||0)),part:s.thematic.part==='B'?'B':'A',step:['list','lesson','words','practice','reading','questions','done'].includes(s.thematic.step)?s.thematic.step:'list',questionIndex:Math.max(0,Math.floor(Number(s.thematic.questionIndex)||0)),correct:Math.max(0,Math.floor(Number(s.thematic.correct)||0)),answered:!!s.thematic.answered,selected:typeof s.thematic.selected==='string'?s.thematic.selected:null};}
+    if(s.thematicCompleted&&typeof s.thematicCompleted==='object')for(const [id,parts] of Object.entries(s.thematicCompleted))if(/^l(?:11-home|11|12|13|14|15)-[1-5]$/.test(id)&&parts&&typeof parts==='object')state.thematicCompleted[id]={A:!!parts.A,B:!!parts.B};
+    if(s.thematicScores&&typeof s.thematicScores==='object')for(const [id,scores] of Object.entries(s.thematicScores))if(/^l(?:11-home|11|12|13|14|15)-[1-5]$/.test(id)&&scores&&typeof scores==='object')state.thematicScores[id]={A:Math.max(0,Number(scores.A)||0),B:Math.max(0,Number(scores.B)||0)};
     if(['hiragana','katakana'].includes(s.dakScript))state.dakScript=s.dakScript;
     if(['profile','progress','knowledge'].includes(s.progressTab))state.progressTab=s.progressTab;
     else if(['analysis','timeline','activities','overview'].includes(s.progressTab))state.progressTab='progress';
@@ -2753,6 +2897,7 @@ function loadProgress(){
       });
     }
     const ranks=saved.ranks||{};
+    if(savedVersion<=6&&ranks['l11-exam']&&!ranks['l15-exam'])ranks['l15-exam']=ranks['l11-exam'];
     Object.keys(ranks).forEach(id=>{
       if(!rankState[id])return;
       const src=ranks[id]||{};
@@ -2821,15 +2966,28 @@ function setMain(){show('main');renderMain()}
 const pct=x=>Math.round(x*100)+'%';
 
 function updateHeader(){
-  const back=$('navBack'),home=$('navHome'),ey=$('headerEyebrow'),title=$('headerTitle'),learn=$('learnNav'),cards=$('flashcardsNav'),progress=$('sessionBtn');
+  const back=$('navBack'),home=$('navHome'),options=$('navOptions'),ey=$('headerEyebrow'),title=$('headerTitle'),learn=$('learnNav'),cards=$('flashcardsNav'),progress=$('sessionBtn');
   const progressOpen=!$('sessionView').classList.contains('hidden');
   const cardsOpen=!$('flashcardView').classList.contains('hidden')||state.screen==='flashcards';
-  learn.classList.toggle('active',!progressOpen&&!cardsOpen&&state.screen!=='home');
+  const appShell=!state.currentCourse||state.screen==='app-home'||state.screen.startsWith('options');
+  root.dataset.shell=appShell?'app':'course';
+  document.body.dataset.appShell=appShell?'app':'course';
+  document.title=appShell?'Language Journey':`Language Journey — ${state.currentCourse==='japanese'?t('course.japanese.name'):platform.course(state.currentCourse)?.displayName||state.currentCourse}`;
+  state.primaryTab=appShell?'learn':progressOpen?'progress':cardsOpen?'recall':'learn';
+  learn.classList.toggle('active',!appShell&&!progressOpen&&!cardsOpen);
   cards.classList.toggle('active',cardsOpen&&!progressOpen);
   progress.classList.toggle('active',progressOpen);
-  home.classList.remove('hidden');
+  home.classList.toggle('hidden',appShell);
+  home.title=t('app.allCourses');
+  options.setAttribute('aria-label',t('app.options'));
+  options.setAttribute('aria-expanded',String(state.screen.startsWith('options')));
   ey.classList.add('hidden');title.classList.add('hidden');
-  if(cardsOpen&&!progressOpen){
+  if(appShell){
+    back.classList.toggle('hidden',state.screen==='app-home');
+    ey.classList.remove('hidden');title.classList.remove('hidden');
+    ey.textContent='Language Journey';
+    title.textContent=state.screen==='app-home'?t('app.allCourses'):t('app.options');
+  }else if(cardsOpen&&!progressOpen){
     back.classList.add('hidden');
     ey.textContent=t('nav.cards');
     title.textContent=t('flashcards.title');
@@ -2844,12 +3002,14 @@ function updateHeader(){
     title.textContent=state.screen==='levels'?t('nav.levels'):state.screen==='module'?(moduleHeaderTitle()||lv?.[1]||t('course.japanese.name')):(lv?.[1]||t('course.japanese.name'));
   }
   learn.textContent=t('nav.learn');cards.textContent='Recall';progress.textContent=t('nav.progress');
+  syncBrowserRoute();
 }
 function moduleHeaderTitle(){
   if(state.level===0)return state.basisModule==='numbers'?t('course.japanese.level.1.numbers'):kanaModules[state.basisModule]?.label;
   return localizedLevel(state.level)?.[1]||t('course.japanese.name');
 }
 function navigateBack(){
+  if(flightTimer){clearTimeout(flightTimer);flightTimer=null;$('courseFlight').hidden=true;$('courseFlight').classList.remove('is-visible');return}
   if(!$('sceneTransition').hidden){scenes.cancel();return}
   if(!$('sessionView').classList.contains('hidden')){state.screen='home';scheduleSave();return setMain()}
   if(!$('flashcardView').classList.contains('hidden')||state.screen==='flashcards'){state.screen='home';scheduleSave();return renderMain()}
@@ -2959,7 +3119,8 @@ function levelMenuCard(lv,i){
   b.className=`level-menu-card ${rankClass(rank)}`;
   b.dataset.levelIndex=String(i);
   const [number,title,description]=localizedLevel(i);
-  b.innerHTML=`<div class="level-no">${number}</div><div class="level-title">${title}</div><div class="level-desc">${description}</div>`;
+  const levelLabel=i>=11&&state.introducedVocabIds.includes('vocab-レベル')?`レベル ${i+1}`:number;
+  b.innerHTML=`<div class="level-no">${levelLabel}</div><div class="level-title">${title}</div><div class="level-desc">${description}</div>`;
   b.onclick=()=>openLevel(i);
   return b;
 }
@@ -3078,7 +3239,7 @@ function renderAvatarUnlock(box){
   const notice=document.createElement('section');
   notice.className='avatar-assist avatar-assist--medium avatar-unlock';
   notice.innerHTML=`<div class="avatar-assist-copy"><strong>Nieuw outfit vrijgespeeld: ${escapeHtml(outfit.name)}</strong><div class="small">Je kunt het bekijken of later verder leren.</div><div class="avatar-unlock-actions"><button class="btn tiny" type="button" data-avatar-unlock="view">Bekijken</button><button class="btn tiny" type="button" data-avatar-unlock="later">Later</button></div></div><div class="avatar-assist-figure" aria-hidden="true">${avatarVisualHtml({pose:'celebrate',outfit})}</div>`;
-  notice.querySelector('[data-avatar-unlock="view"]').onclick=()=>{state.pendingAvatarOutfit=null;state.progressTab='profile';scheduleSave();renderSession()};
+  notice.querySelector('[data-avatar-unlock="view"]').onclick=()=>{state.pendingAvatarOutfit=null;state.currentCourse=null;state.screen='options-profile';routePushRequested=true;scheduleSave();renderMain()};
   notice.querySelector('[data-avatar-unlock="later"]').onclick=()=>{state.pendingAvatarOutfit=null;notice.remove()};
   box.prepend(notice);
 }
@@ -3142,6 +3303,60 @@ function renderLevelOverview(box,i){
 function tabsHtml(key,labels=['Leerroute','Oefenen','Examens']){const t=state.tabs[key];return`<div class="tabs"><button id="tabA" class="tab ${t==='learn'?'active':''}">${labels[0]}</button><button id="tabB" class="tab ${t==='practice'?'active':''}">${labels[1]}</button><button id="tabC" class="tab ${t==='exams'?'active':''}">${labels[2]}</button></div>`}
 function bindTabs(key){$('tabA').onclick=()=>{state.tabs[key]='learn';scheduleSave();renderMain()};$('tabB').onclick=()=>{state.tabs[key]='practice';scheduleSave();renderMain()};$('tabC').onclick=()=>{state.tabs[key]='exams';scheduleSave();renderMain()}}
 function renderLevels(){/* v7: levels are rendered in the dedicated level menu */}
+let flightTimer=null,routePushRequested=false,routeApplying=false;
+function routeForState(){
+  const screen=state.screen,view=document.body.dataset.view;
+  if(!state.currentCourse||screen==='app-home'||screen.startsWith('options'))return{screen,courseId:null,primaryTab:null};
+  if(view==='session')return{screen:'session',courseId:state.currentCourse,primaryTab:'progress'};
+  if(view==='flashcards'||screen==='flashcards')return{screen:'flashcards',courseId:state.currentCourse,primaryTab:'recall'};
+  return{screen,courseId:state.currentCourse,primaryTab:'learn',level:state.level};
+}
+function syncBrowserRoute(){
+  if(routeApplying||typeof history==='undefined')return;
+  const hash=navigation.formatHash(routeForState());
+  if(location.hash!==hash)history[routePushRequested?'pushState':'replaceState'](null,'',hash);
+  routePushRequested=false;
+}
+function applyBrowserRoute(route){
+  if(!route)return false;
+  routeApplying=true;
+  state.currentCourse=route.courseId;
+  state.primaryTab=route.primaryTab||'learn';
+  state.screen=route.screen==='session'?'home':route.screen;
+  if(Number.isInteger(route.level))state.level=Math.max(0,Math.min(levels.length-1,route.level));
+  if(route.screen==='session')renderSession();
+  else if(route.screen==='flashcards')renderFlashcardsScreen();
+  else renderMain();
+  routeApplying=false;
+  scheduleSave();
+  return true;
+}
+function renderAppHome(box){
+  const available=Object.values(platform.courses).filter(course=>platform.content(course.id));
+  box.innerHTML=`<div class="app-landing"><div class="landing-intro"><div class="eyebrow">Language Journey</div><h1>${escapeHtml(t('app.choose'))}</h1><p>${escapeHtml(t('app.intro'))}</p></div><div class="course-grid">${available.map(course=>{const name=course.names?.[state.uiLanguage]||(course.id==='japanese'?t('course.japanese.name'):course.displayName||course.id);return`<button class="course-tile course-tile--${escapeHtml(course.identity||'neutral')}" type="button" data-course-open="${escapeHtml(course.id)}" aria-label="${escapeHtml(t('app.openCourse',{name}))}"><span class="course-tile-sun" aria-hidden="true"></span><span class="course-tile-avatars" aria-hidden="true"><img src="${escapeHtml(course.avatars?.female||'')}" alt=""><img src="${escapeHtml(course.avatars?.male||'')}" alt=""></span><span class="course-tile-copy"><span class="eyebrow">${escapeHtml(t('profile.course'))}</span><strong>${escapeHtml(name)}</strong><small lang="${escapeHtml(course.targetLanguage)}">${escapeHtml(course.nativeName||'')}</small></span><span class="course-tile-arrow" aria-hidden="true">↗</span></button>`}).join('')}</div></div>`;
+  box.querySelectorAll('[data-course-open]').forEach(button=>button.onclick=()=>enterCourse(button.dataset.courseOpen));
+}
+function enterCourse(courseId){
+  const course=platform.course(courseId);
+  if(!course||!platform.content(courseId))return;
+  const finish=()=>{flightTimer=null;$('courseFlight').classList.remove('is-visible');$('courseFlight').hidden=true;if(courseId!==state.courseId){platform.savePreferences({uiLanguage:state.uiLanguage,courseId});history.pushState(null,'',navigation.formatHash({screen:'home',courseId,primaryTab:'learn'}));location.reload();return}state.courseId=courseId;state.currentCourse=courseId;state.primaryTab='learn';state.screen='home';routePushRequested=true;scheduleSave();renderMain()};
+  if(course.transition!=='flight-japan'){finish();return}
+  const overlay=$('courseFlight');overlay.hidden=false;
+  overlay.setAttribute('aria-label',t('app.flight'));
+  overlay.querySelector('strong').textContent=t('app.flight');
+  requestAnimationFrame(()=>overlay.classList.add('is-visible'));
+  flightTimer=setTimeout(finish,matchMedia('(prefers-reduced-motion: reduce)').matches?180:1200);
+}
+function renderOptions(box){
+  box.innerHTML=`<div class="app-options"><section class="card"><div class="eyebrow">Language Journey</div><div class="h1">${escapeHtml(t('app.options'))}</div><div class="muted">${escapeHtml(t('app.optionsIntro'))}</div></section><button class="option-entry" id="optionProfile" type="button"><span><strong>${escapeHtml(t('app.profileAvatar'))}</strong><small>${escapeHtml(state.userName||t('app.profileAvatar'))} · ${escapeHtml(avatarDisplayName())} · level ${getAvatarProgressLevel()}</small></span><span>›</span></button><button class="option-entry" id="optionAudio" type="button"><span><strong>${escapeHtml(t('app.audioSettings'))}</strong><small>${escapeHtml(t('app.audioSummary'))}</small></span><span>›</span></button><section class="card option-future"><strong>${escapeHtml(t('app.future'))}</strong><div class="small">${escapeHtml(t('app.futureIntro'))}</div></section></div>`;
+  $('optionProfile').onclick=()=>{state.screen='options-profile';routePushRequested=true;scheduleSave();renderMain()};
+  $('optionAudio').onclick=()=>{state.screen='options-audio';routePushRequested=true;scheduleSave();renderMain()};
+}
+function renderOptionsAudio(box){
+  box.innerHTML=`<div class="app-options"><section class="card"><div class="eyebrow">Instellingen</div><div class="h1">Audio en geluid</div><div class="muted">Deze keuzes gelden voor je Japanse cursus en zijn altijd aanpasbaar.</div></section><section class="card"><label class="option-switch"><span><strong>Uitspraak en audio</strong><span class="small">Speel beschikbare lokale opnames af.</span></span><input type="checkbox" data-audio-option="audioEnabled" ${state.audioEnabled?'checked':''}></label><label class="option-switch"><span><strong>Avatar-audiohulp</strong><span class="small">Toon de avatar bij afspelen.</span></span><input type="checkbox" data-audio-option="audioCoachEnabled" ${state.audioCoachEnabled?'checked':''}></label><label class="option-switch"><span><strong>Geluid bij goed antwoord</strong><span class="small">Een kort, subtiel signaal.</span></span><input type="checkbox" data-audio-option="correctSoundEnabled" ${state.correctSoundEnabled?'checked':''}></label><label class="option-switch"><span><strong>Volume</strong></span><input type="range" min="0" max="1" step="0.05" value="${state.audioVolume}" id="optionsAudioVolume" aria-label="Audiovolume"></label></section></div>`;
+  box.querySelectorAll('[data-audio-option]').forEach(input=>input.onchange=()=>{state[input.dataset.audioOption]=input.checked;if(!state.audioCoachEnabled)hideAvatarAudioOverlay();scheduleSave()});
+  $('optionsAudioVolume').oninput=event=>{state.audioVolume=Number(event.target.value);scheduleSave()};
+}
 function renderHomeMenu(box){
   const level=localizedLevel(state.level);
   const plan=continueJourneyPlan(),courseLessons=state.level===3?langLessons:state.level===4?smallLessons:state.level>=10?thematicCourses[state.level]?.lessons:advancedCourses[state.level]?.lessons;
@@ -3157,6 +3372,11 @@ function renderMain(){
   updateHeader();
   const box=$('mainView');
   box.innerHTML='';
+  box.className='stack';
+  if(state.screen==='app-home')return renderAppHome(box);
+  if(state.screen==='options')return renderOptions(box);
+  if(state.screen==='options-profile'){box.className='stack app-options';return renderProfileDashboard(box)}
+  if(state.screen==='options-audio')return renderOptionsAudio(box);
   if(state.screen==='home')return renderHomeMenu(box);
   if(state.screen==='levels'){scenes.preload(scenes.resolve({level:state.level}));return renderLevelMenu(box)}
   if(state.screen==='level')return renderLevelOverview(box,state.level);
@@ -3174,6 +3394,8 @@ function thematicCourse(){return thematicCourses[state.level]}
 function thematicLesson(){return thematicCourse()?.lessons[state.thematic.lessonIndex]}
 function thematicPart(){return thematicLesson()?.applications?.find(part=>part.part===state.thematic.part)}
 function thematicProgress(lesson){const done=state.thematicCompleted[lesson.id]||{};return Number(!!done.A)+Number(!!done.B)}
+function thematicLevelLabel(number){return number>=12&&state.introducedVocabIds.includes('vocab-レベル')?`レベル ${number}`:`Level ${number}`}
+function thematicLessonLabel(number){return number>=12&&state.introducedVocabIds.includes('vocab-レッスン')?`レッスン ${number}`:`Les ${number}`}
 function thematicQuestions(lesson){return lesson.applications.flatMap((part,partIndex)=>part.questions.map((q,index)=>({kind:'order',instruction:'Kies het antwoord dat bij de tekst past.',prompt:q.prompt,correct:q.answer,choices:q.choices.slice((index+partIndex+1)%q.choices.length).concat(q.choices.slice(0,(index+partIndex+1)%q.choices.length))}))) }
 function openThematicLesson(index){state.thematic={level:state.level+1,lessonIndex:index,part:'A',step:'lesson',questionIndex:0,correct:0,answered:false,selected:null};state.screen='module';scheduleSave();renderMain()}
 function startThematicPart(part){
@@ -3196,7 +3418,8 @@ function thematicFinishPart(){
 function thematicAnswer(answer,correct){
   if(state.thematic.answered)return;
   state.thematic.answered=true;state.thematic.selected=answer;
-  if(answer===correct)state.thematic.correct++;
+  if(answer===correct){state.thematic.correct++;const id=thematicPart()?.instructionId;if(id){const progress=state.instructionKnowledge[id]||{attempts:0,correct:0};progress.attempts++;progress.correct++;state.instructionKnowledge[id]=progress}}
+  else{const id=thematicPart()?.instructionId;if(id){const progress=state.instructionKnowledge[id]||{attempts:0,correct:0};progress.attempts++;state.instructionKnowledge[id]=progress}}
   scheduleSave();renderMain();
 }
 function thematicNextQuestion(length,nextStep){
@@ -3208,9 +3431,18 @@ function thematicOrderedChoices(choices){
   const offset=(state.thematic.questionIndex+state.thematic.lessonIndex+(state.thematic.part==='B'?2:1))%choices.length;
   return choices.slice(offset).concat(choices.slice(0,offset));
 }
-function thematicChoiceHtml(question,kind){
+function hasJapaneseText(text){return/[\u3040-\u30ff\u3400-\u9fff]/u.test(String(text||''))}
+function thematicInstructionHtml(id){
+  const item=window.LanguageJourneyContent.manifest.instructions.find(instruction=>instruction.id===id);if(!item)return'';
+  const supported=item.requiredVocabIds.every(vocabId=>state.introducedVocabIds.includes(vocabId));
+  if(!supported)return`<div class="notice thematic-instruction" role="note">${escapeHtml(item.translations[state.uiLanguage]||item.translations.nl||'Lees de vraag en kies een antwoord.')}</div>`;
+  const translation=item.translations[state.uiLanguage]||item.translations.nl||'Help with this instruction';
+  const known=(state.instructionKnowledge[id]?.correct||0)>=2;
+  return`<div class="thematic-instruction" lang="ja"><span>${escapeHtml(item.textJa)}</span>${known?'':`<details><summary>${escapeHtml(state.uiLanguage==='nl'?'Hulp in het Nederlands':'Show translation')}</summary><span lang="${escapeHtml(state.uiLanguage||'nl')}">${escapeHtml(translation)}</span></details>`}</div>`;
+}
+function thematicChoiceHtml(question,kind,instructionId=null){
   const answered=state.thematic.answered,chosen=state.thematic.selected;
-  return`<section class="card"><div class="eyebrow">${kind}</div><div class="h2">${escapeHtml(question.prompt)}</div><div class="thematic-choices">${question.choices.map((choice,index)=>`<button class="btn thematic-choice ${answered&&choice===question.answer?'is-correct':answered&&choice===chosen?'is-incorrect':''}" data-thematic-choice="${index}" ${answered?'disabled':''}>${escapeHtml(choice)}</button>`).join('')}</div>${answered?`<div class="notice" role="status">${chosen===question.answer?'Goed!':`Het juiste antwoord is: ${escapeHtml(question.answer)}.`}</div><button class="btn primary" id="thematicNext" style="width:100%;margin-top:10px">Volgende →</button>`:''}</section>`;
+  return`<section class="card"><div class="eyebrow">${kind}</div>${thematicInstructionHtml(instructionId)}<div class="h2${hasJapaneseText(question.prompt)?' jp-question-copy':''}">${escapeHtml(question.prompt)}</div><div class="thematic-choices">${question.choices.map((choice,index)=>`<button class="btn thematic-choice${hasJapaneseText(choice)?' thematic-choice-jp':''} ${answered&&choice===question.answer?'is-correct':answered&&choice===chosen?'is-incorrect':''}" data-thematic-choice="${index}" ${answered?'disabled':''}>${escapeHtml(choice)}</button>`).join('')}</div>${answered?`<div class="notice" role="status">${chosen===question.answer?'Goed!':`Niet goed. Juiste antwoord: ${escapeHtml(question.answer)}.`}</div><button class="btn primary" id="thematicNext" style="width:100%;margin-top:10px">Volgende →</button>`:''}</section>`;
 }
 function thematicReadingHtml(text){
   return text.split(/(\s+|[。、：])/u).map(token=>{
@@ -3228,14 +3460,14 @@ function renderThematicCourse(box){
 }
 function renderThematicList(box,course){
   const done=course.lessons.filter(lesson=>thematicProgress(lesson)===2).length;
-  box.innerHTML=`<section class="card"><div class="eyebrow">Level ${course.number} · thematische module</div><div class="h1">${escapeHtml(course.title)}</div><div class="muted">${escapeHtml(course.competency)}</div><div class="progress" style="margin-top:12px"><div style="width:${done*20}%"></div></div><div class="small">${done}/5 lessen afgerond</div>${course.number===11?'<div class="notice" style="margin-top:10px">Level 1–10 was de basis. Vanaf nu lees je per les een kort verhaal én een praktische bron. Reken op ongeveer 20–25 minuten als richttempo; sneller of langzamer is allebei goed. Bonus is vrijwillig.</div>':''}</section><div id="thematicLessonList" class="stack"></div><section class="card"><div class="between"><strong>Level ${course.number} · integratie</strong><span class="rank ${rankClass(levelRank(state.level))}">${rankText(levelRank(state.level))}</span></div><div class="small" style="margin-top:6px">Twintig begripsvragen uit beide onderdelen van de vijf lessen. Bonus is niet verplicht.</div><button id="thematicExam" class="btn primary" style="width:100%;margin-top:10px" ${done===5?'':'disabled'}>Start levelcheck</button></section>`;
+  box.innerHTML=`<section class="card"><div class="eyebrow">${thematicLevelLabel(course.number)} · thematische module</div><div class="h1">${escapeHtml(course.title)}</div><div class="muted">${escapeHtml(course.competency)}</div><div class="progress" style="margin-top:12px"><div style="width:${done*20}%"></div></div><div class="small">${done}/5 lessen afgerond</div>${course.number===11?'<div class="notice" style="margin-top:10px">Level 1–10 was de basis. Vanaf nu lees je per les een kort verhaal én een praktische bron. Reken op ongeveer 20–25 minuten als richttempo; sneller of langzamer is allebei goed. Bonus is vrijwillig.</div>':''}</section><div id="thematicLessonList" class="stack"></div><section class="card"><div class="between"><strong>${thematicLevelLabel(course.number)} · integratie</strong><span class="rank ${rankClass(levelRank(state.level))}">${rankText(levelRank(state.level))}</span></div><div class="small" style="margin-top:6px">Twintig begripsvragen uit beide onderdelen van de vijf lessen. Bonus is niet verplicht.</div><button id="thematicExam" class="btn primary" style="width:100%;margin-top:10px" ${done===5?'':'disabled'}>Start levelcheck</button></section>`;
   renderAvatarUnlock(box);
   course.lessons.forEach((lesson,index)=>{const card=document.createElement('button');card.type='button';card.className=`lang-lesson-card ${rankClass(rankState[lesson.id]?.rank)}`;card.innerHTML=`<div class="between"><div><div class="eyebrow">Les ${index+1}</div><div class="h2">${escapeHtml(lesson.title)}</div></div><span class="rank ${rankClass(rankState[lesson.id]?.rank)}">${rankText(rankState[lesson.id]?.rank)}</span></div><div class="small">${escapeHtml(lesson.goal)} · ${thematicProgress(lesson)}/2 onderdelen</div>`;card.onclick=()=>openThematicLesson(index);$('thematicLessonList').appendChild(card)});
   if(done===5)$('thematicExam').onclick=()=>startQuiz({source:'advanced',title:`Level ${course.number} · integratie`,rankId:`l${course.number}-exam`,rankThreshold:.8,official:true,pool:[],questions:shuffle(course.lessons.flatMap(thematicQuestions)),choices:3});
 }
 function renderThematicLesson(box,course){
   const lesson=thematicLesson(),step=state.thematic.step,part=thematicPart(),reading=thematicReadingById[part.readingId],done=state.thematicCompleted[lesson.id]||{};
-  box.innerHTML=`<section class="card"><div class="eyebrow">Level ${course.number} · Les ${state.thematic.lessonIndex+1} van 5</div><div class="h1">${escapeHtml(lesson.title)}</div><div class="muted">${escapeHtml(lesson.goal)}</div><div class="small" style="margin-top:8px">A · verhaal ${done.A?'✓':''}　B · praktische bron ${done.B?'✓':''} · geen kalenderdruk</div></section><div id="thematicBody" class="stack"></div>`;
+  box.innerHTML=`<section class="card"><div class="eyebrow">${thematicLevelLabel(course.number)} · ${thematicLessonLabel(state.thematic.lessonIndex+1)} van 5</div><div class="h1">${escapeHtml(lesson.title)}</div><div class="muted">${escapeHtml(lesson.goal)}</div><div class="small" style="margin-top:8px">A · verhaal ${done.A?'✓':''}　B · praktische bron ${done.B?'✓':''} · geen kalenderdruk</div></section><div id="thematicBody" class="stack"></div>`;
   const host=$('thematicBody');
   if(step==='lesson'||step==='bonus'){
     if(step==='bonus')return renderThematicBonus(host,lesson);
@@ -3251,7 +3483,7 @@ function renderThematicLesson(box,course){
   }
   if(step==='practice'){
     const id=part.wordIds[state.thematic.questionIndex],v=vocabById[id],others=part.wordIds.filter(wordId=>wordId!==id).map(wordId=>vocabById[wordId].meaning).filter(meaning=>meaning!==v.meaning),choices=thematicOrderedChoices([v.meaning,...others].slice(0,4)),question={prompt:v.kana,answer:v.meaning,choices};
-    host.innerHTML=`<section class="card"><div class="small">Woord ${state.thematic.questionIndex+1}/${part.wordIds.length}</div><div class="muted">Kies de betekenis.</div></section>${thematicChoiceHtml(question,'Actieve recall')}`;
+    host.innerHTML=`<section class="card"><div class="small">Woord ${state.thematic.questionIndex+1}/${part.wordIds.length}</div><div class="muted">Kies de betekenis.</div></section>${thematicChoiceHtml(question,'Actieve recall',part.instructionId)}`;
     host.querySelectorAll('[data-thematic-choice]').forEach(button=>button.onclick=()=>thematicAnswer(choices[Number(button.dataset.thematicChoice)],question.answer));
     if(state.thematic.answered)$('thematicNext').onclick=()=>thematicNextQuestion(part.wordIds.length,'reading');return;
   }
@@ -3260,7 +3492,7 @@ function renderThematicLesson(box,course){
     $('thematicQuestionsStart').onclick=()=>thematicAdvance('questions');return;
   }
   if(step==='questions'){
-    const base=part.questions[state.thematic.questionIndex],question={...base,choices:thematicOrderedChoices(base.choices)};host.innerHTML=`<section class="card"><div class="small">Vraag ${state.thematic.questionIndex+1}/${part.questions.length} · Je mag de tekst opnieuw bekijken</div><details class="thematic-hint"><summary>Tekst opnieuw bekijken</summary><div class="thematic-reading" lang="ja">${thematicReadingHtml(reading.text)}</div></details></section>${thematicChoiceHtml(question,'Begrijpend lezen')}`;
+    const base=part.questions[state.thematic.questionIndex],question={...base,choices:thematicOrderedChoices(base.choices)};host.innerHTML=`<section class="card"><div class="small">Vraag ${state.thematic.questionIndex+1}/${part.questions.length} · Je mag de tekst opnieuw bekijken</div><details class="thematic-hint"><summary>Tekst opnieuw bekijken</summary><div class="thematic-reading" lang="ja">${thematicReadingHtml(reading.text)}</div></details></section>${thematicChoiceHtml(question,'Begrijpend lezen',part.instructionId)}`;
     host.querySelectorAll('[data-thematic-choice]').forEach(button=>button.onclick=()=>thematicAnswer(question.choices[Number(button.dataset.thematicChoice)],question.answer));
     if(state.thematic.answered)$('thematicNext').onclick=()=>thematicNextQuestion(part.questions.length,'done');return;
   }
@@ -3683,8 +3915,8 @@ function recordVocabEncounter(id){if(!vocabById[id]||state.vocabFirstSeen[id])re
 function introduceLessonWords(l){const ids=new Set(state.introducedVocabIds);l.words.forEach(([jp])=>{const v=vocabCatalog.find(x=>x.jp===jp&&(x.lessonId===l.id||!x.lessonId));if(v){ids.add(v.id);recordVocabEncounter(v.id)}});state.introducedVocabIds=[...ids];scheduleSave()}
 function introduceSmallWords(l){const ids=new Set(state.introducedVocabIds);(l.examples||[]).forEach(([jp])=>{const v=vocabCatalog.find(x=>x.jp===jp);if(v){ids.add(v.id);recordVocabEncounter(v.id)}});state.introducedVocabIds=[...ids];scheduleSave()}
 function wordLearningQuestions(l){if(!l.words.length)return[];const all=langLessons.slice(0,state.langLesson+1).flatMap(x=>x.words);return shuffle(l.words.flatMap(([jp,nl])=>{const others=shuffle(all.filter(x=>x[0]!==jp));return[{kind:'mc',prompt:jp,correct:nl,choices:shuffle([nl,...others.slice(0,2).map(x=>x[1])]),category:'vocab',instruction:'Kies de Nederlandse betekenis van dit woord.'},{kind:'mc',prompt:nl,correct:jp,choices:shuffle([jp,...others.slice(0,2).map(x=>x[0])]),category:'vocab',instruction:`Kies het Japanse woord voor “${nl}”.`}]})).map(raw=>lessonQuestion(raw,l))}
-function renderLanguageWords(l,index){introduceLessonWords(l);const body=$('langStepBody');body.innerHTML=`<section class="card"><div class="eyebrow">Stap 1</div><div class="h2">${l.words.length?'Woorden leren':'Bekende woorden hergebruiken'}</div><div class="muted">${l.words.length?'Bekijk vorm, uitspraak en betekenis. Daarna herken je de woorden in beide richtingen.':'Deze les voegt geen woorden toe. Je past bekende woorden toe in een nieuw patroon.'}</div><div id="learnWords" class="vocab-grid" style="margin-top:10px"></div><button id="practiceLangWords" class="btn primary" style="width:100%;margin-top:12px">${l.words.length?'Oefen woordherkenning':'Naar de basiszin →'}</button></section>`;const host=$('learnWords');if(!l.words.length)host.innerHTML=`<div class="panel"><strong>${l.pattern}</strong><div class="small" style="margin-top:4px">De betekenis van de bekende woorden verandert niet.</div></div>`;l.words.forEach(([jp,nl,ro])=>{const d=document.createElement('div'),entry=dictionaryEntryForToken(jp,l.id);d.className='vocab';d.innerHTML=`<div class="jp">${entry?dictionaryButton(entry.id,l.id,jp,nl):escapeHtml(jp)}</div><div class="word-romaji">${escapeHtml(ro)}</div><div class="small">${escapeHtml(nl)}</div>`;host.appendChild(d)});const go=()=>{markLanguageStep(l.id,'words');state.langStep='model';renderMain()};$('practiceLangWords').onclick=()=>{const qs=wordLearningQuestions(l);if(!qs.length)return go();startQuiz({source:'lang',title:`Les ${index+1} · woorden leren`,official:false,pool:[],questions:qs,choices:3,next:{kind:'langStep',index,step:'model',complete:'words'}})}}
-function modelAnalysisHtml(model,lessonId=''){return`<div class="model-sentence">${model.sentence}</div><div class="sentence-analysis">${model.parts.map(([token,role,gloss])=>{const entry=dictionaryEntryForToken(token,lessonId);return`<div class="sentence-part"><div class="token">${entry?dictionaryButton(entry.id,lessonId,model.sentence,model.meaning):escapeHtml(token)}</div><div class="role">${escapeHtml(role)}</div><div class="gloss">${escapeHtml(gloss)}</div></div>`}).join('')}</div><div class="small" style="text-align:center;margin-top:9px">${escapeHtml(model.meaning)}</div>`}
+function renderLanguageWords(l,index){introduceLessonWords(l);const body=$('langStepBody');body.innerHTML=`<section class="card"><div class="eyebrow">Stap 1</div><div class="h2">${l.words.length?'Woorden leren':'Bekende woorden hergebruiken'}</div><div class="muted">${l.words.length?'Bekijk vorm, uitspraak en betekenis. Daarna herken je de woorden in beide richtingen.':'Deze les voegt geen woorden toe. Je past bekende woorden toe in een nieuw patroon.'}</div><div id="learnWords" class="vocab-grid" style="margin-top:10px"></div><button id="practiceLangWords" class="btn primary" style="width:100%;margin-top:12px">${l.words.length?'Oefen woordherkenning':'Naar de basiszin →'}</button></section>`;const host=$('learnWords');if(!l.words.length)host.innerHTML=`<div class="panel"><strong>${l.pattern}</strong><div class="small" style="margin-top:4px">De betekenis van de bekende woorden verandert niet.</div></div>`;l.words.forEach(([jp,nl,ro])=>{const d=document.createElement('div'),entry=dictionaryEntryForToken(jp,l.id);d.className='vocab';d.innerHTML=`<div class="jp">${entry?dictionaryButton(entry.id,l.id,jp,nl):escapeHtml(jp)} ${speakerButtonHtml(jp,entry?.audioId,'Luister naar het Japanse woord')}</div><div class="word-romaji">${escapeHtml(ro)}</div><div class="small">${escapeHtml(nl)}</div>`;host.appendChild(d)});const go=()=>{markLanguageStep(l.id,'words');state.langStep='model';renderMain()};$('practiceLangWords').onclick=()=>{const qs=wordLearningQuestions(l);if(!qs.length)return go();startQuiz({source:'lang',title:`Les ${index+1} · woorden leren`,official:false,pool:[],questions:qs,choices:3,next:{kind:'langStep',index,step:'model',complete:'words'}})}}
+function modelAnalysisHtml(model,lessonId=''){return`<div class="model-sentence">${escapeHtml(model.sentence)} ${speakerButtonHtml(model.sentence,model.audioKey||model.audioId,'Luister naar de voorbeeldzin')}</div><div class="sentence-analysis">${model.parts.map(([token,role,gloss])=>{const entry=dictionaryEntryForToken(token,lessonId);return`<div class="sentence-part"><div class="token">${entry?dictionaryButton(entry.id,lessonId,model.sentence,model.meaning):escapeHtml(token)}</div><div class="role">${escapeHtml(role)}</div><div class="gloss">${escapeHtml(gloss)}</div></div>`}).join('')}</div><div class="small" style="text-align:center;margin-top:9px">${escapeHtml(model.meaning)}</div>`}
 function renderLanguageModel(l,index){const didactic=level4Didactics[index];$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 2 · uitleg + oefenen</div><div class="h2">${l.pattern}</div><div class="notice" style="margin-top:9px">${l.grammar}</div><div class="small" style="margin-top:8px"><strong>Let op:</strong> ${didactic.watch}</div>${l.spaceNote?'<div class="small" style="margin-top:5px">De spaties zijn een leerhulpmiddel; gewone Japanse tekst gebruikt ze meestal niet.</div>':''}<div id="modelList" class="stack" style="margin-top:10px"></div><button id="modelNext" class="btn primary" style="width:100%;margin-top:12px">Oefenen · 10 vragen</button></section>`;const host=$('modelList');l.models.slice(0,MAX_LEVEL4_MODEL_SENTENCES).forEach(model=>{const d=document.createElement('div');d.className='panel';d.innerHTML=modelAnalysisHtml(model,l.id);host.appendChild(d)});$('modelNext').onclick=()=>startQuiz({source:'lang',title:`Les ${index+1} · oefenen`,official:false,pool:[],questions:languagePracticeQuestions(l,index),choices:3,next:{kind:'langStep',index,step:'check',complete:'practice'}})}
 function understandingQuestions(l,index=langLessons.indexOf(l)){return balancedLevel4Questions(index,10,['meaning','structure','integration'])}
 function languagePracticeQuestions(l,index){const recognition=understandingQuestions(l,index).filter(q=>q.kind!=='build').slice(0,8),builders=cumulativeLevel4Builders(index).slice(0,2).map(([prompt,correct,blocks,accepted])=>lessonQuestion(['build',`Bouw: ${prompt}`,correct,blocks,'build',accepted],l));return shuffle([...recognition,...builders])}
@@ -4054,7 +4286,7 @@ function quizStudyMeta(cfg){
 }
 function startQuiz(cfg){beginStudySession(quizStudyMeta(cfg));state.lastConfig=cfg;state.quiz={...cfg,index:0,score:0,mistakes:[]};show('quiz');updateHeader();renderQuestion()}
 function currentQ(){return state.quiz.questions[state.quiz.index]}
-function renderQuestion(){const c=state.quiz,q=currentQ();(q.vocabIds||[]).forEach(recordVocabEncounter);$('quizTitle').textContent=c.title;$('quizMeta').textContent=c.official?'Deze toets kan de sessierank maximaal één stap verhogen.':'Vrij oefenen / snelle check · geen rankstap.';$('qNow').textContent=c.index+1;$('qTotal').textContent=c.questions.length;$('qBar').style.width=(c.index/c.questions.length*100)+'%';$('qScore').textContent='Goed: '+c.score;$('qFeedback').textContent='';$('qPrompt').style.fontSize='';const box=$('qChoices');box.className='choices';box.removeAttribute('style');box.innerHTML='';if(q.type==='kana')renderKanaQ(c,q,box);else if(q.type==='scriptReverse')renderScriptReverseQ(c,q,box);else if(q.type==='number')renderNumberQ(c,q,box);else if(q.type==='math')renderMathQ(c,q,box);else renderLessonQ(c,q,box);updateQuizAvatar()}
+function renderQuestion(){if(quizFeedbackTimer)clearTimeout(quizFeedbackTimer);quizFeedbackTimer=null;quizAnswerToken++;hideAvatarAudioOverlay();const c=state.quiz,q=currentQ();(q.vocabIds||[]).forEach(recordVocabEncounter);$('quizTitle').textContent=c.title;$('quizMeta').textContent=c.official?'Deze toets kan de sessierank maximaal één stap verhogen.':'Vrij oefenen / snelle check · geen rankstap.';$('qNow').textContent=c.index+1;$('qTotal').textContent=c.questions.length;$('qBar').style.width=(c.index/c.questions.length*100)+'%';$('qScore').textContent='Goed: '+c.score;$('qFeedback').textContent='';$('qPrompt').className='prompt';$('qPrompt').removeAttribute('style');$('qPromptAudio').innerHTML='';$('qCorrectAudio').innerHTML='';$('qCorrectAudio').dataset.autoNext='false';const box=$('qChoices');box.className='choices';box.removeAttribute('style');box.innerHTML='';if(q.type==='kana')renderKanaQ(c,q,box);else if(q.type==='scriptReverse')renderScriptReverseQ(c,q,box);else if(q.type==='number')renderNumberQ(c,q,box);else if(q.type==='math')renderMathQ(c,q,box);else renderLessonQ(c,q,box);const prompt=$('qPrompt').textContent.trim();$('qPromptAudio').innerHTML=q.kind==='build'?'':speakerButtonHtml(prompt,q.promptAudioKey||q.audioKey);updateQuizAvatar()}
 function updateQuizAvatar(ok=null){
   const host=$('quizAvatarAssist');
   if(!host)return;
@@ -4138,11 +4370,11 @@ function lessonQuestionInstruction(q){
   if(q.kind==='fill')return'Kies het blok dat de getoonde betekenis compleet maakt.';
   return'Kies het juiste antwoord.';
 }
-function renderLessonQ(c,q,box){if(q.kind==='build')return renderBuilderQuizQ(c,q,box);box.classList.add('choices-text');$('qHint').textContent=c.source==='small'&&q.learningGoal?`Level 5 · ${q.learningGoal}`:lessonQuestionInstruction(q);$('qPrompt').style.fontSize=q.kind==='mc'?'clamp(34px,10vw,52px)':'clamp(24px,7vw,30px)';$('qPrompt').textContent=q.prompt;const accepted=q.accepted?.length?q.accepted:[q.correct];q.choices.forEach(ch=>addChoice(box,ch,accepted.includes(ch)))}
-function renderBuilderQuizQ(c,q,box){let selected=[];$('qHint').textContent=q.instruction||(q.accepted?.length>1?'Bouw één geldige zin; je hoeft niet alle blokken te gebruiken.':'Bouw met de blokken de getoonde zin.');$('qPrompt').style.fontSize='24px';$('qPrompt').textContent=q.prompt;box.className='';const draw=()=>{box.innerHTML='<div id="quizBuilderAnswer" class="builder-answer"></div><div id="quizBuilderBank" class="builder-bank"></div><button id="quizBuilderCheck" class="btn primary" style="width:100%;margin-top:10px">Controleer</button>';const answerBox=$('quizBuilderAnswer'),bank=$('quizBuilderBank');if(!selected.length)answerBox.innerHTML='<span class="builder-placeholder">Je zin verschijnt hier…</span>';selected.forEach((entry,i)=>{const b=document.createElement('button');b.className='sentence-chip placed';b.textContent=entry.text;b.onclick=()=>{selected.splice(i,1);draw()};answerBox.appendChild(b)});q.choices.forEach((text,pos)=>{if(selected.some(x=>x.pos===pos))return;const b=document.createElement('button');b.className='sentence-chip';b.textContent=text;b.onclick=()=>{selected.push({text,pos});draw()};bank.appendChild(b)});$('quizBuilderCheck').disabled=!selected.length;$('quizBuilderCheck').onclick=()=>{const made=selected.map(x=>x.text).join(' '),accepted=q.accepted?.length?q.accepted:[q.correct];answer(accepted.includes(made),$('quizBuilderCheck'),made||'geen antwoord')}};draw()}
-function addChoice(box,text,ok){const b=document.createElement('button');b.className='choice';b.dataset.correct=ok?'1':'0';b.textContent=text;b.onclick=()=>answer(ok,b,text);box.appendChild(b)}
+function renderLessonQ(c,q,box){if(q.kind==='build')return renderBuilderQuizQ(c,q,box);box.classList.add('choices-text');$('qHint').textContent=c.source==='small'&&q.learningGoal?`Level 5 · ${q.learningGoal}`:lessonQuestionInstruction(q);$('qPrompt').classList.toggle('prompt--example',q.kind!=='mc');$('qPrompt').textContent=q.prompt;const accepted=q.accepted?.length?q.accepted:[q.correct];q.choices.forEach(ch=>addChoice(box,ch,accepted.includes(ch)))}
+function renderBuilderQuizQ(c,q,box){let selected=[];$('qHint').textContent=q.instruction||(q.accepted?.length>1?'Bouw één geldige zin; je hoeft niet alle blokken te gebruiken.':'Bouw met de blokken de getoonde zin.');$('qPrompt').classList.add('prompt--example');$('qPrompt').textContent=q.prompt;box.className='';const draw=()=>{box.innerHTML='<div id="quizBuilderAnswer" class="builder-answer"></div><div id="quizBuilderBank" class="builder-bank"></div><button id="quizBuilderCheck" class="btn primary" style="width:100%;margin-top:10px">Controleer</button>';const answerBox=$('quizBuilderAnswer'),bank=$('quizBuilderBank');if(!selected.length)answerBox.innerHTML='<span class="builder-placeholder">Je zin verschijnt hier…</span>';selected.forEach((entry,i)=>{const b=document.createElement('button');b.className='sentence-chip placed';b.textContent=entry.text;b.onclick=()=>{selected.splice(i,1);draw()};answerBox.appendChild(b)});q.choices.forEach((text,pos)=>{if(selected.some(x=>x.pos===pos))return;const b=document.createElement('button');b.className='sentence-chip';b.textContent=text;b.onclick=()=>{selected.push({text,pos});draw()};bank.appendChild(b)});$('quizBuilderCheck').disabled=!selected.length;$('quizBuilderCheck').onclick=()=>{const made=selected.map(x=>x.text).join(' '),accepted=q.accepted?.length?q.accepted:[q.correct];answer(accepted.includes(made),$('quizBuilderCheck'),made||'geen antwoord')}};draw()}
+function addChoice(box,text,ok){const b=document.createElement('button');b.className='choice';if(/[\u3040-\u30ff\u3400-\u9fff]/u.test(String(text)))b.classList.add('choice-jp');b.dataset.correct=ok?'1':'0';b.textContent=text;b.onclick=()=>answer(ok,b,text);box.appendChild(b)}
 function qData(q){if(q.type==='kana')return{asked:q.mode==='forward'?q.item.front:hasDakutenSourceContext(q)?dakutenReversePrompt(q.item):q.item.back,correct:q.mode==='forward'?q.item.back:q.item.front,detail:`${q.item.base?`${q.item.base} → `:''}${q.item.front} ↔ ${q.item.back}`};if(q.type==='scriptReverse')return{asked:hasDakutenSourceContext(q)?dakutenReversePrompt(q.item):`${q.item.back} · ${q.script}`,correct:q.item.front,detail:`${q.item.base?`${q.item.base} → `:''}${q.item.front} ↔ ${q.item.back}`};if(q.type==='number')return{asked:fieldText(q.item,q.from),correct:fieldText(q.item,q.to),detail:`${q.item.symbol} ↔ ${q.item.valueText} ↔ ${q.item.reading}`};if(q.type==='math')return{asked:`${numberSymbol(q.a)} ${q.op} ${numberSymbol(q.b)}`,correct:numberSymbol(q.answer),detail:`${numberSymbol(q.answer)} ↔ ${q.answer} ↔ ${numberReading(q.answer)}`};return{asked:q.prompt,correct:q.correct,detail:q.correct}}
-function answer(ok,b,chosen){const c=state.quiz,q=currentQ();[...$('qChoices').querySelectorAll('button')].forEach(x=>x.disabled=true);recordQuestionMastery(q,ok,c);if(ok){c.score++;if(c.errorBankPractice)resolveErrorBank(c.source,q);b.classList.add('correct');$('qFeedback').textContent='✓ Goed';c.index++;setTimeout(nextQuestion,700)}else{const d=qData(q);c.mistakes.push({number:c.index+1,chosen,...d,source:c.source,question:q});[...$('qChoices').querySelectorAll('button')].forEach(x=>{if(x.dataset.correct==='1')x.classList.add('correct')});$('qFeedback').innerHTML=`Niet goed · <strong>${d.correct}</strong>`;c.index++;setTimeout(nextQuestion,1700)}updateQuizAvatar(ok);$('qBar').style.width=(c.index/c.questions.length*100)+'%';scheduleSave()}
+function answer(ok,b,chosen){const c=state.quiz,q=currentQ(),answerToken=++quizAnswerToken;[...$('qChoices').querySelectorAll('button')].forEach(x=>x.disabled=true);recordQuestionMastery(q,ok,c);if(ok){c.score++;if(c.errorBankPractice)resolveErrorBank(c.source,q);b.classList.add('correct');$('qFeedback').textContent='✓ Goed';playCorrectAnswerSound();const correct=qData(q).correct;$('qCorrectAudio').dataset.autoNext='true';$('qCorrectAudio').innerHTML=speakerButtonHtml(correct,q.correctAudioKey||q.answerAudioKey,'Luister naar het juiste antwoord');c.index++;quizFeedbackTimer=setTimeout(()=>{if(answerToken===quizAnswerToken)nextQuestion()},AUDIO_FEEDBACK_MS)}else{const d=qData(q);c.mistakes.push({number:c.index+1,chosen,...d,source:c.source,question:q});[...$('qChoices').querySelectorAll('button')].forEach(x=>{if(x.dataset.correct==='1')x.classList.add('correct')});$('qFeedback').innerHTML=`Niet goed · <strong>${escapeHtml(d.correct)}</strong>`;$('qCorrectAudio').dataset.autoNext='false';$('qCorrectAudio').innerHTML=speakerButtonHtml(d.correct,q.correctAudioKey||q.answerAudioKey,'Luister naar het juiste antwoord');c.index++;const next=document.createElement('button');next.type='button';next.className='btn tiny';next.textContent='Volgende vraag →';next.onclick=()=>{if(answerToken!==quizAnswerToken)return;if(quizFeedbackTimer)clearTimeout(quizFeedbackTimer);quizFeedbackTimer=null;nextQuestion()};$('qFeedback').appendChild(next)}updateQuizAvatar(ok);$('qBar').style.width=(c.index/c.questions.length*100)+'%';scheduleSave()}
 function nextQuestion(){if(state.quiz.index>=state.quiz.questions.length)finishQuiz();else renderQuestion()}
 function finishQuiz(){const c=state.quiz,acc=c.score/c.questions.length;c.passed=acc>=(c.rankThreshold??.9);let rr=null;if(c.official&&c.rankId)rr=applyRank(c.rankId,acc,c.rankThreshold??.9);if(state.lastErrors[c.source])state.lastErrors[c.source]=[...c.mistakes];mergeErrorBank(c.source,c.mistakes);const study=completeStudySession({status:'afgerond',result:{score:c.score,total:c.questions.length,accuracy:acc,passed:c.passed}});show('result');$('resultTitle').textContent=c.title;$('resultScore').textContent=`${c.score} / ${c.questions.length}`;$('resultStats').textContent=`Goed: ${c.score} · Fout: ${c.questions.length-c.score} · Nauwkeurigheid: ${pct(acc)}`;if(rr){$('resultRank').classList.remove('hidden');$('resultRank').innerHTML=`${c.rankId&&/-row-/.test(c.rankId)?'Rijrank':'Sessierank'}: <strong>${rankText(rr.next)}</strong>${rr.prev!==rr.next?` · vorige: ${rankText(rr.prev)}`:''}. Een succesvolle volledige toets stijgt maximaal één stap.`}else $('resultRank').classList.add('hidden');$('resultAvatarAssist').innerHTML=avatarAssistHtml({pose:c.passed?'celebrate':'encourage',size:'medium',message:c.passed?'Mooi gedaan!':'Je bent aan het leren.',detail:c.passed?'Neem je resultaat even in je op.':'Bekijk je fouten en probeer het opnieuw.'});renderErrors(c.mistakes);$('practiceErrors').disabled=!c.mistakes.length;configureNext(c);if(study)renderStudyAdjustment(study.id);saveProgress()}
 function renderErrors(errors){const box=$('errorList');box.innerHTML='';$('errorIntro').textContent=errors.length?'Score blijft staan. Bekijk kort wat misging.':'Geen fouten.';if(!errors.length){box.innerHTML='<div class="panel">Alles correct.</div>';return}errors.forEach(e=>{const d=document.createElement('div');d.className='error';d.innerHTML=`<div class="small">Vraag ${e.number}</div><div style="font-weight:750;margin-top:4px">${e.asked}</div><div style="margin-top:5px">Jouw antwoord: ${e.chosen}</div><div>Correct: <strong>${e.correct}</strong></div><div class="small" style="margin-top:4px">${e.detail}</div>`;box.appendChild(d)})}
@@ -4235,7 +4467,7 @@ function levelLessonIds(level){
   if(level===3)return langLessons.map(x=>x.id);
   if(level===4)return smallLessons.map(x=>x.id);
   if(level>=5&&level<=9)return advancedCourses[level].lessons.map(x=>x.id);
-  if(level>=10&&level<=11)return thematicCourses[level].lessons.map(x=>x.id);
+  if(level>=10&&thematicCourses[level])return thematicCourses[level].lessons.map(x=>x.id);
   return[];
 }
 function completedLessonCount(level){
@@ -4469,6 +4701,24 @@ function flashcardCounts(cards=flashcardSelectedCards()){
   counts.ready=counts.new+counts.due;
   return counts;
 }
+function getNextRecallDueAt(eligibleCards=flashcardSelectedCards(),directions=flashcardDirections(),now=Date.now()){
+  let nextDueAt=null;
+  eligibleCards.forEach(card=>directions.forEach(direction=>{
+    const dueAt=flashcardRecord(card.id,direction)?.dueAt;
+    if(Number.isFinite(dueAt)&&dueAt>now&&(nextDueAt===null||dueAt<nextDueAt))nextDueAt=dueAt;
+  }));
+  return nextDueAt;
+}
+let flashcardDueRefreshTimer=null,flashcardDueRefreshListenersBound=false;
+function refreshFlashcardDueDashboard(){if(state.screen==='flashcards'&&!state.flashcardSession)renderFlashcardsScreen()}
+function ensureFlashcardDueRefresh(){
+  if(!flashcardDueRefreshListenersBound){
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshFlashcardDueDashboard()});
+    window.addEventListener('focus',refreshFlashcardDueDashboard);
+    flashcardDueRefreshListenersBound=true;
+  }
+  if(!flashcardDueRefreshTimer&&window.setInterval)flashcardDueRefreshTimer=window.setInterval(refreshFlashcardDueDashboard,60000);
+}
 function flashcardDueText(timestamp,now=Date.now()){
   if(!timestamp)return'nu beschikbaar';
   if(timestamp<=now)return'nu aan de beurt';
@@ -4499,7 +4749,7 @@ function flashcardAnswerState(answer,feedback){
 }
 function flashcardAnswerFeedbackText(feedback){
   if(!feedback?.isSubmitted)return'';
-  return feedback.selectedAnswer===feedback.correctAnswer?'Goed!':`Niet goed · Juiste antwoord: ${feedback.correctAnswer||'—'}`;
+  return feedback.selectedAnswer===feedback.correctAnswer?'Goed!':`Niet goed\nJuiste antwoord: ${feedback.correctAnswer||'—'}`;
 }
 function flashcardAnswerChoices(card,direction){
   const answers=flashcardCorrectAnswers(card,direction),correct=shuffle(answers)[0]||card.meaning;
@@ -4536,7 +4786,7 @@ function flashcardRate(grade,chosen=null){
   state.flashcardProgress.cards[key]={dueAt:flashcardNextDueAt(now,grade,intervalDays),intervalDays,repetitions,lapses:old.lapses||0,lastReviewedAt:now,lastGrade:grade};
   const repeatKey=key;
   if(grade==='again'&&session.position<session.queue.length-1&&!session.requeued.includes(repeatKey)){session.requeued.push(repeatKey);session.queue.push({...item,round:0})}
-  session.feedback={grade,chosen:typeof chosen==='string'?chosen:null,until:grade==='knew'?now+850:null};
+  session.feedback={grade,chosen:typeof chosen==='string'?chosen:null,until:grade==='knew'?now+AUDIO_FEEDBACK_MS:null};
   session.revealed=false;
   scheduleSave();renderFlashcardsScreen();
 }
@@ -4565,10 +4815,12 @@ function renderFlashcardSession(){
   const item=s.queue[s.position],card=vocabById[item.cardId],direction=item.direction,front=direction==='jp-nl'?card.kana:card.meaning,preview=flashcardPreview(card),record=flashcardRecord(card.id,direction),choices=item.answerChoices?.length?item.answerChoices:flashcardAnswerChoices(card,direction);
   const scheduled=s.mode!=='free',done=scheduled?s.knew+s.again:s.position-(s.skipped||0),feedback=s.feedback,correctAnswers=flashcardCorrectAnswers(card,direction),answerFeedback=flashcardAnswerFeedback(choices,correctAnswers,feedback),correctChoice=answerFeedback.correctAnswer;
   if(direction==='jp-nl'||s.revealed)recordVocabEncounter(card.id);
-  $('flashcardView').innerHTML=`<section class="card"><div class="between"><div><div class="eyebrow">${scheduled?'SRS-herhaling':'Vrij oefenen'} · Level ${card.level} · ${card.lessonTitle}</div><div class="small">Kaart ${Math.min(s.position+1,s.queue.length)} van ${s.queue.length} · ${done} ${scheduled?'beoordeeld':'bekeken'}</div></div>${preview?'<span class="rank">Voorproefje</span>':''}</div><div class="progress" style="margin-top:9px"><div style="width:${Math.min(100,done/Math.max(1,s.queue.length)*100)}%"></div></div></section><section class="card"><div class="flashcard-avatar">${avatarAssistHtml({pose:feedback?(answerFeedback.selectedAnswer===correctChoice?'celebrate':'encourage'):nextAvatarMood(),message:feedback?(feedback.ungraded?'Vrij oefenen — je SRS-planning is niet gewijzigd.':flashcardAnswerFeedbackText(answerFeedback)):'Denk rustig na over dit woord.'})}</div><div class="flashcard-front"><div><div class="flashcard-face-main">${escapeHtml(front)}</div><div class="flashcard-face-sub">${direction==='jp-nl'?'Kies de Nederlandse betekenis':'Kies het Japanse woord in kana'}</div></div></div><div class="flashcard-answer-options"><div class="small">${feedback?(feedback.ungraded?'Vrij geoefend — geen wijziging aan SRS.':'Antwoord nagekeken:'):'Kies je antwoord:'}</div>${choices.map((answer,index)=>{const answerState=flashcardAnswerState(answer,answerFeedback),selected=answer===answerFeedback.selectedAnswer;return`<button class="btn flashcard-answer-choice${answerState==='correct'?' is-correct':answerState==='incorrect'?' is-incorrect':''}" data-fc-answer="${index}" ${feedback?'disabled':''} ${selected?'aria-pressed="true"':''}>${escapeHtml(answer)}</button>`}).join('')}</div><div class="flashcard-feedback-status" role="status" aria-live="polite">${flashcardAnswerFeedbackText(answerFeedback)}</div><div class="flashcard-actions" style="margin-top:12px"><button id="fcSkip" class="btn" ${feedback?'disabled':''}>Sla over</button><button id="fcPause" class="btn" style="grid-column:1/-1" ${feedback?'disabled':''}>Onderbreek sessie</button></div>${record?`<div class="small" style="text-align:center;margin-top:9px">Huidige planning: ${flashcardDueText(record.dueAt)}</div>`:''}</section>`;
+  $('flashcardView').innerHTML=`<section class="card"><div class="between"><div><div class="eyebrow">${scheduled?'SRS-herhaling':'Vrij oefenen'} · Level ${card.level} · ${card.lessonTitle}</div><div class="small">Kaart ${Math.min(s.position+1,s.queue.length)} van ${s.queue.length} · ${done} ${scheduled?'beoordeeld':'bekeken'}</div></div>${preview?'<span class="rank">Voorproefje</span>':''}</div><div class="progress" style="margin-top:9px"><div style="width:${Math.min(100,done/Math.max(1,s.queue.length)*100)}%"></div></div></section><section class="card"><div class="flashcard-avatar">${avatarAssistHtml({pose:feedback?(answerFeedback.selectedAnswer===correctChoice?'celebrate':'encourage'):nextAvatarMood(),message:feedback?(feedback.ungraded?'Vrij oefenen — je SRS-planning is niet gewijzigd.':answerFeedback.selectedAnswer===correctChoice?'Goed!':'Niet goed'):'Denk rustig na over dit woord.'})}</div><div class="flashcard-front"><div><div class="flashcard-face-main">${escapeHtml(front)}</div><div class="flashcard-face-sub">${direction==='jp-nl'?'Kies de Nederlandse betekenis':'Kies het Japanse woord in kana'}</div></div></div><div class="flashcard-answer-options"><div class="small">${feedback?(feedback.ungraded?'Vrij geoefend — geen wijziging aan SRS.':'Antwoord nagekeken:'):'Kies je antwoord:'}</div>${choices.map((answer,index)=>{const answerState=flashcardAnswerState(answer,answerFeedback),selected=answer===answerFeedback.selectedAnswer;return`<button class="btn flashcard-answer-choice${answerState==='correct'?' is-correct':answerState==='incorrect'?' is-incorrect':''}" data-fc-answer="${index}" ${feedback?'disabled':''} ${selected?'aria-pressed="true"':''}>${escapeHtml(answer)}</button>`}).join('')}</div><div class="flashcard-feedback-status" role="status" aria-live="polite">${escapeHtml(flashcardAnswerFeedbackText(answerFeedback))}</div><div class="flashcard-actions" style="margin-top:12px"><button id="fcSkip" class="btn" ${feedback?'disabled':''}>Sla over</button><button id="fcPause" class="btn" style="grid-column:1/-1" ${feedback?'disabled':''}>Onderbreek sessie</button></div>${record?`<div class="small" style="text-align:center;margin-top:9px">Huidige planning: ${flashcardDueText(record.dueAt)}</div>`:''}</section>`;
   const flashcardView=$('flashcardView'),answerPanel=flashcardView.querySelector('.flashcard-answer-options');
   flashcardView.querySelector('.flashcard-avatar')?.remove();
   flashcardView.querySelector('.flashcard-face-sub')?.remove();
+  if(direction==='jp-nl'){const face=flashcardView.querySelector('.flashcard-face-main');if(face)face.innerHTML+=speakerButtonHtml(card.kana,card.audioId,'Luister naar het Japanse woord')}
+  if(feedback){const spokenAnswer=direction==='nl-jp'?correctChoice:card.kana,status=flashcardView.querySelector('.flashcard-feedback-status');if(spokenAnswer&&status)status.innerHTML+=`<div class="audio-feedback">${speakerButtonHtml(spokenAnswer,card.audioId,'Luister naar het juiste Japanse woord')}</div>`}
   if(!feedback&&!s.optionsRevealed&&answerPanel){
     answerPanel.classList.add('is-hidden');
     const reveal=document.createElement('button');reveal.type='button';reveal.className='flashcard-options-reveal';reveal.textContent='Toon opties';reveal.setAttribute('aria-label','Toon antwoordopties');
@@ -4578,8 +4830,8 @@ function renderFlashcardSession(){
   if(!feedback&&s.optionsRevealed)root.querySelectorAll('[data-fc-answer]').forEach(button=>button.onclick=()=>{if(s.feedback||!s.optionsRevealed)return;const choice=choices[Number(button.dataset.fcAnswer)],correct=correctAnswers.includes(choice);s.revealed=true;if(scheduled)flashcardRate(correct?'knew':'again',choice);else{s.feedback={grade:'viewed',chosen:choice,until:null,ungraded:true};scheduleSave();renderFlashcardsScreen()}});
   $('fcSkip').onclick=flashcardSkip;
   $('fcPause').onclick=pauseFlashcardSession;
-  if(feedback?.grade==='again'||feedback?.ungraded){const next=document.createElement('button');next.className='btn primary';next.textContent='Volgende kaart →';next.onclick=flashcardNextCard;$('flashcardView').querySelector('.flashcard-actions').appendChild(next)}
-  if(feedback?.grade==='knew'){const remaining=Math.max(0,(feedback.until||Date.now())-Date.now()),sessionRef=s,positionRef=s.position,untilRef=feedback.until;window.setTimeout(()=>{if(state.flashcardSession===sessionRef&&sessionRef.position===positionRef&&sessionRef.feedback?.until===untilRef)flashcardNextCard()},remaining)}
+  if(feedback?.grade==='again'||feedback?.ungraded){const next=document.createElement('button');next.className='btn primary';next.textContent='Volgende kaart';next.onclick=flashcardNextCard;$('flashcardView').querySelector('.flashcard-actions').appendChild(next)}
+  if(feedback?.grade==='knew'){const remaining=Math.max(0,(feedback.until||Date.now())-Date.now()),sessionRef=s,positionRef=s.position,untilRef=feedback.until;if(recallFeedbackTimer)clearTimeout(recallFeedbackTimer);recallFeedbackTimer=window.setTimeout(()=>{if(state.flashcardSession===sessionRef&&sessionRef.position===positionRef&&sessionRef.feedback?.until===untilRef)flashcardNextCard()},remaining)}
 }
 function renderFlashcardSummary(){
   const s=state.flashcardSession,selected=new Set(flashcardSelectedCards().map(card=>card.id)),directions=new Set(flashcardDirections());
@@ -4589,11 +4841,13 @@ function renderFlashcardSummary(){
   $('fcSummaryDone').onclick=()=>{state.flashcardSession=null;scheduleSave();renderFlashcardsScreen()};$('fcSummaryLevels').onclick=()=>{state.flashcardSession=null;scheduleSave();goToLevels()};
 }
 function renderFlashcardsScreen(){
+  ensureFlashcardDueRefresh();
   show('flashcards');document.body.dataset.scene='journey';updateHeader();
   const box=$('flashcardView');
   if(state.flashcardSession&&['active','paused','complete'].includes(state.flashcardSession.status))return renderFlashcardSession();
   const cards=flashcardSelectedCards(),freeCards=flashcardSelectedCards(true),counts=flashcardCounts(cards);
-  box.innerHTML=`<section class="card recall-start"><div class="eyebrow">Herhalen wanneer jij wilt</div><div class="h1">Recall</div><div class="muted">Recall helpt bepalen welke woorden weer aan de beurt zijn. Je selectie bevat ${counts.total} bekende ${counts.total===1?'kaart':'kaarten'}.</div><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${counts.new}</strong><span>Nieuw · beschikbaar</span></div><div class="flashcard-stat"><strong>${counts.due}</strong><span>Aan de beurt</span></div><div class="flashcard-stat"><strong>${counts.upcoming}</strong><span>Later gepland</span></div></div><button id="fcStart" class="btn primary" ${counts.ready?'':'disabled'}>${counts.ready?'Start SRS-herhaling':counts.upcoming?'Geen kaarten aan de beurt':'Geen nieuwe of verschuldigde kaarten'}</button><button id="fcFreeStart" class="btn" ${cards.length?'':'disabled'}>Vrij oefenen · ${counts.total} kaarten</button><div class="small">Vrij oefenen verandert de herhaalplanning niet. Kies hieronder andere levels of lessen om vooruit te oefenen.</div></section><details id="recallCustom" class="card recall-custom" ${state.recallCustomOpen?'open':''}><summary>Kies andere levels of lessen</summary><div id="flashcardScope"></div></details><details class="recall-info"><summary>Hoe werkt Recall?</summary><p>Herhaal woorden wanneer jij wilt; Recall helpt bepalen welke weer aan de beurt zijn. Een expliciete keuze in de SRS-sessie plant het volgende moment. Vrij oefenen en overslaan veranderen die planning niet. Recall verandert je lesrank niet.</p></details>`;
+  const nextDueAt=counts.due===0?getNextRecallDueAt(cards,flashcardDirections()):null;
+  box.innerHTML=`<section class="card recall-start"><div class="eyebrow">Herhalen wanneer jij wilt</div><div class="h1">Recall</div><div class="muted">Recall helpt bepalen welke woorden weer aan de beurt zijn. Je selectie bevat ${counts.total} bekende ${counts.total===1?'kaart':'kaarten'}.</div><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${counts.new}</strong><span>Nieuw · beschikbaar</span></div><div class="flashcard-stat"><strong>${counts.due}</strong><span>Aan de beurt</span></div><div class="flashcard-stat"><strong>${counts.upcoming}</strong><span>Later gepland</span></div></div><button id="fcStart" class="btn primary" ${counts.ready?'':'disabled'}>${counts.ready?'Start SRS-herhaling':counts.upcoming?'Geen kaarten aan de beurt':'Geen nieuwe of verschuldigde kaarten'}</button>${nextDueAt!==null?`<div class="flashcard-next-due" role="status" style="margin-top:9px">Volgende herhaling: <strong>${flashcardDueText(nextDueAt)}</strong></div>`:''}<button id="fcFreeStart" class="btn" ${cards.length?'':'disabled'}>Vrij oefenen · ${counts.total} kaarten</button><div class="small">Vrij oefenen verandert de herhaalplanning niet. Kies hieronder andere levels of lessen om vooruit te oefenen.</div></section><details id="recallCustom" class="card recall-custom" ${state.recallCustomOpen?'open':''}><summary>Kies andere levels of lessen</summary><div id="flashcardScope"></div></details><details class="recall-info"><summary>Hoe werkt Recall?</summary><p>Herhaal woorden wanneer jij wilt; Recall helpt bepalen welke weer aan de beurt zijn. Een expliciete keuze in de SRS-sessie plant het volgende moment. Vrij oefenen en overslaan veranderen die planning niet. Recall verandert je lesrank niet.</p></details>`;
   $('fcStart').onclick=()=>startFlashcardSession(cards,flashcardDirections());$('fcFreeStart').onclick=()=>startFlashcardSession(cards,flashcardDirections(),'free');
   $('recallCustom').ontoggle=()=>{state.recallCustomOpen=$('recallCustom').open};
   const continueButton=$('fcContinue');if(continueButton)continueButton.onclick=resumeFlashcardSession;
@@ -4674,6 +4928,7 @@ function renderAvatarSettings(box){
   const preview=box.querySelector('.profile-avatar-preview .avatar-sprite');
   if(preview)preview.outerHTML=avatarVisualHtml({pose:nextAvatarMood(),extraClass:'avatar-settings-preview'});
   const settings=box.querySelector('.avatar-settings-grid');
+  settings.insertAdjacentHTML('afterend',`<div class="panel audio-coach-settings"><strong>Uitspraak en audio</strong><div class="small" style="margin-top:3px">Japanse uitspraak gebruikt lokale opnames wanneer die aan een les, woord of oefening zijn gekoppeld.</div><label class="flashcard-check" style="margin-top:8px"><input id="audioEnabledSetting" type="checkbox" ${state.audioEnabled?'checked':''}> Uitspraak en audio</label><label class="flashcard-check" style="margin-top:6px"><input id="audioCoachEnabledSetting" type="checkbox" ${state.audioCoachEnabled?'checked':''}> Avatar als audio-coach</label><label class="flashcard-check" style="margin-top:6px"><input id="correctSoundEnabledSetting" type="checkbox" ${state.correctSoundEnabled?'checked':''}> Subtiel geluid bij een goed antwoord</label><label class="profile-field" style="margin-top:8px"><span>Volume</span><input id="audioVolumeSetting" type="range" min="0" max="1" step="0.05" value="${state.audioVolume}"></label></div>`);
   settings.querySelector('.avatar-setting-row .small').textContent='Toon je reisgenoot bij menu, oefening en voortgang.';
   const modeRow=settings.querySelectorAll('.avatar-setting-row')[2];
   modeRow.querySelector('strong').textContent='Outfit-modus';
@@ -4710,6 +4965,8 @@ function renderAvatarSettings(box){
   bindProfileInput('profileUserNameJapanese','userNameJapanese');
   bindProfileInput('profileAvatarName','avatarName',()=>{state.avatarNameCustom=true;if(!state.avatarNameJapaneseCustom){state.avatarNameJapanese='';$('profileAvatarNameJapanese').value=''}const name=state.avatarName.trim()||avatarDefaults().name;$('profilePreviewName').textContent=name;$('profileCompanionName').textContent=name});
   bindProfileInput('profileAvatarNameJapanese','avatarNameJapanese',()=>{state.avatarNameJapaneseCustom=true});
+  [['audioEnabledSetting','audioEnabled'],['audioCoachEnabledSetting','audioCoachEnabled'],['correctSoundEnabledSetting','correctSoundEnabled']].forEach(([id,key])=>$(id).onchange=event=>{state[key]=event.target.checked;if(!state.audioCoachEnabled)hideAvatarAudioOverlay();scheduleSave()});
+  $('audioVolumeSetting').oninput=event=>{state.audioVolume=Math.max(0,Math.min(1,Number(event.target.value)));scheduleSave()};
   root.querySelectorAll('[data-avatar-enabled]').forEach(b=>b.onclick=()=>{state.avatarEnabled=b.dataset.avatarEnabled==='true';scheduleSave();renderAvatarSettings(box)});
   root.querySelectorAll('[data-avatar-gender]').forEach(b=>b.onclick=()=>{setAvatarGender(b.dataset.avatarGender);scheduleSave();renderAvatarSettings(box)});
   root.querySelectorAll('[data-avatar-hair]').forEach(b=>b.onclick=()=>{state.avatarHairstyle=b.dataset.avatarHair;if(state.avatarMode==='manual'&&state.selectedAvatarSkin&&!state.selectedAvatarOutfit){state.selectedAvatarOutfit=activeAvatarOutfit().id;state.selectedAvatarSkin=null}scheduleSave();renderAvatarSettings(box)});
@@ -4853,11 +5110,13 @@ function renderStudyAdjustment(sessionId){
   const s=state.studyTracker.sessions.find(x=>x.id===sessionId),card=$('resultStats')?.parentElement;if(!s||!card)return;const minutes=s.effectiveSeconds>0?Math.max(1,Math.round(s.effectiveSeconds/60)):0;let host=$('studyAdjustment');if(!host){host=document.createElement('details');host.id='studyAdjustment';host.className='panel study-adjust';card.appendChild(host)}host.innerHTML=`<summary>Studietijd aanpassen · ${formatDuration(s.effectiveSeconds,true)}</summary><form id="resultStudyForm" class="study-form" style="margin-top:10px"><div class="study-form-grid"><label>Effectieve minuten<input id="resultStudyMinutes" name="minutes" type="number" min="0" value="${minutes}"></label><label>Moeilijkheid 1–5<input name="difficulty" type="number" min="1" max="5" value="${s.difficulty||''}"></label><label>Begrip 1–5<input name="comprehension" type="number" min="1" max="5" value="${s.comprehension||''}"></label></div><div class="study-toolbar"><button class="btn tiny" type="button" data-minute-delta="-5">−5 min</button><button class="btn tiny" type="button" data-minute-delta="-1">−1 min</button><button class="btn tiny" type="button" data-minute-delta="1">+1 min</button><button class="btn tiny" type="button" data-minute-delta="5">+5 min</button></div><label>Notitie<textarea name="note">${escapeHtml(s.note||'')}</textarea></label><button class="btn primary" type="submit">Aanpassing opslaan</button></form>`;root.querySelectorAll('[data-minute-delta]').forEach(b=>b.onclick=()=>{$('resultStudyMinutes').value=Math.max(0,Number($('resultStudyMinutes').value||0)+Number(b.dataset.minuteDelta))});$('resultStudyForm').onsubmit=e=>{e.preventDefault();const fd=new FormData(e.currentTarget);s.effectiveSeconds=Math.max(0,Number(fd.get('minutes'))*60);s.difficulty=Number(fd.get('difficulty'))||null;s.comprehension=Number(fd.get('comprehension'))||null;s.note=String(fd.get('note')).trim();saveProgress();renderStudyAdjustment(sessionId)};
 }
 function renderProgressKnowledge(box){
-  box.innerHTML=`<div class="progress-tabs"><button class="progress-tab ${state.progressKnowledgeTab==='levels'?'active':''}" data-knowledge="levels">Levels</button><button class="progress-tab ${state.progressKnowledgeTab==='kana'?'active':''}" data-knowledge="kana">Kana</button><button class="progress-tab ${state.progressKnowledgeTab==='vocab'?'active':''}" data-knowledge="vocab">Vocabulaire</button><button class="progress-tab ${state.progressKnowledgeTab==='dictionary'?'active':''}" data-knowledge="dictionary">Dictionary</button><button class="progress-tab ${state.progressKnowledgeTab==='skills'?'active':''}" data-knowledge="skills">Vaardigheden</button><button class="progress-tab ${state.progressKnowledgeTab==='avatar'?'active':''}" data-knowledge="avatar">Profiel</button></div><div id="knowledgeBody" class="stack"></div>`;
-  root.querySelectorAll('[data-knowledge]').forEach(b=>b.onclick=()=>{state.progressKnowledgeTab=b.dataset.knowledge;state.progressDetailId=null;state.progressVocabDetailId=null;scheduleSave();renderProgressKnowledge(box)});const body=$('knowledgeBody');if(state.progressKnowledgeTab==='kana')renderProgressKanaTab(body);else if(state.progressKnowledgeTab==='vocab')renderProgressVocabTab(body);else if(state.progressKnowledgeTab==='dictionary')renderDictionaryTab(body);else if(state.progressKnowledgeTab==='skills')renderProgressSkillsTab(body);else if(state.progressKnowledgeTab==='avatar')renderAvatarSettings(body);else renderProgressLevelTab(body)
+  if(state.progressKnowledgeTab==='avatar')state.progressKnowledgeTab='levels';
+  box.innerHTML=`<div class="progress-tabs"><button class="progress-tab ${state.progressKnowledgeTab==='levels'?'active':''}" data-knowledge="levels">Levels</button><button class="progress-tab ${state.progressKnowledgeTab==='kana'?'active':''}" data-knowledge="kana">Kana</button><button class="progress-tab ${state.progressKnowledgeTab==='vocab'?'active':''}" data-knowledge="vocab">Vocabulaire</button><button class="progress-tab ${state.progressKnowledgeTab==='dictionary'?'active':''}" data-knowledge="dictionary">Dictionary</button><button class="progress-tab ${state.progressKnowledgeTab==='skills'?'active':''}" data-knowledge="skills">Vaardigheden</button></div><div id="knowledgeBody" class="stack"></div>`;
+  root.querySelectorAll('[data-knowledge]').forEach(b=>b.onclick=()=>{state.progressKnowledgeTab=b.dataset.knowledge;state.progressDetailId=null;state.progressVocabDetailId=null;scheduleSave();renderProgressKnowledge(box)});const body=$('knowledgeBody');if(state.progressKnowledgeTab==='kana')renderProgressKanaTab(body);else if(state.progressKnowledgeTab==='vocab')renderProgressVocabTab(body);else if(state.progressKnowledgeTab==='dictionary')renderDictionaryTab(body);else if(state.progressKnowledgeTab==='skills')renderProgressSkillsTab(body);else renderProgressLevelTab(body)
 }
 function renderSession(){
-  show('session');updateHeader();$('sessionView').querySelector('.card .h1').textContent=t('progress.heroTitle');$('sessionView').querySelector('.card .muted').textContent=t('progress.heroIntro');$('sessionBack').textContent=t('common.back');const box=$('sessionContent');box.innerHTML=`<div class="progress-tabs" role="tablist" aria-label="${t('progress.title')}"><button class="progress-tab ${state.progressTab==='profile'?'active':''}" data-progress="profile" role="tab" aria-selected="${state.progressTab==='profile'}">${t('progress.profile')}</button><button class="progress-tab ${state.progressTab==='progress'?'active':''}" data-progress="progress" role="tab" aria-selected="${state.progressTab==='progress'}">${t('progress.title')}</button><button class="progress-tab ${state.progressTab==='knowledge'?'active':''}" data-progress="knowledge" role="tab" aria-selected="${state.progressTab==='knowledge'}">${t('progress.knowledge')}</button></div><div id="progressBody" class="stack"></div>`;root.querySelectorAll('[data-progress]').forEach(b=>b.onclick=()=>{state.progressTab=b.dataset.progress;state.progressDetailId=null;state.progressVocabDetailId=null;studyEditingId=null;scheduleSave();renderSession()});const body=$('progressBody');if(state.progressTab==='profile')renderProfileDashboard(body);else if(state.progressTab==='knowledge')renderKnowledgeDashboard(body);else renderProgressDashboard(body)
+  if(state.progressTab==='profile')state.progressTab='progress';
+  show('session');updateHeader();$('sessionView').querySelector('.card .h1').textContent=t('progress.heroTitle');$('sessionView').querySelector('.card .muted').textContent=t('progress.heroIntro');$('sessionBack').textContent=t('common.back');const box=$('sessionContent');box.innerHTML=`<div class="progress-tabs" role="tablist" aria-label="${t('progress.title')}"><button class="progress-tab ${state.progressTab==='progress'?'active':''}" data-progress="progress" role="tab" aria-selected="${state.progressTab==='progress'}">${t('progress.title')}</button><button class="progress-tab ${state.progressTab==='knowledge'?'active':''}" data-progress="knowledge" role="tab" aria-selected="${state.progressTab==='knowledge'}">${t('progress.knowledge')}</button></div><div id="progressBody" class="stack"></div>`;root.querySelectorAll('[data-progress]').forEach(b=>b.onclick=()=>{state.progressTab=b.dataset.progress;state.progressDetailId=null;state.progressVocabDetailId=null;studyEditingId=null;scheduleSave();renderSession()});const body=$('progressBody');if(state.progressTab==='knowledge')renderKnowledgeDashboard(body);else renderProgressDashboard(body)
 }
 
 function toggleProgress(){
@@ -4867,6 +5126,15 @@ function toggleProgress(){
 function goToLearningHome(){
   if(state.studyTracker.active)completeStudySession({status:'verlaten'});
   state.screen='home';
+  scheduleSave();
+  renderMain();
+}
+function goToAppHome(){
+  if(state.studyTracker.active)completeStudySession({status:'verlaten'});
+  hideAvatarAudioOverlay();
+  state.currentCourse=null;
+  state.screen='app-home';
+  routePushRequested=true;
   scheduleSave();
   renderMain();
 }
@@ -4881,9 +5149,20 @@ $('learnNav').onclick=goToLevels;
 $('flashcardsNav').onclick=openFlashcards;
 $('sessionBack').onclick=navigateBack;
 $('navBack').onclick=navigateBack;
-$('navHome').onclick=goToLearningHome;
+$('navHome').onclick=goToAppHome;
+$('navOptions').onclick=()=>{state.screen=state.screen==='options'?'app-home':'options';routePushRequested=true;scheduleSave();renderMain()};
 $('dictionaryClose').onclick=closeDictionaryModal;
 $('dictionaryModal').addEventListener('click',event=>{if(event.target===$('dictionaryModal'))closeDictionaryModal()});
+document.addEventListener('click',event=>{
+  const close=event.target.closest('[data-audio-close]');if(close){hideAvatarAudioOverlay();return}
+  const replay=event.target.closest('[data-audio-replay]');if(replay){if(audioCoachAsset){const completion=audioCoachCompletion,audio=playAvatarAudio(audioCoachAsset.id,audioCoachText,replay,audioCoachPlacement);audioCoachCompletion=audio?completion:null}return}
+  const button=event.target.closest('[data-audio-key],[data-audio-text]');if(!button)return;
+  event.preventDefault();event.stopPropagation();
+  let completion=null;
+  if(button.closest('#quizView')&&$('qCorrectAudio').dataset.autoNext==='true'){if(quizFeedbackTimer)clearTimeout(quizFeedbackTimer);quizFeedbackTimer=null;const token=quizAnswerToken;completion=()=>{hideAvatarAudioOverlay();if(token===quizAnswerToken)nextQuestion()}}
+  const session=state.flashcardSession;if(session?.feedback?.grade==='knew'&&button.closest('#flashcardView')){if(recallFeedbackTimer)clearTimeout(recallFeedbackTimer);recallFeedbackTimer=null;completion=()=>{hideAvatarAudioOverlay();if(state.flashcardSession===session)flashcardNextCard()}}
+  const audio=playAvatarAudio(button.dataset.audioKey,button.dataset.audioText,button);audioCoachCompletion=audio?completion:null;
+},true);
 document.addEventListener('click',event=>{const button=event.target.closest('[data-dictionary-open]');if(!button)return;event.preventDefault();event.stopPropagation();openDictionaryModal(button.dataset.dictionaryOpen,button.dataset.dictionaryLesson,button.dataset.dictionarySentence,button.dataset.dictionaryMeaning)},true);
 document.addEventListener('keydown',event=>{const modal=$('dictionaryModal');if(modal.classList.contains('hidden'))return;if(event.key==='Escape'){event.preventDefault();closeDictionaryModal();return}if(event.key==='Tab'){const focusable=[...modal.querySelectorAll('button:not(:disabled),input:not(:disabled),[href],[tabindex]:not([tabindex="-1"])')].filter(el=>el.getClientRects().length);if(!focusable.length)return;const first=focusable[0],last=focusable[focusable.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}}});
 $('quitQuiz').onclick=()=>{completeStudySession({status:'afgebroken'});setMain()};
@@ -4899,12 +5178,20 @@ window.addEventListener('pagehide',pauseActiveStudySession);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseActiveStudySession();else resumeActiveStudySession()});
 
 detectLayout();
+let hadSavedProgress=false;
+try{hadSavedProgress=!!localStorage.getItem(STORAGE_KEY)}catch{}
 loadProgress();
-// A new visit starts at the active course home; the saved lesson position remains available through Continue.
-state.screen='home';
+const initialRoute=location.hash?navigation.parseHash(location.hash,platform.courses):null;
+if(initialRoute?.courseId&&initialRoute.courseId!==state.courseId){platform.savePreferences({uiLanguage:state.uiLanguage,courseId:initialRoute.courseId});location.reload();return}
+if(initialRoute){state.currentCourse=initialRoute.courseId;state.primaryTab=initialRoute.primaryTab||'learn';state.screen=initialRoute.screen==='session'?'home':initialRoute.screen;if(Number.isInteger(initialRoute.level))state.level=Math.max(0,Math.min(levels.length-1,initialRoute.level))}
+else if(!hadSavedProgress){state.currentCourse=null;state.screen='app-home';state.primaryTab='learn'}
+else if(!state.currentCourse&&!state.screen.startsWith('options'))state.screen='app-home';
 document.documentElement.lang=state.uiLanguage;
 recoverInterruptedStudySession();
-renderMain();
+if(initialRoute?.screen==='session'||(!initialRoute&&state.currentCourse&&state.primaryTab==='progress'))renderSession();
+else renderMain();
+window.addEventListener('popstate',()=>{const route=navigation.parseHash(location.hash,platform.courses);if(route)applyBrowserRoute(route)});
+window.addEventListener('hashchange',()=>{const route=navigation.parseHash(location.hash,platform.courses);if(route)applyBrowserRoute(route)});
 updateStorageUI();
 if(typeof MutationObserver!=='undefined'&&document.createTreeWalker){
   const localeObserver=new MutationObserver(()=>i18n.localizeNodes(root,state.uiLanguage));

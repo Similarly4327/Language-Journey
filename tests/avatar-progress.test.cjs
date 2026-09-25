@@ -21,7 +21,7 @@ function createAvatarApp({savedState={},ranks={}}={}){
   storage.set('taal-japanse-leerapp-v1',JSON.stringify({version:6,state:savedState,ranks}));
   const localStorage={getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,value),removeItem:key=>storage.delete(key)};
   const window={LanguageJourneyContent:content,innerWidth:390,innerHeight:844,addEventListener(){},setTimeout(){return 1},clearTimeout(){},matchMedia:()=>({matches:false,addEventListener(){}})};
-  const context={document,window,localStorage,performance:{now:()=>0},navigator:{},console,setTimeout(){return 1},clearTimeout(){},requestAnimationFrame(){},structuredClone,URL,Date,Math,Intl,alert(){},Image:class{}};
+  const context={document,window,localStorage,location:{hash:''},performance:{now:()=>0},navigator:{},console,setTimeout(){return 1},clearTimeout(){},requestAnimationFrame(){},structuredClone,URL,Date,Math,Intl,alert(){},Image:class{}};
   for(const [,relative] of html.matchAll(/<script src="\.\/([^"?]+)(?:\?[^"]*)?"><\/script>/g)){
     if(relative==='language-journey-content/content.js')continue;
     vm.runInNewContext(fs.readFileSync(path.join(__dirname,'..',relative),'utf8'),context,{timeout:5000});
@@ -58,6 +58,18 @@ test('avatar level is derived again from saved ranks after reload',()=>{
   const reloaded=createAvatarApp({savedState:{level:1},ranks});
   assert.equal(reloaded.activeLearningLevel(),2);
   assert.equal(reloaded.getAvatarProgressLevel(),7);
+});
+
+test('Level 11 supermarket progress migrates to Level 15 without resetting lesson history',()=>{
+  const completed={'l11-1':{A:true,B:true}},scores={'l11-1':{A:8,B:7}};
+  const app=createAvatarApp({savedState:{level:10,thematic:{level:11,lessonIndex:0,part:'B',step:'reading'},thematicCompleted:completed,thematicScores:scores},ranks:{'l11-exam':{rank:'Silver',last:.86,attempts:3},'l11-1':{rank:'Gold',last:.95,attempts:4}}});
+  assert.equal(app.state.level,14,'the old zero-based Level 11 selection now opens Level 15');
+  assert.equal(app.state.thematic.level,15,'an in-progress supermarket activity remains at the supermarket');
+  assert.deepEqual(JSON.parse(JSON.stringify(app.state.thematicCompleted['l11-1'])),completed['l11-1']);
+  assert.deepEqual(JSON.parse(JSON.stringify(app.state.thematicScores['l11-1'])),scores['l11-1']);
+  assert.equal(app.rankState['l15-exam'].rank,'Silver');
+  assert.equal(app.rankState['l15-exam'].attempts,3);
+  assert.equal(app.rankState['l11-1'].rank,'Gold');
 });
 
 test('automatic outfit follows active level while manual selection remains fixed',()=>{

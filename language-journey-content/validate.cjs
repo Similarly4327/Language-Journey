@@ -7,7 +7,7 @@ function validate(manifest = content.manifest, options = {}) {
   const add=(severity,code,message,location='curriculum')=>diagnostics.push({severity,code,message,location});
   if(!Number.isInteger(manifest.schemaVersion)||manifest.schemaVersion<1)add('ERROR','SCHEMA_VERSION','schemaVersion must be a positive integer');
   if(typeof manifest.contentVersion!=='string'||!/^\d+\.\d+\.\d+$/.test(manifest.contentVersion))add('ERROR','CONTENT_VERSION','contentVersion must use major.minor.patch');
-  const registries={vocabulary:manifest.vocabulary,grammar:manifest.grammar,patterns:manifest.patterns,lessons:manifest.lessons,exercises:manifest.exercises,readings:manifest.readings,bonus:manifest.bonus,kanji:manifest.kanji};
+  const registries={vocabulary:manifest.vocabulary,grammar:manifest.grammar,patterns:manifest.patterns,lessons:manifest.lessons,exercises:manifest.exercises,readings:manifest.readings,bonus:manifest.bonus,kanji:manifest.kanji,instructions:manifest.instructions};
   const maps={};
   for(const [name,items] of Object.entries(registries)) {
     maps[name]=new Map();
@@ -67,6 +67,20 @@ function validate(manifest = content.manifest, options = {}) {
     const modules=(manifest.modules||[]).filter(x=>x.level===level.number);
     if(!modules.some(x=>x.name==='A')||!modules.some(x=>x.name==='B'))add('ERROR','FUTURE_LEVEL_STRUCTURE',`Level ${level.number} needs Modules A and B`,`level-${level.number}`);
   }
+  for(const level of manifest.levels||[])if(level.nextDestinationVocabularyId){
+    const word=maps.vocabulary.get(level.nextDestinationVocabularyId);
+    if(!word)add('ERROR','UNKNOWN_BRIDGE',`Level ${level.number} points to missing bridge vocabulary ${level.nextDestinationVocabularyId}`,`level-${level.number}`);
+    else if(order(word.introducedAt)>level.number*10000+9999)add('ERROR','FUTURE_BRIDGE',`${level.nextDestinationVocabularyId} is not known by the end of Level ${level.number}`,`level-${level.number}`);
+  }
+  const audioIds=new Set((manifest.audio?.assets||[]).map(asset=>asset.id));
+  for(const instruction of manifest.instructions||[]){
+    if(!instruction.textJa||!instruction.translations||!Object.keys(instruction.translations).length)add('ERROR','INSTRUCTION_FIELDS',`${instruction.id} needs Japanese text and mother-tongue translations`,instruction.id);
+    if(!instruction.introducedAt)add('ERROR','INSTRUCTION_INTRODUCTION',`${instruction.id} needs an introduction point`,instruction.id);
+    for(const id of instruction.requiredVocabIds||[])known('vocabulary',id,instruction.introducedAt,instruction.id);
+    if(instruction.audioRef&&!audioIds.has(instruction.audioRef))add('ERROR','UNKNOWN_AUDIO',`${instruction.audioRef} is not registered`,instruction.id);
+  }
+  const instructionIds=new Set((manifest.instructions||[]).map(item=>item.id));
+  for(const lesson of manifest.lessons||[])for(const application of lesson.applications||[])if(application.instructionId&&!instructionIds.has(application.instructionId))add('ERROR','UNKNOWN_INSTRUCTION',`${application.instructionId} is not registered`,application.id);
   for(const module of manifest.modules||[]){
     if(!manifest.levels.some(l=>l.number===module.level))add('ERROR','UNKNOWN_LEVEL',`Module ${module.id} has unknown level ${module.level}`,module.id);
     for(const id of module.lessonIds||[])if(!maps.lessons.has(id))add('ERROR','UNKNOWN_REFERENCE',`Module ${module.id} names missing lesson ${id}`,module.id);
@@ -106,10 +120,10 @@ function validate(manifest = content.manifest, options = {}) {
     if(word.kanjiForm&&word.kanjiIntroducedAt&&word.introducedAt&&order(word.kanjiIntroducedAt)<order(word.introducedAt))add('ERROR','KANJI_BEFORE_WORD',`${word.id} kanji predates the word`,word.id);
     if(word.kanjiForm&&!word.kanjiIntroducedAt)add('WARNING','KANJI_UNSCHEDULED',`${word.id} has a kanji form but no teaching point`,word.id);
   }
-  const audioIds=new Set();
+  const registeredAudioIds=new Set();
   for(const asset of manifest.audio?.assets||[]) {
-    if(audioIds.has(asset.id))add('ERROR','DUPLICATE_AUDIO',`${asset.id} is duplicated`,asset.id);
-    audioIds.add(asset.id);
+    if(registeredAudioIds.has(asset.id))add('ERROR','DUPLICATE_AUDIO',`${asset.id} is duplicated`,asset.id);
+    registeredAudioIds.add(asset.id);
     if(!manifest.audio.speakers.some(s=>s.id===asset.speakerId))add('ERROR','UNKNOWN_SPEAKER',`${asset.speakerId} is not registered`,asset.id);
     if(!asset.path||path.isAbsolute(asset.path)||asset.path.includes('..'))add('ERROR','AUDIO_PATH',`${asset.id} has unsafe or missing path`,asset.id);
     else if(options.checkFiles!==false&&!fs.existsSync(path.resolve(__dirname,asset.path)))add('WARNING','MISSING_AUDIO_FILE',`${asset.path} is not present`,asset.id);

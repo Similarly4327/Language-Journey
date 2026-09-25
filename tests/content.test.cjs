@@ -11,11 +11,11 @@ const codes=result=>result.diagnostics.map(d=>d.code);
 
 test('current curriculum validates with no errors',()=>assert.equal(validate().counts.ERROR,0));
 test('foundation and thematic levels have renderable adapter data',()=>{
-  assert.equal(content.levels.length,12);
+  assert.equal(content.levels.length,15);
   assert.equal(content.langLessons.length,10);
   assert.equal(content.smallLessons.length,5);
   for(let n=6;n<=10;n++)assert.ok(content.advancedCourses[n-1].lessons.length>=5);
-  for(let n=11;n<=12;n++)assert.equal(content.thematicCourses[n-1].lessons.length,5);
+  for(let n=11;n<=15;n++)assert.equal(content.thematicCourses[n-1].lessons.length,5);
   assert.equal(content.hira.flat().length,46);
   assert.equal(content.kata.flat().length,46);
   assert.ok(content.numberLessons.length>0);
@@ -32,7 +32,7 @@ test('app script parses, imports registry and preserves storage key',()=>{
   assert.match(html,/language-journey-content\/content\.js/);
   const platform=fs.readFileSync(path.join(__dirname,'../platform.js'),'utf8');
   assert.ok(platform.includes("storageKey:'taal-japanse-leerapp-v1'"));
-  assert.match(html,/const STORAGE_VERSION=6/);
+  assert.match(html,/const STORAGE_VERSION=7/);
 });
 test('knowledge state is cumulative and excludes later and legacy words',()=>{
   const first=content.getKnowledgeState('4-1'),last=content.getKnowledgeState('10-complete');
@@ -86,6 +86,14 @@ test('a playable Level 11 needs five lessons and both modules',()=>{
   m.levels.find(l=>l.number===11).lessonIds=[];
   assert.ok(codes(validate(m,{checkFiles:false})).includes('FUTURE_LEVEL_STRUCTURE'));
 });
+test('route validator rejects a future bridge and an unregistered Japanese instruction',()=>{
+  const m=copy();
+  m.levels.find(level=>level.number===12).nextDestinationVocabularyId='vocab-にんじん';
+  m.lessons.find(lesson=>lesson.id==='l12-1').applications[0].instructionId='missing-instruction';
+  const found=codes(validate(m,{checkFiles:false}));
+  assert.ok(found.includes('FUTURE_BRIDGE'));
+  assert.ok(found.includes('UNKNOWN_INSTRUCTION'));
+});
 test('audio references and missing files have distinct severities',()=>{
   const m=copy(),word=m.vocabulary.find(v=>v.japanese==='ねこ');
   word.audioId='audio-neko';
@@ -95,13 +103,29 @@ test('audio references and missing files have distinct severities',()=>{
   assert.ok(codes(result).includes('MISSING_AUDIO_FILE'));
   assert.ok(!codes(result).includes('UNKNOWN_AUDIO'));
 });
+test('Level 11–15 travel route is chronological and preserves supermarket lesson IDs',()=>{
+  const levels=content.manifest.levels;
+  assert.deepEqual(levels.slice(10).map(level=>level.number),[11,12,13,14,15]);
+  assert.deepEqual(levels.slice(10).map(level=>level.theme),['Vakantiecursus thuis','Aankomst op het vliegveld','Vervoer naar het hotel','Inchecken in het hotel','Boodschappen doen']);
+  assert.deepEqual(levels.find(level=>level.number===15).lessonIds,['l11-1','l11-2','l11-3','l11-4','l11-5']);
+  assert.equal(content.manifest.vocabulary.filter(word=>word.themes.includes('home-preparation')&&word.introducedAt?.startsWith('11-')).length,50);
+  assert.deepEqual(content.manifest.phases.find(phase=>phase.id==='foundation').levels.map(level=>level.number),[1,2,3,4,5,6,7,8,9,10]);
+});
+test('instruction resolver data and destination bridges are centrally registered',()=>{
+  assert.ok(content.manifest.instructions.length>=5);
+  for(const instruction of content.manifest.instructions){assert.ok(instruction.textJa);assert.ok(instruction.translations.nl);assert.ok(instruction.translations.en);assert.ok(instruction.translations.de);assert.ok(instruction.requiredVocabIds.length);assert.ok(Object.hasOwn(instruction,'audioRef'))}
+  for(const level of content.manifest.levels.filter(item=>item.number>=11&&item.nextDestinationVocabularyId))assert.ok(content.manifest.vocabulary.some(word=>word.id===level.nextDestinationVocabularyId&&content.pointOrder(word.introducedAt)<=level.number*10000+9999));
+  const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
+  assert.match(html,/savedVersion<=6&&s\.level===10\?14:s\.level/);
+  assert.match(html,/ranks\['l11-exam'\].*ranks\['l15-exam'\]/);
+});
 test('report has human-readable summary',()=>{
   const output=format(validate());
-  assert.match(output,/SUMMARY 12 levels/);
+  assert.match(output,/SUMMARY 15 levels/);
   assert.match(output,/0 errors/);
 });
-test('Levels 11 and 12 have five two-part lessons with staged words and optional bonus',()=>{
-  for(const number of [11,12]){
+test('Levels 11–15 have five two-part lessons with staged words and optional bonus',()=>{
+  for(const number of [11,12,13,14,15]){
     const level=content.manifest.levels.find(l=>l.number===number);
     assert.equal(level.status,'playable');
     assert.equal(level.lessonIds.length,5);
@@ -123,7 +147,7 @@ test('Levels 11 and 12 have five two-part lessons with staged words and optional
       }
     }
   }
-  const a=content.getKnowledgeState('11-1-A'),b=content.getKnowledgeState('11-1-B');
+  const a=content.getKnowledgeState('15-1-A'),b=content.getKnowledgeState('15-1-B');
   assert.ok(a.vocabulary.some(v=>v.japanese==='りんご'));
   assert.ok(!a.vocabulary.some(v=>v.japanese==='ねだん'));
   assert.ok(b.vocabulary.some(v=>v.japanese==='ねだん'));

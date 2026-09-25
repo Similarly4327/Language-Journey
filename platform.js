@@ -1,7 +1,7 @@
 (() => {
   const preferenceKey='language-journey-platform-v1';
   const courses={
-    japanese:{id:'japanese',targetLanguage:'ja',contentKey:'LanguageJourneyContent',storageKey:'taal-japanse-leerapp-v1',defaultSceneTheme:'school'}
+    japanese:{id:'japanese',displayName:'Japans',nativeName:'日本語',targetLanguage:'ja',contentKey:'LanguageJourneyContent',storageKey:'taal-japanse-leerapp-v1',defaultSceneTheme:'school',identity:'japan',transition:'flight-japan',avatars:{female:'assets/avatar-female_starter_greeting_bun.webp',male:'assets/avatar-male_starter_greeting.webp'}}
   };
   const courseLocales={};
   function registerCourse(config){

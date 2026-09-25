@@ -4522,8 +4522,10 @@
     {
       "id": "grammar-ha",
       "title": "は",
-      "shortExplanation": "これは X です betekent: “Dit is X.” は markeert waar de zin over gaat en klinkt hier als wa.",
-      "fullExplanation": "これは X です betekent: “Dit is X.” は markeert waar de zin over gaat en klinkt hier als wa.",
+      "shortExplanation": "Markeert het topic: waar de zin over gaat. Als partikel spreek je は uit als wa.",
+      "fullExplanation": "は laat zien welk persoon of ding centraal staat in de zin. In deze grammaticale rol klinkt は als wa; als los kana is het ha.",
+      "category": "topicpartikel",
+      "romaji": "wa",
       "introducedAt": "4-1",
       "availableFrom": "4-1",
       "examples": [
@@ -4538,12 +4540,31 @@
     {
       "id": "grammar-desu",
       "title": "です",
-      "shortExplanation": "これは X です betekent: “Dit is X.” は markeert waar de zin over gaat en klinkt hier als wa.",
-      "fullExplanation": "これは X です betekent: “Dit is X.” は markeert waar de zin over gaat en klinkt hier als wa.",
+      "shortExplanation": "Beleefde zinsafsluiting (copula): vaak “ben”, “bent”, “is” of “zijn”. De precieze vertaling hangt af van de zin.",
+      "fullExplanation": "です sluit een zin beleefd af en verbindt een onderwerp of beschrijving met wat erover wordt gezegd. Het wordt vaak vertaald als “ben”, “bent”, “is” of “zijn”, maar heeft niet altijd één vaste Nederlandse vertaling.",
+      "category": "beleefde copula",
+      "romaji": "desu",
+      "audioKey": "desu-pronunciation",
+      "synonyms": [
+        "desu",
+        "copula",
+        "beleefde zinsafsluiting",
+        "ben",
+        "bent",
+        "is",
+        "zijn"
+      ],
+      "pronunciationNote": "De う-klank in です wordt in natuurlijke spraak vaak heel zwak uitgesproken. Daardoor kan です ongeveer als “des” klinken.",
+      "exampleTranslations": [
+        {
+          "translation": "Jij bent een vriend.",
+          "note": "は markeert waar de zin over gaat; です sluit de zin beleefd af."
+        }
+      ],
       "introducedAt": "4-1",
       "availableFrom": "4-1",
       "examples": [
-        "これは ねこ です"
+        "あなた は ともだち です。"
       ],
       "dependencies": [],
       "tags": [
@@ -4554,8 +4575,10 @@
     {
       "id": "grammar-no",
       "title": "の",
-      "shortExplanation": "X の Y betekent: Y van X. わたし の ほん is letterlijk “ik van boek” en natuurlijk Nederlands “mijn boek”.",
-      "fullExplanation": "X の Y betekent: Y van X. わたし の ほん is letterlijk “ik van boek” en natuurlijk Nederlands “mijn boek”.",
+      "shortExplanation": "Verbindt twee naamwoorden. X の Y betekent vaak “Y van X”, zoals わたし の ほん: mijn boek.",
+      "fullExplanation": "の verbindt twee naamwoorden. In het bekende bezitspatroon staat de eigenaar vóór の en het bezit erna.",
+      "category": "bezitspartikel",
+      "romaji": "no",
       "introducedAt": "4-4",
       "availableFrom": "4-4",
       "examples": [
@@ -4573,6 +4596,8 @@
       "title": "か",
       "shortExplanation": "Zet か achter de beleefde zin. これは ねこ です is een mededeling; これは ねこ です か is een vraag.",
       "fullExplanation": "Zet か achter de beleefde zin. これは ねこ です is een mededeling; これは ねこ です か is een vraag.",
+      "category": "vraagpartikel",
+      "romaji": "ka",
       "introducedAt": "4-5",
       "availableFrom": "4-5",
       "examples": [
@@ -4590,6 +4615,8 @@
       "title": "も",
       "shortExplanation": "も betekent hier “ook” en neemt in dit patroon de plaats van は in: それも ねこ です — dat is ook een kat.",
       "fullExplanation": "も betekent hier “ook” en neemt in dit patroon de plaats van は in: それも ねこ です — dat is ook een kat.",
+      "category": "partikel · ook",
+      "romaji": "mo",
       "introducedAt": "4-6",
       "availableFrom": "4-6",
       "examples": [
@@ -4607,6 +4634,8 @@
       "title": "を",
       "shortExplanation": "を markeert het object en klinkt als o. In de beginnersvolgorde komt eerst het topic, dan het object en het werkwoord altijd achteraan.",
       "fullExplanation": "を markeert het object en klinkt als o. In de beginnersvolgorde komt eerst het topic, dan het object en het werkwoord altijd achteraan.",
+      "category": "objectpartikel",
+      "romaji": "o",
       "introducedAt": "4-7",
       "availableFrom": "4-7",
       "examples": [
@@ -4624,6 +4653,8 @@
       "title": "に",
       "shortExplanation": "に markeert hier de bestemming. De plaats staat vóór に en het werkwoord いきます staat aan het einde.",
       "fullExplanation": "に markeert hier de bestemming. De plaats staat vóór に en het werkwoord いきます staat aan het einde.",
+      "category": "bestemmingspartikel",
+      "romaji": "ni",
       "introducedAt": "4-9",
       "availableFrom": "4-9",
       "examples": [
@@ -12850,73 +12881,78 @@
     },
     {
       "id": "usable-japanese",
-      "title": "Fase 2 — Japans gaan gebruiken",
-      "subtitle": "Van losse zinnen naar situaties en korte teksten",
-      "description": "Japans wordt steeds bruikbaarder in dialogen, routines en korte verhalen.",
+      "title": "Fase 2 — Thuis voorbereiden, Japan ontdekken",
+      "subtitle": "Een thuiscursus en daarna een geoefende Japanreis",
+      "description": "Je bereidt de reis thuis voor en gebruikt bekende Japanse labels en korte teksten vanaf aankomst.",
       "startLevel": 11,
       "endLevel": 20,
-      "goal": "Steeds meer complete zinnen, situaties en korte teksten begrijpen en bouwen.",
-      "status": "planned",
+      "goal": "Bekende taal toepassen in geoefende vakantiesituaties, zonder vloeiendheid te claimen.",
+      "status": "active",
       "theme": "使",
       "levels": [
         {
           "number": 11,
-          "title": "Dagelijkse routines",
-          "description": "Handelingen en vaste momenten van een dag.",
-          "status": "placeholder"
+          "title": "Vakantiecursus thuis",
+          "description": "Leer app-opdrachten begrijpen en oefen basiswoorden voor vertrek.",
+          "status": "playable",
+          "levelIndex": 10
         },
         {
           "number": 12,
-          "title": "Eten en bestellen",
-          "description": "Meer natuurlijke bestelsituaties en voorkeuren.",
-          "status": "placeholder"
+          "title": "Aankomst op het vliegveld",
+          "description": "Lees aankomst-, bagage- en uitgangsinformatie.",
+          "status": "playable",
+          "levelIndex": 11
         },
         {
           "number": 13,
-          "title": "Winkelen en geld",
-          "description": "Prijzen, keuzes en eenvoudige winkelgesprekken.",
-          "status": "placeholder"
+          "title": "Vervoer naar het hotel",
+          "description": "Vind vervoer, bestemming en eenvoudige route-informatie.",
+          "status": "playable",
+          "levelIndex": 12
         },
         {
           "number": 14,
-          "title": "Onderweg en vervoer",
-          "description": "Routes, voertuigen en praktische reisinformatie.",
-          "status": "placeholder"
+          "title": "Inchecken in het hotel",
+          "description": "Begrijp reserverings-, receptie- en kamerinformatie.",
+          "status": "playable",
+          "levelIndex": 13
         },
         {
           "number": 15,
-          "title": "Sociale gesprekken",
-          "description": "Kennismaken en korte gesprekjes onderhouden.",
-          "status": "placeholder"
+          "title": "Boodschappen doen",
+          "description": "Zoek producten, lees prijzen en rond een aankoop af.",
+          "status": "playable",
+          "levelIndex": 14
         },
         {
           "number": 16,
-          "title": "Verleden en ervaringen",
-          "description": "Eenvoudig vertellen wat er is gebeurd.",
+          "title": "Restaurant en eten",
+          "description": "Bestel een maaltijd en begrijp eenvoudige menutekst.",
           "status": "placeholder"
         },
         {
           "number": 17,
-          "title": "Plannen en afspraken",
-          "description": "Vooruitkijken, afspreken en intenties begrijpen.",
+          "title": "Tokio en de stad",
+          "description": "Gebruik richtingen, kaarten en herkenbare stadsinformatie.",
           "status": "placeholder"
         },
         {
           "number": 18,
-          "title": "Korte teksten en microverhalen",
-          "description": "Van enkele regels naar samenhangende tekst.",
+          "title": "Kyoto en cultuur",
+          "description": "Lees korte culturele aanduidingen en praktische informatie.",
           "status": "placeholder"
         },
         {
           "number": 19,
-          "title": "Natuurlijker Japans",
-          "description": "Bekende structuren in minder schoolse formuleringen.",
+          "title": "Vrije tijd en karaoke",
+          "description": "Volg eenvoudige vrijetijds- en karaoke-informatie.",
           "status": "placeholder"
         },
         {
           "number": 20,
-          "title": "Integratie bruikbaar Japans",
-          "description": "De onderdelen van deze fase samen toepassen.",
+          "title": "Laatste reisdag",
+          "description": "Combineer hotel, boodschappen, vervoer, eten, bagage en vertrek.",
           "status": "placeholder"
         }
       ]
@@ -13121,17 +13157,67 @@
     ]
   }
 };
+  const homePreparationLessons=[
+    {title:'De les begint',goal:'Herken de woorden voor een level, les, vraag, antwoord en keuze.',A:{instructionId:'choose-answer',label:'Leskaart',words:[['レベル','level','reberu'],['レッスン','les','ressun'],['しつもん','vraag','shitsumon'],['こたえ','antwoord','kotae'],['えらびます','kiezen','erabimasu']],example:'しつもん と こたえ。',text:'レベル 11\nレッスン 1\nしつもん：しつもん\nこたえ：こたえ',translation:'Level 11, les 1. Dit zijn het label voor een vraag en het label voor een antwoord.',questions:[['Welk woord betekent antwoord?','こたえ','レッスン','レベル'],['Wat doe je bij een keuzevraag?','een antwoord kiezen','een level overslaan','een woord schrijven']]},B:{instructionId:'choose-answer',type:'notice',label:'Korte oefening',words:[['もんだい','opgave','mondai'],['れんしゅう','oefening','renshū'],['ただしい','juist','tadashii'],['まちがい','fout','machigai'],['もういちど','nog een keer','mō ichido']],example:'ただしい こたえ を えらびます。',text:'れんしゅう\nもんだい 1：ただしい こたえ を えらんでください。\nもんだい 2：まちがい を もういちど みます。',translation:'Oefening. Kies het juiste antwoord bij opgave 1. Bekijk de fout bij opgave 2 nog een keer.',questions:[['Wat kies je bij opgave 1?','het juiste antwoord','een level','een luchthaven'],['Wat doe je na een fout?','de fout nog een keer bekijken','de les afsluiten','de tekst overslaan']] }},
+    {title:'Lezen en betekenis',goal:'Lees een korte Japanse zin en zoek het woord met de gevraagde betekenis.',A:{instructionId:'read-text',label:'Leeskaart',words:[['よみます','lezen','yomimasu'],['ぶん','zin','bun'],['ことば','woord','kotoba'],['いみ','betekenis','imi'],['みつけます','vinden','mitsukemasu']],example:'ぶん を よみます。',text:'ぶん を よみます。\nことば の いみ を みつけます。',translation:'Ik lees een zin. Ik zoek de betekenis van een woord.',questions:[['Wat lees je?','een zin','een kassabon','een gate'],['Wat zoek je?','de betekenis van een woord','een stoelnummer','een prijs']]},B:{instructionId:'read-text',type:'sign',label:'Voorbeeldblad',words:[['よんでください','lees alstublieft','yonde kudasai'],['ページ','pagina','pēji'],['タイトル','titel','taitoru'],['もじ','teken / letter','moji'],['しるし','markering','shirushi']],example:'タイトル を よんでください。',text:'ページ 1\nタイトル：よんでください\nもじ に しるし を つけます。',translation:'Pagina 1. Lees de titel en zet een markering bij het teken.',questions:[['Wat vraagt de titel?','lees alstublieft','luister alstublieft','ga naar de uitgang'],['Waar zet je een markering?','bij een teken','bij een prijs','bij een gate']] }},
+    {title:'Luisteren en invullen',goal:'Herken de opdracht voor een invulvak en voer die uit in een korte oefening.',A:{instructionId:'listen-audio',label:'Luisteropdracht',words:[['きいてください','luister alstublieft','kiite kudasai'],['おと','geluid','oto'],['おんせい','audio / stemgeluid','onsei'],['ゆっくり','langzaam','yukkuri'],['くりかえします','herhalen','kurikaeshimasu']],example:'おんせい を きいてください。',text:'おんせい を きいてください。\nゆっくり ききます。\nおと を くりかえします。',translation:'Luister naar de audio. Luister langzaam en herhaal het geluid.',questions:[['Wat doe je eerst?','naar de audio luisteren','een bon lezen','een antwoord invullen'],['Hoe kun je luisteren?','langzaam','bij de uitgang','met een ticket']]},B:{instructionId:'fill-answer',type:'notice',label:'Invuloefening',words:[['うめてください','vul alstublieft in','umete kudasai'],['くうらん','open vak','kūran'],['かいてください','schrijf alstublieft','kaite kudasai'],['きごう','symbool','kigō'],['まる','cirkel','maru']],example:'くうらん を うめてください。',text:'ことば：おと\nくうらん：＿＿＿\nきごう：○\nかいてください。',translation:'Vul het open vak in, schrijf het woord en zet een cirkel bij het passende symbool.',questions:[['Wat moet je doen met het open vak?','het invullen','het overslaan','het beluisteren'],['Welk teken is een cirkel?','○','×','→']] }},
+    {title:'Volgorde en volgende stap',goal:'Volg woorden die de volgorde van een korte oefening aangeven.',A:{instructionId:'order-steps',label:'Stappenkaart',words:[['じゅんばん','volgorde','junban'],['ならべます','op volgorde zetten','narabemasu'],['さいしょ','eerst','saisho'],['つぎ','volgende','tsugi'],['おわり','einde','owari']],example:'じゅんばん に ならべます。',text:'さいしょ：ぶん を よみます。\nつぎ：こたえ を えらびます。\nおわり：こたえ を かくにん します。',translation:'Eerst lees je de zin. Daarna kies je het antwoord. Aan het einde controleer je het antwoord.',questions:[['Wat komt als eerste?','de zin lezen','het antwoord controleren','de les afsluiten'],['Wat komt na de zin lezen?','het antwoord kiezen','een level kiezen','een geluid herhalen']]},B:{instructionId:'next-step',type:'notice',label:'Route door een les',words:[['まえ','ervoor','mae'],['あと','erna','ato'],['すすめます','verdergaan','susumemasu'],['はじめます','beginnen','hajიმemasu'],['かくにん','controleren','kakunin']],example:'つぎ へ すすめます。',text:'はじめます → よみます → えらびます → かくにん → つぎ へ',translation:'Begin, lees, kies, controleer en ga daarna verder.',questions:[['Wat gebeurt na controleren?','je gaat naar de volgende stap','je begint opnieuw bij level 1','je sluit de app']] }},
+    {title:'Klaar voor vertrek',goal:'Combineer bekende opdrachtwoorden met een korte vertrekcheck en herken de eerstvolgende bestemming.',A:{instructionId:'read-text',label:'Vertrekcheck',words:[['りょこう','reis','ryokō'],['じゅんび','voorbereiding','junbi'],['しゅっぱつ','vertrek','shuppatsu'],['にもつ','bagage','nimotsu'],['ひこうき','vliegtuig','hikōki']],example:'りょこう の じゅんび。',text:'りょこう の じゅんび を します。\nしゅっぱつ の まえ に にもつ を かくにん します。\nひこうき で にほん へ いきます。',translation:'Ik bereid de reis voor. Voor vertrek controleer ik de bagage. Ik ga met het vliegtuig naar Japan.',questions:[['Wat controleer je voor vertrek?','de bagage','een bon','een hotelkamer'],['Waar ga je met het vliegtuig heen?','Japan','de supermarkt','het station']]},B:{instructionId:'choose-answer',type:'sign',label:'Vertrekbord',words:[['くうこう','luchthaven','kūkō'],['ちず','kaart','chizu'],['ひょうじ','aanduiding / display','hyōji'],['でぐち','uitgang','deguchi'],['のりば','instapplek / perron','noriba']],example:'くうこう の ひょうじ。',text:'くうこう\nでぐち →\nのりば →\nちず と ひょうじ を かくにん します。',translation:'Luchthaven. Volg de uitgang en de instapplek. Controleer de kaart en de aanduidingen.',questions:[['Waar begint de reis in Japan?','op de luchthaven','in de supermarkt','in het hotel'],['Wat controleer je op de luchthaven?','de kaart en aanduidingen','de kassabon','de lesvolgorde']] }}
+  ];
+  const homePreparationPlan={number:11,lessonPrefix:'l11-home',themeId:'home-preparation',theme:'Vakantiecursus thuis',subtitle:'App-taal en vertrekvoorbereiding',competency:'Ik herken veelgebruikte Japanse lesinstructies, voer de bijbehorende taak uit en lees een korte vertrekcheck.',nextDestinationVocabularyId:'vocab-くうこう',grammar:{id:'grammar-l11-home-1',title:'〜てください',explanation:'〜てください is een beleefde opdracht: doe alsjeblieft wat het werkwoord vraagt. Je leest de opdracht en voert die meteen uit.'},lessons:homePreparationLessons};
   // Thematic levels: each lesson has a story (A) and a different practical source (B).
   // Word introduction points use A/B so knowledge snapshots and Recall stay cumulative.
-  const thematicPlans=[
-    {number:11,theme:'Supermarkt',subtitle:'Van schap tot kassabon',competency:'Ik kan een kort supermarktverhaal en praktische winkelinformatie begrijpen.',grammar:{id:'grammar-l11-1',title:'が あります',explanation:'Met X が あります zeg je dat iets aanwezig is. りんご が あります betekent: er zijn appels.'},lessons:[
+  homePreparationLessons[1].A.words[0]=['せつめい','uitleg','setsumei'];
+  homePreparationLessons[3].B.words[0]=['ぜんぶ','alles','zenbu'];
+  homePreparationLessons[3].B.words[3]=['はじめます','beginnen','hajimemasu'];
+  homePreparationLessons[4].B.words[1]=['あんないじょ','informatiebalie','annaijo'];
+  homePreparationLessons[3].A.text='さいしょ：ぶん を よみます。\nつぎ：こたえ を えらびます。\nおわり：こたえ を みます。';
+  homePreparationLessons[3].B.questions.push(['Welk woord betekent beginnen?','はじめます','つぎ','おわり']);
+  const routePlan=(number,theme,themeId,subtitle,competency,grammar,rows,nextDestinationVocabularyId)=>({number,themeId,theme,subtitle,competency,nextDestinationVocabularyId,grammar,lessons:rows.map((row,index)=>({title:row.title,goal:row.goal,A:{instructionId:row.aInstructionId||'read-text',label:row.aLabel||'Korte scène',words:row.a,text:row.aText,translation:row.aNl,example:row.aText.split('\n')[0],questions:[[row.aQuestion,row.aAnswer,...row.aWrong],[row.aQuestion2||row.aQuestion,row.aAnswer2||row.aAnswer,...row.aWrong2||row.aWrong]]},B:{instructionId:row.bInstructionId||'choose-answer',type:row.bType||'sign',label:row.bLabel||'Praktische informatie',words:row.b,text:row.bText,translation:row.bNl,example:row.bText.split('\n')[0],questions:[[row.bQuestion,row.bAnswer,...row.bWrong],[row.bQuestion2||row.bQuestion,row.bAnswer2||row.bAnswer,...row.bWrong2||row.bWrong]]}}))});
+  const transitRows=[
+    {title:'Kies je vervoer',goal:'Herken vervoer vanaf de luchthaven en kies een passende bestemming.',a:[['でんしゃ','trein','densha'],['バス','bus','basu'],['タクシー','taxi','takushī'],['えき','station','eki'],['ホテル','hotel','hoteru']],aText:'くうこう から でんしゃ に のります。\nホテル へ いきます。',aNl:'Ik neem de trein vanaf de luchthaven. Ik ga naar het hotel.',aQuestion:'Waar gaat de reiziger heen?',aAnswer:'naar het hotel',aWrong:['naar school','naar de supermarkt'],aQuestion2:'Waar stapt de reiziger op de trein?',aAnswer2:'op de luchthaven',aWrong2:['in het hotel','bij de kassa'],b:[['のりば','instapplek','noriba'],['きっぷ','kaartje','kippu'],['いきさき','bestemming','ikisaki'],['ばんせん','spoor','bansen'],['こちら','deze kant','kochira']],bText:'でんしゃ のりば →\nきっぷ：ホテル まえ\n3ばんせん',bNl:'Treinperron. Kaartje: hotelplein. Spoor 3.',bQuestion:'Op welk spoor vertrekt de trein?',bAnswer:'spoor 3',bWrong:['spoor 1','spoor 4']},
+    {title:'Koop een kaartje',goal:'Lees een eenvoudige ticketkeuze met bestemming en prijs.',a:[['かいます','kopen','kaimasu'],['かたみち','enkele reis','katamichi'],['おとな','volwassene','otona'],['こども','kind','kodomo'],['いくら','hoeveel kost het','ikura']],aText:'ホテル まで の きっぷ を かいます。\nおとな の きっぷ は 500えん です。',aNl:'Ik koop een kaartje naar het hotel. Een kaartje voor een volwassene kost 500 yen.',aQuestion:'Wat kost het kaartje voor een volwassene?',aAnswer:'500 yen',aWrong:['300 yen','800 yen'],b:[['きっぷうりば','kaartjesloket','kippu uriba'],['おかね','geld','okane'],['ひとつ','één stuk','hitotsu'],['ください','alstublieft','kudasai'],['まどぐち','loket','madoguchi']],bText:'きっぷうりば\nホテル まで：500えん\nひとつ ください。',bNl:'Kaartjesloket. Naar het hotel: 500 yen. Eén kaartje alstublieft.',bQuestion:'Hoeveel kost de reis naar het hotel?',bAnswer:'500 yen',bWrong:['50 yen','5000 yen']},
+    {title:'Volg de richting',goal:'Volg eenvoudige aanwijzingen naar het juiste perron.',a:[['ひだり','links','hidari'],['みぎ','rechts','migi'],['まっすぐ','rechtdoor','massugu'],['まがります','afslaan','magarimasu'],['かいだん','trap','kaidan']],aText:'まっすぐ いきます。\nかいだん の まえ で ひだり に まがります。',aNl:'Ga rechtdoor. Sla voor de trap linksaf.',aQuestion:'Waar sla je linksaf?',aAnswer:'voor de trap',aWrong:['na het hotel','bij de kassa'],b:[['ちか','ondergronds','chika'],['ちじょう','bovengronds','chijō'],['ちかてつ','metro','chikatetsu'],['いりぐち','ingang','iriguchi'],['でぐち','uitgang','deguchi']],bText:'ちかてつ いりぐち ↓\nでぐち：みぎ\nちか 1かい',bNl:'Metro-ingang beneden. Uitgang rechts. Ondergrondse verdieping 1.',bQuestion:'Waar is de uitgang?',bAnswer:'rechts',bWrong:['links','rechtdoor']},
+    {title:'Lees het vertrekbord',goal:'Haal bestemming en tijd uit een eenvoudig vertrekbord.',a:[['でます','vertrekken','demasu'],['はやい','vroeg / snel','hayai'],['おそい','laat / langzaam','osoi'],['じ','uur','ji'],['ふん','minuut','fun']],aText:'でんしゃ は 10じ 15ふん に でます。\nホテル へ いきます。',aNl:'De trein vertrekt om 10:15. Hij gaat naar het hotel.',aQuestion:'Hoe laat vertrekt de trein?',aAnswer:'10:15',aWrong:['10:50','11:15'],b:[['おくれ','vertraging','okure'],['てんじ','display','tenji'],['つぎ','volgende','tsugi'],['ばん','nummer','ban'],['まちます','wachten','machimasu']],bText:'ホテル いき\n10じ 15ふん\nおくれ：ありません',bNl:'Naar het hotel. 10:15. Geen vertraging.',bQuestion:'Is er vertraging?',bAnswer:'nee',bWrong:['ja, 15 minuten','ja, een uur']},
+    {title:'Van luchthaven naar hotel',goal:'Combineer vervoerskeuze, ticket en route naar het hotel.',a:[['おります','uitstappen','orimasu'],['つきます','aankomen','tsukimasu'],['のりかえ','overstap','norikae'],['じかん','tijd','jikan'],['ちかく','in de buurt','chikaku']],aText:'ホテル の ちかく の えき で おります。\nのりかえ は ありません。',aNl:'Ik stap uit bij het station dicht bij het hotel. Er is geen overstap.',aQuestion:'Waar stapt de reiziger uit?',aAnswer:'bij het station bij het hotel',aWrong:['op de luchthaven','bij de supermarkt'],b:[['うんてんしゅ','chauffeur','untenshu'],['つぎ','volgende','tsugi'],['おりば','uitstapplek','oriba'],['しゅうてん','eindhalte','shūten'],['ホテルまえ','voor het hotel','hoteru mae']],bText:'つぎ は ホテルまえ です。\nおりば で おります。',bNl:'De volgende halte is voor het hotel. Stap uit bij de uitstapplek.',bQuestion:'Wat is de volgende halte?',bAnswer:'voor het hotel',bWrong:['de luchthaven','het station']}
+  ];
+  const arrivalRows=[
+    {title:'Aankomsthal en terminal',goal:'Herken de aankomsthal, terminal en aankomstinformatie.',a:[['とうちゃく','aankomst','tōchaku'],['ターミナル','terminal','tāminaru'],['ひこうじょう','luchthaven','hikōjō'],['つきました','aangekomen','tsukimashita'],['こちら','deze kant','kochira']],aText:'にほん に つきました。\nとうちゃく ターミナル は 2 です。',aNl:'Ik ben in Japan aangekomen. De aankomstterminal is 2.',aQuestion:'In welke terminal is de aankomst?',aAnswer:'terminal 2',aWrong:['terminal 1','terminal 3'],b:[['あんないばん','informatiebord','annaiban'],['ひょうじ','aanduiding','hyōji'],['かくにん','controleren','kakunin'],['いりぐち','ingang','iriguchi'],['でぐち','uitgang','deguchi']],bText:'とうちゃく：2ターミナル\nあんないばん を かくにん します。',bNl:'Aankomst: terminal 2. Controleer het informatiebord.',bQuestion:'Wat controleer je?',bAnswer:'het informatiebord',bWrong:['de kassabon','het hotelmenu']},
+    {title:'Volg de aankomstborden',goal:'Volg de borden naar immigratie en bagageafhandeling.',a:[['にゅうこく','immigratie / binnenkomst','nyūkoku'],['てつづき','procedure','tetsuzuki'],['すすみます','verdergaan','susumimasu'],['ひと','persoon','hito'],['ならびます','in de rij staan','narabimasu']],aText:'にゅうこく てつづき へ すすみます。\nここ で ならびます。',aNl:'Ga verder naar de immigratieprocedure. Hier sluit je aan in de rij.',aQuestion:'Waar gaat de reiziger heen?',aAnswer:'naar immigratie',aWrong:['naar de kassa','naar het hotel'],b:[['ゆうどう','routegeleiding','yūdō'],['ゆか','vloer','yuka'],['した','beneden','shita'],['まっすぐ','rechtdoor','massugu'],['つぎ','volgende','tsugi']],bText:'にゅうこく →\nまっすぐ\nにもつ うけとり ↓',bNl:'Immigratie rechtdoor. Bagage ophalen beneden.',bQuestion:'Waar is bagage ophalen?',bAnswer:'beneden',bWrong:['boven','links']},
+    {title:'Haal je bagage op',goal:'Lees bagageband- en bagage-informatie.',a:[['にもつ','bagage','nimotsu'],['うけとります','in ontvangst nemen','uketorimasu'],['ベルト','band','beruto'],['ばんごう','nummer','bangō'],['でます','verschijnen / vertrekken','demasu']],aText:'にもつ は 5ばん ベルト から でます。\nにもつ を うけとります。',aNl:'De bagage komt van band 5. Ik haal mijn bagage op.',aQuestion:'Van welke band komt de bagage?',aAnswer:'band 5',aWrong:['band 2','band 8'],b:[['おおきい','groot','ōkii'],['ちいさい','klein','chiisai'],['くろ','zwart','kuro'],['あか','rood','aka'],['かばん','tas','kaban']],bText:'5ばん ベルト\nくろい かばん\nにもつ が でます。',bNl:'Band 5. Een zwarte tas komt eraan.',bQuestion:'Welke kleur heeft de tas?',bAnswer:'zwart',bWrong:['rood','wit']},
+    {title:'Vind de uitgang',goal:'Volg een eenvoudige route van bagageafhaling naar de uitgang.',a:[['しゅうりょう','klaar / afgerond','shūryō'],['そと','buiten','soto'],['でぐち','uitgang','deguchi'],['みぎ','rechts','migi'],['ひだり','links','hidari']],aText:'にもつ を うけとりました。\nでぐち は みぎ です。',aNl:'Ik heb mijn bagage opgehaald. De uitgang is rechts.',aQuestion:'Aan welke kant is de uitgang?',aAnswer:'rechts',aWrong:['links','rechtdoor'],b:[['タクシー','taxi','takushī'],['バス','bus','basu'],['でむかえ','ophalen / verwelkomen','demukae'],['まちあい','ontmoetingsplek','machiai'],['まどぐち','balie','madoguchi']],bText:'でぐち →\nタクシー・バス のりば\nでむかえ：A',bNl:'Uitgang rechts. Taxi- en bushalte. Afhaalpunt A.',bQuestion:'Waar staat het afhaalpunt?',bAnswer:'A',bWrong:['B','C']},
+    {title:'De aankomst afronden',goal:'Combineer aankomst, bagage, uitgang en de volgende bestemming.',a:[['かぞく','familie','kazoku'],['ともだち','vriend','tomodachi'],['まちます','wachten','machimasu'],['あいます','ontmoeten','aimasu'],['でます','naar buiten gaan','demasu']],aText:'でぐち で ともだち を まちます。\nともだち に あいます。',aNl:'Ik wacht bij de uitgang op mijn vriend. Ik ontmoet mijn vriend.',aQuestion:'Op wie wacht de reiziger?',aAnswer:'op een vriend',aWrong:['op een chauffeur','op een medewerker'],b:[['くうこう','luchthaven','kūkō'],['ホテル','hotel','hoteru'],['いきます','gaan','ikimasu'],['つぎ','volgende','tsugi'],['でんしゃ','trein','densha']],bText:'くうこう から ホテル へ。\nつぎ は でんしゃ です。',bNl:'Van de luchthaven naar het hotel. Daarna met de trein.',bQuestion:'Wat is de volgende reisstap?',bAnswer:'met de trein naar het hotel',bWrong:['naar de supermarkt','naar de gate']}
+  ];
+  const hotelRows=[
+    {title:'Bij de receptie',goal:'Meld je bij de receptie en geef je naam en reservering door.',a:[['ホテル','hotel','hoteru'],['フロント','receptie','furonto'],['よやく','reservering','yoyaku'],['なまえ','naam','namae'],['あります','er is','arimasu']],aText:'フロント で よやく を つたえます。\nなまえ は ミナ です。',aNl:'Bij de receptie geef ik mijn reservering door. Mijn naam is Mina.',aQuestion:'Waar meldt de reiziger zich?',aAnswer:'bij de receptie',aWrong:['bij het station','bij de kassa'],b:[['パスポート','paspoort','pasupōto'],['みせます','laten zien','misemasu'],['よやくばんごう','reserveringsnummer','yoyaku bangō'],['かくにん','controleren','kakunin'],['おねがいします','alstublieft','onegaishimasu']],bText:'よやくばんごう：215\nパスポート を みせてください。',bNl:'Reserveringsnummer 215. Laat uw paspoort zien, alstublieft.',bQuestion:'Welk document toont de gast?',bAnswer:'het paspoort',bWrong:['het treinkaartje','de kassabon']},
+    {title:'Vind je kamer',goal:'Lees een kamernummer en volg eenvoudige aanwijzingen in het hotel.',a:[['へや','kamer','heya'],['かい','verdieping','kai'],['エレベーター','lift','erebētā'],['いきます','gaan','ikimasu'],['ばんごう','nummer','bangō']],aText:'へや は 305ごう です。\nエレベーター で 3かい へ いきます。',aNl:'De kamer is nummer 305. Neem de lift naar de derde verdieping.',aQuestion:'Op welke verdieping is de kamer?',aAnswer:'de derde verdieping',aWrong:['de tweede verdieping','de vijfde verdieping'],b:[['かぎ','sleutel','kagi'],['カード','kaart','kādo'],['つかいます','gebruiken','tsukaimasu'],['ひらきます','opengaan','hirakimasu'],['ドア','deur','doa']],bText:'305ごうしつ\nカードキー を つかいます。',bNl:'Kamer 305. Gebruik de sleutelkaart.',bQuestion:'Wat gebruik je om de deur te openen?',bAnswer:'de sleutelkaart',bWrong:['een ticket','een munt']},
+    {title:'Begrijp hotelaanduidingen',goal:'Herken faciliteiten en nuttige aanduidingen in het hotel.',a:[['トイレ','toilet','toire'],['みず','water','mizu'],['あります','er is','arimasu'],['かりる','lenen','kariru'],['タオル','handdoek','taoru']],aText:'トイレ は こちら です。\nタオル を かりる こと が できます。',aNl:'Het toilet is deze kant op. Je kunt een handdoek lenen.',aQuestion:'Wat kun je lenen?',aAnswer:'een handdoek',aWrong:['een treinkaartje','een koffer'],b:[['かいだん','trap','kaidan'],['きんえん','niet roken','kin-en'],['じはんき','automaat','jihanki'],['あんない','informatie','annai'],['ちず','kaart','chizu']],bText:'じはんき →\nかいだん ↑\nきんえん',bNl:'Automaat rechts. Trap omhoog. Niet roken.',bQuestion:'Wat staat bij de rookregel?',bAnswer:'niet roken',bWrong:['uitgang','receptie']},
+    {title:'Vraag om hulp',goal:'Begrijp een eenvoudige vraag over bagage of een voorziening.',a:[['にもつ','bagage','nimotsu'],['あずけます','in bewaring geven','azukemasu'],['あずかります','bewaren','azukarimasu'],['できます','kunnen','dekimasu'],['あとで','later','atode']],aText:'にもつ を あずける こと が できます か。\nはい、できます。',aNl:'Kan ik mijn bagage hier achterlaten? Ja, dat kan.',aQuestion:'Wat wil de gast achterlaten?',aAnswer:'bagage',aWrong:['een sleutel','een kaart'],b:[['あさ','ochtend','asa'],['よる','avond','yoru'],['あいています','open zijn','aiteimasu'],['しめます','sluiten','shimemasu'],['じかん','tijd','jikan']],bText:'フロント：24じかん あいています。\nいつ でも どうぞ。',bNl:'De receptie is 24 uur open. Kom gerust wanneer je wilt.',bQuestion:'Wanneer is de receptie open?',bAnswer:'24 uur per dag',bWrong:['alleen in de ochtend','tot 18:00']},
+    {title:'Aankomen en voorbereiden',goal:'Combineer inchecken, kamerinformatie en een eenvoudige verblijfcheck.',a:[['とまります','overnachten','tomarimasu'],['ひとばん','één nacht','hitoban'],['あした','morgen','ashita'],['あさごはん','ontbijt','asagohan'],['なんじ','hoe laat','nanji']],aText:'ホテル に ひとばん とまります。\nあさごはん は 7じ です。',aNl:'Ik overnacht één nacht in het hotel. Het ontbijt is om zeven uur.',aQuestion:'Hoe lang blijft de gast?',aAnswer:'één nacht',aWrong:['twee weken','één uur'],b:[['ひつよう','nodig','hitsuyō'],['かいます','kopen','kaimasu'],['ちかく','in de buurt','chikaku'],['みせ','winkel','mise'],['さがします','zoeken','sagashimasu']],bText:'みず が ひつよう です。\nちかく の みせ を さがします。',bNl:'Ik heb water nodig. Ik zoek een winkel in de buurt.',bQuestion:'Wat heeft de reiziger nodig?',bAnswer:'water',bWrong:['een kamer','een ticket']}
+  ];
+  hotelRows[2].a[1]=['できます','kunnen','dekimasu'];
+  const instructionCatalog=[
+    {id:'choose-answer',textJa:'ただしい こたえ を えらんでください。',translations:{nl:'Kies het juiste antwoord.',en:'Choose the correct answer.'},requiredVocabIds:['vocab-ただしい','vocab-こたえ','vocab-えらびます'],introducedAt:'11-1-B',audioRef:null},
+    {id:'read-text',textJa:'ぶん を よんでください。',translations:{nl:'Lees de zin.',en:'Read the sentence.'},requiredVocabIds:['vocab-ぶん','vocab-よんでください'],introducedAt:'11-2-B',audioRef:null},
+    {id:'listen-audio',textJa:'おんせい を きいてください。',translations:{nl:'Luister naar de audio.',en:'Listen to the audio.'},requiredVocabIds:['vocab-おんせい','vocab-きいてください'],introducedAt:'11-3-A',audioRef:null},
+    {id:'fill-answer',textJa:'くうらん を うめてください。',translations:{nl:'Vul het open vak in.',en:'Fill in the blank.'},requiredVocabIds:['vocab-くうらん','vocab-うめてください'],introducedAt:'11-3-B',audioRef:null},
+    {id:'order-steps',textJa:'じゅんばん に ならべてください。',translations:{nl:'Zet in de juiste volgorde.',en:'Put these in order.'},requiredVocabIds:['vocab-じゅんばん','vocab-ならべます'],introducedAt:'11-4-A',audioRef:null},
+    {id:'next-step',textJa:'つぎ へ すすめます。',translations:{nl:'Ga verder naar de volgende stap.',en:'Continue to the next step.'},requiredVocabIds:['vocab-つぎ','vocab-すすめます'],introducedAt:'11-4-B',audioRef:null}
+  ];
+  const germanInstructions={'choose-answer':'Wähle die richtige Antwort.','read-text':'Lies den Satz.','listen-audio':'Höre dir die Audioaufnahme an.','fill-answer':'Fülle die Lücke aus.','order-steps':'Bringe die Schritte in die richtige Reihenfolge.','next-step':'Gehe zum nächsten Schritt weiter.'};
+  instructionCatalog.forEach(instruction=>instruction.translations.de=germanInstructions[instruction.id]);
+  manifest.instructions=instructionCatalog;
+  const thematicPlans=[homePreparationPlan,
+    routePlan(13,'Vervoer naar het hotel','transit','Van luchthaven naar hotel','Ik kan een eenvoudig vervoermiddel kiezen, een kaartje lezen en de route naar het hotel volgen.',{id:'grammar-l13-1',title:'から als vertrekpunt',explanation:'から geeft aan waar iets begint: くうこう から betekent vanaf de luchthaven.'},transitRows,'vocab-ホテル'),
+    routePlan(14,'Inchecken in het hotel','hotel','Receptie, kamer en verblijf','Ik kan inchecken, mijn kamer vinden en eenvoudige hotelinformatie begrijpen.',{id:'grammar-l14-1',title:'ありますか als vraag',explanation:'ありますか vraagt of iets aanwezig is: タオル が ありますか betekent is er een handdoek?'},hotelRows,'vocab-みせ'),
+    {number:15,lessonPrefix:'l11',themeId:'supermarket',theme:'Boodschappen doen',subtitle:'Zoeken, kiezen en afrekenen',competency:'Ik kan producten zoeken, eenvoudige prijsinformatie lezen en een aankoop afronden.',grammar:{id:'grammar-l11-1',title:'が あります',explanation:'Met X が あります zeg je dat iets aanwezig is. りんご が あります betekent: er zijn appels.'},lessons:[
       {title:'Wat ligt er in de winkel?',goal:'Ontdek wat er beschikbaar is en lees een eenvoudig prijskaartje.',A:{words:[['りんご','appel','ringo'],['やさい','groente','yasai'],['くだもの','fruit','kudamono'],['あります','er is / er zijn','arimasu']],example:'りんご が あります。',text:'わたし は スーパー に いきます。\nりんご と やさい が あります。\nりんご を ひとつ かいます。',translation:'Ik ga naar de supermarkt. Er zijn appels en groenten. Ik koop één appel.',questions:[['Waar gaat de verteller heen?','naar de supermarkt','naar school','naar het station'],['Wat koopt de verteller?','één appel','een boek','twee vissen']]},B:{type:'sign',label:'Prijskaartje',words:[['ねだん','prijs','nedan'],['えん','yen','en'],['やすい','goedkoop','yasui'],['セール','uitverkoop','sēru']],example:'りんご の ねだん は 100えん です。',text:'セール\nりんご　100えん\nやさい　200えん',translation:'Uitverkoop. Appel: 100 yen. Groente: 200 yen.',questions:[['Wat kost een appel?','100 yen','200 yen','300 yen'],['Welk product is duurder?','groente','appel','beide kosten evenveel']]}},
       {title:'Iets zoeken',goal:'Volg hoe iemand producten vindt en lees een winkelbord.',A:{words:[['にんじん','wortel','ninjin'],['たまご','ei','tamago'],['ぎゅうにゅう','melk','gyūnyū'],['さがします','zoeken','sagashimasu']],example:'たまご を さがします。',text:'わたし は たまご を さがします。\nやさい の ちかく に たまご が あります。\nたまご と ぎゅうにゅう を かいます。',translation:'Ik zoek eieren. Dicht bij de groenten liggen eieren. Ik koop eieren en melk.',questions:[['Wat zoekt de verteller eerst?','eieren','melk','brood'],['Wat koopt de verteller naast eieren?','melk','wortels','vis']]},B:{type:'sign',label:'Winkelbord',words:[['うりば','afdeling','uriba'],['レジ','kassa','reji'],['ちかい','dichtbij','chikai'],['ならびます','in de rij staan','narabimasu']],example:'レジ は みぎ です。',text:'やさい うりば　ひだり\nぎゅうにゅう うりば　まっすぐ\nレジ　みぎ',translation:'Groenteafdeling links. Melkafdeling rechtdoor. Kassa rechts.',questions:[['Waar is de kassa?','rechts','links','rechtdoor'],['Waar is de groenteafdeling?','links','rechts','boven']]}},
       {title:'Kiezen uit het schap',goal:'Begrijp een keuze tussen producten en een productlabel.',A:{words:[['にく','vlees','niku'],['とりにく','kippenvlees','toriniku'],['おいしい','lekker','oishii'],['えらびます','kiezen','erabimasu']],example:'とりにく を えらびます。',text:'にく が あります。\nとりにく も あります。\nわたし は とりにく を えらびます。',translation:'Er is vlees. Er is ook kippenvlees. Ik kies kippenvlees.',questions:[['Welk vlees kiest de verteller?','kippenvlees','vis','geen vlees'],['Wat ligt er ook?','kippenvlees','een boek','een kaart']]},B:{type:'sign',label:'Productlabel',words:[['しょうひん','product','shōhin'],['ラベル','etiket','raberu'],['あたらしい','nieuw','atarashii'],['いろ','kleur','iro']],example:'あたらしい しょうひん です。',text:'しょうひん：とりにく\nねだん：300えん\nラベル：あたらしい',translation:'Product: kippenvlees. Prijs: 300 yen. Etiket: nieuw.',questions:[['Welk product staat op het etiket?','kippenvlees','melk','appels'],['Wat staat er over het product?','nieuw','oud','goedkoop']]}},
       {title:'Bij de kassa',goal:'Volg het afrekenen en begrijp een kort kassagesprek.',A:{words:[['ふくろ','tas / zak','fukuro'],['おもい','zwaar','omoi'],['かるい','licht van gewicht','karui'],['はこびます','dragen','hakobimasu']],example:'ふくろ を はこびます。',text:'わたし は レジ に いきます。\nふくろ は おもい です。\nふくろ を はこびます。',translation:'Ik ga naar de kassa. De tas is zwaar. Ik draag de tas.',questions:[['Waar gaat de verteller heen?','naar de kassa','naar de uitgang','naar school'],['Hoe voelt de tas?','zwaar','licht','leeg']]},B:{type:'dialogue',label:'Kassagesprek',words:[['はらいます','betalen','haraimasu'],['カード','betaalkaart','kādo'],['げんきん','contant geld','genkin'],['おつり','wisselgeld','otsuri']],example:'カード で はらいます。',text:'みせ：カード です か。\nわたし：はい。カード で はらいます。\nみせ：はい。',translation:'Winkel: Met kaart? Ik: Ja. Ik betaal met kaart. Winkel: Ja.',questions:[['Hoe betaalt de klant?','met kaart','contant','met wisselgeld'],['Wie stelt de eerste vraag?','de winkelmedewerker','de klant','een vriend']]}},
       {title:'De hele boodschap',goal:'Volg een complete winkelronde en lees het totaal op een bon.',A:{words:[['かえります','naar huis gaan','kaerimasu'],['わすれます','vergeten','wasuremasu']],example:'うち に かえります。',text:'きょう、スーパー に いきます。\nりんご と たまご を さがします。\nレジ で カード で はらいます。\nふくろ を はこびます。うち に かえります。',translation:'Vandaag ga ik naar de supermarkt. Ik zoek appels en eieren. Bij de kassa betaal ik met kaart. Ik draag de tas en ga naar huis.',questions:[['Wat zoekt de verteller vóór het betalen?','appels en eieren','melk en brood','kippenvlees en vis'],['Wat gebeurt als laatste?','naar huis gaan','betalen','producten zoeken']]},B:{type:'notice',label:'Kassabon',words:[['りょうしゅうしょ','kassabon','ryōshūsho'],['ごうけい','totaal','gōkei']],example:'ごうけい は 300えん です。',text:'りょうしゅうしょ\nりんご　100えん\nたまご　200えん\nごうけい　300えん',translation:'Kassabon: appel 100 yen, eieren 200 yen, totaal 300 yen.',questions:[['Wat is het totaal?','300 yen','100 yen','200 yen'],['Welk product kost 200 yen?','eieren','appel','melk']]}}
     ]},
-    {number:12,theme:'Luchthaven',subtitle:'Van vertrekhal tot instappen',competency:'Ik kan basisinformatie over een vlucht vinden en een eenvoudige luchthavensituatie volgen.',grammar:{id:'grammar-l12-1',title:'へ als richting',explanation:'Met へ geef je een richting aan. くうこう へ いきます betekent: ik ga richting luchthaven. へ klinkt hier als e.'},lessons:[
+    {number:12,themeId:'airport',theme:'Aankomst op het vliegveld',subtitle:'Van landing naar de uitgang',competency:'Ik kan eenvoudige aankomst-, bagage- en uitgangsinformatie op een luchthaven volgen.',grammar:{id:'grammar-l12-1',title:'へ als richting',explanation:'Met へ geef je een richting aan. くうこう へ いきます betekent: ik ga richting luchthaven. へ klinkt hier als e.'},lessons:[
       {title:'Naar het vliegveld',goal:'Volg de reis naar het vliegveld en lees een vluchtbord.',A:{words:[['くうこう','luchthaven','kūkō'],['ひこうき','vliegtuig','hikōki'],['しゅっぱつ','vertrek','shuppatsu'],['にもつ','bagage','nimotsu']],example:'くうこう へ いきます。',text:'きょう、くうこう へ いきます。\nにもつ が あります。\nひこうき は さんじ に しゅっぱつ です。',translation:'Vandaag ga ik naar de luchthaven. Ik heb bagage. Het vliegtuig vertrekt om drie uur.',questions:[['Waar gaat de verteller heen?','naar de luchthaven','naar de supermarkt','naar school'],['Wanneer vertrekt het vliegtuig?','om drie uur','om één uur','morgen']]},B:{type:'sign',label:'Vluchtbord',words:[['とうちゃく','aankomst','tōchaku'],['じかん','tijd','jikan'],['こくない','binnenlands','kokunai'],['こくさい','internationaal','kokusai']],example:'しゅっぱつ の じかん は さんじ です。',text:'こくない　しゅっぱつ　さんじ\nこくさい　とうちゃく　にじ',translation:'Binnenlands vertrek om drie uur. Internationale aankomst om twee uur.',questions:[['Welke vlucht vertrekt om drie uur?','de binnenlandse','de internationale','geen vlucht'],['Wat gebeurt om twee uur?','internationale aankomst','binnenlands vertrek','instappen']]}},
       {title:'Inchecken',goal:'Begrijp wat je bij de balie laat zien en lees balie-informatie.',A:{words:[['パスポート','paspoort','pasupōto'],['チケット','ticket','chiketto'],['みせます','laten zien','misemasu'],['なまえ','naam','namae']],example:'パスポート を みせます。',text:'くうこう に いきます。\nパスポート と チケット を みせます。\nなまえ を みます。',translation:'Ik ga naar de luchthaven. Ik laat mijn paspoort en ticket zien. Ik kijk naar de naam.',questions:[['Wat laat de verteller zien?','paspoort en ticket','alleen bagage','alleen geld'],['Waar kijkt de verteller daarna naar?','de naam','de stoel','het eten']]},B:{type:'sign',label:'Incheckbord',words:[['カウンター','balie','kauntā'],['チェックイン','inchecken','chekkuin'],['びん','vlucht (nummer)','bin'],['ばんごう','nummer','bangō']],example:'チェックイン は この カウンター です。',text:'チェックイン\nびん 123　カウンター 2\nびん 456　カウンター 4',translation:'Inchecken: vlucht 123 bij balie 2; vlucht 456 bij balie 4.',questions:[['Welke balie hoort bij vlucht 123?','balie 2','balie 4','balie 1'],['Welke vlucht hoort bij balie 4?','vlucht 456','vlucht 123','vlucht 2']]}},
       {title:'Door de controle',goal:'Volg de veiligheidscontrole en lees een eenvoudige regelkaart.',A:{words:[['けんさ','controle','kensa'],['くつ','schoenen','kutsu'],['だします','eruit halen / afdoen','dashimasu'],['まちます','wachten','machimasu']],example:'けんさ で くつ を だします。',text:'けんさ に いきます。\nくつ を だします。\nならびます。\nともだち を まちます。',translation:'Ik ga naar de controle. Ik doe mijn schoenen uit. Daarna sta ik in de rij en wacht op mijn vriend.',questions:[['Wat gebeurt vóór het wachten?','schoenen uitdoen','in het vliegtuig zitten','een ticket kopen'],['Op wie wacht de verteller?','een vriend','een medewerker','een kind']]},B:{type:'notice',label:'Regelkaart',words:[['もちこみ','handbagage','mochikomi'],['えきたい','vloeistof','ekitai'],['きんし','verboden','kinshi'],['かくにん','controle / bevestiging','kakunin'],['はさみ','schaar','hasami']],example:'えきたい は かくにん します。',text:'けんさ\nもちこみ：かくにん\nえきたい：かくにん\nきんし：はさみ',translation:'Controle: handbagage en vloeistof worden gecontroleerd; scharen zijn verboden.',questions:[['Wat wordt gecontroleerd?','handbagage en vloeistof','alleen tickets','alleen schoenen'],['Wat is volgens de kaart verboden?','scharen','kleine tassen','paspoorten']]}},
@@ -13139,7 +13225,15 @@
       {title:'Instappen',goal:'Volg het instappen en combineer ticket-, gate- en veiligheidsinformatie.',A:{words:[['せき','zitplaats','seki'],['まど','raam','mado'],['すわります','gaan zitten','suwarimasu']],example:'まど の ちかく の せき に すわります。',text:'チケット を みせます。\nゲート 4 で ひこうき に のります。\nまど の ちかく の せき に すわります。\nにもつ は せき の うえ に あります。',translation:'Ik laat mijn ticket zien. Bij gate 4 stap ik in het vliegtuig. Ik ga bij het raam zitten. Mijn bagage ligt boven de stoel.',questions:[['Waar zit de verteller?','bij het raam','bij de deur','bij de balie'],['Wat gebeurt vóór het zitten?','ticket laten zien en instappen','uitchecken','naar de supermarkt gaan']]},B:{type:'notice',label:'Instapkaart en veiligheidsregel',words:[['シートベルト','veiligheidsgordel','shītoberuto'],['あんぜん','veiligheid','anzen'],['のりつぎ','overstap','noritsugi']],example:'シートベルト を します。',text:'びん 123　ゲート 4\nせき：まど の ちかく\nあんぜん：シートベルト を します',translation:'Vlucht 123, gate 4. Zitplaats bij het raam. Voor de veiligheid: veiligheidsgordel om.',questions:[['Welke gate staat op de instapkaart?','gate 4','gate 2','gate 1'],['Wat moet je voor de veiligheid doen?','de gordel omdoen','contant betalen','in de rij staan']]}}
     ]}
   ];
+  const airportPlan=thematicPlans.find(plan=>plan.number===12);
+  airportPlan.lessons=routePlan(12,airportPlan.theme,airportPlan.themeId,airportPlan.subtitle,airportPlan.competency,airportPlan.grammar,arrivalRows).lessons;
+  airportPlan.subtitle='Na de landing: borden, bagage en uitgang';
+  airportPlan.competency='Ik kan eenvoudige aankomst-, bagage- en uitgangsinformatie volgen en daarna vervoer naar het hotel vinden.';
+  airportPlan.nextDestinationVocabularyId='vocab-でんしゃ';
   const thematicBonuses={
+    '11-home-1':{text:'しつもん を よみます。こたえ を えらびます。',translation:'Ik lees de vraag en kies een antwoord.',question:'Wat doe je?',answer:'een antwoord kiezen',choices:['een antwoord kiezen','een prijs betalen','een trein nemen']},
+    '11-home-3':{text:'おんせい を きいてください。くうらん を うめてください。',translation:'Luister naar de audio en vul het open vak in.',question:'Wat vul je in?',answer:'het open vak',choices:['het open vak','een hotelkamer','een bon']},
+    '11-home-5':{text:'りょこう の じゅんび を します。くうこう の ちず を みます。',translation:'Ik bereid de reis voor en bekijk de luchthavenkaart.',question:'Wat bekijkt de verteller?',answer:'de luchthavenkaart',choices:['de luchthavenkaart','de kassabon','de menukaart']},
     '11-1':{text:'りんご は 100えん です。\nやさい は 200えん です。\nわたし は りんご を かいます。',translation:'Een appel kost 100 yen. Groente kost 200 yen. Ik koop de appel.',question:'Wat koopt de verteller?',answer:'een appel',choices:['een appel','groente','niets']},
     '11-3':{text:'とりにく と やさい が あります。\nわたし は とりにく を えらびます。\nねだん は 300えん です。',translation:'Er is kippenvlees en groente. Ik kies kippenvlees. Het kost 300 yen.',question:'Welk product kiest de verteller?',answer:'kippenvlees',choices:['kippenvlees','groente','melk']},
     '11-5':{text:'りんご と たまご を かいます。\nりょうしゅうしょ の ごうけい は 300えん です。\nふくろ を はこびます。うち に かえります。',translation:'Ik koop appels en eieren. Het totaal op de bon is 300 yen. Ik draag de tas en ga naar huis.',question:'Wat gebeurt na het betalen?',answer:'de tas dragen en naar huis gaan',choices:['de tas dragen en naar huis gaan','opnieuw zoeken','naar de luchthaven gaan']},
@@ -13148,41 +13242,47 @@
     '12-5':{text:'チケット を みせます。\nゲート 4 で ひこうき に のります。\nまど の ちかく の せき に すわります。',translation:'Ik laat het ticket zien. Ik stap bij gate 4 in. Ik zit op een stoel bij het raam.',question:'Waar zit de verteller?',answer:'bij het raam',choices:['bij het raam','bij de kassa','bij de balie']}
   };
   for(const plan of thematicPlans){
-    manifest.levels.push({number:plan.number,title:`Level ${plan.number}`,theme:plan.theme,subtitle:plan.subtitle,lessonIds:plan.lessons.map((_,i)=>`l${plan.number}-${i+1}`),status:'playable',competency:plan.competency});
+    const lessonPrefix=plan.lessonPrefix||`l${plan.number}`,lessonIdFor=order=>`${lessonPrefix}-${order}`,patternId=`pattern-${lessonPrefix}-1`;
+    manifest.levels.push({number:plan.number,title:`Level ${plan.number}`,theme:plan.theme,subtitle:plan.subtitle,lessonIds:plan.lessons.map((_,i)=>lessonIdFor(i+1)),status:'playable',competency:plan.competency,nextDestinationVocabularyId:plan.nextDestinationVocabularyId||null});
     manifest.grammar.push({id:plan.grammar.id,title:plan.grammar.title,shortExplanation:plan.grammar.explanation,fullExplanation:plan.grammar.explanation,introducedAt:`${plan.number}-1-A`,availableFrom:`${plan.number}-1-A`,examples:[plan.lessons[0].A.example],dependencies:[],tags:[`level-${plan.number}`],symbol:plan.grammar.title});
-    manifest.patterns.push({id:`pattern-l${plan.number}-1`,title:plan.grammar.title,template:plan.grammar.title,introducedAt:`${plan.number}-1-A`,availableFrom:`${plan.number}-1-A`,dependencies:[plan.grammar.id],examples:[plan.lessons[0].A.example]});
+    manifest.patterns.push({id:patternId,title:plan.grammar.title,template:plan.grammar.title,introducedAt:`${plan.number}-1-A`,availableFrom:`${plan.number}-1-A`,dependencies:[plan.grammar.id],examples:[plan.lessons[0].A.example]});
     for(const [index,entry] of plan.lessons.entries()){
-      const order=index+1,id=`l${plan.number}-${order}`;
+      const order=index+1,id=lessonIdFor(order);
       const applications=['A','B'].map(part=>{
         const app=entry[part],point=`${plan.number}-${order}-${part}`,wordIds=[];
         for(const [japanese,meaning,romaji] of app.words){
           const existing=manifest.vocabulary.find(word=>word.japanese===japanese);
           if(existing){
             wordIds.push(existing.id);
-            if(existing.coreOrContext==='legacy')Object.assign(existing,{previousLegacyLessonId:existing.legacyLessonId,legacyLessonId:null,coreOrContext:'core',introducedAt:point,availableFrom:point,themes:[plan.number===11?'supermarket':'airport']});
+            if(existing.coreOrContext==='legacy')Object.assign(existing,{previousLegacyLessonId:existing.legacyLessonId,legacyLessonId:null,coreOrContext:'core',introducedAt:point,availableFrom:point,themes:[plan.themeId||'travel']});
             continue;
           }
           const wordId=`vocab-${japanese}`;wordIds.push(wordId);
-          manifest.vocabulary.push({id:wordId,japanese,reading:japanese,meanings:[meaning],meaning,romaji,partOfSpeech:'unspecified',introducedAt:point,availableFrom:point,themes:[plan.number===11?'supermarket':'airport'],coreOrContext:'core',kanjiForm:null,kanjiIntroducedAt:null,audioId:null,notes:'',legacyLessonId:null});
+          manifest.vocabulary.push({id:wordId,japanese,reading:japanese,meanings:[meaning],meaning,romaji,partOfSpeech:'unspecified',introducedAt:point,availableFrom:point,themes:[plan.themeId||'travel'],coreOrContext:'core',kanjiForm:null,kanjiIntroducedAt:null,audioId:null,notes:'',legacyLessonId:null});
         }
         const readingId=`reading-${id}-${part.toLowerCase()}`;
         manifest.readings.push({id:readingId,introducedAt:point,lessonId:id,type:part==='A'?'micro-story':app.type,text:app.text,translation:app.translation,question:app.questions[0][0],answer:app.questions[0][1],choices:app.questions[0].slice(1),requiredVocabIds:wordIds,contextVocabIds:[],coreOrContext:'core',audioId:null});
-        return{id:`${id}-${part}`,part,kind:part==='A'?'story':'real-world',label:app.label||'Kort verhaal',wordIds,example:app.example,readingId,questions:app.questions.map(([prompt,answer,...distractors])=>({prompt,answer,choices:[answer,...distractors]})),grammarHint:plan.grammar.explanation,audioId:null};
+        return{id:`${id}-${part}`,part,kind:part==='A'?'story':'real-world',label:app.label||'Kort verhaal',wordIds,example:app.example,readingId,instructionId:app.instructionId||null,questions:app.questions.map(([prompt,answer,...distractors])=>({prompt,answer,choices:[answer,...distractors]})),grammarHint:plan.grammar.explanation,audioId:null};
       });
-      manifest.lessons.push({id,title:entry.title,goal:entry.goal,level:plan.number,order,kind:'thematic',module:'A+B',wordIds:applications.flatMap(app=>app.wordIds),grammarIds:order===1?[plan.grammar.id]:[],patternIds:order===1?[`pattern-l${plan.number}-1`]:[],applications,readingId:applications[0].readingId,bonusIds:[]});
+      manifest.lessons.push({id,title:entry.title,goal:entry.goal,level:plan.number,order,kind:'thematic',module:'A+B',wordIds:applications.flatMap(app=>app.wordIds),grammarIds:order===1?[plan.grammar.id]:[],patternIds:order===1?[patternId]:[],applications,readingId:applications[0].readingId,bonusIds:[]});
       for(const app of applications)for(const [questionIndex,question] of app.questions.entries())manifest.exercises.push({id:`exercise-${id}-${app.part}-${questionIndex+1}`,lessonId:id,type:'comprehension',payload:['mc',question.prompt,question.answer,question.choices],requiredVocabIds:app.wordIds,requiredGrammarIds:order===1?[plan.grammar.id]:[],contextVocabIds:[]});
     }
-    for(const part of ['A','B'])manifest.modules.push({id:`l${plan.number}-module-${part.toLowerCase()}`,level:plan.number,name:part,lessonIds:plan.lessons.map((_,i)=>`l${plan.number}-${i+1}`),readingIds:plan.lessons.map((_,i)=>`reading-l${plan.number}-${i+1}-${part.toLowerCase()}`)});
+    for(const part of ['A','B'])manifest.modules.push({id:`l${plan.number}-module-${part.toLowerCase()}`,level:plan.number,name:part,lessonIds:plan.lessons.map((_,i)=>lessonIdFor(i+1)),readingIds:plan.lessons.map((_,i)=>`reading-${lessonIdFor(i+1)}-${part.toLowerCase()}`)});
     for(const order of [1,3,5]){
-      const lessonId=`l${plan.number}-${order}`,id=`bonus-${lessonId}`,reading=manifest.readings.find(item=>item.id===`reading-${lessonId}-a`),bonus=thematicBonuses[`${plan.number}-${order}`];
-      manifest.bonus.push({id,lessonId,introducedAt:`${plan.number}-${order}`,availableFrom:`${plan.number}-${order}`,type:'micro-story',optional:true,requiredVocabIds:reading.requiredVocabIds,contextVocabIds:[],text:bonus.text,translation:bonus.translation,question:bonus.question,answer:bonus.answer,choices:bonus.choices,audioId:null});
-      manifest.lessons.find(item=>item.id===lessonId).bonusIds.push(id);
+      const lessonId=lessonIdFor(order),id=`bonus-${lessonId}`,reading=manifest.readings.find(item=>item.id===`reading-${lessonId}-a`),bonusPrefix=plan.lessonPrefix==='l11'?'11':plan.lessonPrefix==='l11-home'?'11-home':String(plan.number),bonus=thematicBonuses[`${bonusPrefix}-${order}`];
+      const optionalBonus=bonus||{text:reading.text,translation:reading.translation,question:reading.question,answer:reading.answer,choices:reading.choices};
+      manifest.bonus.push({id,lessonId,introducedAt:`${plan.number}-${order}`,availableFrom:`${plan.number}-${order}`,type:'micro-story',optional:true,requiredVocabIds:reading.requiredVocabIds,contextVocabIds:[],text:optionalBonus.text,translation:optionalBonus.translation,question:optionalBonus.question,answer:optionalBonus.answer,choices:optionalBonus.choices,audioId:null});manifest.lessons.find(item=>item.id===lessonId).bonusIds.push(id)
     }
     const phase=manifest.phases.find(item=>item.id==='usable-japanese');
     if(phase){const item=phase.levels.find(level=>level.number===plan.number);Object.assign(item,{title:plan.theme,description:plan.subtitle,status:'playable',levelIndex:plan.number-1});phase.status='active'}
     manifest.skills.push({label:plan.competency,requires:[`l${plan.number}-exam`]});
   }
-  manifest.contentVersion='1.1.0';
+  for(const plan of [...thematicPlans].sort((a,b)=>a.number-b.number))for(const [lessonIndex,lesson] of plan.lessons.entries())for(const part of ['A','B'])for(const [japanese] of lesson[part].words){
+    const word=manifest.vocabulary.find(item=>item.japanese===japanese),point=`${plan.number}-${lessonIndex+1}-${part}`;
+    if(word&&pointOrder(point)<pointOrder(word.introducedAt)){word.introducedAt=point;word.availableFrom=point;word.themes=[...new Set([...(word.themes||[]),plan.themeId||'travel'])]}
+  }
+  manifest.levels.sort((a,b)=>a.number-b.number);
+  manifest.contentVersion='1.2.0';
   for(const word of manifest.vocabulary){
     if(word.partOfSpeech==='unspecified')word.partOfSpeech=/ます$/.test(word.japanese)?'verb':['これ','それ','あれ','わたし','あなた','どれ','だれ','どこ'].includes(word.japanese)?'pronoun':/ようび$|^きょう$|^あした$|^きのう$|^いま$/.test(word.japanese)?'time-expression':/つ$|にん$|ひき$|ほん$|まい$|ばんめ$/.test(word.japanese)?'counter':'noun';
     if(!word.themes?.length){const n=Number(word.introducedAt?.split('-')[0]||0);word.themes=[({4:'basics',5:'kana-extension',6:'people',7:'quantities',8:'time',9:'place',10:'daily-life'})[n]||'historical'];}
