@@ -202,7 +202,7 @@ test('Recall start screen clearly separates due SRS cards from free practice',()
   assert.match(markup,/Nieuw · beschikbaar/);
   assert.match(markup,/Aan de beurt/);
   assert.match(markup,/Later gepland/);
-  assert.match(markup,/Start SRS-herhaling/);
+  assert.match(markup,/Start geplande herhaling/);
   assert.match(markup,/Vrij oefenen/);
   assert.match(markup,/Kies andere levels of lessen/);
 });
@@ -278,7 +278,7 @@ test('Recall dashboard refreshes due status periodically and on focus or visibil
   assert.equal(state.screen,'flashcards');assert.equal(state.flashcardSession,null);
   app.setNow(dueAt);assert.equal(app.flashcardCounts().due,1,'dueAt equality is due');app.fireInterval();
   assert.match(app.viewMarkup(),/<strong>1<\/strong><span>Aan de beurt/);
-  assert.match(app.viewMarkup(),/Start SRS-herhaling/);
+  assert.match(app.viewMarkup(),/Start geplande herhaling/);
   app.setNow(dueAt+60000);app.fireWindowEvent('focus');
   assert.match(app.viewMarkup(),/Aan de beurt/);
   app.setNow(dueAt+120000);app.fireDocumentEvent('visibilitychange');
@@ -304,7 +304,8 @@ test('Recall keeps a revealed card revealed after reload and exposes a labeled r
   assert.equal(app.state.flashcardSession.optionsRevealed,true);
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
   assert.match(html,/\.flashcard-answer-options\.is-hidden \.flashcard-answer-choice\{filter:blur\(7px\)/);
-  assert.match(html,/reveal\.setAttribute\('aria-label','Toon antwoordopties'\)/);
+  assert.match(html,/reveal\.textContent='Tik om te tonen'/);
+  assert.match(html,/reveal\.setAttribute\('aria-label','Tik om antwoordopties te tonen'\)/);
   assert.match(html,/querySelector\('\.flashcard-avatar'\)\?\.remove\(\)/,'the prompt is not preceded by an extra avatar message');
   assert.match(html,/querySelector\('\.flashcard-face-sub'\)\?\.remove\(\)/,'Recall removes the redundant direction hint from the rendered card');
 });

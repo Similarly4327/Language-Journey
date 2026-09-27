@@ -33,7 +33,7 @@ window.LanguageJourneyLegacyUiKeys={
   'Vanaf level 6 komt er om de vijf levels een nieuwe stijl vrij. Tik op een vrijgespeeld outfit om handmatig te kiezen.':'profile.outfitsIntro',
   'Vrijgespeeld':'profile.unlocked',
   'Voortgang':'progress.title','Urenanalyse':'progress.analysis','Tijdlijn':'progress.timeline',
-  'Studietijd door de tijd':'progress.studyThroughTime',
+  'Studietijd door de tijd':'progress.wordGrowth',
   'Tijd op de horizontale as · aantal bekende woorden en kanji op de verticale as':'progress.chartHelp',
   'Activiteiten':'progress.activities',
   'Woorden':'progress.words','Kanji':'progress.kanji',

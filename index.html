@@ -1371,10 +1371,13 @@ body[data-scene="classroom"]::after{
 .phase-progress>div{height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--accent),#e68b72)}
 .phase-details{padding:0 14px 15px}
 .phase-intro{display:flex;align-items:center;gap:12px}
-.phase-goal{padding:10px 11px;border-radius:12px;background:var(--panel);font-size:13px}
-.phase-intro .phase-goal{flex:1;min-width:0}
-.phase-avatar{width:66px;height:100px;flex:0 0 66px;display:grid;place-items:end center;overflow:hidden}
-.phase-avatar .avatar-figure,.phase-avatar .avatar-sprite{width:66px;height:100px;filter:none}
+.phase-intro .phase-guide{flex:1;min-width:0}
+.phase-guide .avatar-assist{min-height:74px;padding:8px 10px}
+.phase-guide .avatar-assist-copy strong{font-size:13px}
+.phase-guide .avatar-assist-figure{width:48px;height:76px;flex-basis:48px}
+.phase-guide .avatar-assist-figure .avatar-figure,.phase-guide .avatar-assist-figure .avatar-sprite{width:48px;height:76px}
+.recommendation-label{display:inline-block;margin-left:7px;padding:3px 6px;border-radius:999px;background:color-mix(in srgb,var(--accent) 13%,var(--panel));color:var(--accent);font-size:10px;font-weight:800;vertical-align:middle}
+.module-card.is-recommended{border-color:color-mix(in srgb,var(--accent) 60%,var(--border));box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 24%,transparent)}
 .phase-levels{margin-top:10px}
 .phase-level-card.placeholder{opacity:.82;border-style:dashed;cursor:default}
 .phase-level-card .level-status{margin-top:auto;font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
@@ -1482,8 +1485,6 @@ body[data-scene="journey"][data-view="main"] #mainView{
   .course-phase-summary{padding:14px 48px 13px 13px}
   .phase-title{font-size:18px}
   .phase-details{padding:0 10px 12px}
-  .phase-avatar{width:50px;height:76px;flex-basis:50px}
-  .phase-avatar .avatar-figure,.phase-avatar .avatar-sprite{width:50px;height:76px}
   .milestone-grid{grid-template-columns:1fr}
   #quizView .card,#resultView .card{background:rgba(255,255,255,.9)}
 }
@@ -2506,6 +2507,7 @@ function moduleRank(key){
 
 const state={screen:'levels',courseId:preferences.courseId,targetLanguage:platform.course(preferences.courseId)?.targetLanguage||'ja',uiLanguage:preferences.uiLanguage,level:0,currentLevel:1,userName:'',userNameJapanese:'',avatarId:'avatar-female',avatarName:'Miku',avatarNameJapanese:'ミク',avatarNameCustom:false,avatarNameJapaneseCustom:false,avatarEnabled:true,avatarGender:'female',avatarMode:'auto',selectedAvatarSkin:null,unlockedAvatarSkins:['skin-1'],audioEnabled:true,correctSoundEnabled:true,audioCoachEnabled:true,audioVolume:.65,basisModule:'hiragana',tabs:{hiragana:'learn',katakana:'learn',numbers:'learn',mix:'practice',dakuten:'learn',lang:'learn',small:'learn',advanced:'learn'},row:{hiragana:0,katakana:0},step:{hiragana:0,katakana:0},numberLesson:0,dakScript:'hiragana',dakPattern:0,dakStep:0,langLesson:0,langView:'list',langStep:'overview',langStepProgress:{},introducedVocabIds:[],instructionKnowledge:{},vocabFirstSeen:{},kanaFirstSeen:{},smallLesson:0,advancedLesson:{5:0,6:0,7:0,8:0,9:0},advancedView:{5:'list',6:'list',7:'list',8:'list',9:'list'},advancedStep:{5:'overview',6:'overview',7:'overview',8:'overview',9:'overview'},advancedStepProgress:{},progressTab:'progress',progressActivityLimit:10,progressKnowledgeTab:'levels',progressKanaGroup:'hiragana',progressDetailId:null,progressVocabDetailId:null,studyRange:{low:0,high:100},studyCalendar:{from:'',to:''},studyFilters:{category:'',skill:'',origin:'',level:'',tag:''},studyTracker:{version:1,courseStartedAt:null,trackingStartedAt:null,sessions:[],events:[],noticeDismissed:false,active:null},practiceSelections:{hiragana:[0,1,2],katakana:[0,1,2],hiraganaChars:[],katakanaChars:[],dakuten:['g','z'],dakScripts:['hiragana','katakana'],numbers:['0-10']},errorBank:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},lastErrors:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},quiz:null,lastConfig:null};
 state.screen='app-home';
+state.openPhaseId=coursePhases.find(phase=>phase.status==='active')?.id||coursePhases[0]?.id||null;
 state.currentCourse=null;
 state.primaryTab='learn';
 const t=(key,values)=>i18n.translate(key,state.uiLanguage,values);
@@ -2523,7 +2525,6 @@ state.selectedAvatarOutfit=null;
 state.avatarHairstyle='bun';
 state.unlockedAvatarOutfits=['starter'];
 state.seenAvatarOutfits=['starter'];
-state.pendingAvatarOutfit=null;
 
 function avatarDefaults(gender=state.avatarGender){return gender==='male'?{name:'Ren',japanese:'レン'}:{name:'Miku',japanese:'ミク'}}
 function cleanProfileValue(value){return typeof value==='string'?value.trim().slice(0,40):''}
@@ -2724,6 +2725,7 @@ function storageStateSnapshot(){
     targetLanguage:state.targetLanguage,
     uiLanguage:state.uiLanguage,
     level:state.level,
+    openPhaseId:state.openPhaseId,
     currentLevel:state.currentLevel,
     userName:state.userName,
     userNameJapanese:state.userNameJapanese,
@@ -2830,6 +2832,8 @@ function loadProgress(){
     state.currentCourse=Object.hasOwn(s,'currentCourse')?(platform.course(s.currentCourse)?.id||null):state.courseId;
     state.primaryTab=['learn','recall','progress'].includes(s.primaryTab)?s.primaryTab:(state.screen==='flashcards'?'recall':'learn');
     if(Number.isInteger(s.level))state.level=Math.max(0,Math.min(levels.length-1,savedVersion<=6&&s.level===10?14:s.level));
+    if(typeof s.openPhaseId==='string'&&coursePhases.some(phase=>phase.id===s.openPhaseId))state.openPhaseId=s.openPhaseId;
+    else state.openPhaseId=phaseIdForLevel(state.level)||state.openPhaseId||coursePhases[0]?.id||null;
     if(typeof s.userName==='string')state.userName=s.userName;
     if(typeof s.userNameJapanese==='string')state.userNameJapanese=s.userNameJapanese;
     if(typeof s.avatarName==='string')state.avatarName=s.avatarName;
@@ -2987,6 +2991,9 @@ function updateHeader(){
   const progressOpen=!$('sessionView').classList.contains('hidden');
   const cardsOpen=!$('flashcardView').classList.contains('hidden')||state.screen==='flashcards';
   const appShell=!state.currentCourse||state.screen==='app-home'||state.screen.startsWith('options');
+  const exerciseOpen=!$('quizView').classList.contains('hidden')||!$('resultView').classList.contains('hidden');
+  const activeRecallSession=!!state.flashcardSession&&['active','paused','complete'].includes(state.flashcardSession.status);
+  const mainPage=!appShell&&!exerciseOpen&&(state.screen==='levels'||progressOpen||(cardsOpen&&!activeRecallSession));
   root.dataset.shell=appShell?'app':'course';
   document.body.dataset.appShell=appShell?'app':'course';
   document.title=appShell?'Language Journey':`Language Journey — ${state.currentCourse==='japanese'?t('course.japanese.name'):platform.course(state.currentCourse)?.displayName||state.currentCourse}`;
@@ -2994,7 +3001,7 @@ function updateHeader(){
   learn.classList.toggle('active',!appShell&&!progressOpen&&!cardsOpen);
   cards.classList.toggle('active',cardsOpen&&!progressOpen);
   progress.classList.toggle('active',progressOpen);
-  home.classList.toggle('hidden',appShell);
+  home.classList.toggle('hidden',!mainPage);
   home.title=t('app.allCourses');
   options.setAttribute('aria-label',t('app.options'));
   options.setAttribute('aria-expanded',String(state.screen.startsWith('options')));
@@ -3064,16 +3071,15 @@ function navigateBack(){
 function openLevel(i){
   scenes.start({theme:scenes.resolve({level:i}),locale:state.uiLanguage,onEnter:()=>{
     state.level=i;
+    state.openPhaseId=phaseIdForLevel(i)||state.openPhaseId;
     syncAvatarState();
-    const unlocked=avatarOutfits.find(outfit=>outfit.unlockLevel===i+1&&!state.seenAvatarOutfits.includes(outfit.id));
-    if(unlocked){state.seenAvatarOutfits.push(unlocked.id);state.pendingAvatarOutfit=unlocked.id}
     state.screen='level';
     scheduleSave();
     renderMain();
   }});
 }
 function openModule(level,setup){
-  const enter=()=>{state.level=level;syncAvatarState();state.screen='module';if(typeof setup==='function')setup();scheduleSave();renderMain()};
+  const enter=()=>{state.level=level;state.openPhaseId=phaseIdForLevel(level)||state.openPhaseId;syncAvatarState();state.screen='module';if(typeof setup==='function')setup();scheduleSave();renderMain()};
   if(['home','levels'].includes(state.screen))scenes.start({theme:scenes.resolve({level}),locale:state.uiLanguage,onEnter:enter});
   else enter();
 }
@@ -3105,6 +3111,31 @@ function phaseProgressInfo(phase){
   const done=playable.filter(l=>!!levelRank(l.levelIndex)).length;
   const current=playable.find(l=>l.levelIndex===state.level);
   return{done,total:phase.levels.length,pct:phase.levels.length?done/phase.levels.length*100:0,current};
+}
+function phaseIdForLevel(levelIndex){return coursePhases.find(phase=>phase.levels.some(item=>item.status==='playable'&&item.levelIndex===levelIndex))?.id||null}
+function phaseGuideCopy(phase){
+  const p=phaseProgressInfo(phase),playable=phase.levels.filter(item=>item.status==='playable');
+  const selected=p.current||playable.find(item=>!levelRank(item.levelIndex))||playable[0]||null;
+  const levelNumber=selected?.number||phase.startLevel;
+  const history=state.studyTracker.sessions||[];
+  const hasLearningHistory=history.length>0||state.introducedVocabIds.length>0||Object.values(rankState).some(record=>!!record.rank);
+  const sessions=history.filter(session=>session.status==='afgerond'&&session.title&&Number(session.level)>=phase.startLevel&&Number(session.level)<=phase.endLevel)
+    .sort((a,b)=>Date.parse(a.endedAt||a.startedAt||0)-Date.parse(b.endedAt||b.startedAt||0));
+  const last=sessions.at(-1),score=Number(last?.result?.score),total=Number(last?.result?.total);
+  const hasResult=last?.result&&last.result.score!==null&&last.result.score!==undefined&&last.result.total!==null&&last.result.total!==undefined&&Number.isFinite(score)&&Number.isFinite(total)&&total>0;
+  const message=last?`Laatst afgerond: ${last.title}${hasResult?` · ${score}/${total} goed`:''}.`:!hasLearningHistory&&levelNumber===1?'Begin met Level 1.':p.current?`Je bent bij Level ${levelNumber}.`:`Aanbevolen start: Level ${levelNumber}.`;
+  let detail;
+  if(!hasLearningHistory&&levelNumber===1)detail='Aanbevolen start: Hiragana → Leerroute → Klinkers, stap 1.';
+  else if(selected?.status==='playable'){
+    const title=localizedLevel(selected.levelIndex)?.[1];
+    detail=last?`Ga verder in Level ${levelNumber}${title?` · ${title}`:''}.`:p.current?`Volgende stap: Level ${levelNumber}${title?` · ${title}`:''}.`:`Open Level ${levelNumber}${title?` · ${title}`:''} wanneer je wilt beginnen.`;
+  }else detail='Kies hieronder een level om verder te leren.';
+  return{message,detail};
+}
+function phaseGuideHtml(phase){
+  const{message,detail}=phaseGuideCopy(phase);
+  if(state.avatarEnabled)return avatarAssistHtml({pose:'tip',size:'small',message,detail});
+  return`<div class="avatar-assist phase-guide-copy"><div class="avatar-assist-copy"><strong>${escapeHtml(message)}</strong><div class="small">${escapeHtml(detail)}</div></div></div>`;
 }
 function phaseLevelCard(item){
   if(item.status==='playable'){
@@ -3149,13 +3180,19 @@ function addDesktopSliderControls(grid,label){
 function renderCoursePhase(phase,index){
   const p=phaseProgressInfo(phase),details=document.createElement('details');
   details.className='course-phase';
-  if(phase.status==='active')details.open=true;
+  if(phase.id===state.openPhaseId)details.open=true;
   const key=`course.${state.courseId}.phase.${phase.id}`,phaseTitle=t(`${key}.title`);
-  details.innerHTML=`<summary class="course-phase-summary"><div class="phase-kicker">${phaseTitle}</div><div class="phase-title">${t(`${key}.subtitle`)}</div><div class="phase-subtitle">${t(`${key}.description`)}</div><div class="phase-meta"><span>Level ${phase.startLevel}–${phase.endLevel}</span><span>${phase.status==='active'?t('levels.ranks',{done:p.done,total:p.total}):phase.status==='planned'?t('levels.planned'):t('levels.concept')}</span>${p.current?`<span>${t('levels.now',{number:p.current.number,total:phase.endLevel})}</span>`:''}</div><div class="phase-progress"><div style="width:${p.pct}%"></div></div></summary><div class="phase-details"><div class="phase-intro"><div class="phase-goal"><strong>${t('levels.goal')}</strong><div class="small" style="margin-top:4px">${t(`${key}.goal`)}</div></div>${state.avatarEnabled?`<div class="phase-avatar" aria-hidden="true">${avatarVisualHtml({pose:'greeting'})}</div>`:''}</div><div class="level-menu-grid phase-levels" role="region" aria-label="${phaseTitle}"></div></div>`;
+  details.innerHTML=`<summary class="course-phase-summary"><div class="phase-kicker">${phaseTitle}</div><div class="phase-title">${t(`${key}.subtitle`)}</div><div class="phase-subtitle">${t(`${key}.description`)}</div><div class="phase-meta"><span>Level ${phase.startLevel}–${phase.endLevel}</span><span>${phase.status==='active'?t('levels.ranks',{done:p.done,total:p.total}):phase.status==='planned'?t('levels.planned'):t('levels.concept')}</span>${p.current?`<span>${t('levels.now',{number:p.current.number,total:phase.endLevel})}</span>`:''}</div><div class="phase-progress"><div style="width:${p.pct}%"></div></div></summary><div class="phase-details"><div class="phase-intro"><div class="phase-guide">${phaseGuideHtml(phase)}</div></div><div class="level-menu-grid phase-levels" role="region" aria-label="${phaseTitle}"></div></div>`;
   const grid=details.querySelector('.phase-levels');
   phase.levels.forEach(level=>grid.appendChild(phaseLevelCard(level)));
   addDesktopSliderControls(grid,phaseTitle);
-  details.addEventListener('toggle',()=>{if(details.open)requestAnimationFrame(()=>centerPhaseLevel(grid))});
+  details.addEventListener('toggle',()=>{
+    if(!details.open)return;
+    state.openPhaseId=phase.id;
+    details.parentElement?.querySelectorAll('.course-phase').forEach(other=>{if(other!==details)other.open=false});
+    scheduleSave();
+    requestAnimationFrame(()=>centerPhaseLevel(grid));
+  });
   return details;
 }
 function centerPhaseLevel(grid,preferred=state.level){
@@ -3174,8 +3211,10 @@ function renderLevelMenu(box){
   routeHead.innerHTML=`<div class="h1">${t('nav.levels')}</div><div class="muted">${t('levels.routeIntro')}</div>`;
   box.appendChild(routeHead);
   coursePhases.forEach((phase,index)=>box.appendChild(renderCoursePhase(phase,index)));
-  const current=box.querySelector(`[data-level-index="${state.level}"]`);
-  if(current&&typeof current.closest==='function'){current.closest('details')?.setAttribute('open','');requestAnimationFrame(()=>centerPhaseLevel(current.closest('.phase-levels'),state.level))}
+  const openPhase=box.querySelector('.course-phase[open]');
+  const current=openPhase?.querySelector(`[data-level-index="${state.level}"]`);
+  const target=current||openPhase?.querySelector('.phase-level-card:not(.placeholder)');
+  if(target)requestAnimationFrame(()=>centerPhaseLevel(target.closest('.phase-levels'),current?state.level:Number(target.dataset.levelIndex)));
 
   const milestoneHead=document.createElement('div');
   milestoneHead.className='menu-section-head future-head';
@@ -3194,16 +3233,6 @@ function overviewAction(label,desc,fn,rank=null){
   d.onclick=fn;
   return d;
 }
-function renderAvatarUnlock(box){
-  const outfit=avatarOutfits.find(item=>item.id===state.pendingAvatarOutfit);
-  if(!outfit||!state.avatarEnabled)return;
-  const notice=document.createElement('section');
-  notice.className='avatar-assist avatar-assist--medium avatar-unlock';
-  notice.innerHTML=`<div class="avatar-assist-copy"><strong>Nieuw outfit vrijgespeeld: ${escapeHtml(outfit.name)}</strong><div class="small">Je kunt het bekijken of later verder leren.</div><div class="avatar-unlock-actions"><button class="btn tiny" type="button" data-avatar-unlock="view">Bekijken</button><button class="btn tiny" type="button" data-avatar-unlock="later">Later</button></div></div><div class="avatar-assist-figure" aria-hidden="true">${avatarVisualHtml({pose:'celebrate',outfit})}</div>`;
-  notice.querySelector('[data-avatar-unlock="view"]').onclick=()=>{state.pendingAvatarOutfit=null;state.currentCourse=null;state.screen='options-profile';routePushRequested=true;scheduleSave();renderMain()};
-  notice.querySelector('[data-avatar-unlock="later"]').onclick=()=>{state.pendingAvatarOutfit=null;notice.remove()};
-  box.prepend(notice);
-}
 function renderLevelOverview(box,i){
   if(i>=10)return renderThematicCourse(box);
   updateHeader();
@@ -3212,7 +3241,6 @@ function renderLevelOverview(box,i){
   const lessons=i===3?langLessons:i===4?smallLessons:advancedCourses[i]?.lessons;
   const p=lessons?lessonProgress(lessons):null;
   box.innerHTML=`<section class="card level-compact-hero"><div class="eyebrow">${number}</div><div class="h1">${title}</div><div class="muted">${goal}</div>${p?`<div class="progress" style="margin-top:12px"><div style="width:${p.pct}%"></div></div><div class="small">${p.done}/${p.total} lessen afgerond</div>`:''}</section><div id="levelOverviewList" class="module-list"></div>`;
-  renderAvatarUnlock(box);
   const list=$('levelOverviewList');
   if(lessons){
     const next=firstIncompleteLesson(lessons),lessonList=document.createElement('div');
@@ -3241,8 +3269,8 @@ function renderLevelOverview(box,i){
     [['hiragana','Hiragana','46 basiskana leren en herkennen.'],['numbers','Cijfers','Teken ↔ waarde ↔ uitspraak en eenvoudig rekenen.'],['katakana','Katakana','Dezelfde klanken in een tweede schrift.']].forEach(([key,title,desc])=>{
       const r=moduleRank(key);
       const card=document.createElement('section');
-      card.className=`module-card ${rankClass(r)}`;
-      card.innerHTML=`<div class="between"><div><div class="module-title">${title}</div><div class="module-desc">${desc}</div>${key==='hiragana'||key==='katakana'?'<div class="small" style="margin-top:5px">Modulerank = laagste rank van Examen 1, 2 en 3.</div>':''}</div><span class="rank ${rankClass(r)}">${rankText(r)}</span></div><div class="module-actions"><button class="btn" data-mode="learn">Leerroute</button><button class="btn" data-mode="practice">Oefenen</button><button class="btn" data-mode="exams">Examens</button></div>`;
+      card.className=`module-card ${rankClass(r)} ${key==='hiragana'?'is-recommended':''}`;
+      card.innerHTML=`<div class="between"><div><div class="module-title">${title}${key==='hiragana'?'<span class="recommendation-label">Aanbevolen start</span>':''}</div><div class="module-desc">${desc}</div>${key==='hiragana'||key==='katakana'?'<div class="small" style="margin-top:5px">Modulerank = laagste rank van Examen 1, 2 en 3.</div>':''}</div><span class="rank ${rankClass(r)}">${rankText(r)}</span></div><div class="module-actions"><button class="btn ${key==='hiragana'?'primary':''}" data-mode="learn">${key==='hiragana'?'Leerroute · Klinkers, stap 1 →':'Leerroute'}</button><button class="btn" data-mode="practice">Oefenen</button><button class="btn" data-mode="exams">Examens</button></div>`;
       card.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>openModule(0,()=>{state.basisModule=key;state.tabs[key]=b.dataset.mode}));
       list.appendChild(card);
     });
@@ -3414,7 +3442,6 @@ function renderThematicCourse(box){
 function renderThematicList(box,course){
   const done=course.lessons.filter(lesson=>thematicProgress(lesson)===2).length;
   box.innerHTML=`<section class="card"><div class="eyebrow">${thematicLevelLabel(course.number)} · thematische module</div><div class="h1">${escapeHtml(course.title)}</div>${course.number===12?`<div class="small">${escapeHtml(t('course.japanese.level.12.support'))}</div>`:''}<div class="muted">${escapeHtml(course.competency)}</div><div class="progress" style="margin-top:12px"><div style="width:${done*20}%"></div></div><div class="small">${done}/5 lessen afgerond</div>${course.number===11?'<div class="notice" style="margin-top:10px">Level 1–10 was de basis. Vanaf nu lees je per les een kort verhaal én een praktische bron. Reken op ongeveer 20–25 minuten als richttempo; sneller of langzamer is allebei goed. Bonus is vrijwillig.</div>':''}</section><div id="thematicLessonList" class="stack"></div><section class="card"><div class="between"><strong>${thematicLevelLabel(course.number)} · integratie</strong><span class="rank ${rankClass(levelRank(state.level))}">${rankText(levelRank(state.level))}</span></div><div class="small" style="margin-top:6px">Twintig begripsvragen uit beide onderdelen van de vijf lessen. Bonus is niet verplicht.</div><button id="thematicExam" class="btn primary" style="width:100%;margin-top:10px" ${done===5?'':'disabled'}>Start levelcheck</button></section>`;
-  renderAvatarUnlock(box);
   course.lessons.forEach((lesson,index)=>{const card=document.createElement('button');card.type='button';card.className=`lang-lesson-card ${rankClass(rankState[lesson.id]?.rank)}`;card.innerHTML=`<div class="between"><div><div class="eyebrow">Les ${index+1}</div><div class="h2">${escapeHtml(lesson.title)}</div></div><span class="rank ${rankClass(rankState[lesson.id]?.rank)}">${rankText(rankState[lesson.id]?.rank)}</span></div><div class="small">${escapeHtml(lesson.goal)} · ${thematicProgress(lesson)}/2 onderdelen</div>`;card.onclick=()=>openThematicLesson(index);$('thematicLessonList').appendChild(card)});
   if(done===5)$('thematicExam').onclick=()=>startQuiz({source:'advanced',title:`Level ${course.number} · integratie`,rankId:`l${course.number}-exam`,rankThreshold:.8,official:true,pool:[],questions:shuffle(course.lessons.flatMap(thematicQuestions)),choices:3});
 }
@@ -4749,7 +4776,7 @@ function flashcardNextCard(){const session=state.flashcardSession;if(!session||!
 function renderFlashcardScope(box){
   const groups=flashcardGroups(),selected=flashcardSelectedLessons(),allLessonIds=[...new Set(groups.flatMap(group=>group.lessons.map(lesson=>lesson.id)))],allSelected=allLessonIds.every(id=>selected.has(id));
   const counts=flashcardCounts(),freeCount=flashcardSelectedCards(true).length*flashcardDirections().length;
-  box.innerHTML=`<div class="between"><strong>Kies levels en lessen</strong><button id="fcSelectAll" class="btn tiny">${allSelected?'Alles uit':'Alles aan'}</button></div><div class="flashcard-scope" style="margin-top:10px">${groups.map(group=>{const ids=group.lessons.map(x=>x.id),checked=ids.every(id=>selected.has(id));return`<section class="flashcard-level"><div class="flashcard-level-head"><label class="flashcard-check"><input type="checkbox" data-fc-level="${group.level}" ${checked?'checked':''}><strong>Level ${group.level}</strong></label><span class="small">${group.lessons.reduce((n,l)=>n+l.words.length,0)} woorden</span></div><div class="flashcard-lesson-list">${group.lessons.map(lesson=>`<label class="flashcard-check"><input type="checkbox" data-fc-lesson="${lesson.id}" ${selected.has(lesson.id)?'checked':''}><span>${lesson.title} <span class="muted">· ${lesson.words.length}</span></span></label>`).join('')}</div></section>`}).join('')}</div><label class="profile-field" style="margin-top:10px"><span>Oefenrichting</span><select id="fcDirection" class="select"><option value="jp-nl" ${state.flashcardSelection.direction==='jp-nl'?'selected':''}>Japans → Nederlands</option><option value="nl-jp" ${state.flashcardSelection.direction==='nl-jp'?'selected':''}>Nederlands → Japans</option><option value="both" ${state.flashcardSelection.direction==='both'?'selected':''}>Beide richtingen · apart herhaald</option></select></label><div class="grid2" style="margin-top:12px"><button id="fcCustomStart" class="btn primary" ${counts.ready?'':'disabled'}>Start SRS · ${counts.ready} aan de beurt</button><button id="fcCustomFree" class="btn" ${freeCount?'':'disabled'}>Vrij oefenen · ${freeCount} kaarten</button></div><div class="small" style="margin-top:7px">Vrij oefenen beoordeelt je antwoord niet voor SRS en verandert geen herhaaldatum. Toekomstige woorden verschijnen alleen in deze vrije modus.</div>`;
+  box.innerHTML=`<div class="between"><strong>Kies levels en lessen</strong><button id="fcSelectAll" class="btn tiny">${allSelected?'Alles uit':'Alles aan'}</button></div><div class="flashcard-scope" style="margin-top:10px">${groups.map(group=>{const ids=group.lessons.map(x=>x.id),checked=ids.every(id=>selected.has(id));return`<section class="flashcard-level"><div class="flashcard-level-head"><label class="flashcard-check"><input type="checkbox" data-fc-level="${group.level}" ${checked?'checked':''}><strong>Level ${group.level}</strong></label><span class="small">${group.lessons.reduce((n,l)=>n+l.words.length,0)} woorden</span></div><div class="flashcard-lesson-list">${group.lessons.map(lesson=>`<label class="flashcard-check"><input type="checkbox" data-fc-lesson="${lesson.id}" ${selected.has(lesson.id)?'checked':''}><span>${lesson.title} <span class="muted">· ${lesson.words.length}</span></span></label>`).join('')}</div></section>`}).join('')}</div><label class="profile-field" style="margin-top:10px"><span>Oefenrichting</span><select id="fcDirection" class="select"><option value="jp-nl" ${state.flashcardSelection.direction==='jp-nl'?'selected':''}>Japans → Nederlands</option><option value="nl-jp" ${state.flashcardSelection.direction==='nl-jp'?'selected':''}>Nederlands → Japans</option><option value="both" ${state.flashcardSelection.direction==='both'?'selected':''}>Beide richtingen · apart herhaald</option></select></label><div class="grid2" style="margin-top:12px"><button id="fcCustomStart" class="btn primary" ${counts.ready?'':'disabled'}>Start geplande herhaling · ${counts.ready} aan de beurt</button><button id="fcCustomFree" class="btn" ${freeCount?'':'disabled'}>Vrij oefenen · ${freeCount} kaarten</button></div><div class="small" style="margin-top:7px">Vrij oefenen beoordeelt je antwoord niet voor de herhaalplanning en verandert geen herhaaldatum. Toekomstige woorden verschijnen alleen in deze vrije modus.</div>`;
   $('fcSelectAll').onclick=()=>{state.flashcardSelection.lessonIds=allSelected?[]:null;scheduleSave();renderFlashcardsScreen()};
   $('fcDirection').onchange=()=>{state.flashcardSelection.direction=$('fcDirection').value;scheduleSave();renderFlashcardsScreen()};
   $('fcCustomStart').onclick=()=>startFlashcardSession();$('fcCustomFree').onclick=()=>startFlashcardSession(flashcardSelectedCards(true),flashcardDirections(),'free');
@@ -4768,7 +4795,7 @@ function renderFlashcardSession(){
   const item=s.queue[s.position],card=vocabById[item.cardId],direction=item.direction,front=direction==='jp-nl'?card.kana:card.meaning,preview=flashcardPreview(card),record=flashcardRecord(card.id,direction),choices=item.answerChoices?.length?item.answerChoices:flashcardAnswerChoices(card,direction);
   const scheduled=s.mode!=='free',done=scheduled?s.knew+s.again:s.position-(s.skipped||0),feedback=s.feedback,correctAnswers=flashcardCorrectAnswers(card,direction),answerFeedback=flashcardAnswerFeedback(choices,correctAnswers,feedback),correctChoice=answerFeedback.correctAnswer;
   if(direction==='jp-nl'||s.revealed)recordVocabEncounter(card.id);
-  $('flashcardView').innerHTML=`<section class="card"><div class="between"><div><div class="eyebrow">${scheduled?'SRS-herhaling':'Vrij oefenen'} · Level ${card.level} · ${card.lessonTitle}</div><div class="small">Kaart ${Math.min(s.position+1,s.queue.length)} van ${s.queue.length} · ${done} ${scheduled?'beoordeeld':'bekeken'}</div></div>${preview?'<span class="rank">Voorproefje</span>':''}</div><div class="progress" style="margin-top:9px"><div style="width:${Math.min(100,done/Math.max(1,s.queue.length)*100)}%"></div></div></section><section class="card"><div class="flashcard-avatar">${avatarAssistHtml({pose:feedback?(answerFeedback.selectedAnswer===correctChoice?'celebrate':'encourage'):nextAvatarMood(),message:feedback?(feedback.ungraded?'Vrij oefenen — je SRS-planning is niet gewijzigd.':answerFeedback.selectedAnswer===correctChoice?'Goed!':'Niet goed'):'Denk rustig na over dit woord.'})}</div><div class="flashcard-front"><div><div class="flashcard-face-main">${escapeHtml(front)}</div><div class="flashcard-face-sub">${direction==='jp-nl'?'Kies de Nederlandse betekenis':'Kies het Japanse woord in kana'}</div></div></div><div class="flashcard-answer-options"><div class="small">${feedback?(feedback.ungraded?'Vrij geoefend — geen wijziging aan SRS.':'Antwoord nagekeken:'):'Kies je antwoord:'}</div>${choices.map((answer,index)=>{const answerState=flashcardAnswerState(answer,answerFeedback),selected=answer===answerFeedback.selectedAnswer;return`<button class="btn flashcard-answer-choice${answerState==='correct'?' is-correct':answerState==='incorrect'?' is-incorrect':''}" data-fc-answer="${index}" ${feedback?'disabled':''} ${selected?'aria-pressed="true"':''}>${escapeHtml(answer)}</button>`}).join('')}</div><div class="flashcard-feedback-status" role="status" aria-live="polite">${escapeHtml(flashcardAnswerFeedbackText(answerFeedback))}</div><div class="flashcard-actions" style="margin-top:12px"><button id="fcSkip" class="btn" ${feedback?'disabled':''}>Sla over</button><button id="fcPause" class="btn" style="grid-column:1/-1" ${feedback?'disabled':''}>Onderbreek sessie</button></div>${record?`<div class="small" style="text-align:center;margin-top:9px">Huidige planning: ${flashcardDueText(record.dueAt)}</div>`:''}</section>`;
+  $('flashcardView').innerHTML=`<section class="card"><div class="between"><div><div class="eyebrow">${scheduled?'geplande herhaling':'Vrij oefenen'} · Level ${card.level} · ${card.lessonTitle}</div><div class="small">Kaart ${Math.min(s.position+1,s.queue.length)} van ${s.queue.length} · ${done} ${scheduled?'beoordeeld':'bekeken'}</div></div>${preview?'<span class="rank">Voorproefje</span>':''}</div><div class="progress" style="margin-top:9px"><div style="width:${Math.min(100,done/Math.max(1,s.queue.length)*100)}%"></div></div></section><section class="card"><div class="flashcard-avatar">${avatarAssistHtml({pose:feedback?(answerFeedback.selectedAnswer===correctChoice?'celebrate':'encourage'):nextAvatarMood(),message:feedback?(feedback.ungraded?'Vrij oefenen — je herhaalplanning is niet gewijzigd.':answerFeedback.selectedAnswer===correctChoice?'Goed!':'Niet goed'):'Denk rustig na over dit woord.'})}</div><div class="flashcard-front"><div><div class="flashcard-face-main">${escapeHtml(front)}</div><div class="flashcard-face-sub">${direction==='jp-nl'?'Kies de Nederlandse betekenis':'Kies het Japanse woord in kana'}</div></div></div><div class="flashcard-answer-options"><div class="small">${feedback?(feedback.ungraded?'Vrij geoefend — geen wijziging aan de herhaalplanning.':'Antwoord nagekeken:'):'Kies je antwoord:'}</div>${choices.map((answer,index)=>{const answerState=flashcardAnswerState(answer,answerFeedback),selected=answer===answerFeedback.selectedAnswer;return`<button class="btn flashcard-answer-choice${answerState==='correct'?' is-correct':answerState==='incorrect'?' is-incorrect':''}" data-fc-answer="${index}" ${feedback?'disabled':''} ${selected?'aria-pressed="true"':''}>${escapeHtml(answer)}</button>`}).join('')}</div><div class="flashcard-feedback-status" role="status" aria-live="polite">${escapeHtml(flashcardAnswerFeedbackText(answerFeedback))}</div><div class="flashcard-actions" style="margin-top:12px"><button id="fcSkip" class="btn" ${feedback?'disabled':''}>Sla over</button><button id="fcPause" class="btn" style="grid-column:1/-1" ${feedback?'disabled':''}>Onderbreek sessie</button></div>${record?`<div class="small" style="text-align:center;margin-top:9px">Huidige planning: ${flashcardDueText(record.dueAt)}</div>`:''}</section>`;
   const flashcardView=$('flashcardView'),answerPanel=flashcardView.querySelector('.flashcard-answer-options');
   flashcardView.querySelector('.flashcard-avatar')?.remove();
   flashcardView.querySelector('.flashcard-face-sub')?.remove();
@@ -4776,7 +4803,7 @@ function renderFlashcardSession(){
   if(feedback){const spokenAnswer=direction==='nl-jp'?correctChoice:card.kana,status=flashcardView.querySelector('.flashcard-feedback-status');if(spokenAnswer&&status)status.innerHTML+=`<div class="audio-feedback">${speakerButtonHtml(spokenAnswer,card.audioId,'Luister naar het juiste Japanse woord')}</div>`}
   if(!feedback&&!s.optionsRevealed&&answerPanel){
     answerPanel.classList.add('is-hidden');
-    const reveal=document.createElement('button');reveal.type='button';reveal.className='flashcard-options-reveal';reveal.textContent='Toon opties';reveal.setAttribute('aria-label','Toon antwoordopties');
+    const reveal=document.createElement('button');reveal.type='button';reveal.className='flashcard-options-reveal';reveal.textContent='Tik om te tonen';reveal.setAttribute('aria-label','Tik om antwoordopties te tonen');
     reveal.onclick=revealFlashcardOptions;answerPanel.prepend(reveal);
     answerPanel.querySelectorAll('[data-fc-answer]').forEach(option=>{option.disabled=true;option.tabIndex=-1;option.setAttribute('aria-hidden','true')});
   }
@@ -4789,8 +4816,8 @@ function renderFlashcardSession(){
 function renderFlashcardSummary(){
   const s=state.flashcardSession,selected=new Set(flashcardSelectedCards().map(card=>card.id)),directions=new Set(flashcardDirections());
   const next=Object.entries(state.flashcardProgress.cards).filter(([key,value])=>selected.has(key.split('::')[0])&&directions.has(key.split('::')[1])&&value.dueAt>Date.now()).sort((a,b)=>a[1].dueAt-b[1].dueAt)[0],total=s.knew+s.again,free=s.mode==='free';
-  const stats=free?`<div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${s.viewed||0}</strong><span>Bekeken</span></div><div class="flashcard-stat"><strong>${s.skipped||0}</strong><span>Overgeslagen</span></div><div class="flashcard-stat"><strong>0</strong><span>SRS-beoordelingen</span></div></div>`:`<div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${total}</strong><span>Beoordelingen</span></div><div class="flashcard-stat"><strong>${s.knew}</strong><span>Wist ik</span></div><div class="flashcard-stat"><strong>${s.again}</strong><span>Komt eerder terug</span></div></div><div class="small" style="margin-top:6px">${s.skipped||0} overgeslagen · niet meegenomen in SRS.</div>`;
-  $('flashcardView').innerHTML=`<section class="card"><div class="eyebrow">Sessie afgerond · ${free?'vrije oefening':'SRS-herhaling'}</div><div class="h2">Goed gedaan</div>${stats}${next?`<div class="flashcard-next-due" style="margin-top:12px">Eerstvolgende herhaling: <strong>${flashcardDueText(next[1].dueAt)}</strong> · ${escapeHtml(vocabById[next[0].split('::')[0]]?.kana||'woord')}</div>`:'<div class="small" style="margin-top:10px">Nieuwe woorden verschijnen meteen in je volgende selectie.</div>'}${avatarAssistHtml({pose:'celebrate',message:'Mooi geoefend!',detail:free?'Vrij oefenen heeft je SRS-planning niet aangepast.':'Je volgende herhaling staat klaar wanneer het tijd is.'})}<div class="grid2" style="margin-top:13px"><button id="fcSummaryDone" class="btn">Terug naar selectie</button><button id="fcSummaryLevels" class="btn primary">Terug naar levels</button></div></section>`;
+  const stats=free?`<div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${s.viewed||0}</strong><span>Bekeken</span></div><div class="flashcard-stat"><strong>${s.skipped||0}</strong><span>Overgeslagen</span></div><div class="flashcard-stat"><strong>0</strong><span>Planning bijgewerkt</span></div></div>`:`<div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${total}</strong><span>Beoordelingen</span></div><div class="flashcard-stat"><strong>${s.knew}</strong><span>Wist ik</span></div><div class="flashcard-stat"><strong>${s.again}</strong><span>Komt eerder terug</span></div></div><div class="small" style="margin-top:6px">${s.skipped||0} overgeslagen · niet meegenomen in de herhaalplanning.</div>`;
+  $('flashcardView').innerHTML=`<section class="card"><div class="eyebrow">Sessie afgerond · ${free?'vrije oefening':'geplande herhaling'}</div><div class="h2">Goed gedaan</div>${stats}${next?`<div class="flashcard-next-due" style="margin-top:12px">Eerstvolgende herhaling: <strong>${flashcardDueText(next[1].dueAt)}</strong> · ${escapeHtml(vocabById[next[0].split('::')[0]]?.kana||'woord')}</div>`:'<div class="small" style="margin-top:10px">Nieuwe woorden verschijnen meteen in je volgende selectie.</div>'}${avatarAssistHtml({pose:'celebrate',message:'Mooi geoefend!',detail:free?'Vrij oefenen heeft je herhaalplanning niet aangepast.':'Je volgende herhaling staat klaar wanneer het tijd is.'})}<div class="grid2" style="margin-top:13px"><button id="fcSummaryDone" class="btn">Terug naar selectie</button><button id="fcSummaryLevels" class="btn primary">Terug naar levels</button></div></section>`;
   $('fcSummaryDone').onclick=()=>{state.flashcardSession=null;scheduleSave();renderFlashcardsScreen()};$('fcSummaryLevels').onclick=()=>{state.flashcardSession=null;scheduleSave();goToLevels()};
 }
 function renderFlashcardsScreen(){
@@ -4800,7 +4827,7 @@ function renderFlashcardsScreen(){
   if(state.flashcardSession&&['active','paused','complete'].includes(state.flashcardSession.status))return renderFlashcardSession();
   const cards=flashcardSelectedCards(),freeCards=flashcardSelectedCards(true),counts=flashcardCounts(cards);
   const nextDueAt=counts.due===0?getNextRecallDueAt(cards,flashcardDirections()):null;
-  box.innerHTML=`<section class="card recall-start"><div class="eyebrow">Herhalen wanneer jij wilt</div><div class="h1">Recall</div><div class="muted">Recall helpt bepalen welke woorden weer aan de beurt zijn. Je selectie bevat ${counts.total} bekende ${counts.total===1?'kaart':'kaarten'}.</div><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${counts.new}</strong><span>Nieuw · beschikbaar</span></div><div class="flashcard-stat"><strong>${counts.due}</strong><span>Aan de beurt</span></div><div class="flashcard-stat"><strong>${counts.upcoming}</strong><span>Later gepland</span></div></div><button id="fcStart" class="btn primary" ${counts.ready?'':'disabled'}>${counts.ready?'Start SRS-herhaling':counts.upcoming?'Geen kaarten aan de beurt':'Geen nieuwe of verschuldigde kaarten'}</button>${nextDueAt!==null?`<div class="flashcard-next-due" role="status" style="margin-top:9px">Volgende herhaling: <strong>${flashcardDueText(nextDueAt)}</strong></div>`:''}<button id="fcFreeStart" class="btn" ${cards.length?'':'disabled'}>Vrij oefenen · ${counts.total} kaarten</button><div class="small">Vrij oefenen verandert de herhaalplanning niet. Kies hieronder andere levels of lessen om vooruit te oefenen.</div></section><details id="recallCustom" class="card recall-custom" ${state.recallCustomOpen?'open':''}><summary>Kies andere levels of lessen</summary><div id="flashcardScope"></div></details><details class="recall-info"><summary>Hoe werkt Recall?</summary><p>Herhaal woorden wanneer jij wilt; Recall helpt bepalen welke weer aan de beurt zijn. Een expliciete keuze in de SRS-sessie plant het volgende moment. Vrij oefenen en overslaan veranderen die planning niet. Recall verandert je lesrank niet.</p></details>`;
+  box.innerHTML=`<section class="card recall-start"><div class="eyebrow">Herhalen wanneer jij wilt</div><div class="h1">Recall</div><div class="muted">Recall helpt bepalen welke woorden weer aan de beurt zijn. Je selectie bevat ${counts.total} bekende ${counts.total===1?'kaart':'kaarten'}.</div><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${counts.new}</strong><span>Nieuw · beschikbaar</span></div><div class="flashcard-stat"><strong>${counts.due}</strong><span>Aan de beurt</span></div><div class="flashcard-stat"><strong>${counts.upcoming}</strong><span>Later gepland</span></div></div><button id="fcStart" class="btn primary" ${counts.ready?'':'disabled'}>${counts.ready?'Start geplande herhaling':counts.upcoming?'Geen kaarten aan de beurt':'Geen nieuwe of verschuldigde kaarten'}</button>${nextDueAt!==null?`<div class="flashcard-next-due" role="status" style="margin-top:9px">Volgende herhaling: <strong>${flashcardDueText(nextDueAt)}</strong></div>`:''}<button id="fcFreeStart" class="btn" ${cards.length?'':'disabled'}>Vrij oefenen · ${counts.total} kaarten</button><div class="small">Vrij oefenen verandert de herhaalplanning niet. Kies hieronder andere levels of lessen om vooruit te oefenen.</div></section><details id="recallCustom" class="card recall-custom" ${state.recallCustomOpen?'open':''}><summary>Kies andere levels of lessen</summary><div id="flashcardScope"></div></details><details class="recall-info"><summary>Hoe werkt Recall?</summary><p>Herhaal woorden wanneer jij wilt; Recall helpt bepalen welke weer aan de beurt zijn. Tijdens geplande herhaling geef je aan of je een woord kende; dat bepaalt het volgende moment. Vrij oefenen en overslaan veranderen die planning niet. SRS betekent gespreide herhaling. Recall verandert je lesrank niet.</p></details>`;
   $('fcStart').onclick=()=>startFlashcardSession(cards,flashcardDirections());$('fcFreeStart').onclick=()=>startFlashcardSession(cards,flashcardDirections(),'free');
   $('recallCustom').ontoggle=()=>{state.recallCustomOpen=$('recallCustom').open};
   const continueButton=$('fcContinue');if(continueButton)continueButton.onclick=resumeFlashcardSession;
@@ -5049,7 +5076,7 @@ function bindStudyDisclosure(buttonId,panelId){const button=$(buttonId);if(butto
 function renderProgressSectionSafely(hostId,label,render){try{render()}catch(error){console.error(`Voortgangsonderdeel niet geladen: ${label}`,error);const host=$(hostId);if(host){host.dataset.renderError=String(error?.message||error);host.innerHTML=`<div class="panel" role="alert">${label} kon niet worden geladen. Je opgeslagen voortgang is behouden.</div>`}}}
 function renderProgressDashboard(box){
   const sessions=studySessions(),totals=studyTotals(sessions),groups=[['exam','Examens'],['practice','Oefenen'],['app','App-lessen']],recent=[...sessions].sort((a,b)=>new Date(b.startedAt)-new Date(a.startedAt));
-  box.innerHTML=`${legacyStudyNotice()}<section class="card"><div class="between"><div><div class="h2">Voortgang</div><div class="muted">Effectieve tijd is leidend; studietijd verandert geen rank of mastery.</div></div><strong>${formatDuration(totals.total)}</strong></div><div class="category-breakdown">${groups.map(([key,label])=>`<div class="category-bar"><span>${label}</span><div class="category-bar-track"><span style="width:${totals.total?((totals.byCategory[key]||0)/totals.total*100):0}%"></span></div><strong>${formatDuration(totals.byCategory[key]||0,true)}</strong></div>`).join('')}</div></section><section class="card"><div class="h2">Studietijd door de tijd</div><div class="small">Tijd op de horizontale as · aantal bekende woorden en kanji op de verticale as</div>${studyLineChart(sessions)}</section><section class="card study-disclosure-card"><button id="recentActivitiesToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="recentActivitiesPanel"><span class="h2">Recente activiteiten (${sessions.length})</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="recentActivitiesPanel" class="study-disclosure-panel" hidden><div class="small">Nieuwste eerst · ${Math.min(state.progressActivityLimit,recent.length)} van ${recent.length}</div><div id="recentActivities" class="stack" style="margin-top:8px"></div><button id="moreActivities" class="btn tiny" style="width:100%;margin-top:8px" ${recent.length>state.progressActivityLimit?'':'hidden'}>Meer tonen</button><button id="activityManagerToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="activityManagerPanel" style="margin-top:14px"><span class="small">Activiteiten beheren en geschiedenis filteren</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="activityManagerPanel" class="study-disclosure-panel" hidden><div id="activityManager"></div></div></div></section><section class="card study-disclosure-card"><button id="studyAnalysisToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="studyAnalysisPanel"><span class="h2">Urenanalyse</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="studyAnalysisPanel" class="study-disclosure-panel" hidden><div id="studyAnalysisBody"></div></div></section><section class="card study-disclosure-card"><button id="studyTimelineToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="studyTimelinePanel"><span class="h2">Tijdlijn</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="studyTimelinePanel" class="study-disclosure-panel" hidden><div id="studyTimelineBody"></div></div></section>`;
+  box.innerHTML=`${legacyStudyNotice()}<section class="card"><div class="between"><div><div class="h2">Voortgang</div><div class="muted">Effectieve tijd is leidend; studietijd verandert geen rank of mastery.</div></div><strong>${formatDuration(totals.total)}</strong></div><div class="category-breakdown">${groups.map(([key,label])=>`<div class="category-bar"><span>${label}</span><div class="category-bar-track"><span style="width:${totals.total?((totals.byCategory[key]||0)/totals.total*100):0}%"></span></div><strong>${formatDuration(totals.byCategory[key]||0,true)}</strong></div>`).join('')}</div></section><section class="card"><div class="h2">${t('progress.wordGrowth')}</div><div class="small">${t('progress.chartHelp')}</div>${studyLineChart(sessions)}</section><section class="card study-disclosure-card"><button id="recentActivitiesToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="recentActivitiesPanel"><span class="h2">Recente activiteiten (${sessions.length})</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="recentActivitiesPanel" class="study-disclosure-panel" hidden><div class="small">Nieuwste eerst · ${Math.min(state.progressActivityLimit,recent.length)} van ${recent.length}</div><div id="recentActivities" class="stack" style="margin-top:8px"></div><button id="moreActivities" class="btn tiny" style="width:100%;margin-top:8px" ${recent.length>state.progressActivityLimit?'':'hidden'}>Meer tonen</button><button id="activityManagerToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="activityManagerPanel" style="margin-top:14px"><span class="small">Activiteiten beheren en geschiedenis filteren</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="activityManagerPanel" class="study-disclosure-panel" hidden><div id="activityManager"></div></div></div></section><section class="card study-disclosure-card"><button id="studyAnalysisToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="studyAnalysisPanel"><span class="h2">Urenanalyse</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="studyAnalysisPanel" class="study-disclosure-panel" hidden><div id="studyAnalysisBody"></div></div></section><section class="card study-disclosure-card"><button id="studyTimelineToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="studyTimelinePanel"><span class="h2">Tijdlijn</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="studyTimelinePanel" class="study-disclosure-panel" hidden><div id="studyTimelineBody"></div></div></section>`;
   bindStudyDisclosure('recentActivitiesToggle','recentActivitiesPanel');bindStudyDisclosure('activityManagerToggle','activityManagerPanel');bindStudyDisclosure('studyAnalysisToggle','studyAnalysisPanel');bindStudyDisclosure('studyTimelineToggle','studyTimelinePanel');
   renderProgressSectionSafely('activityManager','Activiteiten beheren',()=>renderStudyActivities($('activityManager')));
   renderProgressSectionSafely('studyAnalysisBody','De urenanalyse',()=>renderStudyAnalysis($('studyAnalysisBody')));
