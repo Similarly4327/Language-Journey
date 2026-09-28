@@ -9,21 +9,21 @@ const markerAt = html.indexOf(marker, scriptStart);
 assert.ok(markerAt > scriptStart, 'Dictionary catalog is present in the app script');
 const end = html.indexOf('\nfunction blankDirectionStats', markerAt);
 assert.ok(end > markerAt, 'Dictionary helpers end before the progress utilities');
-const source = `${html.slice(scriptStart, end)}\nglobalThis.dictionaryTestApi={dictionaryById,dictionarySearch,dictionaryEntryForToken,vocabCatalog,vocabMastery,rankState};\n})();`;
+const source = `${html.slice(scriptStart, end)}\nglobalThis.dictionaryTestApi={dictionaryById,dictionarySearch,dictionaryEntryForToken,dictionaryPracticeAvailable,dictionaryPracticeQuestions,knowledgeWordIsKnown,knowledgeGrammarIsKnown,knowledgeGrammarForKana,vocabCatalog,vocabMastery,rankState};\n})();`;
 const content = require('../language-journey-content/content.js');
 const kanaRows = rows => rows.map((kana, i) => ({name: content.rowNames[i], kana}));
 const sandbox = {
-  state: {currentLevel: 30, introducedVocabIds: []},
+  state: {currentLevel: 30, introducedVocabIds: [], vocabFirstSeen: {}, langStepProgress: {}, advancedStepProgress: {}, thematicCompleted: {}, thematic: {level: 11, lessonIndex: 0, step: 'list'}},
   window: {
     LanguageJourneyContent: content,
     LanguageJourneyPlatform: {preferences: () => ({courseId: 'japanese'}), course: () => ({targetLanguage: 'ja'}), content: () => content},
     LanguageJourneyI18n: {}, LanguageJourneyScenes: {}, LanguageJourneyNavigation: {}
   },
-  document: {getElementById: () => null}, console, setTimeout, clearTimeout,
+  document: {getElementById: () => null}, console, setTimeout, clearTimeout, shuffle: items => [...items],
   languageJourneyStorageKey: 'taal-japanse-leerapp-v1'
 };
 vm.runInNewContext(source, sandbox);
-const {dictionaryById, dictionarySearch, dictionaryEntryForToken, vocabCatalog, vocabMastery, rankState} = sandbox.dictionaryTestApi;
+const {dictionaryById, dictionarySearch, dictionaryEntryForToken, dictionaryPracticeAvailable, dictionaryPracticeQuestions, knowledgeWordIsKnown, knowledgeGrammarIsKnown, knowledgeGrammarForKana, vocabCatalog, vocabMastery, rankState} = sandbox.dictionaryTestApi;
 
 assert.ok(vocabCatalog.length > 0, 'existing course vocabulary is loaded');
 assert.match(html, /data-knowledge="dictionary"/, 'Dictionary is available from the knowledge tabs');
@@ -77,6 +77,45 @@ assert.ok(dictionarySearch('kyuu').some(x => x.id === 'kana-combo-きゅ'), 'com
 assert.ok(dictionarySearch('kōhī').some(x => x.id === 'vocab-コーヒー'), 'macron romaji finds course spelling without stripping kana diacritics');
 assert.ok(dictionarySearch('ook').some(x => x.id === 'grammar-particle-mo'), 'Dutch meaning/synonym search finds も particle');
 assert.ok(dictionarySearch('water').some(x => x.meaning.includes('water')), 'Dutch word search finds course vocabulary');
+
+const knownParticleKa = dictionaryById['grammar-particle-ka'];
+assert.equal(knowledgeGrammarIsKnown(knownParticleKa), false, 'opening a later level does not reveal an untaught grammar role in Knowledge');
+assert.equal(knowledgeGrammarForKana('か'), null, 'a seen kana does not automatically reveal its particle role');
+sandbox.state.langStepProgress['l4-5'] = ['model'];
+assert.equal(knowledgeGrammarIsKnown(knownParticleKa), true, 'the particle role becomes available after its lesson model');
+assert.equal(knowledgeGrammarForKana('か').id, knownParticleKa.id, 'the kana tile resolves to the known particle entry');
+const [word, distractor, future] = vocabCatalog.slice(0, 3);
+assert.equal(knowledgeWordIsKnown(dictionaryById[word.id]), false, 'unseen word remains a preview');
+assert.equal(dictionaryPracticeAvailable(dictionaryById[word.id]), false, 'preview words cannot start extra practice');
+sandbox.state.introducedVocabIds.push(word.id, distractor.id);
+assert.equal(knowledgeWordIsKnown(dictionaryById[word.id]), true, 'introduced word opens as known');
+assert.equal(dictionaryPracticeAvailable(dictionaryById[word.id]), true, 'known word allows optional practice');
+const practice = dictionaryPracticeQuestions(dictionaryById[word.id]);
+assert.ok(practice.length <= 3 && practice.length >= 2, 'extra practice stays short');
+assert.ok(practice.every(question => !question.choices.includes(future.meaning) && !question.choices.includes(future.jp)), 'practice distractors use known words only');
+const knowledgeView = html.slice(html.indexOf('function renderKnowledgeDashboard('), html.indexOf('function knowledgeGrowthSeries('));
+assert.match(knowledgeView, /openDictionaryModal\(row\.entry\.id\)/, 'Knowledge tiles open the existing dictionary detail');
+assert.doesNotMatch(knowledgeView, /startSingleVocabPractice|recordVocabEncounter\(/, 'opening Knowledge does not begin practice or mark words encountered');
+assert.match(knowledgeView, /speakerButtonHtml\(row\.jp/, 'Knowledge tiles use the registered speaker component');
+const extraPractice = html.slice(html.indexOf('function renderDictionaryPractice('), html.indexOf('function showDictionaryArticle('));
+assert.doesNotMatch(extraPractice, /startQuiz|recordQuestionMastery|flashcardRate|applyRank/, 'dictionary mini practice does not alter mastery, rank, or Recall');
+const audioStart = html.indexOf('function registeredAudioAsset(');
+const audioEnd = html.indexOf('function stopAvatarAudio(', audioStart);
+const played = [];
+const audioSandbox = {
+  state: {audioEnabled: true, audioVolume: 0.5},
+  window: {LanguageJourneyContent: {manifest: {audio: {assets: [{id: 'sample-ka', textJa: 'か', path: 'assets/audio/sample-ka.wav'}]}}}},
+  escapeHtml: value => String(value),
+  Audio: class {constructor(path){this.path=path;played.push(this)} play(){this.started=true;return Promise.resolve()} pause(){this.paused=true}}
+};
+vm.runInNewContext(`${html.slice(audioStart, audioEnd)}\nglobalThis.audioTestApi={speakerButtonHtml,playKnowledgeTileAudio};`, audioSandbox);
+assert.match(audioSandbox.audioTestApi.speakerButtonHtml('か', 'sample-ka'), /audio-speaker/, 'registered pronunciation adds a tile speaker');
+assert.equal(audioSandbox.audioTestApi.speakerButtonHtml('も'), '', 'items without audio do not show an empty speaker');
+const sampleButton = {dataset: {audioKey: 'sample-ka', audioText: 'か'}};
+audioSandbox.audioTestApi.playKnowledgeTileAudio(sampleButton);
+assert.equal(played[0].path, './assets/audio/sample-ka.wav', 'tile audio uses the registered local file');
+audioSandbox.audioTestApi.playKnowledgeTileAudio(sampleButton);
+assert.equal(played[0].paused, true, 'another tile tap stops the previous pronunciation');
 
 const before = JSON.stringify({mastery: vocabMastery, ranks: rankState});
 dictionarySearch('も');

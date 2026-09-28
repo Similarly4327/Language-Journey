@@ -11,10 +11,10 @@ window.LanguageJourneyLocales.de={
   'course.japanese.level.2.title':'Kana Mix','course.japanese.level.2.description':'Zwischen 92 Grundkana wechseln',
   'course.japanese.level.3.title':'Dakuten & Handakuten','course.japanese.level.3.description':'Bekannte Kana-Laute verändern',
   'course.japanese.level.4.title':'Erste Sprachgrundlagen','course.japanese.level.4.description':'Wörter + erste Sätze',
-  'course.japanese.level.5.title':'Kana komplett','course.japanese.level.5.description':'ゃゅょ · っ · ー',
+  'course.japanese.level.5.title':'Kleine Kana und lange Laute','course.japanese.level.5.description':'ゃゅょ · っ · ー',
   'course.japanese.level.6.title':'Menschen & Beziehungen','course.japanese.level.6.description':'Wer jemand ist · Besitz mit の',
   'course.japanese.level.7.title':'Mengen','course.japanese.level.7.description':'Zählwörter · Ordnungszahlen',
-  'course.japanese.level.8.title':'Zeit & Termine','course.japanese.level.8.description':'Tage · Daten · Verabredungen',
+  'course.japanese.level.8.title':'Zeit & Pläne','course.japanese.level.8.description':'Tage · Daten · einfache Pläne',
   'course.japanese.level.9.title':'Orte & Richtungen','course.japanese.level.9.description':'Wo · links · rechts',
   'course.japanese.level.10.title':'Japanisch im Alltag','course.japanese.level.10.description':'Erste praktische Situationen',
   'course.japanese.level.11.title':'Reisekurs zu Hause','course.japanese.level.11.description':'Japanische App-Anweisungen und Reisevorbereitung',
@@ -44,5 +44,6 @@ window.LanguageJourneyLocales.de={
   'profile.title':'Persönliches Profil','profile.uiLanguage':'App-Sprache','profile.targetLanguage':'Sprache, die du lernst','profile.course':'Kurs','profile.languageHelp':'Die App-Sprache ändert nur die Begleitung. Dein Kursfortschritt bleibt gleich.','profile.languageDutch':'Niederländisch','profile.languageEnglish':'Englisch','profile.languageGerman':'Deutsch',
   'progress.title':'Fortschritt','progress.profile':'Profil','progress.knowledge':'Wissen','progress.heroTitle':'Mein Weg zum Japanischen','progress.heroIntro':'Dein Profil, deine Entwicklung und bekannte Bausteine.','progress.recent':'Letzte Aktivitäten','progress.analysis':'Lernzeitanalyse','progress.timeline':'Zeitleiste',
   'flashcards.title':'Recall','flashcards.correct':'Richtig!','flashcards.incorrect':'Die richtige Antwort ist markiert.','flashcards.next':'Nächste Karte',
+  'flashcards.direction.jpNl':'Japanisch → Niederländisch','flashcards.direction.nlJp':'Niederländisch → Japanisch','flashcards.startPlanned':'Geplante Wiederholung starten · {count} bereit','flashcards.startFree':'Freies Üben · {count} Karten','flashcards.countNew':'Neu · verfügbar','flashcards.countDue':'Jetzt fällig','flashcards.countUpcoming':'Später geplant','flashcards.noDue':'Keine neuen oder fälligen Karten','flashcards.directionHelp':'Wähle eine Richtung. Wiederholungen werden je Richtung separat geplant.','flashcards.freeNote':'Freies Üben ändert den Wiederholungsplan nicht. Enthalten sind nur Wörter, die in dieser Richtung verfügbar sind.','flashcards.nextDue':'Nächste Wiederholung',
   'errors.generic':'Etwas ist schiefgegangen. Bitte versuche es erneut.'
 };

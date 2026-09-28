@@ -16,7 +16,7 @@ function fakeElement(id=''){
 
 test('all level screens render through the imported content adapter',()=>{
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
-  const source=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/, 'globalThis.__probe={state,rankState,vocabMastery,itemMastery,renderMain,advancedPracticeQuestions,languagePracticeQuestions,advancedCourses,langLessons,coursePhases,renderCoursePhase,phaseGuideCopy,storageStateSnapshot,loadProgress};})();');
+  const source=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/, 'globalThis.__probe={state,rankState,vocabMastery,itemMastery,renderMain,advancedPracticeQuestions,languagePracticeQuestions,advancedCourses,langLessons,coursePhases,renderCoursePhase,phaseGuideCopy,storageStateSnapshot,loadProgress,renderLanguageExam,renderAdvancedExam,lessonQuestionInstruction,advancedWordStages};})();');
   const elements=new Map();
   const get=id=>{if(!elements.has(id))elements.set(id,fakeElement(id));return elements.get(id)};
   const document={body:fakeElement('body'),documentElement:fakeElement('html'),hidden:false,getElementById:get,createElement:()=>fakeElement(),querySelectorAll:()=>[],querySelector:()=>fakeElement(),addEventListener(){}};
@@ -53,8 +53,20 @@ test('all level screens render through the imported content adapter',()=>{
       const questions=context.__probe.advancedPracticeQuestions(course,lesson,index);
       assert.equal(questions.length,10,`Level ${course.number} lesson ${index+1} practice count`);
       assert.equal(questions.filter(question=>question.kind==='build').length,2);
+      assert.ok(context.__probe.advancedWordStages(lesson).core.length<=2,`Level ${course.number} lesson ${index+1} starts with at most two new words`);
     });
   }
+  context.__probe.rankState['l4-10'].rank=null;
+  context.__probe.renderLanguageExam();
+  assert.equal(get('langExam').disabled,false,'Level 4 exam is available without a prerequisite rank');
+  assert.equal(typeof get('langExam').onclick,'function');
+  for(const [level,course] of Object.entries(context.__probe.advancedCourses)){
+    context.__probe.rankState[course.lessons.at(-1).id].rank=null;
+    context.__probe.renderAdvancedExam(course,Number(level));
+    assert.equal(get('advancedExamStart').disabled,false,`Level ${course.number} exam is available without a prerequisite rank`);
+    assert.equal(typeof get('advancedExamStart').onclick,'function');
+  }
+  assert.equal(context.__probe.lessonQuestionInstruction({kind:'fill',prompt:'パン を ふたつ ___'}),'Maak de Japanse zin af met het juiste blok.');
 
   const {state,rankState,coursePhases,renderCoursePhase,phaseGuideCopy,storageStateSnapshot,loadProgress}=context.__probe;
   const foundation=coursePhases.find(phase=>phase.id==='foundation');

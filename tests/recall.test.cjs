@@ -17,17 +17,17 @@ function fakeElement(id=''){
 function createRecallApp({savedState={},now=new Date(2026,2,20,12).getTime()}={}){
   const clock={now};
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
-  const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,`const recallRenderFlashcardsScreen=renderFlashcardsScreen;globalThis.__probe={state,rankState,vocabCatalog,vocabById,flashcardDue,flashcardDueText,flashcardNextDueAt,flashcardCounts,flashcardSelectedCards,getNextRecallDueAt,flashcardAnswerChoices,flashcardAnswerFeedback,flashcardAnswerState,flashcardAnswerFeedbackText,flashcardRate,flashcardSkip,flashcardNextCard,revealFlashcardOptions,startFlashcardSession,pauseFlashcardSession,resumeFlashcardSession,recordVocabEncounter,renderFlashcardsScreen,registeredAudioAsset,speakerButtonHtml,audioOverlayPlacement,viewMarkup(){return $('flashcardView').innerHTML},setNow(value){clock.now=value},enableRender(){renderFlashcardsScreen=recallRenderFlashcardsScreen},disableRender(){renderFlashcardsScreen=()=>{}}};})();`);
+  const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,`const recallRenderFlashcardsScreen=renderFlashcardsScreen;globalThis.__probe={state,rankState,vocabCatalog,vocabById,flashcardDue,flashcardDueText,flashcardNextDueAt,flashcardCounts,flashcardSelectedCards,flashcardDirections,getNextRecallDueAt,flashcardAnswerChoices,flashcardQuestionIsValid,flashcardAnswerFeedback,flashcardAnswerState,flashcardAnswerFeedbackText,flashcardRate,flashcardSkip,flashcardNextCard,revealFlashcardOptions,startFlashcardSession,pauseFlashcardSession,resumeFlashcardSession,recordVocabEncounter,renderFlashcardsScreen,registeredAudioAsset,speakerButtonHtml,audioOverlayPlacement,show,viewMarkup(){return $('flashcardView').innerHTML},setNow(value){clock.now=value},enableRender(){renderFlashcardsScreen=recallRenderFlashcardsScreen},disableRender(){renderFlashcardsScreen=()=>{}}};})();`);
   const elements=new Map(),get=id=>{if(!elements.has(id))elements.set(id,fakeElement(id));return elements.get(id)};
   const document={body:fakeElement('body'),documentElement:fakeElement('html'),hidden:false,getElementById:get,createElement:()=>fakeElement(),querySelectorAll:()=>[],querySelector:()=>fakeElement(),addEventListener(){}};
   const storage=new Map();
   storage.set('taal-japanse-leerapp-v1',JSON.stringify({version:6,state:savedState}));
   const localStorage={getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,value),removeItem:key=>storage.delete(key)};
-  const documentListeners=new Map(),windowListeners=new Map(),intervals=[],windowTimeouts=[];
+  const documentListeners=new Map(),windowListeners=new Map(),intervals=[],windowTimeouts=[],clearedWindowTimeouts=[];
   const addListener=(listeners,type,callback)=>{if(!listeners.has(type))listeners.set(type,[]);listeners.get(type).push(callback)};
   const NativeDate=Date;
   class FixedDate extends NativeDate{constructor(...args){super(...(args.length?args:[clock.now]))}static now(){return clock.now}}
-  const window={LanguageJourneyContent:content,innerWidth:390,innerHeight:844,addEventListener:(type,callback)=>addListener(windowListeners,type,callback),setInterval:(callback,delay)=>{intervals.push({callback,delay});return intervals.length},setTimeout:(callback,delay)=>{windowTimeouts.push({callback,delay});return windowTimeouts.length},clearTimeout(){},matchMedia:()=>({matches:false,addEventListener(){}})};
+  const window={LanguageJourneyContent:content,innerWidth:390,innerHeight:844,addEventListener:(type,callback)=>addListener(windowListeners,type,callback),setInterval:(callback,delay)=>{intervals.push({callback,delay});return intervals.length},setTimeout:(callback,delay)=>{windowTimeouts.push({callback,delay});return windowTimeouts.length},clearTimeout:id=>clearedWindowTimeouts.push(id),matchMedia:()=>({matches:false,addEventListener(){}})};
   document.addEventListener=(type,callback)=>addListener(documentListeners,type,callback);
   const context={document,window,localStorage,location:{hash:''},clock,performance:{now:()=>0},navigator:{},console,setTimeout(){return 1},clearTimeout(){},requestAnimationFrame(){},structuredClone,URL,Date:FixedDate,Math,Intl,alert(){},Image:class{}};
   for(const [,relative] of html.matchAll(/<script src="\.\/([^"?]+)(?:\?[^"]*)?"><\/script>/g)){
@@ -41,6 +41,8 @@ function createRecallApp({savedState={},now=new Date(2026,2,20,12).getTime()}={}
   context.__probe.fireDocumentEvent=type=>(documentListeners.get(type)||[]).forEach(callback=>callback());
   context.__probe.intervalDelays=()=>intervals.map(timer=>timer.delay);
   context.__probe.windowTimeouts=()=>windowTimeouts;
+  context.__probe.clearedWindowTimeouts=()=>clearedWindowTimeouts;
+  context.__probe.leaveRecall=()=>{context.__probe.state.screen='levels';context.__probe.show('main')};
   return context.__probe;
 }
 
@@ -70,10 +72,19 @@ test('Recall preserves legacy per-direction reviews and interrupted sessions',()
   assert.equal(app.state.flashcardSession.knew,1);
 });
 
+test('Bare legacy Recall records migrate to Japanese → Dutch without replacing explicit history',()=>{
+  const id='vocab-ねこ',bareId='vocab-いぬ',legacy={dueAt:12345,intervalDays:7,repetitions:4,lapses:1,lastReviewedAt:2345,lastGrade:'again'},explicit={dueAt:54321,intervalDays:3,repetitions:2,lapses:0,lastReviewedAt:23456,lastGrade:'knew'};
+  const app=createRecallApp({savedState:{flashcardProgress:{cards:{[id]:legacy,[`${id}::jp-nl`]:explicit,[bareId]:legacy}}}});
+  assert.deepEqual(JSON.parse(JSON.stringify(app.state.flashcardProgress.cards[`${id}::jp-nl`])),explicit);
+  assert.equal(app.state.flashcardProgress.cards[`${id}::nl-jp`],undefined);
+  assert.deepEqual(JSON.parse(JSON.stringify(app.state.flashcardProgress.cards[`${bareId}::jp-nl`])),legacy);
+});
+
 test('Good answers advance intervals while directions and duplicate clicks stay independent',()=>{
   const app=createRecallApp(),{state}=app,[card]=app.vocabCatalog.filter(v=>!v.legacy);
   state.introducedVocabIds=[card.id];state.flashcardSelection.direction='both';
-  assert.equal(app.flashcardCounts().new,2);
+  assert.equal(app.flashcardDirections().length,1);
+  assert.equal(app.flashcardCounts().new,1);
   const session={mode:'scheduled',queue:[{cardId:card.id,direction:'jp-nl'}],position:0,status:'active',revealed:true,knew:0,again:0,requeued:[],feedback:null};
   state.flashcardSession=session;
   const oldIntroduced=[...state.introducedVocabIds];
@@ -109,6 +120,81 @@ test('Good Recall feedback is brief and auto-advances once without another SRS w
   timeout.callback();assert.equal(session.position,1,'duplicate timer callbacks cannot advance twice');
 });
 
+test('Manual advance cancels the good-answer timer and stale callbacks cannot skip a card',()=>{
+  const app=createRecallApp(),{state}=app,[first,second,third]=app.vocabCatalog.filter(v=>!v.legacy);
+  app.enableRender();state.screen='flashcards';state.introducedVocabIds=[first.id,second.id,third.id];
+  const session={mode:'scheduled',queue:[first,second,third].map(card=>({cardId:card.id,direction:'jp-nl'})),position:0,status:'active',revealed:true,optionsRevealed:true,knew:0,again:0,requeued:[],feedback:null};
+  state.flashcardSession=session;app.flashcardRate('knew',first.meaning);
+  const timer=app.windowTimeouts().at(-1);
+  app.flashcardNextCard();
+  assert.equal(session.position,1);
+  assert.ok(app.clearedWindowTimeouts().length,'manual next cancels the pending timeout');
+  app.setNow(session.feedback?.until||Date.now()+2000);timer.callback();
+  assert.equal(session.position,1,'the expired callback cannot skip the card now shown');
+  assert.equal(session.status,'active');
+});
+
+test('Leaving Recall cancels its timer and returning shows feedback before continuing',()=>{
+  const app=createRecallApp(),{state}=app,[first,second]=app.vocabCatalog.filter(v=>!v.legacy);
+  app.enableRender();state.screen='flashcards';state.introducedVocabIds=[first.id,second.id];
+  const session={mode:'scheduled',queue:[first,second].map(card=>({cardId:card.id,direction:'jp-nl'})),position:0,status:'active',revealed:true,optionsRevealed:true,knew:0,again:0,requeued:[],feedback:null};
+  state.flashcardSession=session;app.flashcardRate('knew',first.meaning);
+  const timer=app.windowTimeouts().at(-1);
+  app.leaveRecall();
+  assert.equal(state.screen,'levels');
+  assert.equal(session.position,0);
+  assert.equal(session.feedback.until,null,'leaving resets the paused feedback delay');
+  app.setNow(Date.now()+2000);timer.callback();
+  assert.equal(session.position,0,'a timer cannot reopen Recall after leaving it');
+  state.screen='flashcards';app.renderFlashcardsScreen();
+  assert.match(app.viewMarkup(),/Goed!/);
+  const resumedTimer=app.windowTimeouts().at(-1);
+  app.startFlashcardSession([second],['jp-nl'],'free');
+  const replacement=state.flashcardSession;
+  app.setNow((replacement.startedAt||Date.now())+2000);resumedTimer.callback();
+  assert.notEqual(replacement,session);
+  assert.equal(replacement.position,0,'a prior session timer cannot advance the replacement session');
+});
+
+test('A wrong answer stays visible for manual advance, while a correct free-practice answer auto-advances without rescheduling',()=>{
+  const wrongApp=createRecallApp(),wrongState=wrongApp.state,[wrongCard]=wrongApp.vocabCatalog.filter(v=>!v.legacy);
+  wrongApp.enableRender();wrongState.screen='flashcards';wrongState.introducedVocabIds=[wrongCard.id];
+  const choices=wrongApp.flashcardAnswerChoices(wrongCard,'jp-nl'),wrongChoice=choices.find(choice=>choice!==wrongCard.meaning);
+  wrongState.flashcardSession={mode:'scheduled',queue:[{cardId:wrongCard.id,direction:'jp-nl'}],position:0,status:'active',revealed:false,optionsRevealed:true,knew:0,again:1,requeued:[],feedback:{grade:'again',chosen:wrongChoice,until:null}};
+  wrongApp.renderFlashcardsScreen();
+  assert.ok(wrongApp.viewMarkup().includes(`Juiste antwoord: ${wrongCard.meaning}`));
+  assert.equal(wrongApp.windowTimeouts().length,0,'wrong answers wait for a manual tap');
+  wrongApp.flashcardNextCard();
+  assert.equal(wrongState.flashcardSession.position,1,'the wrong answer advances only after manual next');
+  assert.equal(wrongState.flashcardSession.status,'complete');
+
+  const freeApp=createRecallApp(),{state}=freeApp,[freeCard,nextCard]=freeApp.vocabCatalog.filter(v=>!v.legacy);
+  freeApp.enableRender();state.screen='flashcards';state.introducedVocabIds=[freeCard.id,nextCard.id];
+  const progressBefore=JSON.stringify(state.flashcardProgress.cards);
+  const session={mode:'free',queue:[freeCard,nextCard].map(card=>({cardId:card.id,direction:'jp-nl'})),position:0,status:'active',revealed:false,optionsRevealed:true,knew:0,again:0,viewed:0,skipped:0,requeued:[],feedback:{grade:'viewed',chosen:freeCard.meaning,until:new Date(2026,2,20,12).getTime()+1500,ungraded:true}};
+  state.flashcardSession=session;freeApp.renderFlashcardsScreen();
+  const timer=freeApp.windowTimeouts().at(-1);
+  assert.match(freeApp.viewMarkup(),/Goed!/);
+  freeApp.setNow(session.feedback.until);timer.callback();
+  assert.equal(session.position,1);
+  assert.equal(session.viewed,1);
+  assert.equal(JSON.stringify(state.flashcardProgress.cards),progressBefore,'free practice leaves Recall scheduling unchanged');
+});
+
+test('The last good answer waits for its feedback, then opens the normal results screen',()=>{
+  const app=createRecallApp(),{state}=app,[card]=app.vocabCatalog.filter(v=>!v.legacy);
+  app.enableRender();state.screen='flashcards';state.introducedVocabIds=[card.id];
+  state.flashcardSession={mode:'scheduled',queue:[{cardId:card.id,direction:'jp-nl'}],position:0,status:'active',revealed:true,optionsRevealed:true,knew:0,again:0,requeued:[],feedback:null};
+  app.flashcardRate('knew',card.meaning);
+  const timer=app.windowTimeouts().at(-1),session=state.flashcardSession;
+  assert.match(app.viewMarkup(),/Goed!/);
+  assert.equal(session.status,'active','the result screen is not shown before feedback finishes');
+  app.setNow(session.feedback.until);timer.callback();
+  assert.equal(session.status,'complete');
+  assert.match(app.viewMarkup(),/Sessie afgerond/);
+  assert.match(app.viewMarkup(),/Goed gedaan/);
+});
+
 test('Again returns after six hours, requeues at most once, and cannot loop alone',()=>{
   const app=createRecallApp(),{state}=app,[a,b]=app.vocabCatalog.filter(v=>!v.legacy);
   state.introducedVocabIds=[a.id,b.id];
@@ -126,25 +212,28 @@ test('Again returns after six hours, requeues at most once, and cannot loop alon
   assert.equal(state.flashcardSession.status,'complete');
 });
 
-test('Future words can be freely practiced, while skips and free answers never reschedule them',()=>{
+test('Future words cannot enter Recall in either direction; learned free practice does not reschedule',()=>{
   const app=createRecallApp(),{state}=app,future=app.vocabCatalog.find(v=>!v.legacy&&!state.introducedVocabIds.includes(v.id));
   assert.ok(future);
   assert.ok(!app.flashcardSelectedCards().some(v=>v.id===future.id));
-  const now=new Date(2026,2,20,12).getTime();
-  state.flashcardProgress.cards[`${future.id}::nl-jp`]={dueAt:now+3*86400000,intervalDays:3,repetitions:2,lapses:0,lastReviewedAt:now,lastGrade:'knew'};
-  const before=JSON.stringify(state.flashcardProgress.cards),known=[...state.introducedVocabIds];
+  const before=JSON.stringify(state.flashcardProgress.cards);
   app.startFlashcardSession([future],['nl-jp'],'free');
+  assert.equal(state.flashcardSession,null);
+  app.startFlashcardSession([future],['jp-nl'],'free');
+  assert.equal(state.flashcardSession,null);
+  state.introducedVocabIds.push(future.id);
+  const known=[...state.introducedVocabIds];
+  app.startFlashcardSession([future],['jp-nl'],'free');
   assert.equal(state.flashcardSession.queue.length,1);
   assert.equal(state.flashcardSession.mode,'free');
   state.flashcardSession.revealed=true;
-  app.flashcardRate('knew',future.kana);
-  assert.equal(state.flashcardProgress.cards[`${future.id}::nl-jp`].repetitions,2);
+  app.flashcardRate('knew',future.meaning);
   state.flashcardSession.feedback={grade:'viewed',chosen:future.kana,ungraded:true};
   app.flashcardNextCard();
   assert.equal(state.flashcardSession.viewed,1);
   assert.equal(JSON.stringify(state.flashcardProgress.cards),before);
   assert.deepEqual(JSON.parse(JSON.stringify(state.introducedVocabIds)),known);
-  state.flashcardSession={mode:'scheduled',queue:[{cardId:future.id,direction:'nl-jp'}],position:0,status:'active',revealed:false,knew:0,again:0,requeued:[],feedback:null};
+  state.flashcardSession={mode:'scheduled',queue:[{cardId:future.id,direction:'jp-nl'}],position:0,status:'active',revealed:false,knew:0,again:0,requeued:[],feedback:null};
   app.flashcardSkip();
   assert.equal(state.flashcardSession.skipped,1);
   assert.equal(JSON.stringify(state.flashcardProgress.cards),before);
@@ -199,6 +288,10 @@ test('Recall start screen clearly separates due SRS cards from free practice',()
   app.renderFlashcardsScreen();
   const markup=app.viewMarkup();
   assert.match(markup,/>Recall</);
+  assert.match(markup,/Japans → Nederlands/);
+  assert.match(markup,/Nederlands → Japans/);
+  assert.match(markup,/id="fcStartJpNl"/);
+  assert.match(markup,/id="fcStartNlJp"/);
   assert.match(markup,/Nieuw · beschikbaar/);
   assert.match(markup,/Aan de beurt/);
   assert.match(markup,/Later gepland/);
@@ -225,12 +318,35 @@ test('Dutch to Japanese choices do not offer another word with the same Dutch me
   }
 });
 
-test('Future free-practice cards have useful choices on a fresh profile',()=>{
+test('A Dutch → Japanese session uses only eligible kana choices and records only reverse reviews once',()=>{
+  const app=createRecallApp(),{state}=app;
+  const unique=app.vocabCatalog.filter(v=>!v.legacy&&v.meaning!=='vrouw').slice(0,4);
+  state.introducedVocabIds=unique.map(v=>v.id);
+  const eligible=app.flashcardSelectedCards(false,'nl-jp');
+  assert.ok(eligible.length>=1);
+  for(const card of eligible){
+    const choices=app.flashcardAnswerChoices(card,'nl-jp',eligible);
+    assert.ok(choices.length>=1&&choices.length<=4);
+    assert.ok(choices.includes(card.kana));
+    assert.ok(app.flashcardQuestionIsValid(card,'nl-jp',choices,eligible));
+    for(const option of choices)if(option!==card.kana)assert.ok(eligible.some(other=>other.id!==card.id&&other.kana===option&&!other.meanings.some(meaning=>meaning.toLocaleLowerCase('nl')===card.meaning.toLocaleLowerCase('nl'))));
+  }
+  app.startFlashcardSession(eligible,['nl-jp']);
+  assert.deepEqual([...new Set(state.flashcardSession.queue.map(item=>item.direction))],['nl-jp']);
+  const card=app.vocabById[state.flashcardSession.queue[0].cardId];
+  state.flashcardSession.revealed=true;
+  app.flashcardRate('knew',card.kana);
+  app.flashcardRate('knew',card.kana);
+  assert.equal(state.flashcardProgress.cards[`${card.id}::nl-jp`].repetitions,1);
+  assert.equal(state.flashcardProgress.cards[`${card.id}::jp-nl`],undefined);
+});
+
+test('Fresh profiles cannot build Recall questions from future vocabulary',()=>{
   const app=createRecallApp(),{state}=app,card=app.vocabCatalog.find(v=>!v.legacy&&!state.introducedVocabIds.includes(v.id));
   assert.ok(card);
   assert.equal(state.introducedVocabIds.length,0);
-  assert.equal(app.flashcardAnswerChoices(card,'jp-nl').length,4);
-  assert.equal(app.flashcardAnswerChoices(card,'nl-jp').length,4);
+  assert.deepEqual(JSON.parse(JSON.stringify(app.flashcardAnswerChoices(card,'jp-nl'))),[]);
+  assert.deepEqual(JSON.parse(JSON.stringify(app.flashcardAnswerChoices(card,'nl-jp'))),[]);
   assert.equal(state.introducedVocabIds.length,0);
   assert.equal(Object.keys(state.flashcardProgress.cards).length,0);
 });

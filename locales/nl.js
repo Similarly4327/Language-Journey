@@ -11,10 +11,10 @@ window.LanguageJourneyLocales.nl={
   'course.japanese.level.2.title':'Kana Mix','course.japanese.level.2.description':'92 basiskana schakelen',
   'course.japanese.level.3.title':'Dakuten & Handakuten','course.japanese.level.3.description':'Bekende kana modificeren',
   'course.japanese.level.4.title':'Eerste taalbasis','course.japanese.level.4.description':'Woorden + eerste zinnen',
-  'course.japanese.level.5.title':'Kana compleet','course.japanese.level.5.description':'ゃゅょ · っ · ー',
+  'course.japanese.level.5.title':'Kleine kana en lange klanken','course.japanese.level.5.description':'ゃゅょ · っ · ー',
   'course.japanese.level.6.title':'Mensen & relaties','course.japanese.level.6.description':'Wie iemand is · bezit met の',
   'course.japanese.level.7.title':'Hoeveelheden','course.japanese.level.7.description':'Tellers · rangtelwoorden',
-  'course.japanese.level.8.title':'Tijd & agenda','course.japanese.level.8.description':'Dag · datum · afspraak',
+  'course.japanese.level.8.title':'Tijd & agenda','course.japanese.level.8.description':'Dag · datum · eenvoudig plan',
   'course.japanese.level.9.title':'Plaats & richting','course.japanese.level.9.description':'Waar · links · rechts',
   'course.japanese.level.10.title':'Dagelijks Japans','course.japanese.level.10.description':'Eerste praktijksituaties',
   'course.japanese.level.11.title':'Vakantiecursus thuis','course.japanese.level.11.description':'Japanse app-opdrachten en vertrekvoorbereiding',
@@ -44,5 +44,6 @@ window.LanguageJourneyLocales.nl={
   'profile.title':'Persoonlijk profiel','profile.uiLanguage':'Taal van de app','profile.targetLanguage':'Taal die je leert','profile.course':'Cursus','profile.languageHelp':'De app-taal verandert alleen de begeleiding. Je cursusvoortgang blijft gelijk.','profile.languageDutch':'Nederlands','profile.languageEnglish':'Engels','profile.languageGerman':'Duits',
   'progress.title':'Voortgang','progress.profile':'Profiel','progress.knowledge':'Kennis','progress.heroTitle':'Mijn Japanse leerreis','progress.heroIntro':'Je profiel, groei en bekende bouwstenen.','progress.recent':'Recente activiteiten','progress.analysis':'Urenanalyse','progress.timeline':'Tijdlijn',
   'flashcards.title':'Recall','flashcards.correct':'Goed!','flashcards.incorrect':'Het juiste antwoord is geselecteerd.','flashcards.next':'Volgende kaart',
+  'flashcards.direction.jpNl':'Japans → Nederlands','flashcards.direction.nlJp':'Nederlands → Japans','flashcards.startPlanned':'Start geplande herhaling · {count} klaar','flashcards.startFree':'Vrij oefenen · {count} kaarten','flashcards.countNew':'Nieuw · beschikbaar','flashcards.countDue':'Aan de beurt','flashcards.countUpcoming':'Later gepland','flashcards.noDue':'Geen nieuwe of verschuldigde kaarten','flashcards.directionHelp':'Kies één richting. De herhaalplanning wordt per richting bijgehouden.','flashcards.freeNote':'Vrij oefenen verandert de herhaalplanning niet. Je oefent alleen woorden die voor deze richting beschikbaar zijn.','flashcards.nextDue':'Volgende herhaling',
   'errors.generic':'Er ging iets mis. Probeer het opnieuw.'
 };

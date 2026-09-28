@@ -52,7 +52,7 @@
     {
       "number": 5,
       "title": "Level 5",
-      "theme": "Kana compleet",
+      "theme": "Kleine kana en lange klanken",
       "subtitle": "ゃゅょ · っ · ー",
       "lessonIds": [
         "l5-1",
@@ -95,7 +95,7 @@
       "number": 8,
       "title": "Level 8",
       "theme": "Tijd & agenda",
-      "subtitle": "Dag · datum · afspraak",
+      "subtitle": "Dag · datum · eenvoudig plan",
       "lessonIds": [
         "l8-1",
         "l8-2",
@@ -3286,8 +3286,8 @@
       "meaning": "afspraak",
       "romaji": "yakusoku",
       "partOfSpeech": "unspecified",
-      "introducedAt": "8-6",
-      "availableFrom": "8-6",
+      "introducedAt": "10-3",
+      "availableFrom": "10-3",
       "themes": [],
       "coreOrContext": "core",
       "kanjiForm": null,
@@ -8110,11 +8110,11 @@
     {
       "id": "l6-1",
       "title": "Mensen om mij heen",
-      "goal": "Benoem jezelf, een persoon en een vriend.",
-      "review": "Herhaling: わたし, ひと en ともだち kwamen in Level 4 al voor.",
+      "goal": "Gebruik de nieuwe woorden あなた, かぞく, おとこ en おんな in bekende です-zinnen.",
+      "review": "Herhaling/context: わたし, ひと en ともだち kwamen in Level 4 al voor en zijn hier geen nieuwe woorden.",
       "newLabel": "4 nieuwe woorden",
       "pattern": "X は Y です",
-      "grammar": "De bekende です-zin werkt ook voor personen. Voeg vandaag alleen vier menswoorden toe.",
+      "grammar": "De bekende です-zin werkt ook voor personen. Begin met あなた en かぞく; voeg daarna おとこ en おんな toe.",
       "models": [
         {
           "sentence": "あなた は ともだち です",
@@ -8184,11 +8184,11 @@
     {
       "id": "l6-2",
       "title": "Mijn vader en moeder",
-      "goal": "Zeg wie jouw vader of moeder is.",
+      "goal": "Maak onderscheid tussen je eigen ouders en hoe je iemands ouder aanspreekt of noemt.",
       "review": "Herhaling: の betekent “van” en maakt een relatie tussen twee woorden.",
       "newLabel": "4 nieuwe woorden",
       "pattern": "X の Y",
-      "grammar": "Gebruik ちち en はは voor je eigen ouders. おとうさん en おかあさん gebruik je beleefd voor die van iemand anders.",
+      "grammar": "Gebruik ちち en はは wanneer je over je eigen ouders praat. おとうさん en おかあさん gebruik je voor de ouders van iemand anders én wanneer je vader of moeder aanspreekt.",
       "models": [
         {
           "sentence": "これは わたし の はは です",
@@ -8581,11 +8581,11 @@
     {
       "id": "l7-2",
       "title": "Mensen tellen",
-      "goal": "Tel één, twee en drie personen.",
+      "goal": "Tel één, twee, drie en vier personen.",
       "review": "Herhaling: ひと betekent persoon; nu verandert alleen de telvorm.",
       "newLabel": "4 nieuwe woorden",
       "pattern": "aantal + にん",
-      "grammar": "Bij één en twee gebruik je ひとり en ふたり. Vanaf drie hoor je het bekende getal met にん.",
+      "grammar": "Bij één en twee gebruik je de afwijkende vormen ひとり en ふたり. Daarna krijg je さんにん en よにん; vier klinkt hier als よ, niet よん.",
       "models": [
         {
           "sentence": "かぞく は よにん です",
@@ -9253,12 +9253,12 @@
     },
     {
       "id": "l8-6",
-      "title": "Een afspraak",
-      "goal": "Combineer persoon, dag, tijd en plaats.",
-      "review": "Herhaling: alle onderdelen zijn eerder apart geleerd; deze les voegt geen nieuwe grammatica toe.",
-      "newLabel": "4 nieuwe woorden",
-      "pattern": "wanneer + wie + waar",
-      "grammar": "Bouw de informatie in rustige blokken. Het werkwoord blijft achteraan.",
+      "title": "Een plan met dag en tijd",
+      "goal": "Combineer een dag, tijd en plaats tot een eenvoudig plan.",
+      "review": "Herhaling/context: さんじ, えき, に en いきます zijn bekend. Je plant nog geen ontmoeting; dat volgt in Level 10.",
+      "newLabel": "3 nieuwe woorden",
+      "pattern": "dag + tijd + plaats + handeling",
+      "grammar": "Zet eerst wanneer iets gebeurt en daarna de plaats. Het werkwoord blijft achteraan; het ontmoetingspatroon met あいます komt pas in Level 10.",
       "models": [
         {
           "sentence": "あした さんじ えき に いきます",
@@ -9317,7 +9317,6 @@
         "integration"
       ],
       "wordIds": [
-        "vocab-やくそく",
         "vocab-らいしゅう",
         "vocab-せんしゅう",
         "vocab-いま"
@@ -9906,7 +9905,7 @@
       "title": "Een afspraak maken",
       "goal": "Combineer persoon, dag, tijd en plaats in één plan.",
       "review": "Herhaling: Level 6-personen en Level 8-agenda komen samen.",
-      "newLabel": "4 nieuwe woorden",
+      "newLabel": "5 nieuwe woorden",
       "pattern": "persoon と あいます",
       "grammar": "と betekent hier “met”. Gebruik het alleen in dit duidelijke ontmoetingspatroon.",
       "models": [
@@ -9969,6 +9968,7 @@
       "story": null,
       "wordIds": [
         "vocab-あいます",
+        "vocab-やくそく",
         "vocab-いつ",
         "vocab-いっしょに",
         "vocab-だいじょうぶ"
@@ -12837,7 +12837,7 @@
         },
         {
           "number": 5,
-          "title": "Kana compleet",
+          "title": "Kleine kana en lange klanken",
           "description": "ゃゅょ · っ · ー",
           "status": "playable",
           "levelIndex": 4
@@ -12859,7 +12859,7 @@
         {
           "number": 8,
           "title": "Tijd & agenda",
-          "description": "Dag · datum · afspraak",
+          "description": "Dag · datum · eenvoudig plan",
           "status": "playable",
           "levelIndex": 7
         },
@@ -13130,7 +13130,7 @@
       ]
     },
     {
-      "label": "Ik kan eenvoudige dagen, tijden en afspraken begrijpen.",
+      "label": "Ik kan eenvoudige dagen, tijden en plannen begrijpen.",
       "requires": [
         "l8-exam"
       ]
@@ -13295,10 +13295,10 @@
   const lessonById=Object.fromEntries(manifest.lessons.map(l=>[l.id,l]));
   const readingById=Object.fromEntries(manifest.readings.map(r=>[r.id,r]));
   function wordTuple(id,kind){const v=byId[id];if(!v)throw new Error('Unknown vocabulary '+id);return kind==='example'?[v.japanese,v.romaji,v.meaning,v.kanjiForm,null]:[v.japanese,v.meaning,v.romaji,v.kanjiForm,null]}
-  function materializeLesson(source){const l={...source};if(l.wordIds)l.words=l.wordIds.map(id=>wordTuple(id));if(l.exampleIds)l.examples=l.exampleIds.map(id=>wordTuple(id,'example'));if(l.readingId){const r=readingById[l.readingId];l.story=r?[r.text,r.question,r.answer,r.choices]:null}if(l.level>=6&&l.wordIds){const newCount=l.wordIds.filter(id=>byId[id].introducedAt===`${l.level}-${l.order}`).length;l.newLabel=`${newCount} nieuwe woorden`}return l}
+  function materializeLesson(source){const l={...source};if(l.wordIds)l.words=l.wordIds.map(id=>wordTuple(id));if(l.exampleIds)l.examples=l.exampleIds.map(id=>wordTuple(id,'example'));if(l.readingId){const r=readingById[l.readingId];l.story=r?[r.text,r.question,r.answer,r.choices]:null}if((l.level===4||l.level>=6)&&l.wordIds){const newCount=l.wordIds.filter(id=>byId[id].introducedAt===`${l.level}-${l.order}`).length;l.newLabel=newCount===1?'1 nieuw woord':`${newCount} nieuwe woorden`}return l}
   const langLessons=manifest.lessons.filter(l=>l.level===4).map(materializeLesson);
   const smallLessons=manifest.lessons.filter(l=>l.level===5).map(materializeLesson);
-  const advancedCompetencies={6:'Ik kan eenvoudige personen en familierelaties benoemen.',7:'Ik kan enkele veelgebruikte dingen, mensen en dieren tellen.',8:'Ik kan eenvoudige dagen, tijden en afspraken begrijpen.',9:'Ik kan eenvoudige plaats, positie en beweging begrijpen.',10:'Ik kan eenvoudige dagelijkse situaties combineren.'};
+  const advancedCompetencies={6:'Ik kan eenvoudige personen en familierelaties benoemen.',7:'Ik kan enkele veelgebruikte dingen, mensen en dieren tellen.',8:'Ik kan eenvoudige dagen, tijden en plannen begrijpen.',9:'Ik kan eenvoudige plaats, positie en beweging begrijpen.',10:'Ik kan eenvoudige dagelijkse situaties combineren.'};
   const advancedCourses={};for(let n=6;n<=10;n++){const level=manifest.levels[n-1];advancedCourses[n-1]={number:n,title:level.theme,competency:advancedCompetencies[n],lessons:manifest.lessons.filter(l=>l.level===n).map(materializeLesson)}}
   const thematicCourses={};for(const plan of thematicPlans)thematicCourses[plan.number-1]={number:plan.number,title:plan.theme,competency:plan.competency,lessons:manifest.lessons.filter(l=>l.level===plan.number).map(materializeLesson)};
   const legacyLessonTitles={'l4-2':'Dit, dat en meer','l4-3':'Van wie?','l4-4':'Niet X','l4-5':'Een vraag maken','l4-6':'Ook','l4-7':'Iets doen','l4-8':'Niet doen','l4-9':'Naar een plaats'};

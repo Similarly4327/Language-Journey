@@ -153,3 +153,15 @@ test('Levels 11–15 have five two-part lessons with staged words and optional b
   assert.ok(b.vocabulary.some(v=>v.japanese==='ねだん'));
   assert.equal(new Set(content.manifest.vocabulary.map(v=>v.id)).size,content.manifest.vocabulary.length);
 });
+test('foundation lesson labels and vocabulary timing match the taught sequence',()=>{
+  const lesson=id=>content.manifest.lessons.find(item=>item.id===id);
+  const word=id=>content.manifest.vocabulary.find(item=>item.id===id);
+  assert.equal(content.manifest.levels.find(level=>level.number===5).theme,'Kleine kana en lange klanken');
+  assert.match(lesson('l6-1').review,/わたし, ひと en ともだち.*geen nieuwe woorden/);
+  assert.match(lesson('l6-2').grammar,/eigen ouders.*iemand anders.*aanspreekt/);
+  assert.match(lesson('l7-2').goal,/vier personen/);
+  assert.equal(lesson('l8-6').title,'Een plan met dag en tijd');
+  assert.ok(!lesson('l8-6').wordIds.includes('vocab-やくそく'));
+  assert.ok(lesson('l10-3').wordIds.includes('vocab-やくそく'));
+  assert.equal(word('vocab-やくそく').introducedAt,'10-3');
+});
