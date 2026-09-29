@@ -16,7 +16,7 @@ function fakeElement(id=''){
 
 test('all level screens render through the imported content adapter',()=>{
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
-  const source=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/, 'globalThis.__probe={state,rankState,vocabMastery,itemMastery,renderMain,advancedPracticeQuestions,languagePracticeQuestions,advancedCourses,langLessons,coursePhases,renderCoursePhase,phaseGuideCopy,storageStateSnapshot,loadProgress,renderLanguageExam,renderAdvancedExam,lessonQuestionInstruction,advancedWordStages};})();');
+  const source=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/, 'globalThis.__probe={state,rankState,vocabMastery,itemMastery,renderMain,advancedPracticeQuestions,languagePracticeQuestions,advancedCourses,langLessons,coursePhases,renderCoursePhase,phaseGuideCopy,storageStateSnapshot,loadProgress,renderLanguageExam,renderAdvancedExam,lessonQuestionInstruction,advancedWordStages,lessonNewWords,wordCrashCourseDeck,wordCrashCourseAccepts,renderLanguageWords,renderAdvancedWords,beginWordCrashCourse,answerWordCrashCourse,advanceWordCrashCourse,leaveWordCrashCourse,element(id){return $(id)},get activeWordCrashCourse(){return activeWordCrashCourse},manifest:window.LanguageJourneyContent.manifest};})();');
   const elements=new Map();
   const get=id=>{if(!elements.has(id))elements.set(id,fakeElement(id));return elements.get(id)};
   const document={body:fakeElement('body'),documentElement:fakeElement('html'),hidden:false,getElementById:get,createElement:()=>fakeElement(),querySelectorAll:()=>[],querySelector:()=>fakeElement(),addEventListener(){}};
@@ -56,6 +56,129 @@ test('all level screens render through the imported content adapter',()=>{
       assert.ok(context.__probe.advancedWordStages(lesson).core.length<=2,`Level ${course.number} lesson ${index+1} starts with at most two new words`);
     });
   }
+  const probe=context.__probe,{lessonNewWords,wordCrashCourseDeck,wordCrashCourseAccepts}=probe;
+  const wordLessons=[...probe.langLessons,...Object.values(probe.advancedCourses).flatMap(course=>course.lessons)];
+  for(const lesson of wordLessons){
+    const point=`${lesson.level}-${lesson.order}`,metadata=probe.manifest.vocabulary;
+    let expected=metadata.filter(word=>word.introducedAt===point);
+    if(!expected.length)expected=metadata.filter(word=>word.coreOrContext==='legacy'&&word.legacyLessonId===lesson.id);
+    assert.equal(JSON.stringify(lessonNewWords(lesson).map(word=>word.id)),JSON.stringify([...new Set(expected.map(word=>word.id))]),`${lesson.id} follows canonical first-introduction metadata`);
+    const words=lessonNewWords(lesson),deck=wordCrashCourseDeck(words);
+    assert.equal(deck.length,4*words.length,`${lesson.id} has four starting assessments per new word`);
+    const counts=new Map();deck.forEach(question=>counts.set(question.key,(counts.get(question.key)||0)+1));
+    words.forEach(word=>['jp-nl','nl-jp'].forEach(direction=>assert.equal(counts.get(`${word.id}|${direction}`),2,`${lesson.id} asks each direction twice`)));
+    assert.ok(deck.every((question,index)=>index===0||question.key!==deck[index-1].key),`${lesson.id} never repeats the identical question consecutively`);
+    for(const question of deck.filter(question=>!question.selfReveal)){
+      const sameLessonAnswers=new Set(words.map(word=>question.direction==='jp-nl'?word.meaning:word.jp));
+      assert.ok(question.choices.every(choice=>sameLessonAnswers.has(choice)),`${lesson.id} uses only words introduced there as answer options`);
+      assert.ok(question.choices.includes(question.correct));
+    }
+  }
+  assert.equal(wordCrashCourseAccepts({accepted:['jongere broer','broertje']},'broertje'),true,'valid alternate meanings are accepted');
+  const seeWordLesson=wordLessons.find(lesson=>lessonNewWords(lesson).some(word=>word.id==='vocab-みます'));
+  const seeWord=lessonNewWords(seeWordLesson).find(word=>word.id==='vocab-みます');
+  const seeQuestion=wordCrashCourseDeck([seeWord]).find(question=>question.direction==='jp-nl');
+  assert.equal(wordCrashCourseAccepts(seeQuestion,seeQuestion.correct),true,'the visible compound meaning is accepted');
+  assert.equal(wordCrashCourseAccepts(seeQuestion,'kijken'),true,'each listed valid meaning is accepted');
+  assert.equal(wordCrashCourseAccepts(seeQuestion,'zien'),true,'alternate valid meanings are accepted');
+  const oneWordLesson=probe.langLessons.find(lesson=>lesson.id==='l4-8'),oneWord=lessonNewWords(oneWordLesson);
+  assert.equal(oneWord.length,1);
+  assert.ok(wordCrashCourseDeck(oneWord).every(question=>question.selfReveal),'one-word lessons use a reveal and self-assessment instead of outside distractors');
+
+  const six=probe.advancedCourses[5],fourWordLesson=six.lessons.find(lesson=>lesson.id==='l6-4');
+  probe.state.screen='module';probe.state.level=5;probe.state.tabs.advanced='learn';probe.state.advancedView[5]='lesson';probe.state.advancedStep[5]='words';probe.state.advancedLesson[5]=3;
+  probe.renderAdvancedWords(six,fourWordLesson,5,3);
+  let wordsMarkup=probe.element('advancedStepBody').innerHTML;
+  lessonNewWords(fourWordLesson).forEach(word=>assert.ok(wordsMarkup.includes(word.jp),`${word.jp} appears immediately`));
+  assert.match(wordsMarkup,/4 nieuwe woorden/);
+  assert.doesNotMatch(wordsMarkup,/Eerst voor het patroon|Daarna uitbreiden|<details/);
+  assert.ok(probe.element('advancedWordCrashCourse').onclick);
+
+  const twoWordLesson=probe.advancedCourses[9].lessons.find(lesson=>lesson.id==='l10-2');
+  assert.equal(lessonNewWords(twoWordLesson).length,2,'known tea and cake words are not counted again in Level 10, lesson 2');
+  probe.renderAdvancedWords(probe.advancedCourses[9],twoWordLesson,9,1);
+  wordsMarkup=probe.element('advancedStepBody').innerHTML;
+  assert.match(wordsMarkup,/2 nieuwe woorden/);
+  assert.doesNotMatch(wordsMarkup,/おちゃ|ケーキ/);
+  const manyWordLesson=probe.advancedCourses[7].lessons.find(lesson=>lesson.id==='l8-4');
+  assert.equal(lessonNewWords(manyWordLesson).length,5);
+  probe.renderAdvancedWords(probe.advancedCourses[7],manyWordLesson,7,3);
+  wordsMarkup=probe.element('advancedStepBody').innerHTML;
+  lessonNewWords(manyWordLesson).forEach(word=>assert.ok(wordsMarkup.includes(word.jp)));
+  assert.doesNotMatch(wordsMarkup,/Daarna uitbreiden|<details/);
+
+  const zeroWordLesson=six.lessons.find(lesson=>lesson.id==='l6-5');
+  probe.state.advancedStep[5]='words';probe.renderAdvancedWords(six,zeroWordLesson,5,4);
+  assert.doesNotMatch(probe.element('advancedStepBody').innerHTML,/Crash course woorden/);
+  assert.ok(probe.element('advancedWordsNext').onclick,'a lesson without new words keeps its normal next step');
+  assert.equal(probe.state.advancedStep[5],'words','rendering a no-word lesson does not advance it');
+
+  const progressBeforeCrash=JSON.stringify(probe.state.flashcardProgress),ranksBeforeCrash=JSON.stringify(probe.rankState);
+  probe.state.advancedStep[5]='words';probe.state.advancedView[5]='lesson';probe.state.advancedLesson[5]=3;
+  probe.renderAdvancedWords(six,fourWordLesson,5,3);
+  probe.element('advancedWordCrashCourse').onclick();
+  let crash=probe.activeWordCrashCourse;
+  assert.equal(crash.phase,'intro');
+  lessonNewWords(fourWordLesson).forEach(word=>assert.ok(probe.element('advancedStepBody').innerHTML.includes(word.jp),'all words are shown before testing'));
+  probe.element('wordCrashBegin').onclick();
+  crash=probe.activeWordCrashCourse;
+  let question=crash.queue[0];
+  assert.match(probe.element('advancedStepBody').innerHTML,/flashcard-answer-options is-hidden/,'answer options start blurred');
+  assert.equal(question.revealed,false);
+  probe.element('wordCrashReveal').onclick();
+  const wrongIndex=question.choices.findIndex(choice=>!wordCrashCourseAccepts(question,choice));
+  probe.element(`wordCrashChoice${wrongIndex}`).onclick();
+  assert.match(probe.element('advancedStepBody').innerHTML,/Niet goed\. Juiste antwoord:/);
+  assert.equal(probe.answerWordCrashCourse(question.correct),false,'an answer cannot be assessed twice');
+  probe.element('wordCrashNext').onclick();
+  assert.match(probe.element('advancedStepBody').innerHTML,/flashcard-answer-options is-hidden/,'the blur resets on the next card');
+  while(crash.phase==='initial'){
+    question=crash.queue[crash.index];question.revealed=true;
+    assert.equal(probe.answerWordCrashCourse(question.correct,true),true);
+    probe.advanceWordCrashCourse();
+  }
+  assert.equal(crash.phase,'summary');
+  assert.match(probe.element('advancedStepBody').innerHTML,/Crash course afgerond/);
+  assert.equal(Object.keys(crash.missed).length,0,'a later correct answer clears an earlier miss for the same direction');
+  assert.match(probe.element('advancedStepBody').innerHTML,/Nog een keer/);
+  assert.equal(JSON.stringify(probe.state.flashcardProgress),progressBeforeCrash,'the course does not create or reschedule SRS reviews');
+  assert.equal(JSON.stringify(probe.rankState),ranksBeforeCrash,'the course does not change lesson ranks');
+  assert.equal(probe.state.advancedStep[5],'words','the course does not mark the lesson step complete');
+  probe.element('wordCrashAgain').onclick();assert.equal(crash.phase,'intro','the short course can restart');
+  probe.element('wordCrashExit').onclick();assert.equal(probe.activeWordCrashCourse,null);
+  assert.equal(probe.state.advancedStep[5],'words','interrupting returns to the same lesson step');
+  assert.match(probe.element('advancedStepBody').innerHTML,/Naar het nieuwe patroon/);
+
+  probe.beginWordCrashCourse({hostId:'advancedStepBody',lesson:fourWordLesson,words:lessonNewWords(fourWordLesson),returnToLesson:()=>{}});
+  probe.element('wordCrashBegin').onclick();crash=probe.activeWordCrashCourse;
+  const retryKey=crash.deck[0].key;
+  while(crash.phase==='initial'){
+    question=crash.queue[crash.index];question.revealed=true;
+    if(question.key===retryKey){
+      const wrong=question.choices.find(choice=>!wordCrashCourseAccepts(question,choice));
+      probe.answerWordCrashCourse(wrong);
+    }else probe.answerWordCrashCourse(question.correct);
+    probe.advanceWordCrashCourse();
+  }
+  assert.equal(crash.phase,'review','words missed on both starting assessments return once');
+  assert.equal(crash.queue.length,1);
+  question=crash.queue[0];question.revealed=true;probe.answerWordCrashCourse(question.correct);probe.advanceWordCrashCourse();
+  assert.equal(crash.phase,'summary');
+  assert.equal(Object.keys(crash.missed).length,0,'a correct retry removes the miss from the summary');
+  probe.leaveWordCrashCourse();
+
+  let returnedToOneWordStep=false;probe.state.langStep='words';
+  probe.beginWordCrashCourse({hostId:'langStepBody',lesson:oneWordLesson,words:oneWord,returnToLesson:()=>{returnedToOneWordStep=probe.state.langStep==='words'}});
+  probe.element('wordCrashBegin').onclick();
+  assert.match(probe.element('langStepBody').innerHTML,/Tik om te tonen/);
+  probe.element('wordCrashReveal').onclick();
+  assert.match(probe.element('langStepBody').innerHTML,/wordCrashSelfKnown/);
+  probe.element('wordCrashSelfAgain').onclick();
+  assert.match(probe.element('langStepBody').innerHTML,/Niet goed\. Juiste antwoord:/);
+  probe.element('wordCrashNext').onclick();
+  probe.leaveWordCrashCourse();
+  assert.equal(returnedToOneWordStep,true,'self-reveal practice can be interrupted without advancing the lesson');
+
   context.__probe.rankState['l4-10'].rank=null;
   context.__probe.renderLanguageExam();
   assert.equal(get('langExam').disabled,false,'Level 4 exam is available without a prerequisite rank');
