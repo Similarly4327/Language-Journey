@@ -13157,6 +13157,186 @@
     ]
   }
 };
+  // Stable source IDs and explicit stems keep fixed lesson questions traceable
+  // while keeping Dutch instructions separate from Japanese prompts.
+  const lessonIndexById=new Map(manifest.lessons.map(lesson=>[lesson.id,lesson]));
+  const exerciseById=new Map(manifest.exercises.map(exercise=>[exercise.id,exercise]));
+  const vocabByJapanese=new Map(manifest.vocabulary.map(word=>[word.japanese,word]));
+  const hasJapanese=text=>/[\u3040-\u30ff\u3400-\u9fff]/u.test(String(text||''));
+  const defaultInstruction=payload=>{
+    const [kind,prompt,, ,category,learningGoal]=payload;
+    if(category==='vocab')return hasJapanese(prompt)?`Wat betekent ${prompt}?`:`Hoe schrijf je “${prompt}” in het Japans?`;
+    if(kind==='meaning')return'Wat betekent deze Japanse zin?';
+    if(kind==='fill')return'Vul het ontbrekende blok in.';
+    if(kind==='build')return'Bouw de Japanse zin met de tegels.';
+    if(kind==='order')return'Kies het antwoord dat precies bij de opdracht past.';
+    if(kind==='contrast')return learningGoal||'Kies de schrijfwijze die bij de gevraagde klank past.';
+    if(kind==='reading')return learningGoal||'Lees de vraag en kies de passende schrijfwijze.';
+    if(kind==='pronunciation')return learningGoal||`Welke klank hoort bij ${prompt}?`;
+    return learningGoal||'Kies het juiste antwoord.';
+  };
+  function writeLessonQuestion(lessonId,index,values={}){
+    const lesson=lessonIndexById.get(lessonId);if(!lesson)return;
+    const old=lesson.check?.[index];if(!old)return;
+    const payload=[old[0],old[1],old[2],old[3],old[4],old[5]];
+    for(const key of ['kind','prompt','correct','choices','category','learningGoal'])if(values[key]!==undefined)payload[key==='kind'?0:key==='prompt'?1:key==='correct'?2:key==='choices'?3:key==='category'?4:5]=values[key];
+    const sourceId=`exercise-${lessonId}-${index+1}`;
+    const matchedWord=manifest.vocabulary.find(word=>word.japanese===payload[1]||word.japanese===payload[2]);
+    payload[6]=values.instruction||defaultInstruction(payload);
+    payload[7]=values.context||'';
+    payload[8]=sourceId;
+    payload[9]=values.targetLemmaId||(payload[4]==='vocab'&&matchedWord?matchedWord.id:'');
+    payload[10]=values.targetConceptId||`question:${lessonId}:${index+1}`;
+    lesson.check[index]=payload;
+    const exercise=exerciseById.get(sourceId);
+    if(exercise){exercise.payload=payload.slice(0,6);exercise.instruction=payload[6];exercise.context=payload[7];exercise.targetLemmaId=payload[9]||null;exercise.targetConceptId=payload[10]}
+  }
+  function writeFocus(lessonId,payload,instruction,context='',targetConceptId=''){
+    const lesson=lessonIndexById.get(lessonId);if(!lesson)return;
+    const row=[...payload];row[5]=row[5]||null;row[6]=instruction;row[7]=context;row[8]=`exercise-${lessonId}-focus-1`;row[9]='';row[10]=targetConceptId||`focus:${lessonId}`;lesson.focus=row;
+  }
+
+  // Level 4: concrete questions show the sentence/meaning they refer to.
+  writeLessonQuestion('l4-1',0,{instruction:'Wat betekent ねこ?',targetLemmaId:'vocab-ねこ'});
+  writeLessonQuestion('l4-1',1,{instruction:'Hoe schrijf je “brood” in het Japans?',targetLemmaId:'vocab-パン'});
+  writeLessonQuestion('l4-1',6,{kind:'build',prompt:'Dit is een kat.',correct:'これ は ねこ です',choices:['ねこ','です','これ','は'],instruction:'Bouw de zin met de tegels.',targetConceptId:'sentence:l4-cat'});
+  writeLessonQuestion('l4-1',7,{kind:'meaning',prompt:'これ は パン です',correct:'Dit is brood.',choices:['Dit is brood.','Dat is brood.','Dit is water.'],instruction:'Wat betekent deze Japanse zin?',targetConceptId:'sentence:l4-bread'});
+  writeLessonQuestion('l4-2',5,{prompt:'それ は ___ です',instruction:'Vul het ontbrekende woord in.',context:'Dat bij jou is een boek.',targetLemmaId:'vocab-ほん'});
+  writeLessonQuestion('l4-2',7,{kind:'meaning',prompt:'それ は みず です',correct:'Dat bij jou is water.',choices:['Dat bij jou is water.','Dit is water.','Dat daar is een vis.'],instruction:'Welke zin betekent: “Dat bij jou is water”?',targetLemmaId:'vocab-みず'});
+  writeLessonQuestion('l4-3',7,{kind:'mc',prompt:'わたし は ともだち です',correct:'achteraan',choices:['vooraan','achteraan','direct vóór は'],instruction:'Waar staat です in deze basiszin?',targetConceptId:'sentence:l4-desu-position'});
+  writeLessonQuestion('l4-3',5,{kind:'mc',prompt:'わたし は ひと です',correct:'わたし',choices:['わたし','ひと','です'],instruction:'Welk woord is in deze zin het topic?',targetLemmaId:'vocab-わたし',targetConceptId:'grammar:l4-topic-wa-in-sentence'});
+  writeLessonQuestion('l4-4',3,{instruction:'Vul het partikel in dat “mijn boek” vormt.',context:'Betekenis: mijn boek.',targetConceptId:'grammar:l4-possession-no'});
+  writeLessonQuestion('l4-4',5,{kind:'mc',prompt:'わたし の ほん',correct:'mijn boek',choices:['mijn boek','mijn vriend','dit boek'],instruction:'Welke woordgroep betekent “mijn boek”?',targetConceptId:'phrase:l4-my-book'});
+  writeLessonQuestion('l4-4',7,{kind:'meaning',prompt:'それ は ともだち の ほん です',correct:'Dat bij jou is het boek van een vriend.',choices:['Dat bij jou is het boek van een vriend.','Dat daar is het boek van een vriend.','Dat bij jou is mijn boek.'],instruction:'Welke zin betekent: “Dat bij jou is het boek van een vriend”?',targetConceptId:'sentence:l4-friends-book'});
+  writeLessonQuestion('l4-5',1,{kind:'meaning',prompt:'それは ほん です',correct:'Dat bij jou is een boek.',choices:['Is dat bij jou een boek?','Dat bij jou is een boek.','Dit is een boek.'],instruction:'Wat betekent deze Japanse zin?',targetConceptId:'sentence:l4-sore-book'});
+  writeLessonQuestion('l4-5',2,{instruction:'Zet か aan het einde om van deze zin een vraag te maken.',context:'これ は いぬ です'});
+  writeLessonQuestion('l4-5',3,{kind:'fill',prompt:'これは いぬ です ___',correct:'か',choices:['か','は','です'],instruction:'Welk teken aan het einde maakt er een vraag van?',targetConceptId:'grammar:l4-question-ka'});
+  writeLessonQuestion('l4-5',7,{kind:'mc',prompt:'これは みず です\nこれは みず です か',correct:'か staat achteraan',choices:['か staat achteraan','は verdwijnt','か staat vooraan'],instruction:'Wat maakt de tweede zin een vraag?',targetConceptId:'grammar:l4-question-ka'});
+  writeLessonQuestion('l4-6',2,{prompt:'それ ___ いぬ です',instruction:'Vul het ontbrekende partikel in.',context:'Dat bij jou is ook een hond.',choices:['も','は','の']});
+  writeLessonQuestion('l4-6',3,{kind:'mc',prompt:'それ も いぬ です',correct:'も',choices:['も','は','か'],instruction:'Welk teken betekent hier “ook”?',targetConceptId:'grammar:l4-also-mo'});
+  writeLessonQuestion('l4-6',0,{kind:'meaning',prompt:'これも ねこ です',correct:'Dit is ook een kat.',choices:['Dit is een kat.','Dit is ook een kat.','Is dit een kat?'],instruction:'Wat betekent deze Japanse zin?',targetConceptId:'sentence:l4-also-this-cat'});
+  writeLessonQuestion('l4-6',4,{kind:'meaning',prompt:'それ も ねこ です',correct:'Dat bij jou is ook een kat.',choices:['Dat bij jou is ook een kat.','Dat bij jou is een kat.','Is dat bij jou een kat?'],instruction:'Welke zin betekent: “Dat bij jou is ook een kat”?',targetLemmaId:'vocab-ねこ'});
+  writeLessonQuestion('l4-6',5,{kind:'meaning',prompt:'それ も みず です',correct:'Dat bij jou is ook water.',choices:['Dat bij jou is ook water.','Dat bij jou is water.','Is dat bij jou water?'],instruction:'Welke zin betekent: “Dat bij jou is ook water”?',targetConceptId:'sentence:l4-also-water-near'});
+  writeLessonQuestion('l4-6',7,{kind:'meaning',prompt:'それ も さかな です',correct:'Dat bij jou is ook een vis.',choices:['Dat bij jou is ook een vis.','Dat bij jou is een vis.','Is dat bij jou een vis?'],instruction:'Welke zin betekent: “Dat bij jou is ook een vis”?',targetLemmaId:'vocab-さかな'});
+  writeLessonQuestion('l4-7',5,{prompt:'わたし は パン を たべます',instruction:'Welk woord staat achteraan in deze basiszin?',targetLemmaId:'vocab-たべます'});
+  writeLessonQuestion('l4-7',7,{kind:'build',prompt:'Ik eet brood.',correct:'わたし は パン を たべます',choices:['わたし','は','パン','を','たべます'],instruction:'Bouw de Japanse zin met de tegels.',targetConceptId:'sentence:l4-eat-bread'});
+  writeLessonQuestion('l4-8',2,{kind:'mc',prompt:'わたし は みず を のみます',correct:'みず',choices:['わたし','みず','のみます'],instruction:'Welk woord is het voorwerp dat ik drink?',targetLemmaId:'vocab-みず'});
+  writeLessonQuestion('l4-8',3,{kind:'mc',prompt:'わたし は さかな を みます',correct:'みます',choices:['さかな','を','みます'],instruction:'Welk woord is het werkwoord in deze zin?',targetLemmaId:'vocab-みます'});
+  writeLessonQuestion('l4-8',4,{kind:'mc',prompt:'わたし は ほん を よみます',correct:'を',choices:['は','を','です'],instruction:'Welk teken markeert in deze zin het gelezen object?',targetConceptId:'grammar:l4-object-o'});
+  writeLessonQuestion('l4-8',5,{kind:'mc',prompt:'わたし は ほん を よみます',correct:'achteraan',choices:['vooraan','in het midden','achteraan'],instruction:'Waar staat het werkwoord in deze basiszin?',targetConceptId:'sentence:l4-verb-position'});
+  writeLessonQuestion('l4-8',7,{kind:'meaning',prompt:'わたし は みず を のみます',correct:'Ik drink water.',choices:['Ik drink water.','Ik eet water.','Ik drink brood.'],instruction:'Welke zin betekent: “Ik drink water”?',targetLemmaId:'vocab-のみます'});
+  writeLessonQuestion('l4-9',5,{prompt:'わたし は えき に いきます',instruction:'Welk woord staat achteraan in deze basiszin?',targetLemmaId:'vocab-いきます'});
+  writeLessonQuestion('l4-9',7,{kind:'fill',prompt:'わたし は えき ___ いきます',correct:'に',choices:['に','を','の'],instruction:'Vul het ontbrekende partikel in.',context:'Ik ga naar het station.',targetConceptId:'grammar:l4-destination-ni'});
+  writeLessonQuestion('l4-10',0,{kind:'meaning',prompt:'わたし の ともだち は ほん を よみます',correct:'Mijn vriend leest een boek.',choices:['Mijn vriend leest een boek.','Mijn vriend drinkt water.','Ik lees het boek van een vriend.'],instruction:'Wat betekent deze Japanse zin?',targetConceptId:'sentence:l4-friend-reads-book'});
+  writeLessonQuestion('l4-10',1,{kind:'meaning',prompt:'あれ は ともだち の ほん です か',correct:'Is dat daar het boek van een vriend?',choices:['Is dat daar het boek van een vriend?','Dat daar is het boek van een vriend.','Is dit mijn boek?'],instruction:'Wat betekent deze Japanse vraag?',targetConceptId:'sentence:l4-question-friends-book'});
+  writeLessonQuestion('l4-10',2,{prompt:'わたし は みず ___ のみます',correct:'も',choices:['も','を','に'],instruction:'Vul het ontbrekende partikel in.',context:'Ik drink ook water, naast iets anders.',targetConceptId:'grammar:l4-object-also-mo'});
+  writeLessonQuestion('l4-10',3,{prompt:'わたし は ともだち の うち ___ いきます',correct:'に',choices:['に','を','の'],instruction:'Vul het ontbrekende partikel in.',context:'Ik ga naar het huis van een vriend.',targetConceptId:'grammar:l4-destination-ni'});
+  writeLessonQuestion('l4-10',4,{kind:'mc',prompt:'これ は わたし の ほん です',correct:'わたし の',choices:['わたし の','これ は','です'],instruction:'Welk blok zegt van wie het boek is?',targetConceptId:'phrase:l4-owner'});
+  writeLessonQuestion('l4-10',5,{kind:'mc',prompt:'わたし は えき に いきます',correct:'えき',choices:['えき','わたし','いきます'],instruction:'Welk woord noemt de bestemming?',targetLemmaId:'vocab-えき'});
+  writeLessonQuestion('l4-10',6,{kind:'build',prompt:'Ik lees het boek van een vriend.',correct:'わたし は ともだち の ほん を よみます',choices:['わたし','は','ともだち','の','ほん','を','よみます'],instruction:'Bouw de Japanse zin met de tegels.',targetConceptId:'sentence:l4-friend-book-read'});
+  writeLessonQuestion('l4-10',7,{kind:'build',prompt:'Ik ga naar het huis van een vriend.',correct:'わたし は ともだち の うち に いきます',choices:['わたし','は','ともだち','の','うち','に','いきます'],instruction:'Bouw de Japanse zin met de tegels.',targetConceptId:'sentence:l4-friend-house-go'});
+
+  // Level 5: each question states whether it asks for a sound, spelling or meaning.
+  writeLessonQuestion('l5-1',0,{instruction:'Welke klank hoort bij きゃ?',targetConceptId:'kana:l5-kya'});
+  writeLessonQuestion('l5-1',1,{instruction:'Welke schrijfwijze klinkt als kyu?',targetConceptId:'kana:l5-kyu'});
+  writeLessonQuestion('l5-1',2,{instruction:'Welke klank hoort bij キョ?',targetConceptId:'kana:l5-kyo-katakana'});
+  writeLessonQuestion('l5-1',3,{prompt:'Welke schrijfwijze klinkt als kya en gebruikt kleine ゃ?',instruction:'Kies de schrijfwijze voor kya met kleine ゃ.',targetConceptId:'kana:l5-kya-small'});
+  writeLessonQuestion('l5-1',4,{prompt:'きゃく',correct:'gast',choices:['gast','muziekstuk','boek'],instruction:'Wat betekent きゃく in deze les?',targetLemmaId:'vocab-きゃく',targetConceptId:'vocab-meaning:きゃく'});
+  writeLessonQuestion('l5-1',5,{prompt:'きゃく',correct:'きゃく',choices:['きやく','きゃく','きょく'],instruction:'Hoe schrijf je kyaku met kleine ゃ?',targetConceptId:'kana:l5-kyaku-spelling'});
+  writeLessonQuestion('l5-1',6,{prompt:'きょく',correct:'きょ',choices:['きよ','きょ','きゅ'],instruction:'Welk eerste tekenblok in きょく lees je als kyo?',targetConceptId:'kana:l5-kyo-in-word'});
+  writeLessonQuestion('l5-1',7,{kind:'mc',prompt:'これは きゃく です。',correct:'きゃ',choices:['きゃ','きょ','きゅ'],instruction:'Welk klankblok herken je in de zin?',targetConceptId:'kana:l5-yoon-in-context'});
+
+  writeLessonQuestion('l5-2',0,{instruction:'Welke klank hoort bij しゃ?',targetConceptId:'kana:l5-sha'});
+  writeLessonQuestion('l5-2',1,{instruction:'Welke schrijfwijze klinkt als shu?',targetConceptId:'kana:l5-shu'});
+  writeLessonQuestion('l5-2',2,{instruction:'Welke klank hoort bij ショ?',targetConceptId:'kana:l5-sho-katakana'});
+  writeLessonQuestion('l5-2',3,{prompt:'sho',correct:'しょ',choices:['しよ','しょ','しょう'],instruction:'Kies de schrijfwijze voor kort sho met kleine ょ.',targetConceptId:'kana:l5-sho-small'});
+  writeLessonQuestion('l5-2',4,{instruction:'Wat betekent しゃしん in deze les?',targetLemmaId:'vocab-しゃしん'});
+  writeLessonQuestion('l5-2',5,{instruction:'Wat betekent しゅみ in deze les?',targetLemmaId:'vocab-しゅみ'});
+  writeLessonQuestion('l5-2',6,{prompt:'しょくじ',correct:'しょ',choices:['しよ','しょ','しゃ'],instruction:'Welk eerste tekenblok in しょくじ klinkt als sho?',targetConceptId:'kana:l5-sho-in-word'});
+  writeLessonQuestion('l5-2',7,{prompt:'しょくじ',correct:'maaltijd',choices:['maaltijd','hobby','foto'],instruction:'Wat betekent しょくじ in deze les?',targetLemmaId:'vocab-しょくじ'});
+
+  writeLessonQuestion('l5-3',0,{instruction:'Welke klank hoort bij ちゃ?',targetConceptId:'kana:l5-cha'});
+  writeLessonQuestion('l5-3',1,{instruction:'Welke schrijfwijze klinkt als ja?',targetConceptId:'kana:l5-ja'});
+  writeLessonQuestion('l5-3',2,{instruction:'Welke klank hoort bij じゅ?',targetConceptId:'kana:l5-ju'});
+  writeLessonQuestion('l5-3',3,{prompt:'cho',correct:'ちょ',choices:['ちよ','ちょ','じょ'],instruction:'Kies de schrijfwijze voor cho met kleine ょ.',targetConceptId:'kana:l5-cho'});
+  writeLessonQuestion('l5-3',4,{instruction:'Wat betekent おちゃ in deze les?',targetLemmaId:'vocab-おちゃ'});
+  writeLessonQuestion('l5-3',5,{instruction:'Wat betekent じゃま in deze les?',targetLemmaId:'vocab-じゃま'});
+  writeLessonQuestion('l5-3',6,{prompt:'josei',correct:'じょせい',choices:['じよせい','じょせい','ちょせい'],instruction:'Hoe schrijf je josei met kleine ょ?',targetConceptId:'kana:l5-josei-spelling'});
+  writeLessonQuestion('l5-3',7,{kind:'meaning',prompt:'わたし は じょせい です。',correct:'Ik ben een vrouw.',choices:['Ik ben een vrouw.','Ik drink thee.','Ik ga naar huis.'],instruction:'Wat betekent deze Japanse zin?',targetLemmaId:'vocab-じょせい'});
+
+  writeLessonQuestion('l5-4',0,{prompt:'kitte',correct:'きって',choices:['きて','きって','きつて'],instruction:'Hoe schrijf je kitte met de korte stop?',targetConceptId:'kana:l5-sokuon-kit-te'});
+  writeLessonQuestion('l5-4',1,{instruction:'Hoe schrijf je zasshi met kleine っ?',targetConceptId:'kana:l5-sokuon-zasshi'});
+  writeLessonQuestion('l5-4',2,{instruction:'Wat betekent ざっし in deze les?',targetLemmaId:'vocab-ざっし'});
+  writeLessonQuestion('l5-4',3,{instruction:'Wat betekent きって in deze les?',targetLemmaId:'vocab-きって'});
+  writeLessonQuestion('l5-4',4,{prompt:'kitte',correct:'きって',choices:['きて','きって','きつて'],instruction:'Hoe schrijf je kitte met kleine っ?',targetConceptId:'kana:l5-sokuon-short-stop'});
+  writeLessonQuestion('l5-4',5,{prompt:'beddo',instruction:'Hoe schrijf je beddo in katakana?',targetConceptId:'kana:l5-sokuon-beddo'});
+  writeLessonQuestion('l5-4',6,{prompt:'きって',correct:'Een korte stop vóór de t.',choices:['Een korte stop vóór de t.','Het klinkt als tsu.','Het verlengt de i.'],instruction:'Wat doet kleine っ in きって?',targetConceptId:'kana:l5-sokuon-effect'});
+  writeLessonQuestion('l5-4',7,{kind:'mc',prompt:'ざっし',correct:'っ',choices:['ざ','っ','し'],instruction:'Welk teken geeft in ざっし de korte stop aan?',targetConceptId:'kana:l5-small-tsu-sign'});
+
+  writeLessonQuestion('l5-5',0,{prompt:'ケーキ',correct:'e',choices:['e','a','o'],instruction:'Welke klinker wordt door ー in ケーキ verlengd?',targetConceptId:'kana:l5-long-e'});
+  writeLessonQuestion('l5-5',1,{prompt:'geemu',correct:'ゲーム',choices:['ゲム','ゲーム','ゲエム'],instruction:'Hoe schrijf je geemu volgens de cursusnotatie?',targetLemmaId:'vocab-ゲーム'});
+  writeLessonQuestion('l5-5',2,{instruction:'Wat betekent コーヒー in deze les?',targetLemmaId:'vocab-コーヒー'});
+  writeLessonQuestion('l5-5',3,{instruction:'Wat betekent スーパー in deze les?',targetLemmaId:'vocab-スーパー'});
+  writeLessonQuestion('l5-5',4,{kind:'mc',prompt:'ー',correct:'Het verlengt de klinker ervoor.',choices:['Het verlengt de klinker ervoor.','Het maakt een korte stop.','Het maakt een kleine ゃ-klank.'],instruction:'Wat doet ー in katakana?',targetConceptId:'kana:l5-long-vowel-rule'});
+  writeLessonQuestion('l5-5',5,{prompt:'takushii',correct:'タクシー',choices:['タクシ','タクシー','タクーシ'],instruction:'Hoe schrijf je takushii met ー?',targetLemmaId:'vocab-タクシー'});
+  writeLessonQuestion('l5-5',6,{prompt:'koffie',correct:'コーヒー',choices:['コーヒー','コヒ','コオヒ'],instruction:'Welke Japanse schrijfwijze van koffie heeft ー na コ?',targetLemmaId:'vocab-コーヒー',targetConceptId:'kana:l5-coffee-long-o'});
+  writeLessonQuestion('l5-5',7,{kind:'meaning',prompt:'わたし は ケーキ を たべます。',correct:'Ik eet cake.',choices:['Ik eet cake.','Ik drink koffie.','Ik speel een spel.'],instruction:'Wat betekent deze Japanse zin?',targetLemmaId:'vocab-ケーキ'});
+
+  // Give all remaining fixed questions a stable ID, an explicit visible instruction and metadata.
+  for(const lesson of manifest.lessons.filter(item=>item.level===4||item.level===5))lesson.check.forEach((old,index)=>{
+    if(old.length>=11)return;
+    const sourceId=`exercise-${lesson.id}-${index+1}`,exercise=exerciseById.get(sourceId),payload=[...old];
+    payload[6]=payload[6]||defaultInstruction(payload);payload[7]=payload[7]||'';payload[8]=sourceId;
+    const matchedWord=manifest.vocabulary.find(word=>word.japanese===payload[1]||word.japanese===payload[2]);
+    payload[9]=payload[9]||(payload[4]==='vocab'&&matchedWord?matchedWord.id:'');payload[10]=payload[10]||`question:${lesson.id}:${index+1}`;
+    lesson.check[index]=payload;
+    if(exercise){exercise.payload=payload.slice(0,6);exercise.instruction=payload[6];exercise.context=payload[7];exercise.targetLemmaId=payload[9]||null;exercise.targetConceptId=payload[10]}
+  });
+
+  // Level 6–10 focus questions: Dutch directions/context stay outside Japanese prompts.
+  writeFocus('l6-1',['fill','あなた ___ ともだち です','は',['は','の','を'],'structure'],'Vul de topicmarkering in.','Jij bent een vriend.','grammar:l6-topic-ha');
+  writeFocus('l6-2',['fill','わたし ___ はは','の',['の','は','に'],'structure'],'Vul “mijn moeder” aan.','わたし の はは betekent “mijn moeder”.','grammar:l6-family-no');
+  writeFocus('l6-3',['fill','これは だれ です ___','か',['か','の','を'],'structure'],'Maak de vraag “Wie is dit?” af.','Wie is dit?','grammar:l6-question-ka');
+  writeFocus('l6-4',['fill','ともだち ___ いもうと','の',['の','を','に'],'structure'],'Vul “de jongere zus van een vriend” aan.','De jongere zus van een vriend.','grammar:l6-family-no');
+  writeFocus('l6-5',['mc','これは ともだち の いもうと です','の',['は','の','です'],'integration'],'Welk teken verbindt “vriend” met “jongere zus”?','','grammar:l6-family-no');
+  writeFocus('l7-1',['mc','みっつ','drie',['één','twee','drie'],'vocab'],'Hoeveel dingen betekent みっつ?','','vocab-みっつ');
+  writeFocus('l7-2',['fill','かぞく は ___ です','よにん',['よにん','さんにん','ふたり'],'structure'],'Het gezin telt vier personen. Vul de teller in.','Het gezin telt vier personen.','counter:l7-people');
+  writeFocus('l7-3',['fill','いぬ は ___ です','さんびき',['さんびき','いっぴき','にひき'],'structure'],'Er zijn drie honden. Vul de dierenteller en het aantal in.','Er zijn drie honden.','counter:l7-small-animals');
+  writeFocus('l7-4',['fill','きって は に___ です','まい',['まい','ほん','ひき'],'structure'],'Er zijn twee postzegels. Vul de teller in.','Er zijn twee postzegels.','counter:l7-flat-objects');
+  writeFocus('l7-5',['fill','いぬ は ___ です','にばんめ',['にばんめ','いちばんめ','さんばんめ'],'structure'],'De hond staat tweede in de rij. Vul het rangtelwoord in.','De hond staat tweede in de rij.','counter:l7-order');
+  writeFocus('l8-1',['mc','すいようび','woensdag',['maandag','woensdag','donderdag'],'vocab'],'Welke dag betekent すいようび?','','vocab-すいようび');
+  writeFocus('l8-2',['fill','なんようび です ___','か',['か','に','を'],'structure'],'Maak de vraag “Welke dag van de week is het?” af.','Welke dag van de week is het?','grammar:l8-question-ka');
+  writeFocus('l8-3',['fill','___ えき に いきます','あした',['あした','きょう','こんしゅう'],'structure'],'Ik ga morgen naar het station. Vul het tijdswoord in.','Ik ga morgen naar het station.','time:l8-tomorrow');
+  writeFocus('l8-4',['fill','にがつ ___ です','ふつか',['ふつか','ついたち','みっか'],'structure'],'De datum is 2 februari. Vul de dag in.','De datum is 2 februari.','time:l8-date');
+  writeFocus('l8-5',['fill','___ です か','なんじ',['なんじ','なんようび','なんにん'],'structure'],'Hoe vraag je hoe laat het is?','','time:l8-hour-question');
+  writeFocus('l8-6',['mc','あした さんじ に えき に いきます','さんじ',['さんじ','あした','えき'],'integration'],'Welk woord geeft het uur aan?','','time:l8-hour-in-plan');
+  writeFocus('l9-1',['fill','えき は ___ です か','どこ',['どこ','だれ','どれ'],'structure'],'Hoe vraag je waar het station is?','','place:l9-where');
+  writeFocus('l9-2',['fill','えき は ___ です','みぎ',['みぎ','ひだり','まっすぐ'],'structure'],'Volgens de aanwijzing is het station rechts. Vul de richting in.','Het station is rechts.','place:l9-direction');
+  writeFocus('l9-3',['fill','みせ ___ となり','の',['の','を','に'],'structure'],'Vul “naast de winkel” aan.','Naast de winkel.','place:l9-next-to');
+  writeFocus('l9-4',['fill','ベッド の ___','うえ',['うえ','した','となり'],'structure'],'Het voorwerp ligt bovenop het bed. Vul het plaatswoord in.','Het voorwerp ligt bovenop het bed.','place:l9-above');
+  writeFocus('l9-5',['fill','レストラン ___ パン を たべます','で',['で','に','の'],'structure'],'Vul de plaats in waar de handeling gebeurt.','Ik eet brood in het restaurant.','grammar:l9-action-place-de');
+  writeFocus('l10-1',['fill','パン を ふたつ ___','ください',['ください','いきます','です'],'structure'],'Maak het beleefde verzoek af: twee stuks brood, alstublieft.','Twee stuks brood, alstublieft.','grammar:l10-request-kudasai');
+  writeFocus('l10-2',['fill','おちゃ を ___ ください','ひとつ',['ひとつ','ひとり','いっぴき'],'structure'],'Eén thee, alstublieft. Vul de hoeveelheid in.','Eén thee, alstublieft.','counter:l10-one-tea');
+  writeFocus('l10-3',['fill','ともだち ___ あいます','と',['と','を','で'],'structure'],'Vul aan volgens de in deze les geleerde vorm “met een vriend afspreken”.','Met een vriend afspreken.','grammar:l10-meet-with-to');
+  writeFocus('l10-4',['fill','でんしゃ ___ のります','に',['に','で','を'],'structure'],'Ik stap in de trein. Vul het partikel in.','Ik stap in de trein.','grammar:l10-board-train-ni');
+  writeFocus('l10-5',['mc','あした ともだち と えき に いきます','ともだち と',['あした','ともだち と','えき に'],'integration'],'Welk blok zegt met wie ik ga?','','grammar:l10-with-person-to');
+
+  const l10Mission=lessonIndexById.get('l10-5');
+  if(l10Mission)l10Mission.models=[...(l10Mission.models||[]),
+    {sentence:'きょう は ともだち の うち に いきます',meaning:'Vandaag ga ik naar het huis van een vriend.',parts:[['きょう','tijd','vandaag'],['は','topicmarkering','wa'],['ともだち','persoon','vriend'],['の','relatie','van'],['うち','plaats','huis'],['に','bestemming','naar'],['いきます','werkwoord','gaan']]},
+    {sentence:'あした えき で でんしゃ に のります',meaning:'Morgen stap ik op het station in de trein.',parts:[['あした','tijd','morgen'],['えき','plaats','station'],['で','plaats van handeling','op'],['でんしゃ','vervoer','trein'],['に','patroon','instappen in'],['のります','werkwoord','instappen']]},
+    {sentence:'ともだち と みせ で おちゃ を かいます',meaning:'Ik koop met een vriend thee in de winkel.',parts:[['ともだち','persoon','vriend'],['と','met-persoon','met'],['みせ','plaats','winkel'],['で','plaats van handeling','in'],['おちゃ','object','thee'],['を','objectmarkering','o'],['かいます','werkwoord','kopen']]}
+  ];
+
+  const l6Reading=manifest.readings.find(item=>item.id==='reading-l6-5');
+  if(l6Reading)l6Reading.question='Wie is het familielid dat met あれ wordt aangewezen?';
+  const l8Reading=manifest.readings.find(item=>item.id==='reading-l8-6');
+  if(l8Reading){l8Reading.text='あした は げつようび です。 さんじ に えき に いきます。';l8Reading.question='Op welke dag en om hoe laat ga je naar het station?';l8Reading.answer='maandag, morgen om drie uur';l8Reading.choices=['dinsdag, vandaag om twee uur','maandag, morgen om drie uur','donderdag, morgen om één uur']}
+  const l9Reading=manifest.readings.find(item=>item.id==='reading-l9-5');
+  if(l9Reading)l9Reading.question='Waar eet de verteller brood?';
+  const l10Reading=manifest.readings.find(item=>item.id==='reading-l10-5');
+  if(l10Reading){l10Reading.text='あした は どようび です。 さんじ に ともだち と えき に いきます。 えき で でんしゃ に のります。';l10Reading.question='Wat doet de verteller als eerste?';l10Reading.answer='met een vriend naar het station gaan';l10Reading.choices=['met een vriend naar het station gaan','in de trein stappen','thuis eten']}
+
   const homePreparationLessons=[
     {title:'De les begint',goal:'Herken de woorden voor een level, les, vraag, antwoord en keuze.',A:{instructionId:'choose-answer',label:'Leskaart',words:[['レベル','level','reberu'],['レッスン','les','ressun'],['しつもん','vraag','shitsumon'],['こたえ','antwoord','kotae'],['えらびます','kiezen','erabimasu']],example:'しつもん と こたえ。',text:'レベル 11\nレッスン 1\nしつもん：しつもん\nこたえ：こたえ',translation:'Level 11, les 1. Dit zijn het label voor een vraag en het label voor een antwoord.',questions:[['Welk woord betekent antwoord?','こたえ','レッスン','レベル'],['Wat doe je bij een keuzevraag?','een antwoord kiezen','een level overslaan','een woord schrijven']]},B:{instructionId:'choose-answer',type:'notice',label:'Korte oefening',words:[['もんだい','opgave','mondai'],['れんしゅう','oefening','renshū'],['ただしい','juist','tadashii'],['まちがい','fout','machigai'],['もういちど','nog een keer','mō ichido']],example:'ただしい こたえ を えらびます。',text:'れんしゅう\nもんだい 1：ただしい こたえ を えらんでください。\nもんだい 2：まちがい を もういちど みます。',translation:'Oefening. Kies het juiste antwoord bij opgave 1. Bekijk de fout bij opgave 2 nog een keer.',questions:[['Wat kies je bij opgave 1?','het juiste antwoord','een level','een luchthaven'],['Wat doe je na een fout?','de fout nog een keer bekijken','de les afsluiten','de tekst overslaan']] }},
     {title:'Lezen en betekenis',goal:'Lees een korte Japanse zin en zoek het woord met de gevraagde betekenis.',A:{instructionId:'read-text',label:'Leeskaart',words:[['よみます','lezen','yomimasu'],['ぶん','zin','bun'],['ことば','woord','kotoba'],['いみ','betekenis','imi'],['みつけます','vinden','mitsukemasu']],example:'ぶん を よみます。',text:'ぶん を よみます。\nことば の いみ を みつけます。',translation:'Ik lees een zin. Ik zoek de betekenis van een woord.',questions:[['Wat lees je?','een zin','een kassabon','een gate'],['Wat zoek je?','de betekenis van een woord','een stoelnummer','een prijs']]},B:{instructionId:'read-text',type:'sign',label:'Voorbeeldblad',words:[['よんでください','lees alstublieft','yonde kudasai'],['ページ','pagina','pēji'],['タイトル','titel','taitoru'],['もじ','teken / letter','moji'],['しるし','markering','shirushi']],example:'タイトル を よんでください。',text:'ページ 1\nタイトル：よんでください\nもじ に しるし を つけます。',translation:'Pagina 1. Lees de titel en zet een markering bij het teken.',questions:[['Wat vraagt de titel?','lees alstublieft','luister alstublieft','ga naar de uitgang'],['Waar zet je een markering?','bij een teken','bij een prijs','bij een gate']] }},
@@ -13282,14 +13462,14 @@
     if(word&&pointOrder(point)<pointOrder(word.introducedAt)){word.introducedAt=point;word.availableFrom=point;word.themes=[...new Set([...(word.themes||[]),plan.themeId||'travel'])]}
   }
   manifest.levels.sort((a,b)=>a.number-b.number);
-  manifest.contentVersion='1.2.0';
+  manifest.contentVersion='1.3.0';
   for(const word of manifest.vocabulary){
     if(word.partOfSpeech==='unspecified')word.partOfSpeech=/ます$/.test(word.japanese)?'verb':['これ','それ','あれ','わたし','あなた','どれ','だれ','どこ'].includes(word.japanese)?'pronoun':/ようび$|^きょう$|^あした$|^きのう$|^いま$/.test(word.japanese)?'time-expression':/つ$|にん$|ひき$|ほん$|まい$|ばんめ$/.test(word.japanese)?'counter':'noun';
     if(!word.themes?.length){const n=Number(word.introducedAt?.split('-')[0]||0);word.themes=[({4:'basics',5:'kana-extension',6:'people',7:'quantities',8:'time',9:'place',10:'daily-life'})[n]||'historical'];}
   }
   for(const lesson of manifest.lessons.filter(l=>l.level>=6&&l.focus)){
     const checks=Array.isArray(lesson.focus?.[0])?lesson.focus:[lesson.focus];
-    checks.forEach((payload,index)=>manifest.exercises.push({id:`exercise-${lesson.id}-focus-${index+1}`,lessonId:lesson.id,type:payload[0],payload,requiredVocabIds:[],requiredGrammarIds:lesson.grammarIds,contextVocabIds:[]}));
+    checks.forEach((payload,index)=>manifest.exercises.push({id:`exercise-${lesson.id}-focus-${index+1}`,lessonId:lesson.id,type:payload[0],payload,sourceId:payload[8],instruction:payload[6],context:payload[7],targetLemmaId:payload[9]||null,targetConceptId:payload[10],requiredVocabIds:[],requiredGrammarIds:lesson.grammarIds,contextVocabIds:[]}));
   }
   const byId=Object.fromEntries(manifest.vocabulary.map(v=>[v.id,v]));
   const lessonById=Object.fromEntries(manifest.lessons.map(l=>[l.id,l]));

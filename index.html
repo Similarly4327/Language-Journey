@@ -341,6 +341,24 @@ section{
   min-height:22px;
   text-align:left
 }
+.question-context{
+  margin:8px 0 2px;
+  padding:10px 12px;
+  border:1px solid var(--glass-border);
+  border-radius:12px;
+  background:var(--glass-strong);
+  color:var(--text);
+  font-size:16px;
+  line-height:1.35;
+  overflow-wrap:anywhere;
+  white-space:pre-line
+}
+.question-context--jp{
+  text-align:center;
+  font-size:var(--jp-example-size);
+  font-weight:750;
+  line-height:1.45
+}
 .prompt{
   display:block;
   width:100%;
@@ -1622,7 +1640,7 @@ body[data-scene="journey"][data-view="main"] #mainView{
 </section>
 <main id="mainView" class="stack"></main>
 <section id="flashcardView" class="stack hidden"></section>
-<section id="quizView" class="stack hidden"><div class="card"><div class="between"><div><div id="quizTitle" class="h2"></div><div id="quizMeta" class="small"></div></div><div><span id="qNow">1</span>/<span id="qTotal">10</span></div></div><div class="progress" style="margin-top:9px"><div id="qBar"></div></div></div><div class="card question"><div id="qHint" class="muted"></div><div id="qPrompt" class="prompt"></div><div id="qPromptAudio" class="audio-feedback"></div><div id="qChoices" class="choices"></div><div id="qFeedback" class="feedback"></div><div id="qCorrectAudio" class="audio-feedback"></div><div id="quizAvatarAssist" class="quiz-avatar-assist"></div><div class="between" style="align-items:center;margin-top:8px"><span id="qScore" class="small">Goed: 0</span><button id="quitQuiz" class="btn tiny">Stop</button></div></div></section>
+<section id="quizView" class="stack hidden"><div class="card"><div class="between"><div><div id="quizTitle" class="h2"></div><div id="quizMeta" class="small"></div></div><div><span id="qNow">1</span>/<span id="qTotal">10</span></div></div><div class="progress" style="margin-top:9px"><div id="qBar"></div></div></div><div class="card question"><div id="qHint" class="muted"></div><div id="qContext" class="question-context hidden"></div><div id="qPrompt" class="prompt"></div><div id="qPromptAudio" class="audio-feedback"></div><div id="qChoices" class="choices"></div><div id="qFeedback" class="feedback"></div><div id="qCorrectAudio" class="audio-feedback"></div><div id="quizAvatarAssist" class="quiz-avatar-assist"></div><div class="between" style="align-items:center;margin-top:8px"><span id="qScore" class="small">Goed: 0</span><button id="quitQuiz" class="btn tiny">Stop</button></div></div></section>
 <section id="resultView" class="stack hidden"><div class="card question"><div id="resultTitle" class="h2"></div><div id="resultScore" style="font-size:40px;font-weight:800;margin-top:8px"></div><div id="resultStats" class="muted"></div><div id="resultRank" class="panel hidden" style="margin-top:10px"></div><div id="resultAvatarAssist"></div></div><div class="card"><div class="h2">Fouten</div><div id="errorIntro" class="small"></div><div id="errorList" class="stack" style="margin-top:9px"></div></div><div class="grid2"><button id="practiceErrors" class="btn">Oefen mijn fouten</button><button id="retryBtn" class="btn">Opnieuw</button><button id="nextBtn" class="btn primary hidden">Volgende →</button><button id="backBtn" class="btn">Terug naar overzicht</button></div></section>
 <section id="sessionView" class="stack hidden"><div class="card"><div class="h1">Mijn Japanse leerreis</div><div class="muted">Je profiel, groei en bekende bouwstenen.</div></div><div id="sessionContent" class="stack"></div><button id="sessionBack" class="btn primary">Terug</button></section>
 </div>
@@ -1801,8 +1819,8 @@ function level4Choices(correct,candidates,count=3){
   return shuffle([correct,...shuffle([...new Set(candidates)].filter(x=>x!==correct)).slice(0,count-1)]);
 }
 
-function level4Question(kind,prompt,correct,choices,category,introducedAt,accepted=null,instruction=''){
-  return lessonQuestion({kind,prompt,correct,choices,category,introducedAt,accepted,instruction});
+function level4Question(kind,prompt,correct,choices,category,introducedAt,accepted=null,instruction='',metadata={}){
+  return lessonQuestion({kind,prompt,correct,choices,category,introducedAt,accepted,instruction,...metadata});
 }
 
 function level4StructureQuestion(sentence,token,pos,knowledge){
@@ -1810,59 +1828,47 @@ function level4StructureQuestion(sentence,token,pos,knowledge){
   const statement=sentence.tokens.filter(part=>part!=='か').join(' ');
   const noun=sentence.tokens[pos+1]||sentence.tokens[pos-1]||'';
   const settings={
-    'は':{instruction:'Kies het partikel dat het topic markeert.',prompt:`Bedoelde betekenis: ${sentence.meaning}\n${shown}`},
-    'です':{instruction:'Kies het beleefde slot van deze naamwoordzin.',prompt:`Bedoelde betekenis: ${sentence.meaning}\n${shown}`},
-    'の':{instruction:'Kies の om “van” of bezit uit te drukken.',prompt:`Bedoelde betekenis: ${sentence.meaning}\n${shown}`},
-    'か':{instruction:'Maak van de mededeling een ja/nee-vraag met か.',prompt:`Mededeling: ${statement}\nVraag: ${shown}`},
-    'も':{instruction:'Kies も om in de tweede zin “ook” aan te geven.',prompt:`Eerder: これは ${noun} です\nNu: ${sentence.meaning}\n${shown}`},
-    'を':{instruction:'Kies het partikel dat het object van de handeling markeert.',prompt:`Bedoelde betekenis: ${sentence.meaning}\n${shown}`},
-    'に':{instruction:'Kies het partikel dat de bestemming “naar” markeert.',prompt:`Bedoelde betekenis: ${sentence.meaning}\n${shown}`}
+    'は':{instruction:'Vul het topicpartikel in.',context:sentence.meaning,prompt:shown},
+    'です':{instruction:'Vul het beleefde slot van de zin in.',context:sentence.meaning,prompt:shown},
+    'の':{instruction:'Vul の in om de getoonde relatie aan te geven.',context:sentence.meaning,prompt:shown},
+    'か':{instruction:'Maak van de mededeling een ja/nee-vraag met か.',context:`Mededeling: ${statement}`,prompt:`${shown}`},
+    'も':{instruction:'Vul も in zodat de zin de getoonde betekenis heeft.',context:sentence.meaning,prompt:shown},
+    'を':{instruction:'Vul het partikel voor het object in.',context:sentence.meaning,prompt:shown},
+    'に':{instruction:'Vul het partikel voor de bestemming in.',context:sentence.meaning,prompt:shown}
   };
   const setting=settings[token];
   if(!setting)return null;
   const choices=level4Choices(token,knowledge.grammar,3);
   if(choices.length<2)return null;
   const grammarLesson=Math.max(0,level4LessonMetadata.findIndex(meta=>meta.introducedGrammar.includes(token)));
-  return level4Question('fill',setting.prompt,token,choices,'structure',Math.max(sentence.introducedAt,grammarLesson),null,setting.instruction);
+  return level4Question('fill',setting.prompt,token,choices,'structure',Math.max(sentence.introducedAt,grammarLesson),null,setting.instruction,{context:setting.context,sourceId:`generated-l4-${sentence.tokens.join('-')}-${token}`,targetConceptId:`grammar:${token}:${sentence.tokens.join(' ')}`});
 }
 
 function level4QuestionBank(index){
   const knowledge=level4Knowledge(index),sentences=level4SentencePool(index),questions=[];
   knowledge.vocabulary.forEach(word=>{
     const meanings=knowledge.vocabulary.map(v=>v.meaning),forms=knowledge.vocabulary.map(v=>v.jp);
-    questions.push(level4Question('mc',word.jp,word.meaning,level4Choices(word.meaning,meanings),'vocab',level4WordInfo[word.jp].lessonIndex,null,'Kies de Nederlandse betekenis van dit woord.'));
-    questions.push(level4Question('mc',word.meaning,word.jp,level4Choices(word.jp,forms),'vocab',level4WordInfo[word.jp].lessonIndex,null,`Kies het Japanse woord voor “${word.meaning}”.`));
+    const vocabId=vocabByIdForQuestion(word.jp);
+    questions.push(level4Question('mc',word.jp,word.meaning,level4Choices(word.meaning,meanings),'vocab',level4WordInfo[word.jp].lessonIndex,null,`Wat betekent ${word.jp}?`,{sourceId:`generated-l4-word-${word.jp}-meaning`,targetLemmaIds:vocabId?[vocabId]:[],targetConceptId:`vocab-meaning:${word.jp}`}));
+    questions.push(level4Question('mc',word.meaning,word.jp,level4Choices(word.jp,forms),'vocab',level4WordInfo[word.jp].lessonIndex,null,`Hoe schrijf je “${word.meaning}” in het Japans?`,{sourceId:`generated-l4-word-${word.jp}-spelling`,targetLemmaIds:vocabId?[vocabId]:[],targetConceptId:`vocab-spelling:${word.jp}`}));
   });
   sentences.forEach(sentence=>{
     const samePattern=sentences.filter(s=>s.pattern===sentence.pattern);
     const at=sentence.reviewAt??sentence.introducedAt,answer=sentence.tokens.join(' ');
-    questions.push(level4Question('meaning',answer,sentence.meaning,level4Choices(sentence.meaning,samePattern.map(s=>s.meaning)),'meaning',at,null,'Kies de Nederlandse betekenis van deze Japanse zin.'));
-    questions.push(level4Question('order',sentence.meaning,answer,level4Choices(answer,samePattern.map(s=>s.tokens.join(' '))),'integration',at,null,'Kies de Japanse zin die precies de getoonde betekenis heeft.'));
-    questions.push(level4Question('build',sentence.meaning,answer,shuffle(sentence.tokens),'build',at,null,'Bouw met de blokken de getoonde Nederlandse zin.'));
+    const sentenceId=`sentence:${answer}`;
+    questions.push(level4Question('meaning',answer,sentence.meaning,level4Choices(sentence.meaning,samePattern.map(s=>s.meaning)),'meaning',at,null,'Wat betekent deze Japanse zin?',{sourceId:`generated-l4-meaning-${answer}`,targetConceptId:sentenceId}));
+    questions.push(level4Question('order','Welke Japanse zin past?',answer,level4Choices(answer,samePattern.map(s=>s.tokens.join(' '))),'integration',at,null,'Kies de Japanse zin die bij de Nederlandse betekenis past.',{context:sentence.meaning,promptAudio:false,sourceId:`generated-l4-order-${answer}`,targetConceptId:`sentence:${answer}`}));
+    questions.push(level4Question('build',sentence.meaning,answer,shuffle(sentence.tokens),'build',at,null,'Bouw de Japanse zin met precies deze tegels.',{sourceId:`generated-l4-build-${answer}`,targetConceptId:`sentence:${answer}`}));
     const grammarPositions=sentence.tokens.map((token,pos)=>({token,pos})).filter(x=>knowledge.grammar.includes(x.token));
     grammarPositions.forEach(({token,pos})=>{
       const question=level4StructureQuestion(sentence,token,pos,knowledge);
       if(question)questions.push(question);
     });
   });
-  const free=level4FreeBuilder(index,sentences);
-  if(free)questions.push(level4Question('build',free[0],free[1][0],free[2],'build',index,free[1],'Bouw één geldige zin met de bekende blokken. Niet alle blokken hoeven op.'));
   return questions;
 }
 
-function level4FreeBuilder(index,sentences=level4SentencePool(index)){
-  let preferred=index>=8?'destination':index>=6?'object-action':index>=5?'also':index>=4?'question':index>=3?'possession':index>=2?'topic-description':'copula';
-  if(index===9){
-    const available=[...new Set(sentences.map(s=>s.pattern))].filter(pattern=>sentences.filter(s=>s.pattern===pattern).length>1);
-    preferred=shuffle(available)[0]||'copula';
-  }
-  let valid=sentences.filter(s=>s.pattern===preferred);
-  if(valid.length<2)valid=sentences;
-  if(!valid.length)return null;
-  const accepted=valid.map(s=>s.tokens.join(' '));
-  const blocks=shuffle([...new Set(valid.flatMap(s=>s.tokens))]);
-  return['Bouw zelf één geldige zin met bekende blokken. Niet alle blokken hoeven op.',accepted,blocks];
-}
+function vocabByIdForQuestion(japanese){return vocabCatalog.find(word=>word.jp===japanese)?.id||''}
 
 function level4Weight(question,index){
   const age=index-(question.introducedAt??0);
@@ -1880,20 +1886,22 @@ function weightedLevel4Pick(pool,count,index){
   return picked;
 }
 
-function balancedLevel4Questions(index,count,categories=null){
+function balancedLevel4Questions(index,count,categories=null,sharedUsed=new Set()){
   let bank=level4QuestionBank(index);
   if(categories)bank=bank.filter(q=>categories.includes(q.category));
   const current=bank.filter(q=>(q.introducedAt??0)===index),review=bank.filter(q=>(q.introducedAt??0)<index);
-  const currentCount=index===0?count:Math.ceil(count*.7),chosen=[];
+  const currentCount=index===0?count:Math.ceil(count*.7),chosen=[],used=sharedUsed;
+  const targetKeys=q=>[...(q.targetLemmaIds||[]).map(id=>`lemma:${id}`),...(q.targetConceptId?[q.targetConceptId]:[])];
   const takeBalanced=(pool,wanted)=>{
     const result=[],groups=[...new Set(pool.map(q=>q.category))];
     while(result.length<wanted&&pool.length){
       const category=groups[result.length%groups.length];
-      const candidates=pool.filter(q=>q.category===category&&!result.includes(q));
-      const fallback=pool.filter(q=>!result.includes(q));
+      const candidates=pool.filter(q=>q.category===category&&!result.includes(q)&&targetKeys(q).every(key=>!used.has(key)));
+      const fallback=pool.filter(q=>!result.includes(q)&&targetKeys(q).every(key=>!used.has(key)));
       const next=weightedLevel4Pick(candidates.length?candidates:fallback,1,index)[0];
       if(!next)break;
       result.push(next);
+      targetKeys(next).forEach(key=>used.add(key));
     }
     return result;
   };
@@ -1908,8 +1916,7 @@ function cumulativeLevel4Builders(index){
   const exact=weightedLevel4Pick((current.length?current:sentences).map(s=>({
     introducedAt:s.reviewAt??s.introducedAt,sentence:s
   })),2,index).map(({sentence})=>[sentence.meaning,sentence.tokens.join(' '),shuffle(sentence.tokens)]);
-  const free=level4FreeBuilder(index,sentences);
-  return free?[...exact,[free[0],free[1][0],free[2],free[1]]]:exact;
+  return exact;
 }
 function rankDefs(){const o={};['hiragana','katakana'].forEach(k=>{kanaModules[k].rows.forEach((r,i)=>o[`${k}-row-${i}`]={name:`${kanaModules[k].label} · ${r.name}`});kanaClusters.forEach((c,i)=>o[`${k}-cluster-${i}`]={name:`${kanaModules[k].label} · ${c.name}`});['exam1','exam2','exam3'].forEach(id=>o[`${k}-${id}`]={name:`${kanaModules[k].label} · ${id}`})});['num-basic','num-midterm','num-triangle','num-math','num-teens','num-tens','num-under100','num-hundreds','num-thousands','num-exam1','num-exam2'].forEach(id=>o[id]={name:id});['mix-exam1','mix-exam2'].forEach(id=>o[id]={name:id});dakutenPatterns.forEach(p=>['hiragana','katakana'].forEach(s=>o[`dak-${s}-${p.id}`]={name:`${s} ${p.name}`}));dakutenClusters.forEach((c,i)=>o[`dak-cluster-${i}`]={name:c.name});['dak-examA','dak-examB','dak-examC'].forEach(id=>o[id]={name:id});langLessons.forEach(l=>o[l.id]={name:l.title});o['l4-exam']={name:'Level 4 examen'};smallLessons.forEach(l=>o[l.id]={name:l.title});o['l5-exam']={name:'Level 5 examen'};[...Object.values(advancedCourses),...Object.values(thematicCourses)].forEach(c=>{c.lessons.forEach(l=>o[l.id]={name:`Level ${c.number} · ${l.title}`});o[`l${c.number}-exam`]={name:`Level ${c.number} examen`}});return o}
 const defsCache=rankDefs(),rankState={};Object.keys(defsCache).forEach(id=>rankState[id]={rank:null,last:null,attempts:0});
@@ -3435,6 +3442,7 @@ function syncBrowserRoute(){
 }
 function applyBrowserRoute(route){
   if(!route)return false;
+  if(activeWordCrashCourse){cancelWordCrashCourseTimer();activeWordCrashCourse=null}
   routeApplying=true;
   state.currentCourse=route.courseId;
   state.primaryTab=route.primaryTab||'learn';
@@ -4010,11 +4018,11 @@ function renderLanguageLessons(){
   langLessons.forEach((l,i)=>{const m=rankState[l.id],b=document.createElement('button');b.type='button';b.className=`lang-lesson-card ${rankClass(m.rank)}`;b.innerHTML=`<div class="between"><div><div class="eyebrow">Les ${i+1}${i===next?' · volgende':''}</div><div class="h2">${l.title}</div></div><span class="rank ${rankClass(m.rank)}">${m.rank?'✓ '+rankText(m.rank):'Nog te doen'}</span></div><div class="pattern">${l.newLabel} · Nieuw/patroon: ${l.pattern}</div>`;b.onclick=()=>openLanguageLesson(i);$('langLessonList').appendChild(b)})
 }
 function languageStepper(l){const done=new Set(languageStepState(l.id));return`<div class="lang-stepper compact-lesson-stepper">${langStepDefs.map(([id,label],i)=>`<button class="lang-step-btn ${state.langStep===id?'active':''} ${done.has(id)?'done':''}" data-lang-step="${id}">${i+1}<br>${label}</button>`).join('')}</div>`}
-function bindLanguageStepper(){root.querySelectorAll('[data-lang-step]').forEach(b=>b.onclick=()=>{state.langStep=b.dataset.langStep;scheduleSave();renderMain()})}
+function bindLanguageStepper(){root.querySelectorAll('[data-lang-step]').forEach(b=>b.onclick=()=>{if(activeWordCrashCourse)leaveWordCrashCourse();state.langStep=b.dataset.langStep;scheduleSave();renderMain()})}
 function renderLanguageLessonCard(l,index){
   if(['understand','build'].includes(state.langStep))state.langStep='model';
   const m=rankState[l.id];$('langBody').innerHTML=`<section class="card"><div class="between"><button id="backLangLessons" class="btn tiny">← Alle lessen</button><span class="rank ${rankClass(m.rank)}">${rankText(m.rank)}</span></div><div class="eyebrow" style="margin-top:12px">Les ${index+1}</div><div class="h1">${l.title}</div><div class="muted">${l.goal}</div>${languageStepper(l)}</section><div id="langStepBody"></div>`;
-  $('backLangLessons').onclick=()=>{if(state.studyTracker.active?.source==='lesson:lang')completeStudySession({status:'verlaten'});state.langView='list';state.langStep='overview';scheduleSave();renderMain()};bindLanguageStepper();
+  $('backLangLessons').onclick=()=>{if(activeWordCrashCourse)leaveWordCrashCourse();if(state.studyTracker.active?.source==='lesson:lang')completeStudySession({status:'verlaten'});state.langView='list';state.langStep='overview';scheduleSave();renderMain()};bindLanguageStepper();
   if(state.langStep==='overview')renderLanguageLessonOverview(l,index);else if(state.langStep==='words')renderLanguageWords(l,index);else if(state.langStep==='model')renderLanguageModel(l,index);else if(state.langStep==='understand')renderLanguageUnderstand(l,index);else if(state.langStep==='build')renderLanguageBuild(l,index);else renderLanguageCheck(l,index)
 }
 function renderLanguageLessonOverview(l,index){const known=level4Knowledge(index),didactic=level4Didactics[index];$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Lesoverzicht</div><div class="h2">${l.pattern}</div><div class="muted" style="margin-top:6px">${l.goal}</div><div class="panel" style="margin-top:10px"><strong>Waar je op let</strong><div class="small" style="margin-top:4px">${didactic.focus}</div><div class="small" style="margin-top:4px"><strong>Let op:</strong> ${didactic.watch}</div></div><div class="small" style="margin-top:9px">Je oefent met ${known.vocabulary.length} bekende woorden en ${known.grammar.length} grammaticale bouwstenen. Eerdere stof blijft terugkomen.</div>${l.id==='l4-3'?introductionDialogueHtml():''}<button id="startLangRoute" class="btn primary" style="width:100%;margin-top:12px">Start met woorden →</button></section>`;$('startLangRoute').onclick=()=>{beginStudySession({title:`Level 4 · Les ${index+1} · ${l.title}`,activityType:'les',category:'app',source:'lesson:lang',level:4,tags:['leerroute'],skills:['grammatica','woordenschat']});state.langStep='words';scheduleSave();renderMain()}}
@@ -4047,15 +4055,58 @@ function wordCrashCourseQuestion(word,direction,words){
   const distractors=[...new Map(words.filter(other=>other.id!==word.id).map(other=>direction==='jp-nl'?other.meaning:other.jp).filter(value=>value&&!acceptedKeys.has(flashcardNormalizeMeaning(value))).map(value=>[flashcardNormalizeMeaning(value),value])).values()];
   return{key:`${word.id}|${direction}`,word,direction,correct,accepted,selfReveal:distractors.length===0,choices:distractors.length?shuffle([correct,...shuffle(distractors).slice(0,2)]):[],revealed:false,answered:false,feedback:null};
 }
-function wordCrashCourseDeck(words){const pass=()=>shuffle(words).flatMap(word=>[wordCrashCourseQuestion(word,'jp-nl',words),wordCrashCourseQuestion(word,'nl-jp',words)]);return[...pass(),...pass()]}
+function wordCrashCourseWordSequencePossible(questions,previousWordId){
+  const counts=new Map();questions.forEach(question=>counts.set(question.word.id,(counts.get(question.word.id)||0)+1));
+  const total=questions.length;
+  return[...counts].every(([id,count])=>count<=total-count+(id===previousWordId?0:1));
+}
+function mixWordCrashCourseQuestions(questions){
+  const remaining=shuffle([...questions]),ordered=[];
+  while(remaining.length){
+    const previous=ordered.at(-1);
+    let options=remaining.filter(question=>wordCrashCourseWordSequencePossible(remaining.filter(item=>item!==question),question.word.id));
+    if(!options.length)options=remaining;
+    if(previous){
+      const differentWord=options.filter(question=>question.word.id!==previous.word.id);
+      if(differentWord.length)options=differentWord;
+      const differentKey=options.filter(question=>question.key!==previous.key);
+      if(differentKey.length)options=differentKey;
+      const otherDirection=options.filter(question=>question.direction!==previous.direction);
+      if(otherDirection.length)options=otherDirection;
+    }
+    const lastKeyIndex=new Map();ordered.forEach((question,index)=>lastKeyIndex.set(question.key,index));
+    const score=question=>{
+      const last=lastKeyIndex.get(question.key);
+      return last===undefined?ordered.length+1:ordered.length-last;
+    };
+    const best=Math.max(...options.map(score)),preferred=shuffle(options.filter(question=>score(question)===best));
+    const chosen=preferred[0],index=remaining.indexOf(chosen);
+    ordered.push(chosen);remaining.splice(index,1);
+  }
+  return ordered;
+}
+function wordCrashCourseDeck(words){const questions=[];for(let repeat=0;repeat<2;repeat++)for(const word of words)for(const direction of ['jp-nl','nl-jp'])questions.push(wordCrashCourseQuestion(word,direction,words));return mixWordCrashCourseQuestions(questions)}
 function wordCrashCourseAccepts(question,answer){return question.accepted.some(value=>flashcardNormalizeMeaning(value)===flashcardNormalizeMeaning(answer))}
+const WORD_CRASH_FEEDBACK_DELAY_MS=1000;
+let wordCrashCourseTimer=null,wordCrashCourseTimerToken=0;
+function cancelWordCrashCourseTimer(){if(wordCrashCourseTimer!==null)window.clearTimeout(wordCrashCourseTimer);wordCrashCourseTimer=null;wordCrashCourseTimerToken++}
+function scheduleWordCrashCourseAdvance(course,question){
+  cancelWordCrashCourseTimer();const token=wordCrashCourseTimerToken;
+  wordCrashCourseTimer=window.setTimeout(()=>{
+    if(token!==wordCrashCourseTimerToken)return;
+    wordCrashCourseTimer=null;
+    if(activeWordCrashCourse!==course||course.queue[course.index]!==question||!question.answered||!question.feedback?.correct)return;
+    advanceWordCrashCourse();
+  },WORD_CRASH_FEEDBACK_DELAY_MS);
+}
 function beginWordCrashCourse({hostId,lesson,words,returnToLesson}){
   if(!words.length)return;
+  cancelWordCrashCourseTimer();
   const deck=wordCrashCourseDeck(words);
   activeWordCrashCourse={hostId,lesson,words,returnToLesson,phase:'intro',queue:deck,deck,index:0,missed:{},initialCorrect:0,reviewCorrect:0,reviewTotal:0};
   renderWordCrashCourse();
 }
-function leaveWordCrashCourse(){if(!activeWordCrashCourse)return;const course=activeWordCrashCourse;activeWordCrashCourse=null;course.returnToLesson?.()}
+function leaveWordCrashCourse(){if(!activeWordCrashCourse)return;cancelWordCrashCourseTimer();const course=activeWordCrashCourse;activeWordCrashCourse=null;course.returnToLesson?.()}
 function resetWordCrashQuestion(question){return{...question,revealed:false,answered:false,feedback:null}}
 function renderWordCrashCourse(){
   const course=activeWordCrashCourse;if(!course)return;
@@ -4063,7 +4114,7 @@ function renderWordCrashCourse(){
   const wordCards=course.words.map(word=>lessonWordCardHtml(word,course.lesson.id)).join('');
   if(course.phase==='intro'){
     host.innerHTML=`<section class="card word-crash-course"><div class="eyebrow">Optionele voorbereiding · ${escapeHtml(course.lesson.title)}</div><div class="h2">Crash course woorden</div><div class="muted">Bekijk eerst alle ${course.words.length} nieuwe woorden. Daarna oefen je ze twee keer in beide richtingen.</div><div class="vocab-grid" style="margin-top:12px">${wordCards}</div><div class="grid2" style="margin-top:12px"><button id="wordCrashBegin" class="btn primary">Start korte oefening</button><button id="wordCrashExit" class="btn">Terug naar de les</button></div></section>`;
-    $('wordCrashBegin').onclick=()=>{course.phase='initial';course.queue=course.deck.map(resetWordCrashQuestion);course.index=0;renderWordCrashCourse()};
+    $('wordCrashBegin').onclick=()=>{cancelWordCrashCourseTimer();course.deck=wordCrashCourseDeck(course.words);course.phase='initial';course.queue=course.deck.map(resetWordCrashQuestion);course.index=0;course.missed={};course.initialCorrect=0;course.reviewCorrect=0;course.reviewTotal=0;renderWordCrashCourse()};
     $('wordCrashExit').onclick=leaveWordCrashCourse;
     return;
   }
@@ -4071,7 +4122,7 @@ function renderWordCrashCourse(){
     const missed=Object.values(course.missed),stillLearning=missed.length?`<div class="small" style="margin-top:8px">Nog eens oefenen: ${missed.map(question=>escapeHtml(question.word.jp)).filter((word,index,all)=>all.indexOf(word)===index).join(' · ')}</div>`:'';
     host.innerHTML=`<section class="card word-crash-course"><div class="eyebrow">Crash course afgerond · ${escapeHtml(course.lesson.title)}</div><div class="h2">Goed geoefend</div><div class="muted">${course.initialCorrect} van ${course.deck.length} eerste beoordelingen goed.${course.reviewTotal?` In de herhaalronde: ${course.reviewCorrect} van ${course.reviewTotal} goed.`:''}</div>${stillLearning}<div class="grid2" style="margin-top:12px"><button id="wordCrashReturn" class="btn">Terug naar de les</button><button id="wordCrashAgain" class="btn primary">Nog een keer</button></div></section>`;
     $('wordCrashReturn').onclick=leaveWordCrashCourse;
-    $('wordCrashAgain').onclick=()=>{course.phase='intro';course.queue=course.deck;course.index=0;course.missed={};course.initialCorrect=0;course.reviewCorrect=0;course.reviewTotal=0;renderWordCrashCourse()};
+    $('wordCrashAgain').onclick=()=>{cancelWordCrashCourseTimer();course.deck=wordCrashCourseDeck(course.words);course.phase='intro';course.queue=course.deck;course.index=0;course.missed={};course.initialCorrect=0;course.reviewCorrect=0;course.reviewTotal=0;renderWordCrashCourse()};
     return;
   }
   const question=course.queue[course.index];if(!question){course.phase='summary';return renderWordCrashCourse()}
@@ -4079,7 +4130,7 @@ function renderWordCrashCourse(){
   const optionPanel=question.selfReveal
     ?`<div class="flashcard-answer-options${question.revealed?'':' is-hidden'}"><div class="flashcard-answer-choice" style="padding:12px">${escapeHtml(word.jp)}${word.romaji?` · ${escapeHtml(word.romaji)}`:''}<br>${escapeHtml(word.meaning)}</div>${question.revealed&&!question.answered?'<div class="grid2" style="margin-top:8px"><button id="wordCrashSelfKnown" class="btn primary">Dit wist ik</button><button id="wordCrashSelfAgain" class="btn">Nog oefenen</button></div>':''}${!question.revealed?'<button id="wordCrashReveal" class="flashcard-options-reveal" type="button">Tik om te tonen</button>':''}</div>`
     :`<div class="flashcard-answer-options${question.revealed?'':' is-hidden'}">${question.choices.map((choice,index)=>{const correct=question.answered&&wordCrashCourseAccepts(question,choice),wrong=question.answered&&choice===question.feedback?.selected&&!question.feedback.correct,lock=!question.revealed&&!question.answered?'disabled aria-hidden="true" tabindex="-1"':question.answered?'disabled':'';return`<button id="wordCrashChoice${index}" class="btn flashcard-answer-choice${correct?' is-correct':wrong?' is-incorrect':''}" type="button" ${lock}>${escapeHtml(choice)}</button>`}).join('')}${!question.revealed?'<button id="wordCrashReveal" class="flashcard-options-reveal" type="button">Tik om te tonen</button>':''}</div>`;
-  const feedback=question.answered?`<div class="flashcard-feedback-status" role="status" aria-live="polite">${question.feedback.correct?'Goed!':`Niet goed. Juiste antwoord: ${escapeHtml(word.jp)} · ${escapeHtml(word.romaji||word.kana||'')} · ${escapeHtml(word.meaning)}`}</div><button id="wordCrashNext" class="btn primary" style="width:100%;margin-top:8px">Volgende →</button>`:'';
+  const feedback=question.answered?`<div class="flashcard-feedback-status" role="status" aria-live="polite">${question.feedback.correct?'Goed!':`Niet goed. Juiste antwoord: ${escapeHtml(word.jp)} · ${escapeHtml(word.romaji||word.kana||'')} · ${escapeHtml(word.meaning)}`}</div>${question.feedback.correct?'':'<button id="wordCrashNext" class="btn primary" style="width:100%;margin-top:8px">Volgende →</button>'}`:'';
   host.innerHTML=`<section class="card word-crash-course"><div class="between"><div><div class="eyebrow">${course.phase==='review'?'Fouten herhalen':'Crash course woorden'} · ${escapeHtml(course.lesson.title)}</div><div class="small">Vraag ${course.index+1} van ${total} · ${course.phase==='review'?'herhaalronde':'4 vragen per woord'}</div></div><button id="wordCrashExit" class="btn tiny" type="button">Onderbreek</button></div><div class="progress" style="margin-top:9px"><div style="width:${Math.min(100,(course.index+1)/Math.max(1,total)*100)}%"></div></div><div class="flashcard-front"><div><div class="flashcard-face-main">${escapeHtml(front)}</div><div class="flashcard-face-sub">${question.direction==='jp-nl'?'Kies de Nederlandse betekenis':'Kies de Japanse vorm in kana'}</div></div></div>${optionPanel}${feedback}</section>`;
   $('wordCrashExit').onclick=leaveWordCrashCourse;
   if(!question.revealed)$('wordCrashReveal').onclick=()=>{question.revealed=true;renderWordCrashCourse()};
@@ -4089,24 +4140,35 @@ function renderWordCrashCourse(){
 }
 function answerWordCrashCourse(answer,remembered=null){
   const course=activeWordCrashCourse,question=course?.queue[course.index];if(!question||question.answered||!question.revealed)return false;
+  cancelWordCrashCourseTimer();
   const correct=question.selfReveal?remembered===true:wordCrashCourseAccepts(question,answer);
   question.answered=true;question.feedback={correct,selected:answer};
   if(course.phase==='initial'){if(correct){course.initialCorrect++;delete course.missed[question.key]}else course.missed[question.key]=question}
   else if(course.phase==='review'){course.reviewTotal++;if(correct){course.reviewCorrect++;delete course.missed[question.key]}else course.missed[question.key]=question}
-  renderWordCrashCourse();return true;
+  renderWordCrashCourse();if(correct)scheduleWordCrashCourseAdvance(course,question);return true;
 }
 function advanceWordCrashCourse(){
   const course=activeWordCrashCourse,question=course?.queue[course.index];if(!question?.answered)return false;
+  cancelWordCrashCourseTimer();
   if(course.index<course.queue.length-1){course.index++;return renderWordCrashCourse()}
-  if(course.phase==='initial'&&Object.keys(course.missed).length){course.phase='review';course.queue=Object.values(course.missed).map(resetWordCrashQuestion);course.index=0;return renderWordCrashCourse()}
+  if(course.phase==='initial'&&Object.keys(course.missed).length){course.phase='review';course.queue=mixWordCrashCourseQuestions(Object.values(course.missed).map(resetWordCrashQuestion));course.index=0;return renderWordCrashCourse()}
   course.phase='summary';renderWordCrashCourse();return true;
 }
 function modelAnalysisHtml(model,lessonId=''){return`<div class="model-sentence">${escapeHtml(model.sentence)} ${speakerButtonHtml(model.sentence,model.audioKey||model.audioId,'Luister naar de voorbeeldzin')}</div><div class="sentence-analysis">${model.parts.map(([token,role,gloss])=>{const entry=dictionaryEntryForToken(token,lessonId);return`<div class="sentence-part"><div class="token">${entry?dictionaryButton(entry.id,lessonId,model.sentence,model.meaning):escapeHtml(token)}</div><div class="role">${escapeHtml(role)}</div><div class="gloss">${escapeHtml(gloss)}</div></div>`}).join('')}</div><div class="small" style="text-align:center;margin-top:9px">${escapeHtml(model.meaning)}</div>`}
 function renderLanguageModel(l,index){const didactic=level4Didactics[index];$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 2 · uitleg + oefenen</div><div class="h2">${l.pattern}</div><div class="notice" style="margin-top:9px">${l.grammar}</div><div class="small" style="margin-top:8px"><strong>Let op:</strong> ${didactic.watch}</div>${l.spaceNote?'<div class="small" style="margin-top:5px">De spaties zijn een leerhulpmiddel; gewone Japanse tekst gebruikt ze meestal niet.</div>':''}<div id="modelList" class="stack" style="margin-top:10px"></div><button id="modelNext" class="btn primary" style="width:100%;margin-top:12px">Oefenen · 10 vragen</button></section>`;const host=$('modelList');l.models.slice(0,MAX_LEVEL4_MODEL_SENTENCES).forEach(model=>{const d=document.createElement('div');d.className='panel';d.innerHTML=modelAnalysisHtml(model,l.id);host.appendChild(d)});$('modelNext').onclick=()=>startQuiz({source:'lang',title:`Les ${index+1} · oefenen`,official:false,pool:[],questions:languagePracticeQuestions(l,index),choices:3,next:{kind:'langStep',index,step:'check',complete:'practice'}})}
 function understandingQuestions(l,index=langLessons.indexOf(l)){return balancedLevel4Questions(index,10,['meaning','structure','integration'])}
-function languagePracticeQuestions(l,index){const recognition=understandingQuestions(l,index).filter(q=>q.kind!=='build').slice(0,8),builders=cumulativeLevel4Builders(index).slice(0,2).map(([prompt,correct,blocks,accepted])=>lessonQuestion(['build',`Bouw: ${prompt}`,correct,blocks,'build',accepted],l));return shuffle([...recognition,...builders])}
+function languagePracticeQuestions(l,index){
+  const bank=level4QuestionBank(index),used=new Set(),current=bank.filter(q=>(q.introducedAt??0)===index),review=bank.filter(q=>(q.introducedAt??0)<index),selected=[];
+  const currentBuilders=selectDistinctLessonQuestions(current.filter(q=>q.kind==='build'),2,{used});selected.push(...currentBuilders);
+  const reviewBuilders=selectDistinctLessonQuestions(review.filter(q=>q.kind==='build'),2-selected.length,{used});selected.push(...reviewBuilders);
+  const currentRecognition=selectDistinctLessonQuestions(current.filter(q=>q.kind!=='build'),Math.max(0,6-currentBuilders.length),{used});selected.push(...currentRecognition);
+  const reviewRecognition=selectDistinctLessonQuestions(review.filter(q=>q.kind!=='build'),10-selected.length,{used});selected.push(...reviewRecognition);
+  const remainingCurrent=selectDistinctLessonQuestions(current.filter(q=>!selected.includes(q)),10-selected.length,{used});selected.push(...remainingCurrent);
+  const remainingReview=selectDistinctLessonQuestions(review.filter(q=>!selected.includes(q)),10-selected.length,{used});selected.push(...remainingReview);
+  return shuffle(selected);
+}
 function renderLanguageUnderstand(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 3</div><div class="h2">Begrijpen en toepassen</div><div class="muted">Je krijgt tien gesloten vragen. Iedere vraag noemt precies welke betekenis, rol of structuur je moet herkennen.</div><button id="understandStart" class="btn primary" style="width:100%;margin-top:12px">Start 10 begripvragen</button></section>`;$('understandStart').onclick=()=>startQuiz({source:'lang',title:`Les ${index+1} · begrijpen`,official:false,pool:[],questions:understandingQuestions(l,index),choices:3,next:{kind:'langStep',index,step:'build',complete:'understand'}})}
-function renderLanguageBuild(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 4</div><div class="h2">Zelf zinnen bouwen</div><div class="muted">Combineer bekende blokken. Bij de vrije opdracht zijn meerdere correcte zinnen mogelijk en hoef je niet ieder blok te gebruiken.</div><div id="lessonBuilder" style="margin-top:10px"></div></section>`;renderSentenceBuilder($('lessonBuilder'),cumulativeLevel4Builders(index),()=>{markLanguageStep(l.id,'build');state.langStep='check';scheduleSave();renderMain()})}
+function renderLanguageBuild(l,index){$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 4</div><div class="h2">Zelf zinnen bouwen</div><div class="muted">Tik de tegels aan om de getoonde Japanse zin te bouwen.</div><div id="lessonBuilder" style="margin-top:10px"></div></section>`;renderSentenceBuilder($('lessonBuilder'),cumulativeLevel4Builders(index),()=>{markLanguageStep(l.id,'build');state.langStep='check';scheduleSave();renderMain()})}
 function renderSentenceBuilder(host,items,onComplete){
   let index=0,selected=[];
   const draw=()=>{const [prompt,correct,blocks,alternatives]=items[index],accepted=alternatives?.length?alternatives:[correct];host.innerHTML=`<div class="panel"><div class="between"><strong>Zin ${index+1} van ${items.length}</strong><span class="small">${prompt}</span></div><div id="builderAnswer" class="builder-answer"></div><div id="builderBank" class="builder-bank"></div><div id="builderFeedback" class="builder-feedback"></div><button id="builderCheck" class="btn primary" style="width:100%;margin-top:6px" ${selected.length?'':'disabled'}>Controleer</button></div>`;const answer=$('builderAnswer'),bank=$('builderBank');if(!selected.length)answer.innerHTML='<span class="builder-placeholder">Je zin verschijnt hier…</span>';selected.forEach((entry,pos)=>{const b=document.createElement('button');b.className='sentence-chip placed';b.textContent=entry.text;b.onclick=()=>{selected.splice(pos,1);draw()};answer.appendChild(b)});blocks.forEach((text,pos)=>{if(selected.some(x=>x.pos===pos))return;const b=document.createElement('button');b.className='sentence-chip';b.textContent=text;b.onclick=()=>{selected.push({text,pos});draw()};bank.appendChild(b)});$('builderCheck').onclick=()=>{const made=selected.map(x=>x.text).join(' ');if(accepted.includes(made)){$('builderFeedback').textContent='✓ Geldige zin. Goed gecombineerd.';setTimeout(()=>{index++;selected=[];if(index>=items.length)onComplete();else draw()},650)}else{$('builderFeedback').innerHTML=`Nog niet. Een geldig voorbeeld is: <strong>${correct}</strong>`}}};draw()
@@ -4183,12 +4245,11 @@ const level6SentenceVariants={
   ]
 };
 function advancedContextSentences(course,index){
-  const entries=[],add=(sentence,meaning,level,lessonIndex,curated=false)=>{const text=String(sentence||'').trim();if(text&&meaning)entries.push({sentence:text,meaning,level,lessonIndex,curated})};
-  langLessons.forEach((lesson,lessonIndex)=>lesson.models.forEach(model=>add(model.sentence,model.meaning,4,lessonIndex)));
-  Object.values(advancedCourses).filter(c=>c.number<course.number).forEach(c=>c.lessons.forEach((lesson,lessonIndex)=>lesson.models.forEach(model=>add(model.sentence,model.meaning,c.number,lessonIndex))));
-  course.lessons.slice(0,index+1).forEach((lesson,lessonIndex)=>lesson.models.forEach(model=>add(model.sentence,model.meaning,course.number,lessonIndex)));
-  const l6=level6SentenceVariants[course.lessons[index]?.id]||[];l6.forEach(([tokens,meaning])=>add(tokens.join(' '),meaning,6,index,true));
-  if(course.lessons[index]?.story){const story=course.lessons[index].story;add(`${story[0]} ${story[1]}`,story[2],course.number,index)}
+  const entries=[],add=(sentence,meaning,level,lessonIndex,curated=false,lessonId='',sourceId='')=>{const text=String(sentence||'').trim();if(text&&meaning)entries.push({sentence:text,meaning,level,lessonIndex,curated,lessonId,sourceId:sourceId||`model-${lessonId||`l${level}-${lessonIndex+1}`}-${entries.length+1}`})};
+  langLessons.forEach((lesson,lessonIndex)=>lesson.models.forEach((model,modelIndex)=>add(model.sentence,model.meaning,4,lessonIndex,false,lesson.id,`model-${lesson.id}-${modelIndex+1}`)));
+  Object.values(advancedCourses).filter(c=>c.number<course.number).forEach(c=>c.lessons.forEach((lesson,lessonIndex)=>lesson.models.forEach((model,modelIndex)=>add(model.sentence,model.meaning,c.number,lessonIndex,false,lesson.id,`model-${lesson.id}-${modelIndex+1}`))));
+  course.lessons.slice(0,index+1).forEach((lesson,lessonIndex)=>lesson.models.forEach((model,modelIndex)=>add(model.sentence,model.meaning,course.number,lessonIndex,false,lesson.id,`model-${lesson.id}-${modelIndex+1}`)));
+  const l6=level6SentenceVariants[course.lessons[index]?.id]||[];l6.forEach(([tokens,meaning],variantIndex)=>add(tokens.join(' '),meaning,6,index,true,course.lessons[index]?.id,`variant-${course.lessons[index]?.id}-${variantIndex+1}`));
   const knownWords=new Set(vocabCatalog.filter(v=>v.level<course.number||(v.level===course.number&&v.lessonIndex<=index)).map(v=>v.jp));
   const knownGrammar=new Set(['は','の','です','か','も','を','に','と','で','が','へ','ます','ください','ません','でした','でしょう']);
   return entries.filter(item=>!item.curated||item.sentence.split(/\s+/).every(token=>knownWords.has(token.replace(/[。？！]$/u,''))||knownGrammar.has(token.replace(/[。？！]$/u,''))))
@@ -4199,20 +4260,31 @@ function weightedAdvancedContexts(contexts,count,index,level){
   while(remaining.length&&picked.length<count){const weight=x=>x.level===level&&x.lessonIndex===index?5:x.level===level&&x.lessonIndex===index-1?3:1,total=remaining.reduce((n,x)=>n+weight(x),0);let roll=Math.random()*total,at=0;for(;at<remaining.length;at++){roll-=weight(remaining[at]);if(roll<=0)break}picked.push(remaining.splice(Math.min(at,remaining.length-1),1)[0])}
   return picked;
 }
-function advancedQuestions(course,l,index){
-  const knownWords=vocabCatalog.filter(v=>v.level<course.number||(v.level===course.number&&v.lessonIndex<=index)),current=l.words||[],wordQuestions=shuffle(current.map(([jp,meaning],i)=>{const reverse=(index+i)%2===1,prompt=reverse?meaning:jp,correct=reverse?jp:meaning,choices=reverse?level4Choices(jp,knownWords.map(v=>v.jp),3):level4Choices(meaning,knownWords.map(v=>v.meaning),3);return lessonQuestion(['mc',prompt,correct,choices,'vocab'],l)}));
-  const questions=wordQuestions.slice(0,4);if(l.focus)questions.push(lessonQuestion(l.focus,l));
-  const contexts=advancedContextSentences(course,index),currentContexts=contexts.filter(x=>x.level===course.number&&x.lessonIndex===index),reviewContexts=contexts.filter(x=>x.level!==course.number||x.lessonIndex<index),pick=(pool,count)=>Array.from({length:count},(_,i)=>pool[i%pool.length]).filter(Boolean),targetNeeded=Math.max(0,7-questions.length),selected=[...pick(shuffle(currentContexts),targetNeeded),...pick(shuffle(reviewContexts.length?reviewContexts:currentContexts),10-questions.length-targetNeeded)],meanings=contexts.map(x=>x.meaning),sentences=contexts.map(x=>x.sentence),grammar=new Set(contexts.flatMap(x=>x.sentence.split(/\s+/)).filter(x=>['は','の','です','か','も','を','に','と','で','が','へ','ます'].includes(x)));
-  selected.forEach((context,i)=>{const tokens=context.sentence.split(/\s+/),sentence=context.sentence,choices=level4Choices(context.meaning,meanings,3),orderChoices=level4Choices(sentence,sentences,3),word=current.find(([jp])=>tokens.includes(jp))?.[0],target=word||tokens.find(x=>grammar.has(x));
-    if(i%5===0)questions.push(lessonQuestion(['meaning',sentence,context.meaning,choices,'meaning'],l));
-    else if(i%5===1)questions.push(lessonQuestion(['order',`Welke zin betekent: ${context.meaning}`,sentence,orderChoices,'integration'],l));
-    else if(i%5===2&&target){const pos=tokens.indexOf(target),blank=tokens.map((token,j)=>j===pos?'___':token).join(' '),options=current.some(([jp])=>jp===target)?knownWords.map(v=>v.jp):[...grammar];questions.push(lessonQuestion(['fill',`${context.meaning}\n${blank}`,target,level4Choices(target,options,3),'structure'],l))}
-    else if(i%5===3)questions.push(lessonQuestion(['reading',`Lees: ${sentence}`,context.meaning,choices,'application'],l));
-    else questions.push(lessonQuestion(['build',`Bouw: ${context.meaning}`,sentence,shuffle(tokens),'build'],l));
-  });
-  while(questions.length<10&&contexts.length){const context=contexts[questions.length%contexts.length];questions.push(lessonQuestion(['meaning',`Lees: ${context.sentence}`,context.meaning,level4Choices(context.meaning,meanings,3),'application'],l))}
-  return shuffle(questions.slice(0,10));
+function advancedQuestionForContext(context,lesson,kind,currentContent=false,meaningPool=[],sentencePool=[]){
+  const targetConceptId=`sentence:${context.sentence}`,tokens=context.sentence.split(/\s+/),base={lessonId:lesson.id,sourceId:`${context.sourceId}:${kind}`,targetConceptId,isCurrentContent:currentContent};
+  if(kind==='meaning')return lessonQuestion({kind:'meaning',prompt:context.sentence,correct:context.meaning,choices:level4Choices(context.meaning,meaningPool,3),category:'meaning',instruction:'Wat betekent deze Japanse zin?',...base},lesson);
+  if(kind==='order')return lessonQuestion({kind:'order',prompt:'Welke Japanse zin past bij deze betekenis?',correct:context.sentence,choices:level4Choices(context.sentence,sentencePool.filter(item=>item.meaning!==context.meaning).map(item=>item.sentence),3),category:'integration',instruction:'Kies de Japanse zin die bij de getoonde betekenis past.',context:context.meaning,promptAudio:false,...base},lesson);
+  return lessonQuestion({kind:'build',prompt:context.meaning,correct:context.sentence,choices:shuffle(tokens),category:'build',instruction:'Bouw de Japanse zin met precies deze tegels.',...base},lesson);
 }
+function advancedQuestionPool(course,l,index){
+  const knownWords=vocabCatalog.filter(v=>v.level<course.number||(v.level===course.number&&v.lessonIndex<=index)),contexts=advancedContextSentences(course,index),meanings=[...new Set(contexts.map(x=>x.meaning))],sentences=contexts.filter((item,pos,all)=>all.findIndex(other=>other.sentence===item.sentence)===pos),current=[];
+  (l.words||[]).forEach(([jp,meaning])=>{const word=vocabById[`vocab-${jp}`];current.push(lessonQuestion({kind:'mc',prompt:jp,correct:meaning,choices:level4Choices(meaning,knownWords.filter(v=>v.meaning!==meaning).map(v=>v.meaning),3),category:'vocab',instruction:`Wat betekent ${jp}?`,sourceId:`generated-${l.id}-word-${word?.id||jp}`,targetLemmaIds:word?[word.id]:[],targetConceptId:`vocab:${word?.id||jp}`,isCurrentContent:true},l))});
+  if(l.focus){const focusQuestion=lessonQuestion(l.focus,l);focusQuestion.isCurrentContent=true;current.push(focusQuestion)}
+  (l.models||[]).forEach((model,modelIndex)=>{
+    const context={sentence:model.sentence,meaning:model.meaning,sourceId:`model-${l.id}-${modelIndex+1}`};
+    ['meaning','order','build'].forEach(kind=>current.push(advancedQuestionForContext(context,l,kind,true,meanings,sentences)));
+  });
+  const reading=l.readingId?window.LanguageJourneyContent.manifest.readings.find(item=>item.id===l.readingId):null;
+  if(reading)current.push(lessonQuestion({kind:'reading',prompt:reading.question,correct:reading.answer,choices:reading.choices,category:'reading',instruction:'Lees de zichtbare tekst en beantwoord de vraag.',context:reading.text,promptAudio:false,sourceId:reading.id,targetConceptId:`reading:${reading.id}`,isCurrentContent:true},l));
+  contexts.filter(context=>context.curated&&context.level===course.number&&context.lessonIndex===index).forEach(context=>['meaning','order','build'].forEach(kind=>current.push(advancedQuestionForContext(context,l,kind,true,meanings,sentences))));
+  const review=[];contexts.filter(context=>context.level!==course.number||context.lessonIndex<index).forEach(context=>['meaning','order','build'].forEach(kind=>review.push(advancedQuestionForContext(context,l,kind,false,meanings,sentences))));
+  return{current,review};
+}
+function advancedQuestionsFromPool(pool){
+  const used=new Set(),current=selectDistinctLessonQuestions(pool.current,Math.min(6,pool.current.length),{used}),review=selectDistinctLessonQuestions(pool.review,Math.min(4,10-current.length),{used});
+  return shuffle([...current,...review]);
+}
+function advancedQuestions(course,l,index){return advancedQuestionsFromPool(advancedQuestionPool(course,l,index))}
 function advancedStepState(id){if(!state.advancedStepProgress[id])state.advancedStepProgress[id]=[];return state.advancedStepProgress[id]}
 function markAdvancedStep(id,step){const done=new Set(advancedStepState(id));(step==='practice'?['model','understand','build']:[step]).forEach(item=>done.add(item));state.advancedStepProgress[id]=[...done];scheduleSave()}
 function renderAdvancedCourse(box,level){
@@ -4225,15 +4297,15 @@ function renderAdvancedLessons(c,level){
   if(state.advancedView[level]==='lesson')return renderAdvancedLessonCard(c,level,state.advancedLesson[level]||0);
   const next=firstIncompleteLesson(c.lessons);
   $('advancedBody').innerHTML='<div id="advancedLessonList" class="lang-lesson-list"></div>';
-  c.lessons.forEach((l,i)=>{const m=rankState[l.id],b=document.createElement('button');b.className=`lang-lesson-card ${rankClass(m.rank)}`;b.innerHTML=`<div class="between"><div><div class="eyebrow">Les ${i+1}${i===next?' · volgende':''}</div><div class="h2">${l.title}</div></div><span class="rank ${rankClass(m.rank)}">${m.rank?'✓ '+m.rank:'Nog te doen'}</span></div><div class="pattern">${l.newLabel} · ${l.pattern}</div>`;b.onclick=()=>{state.advancedLesson[level]=i;state.advancedView[level]='lesson';state.advancedStep[level]='overview';renderMain()};$('advancedLessonList').appendChild(b)})
+  c.lessons.forEach((l,i)=>{const m=rankState[l.id],b=document.createElement('button');b.className=`lang-lesson-card ${rankClass(m.rank)}`;b.innerHTML=`<div class="between"><div><div class="eyebrow">Les ${i+1}${i===next?' · volgende':''}</div><div class="h2">${l.title}</div></div><span class="rank ${rankClass(m.rank)}">${m.rank?'✓ '+m.rank:'Nog te doen'}</span></div><div class="pattern">${l.newLabel} · ${l.pattern}</div>`;b.onclick=()=>{if(activeWordCrashCourse)leaveWordCrashCourse();state.advancedLesson[level]=i;state.advancedView[level]='lesson';state.advancedStep[level]='overview';renderMain()};$('advancedLessonList').appendChild(b)})
 }
 function advancedStepper(l,level){const done=new Set(advancedStepState(l.id)),current=state.advancedStep[level];return`<div class="lang-stepper compact-lesson-stepper">${langStepDefs.map(([id,label],i)=>`<button class="lang-step-btn ${current===id?'active':''} ${done.has(id)?'done':''}" data-advanced-step="${id}">${i+1}<br>${label}</button>`).join('')}</div>`}
 function renderAdvancedLessonCard(c,level,index){
   if(['understand','build'].includes(state.advancedStep[level]))state.advancedStep[level]='model';
   const l=c.lessons[index],m=rankState[l.id];
   $('advancedBody').innerHTML=`<section class="card"><div class="between"><button id="backAdvancedLessons" class="btn tiny">← Alle lessen</button><span class="rank ${rankClass(m.rank)}">${rankText(m.rank)}</span></div><div class="eyebrow" style="margin-top:12px">Les ${index+1} van ${c.lessons.length}</div><div class="h1">${l.title}</div><div class="muted">${l.goal}</div>${advancedStepper(l,level)}</section><div id="advancedStepBody"></div>`;
-  $('backAdvancedLessons').onclick=()=>{if(state.studyTracker.active?.source==='lesson:advanced')completeStudySession({status:'verlaten'});state.advancedView[level]='list';state.advancedStep[level]='overview';renderMain()};
-  root.querySelectorAll('[data-advanced-step]').forEach(b=>b.onclick=()=>{state.advancedStep[level]=b.dataset.advancedStep;renderMain()});
+  $('backAdvancedLessons').onclick=()=>{if(activeWordCrashCourse)leaveWordCrashCourse();if(state.studyTracker.active?.source==='lesson:advanced')completeStudySession({status:'verlaten'});state.advancedView[level]='list';state.advancedStep[level]='overview';renderMain()};
+  root.querySelectorAll('[data-advanced-step]').forEach(b=>b.onclick=()=>{if(activeWordCrashCourse)leaveWordCrashCourse();state.advancedStep[level]=b.dataset.advancedStep;renderMain()});
   const step=state.advancedStep[level];
   if(step==='overview')renderAdvancedOverview(l,level);else if(step==='words')renderAdvancedWords(c,l,level,index);else if(step==='model')renderAdvancedModel(l,level);else if(step==='understand')renderAdvancedUnderstand(c,l,level,index);else if(step==='build')renderAdvancedBuild(l,level,index);else renderAdvancedCheck(c,l,level,index)
 }
@@ -4243,36 +4315,21 @@ function advancedWordStages(l){const modelTokens=new Set((l.models||[]).flatMap(
 function renderAdvancedWords(c,l,level,index){
   const newWords=lessonNewWords(l);introduceAdvancedWords(l);$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 1 · voorkennis en woorden</div><div class="notice">${l.review}</div><div class="small" style="margin-top:10px"><strong>${lessonNewWordCountLabel(newWords.length)}</strong> · bekende woorden in voorbeelden blijven context en herhaling.</div>${newWords.length?`<div class="vocab-grid" style="margin-top:10px">${newWords.map(word=>lessonWordCardHtml(word,l.id)).join('')}</div>`:'<div class="panel" style="margin-top:10px">Geen nieuwe woorden. Deze les combineert bekende kennis.</div>'}${newWords.length?'<button id="advancedWordCrashCourse" class="btn" style="width:100%;margin-top:12px">Crash course woorden</button>':''}<button id="advancedWordsNext" class="btn primary" style="width:100%;margin-top:8px">Naar het nieuwe patroon →</button></section>`;
   if(newWords.length)$('advancedWordCrashCourse').onclick=()=>beginWordCrashCourse({hostId:'advancedStepBody',lesson:l,words:newWords,returnToLesson:()=>renderMain()});
-  $('advancedWordsNext').onclick=()=>{markAdvancedStep(l.id,'words');state.advancedStep[level]='model';renderMain()}
+  $('advancedWordsNext').onclick=()=>{if(activeWordCrashCourse)leaveWordCrashCourse();markAdvancedStep(l.id,'words');state.advancedStep[level]='model';renderMain()}
 }
 function advancedPracticeQuestions(c,l,index){
-  const known=vocabCatalog.filter(v=>v.level<c.number||(v.level===c.number&&v.lessonIndex<=index));
-  const stages=advancedWordStages(l),coreQuestions=stages.core.flatMap(([jp,meaning])=>[
-    lessonQuestion(['mc',jp,meaning,level4Choices(meaning,known.map(v=>v.meaning),3),'vocab'],l),
-    lessonQuestion(['mc',meaning,jp,level4Choices(jp,known.map(v=>v.jp),3),'vocab'],l)
-  ]),extensionQuestions=stages.extension.map(([jp,meaning])=>lessonQuestion(['mc',jp,meaning,level4Choices(meaning,known.map(v=>v.meaning),3),'vocab'],l));
-  const contexts=advancedContextSentences(c,index);
-  const modelQuestions=(l.models||[]).flatMap(model=>[
-    lessonQuestion(['mc',`Lees: ${model.sentence}`,model.meaning,level4Choices(model.meaning,contexts.map(item=>item.meaning),3),'meaning'],l),
-    lessonQuestion(['mc',`Welke zin betekent: ${model.meaning}`,model.sentence,level4Choices(model.sentence,contexts.map(item=>item.sentence),3),'meaning'],l)
-  ]);
-  const seen=new Set(),support=[...(l.focus?[lessonQuestion(l.focus,l)]:[]),...modelQuestions,...advancedQuestions(c,l,index).filter(q=>q.category!=='vocab'),...(l.check||[]).map(raw=>lessonQuestion(raw,l))],recognition=[...coreQuestions,...support,...extensionQuestions].filter(q=>{
-    if(q.kind==='build')return false;
-    const key=`${q.kind}|${q.prompt}|${q.correct}`;
-    if(seen.has(key))return false;
-    seen.add(key);return true;
-  }).slice(0,8);
-  while(recognition.length<8&&recognition.length){const sample=recognition[recognition.length%Math.min(3,recognition.length)];recognition.push({...sample,prompt:`Nog een keer · ${sample.prompt}`})}
-  const builders=(l.builders||[]).slice(0,2).map(([prompt,correct,blocks,accepted])=>lessonQuestion(['build',`Bouw: ${prompt}`,correct,blocks,'build',accepted],l));
-  while(builders.length<2){const context=contexts.find(item=>!builders.some(question=>question.correct===item.sentence))||contexts[0];if(!context)break;builders.push(lessonQuestion(['build',`Bouw: ${context.meaning}`,context.sentence,shuffle(context.sentence.split(/\s+/)),'build'],l))}
-  return [...recognition,...builders];
+  const pool=advancedQuestionPool(c,l,index),used=new Set(),builds=selectDistinctLessonQuestions([...pool.current,...pool.review].filter(q=>q.kind==='build'),2,{used}),remaining=selectDistinctLessonQuestions([...pool.current,...pool.review].filter(q=>q.kind!=='build'),8,{used});
+  return shuffle([...builds,...remaining]);
 }
-function renderAdvancedModel(l,level){const c=advancedCourses[level],index=state.advancedLesson[level]||0;$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 2 · uitleg + oefenen</div><div class="h2">${l.pattern}</div><div class="notice" style="margin-top:9px">${l.grammar}</div><div class="panel" style="margin-top:10px">${modelAnalysisHtml(l.models[0],l.id)}</div><button id="advancedModelNext" class="btn primary" style="width:100%;margin-top:12px">Oefenen · 10 vragen</button></section>`;$('advancedModelNext').onclick=()=>startQuiz({source:'advanced',title:`Level ${c.number} · ${l.title} · oefenen`,official:false,pool:[],questions:advancedPracticeQuestions(c,l,index),choices:3,next:{kind:'advancedStep',level,index,step:'check',complete:'practice'}})}
-function renderAdvancedUnderstand(c,l,level,index){const qs=advancedQuestions(c,l,index);$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 3 · herkennen en toepassen</div><div class="h2">Korte oefening</div><div class="muted">Tien gevarieerde vragen combineren nieuwe woorden met eerder bekende zinnen en bouwstenen.</div><button id="advancedUnderstandStart" class="btn primary" style="width:100%;margin-top:12px">Start ${qs.length} vragen</button></section>`;$('advancedUnderstandStart').onclick=()=>startQuiz({source:'advanced',title:`Level ${c.number} · ${l.title} · herkennen`,official:false,pool:[],questions:qs,choices:3,next:{kind:'advancedStep',level,index,step:'build',complete:'understand'}})}
+function renderAdvancedModel(l,level){const c=advancedCourses[level],index=state.advancedLesson[level]||0,questions=advancedPracticeQuestions(c,l,index);$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 2 · uitleg + oefenen</div><div class="h2">${l.pattern}</div><div class="notice" style="margin-top:9px">${l.grammar}</div>${l.models.map(model=>`<div class="panel" style="margin-top:10px">${modelAnalysisHtml(model,l.id)}</div>`).join('')}<button id="advancedModelNext" class="btn primary" style="width:100%;margin-top:12px">Oefenen · ${questions.length} vragen</button></section>`;$('advancedModelNext').onclick=()=>startQuiz({source:'advanced',title:`Level ${c.number} · ${l.title} · oefenen`,official:false,pool:[],questions,choices:3,next:{kind:'advancedStep',level,index,step:'check',complete:'practice'}})}
+function renderAdvancedUnderstand(c,l,level,index){const qs=advancedQuestions(c,l,index);$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 3 · herkennen en toepassen</div><div class="h2">Korte oefening</div><div class="muted">${qs.length} vragen met minstens zes doelen uit deze les wanneer er voldoende verschillende doelen zijn.</div><button id="advancedUnderstandStart" class="btn primary" style="width:100%;margin-top:12px">Start ${qs.length} vragen</button></section>`;$('advancedUnderstandStart').onclick=()=>startQuiz({source:'advanced',title:`Level ${c.number} · ${l.title} · herkennen`,official:false,pool:[],questions:qs,choices:3,next:{kind:'advancedStep',level,index,step:'build',complete:'understand'}})}
 function renderAdvancedBuild(l,level,index){$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 4 · zelf bouwen</div><div class="h2">Tik de zin bij elkaar</div><div id="advancedBuilder" style="margin-top:10px"></div></section>`;renderSentenceBuilder($('advancedBuilder'),l.builders,()=>{markAdvancedStep(l.id,'build');state.advancedStep[level]='check';renderMain()})}
 function renderAdvancedCheck(c,l,level,index){const qs=advancedQuestions(c,l,index);$('advancedStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 3 · mini-check</div><div class="h2">Les afronden</div><div class="muted">${qs.length} korte vragen. 80% of hoger verhoogt de lesrank maximaal één stap.</div><button id="advancedCheckStart" class="btn primary" style="width:100%;margin-top:12px">Start mini-check</button></section>`;$('advancedCheckStart').onclick=()=>startQuiz({source:'advanced',title:`Level ${c.number} · Les ${index+1} · ${l.title}`,rankId:l.id,rankThreshold:.8,official:true,pool:[],questions:shuffle(qs),choices:3,next:{kind:'advancedLesson',level,index:index+1}})}
-function renderAdvancedQuick(c,level){const bankCount=(state.errorBank.advanced||[]).reduce((n,e)=>n+(e.count||1),0);$('advancedBody').innerHTML=`<section class="card"><div class="h2">Snelle checks</div><div class="muted">Herhaal één les in enkele minuten, zonder uitlegschermen.</div></section><div id="advancedQuickList" class="stack"></div><section class="card"><button id="advancedErrors" class="btn" style="width:100%" ${bankCount?'':'disabled'}>Oefen moeilijke punten · ${bankCount}</button></section>`;c.lessons.forEach((l,i)=>{const d=document.createElement('section');d.className=`card ${rankClass(rankState[l.id].rank)}`;d.innerHTML=`<div class="between"><strong>Les ${i+1} · ${l.title}</strong><span class="rank ${rankClass(rankState[l.id].rank)}">${rankText(rankState[l.id].rank)}</span></div><button class="btn advancedQuick" data-i="${i}" style="width:100%;margin-top:9px">Snelle check · 10 vragen</button>`;$('advancedQuickList').appendChild(d)});root.querySelectorAll('.advancedQuick').forEach(b=>b.onclick=()=>{const i=Number(b.dataset.i),l=c.lessons[i];startQuiz({source:'advanced',title:`Snelle check · ${l.title}`,official:false,pool:[],questions:shuffle(advancedQuestions(c,l,i)),choices:3})});$('advancedErrors').onclick=()=>practiceErrorBank('advanced')}
-function renderAdvancedExam(c,level){const id=`l${c.number}-exam`,m=rankState[id];$('advancedBody').innerHTML=`<section class="card ${rankClass(m.rank)}"><div class="between"><div><div class="h2">Level ${c.number} examen</div><div class="muted">25 vragen, evenwichtig verdeeld over de lessen: woorden, betekenis, invullen, volgorde en toepassen.</div></div><span class="rank ${rankClass(m.rank)}">${rankText(m.rank)}</span></div><button id="advancedExamStart" class="btn primary" style="width:100%;margin-top:10px">Start level-examen · 25 vragen</button></section>`;$('advancedExamStart').onclick=()=>{const qs=c.lessons.flatMap((l,i)=>shuffle(advancedQuestions(c,l,i)).slice(0,5));startQuiz({source:'advanced',title:`Level ${c.number} examen`,rankId:id,official:true,pool:[],questions:shuffle(qs),choices:3})}}
+function renderAdvancedQuick(c,level){const bankCount=(state.errorBank.advanced||[]).reduce((n,e)=>n+(e.count||1),0);$('advancedBody').innerHTML=`<section class="card"><div class="h2">Snelle checks</div><div class="muted">Herhaal één les in enkele minuten, zonder uitlegschermen.</div></section><div id="advancedQuickList" class="stack"></div><section class="card"><button id="advancedErrors" class="btn" style="width:100%" ${bankCount?'':'disabled'}>Oefen moeilijke punten · ${bankCount}</button></section>`;c.lessons.forEach((l,i)=>{const d=document.createElement('section');d.className=`card ${rankClass(rankState[l.id].rank)}`;const count=advancedQuestions(c,l,i).length;d.innerHTML=`<div class="between"><strong>Les ${i+1} · ${l.title}</strong><span class="rank ${rankClass(rankState[l.id].rank)}">${rankText(rankState[l.id].rank)}</span></div><button class="btn advancedQuick" data-i="${i}" style="width:100%;margin-top:9px">Snelle check · ${count} vragen</button>`;$('advancedQuickList').appendChild(d)});root.querySelectorAll('.advancedQuick').forEach(b=>b.onclick=()=>{const i=Number(b.dataset.i),l=c.lessons[i];startQuiz({source:'advanced',title:`Snelle check · ${l.title}`,official:false,pool:[],questions:advancedQuestions(c,l,i),choices:3})});$('advancedErrors').onclick=()=>practiceErrorBank('advanced')}
+function advancedExamQuestionCounts(c,total=25){const base=Math.floor(total/c.lessons.length),extra=total%c.lessons.length,bonus=new Set(shuffle(c.lessons.map((_,index)=>index)).slice(0,extra));return c.lessons.map((_,index)=>base+(bonus.has(index)?1:0))}
+function advancedExamQuestionsFromPool(pool,count=5,sharedUsed=new Set()){const used=sharedUsed,current=selectDistinctLessonQuestions(pool.current,Math.min(3,count),{used}),review=selectDistinctLessonQuestions(pool.review,count-current.length,{used}),extra=selectDistinctLessonQuestions(pool.current,count-current.length-review.length,{used});return shuffle([...current,...review,...extra].slice(0,count))}
+function advancedExamQuestions(c,l,index,count=5,sharedUsed=new Set()){return advancedExamQuestionsFromPool(advancedQuestionPool(c,l,index),count,sharedUsed)}
+function renderAdvancedExam(c,level){const id=`l${c.number}-exam`,m=rankState[id],base=Math.floor(25/c.lessons.length),remainder=25%c.lessons.length,spread=remainder?`Minstens ${base} vragen per les; de extra vraag wisselt per examen.`:`Vijf vragen per les.`;$('advancedBody').innerHTML=`<section class="card ${rankClass(m.rank)}"><div class="between"><div><div class="h2">Level ${c.number} examen</div><div class="muted">25 vragen, evenwichtig verdeeld over alle lessen en eerdere lesdoelen. ${spread}</div></div><span class="rank ${rankClass(m.rank)}">${rankText(m.rank)}</span></div><button id="advancedExamStart" class="btn primary" style="width:100%;margin-top:10px">Start level-examen · 25 vragen</button></section>`;$('advancedExamStart').onclick=()=>{const used=new Set(),counts=advancedExamQuestionCounts(c),qs=c.lessons.flatMap((l,i)=>advancedExamQuestions(c,l,i,counts[i],used));startQuiz({source:'advanced',title:`Level ${c.number} examen`,rankId:id,official:true,pool:[],questions:shuffle(qs),choices:3})}}
 
 function kanaQuestion(item,mode){return{type:'kana',item,mode}}function randomKanaQuestions(pool,count,mode='mixed'){const out=[];let last='';for(let i=0;i<count;i++){let q;for(let t=0;t<60;t++){const item=pool[Math.floor(Math.random()*pool.length)],dir=mode==='mixed'?(Math.random()<.5?'forward':'reverse'):mode,key=item.id+'|'+dir;if(key!==last){q=kanaQuestion(item,dir);last=key;break}}out.push(q||kanaQuestion(pool[i%pool.length],'forward'))}return out}function exactKanaQuestions(pool,mode){return shuffle(pool).map(item=>kanaQuestion(item,mode==='mixed'?(Math.random()<.5?'forward':'reverse'):mode))}function pairedKanaQuestions(pool){return shuffle(pool.flatMap(item=>[kanaQuestion(item,'forward'),kanaQuestion(item,'reverse')]))}
 function startKanaMini(key,row,step){const chunk=kanaChunks(kanaModules[key].rows[row])[step],pool=chunk.map(([front,back])=>({id:`${key}-${front}`,front,back}));startQuiz({source:key,title:`${kanaModules[key].rows[row].name} · stap ${step+1}`,official:false,pool,questions:randomKanaQuestions(pool,pool.length===3?12:8),choices:pool.length,next:{kind:'kanaStep',key,row,step:step+1}})}
@@ -4376,8 +4433,8 @@ function startDakCluster(i,quick){const pool=dakutenClusters[i].patterns.flatMap
 function startDakExam(id){if(!['dak-examA','dak-examB'].includes(id))return;const pool=allDakItems();const questions=id==='dak-examA'?exactKanaQuestions(pool,'forward'):shuffle(pool.map(item=>({type:'scriptReverse',item,script:item.script==='hiragana'?'Hiragana':'Katakana'})));startQuiz({source:'dakuten',title:id==='dak-examA'?'Examen A · kana → klank':'Examen B · bronkana + teken → kana',rankId:id,official:true,pool,questions,choices:9})}
 
 function lessonQuestion(raw,lesson=null){
-  const data=Array.isArray(raw)?{kind:raw[0],prompt:raw[1],correct:raw[2],choices:raw[3],category:raw[4],accepted:Array.isArray(raw[5])?raw[5]:null,learningGoal:typeof raw[5]==='string'?raw[5]:raw[6]}:raw;
-  const{kind,prompt,correct,choices,category,accepted,introducedAt,instruction,learningGoal}=data;
+  const data=Array.isArray(raw)?{kind:raw[0],prompt:raw[1],correct:raw[2],choices:raw[3],category:raw[4],accepted:Array.isArray(raw[5])?raw[5]:null,learningGoal:typeof raw[5]==='string'?raw[5]:null,instruction:raw[6]||'',context:raw[7]||'',sourceId:raw[8]||'',targetLemmaId:raw[9]||'',targetConceptId:raw[10]||'',promptAudio:raw[11]!==false}:raw;
+  const{kind,prompt,correct,choices,category,accepted,introducedAt,instruction,learningGoal,context,sourceId,targetLemmaId,targetLemmaIds,targetConceptId,promptAudio}=data;
   const vocabIds=inferVocabIds(prompt,correct,lesson);
   const vocabDirection=vocabDirectionFor(prompt,correct,vocabIds);
   return{
@@ -4385,10 +4442,18 @@ function lessonQuestion(raw,lesson=null){
     kind,
     prompt,
     correct,
-    choices:shuffle([...new Set(choices)]),
+    choices:kind==='build'?shuffle([...choices]):shuffle([...new Set(choices)]),
     category:category||kind,
     accepted:accepted?.length?[...accepted]:null,
     instruction:instruction||'',
+    context:context||'',
+    contextLanguage:context&&/[\u3040-\u30ff\u3400-\u9fff]/u.test(context)?'ja':'nl',
+    sourceId:sourceId||'',
+    targetLemmaIds:Array.isArray(targetLemmaIds)?[...targetLemmaIds]:targetLemmaId?[targetLemmaId]:[],
+    targetConceptId:targetConceptId||'',
+    promptAudio:promptAudio!==false,
+    isCurrentContent:!!data.isCurrentContent,
+    lessonId:lesson?.id||data.lessonId||'',
     introducedAt,
     learningGoal:learningGoal||null,
     vocabIds,
@@ -4397,9 +4462,11 @@ function lessonQuestion(raw,lesson=null){
 }
 function cumulativeChecks(arr,index){return arr.slice(0,index+1).flatMap(l=>l.check.map(raw=>lessonQuestion(raw,l)))}
 function startLanguageLesson(l,index,quick){const questions=balancedLevel4Questions(index,10);startQuiz({source:'lang',title:`Les ${index+1} · ${l.title}${quick?' · snelle check':''}`,rankId:quick?null:l.id,rankThreshold:.8,official:!quick,pool:[],questions,choices:3,next:quick?null:{kind:'langLesson',index:index+1,complete:'check'}})}
-function startLanguageExam(){const groups=['vocab','meaning','structure','build','integration'],questions=[];groups.forEach(category=>questions.push(...balancedLevel4Questions(9,6,[category])));startQuiz({source:'lang',title:'Level 4 examen',rankId:'l4-exam',official:true,pool:[],questions:shuffle(questions),choices:3})}
-function startSmallLesson(l,index,quick){const own=l.check.map(raw=>lessonQuestion(raw,l)),questions=shuffle(own).slice(0,quick?5:8);startQuiz({source:'small',title:`Les ${index+1} · ${l.title}${quick?' · snelle check':''}`,rankId:quick?null:l.id,rankThreshold:.8,official:!quick,pool:[],questions,choices:3,next:quick?null:{kind:'smallLesson',index:index+1}})}
-function startSmallExam(){const questions=smallLessons.flatMap(l=>shuffle(l.check).slice(0,5).map(raw=>lessonQuestion(raw,l)));startQuiz({source:'small',title:'Level 5 examen',rankId:'l5-exam',official:true,pool:[],questions:shuffle(questions),choices:3})}
+function startLanguageExam(){const groups=['vocab','meaning','structure','build','integration'],questions=[],used=new Set();groups.forEach(category=>questions.push(...balancedLevel4Questions(9,6,[category],used)));startQuiz({source:'lang',title:'Level 4 examen',rankId:'l4-exam',official:true,pool:[],questions:shuffle(questions),choices:3})}
+function lessonQuestionTargets(q){return[...(q.targetLemmaIds||[]).map(id=>`lemma:${id}`),...(q.targetConceptId?[q.targetConceptId]:[])];}
+function selectDistinctLessonQuestions(questions,count,options={}){const result=[],used=options.used||new Set(),candidates=shuffle([...questions]);for(const q of candidates){if(result.length>=count)break;const keys=lessonQuestionTargets(q);if(keys.some(key=>used.has(key)))continue;if(q.sourceId&&result.some(item=>item.sourceId===q.sourceId))continue;result.push(q);keys.forEach(key=>used.add(key))}return result}
+function startSmallLesson(l,index,quick){const own=l.check.map(raw=>lessonQuestion(raw,l)),questions=selectDistinctLessonQuestions(own,quick?5:8);startQuiz({source:'small',title:`Les ${index+1} · ${l.title}${quick?' · snelle check':''}`,rankId:quick?null:l.id,rankThreshold:.8,official:!quick,pool:[],questions,choices:3,next:quick?null:{kind:'smallLesson',index:index+1}})}
+function startSmallExam(){const questions=smallLessons.flatMap(l=>selectDistinctLessonQuestions(l.check.map(raw=>lessonQuestion(raw,l)),5));startQuiz({source:'small',title:'Level 5 examen',rankId:'l5-exam',official:true,pool:[],questions:shuffle(questions),choices:3})}
 
 const studyCategoryLabels={app:'App-les',practice:'Oefenen',exam:'Examen',reading:'Lezen',listening:'Luisteren',watching:'Kijken',speaking:'Spreken',writing:'Schrijven',vocab:'Woordenschat',kanji:'Kanji',grammar:'Grammatica',immersion:'Immersion',kana:'Kana',review:'Herhaling',other:'Overig'};
 const studyMilestones=[1,5,10,25,50,100,250,500,1000,2000,3000];
@@ -4471,7 +4538,7 @@ function quizStudyMeta(cfg){
 }
 function startQuiz(cfg){beginStudySession(quizStudyMeta(cfg));state.lastConfig=cfg;state.quiz={...cfg,index:0,score:0,mistakes:[]};show('quiz');updateHeader();renderQuestion()}
 function currentQ(){return state.quiz.questions[state.quiz.index]}
-function renderQuestion(){if(quizFeedbackTimer)clearTimeout(quizFeedbackTimer);quizFeedbackTimer=null;quizAnswerToken++;hideAvatarAudioOverlay();const c=state.quiz,q=currentQ();(q.vocabIds||[]).forEach(recordVocabEncounter);$('quizTitle').textContent=c.title;$('quizMeta').textContent=c.official?'Deze toets kan de sessierank maximaal één stap verhogen.':'Vrij oefenen / snelle check · geen rankstap.';$('qNow').textContent=c.index+1;$('qTotal').textContent=c.questions.length;$('qBar').style.width=(c.index/c.questions.length*100)+'%';$('qScore').textContent='Goed: '+c.score;$('qFeedback').textContent='';$('qPrompt').className='prompt';$('qPrompt').removeAttribute('style');$('qPromptAudio').innerHTML='';$('qCorrectAudio').innerHTML='';$('qCorrectAudio').dataset.autoNext='false';const box=$('qChoices');box.className='choices';box.removeAttribute('style');box.innerHTML='';if(q.type==='kana')renderKanaQ(c,q,box);else if(q.type==='scriptReverse')renderScriptReverseQ(c,q,box);else if(q.type==='number')renderNumberQ(c,q,box);else if(q.type==='math')renderMathQ(c,q,box);else renderLessonQ(c,q,box);const prompt=$('qPrompt').textContent.trim();$('qPromptAudio').innerHTML=q.kind==='build'?'':speakerButtonHtml(prompt,q.promptAudioKey||q.audioKey);updateQuizAvatar()}
+function renderQuestion(){if(quizFeedbackTimer)clearTimeout(quizFeedbackTimer);quizFeedbackTimer=null;quizAnswerToken++;hideAvatarAudioOverlay();const c=state.quiz,q=currentQ();(q.vocabIds||[]).forEach(recordVocabEncounter);$('quizTitle').textContent=c.title;$('quizMeta').textContent=c.official?'Deze toets kan de sessierank maximaal één stap verhogen.':'Vrij oefenen / snelle check · geen rankstap.';$('qNow').textContent=c.index+1;$('qTotal').textContent=c.questions.length;$('qBar').style.width=(c.index/c.questions.length*100)+'%';$('qScore').textContent='Goed: '+c.score;$('qFeedback').textContent='';$('qHint').textContent='';$('qContext').textContent=q.context||'';$('qContext').classList.toggle('hidden',!q.context);$('qContext').classList.toggle('question-context--jp',q.contextLanguage==='ja');$('qPrompt').className='prompt';$('qPrompt').removeAttribute('style');$('qPromptAudio').innerHTML='';$('qCorrectAudio').innerHTML='';$('qCorrectAudio').dataset.autoNext='false';const box=$('qChoices');box.className='choices';box.removeAttribute('style');box.innerHTML='';if(q.type==='kana')renderKanaQ(c,q,box);else if(q.type==='scriptReverse')renderScriptReverseQ(c,q,box);else if(q.type==='number')renderNumberQ(c,q,box);else if(q.type==='math')renderMathQ(c,q,box);else renderLessonQ(c,q,box);const prompt=$('qPrompt').textContent.trim();$('qPromptAudio').innerHTML=q.kind==='build'||q.promptAudio===false?'':speakerButtonHtml(prompt,q.promptAudioKey||q.audioKey);updateQuizAvatar()}
 function updateQuizAvatar(ok=null){
   const host=$('quizAvatarAssist');
   if(!host)return;
@@ -4549,20 +4616,22 @@ function renderNumberQ(c,q,box){$('qHint').textContent=`${q.from} → ${q.to}`;$
 function renderMathQ(c,q,box){$('qHint').textContent='Kies het juiste Japanse antwoordteken';$('qPrompt').textContent=`${numberSymbol(q.a)} ${q.op} ${numberSymbol(q.b)}`;const vals=[q.answer],max=Math.max(5,q.a,q.b,q.answer);while(vals.length<Math.min(c.choices||6,max+1)){const n=Math.floor(Math.random()*(max+1));if(!vals.includes(n))vals.push(n)}shuffle(vals).forEach(n=>addChoice(box,numberSymbol(n),n===q.answer))}
 function lessonQuestionInstruction(q){
   if(q.instruction)return q.instruction;
+  if(q.kind==='reading')return'Lees de zichtbare tekst en beantwoord de vraag.';
   if(q.category==='vocab'||q.vocabDirection==='meaning'||q.vocabDirection==='production')return q.vocabDirection==='meaning'?'Kies de Nederlandse betekenis van dit woord.':'Kies het passende Japanse woord.';
   if(q.kind==='meaning')return'Kies de Nederlandse betekenis van de getoonde zin.';
-  if(q.kind==='order')return'Kies het antwoord dat precies bij de opdracht past.';
-  if(q.kind==='fill')return String(q.prompt||'').includes('\n')?'Vul het juiste blok in voor de betekenis en zin die je ziet.':'Maak de Japanse zin af met het juiste blok.';
+  if(q.kind==='order')return'Kies de zin die precies bij de getoonde betekenis past.';
+  if(q.kind==='fill')return'Vul het ontbrekende blok in.';
+  if(q.kind==='build')return'Bouw de Japanse zin met precies deze tegels.';
   return'Kies het juiste antwoord.';
 }
-function renderLessonQ(c,q,box){if(q.kind==='build')return renderBuilderQuizQ(c,q,box);box.classList.add('choices-text');$('qHint').textContent=c.source==='small'&&q.learningGoal?`Level 5 · ${q.learningGoal}`:lessonQuestionInstruction(q);$('qPrompt').classList.toggle('prompt--example',q.kind!=='mc');$('qPrompt').textContent=q.prompt;const accepted=q.accepted?.length?q.accepted:[q.correct];q.choices.forEach(ch=>addChoice(box,ch,accepted.includes(ch)))}
-function renderBuilderQuizQ(c,q,box){let selected=[];$('qHint').textContent=q.instruction||(q.accepted?.length>1?'Bouw één geldige zin; je hoeft niet alle blokken te gebruiken.':'Bouw met de blokken de getoonde zin.');$('qPrompt').classList.add('prompt--example');$('qPrompt').textContent=q.prompt;box.className='';const draw=()=>{box.innerHTML='<div id="quizBuilderAnswer" class="builder-answer"></div><div id="quizBuilderBank" class="builder-bank"></div><button id="quizBuilderCheck" class="btn primary" style="width:100%;margin-top:10px">Controleer</button>';const answerBox=$('quizBuilderAnswer'),bank=$('quizBuilderBank');if(!selected.length)answerBox.innerHTML='<span class="builder-placeholder">Je zin verschijnt hier…</span>';selected.forEach((entry,i)=>{const b=document.createElement('button');b.className='sentence-chip placed';b.textContent=entry.text;b.onclick=()=>{selected.splice(i,1);draw()};answerBox.appendChild(b)});q.choices.forEach((text,pos)=>{if(selected.some(x=>x.pos===pos))return;const b=document.createElement('button');b.className='sentence-chip';b.textContent=text;b.onclick=()=>{selected.push({text,pos});draw()};bank.appendChild(b)});$('quizBuilderCheck').disabled=!selected.length;$('quizBuilderCheck').onclick=()=>{const made=selected.map(x=>x.text).join(' '),accepted=q.accepted?.length?q.accepted:[q.correct];answer(accepted.includes(made),$('quizBuilderCheck'),made||'geen antwoord')}};draw()}
+function renderLessonQ(c,q,box){if(q.kind==='build')return renderBuilderQuizQ(c,q,box);box.classList.add('choices-text');$('qHint').textContent=c.source==='small'?`Level 5 · ${lessonQuestionInstruction(q)}`:lessonQuestionInstruction(q);$('qPrompt').classList.toggle('prompt--example',q.kind!=='mc');$('qPrompt').textContent=q.prompt;const accepted=q.accepted?.length?q.accepted:[q.correct];q.choices.forEach(ch=>addChoice(box,ch,accepted.includes(ch)))}
+function renderBuilderQuizQ(c,q,box){let selected=[];$('qHint').textContent=c.source==='small'?`Level 5 · ${lessonQuestionInstruction(q)}`:lessonQuestionInstruction(q);$('qPrompt').classList.add('prompt--example');$('qPrompt').textContent=q.prompt;box.className='';const draw=()=>{box.innerHTML='<div id="quizBuilderAnswer" class="builder-answer"></div><div id="quizBuilderBank" class="builder-bank"></div><button id="quizBuilderCheck" class="btn primary" style="width:100%;margin-top:10px">Controleer</button>';const answerBox=$('quizBuilderAnswer'),bank=$('quizBuilderBank');if(!selected.length)answerBox.innerHTML='<span class="builder-placeholder">Je zin verschijnt hier…</span>';selected.forEach((entry,i)=>{const b=document.createElement('button');b.className='sentence-chip placed';b.textContent=entry.text;b.onclick=()=>{selected.splice(i,1);draw()};answerBox.appendChild(b)});q.choices.forEach((text,pos)=>{if(selected.some(x=>x.pos===pos))return;const b=document.createElement('button');b.className='sentence-chip';b.textContent=text;b.onclick=()=>{selected.push({text,pos});draw()};bank.appendChild(b)});$('quizBuilderCheck').disabled=!selected.length;$('quizBuilderCheck').onclick=()=>{const made=selected.map(x=>x.text).join(' '),accepted=q.accepted?.length?q.accepted:[q.correct];answer(accepted.includes(made),$('quizBuilderCheck'),made||'geen antwoord')}};draw()}
 function addChoice(box,text,ok){const b=document.createElement('button');b.className='choice';if(/[\u3040-\u30ff\u3400-\u9fff]/u.test(String(text)))b.classList.add('choice-jp');b.dataset.correct=ok?'1':'0';b.textContent=text;b.onclick=()=>answer(ok,b,text);box.appendChild(b)}
-function qData(q){if(q.type==='kana')return{asked:q.mode==='forward'?q.item.front:hasDakutenSourceContext(q)?dakutenReversePrompt(q.item):q.item.back,correct:q.mode==='forward'?q.item.back:q.item.front,detail:`${q.item.base?`${q.item.base} → `:''}${q.item.front} ↔ ${q.item.back}`};if(q.type==='scriptReverse')return{asked:hasDakutenSourceContext(q)?dakutenReversePrompt(q.item):`${q.item.back} · ${q.script}`,correct:q.item.front,detail:`${q.item.base?`${q.item.base} → `:''}${q.item.front} ↔ ${q.item.back}`};if(q.type==='number')return{asked:fieldText(q.item,q.from),correct:fieldText(q.item,q.to),detail:`${q.item.symbol} ↔ ${q.item.valueText} ↔ ${q.item.reading}`};if(q.type==='math')return{asked:`${numberSymbol(q.a)} ${q.op} ${numberSymbol(q.b)}`,correct:numberSymbol(q.answer),detail:`${numberSymbol(q.answer)} ↔ ${q.answer} ↔ ${numberReading(q.answer)}`};return{asked:q.prompt,correct:q.correct,detail:q.correct}}
+function qData(q){if(q.type==='kana')return{asked:q.mode==='forward'?q.item.front:hasDakutenSourceContext(q)?dakutenReversePrompt(q.item):q.item.back,correct:q.mode==='forward'?q.item.back:q.item.front,detail:`${q.item.base?`${q.item.base} → `:''}${q.item.front} ↔ ${q.item.back}`};if(q.type==='scriptReverse')return{asked:hasDakutenSourceContext(q)?dakutenReversePrompt(q.item):`${q.item.back} · ${q.script}`,correct:q.item.front,detail:`${q.item.base?`${q.item.base} → `:''}${q.item.front} ↔ ${q.item.back}`};if(q.type==='number')return{asked:fieldText(q.item,q.from),correct:fieldText(q.item,q.to),detail:`${q.item.symbol} ↔ ${q.item.valueText} ↔ ${q.item.reading}`};if(q.type==='math')return{asked:`${numberSymbol(q.a)} ${q.op} ${numberSymbol(q.b)}`,correct:numberSymbol(q.answer),detail:`${numberSymbol(q.answer)} ↔ ${q.answer} ↔ ${numberReading(q.answer)}`};return{asked:[q.context,q.prompt].filter(Boolean).join('\n'),correct:q.correct,detail:q.correct}}
 function answer(ok,b,chosen){const c=state.quiz,q=currentQ(),answerToken=++quizAnswerToken;[...$('qChoices').querySelectorAll('button')].forEach(x=>x.disabled=true);recordQuestionMastery(q,ok,c);if(ok){c.score++;if(c.errorBankPractice)resolveErrorBank(c.source,q);b.classList.add('correct');$('qFeedback').innerHTML='<div class="feedback-message">✓ Goed</div>';playCorrectAnswerSound();const correct=qData(q).correct;$('qCorrectAudio').dataset.autoNext='true';$('qCorrectAudio').innerHTML=speakerButtonHtml(correct,q.correctAudioKey||q.answerAudioKey,'Luister naar het juiste antwoord');c.index++;quizFeedbackTimer=setTimeout(()=>{if(answerToken===quizAnswerToken)nextQuestion()},AUDIO_FEEDBACK_MS)}else{const d=qData(q);c.mistakes.push({number:c.index+1,chosen,...d,source:c.source,question:q});b.classList.add('incorrect');[...$('qChoices').querySelectorAll('button')].forEach(x=>{if(x.dataset.correct==='1')x.classList.add('correct')});$('qFeedback').innerHTML=`<div class="feedback-message">Niet goed · juist is <strong>${escapeHtml(d.correct)}</strong></div>`;$('qCorrectAudio').dataset.autoNext='false';$('qCorrectAudio').innerHTML=speakerButtonHtml(d.correct,q.correctAudioKey||q.answerAudioKey,'Luister naar het juiste antwoord');c.index++;const next=document.createElement('button');next.type='button';next.className='btn primary feedback-next';next.textContent='Volgende vraag →';next.onclick=()=>{if(answerToken!==quizAnswerToken)return;if(quizFeedbackTimer)clearTimeout(quizFeedbackTimer);quizFeedbackTimer=null;nextQuestion()};$('qFeedback').appendChild(next)}updateQuizAvatar(ok);$('qBar').style.width=(c.index/c.questions.length*100)+'%';scheduleSave()}
 function nextQuestion(){if(state.quiz.index>=state.quiz.questions.length)finishQuiz();else renderQuestion()}
 function finishQuiz(){const c=state.quiz,acc=c.score/c.questions.length;c.passed=acc>=(c.rankThreshold??.9);let rr=null;if(c.official&&c.rankId)rr=applyRank(c.rankId,acc,c.rankThreshold??.9);if(state.lastErrors[c.source])state.lastErrors[c.source]=[...c.mistakes];mergeErrorBank(c.source,c.mistakes);const study=completeStudySession({status:'afgerond',result:{score:c.score,total:c.questions.length,accuracy:acc,passed:c.passed}});show('result');$('resultTitle').textContent=c.title;$('resultScore').textContent=`${c.score} / ${c.questions.length}`;$('resultStats').textContent=`Goed: ${c.score} · Fout: ${c.questions.length-c.score} · Nauwkeurigheid: ${pct(acc)}`;if(rr){$('resultRank').classList.remove('hidden');$('resultRank').innerHTML=`${c.rankId&&/-row-/.test(c.rankId)?'Rijrank':'Sessierank'}: <strong>${rankText(rr.next)}</strong>${rr.prev!==rr.next?` · vorige: ${rankText(rr.prev)}`:''}. Een succesvolle volledige toets stijgt maximaal één stap.`}else $('resultRank').classList.add('hidden');$('resultAvatarAssist').innerHTML=avatarAssistHtml({pose:c.passed?'celebrate':'encourage',size:'medium',message:c.passed?'Mooi gedaan!':'Je bent aan het leren.',detail:c.passed?'Neem je resultaat even in je op.':'Bekijk je fouten en probeer het opnieuw.'});renderErrors(c.mistakes);$('practiceErrors').disabled=!c.mistakes.length;configureNext(c);if(study)renderStudyAdjustment(study.id);saveProgress()}
-function renderErrors(errors){const box=$('errorList');box.innerHTML='';$('errorIntro').textContent=errors.length?'Score blijft staan. Bekijk kort wat misging.':'Geen fouten.';if(!errors.length){box.innerHTML='<div class="panel">Alles correct.</div>';return}errors.forEach(e=>{const d=document.createElement('div');d.className='error';d.innerHTML=`<div class="small">Vraag ${e.number}</div><div style="font-weight:750;margin-top:4px">${e.asked}</div><div style="margin-top:5px">Jouw antwoord: ${e.chosen}</div><div>Correct: <strong>${e.correct}</strong></div><div class="small" style="margin-top:4px">${e.detail}</div>`;box.appendChild(d)})}
+function renderErrors(errors){const box=$('errorList');box.innerHTML='';$('errorIntro').textContent=errors.length?'Score blijft staan. Bekijk kort wat misging.':'Geen fouten.';if(!errors.length){box.innerHTML='<div class="panel">Alles correct.</div>';return}errors.forEach(e=>{const d=document.createElement('div');d.className='error';const asked=escapeHtml(e.asked||'').replace(/\n/g,'<br>');d.innerHTML=`<div class="small">Vraag ${e.number}</div><div style="font-weight:750;margin-top:4px">${asked}</div><div style="margin-top:5px">Jouw antwoord: ${escapeHtml(e.chosen||'')}</div><div>Correct: <strong>${escapeHtml(e.correct||'')}</strong></div><div class="small" style="margin-top:4px">${escapeHtml(e.detail||'')}</div>`;box.appendChild(d)})}
 function configureNext(c){const b=$('nextBtn');b.classList.add('hidden');b.onclick=null;const n=c.next;if(!n)return;if(n.kind==='kanaStep'){const chunks=kanaChunks(kanaModules[n.key].rows[n.row]);if(n.step<=chunks.length){b.classList.remove('hidden');b.textContent='Volgende stap →';b.onclick=()=>{state.row[n.key]=n.row;state.step[n.key]=n.step;state.tabs[n.key]='learn';setMain()}}}if(n.kind==='kanaRow'&&n.row<kanaModules[n.key].rows.length){b.classList.remove('hidden');b.textContent=`Volgende rij · ${kanaModules[n.key].rows[n.row].name} →`;b.onclick=()=>{state.row[n.key]=n.row;state.step[n.key]=0;state.tabs[n.key]='learn';setMain()}}if(n.kind==='numberLesson'&&n.index<numberLessons.length){b.classList.remove('hidden');b.textContent='Volgende cijferles →';b.onclick=()=>{state.numberLesson=n.index;state.tabs.numbers='learn';setMain()}}if(n.kind==='dakStep'&&n.step<=2){b.classList.remove('hidden');b.textContent=n.step===2?'Naar volledige rij ›':'Naar volgende stap ›';b.onclick=()=>{state.dakStep=n.step;state.tabs.dakuten='learn';setMain()}}if(n.kind==='dakNextPattern'&&state.dakPattern<dakutenPatterns.length-1){b.classList.remove('hidden');b.textContent=`Volgend onderdeel: ${dakutenPatterns[state.dakPattern+1].name} ›`;b.onclick=()=>{state.dakPattern++;state.dakStep=0;state.tabs.dakuten='learn';setMain()}}if(n.kind==='langStep'){b.classList.remove('hidden');b.textContent=`Volgende stap · ${langStepDefs.find(x=>x[0]===n.step)?.[1]||'leerroute'} →`;b.onclick=()=>{if(n.complete)markLanguageStep(langLessons[n.index].id,n.complete);state.langLesson=n.index;state.langView='lesson';state.langStep=n.step;state.tabs.lang='learn';setMain()}}if(n.kind==='langLesson'){if(!c.passed)return;if(n.complete)markLanguageStep(langLessons[Math.max(0,n.index-1)].id,n.complete);b.classList.remove('hidden');if(n.index<langLessons.length){b.textContent=`Volgende les · ${langLessons[n.index].title} →`;b.onclick=()=>{state.langLesson=n.index;state.langView='lesson';state.langStep='overview';state.tabs.lang='learn';setMain()}}else{b.textContent='Naar Level 4 examen →';b.onclick=()=>{state.tabs.lang='exams';state.langView='list';setMain()}}}if(n.kind==='smallLesson'&&n.index<smallLessons.length){b.classList.remove('hidden');b.textContent=`Volgende les · ${smallLessons[n.index].title} →`;b.onclick=()=>{state.smallLesson=n.index;state.tabs.small='learn';setMain()}}if(n.kind==='advancedStep'){const course=advancedCourses[n.level],l=course.lessons[n.index];b.classList.remove('hidden');b.textContent='Volgende stap · zelf bouwen →';b.onclick=()=>{if(n.complete)markAdvancedStep(l.id,n.complete);state.advancedLesson[n.level]=n.index;state.advancedView[n.level]='lesson';state.advancedStep[n.level]=n.step;state.tabs.advanced='learn';setMain()}}if(n.kind==='advancedLesson'){if(!c.passed)return;const course=advancedCourses[n.level];markAdvancedStep(course.lessons[Math.max(0,n.index-1)].id,'check');b.classList.remove('hidden');if(n.index<course.lessons.length){b.textContent=`Volgende les · ${course.lessons[n.index].title} →`;b.onclick=()=>{state.advancedLesson[n.level]=n.index;state.advancedView[n.level]='lesson';state.advancedStep[n.level]='overview';state.tabs.advanced='learn';setMain()}}else{b.textContent=`Naar Level ${course.number} examen →`;b.onclick=()=>{state.tabs.advanced='exams';state.advancedView[n.level]='list';setMain()}}}}
 
 // Keep the legacy result navigation, but label the merged practice destination correctly.
