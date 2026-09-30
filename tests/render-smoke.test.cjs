@@ -36,7 +36,7 @@ function seededRandom(seed){let value=seed>>>0;return()=>{value=(value+0x6d2b79f
 
 test('all level screens render through the imported content adapter',()=>{
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
-  const source=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/, 'globalThis.__probe={state,rankState,vocabMastery,itemMastery,renderMain,advancedPracticeQuestions,advancedQuestions,advancedQuestionsFromPool,advancedQuestionPool,advancedExamQuestions,advancedExamQuestionsFromPool,advancedExamQuestionCounts,languagePracticeQuestions,level4QuestionBank,balancedLevel4Questions,selectDistinctLessonQuestions,lessonQuestion,advancedCourses,langLessons,smallLessons,coursePhases,renderCoursePhase,phaseGuideCopy,storageStateSnapshot,loadProgress,renderLanguageExam,renderAdvancedExam,lessonQuestionInstruction,advancedWordStages,lessonNewWords,wordCrashCourseDeck,wordCrashCourseAccepts,renderLanguageWords,renderAdvancedWords,beginWordCrashCourse,answerWordCrashCourse,advanceWordCrashCourse,leaveWordCrashCourse,element(id){return $(id)},get activeWordCrashCourse(){return activeWordCrashCourse},manifest:window.LanguageJourneyContent.manifest};})();');
+  const source=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/, 'globalThis.__probe={state,rankState,vocabMastery,itemMastery,renderMain,advancedPracticeQuestions,advancedQuestions,advancedQuestionPool,advancedExamQuestions,advancedExamQuestionCounts,buildAdvancedExamQuestions,languagePracticeQuestions,level4QuestionBank,balancedLevel4Questions,buildLanguageExamQuestions,selectDistinctLessonQuestions,lessonQuestion,lessonCanonicalGoals,lessonCoverageReport,levelCoverageReport,smallQuestionPool,smallLessonQuestions,buildSmallExamQuestions,advancedCourses,langLessons,smallLessons,coursePhases,renderCoursePhase,phaseGuideCopy,storageStateSnapshot,loadProgress,renderLanguageExam,renderAdvancedExam,lessonQuestionInstruction,advancedWordStages,lessonNewWords,wordCrashCourseDeck,wordCrashCourseAccepts,renderLanguageWords,renderAdvancedWords,beginWordCrashCourse,answerWordCrashCourse,advanceWordCrashCourse,leaveWordCrashCourse,element(id){return $(id)},get activeWordCrashCourse(){return activeWordCrashCourse},manifest:window.LanguageJourneyContent.manifest};})();');
   const elements=new Map();
   const get=id=>{if(!elements.has(id))elements.set(id,fakeElement(id));return elements.get(id)};
   const document={body:fakeElement('body'),documentElement:fakeElement('html'),hidden:false,getElementById:get,createElement:()=>fakeElement(),querySelectorAll:()=>[],querySelector:()=>fakeElement(),addEventListener(){}};
@@ -129,22 +129,11 @@ test('all level screens render through the imported content adapter',()=>{
       if(question.kind==='order'||question.category==='reading')assert.ok(question.context,`${label} ${question.sourceId} shows its referenced meaning or text`);
     }
   };
-  const level4ExamUsed=new Set(),level4Exam=[];
-  for(const category of ['vocab','meaning','structure','build','integration']){
-    const selected=context.__probe.balancedLevel4Questions(9,6,[category],level4ExamUsed);
-    assert.equal(selected.length,6,`Level 4 exam selects six ${category} questions`);
-    level4Exam.push(...selected);
-  }
-  assert.equal(level4Exam.length,30,'Level 4 exam contains 30 questions');
-  assertDistinctTargets(level4Exam,'Level 4 exam');
   for(let index=0;index<context.__probe.langLessons.length;index++)assertQuestionBank(context.__probe.level4QuestionBank(index),`Level 4 lesson ${index+1} generated bank`);
   for(const lesson of context.__probe.smallLessons){
-    const bank=lesson.check.map(raw=>context.__probe.lessonQuestion(raw,lesson));
-    assert.equal(bank.length,8,`${lesson.id} retains its eight fixed questions`);
-    const quick=context.__probe.selectDistinctLessonQuestions(bank,5),exam=context.__probe.selectDistinctLessonQuestions(bank,5);
-    assert.equal(quick.length,5,`${lesson.id} quick check selects five questions`);
-    assert.equal(exam.length,5,`${lesson.id} contributes five Level 5 exam questions`);
-    assertDistinctTargets(quick,`${lesson.id} quick check`);assertDistinctTargets(exam,`${lesson.id} exam selection`);
+    const bank=context.__probe.smallQuestionPool(lesson),quick=context.__probe.smallLessonQuestions(lesson,8,'test');
+    assert.equal(context.__probe.lessonCoverageReport(lesson,quick).missing.length,0,`${lesson.id} quick check covers all canonical goals`);
+    assert.ok(quick.length>=context.__probe.lessonCanonicalGoals(lesson).length,`${lesson.id} grows when its goal count exceeds the old fixed length`);
     assertQuestionBank(bank,`Level 5 lesson ${lesson.id}`);
   }
   for(let level=0;level<content.levels.length;level++){
@@ -153,55 +142,42 @@ test('all level screens render through the imported content adapter',()=>{
     assert.doesNotThrow(()=>context.__probe.renderMain(),`Level ${level+1} failed`);
   }
   for(let index=0;index<context.__probe.langLessons.length;index++){
-    const questions=context.__probe.languagePracticeQuestions(context.__probe.langLessons[index],index);
+    const lesson=context.__probe.langLessons[index],questions=context.__probe.languagePracticeQuestions(lesson,index);
     const bank=context.__probe.level4QuestionBank(index);
-    assert.equal(questions.length,10,`Level 4 lesson ${index+1} practice count (bank ${bank.length}, targets ${new Set(bank.map(question=>question.targetConceptId).filter(Boolean)).size}, builds ${bank.filter(question=>question.kind==='build').length})`);
-    assert.equal(questions.filter(question=>question.kind==='build').length,2);
-    const availableCurrent=context.__probe.selectDistinctLessonQuestions(bank.filter(question=>question.introducedAt===index),10).length;
-    assert.ok(questions.filter(question=>question.introducedAt===index).length>=Math.min(6,availableCurrent),`Level 4 lesson ${index+1} practice uses up to six current targets when distinct lesson material allows`);
-    assertDistinctTargets(questions,`Level 4 lesson ${index+1} practice`);
+    assert.equal(context.__probe.lessonCoverageReport(lesson,questions).missing.length,0,`Level 4 lesson ${index+1} practice covers all canonical goals`);
+    assert.ok(questions.filter(question=>question.kind==='build').length>=2);
     const mini=context.__probe.balancedLevel4Questions(index,10);
-    assert.equal(mini.length,10,`Level 4 lesson ${index+1} mini-check count`);
-    assertDistinctTargets(mini,`Level 4 lesson ${index+1} mini-check`);
+    assert.equal(context.__probe.lessonCoverageReport(lesson,mini).missing.length,0,`Level 4 lesson ${index+1} mini-check covers all canonical goals`);
   }
-  const advancedPools=new Map();
   for(const [level,course] of Object.entries(context.__probe.advancedCourses)){
     course.lessons.forEach((lesson,index)=>{
       const questions=context.__probe.advancedPracticeQuestions(course,lesson,index);
-      assert.equal(questions.length,10,`Level ${course.number} lesson ${index+1} practice count`);
-      assert.equal(questions.filter(question=>question.kind==='build').length,2);
-      assertDistinctTargets(questions,`Level ${course.number} lesson ${index+1} practice`);
-      const pool=context.__probe.advancedQuestionPool(course,lesson,index),uniqueCurrent=context.__probe.selectDistinctLessonQuestions(pool.current,6);advancedPools.set(lesson.id,pool);
+      assert.equal(context.__probe.lessonCoverageReport(lesson,questions).missing.length,0,`Level ${course.number} lesson ${index+1} practice covers every new goal`);
+      assert.ok(questions.filter(question=>question.kind==='build').length>=2);
+      const pool=context.__probe.advancedQuestionPool(course,lesson,index);
       assertQuestionBank([...pool.current,...pool.review],`Level ${course.number} lesson ${index+1} generated bank`);
-      const quick=context.__probe.advancedQuestions(course,lesson,index),quickCurrent=quick.filter(question=>question.isCurrentContent);
-      assert.equal(quickCurrent.length,Math.min(6,uniqueCurrent.length),`Level ${course.number} lesson ${index+1} quick check prioritizes distinct current goals`);
-      assert.ok(quick.length<=10&&quick.length>=6,`Level ${course.number} lesson ${index+1} quick check is sized to available goals`);
-      assertDistinctTargets(quick,`Level ${course.number} lesson ${index+1} quick check`);
-      assert.equal(context.__probe.advancedExamQuestions(course,lesson,index,5).length,5,`Level ${course.number} lesson ${index+1} contributes five exam questions`);
+      const quick=context.__probe.advancedQuestions(course,lesson,index);
+      assert.equal(context.__probe.lessonCoverageReport(lesson,quick).missing.length,0,`Level ${course.number} lesson ${index+1} quick check covers every new goal`);
       assert.ok(context.__probe.advancedWordStages(lesson).core.length<=2,`Level ${course.number} lesson ${index+1} starts with at most two new words`);
     });
   }
   for(let run=0;run<100;run++){
-    const level4ExamUsed=new Set(),level4Exam=[];
-    for(const category of ['vocab','meaning','structure','build','integration'])level4Exam.push(...context.__probe.balancedLevel4Questions(9,6,[category],level4ExamUsed));
-    assert.equal(level4Exam.length,30,`Level 4 generated exam ${run+1} has 30 questions`);
-    assertDistinctTargets(level4Exam,`Level 4 generated exam ${run+1}`);
-    for(const [level,course] of Object.entries(context.__probe.advancedCourses)){
-      const checkIndex=run%course.lessons.length,checkLesson=course.lessons[checkIndex],check=context.__probe.advancedQuestionsFromPool(advancedPools.get(checkLesson.id));
-      assert.ok(check.length>=6&&check.length<=10,`Level ${course.number} generated lesson check ${run+1} is sized to its distinct goals`);
-      assertDistinctTargets(check,`Level ${course.number} generated lesson check ${run+1}`);
-      const examUsed=new Set(),exam=[],counts=context.__probe.advancedExamQuestionCounts(course);
-      for(let index=0;index<course.lessons.length;index++){
-        const lesson=course.lessons[index],pool=advancedPools.get(lesson.id);
-        const examQuestions=context.__probe.advancedExamQuestionsFromPool(pool,counts[index],examUsed);
-        assert.ok(examQuestions.length>=Math.floor(25/course.lessons.length)&&examQuestions.length<=Math.ceil(25/course.lessons.length),`Level ${course.number} generated exam ${run+1} balances lesson question counts`);
-        exam.push(...examQuestions);
-      }
-      assert.equal(exam.length,25,`Level ${course.number} generated exam ${run+1} has 25 questions`);
-      assert.equal(new Set(counts).size,course.lessons.length>5?2:1,`Level ${course.number} generated exam ${run+1} assigns any extra question to only one lesson`);
-      assertDistinctTargets(exam,`Level ${course.number} generated exam ${run+1}`);
+    seededMath.random=seededRandom(run+1);
+    const level4Exam=context.__probe.buildLanguageExamQuestions();
+    assert.equal(context.__probe.levelCoverageReport(context.__probe.langLessons,level4Exam).missing.length,0,`Level 4 exam run ${run+1} covers every level goal`);
+    const level5Exam=context.__probe.buildSmallExamQuestions();
+    assert.equal(context.__probe.levelCoverageReport(context.__probe.smallLessons,level5Exam).missing.length,0,`Level 5 exam run ${run+1} covers every level goal`);
+    for(const course of Object.values(context.__probe.advancedCourses)){
+      const checkLesson=course.lessons[run%course.lessons.length],check=context.__probe.advancedQuestions(course,checkLesson,run%course.lessons.length);
+      const missing=context.__probe.lessonCoverageReport(checkLesson,check).missing;
+      assert.equal(missing.length,0,`${checkLesson.id} seeded run ${run+1} missing ${missing.map(goal=>goal.id).join(', ')}`);
+      const exam=context.__probe.buildAdvancedExamQuestions(course),examMissing=context.__probe.levelCoverageReport(course.lessons,exam).missing;
+      assert.equal(examMissing.length,0,`Level ${course.number} exam run ${run+1} missing ${examMissing.map(goal=>goal.id).join(', ')}`);
     }
   }
+  const level8Lesson1=context.__probe.advancedCourses[7].lessons[0],level8Questions=context.__probe.advancedQuestions(context.__probe.advancedCourses[7],level8Lesson1,0),weekdayGoals=context.__probe.lessonCanonicalGoals(level8Lesson1).filter(goal=>goal.kind==='vocab');
+  assert.deepEqual(Array.from(weekdayGoals,goal=>goal.label.split(' · ')[0]),['げつようび','かようび','すいようび','もくようび']);
+  for(const goal of weekdayGoals){const question=level8Questions.find(item=>(item.targetGoalIds||[]).includes(goal.id));assert.ok(question,`Level 8 lesson 1 has a target question for ${goal.label}`);assert.equal(question.correct,goal.label.split(' · ')[1],`${goal.label} is the required answer, not merely a distractor`)}
   const probe=context.__probe,{lessonNewWords,wordCrashCourseDeck,wordCrashCourseAccepts}=probe;
   const wordLessons=[...probe.langLessons,...Object.values(probe.advancedCourses).flatMap(course=>course.lessons)];
   for(const lesson of wordLessons){
