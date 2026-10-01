@@ -95,12 +95,13 @@
       "number": 8,
       "title": "Level 8",
       "theme": "Tijd & agenda",
-      "subtitle": "Dag · datum · eenvoudig plan",
+      "subtitle": "Dag · maand · tijd · eenvoudig plan",
       "lessonIds": [
         "l8-1",
         "l8-2",
         "l8-3",
         "l8-4",
+        "l8-months-2",
         "l8-5",
         "l8-6"
       ],
@@ -3137,6 +3138,186 @@
       "legacyLessonId": null
     },
     {
+      "id": "vocab-さんがつ",
+      "japanese": "さんがつ",
+      "reading": "さんがつ",
+      "meanings": ["maart"],
+      "meaning": "maart",
+      "romaji": "sangatsu",
+      "partOfSpeech": "unspecified",
+      "introducedAt": "8-4",
+      "availableFrom": "8-4",
+      "themes": ["calendar"],
+      "coreOrContext": "core",
+      "kanjiForm": null,
+      "kanjiIntroducedAt": null,
+      "audioId": null,
+      "notes": "",
+      "legacyLessonId": null
+    },
+    {
+      "id": "vocab-しがつ",
+      "japanese": "しがつ",
+      "reading": "しがつ",
+      "meanings": ["april"],
+      "meaning": "april",
+      "romaji": "shigatsu",
+      "partOfSpeech": "unspecified",
+      "introducedAt": "8-4",
+      "availableFrom": "8-4",
+      "themes": ["calendar"],
+      "coreOrContext": "core",
+      "kanjiForm": null,
+      "kanjiIntroducedAt": null,
+      "audioId": null,
+      "notes": "Let op de lezing しがつ.",
+      "legacyLessonId": null
+    },
+    {
+      "id": "vocab-ごがつ",
+      "japanese": "ごがつ",
+      "reading": "ごがつ",
+      "meanings": ["mei"],
+      "meaning": "mei",
+      "romaji": "gogatsu",
+      "partOfSpeech": "unspecified",
+      "introducedAt": "8-4",
+      "availableFrom": "8-4",
+      "themes": ["calendar"],
+      "coreOrContext": "core",
+      "kanjiForm": null,
+      "kanjiIntroducedAt": null,
+      "audioId": null,
+      "notes": "",
+      "legacyLessonId": null
+    },
+    {
+      "id": "vocab-ろくがつ",
+      "japanese": "ろくがつ",
+      "reading": "ろくがつ",
+      "meanings": ["juni"],
+      "meaning": "juni",
+      "romaji": "rokugatsu",
+      "partOfSpeech": "unspecified",
+      "introducedAt": "8-4",
+      "availableFrom": "8-4",
+      "themes": ["calendar"],
+      "coreOrContext": "core",
+      "kanjiForm": null,
+      "kanjiIntroducedAt": null,
+      "audioId": null,
+      "notes": "",
+      "legacyLessonId": null
+    },
+    {
+      "id": "vocab-しちがつ",
+      "japanese": "しちがつ",
+      "reading": "しちがつ",
+      "meanings": ["juli"],
+      "meaning": "juli",
+      "romaji": "shichigatsu",
+      "partOfSpeech": "unspecified",
+      "introducedAt": "8-5",
+      "availableFrom": "8-5",
+      "themes": ["calendar"],
+      "coreOrContext": "core",
+      "kanjiForm": null,
+      "kanjiIntroducedAt": null,
+      "audioId": null,
+      "notes": "Let op de lezing しちがつ.",
+      "legacyLessonId": null
+    },
+    {
+      "id": "vocab-はちがつ",
+      "japanese": "はちがつ",
+      "reading": "はちがつ",
+      "meanings": ["augustus"],
+      "meaning": "augustus",
+      "romaji": "hachigatsu",
+      "partOfSpeech": "unspecified",
+      "introducedAt": "8-5",
+      "availableFrom": "8-5",
+      "themes": ["calendar"],
+      "coreOrContext": "core",
+      "kanjiForm": null,
+      "kanjiIntroducedAt": null,
+      "audioId": null,
+      "notes": "",
+      "legacyLessonId": null
+    },
+    {
+      "id": "vocab-くがつ",
+      "japanese": "くがつ",
+      "reading": "くがつ",
+      "meanings": ["september"],
+      "meaning": "september",
+      "romaji": "kugatsu",
+      "partOfSpeech": "unspecified",
+      "introducedAt": "8-5",
+      "availableFrom": "8-5",
+      "themes": ["calendar"],
+      "coreOrContext": "core",
+      "kanjiForm": null,
+      "kanjiIntroducedAt": null,
+      "audioId": null,
+      "notes": "Let op de lezing くがつ.",
+      "legacyLessonId": null
+    },
+    {
+      "id": "vocab-じゅうがつ",
+      "japanese": "じゅうがつ",
+      "reading": "じゅうがつ",
+      "meanings": ["oktober"],
+      "meaning": "oktober",
+      "romaji": "juugatsu",
+      "partOfSpeech": "unspecified",
+      "introducedAt": "8-5",
+      "availableFrom": "8-5",
+      "themes": ["calendar"],
+      "coreOrContext": "core",
+      "kanjiForm": null,
+      "kanjiIntroducedAt": null,
+      "audioId": null,
+      "notes": "",
+      "legacyLessonId": null
+    },
+    {
+      "id": "vocab-じゅういちがつ",
+      "japanese": "じゅういちがつ",
+      "reading": "じゅういちがつ",
+      "meanings": ["november"],
+      "meaning": "november",
+      "romaji": "juuichigatsu",
+      "partOfSpeech": "unspecified",
+      "introducedAt": "8-5",
+      "availableFrom": "8-5",
+      "themes": ["calendar"],
+      "coreOrContext": "core",
+      "kanjiForm": null,
+      "kanjiIntroducedAt": null,
+      "audioId": null,
+      "notes": "",
+      "legacyLessonId": null
+    },
+    {
+      "id": "vocab-じゅうにがつ",
+      "japanese": "じゅうにがつ",
+      "reading": "じゅうにがつ",
+      "meanings": ["december"],
+      "meaning": "december",
+      "romaji": "juunigatsu",
+      "partOfSpeech": "unspecified",
+      "introducedAt": "8-5",
+      "availableFrom": "8-5",
+      "themes": ["calendar"],
+      "coreOrContext": "core",
+      "kanjiForm": null,
+      "kanjiIntroducedAt": null,
+      "audioId": null,
+      "notes": "",
+      "legacyLessonId": null
+    },
+    {
       "id": "vocab-ついたち",
       "japanese": "ついたち",
       "reading": "ついたち",
@@ -3146,14 +3327,14 @@
       "meaning": "de eerste dag",
       "romaji": "tsuitachi",
       "partOfSpeech": "unspecified",
-      "introducedAt": "8-4",
-      "availableFrom": "8-4",
+      "introducedAt": "21-1",
+      "availableFrom": "21-1",
       "themes": [],
-      "coreOrContext": "core",
+      "coreOrContext": "preview",
       "kanjiForm": null,
       "kanjiIntroducedAt": null,
       "audioId": null,
-      "notes": "",
+      "notes": "Bewaard voor een latere datumles; niet langer onderdeel van Level 8.",
       "legacyLessonId": null
     },
     {
@@ -3166,14 +3347,14 @@
       "meaning": "de tweede dag",
       "romaji": "futsuka",
       "partOfSpeech": "unspecified",
-      "introducedAt": "8-4",
-      "availableFrom": "8-4",
+      "introducedAt": "21-1",
+      "availableFrom": "21-1",
       "themes": [],
-      "coreOrContext": "core",
+      "coreOrContext": "preview",
       "kanjiForm": null,
       "kanjiIntroducedAt": null,
       "audioId": null,
-      "notes": "",
+      "notes": "Bewaard voor een latere datumles; niet langer onderdeel van Level 8.",
       "legacyLessonId": null
     },
     {
@@ -3186,14 +3367,14 @@
       "meaning": "de derde dag",
       "romaji": "mikka",
       "partOfSpeech": "unspecified",
-      "introducedAt": "8-4",
-      "availableFrom": "8-4",
+      "introducedAt": "21-1",
+      "availableFrom": "21-1",
       "themes": [],
-      "coreOrContext": "core",
+      "coreOrContext": "preview",
       "kanjiForm": null,
       "kanjiIntroducedAt": null,
       "audioId": null,
-      "notes": "",
+      "notes": "Bewaard voor een latere datumles; niet langer onderdeel van Level 8.",
       "legacyLessonId": null
     },
     {
@@ -3206,8 +3387,8 @@
       "meaning": "één uur",
       "romaji": "ichiji",
       "partOfSpeech": "unspecified",
-      "introducedAt": "8-5",
-      "availableFrom": "8-5",
+      "introducedAt": "8-6",
+      "availableFrom": "8-6",
       "themes": [],
       "coreOrContext": "core",
       "kanjiForm": null,
@@ -3226,8 +3407,8 @@
       "meaning": "twee uur",
       "romaji": "niji",
       "partOfSpeech": "unspecified",
-      "introducedAt": "8-5",
-      "availableFrom": "8-5",
+      "introducedAt": "8-6",
+      "availableFrom": "8-6",
       "themes": [],
       "coreOrContext": "core",
       "kanjiForm": null,
@@ -3246,8 +3427,8 @@
       "meaning": "drie uur",
       "romaji": "sanji",
       "partOfSpeech": "unspecified",
-      "introducedAt": "8-5",
-      "availableFrom": "8-5",
+      "introducedAt": "8-6",
+      "availableFrom": "8-6",
       "themes": [],
       "coreOrContext": "core",
       "kanjiForm": null,
@@ -3266,8 +3447,8 @@
       "meaning": "hoe laat",
       "romaji": "nanji",
       "partOfSpeech": "unspecified",
-      "introducedAt": "8-5",
-      "availableFrom": "8-5",
+      "introducedAt": "8-6",
+      "availableFrom": "8-6",
       "themes": [],
       "coreOrContext": "core",
       "kanjiForm": null,
@@ -3306,8 +3487,8 @@
       "meaning": "volgende week",
       "romaji": "raishuu",
       "partOfSpeech": "unspecified",
-      "introducedAt": "8-6",
-      "availableFrom": "8-6",
+      "introducedAt": "8-7",
+      "availableFrom": "8-7",
       "themes": [],
       "coreOrContext": "core",
       "kanjiForm": null,
@@ -3326,8 +3507,8 @@
       "meaning": "vorige week",
       "romaji": "senshuu",
       "partOfSpeech": "unspecified",
-      "introducedAt": "8-6",
-      "availableFrom": "8-6",
+      "introducedAt": "8-7",
+      "availableFrom": "8-7",
       "themes": [],
       "coreOrContext": "core",
       "kanjiForm": null,
@@ -3346,8 +3527,8 @@
       "meaning": "nu",
       "romaji": "ima",
       "partOfSpeech": "unspecified",
-      "introducedAt": "8-6",
-      "availableFrom": "8-6",
+      "introducedAt": "8-7",
+      "availableFrom": "8-7",
       "themes": [],
       "coreOrContext": "core",
       "kanjiForm": null,
@@ -4834,13 +5015,28 @@
     },
     {
       "id": "grammar-l8-4",
-      "title": "maand + datum",
-      "shortExplanation": "Maanden volgen meestal getal + がつ. De eerste drie datums hebben eigen lezingen en worden apart geoefend.",
-      "fullExplanation": "Maanden volgen meestal getal + がつ. De eerste drie datums hebben eigen lezingen en worden apart geoefend.",
+      "title": "eerste zes maanden + に",
+      "shortExplanation": "Maanden eindigen op がつ. Met に kun je zeggen in welke maand iets gebeurt.",
+      "fullExplanation": "Maanden eindigen op がつ. Met に kun je zeggen in welke maand iets gebeurt.",
       "introducedAt": "8-4",
       "availableFrom": "8-4",
       "examples": [
-        "にがつ ふつか です"
+        "さんがつ に ほん を よみます"
+      ],
+      "dependencies": [],
+      "tags": [
+        "level-8"
+      ]
+    },
+    {
+      "id": "grammar-l8-months-2",
+      "title": "laatste zes maanden + に",
+      "shortExplanation": "Ook juli tot en met december staan vóór に wanneer je zegt in welke maand iets gebeurt.",
+      "fullExplanation": "Ook juli tot en met december staan vóór に wanneer je zegt in welke maand iets gebeurt.",
+      "introducedAt": "8-5",
+      "availableFrom": "8-5",
+      "examples": [
+        "じゅうがつ に えき に いきます"
       ],
       "dependencies": [],
       "tags": [
@@ -4852,8 +5048,8 @@
       "title": "getal + じ",
       "shortExplanation": "じ betekent hier uur. Zet なんじ in de bekende vraagvorm om naar de tijd te vragen.",
       "fullExplanation": "じ betekent hier uur. Zet なんじ in de bekende vraagvorm om naar de tijd te vragen.",
-      "introducedAt": "8-5",
-      "availableFrom": "8-5",
+      "introducedAt": "8-6",
+      "availableFrom": "8-6",
       "examples": [
         "なんじ です か"
       ],
@@ -4867,8 +5063,8 @@
       "title": "wanneer + wie + waar",
       "shortExplanation": "Bouw de informatie in rustige blokken. Het werkwoord blijft achteraan.",
       "fullExplanation": "Bouw de informatie in rustige blokken. Het werkwoord blijft achteraan.",
-      "introducedAt": "8-6",
-      "availableFrom": "8-6",
+      "introducedAt": "8-7",
+      "availableFrom": "8-7",
       "examples": [
         "あした さんじ えき に いきます"
       ],
@@ -5285,21 +5481,32 @@
     },
     {
       "id": "pattern-l8-4",
-      "title": "maand + datum",
-      "template": "maand + datum",
+      "title": "maand + に + handeling",
+      "template": "maand + に + handeling",
       "introducedAt": "8-4",
       "availableFrom": "8-4",
       "dependencies": [],
       "examples": [
-        "にがつ ふつか です"
+        "さんがつ に ほん を よみます"
+      ]
+    },
+    {
+      "id": "pattern-l8-months-2",
+      "title": "maand + に + bestemming",
+      "template": "maand + に + bestemming",
+      "introducedAt": "8-5",
+      "availableFrom": "8-5",
+      "dependencies": [],
+      "examples": [
+        "じゅうがつ に えき に いきます"
       ]
     },
     {
       "id": "pattern-l8-5",
       "title": "getal + じ",
       "template": "getal + じ",
-      "introducedAt": "8-5",
-      "availableFrom": "8-5",
+      "introducedAt": "8-6",
+      "availableFrom": "8-6",
       "dependencies": [],
       "examples": [
         "なんじ です か"
@@ -5309,8 +5516,8 @@
       "id": "pattern-l8-6",
       "title": "wanneer + wie + waar",
       "template": "wanneer + wie + waar",
-      "introducedAt": "8-6",
-      "availableFrom": "8-6",
+      "introducedAt": "8-7",
+      "availableFrom": "8-7",
       "dependencies": [],
       "examples": [
         "あした さんじ えき に いきます"
@@ -9112,54 +9319,66 @@
     },
     {
       "id": "l8-4",
-      "title": "Maand en datum",
-      "goal": "Herken een eenvoudige maand en de eerste drie datums.",
-      "review": "Herhaling: cijfers helpen bij maanden; datums leer je als kleine vaste blokken.",
-      "newLabel": "5 nieuwe woorden",
-      "pattern": "maand + datum",
-      "grammar": "Maanden volgen meestal getal + がつ. De eerste drie datums hebben eigen lezingen en worden apart geoefend.",
+      "title": "De eerste zes maanden",
+      "goal": "Herken en gebruik januari tot en met juni.",
+      "review": "Herhaling: bekende cijfers helpen bij de maandnamen; に koppelt de maand aan een handeling.",
+      "newLabel": "6 nieuwe woorden",
+      "pattern": "maand + に + handeling",
+      "grammar": "Maanden eindigen op がつ. Met に kun je zeggen in welke maand iets gebeurt.",
       "models": [
         {
-          "sentence": "にがつ ふつか です",
-          "meaning": "Het is 2 februari.",
+          "sentence": "さんがつ に ほん を よみます",
+          "meaning": "In maart lees ik een boek.",
           "parts": [
             [
-              "にがつ",
+              "さんがつ",
               "inhoud",
               "woordblok"
             ],
             [
-              "ふつか",
-              "inhoud",
-              "woordblok"
+              "に",
+              "tijd",
+              "in"
             ],
             [
-              "です",
-              "slot",
-              "is"
+              "ほん",
+              "inhoud",
+              "boek"
+            ],
+            [
+              "を",
+              "object",
+              "markering"
+            ],
+            [
+              "よみます",
+              "werkwoord",
+              "lezen"
             ]
           ]
         }
       ],
       "builders": [
         [
-          "Het is 2 februari.",
-          "にがつ ふつか です",
+          "In maart lees ik een boek.",
+          "さんがつ に ほん を よみます",
           [
-            "です",
-            "ふつか",
-            "にがつ"
+            "よみます",
+            "ほん",
+            "に",
+            "を",
+            "さんがつ"
           ]
         ]
       ],
       "focus": [
         "fill",
-        "にがつ ___ です",
-        "ふつか",
+        "___ に ほん を よみます",
+        "ろくがつ",
         [
-          "ふたつ",
-          "ふつか",
-          "ふたり"
+          "しがつ",
+          "ごがつ",
+          "ろくがつ"
         ],
         "structure"
       ],
@@ -9167,9 +9386,10 @@
       "wordIds": [
         "vocab-いちがつ",
         "vocab-にがつ",
-        "vocab-ついたち",
-        "vocab-ふつか",
-        "vocab-みっか"
+        "vocab-さんがつ",
+        "vocab-しがつ",
+        "vocab-ごがつ",
+        "vocab-ろくがつ"
       ],
       "grammarIds": [
         "grammar-l8-4"
@@ -9179,6 +9399,90 @@
       ],
       "level": 8,
       "order": 4,
+      "kind": "lesson"
+    },
+    {
+      "id": "l8-months-2",
+      "title": "De laatste zes maanden",
+      "goal": "Herken en gebruik juli tot en met december.",
+      "review": "Herhaling: de eerste zes maanden en に zijn bekend; nu maak je het jaar compleet.",
+      "newLabel": "6 nieuwe woorden",
+      "pattern": "maand + に + bestemming",
+      "grammar": "Ook juli tot en met december staan vóór に wanneer je zegt in welke maand iets gebeurt.",
+      "models": [
+        {
+          "sentence": "じゅうがつ に えき に いきます",
+          "meaning": "In oktober ga ik naar het station.",
+          "parts": [
+            [
+              "じゅうがつ",
+              "inhoud",
+              "woordblok"
+            ],
+            [
+              "に",
+              "tijd",
+              "in"
+            ],
+            [
+              "えき",
+              "inhoud",
+              "station"
+            ],
+            [
+              "に",
+              "doel",
+              "naar"
+            ],
+            [
+              "いきます",
+              "werkwoord",
+              "gaan"
+            ]
+          ]
+        }
+      ],
+      "builders": [
+        [
+          "In oktober ga ik naar het station.",
+          "じゅうがつ に えき に いきます",
+          [
+            "いきます",
+            "に",
+            "えき",
+            "に",
+            "じゅうがつ"
+          ]
+        ]
+      ],
+      "focus": [
+        "fill",
+        "___ に えき に いきます",
+        "じゅうにがつ",
+        [
+          "くがつ",
+          "じゅういちがつ",
+          "じゅうにがつ"
+        ],
+        "structure"
+      ],
+      "story": null,
+      "wordIds": [
+        "vocab-しちがつ",
+        "vocab-はちがつ",
+        "vocab-くがつ",
+        "vocab-じゅうがつ",
+        "vocab-じゅういちがつ",
+        "vocab-じゅうにがつ"
+      ],
+      "grammarIds": [
+        "grammar-l8-months-2"
+      ],
+      "patternIds": [
+        "pattern-l8-months-2"
+      ],
+      "level": 8,
+      "order": 5,
       "kind": "lesson"
     },
     {
@@ -9248,7 +9552,7 @@
         "pattern-l8-5"
       ],
       "level": 8,
-      "order": 5,
+      "order": 6,
       "kind": "lesson"
     },
     {
@@ -9328,7 +9632,7 @@
         "pattern-l8-6"
       ],
       "level": 8,
-      "order": 6,
+      "order": 7,
       "kind": "lesson",
       "readingId": "reading-l8-6"
     },
@@ -12614,7 +12918,7 @@
     },
     {
       "id": "reading-l8-6",
-      "introducedAt": "8-6",
+      "introducedAt": "8-7",
       "lessonId": "l8-6",
       "type": "micro-story",
       "text": "あした は げつようび です。 さんじ えき に いきます。",
@@ -12859,7 +13163,7 @@
         {
           "number": 8,
           "title": "Tijd & agenda",
-          "description": "Dag · datum · eenvoudig plan",
+          "description": "Dag · maand · tijd · eenvoudig plan",
           "status": "playable",
           "levelIndex": 7
         },
@@ -13130,7 +13434,7 @@
       ]
     },
     {
-      "label": "Ik kan eenvoudige dagen, tijden en plannen begrijpen.",
+      "label": "Ik kan eenvoudige dagen, maanden, tijden en plannen begrijpen.",
       "requires": [
         "l8-exam"
       ]
@@ -13307,7 +13611,8 @@
   writeFocus('l8-1',['mc','すいようび','woensdag',['maandag','woensdag','donderdag'],'vocab'],'Welke dag betekent すいようび?','','vocab-すいようび');
   writeFocus('l8-2',['fill','なんようび です ___','か',['か','に','を'],'structure'],'Maak de vraag “Welke dag van de week is het?” af.','Welke dag van de week is het?','grammar:l8-question-ka');
   writeFocus('l8-3',['fill','___ えき に いきます','あした',['あした','きょう','こんしゅう'],'structure'],'Ik ga morgen naar het station. Vul het tijdswoord in.','Ik ga morgen naar het station.','time:l8-tomorrow');
-  writeFocus('l8-4',['fill','にがつ ___ です','ふつか',['ふつか','ついたち','みっか'],'structure'],'De datum is 2 februari. Vul de dag in.','De datum is 2 februari.','time:l8-date');
+  writeFocus('l8-4',['fill','___ に ほん を よみます','ろくがつ',['しがつ','ごがつ','ろくがつ'],'structure'],'In juni lees ik een boek. Vul de maand in.','In juni lees ik een boek.','time:l8-first-months');
+  writeFocus('l8-months-2',['fill','___ に えき に いきます','じゅうにがつ',['くがつ','じゅういちがつ','じゅうにがつ'],'structure'],'In december ga ik naar het station. Vul de maand in.','In december ga ik naar het station.','time:l8-last-months');
   writeFocus('l8-5',['fill','___ です か','なんじ',['なんじ','なんようび','なんにん'],'structure'],'Hoe vraag je hoe laat het is?','','time:l8-hour-question');
   writeFocus('l8-6',['mc','あした さんじ に えき に いきます','さんじ',['さんじ','あした','えき'],'integration'],'Welk woord geeft het uur aan?','','time:l8-hour-in-plan');
   writeFocus('l9-1',['fill','えき は ___ です か','どこ',['どこ','だれ','どれ'],'structure'],'Hoe vraag je waar het station is?','','place:l9-where');
@@ -13462,7 +13767,7 @@
     if(word&&pointOrder(point)<pointOrder(word.introducedAt)){word.introducedAt=point;word.availableFrom=point;word.themes=[...new Set([...(word.themes||[]),plan.themeId||'travel'])]}
   }
   manifest.levels.sort((a,b)=>a.number-b.number);
-  manifest.contentVersion='1.3.0';
+  manifest.contentVersion='1.4.0';
   for(const word of manifest.vocabulary){
     if(word.partOfSpeech==='unspecified')word.partOfSpeech=/ます$/.test(word.japanese)?'verb':['これ','それ','あれ','わたし','あなた','どれ','だれ','どこ'].includes(word.japanese)?'pronoun':/ようび$|^きょう$|^あした$|^きのう$|^いま$/.test(word.japanese)?'time-expression':/つ$|にん$|ひき$|ほん$|まい$|ばんめ$/.test(word.japanese)?'counter':'noun';
     if(!word.themes?.length){const n=Number(word.introducedAt?.split('-')[0]||0);word.themes=[({4:'basics',5:'kana-extension',6:'people',7:'quantities',8:'time',9:'place',10:'daily-life'})[n]||'historical'];}
@@ -13478,7 +13783,7 @@
   function materializeLesson(source){const l={...source};if(l.wordIds)l.words=l.wordIds.map(id=>wordTuple(id));if(l.exampleIds)l.examples=l.exampleIds.map(id=>wordTuple(id,'example'));if(l.readingId){const r=readingById[l.readingId];l.story=r?[r.text,r.question,r.answer,r.choices]:null}if((l.level===4||l.level>=6)&&l.wordIds){const newCount=l.wordIds.filter(id=>byId[id].introducedAt===`${l.level}-${l.order}`).length;l.newLabel=newCount===1?'1 nieuw woord':`${newCount} nieuwe woorden`}return l}
   const langLessons=manifest.lessons.filter(l=>l.level===4).map(materializeLesson);
   const smallLessons=manifest.lessons.filter(l=>l.level===5).map(materializeLesson);
-  const advancedCompetencies={6:'Ik kan eenvoudige personen en familierelaties benoemen.',7:'Ik kan enkele veelgebruikte dingen, mensen en dieren tellen.',8:'Ik kan eenvoudige dagen, tijden en plannen begrijpen.',9:'Ik kan eenvoudige plaats, positie en beweging begrijpen.',10:'Ik kan eenvoudige dagelijkse situaties combineren.'};
+  const advancedCompetencies={6:'Ik kan eenvoudige personen en familierelaties benoemen.',7:'Ik kan enkele veelgebruikte dingen, mensen en dieren tellen.',8:'Ik kan eenvoudige dagen, maanden, tijden en plannen begrijpen.',9:'Ik kan eenvoudige plaats, positie en beweging begrijpen.',10:'Ik kan eenvoudige dagelijkse situaties combineren.'};
   const advancedCourses={};for(let n=6;n<=10;n++){const level=manifest.levels[n-1];advancedCourses[n-1]={number:n,title:level.theme,competency:advancedCompetencies[n],lessons:manifest.lessons.filter(l=>l.level===n).map(materializeLesson)}}
   const thematicCourses={};for(const plan of thematicPlans)thematicCourses[plan.number-1]={number:plan.number,title:plan.theme,competency:plan.competency,lessons:manifest.lessons.filter(l=>l.level===plan.number).map(materializeLesson)};
   const legacyLessonTitles={'l4-2':'Dit, dat en meer','l4-3':'Van wie?','l4-4':'Niet X','l4-5':'Een vraag maken','l4-6':'Ook','l4-7':'Iets doen','l4-8':'Niet doen','l4-9':'Naar een plaats'};

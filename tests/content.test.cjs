@@ -32,7 +32,7 @@ test('app script parses, imports registry and preserves storage key',()=>{
   assert.match(html,/language-journey-content\/content\.js/);
   const platform=fs.readFileSync(path.join(__dirname,'../platform.js'),'utf8');
   assert.ok(platform.includes("storageKey:'taal-japanse-leerapp-v1'"));
-  assert.match(html,/const STORAGE_VERSION=7/);
+  assert.match(html,/const STORAGE_VERSION=8/);
 });
 test('knowledge state is cumulative and excludes later and legacy words',()=>{
   const first=content.getKnowledgeState('4-1'),last=content.getKnowledgeState('10-complete');

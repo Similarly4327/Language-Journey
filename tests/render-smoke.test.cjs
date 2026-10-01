@@ -16,7 +16,7 @@ function fakeElement(id=''){
 
 function createCrashCourseProbe(){
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
-  const source=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,'globalThis.__probe={state,rankState,advancedCourses,langLessons,lessonNewWords,wordCrashCourseDeck,wordCrashCourseAccepts,beginWordCrashCourse,answerWordCrashCourse,advanceWordCrashCourse,leaveWordCrashCourse,element(id){return $(id)},get activeWordCrashCourse(){return activeWordCrashCourse},get wordCrashCourseTimer(){return wordCrashCourseTimer},fireCrashTimer(id){const timer=window.crashTimers[id];if(timer&&!timer.cancelled&&!timer.fired){timer.fired=true;timer.callback()}},get crashTimers(){return window.crashTimers}};})();');
+  const source=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,'globalThis.__probe={state,rankState,advancedCourses,langLessons,lessonNewWords,wordCrashCourseDeck,wordCrashCourseAccepts,beginWordCrashCourse,answerWordCrashCourse,advanceWordCrashCourse,leaveWordCrashCourse,completeWordCrashCourse,element(id){return $(id)},get activeWordCrashCourse(){return activeWordCrashCourse},get wordCrashCourseTimer(){return wordCrashCourseTimer},fireCrashTimer(id){const timer=window.crashTimers[id];if(timer&&!timer.cancelled&&!timer.fired){timer.fired=true;timer.callback()}},get crashTimers(){return window.crashTimers}};})();');
   const elements=new Map(),get=id=>{if(!elements.has(id))elements.set(id,fakeElement(id));return elements.get(id)};
   const timers=[],storage=new Map();
   const document={body:fakeElement('body'),documentElement:fakeElement('html'),hidden:false,getElementById:get,createElement:()=>fakeElement(),querySelectorAll:()=>[],querySelector:()=>fakeElement(),addEventListener(){}};
@@ -36,7 +36,7 @@ function seededRandom(seed){let value=seed>>>0;return()=>{value=(value+0x6d2b79f
 
 test('all level screens render through the imported content adapter',()=>{
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
-  const source=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/, 'globalThis.__probe={state,rankState,vocabMastery,itemMastery,renderMain,advancedPracticeQuestions,advancedQuestions,advancedQuestionPool,advancedExamQuestions,advancedExamQuestionCounts,buildAdvancedExamQuestions,languagePracticeQuestions,level4QuestionBank,balancedLevel4Questions,buildLanguageExamQuestions,selectDistinctLessonQuestions,lessonQuestion,lessonCanonicalGoals,lessonCoverageReport,levelCoverageReport,smallQuestionPool,smallLessonQuestions,buildSmallExamQuestions,advancedCourses,langLessons,smallLessons,coursePhases,renderCoursePhase,phaseGuideCopy,storageStateSnapshot,loadProgress,renderLanguageExam,renderAdvancedExam,lessonQuestionInstruction,advancedWordStages,lessonNewWords,wordCrashCourseDeck,wordCrashCourseAccepts,renderLanguageWords,renderAdvancedWords,beginWordCrashCourse,answerWordCrashCourse,advanceWordCrashCourse,leaveWordCrashCourse,element(id){return $(id)},get activeWordCrashCourse(){return activeWordCrashCourse},manifest:window.LanguageJourneyContent.manifest};})();');
+  const source=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/, 'globalThis.__probe={state,rankState,vocabMastery,itemMastery,renderMain,advancedPracticeQuestions,advancedQuestions,advancedQuestionPool,advancedExamQuestions,advancedExamQuestionCounts,buildAdvancedExamQuestions,languagePracticeQuestions,level4QuestionBank,balancedLevel4Questions,buildLanguageExamQuestions,selectDistinctLessonQuestions,lessonQuestion,lessonCanonicalGoals,lessonCoverageReport,levelCoverageReport,smallQuestionPool,smallLessonQuestions,buildSmallExamQuestions,advancedCourses,langLessons,smallLessons,coursePhases,renderCoursePhase,phaseGuideCopy,storageStateSnapshot,loadProgress,renderLanguageExam,renderAdvancedExam,lessonQuestionInstruction,advancedWordStages,lessonNewWords,wordCrashCourseDeck,wordCrashCourseAccepts,renderLanguageWords,renderLanguageModel,renderAdvancedWords,renderAdvancedModel,beginWordCrashCourse,answerWordCrashCourse,advanceWordCrashCourse,leaveWordCrashCourse,completeWordCrashCourse,revealQuizOptions,hideQuizOptions,answer,element(id){return $(id)},get activeWordCrashCourse(){return activeWordCrashCourse},manifest:window.LanguageJourneyContent.manifest};})();');
   const elements=new Map();
   const get=id=>{if(!elements.has(id))elements.set(id,fakeElement(id));return elements.get(id)};
   const document={body:fakeElement('body'),documentElement:fakeElement('html'),hidden:false,getElementById:get,createElement:()=>fakeElement(),querySelectorAll:()=>[],querySelector:()=>fakeElement(),addEventListener(){}};
@@ -65,7 +65,7 @@ test('all level screens render through the imported content adapter',()=>{
     if(Array.isArray(lesson.focus))fixedQuestions.push({raw:lesson.focus,lessonId:lesson.id});
   }
   for(const reading of context.__probe.manifest.readings.filter(item=>/^reading-l(?:[4-9]|10)-/.test(item.id)))fixedQuestions.push({reading});
-  assert.equal(fixedQuestions.length,150,'the revised fixed bank keeps all 150 Level 4–10 questions');
+  assert.equal(fixedQuestions.length,151,'the revised fixed bank includes the new second months lesson');
   for(const {raw,reading,lessonId} of fixedQuestions){
     if(reading){
       assert.ok(reading.text&&reading.question&&reading.answer,`${reading.id} shows its passage and question`);
@@ -142,22 +142,25 @@ test('all level screens render through the imported content adapter',()=>{
     assert.doesNotThrow(()=>context.__probe.renderMain(),`Level ${level+1} failed`);
   }
   for(let index=0;index<context.__probe.langLessons.length;index++){
-    const lesson=context.__probe.langLessons[index],questions=context.__probe.languagePracticeQuestions(lesson,index);
-    const bank=context.__probe.level4QuestionBank(index);
-    assert.equal(context.__probe.lessonCoverageReport(lesson,questions).missing.length,0,`Level 4 lesson ${index+1} practice covers all canonical goals`);
-    assert.ok(questions.filter(question=>question.kind==='build').length>=2);
+    const lesson=context.__probe.langLessons[index],questions=context.__probe.languagePracticeQuestions(lesson,index),words=context.__probe.lessonNewWords(lesson);
+    assert.equal(questions.length,words.length*4,`Level 4 lesson ${index+1} practice contains exactly four cards per new word`);
+    assert.ok(questions.every(question=>words.some(word=>word.id===question.word.id)),`Level 4 lesson ${index+1} practice has no old target words`);
     const mini=context.__probe.balancedLevel4Questions(index,10);
     assert.equal(context.__probe.lessonCoverageReport(lesson,mini).missing.length,0,`Level 4 lesson ${index+1} mini-check covers all canonical goals`);
+    assert.ok(mini.every(question=>(question.introducedAt??0)===index),`Level 4 lesson ${index+1} mini-check has no standalone old targets`);
   }
   for(const [level,course] of Object.entries(context.__probe.advancedCourses)){
     course.lessons.forEach((lesson,index)=>{
-      const questions=context.__probe.advancedPracticeQuestions(course,lesson,index);
-      assert.equal(context.__probe.lessonCoverageReport(lesson,questions).missing.length,0,`Level ${course.number} lesson ${index+1} practice covers every new goal`);
-      assert.ok(questions.filter(question=>question.kind==='build').length>=2);
+      const questions=context.__probe.advancedPracticeQuestions(course,lesson,index),words=context.__probe.lessonNewWords(lesson);
+      assert.equal(questions.length,words.length*4,`Level ${course.number} lesson ${index+1} practice contains exactly four cards per new word`);
+      assert.ok(questions.every(question=>words.some(word=>word.id===question.word.id)),`Level ${course.number} lesson ${index+1} practice has no old target words`);
       const pool=context.__probe.advancedQuestionPool(course,lesson,index);
       assertQuestionBank([...pool.current,...pool.review],`Level ${course.number} lesson ${index+1} generated bank`);
       const quick=context.__probe.advancedQuestions(course,lesson,index);
       assert.equal(context.__probe.lessonCoverageReport(lesson,quick).missing.length,0,`Level ${course.number} lesson ${index+1} quick check covers every new goal`);
+      assert.ok(quick.every(question=>question.isCurrentContent),`Level ${course.number} lesson ${index+1} mini-check contains only current-lesson questions`);
+      for(const goal of context.__probe.lessonCanonicalGoals(lesson).filter(goal=>goal.kind==='vocab')){const question=quick.find(item=>(item.targetGoalIds||[]).includes(goal.id));assert.ok(question?.context,`${lesson.id} tests ${goal.id} in a visible situation`)}
+      for(const goal of context.__probe.lessonCanonicalGoals(lesson).filter(goal=>goal.kind!=='vocab')){const question=quick.find(item=>(item.targetGoalIds||[]).includes(goal.id));assert.ok(['order','build','fill'].includes(question?.kind),`${lesson.id} tests ${goal.id} through an actual pattern application`)}
       assert.ok(context.__probe.advancedWordStages(lesson).core.length<=2,`Level ${course.number} lesson ${index+1} starts with at most two new words`);
     });
   }
@@ -177,7 +180,7 @@ test('all level screens render through the imported content adapter',()=>{
   }
   const level8Lesson1=context.__probe.advancedCourses[7].lessons[0],level8Questions=context.__probe.advancedQuestions(context.__probe.advancedCourses[7],level8Lesson1,0),weekdayGoals=context.__probe.lessonCanonicalGoals(level8Lesson1).filter(goal=>goal.kind==='vocab');
   assert.deepEqual(Array.from(weekdayGoals,goal=>goal.label.split(' · ')[0]),['げつようび','かようび','すいようび','もくようび']);
-  for(const goal of weekdayGoals){const question=level8Questions.find(item=>(item.targetGoalIds||[]).includes(goal.id));assert.ok(question,`Level 8 lesson 1 has a target question for ${goal.label}`);assert.equal(question.correct,goal.label.split(' · ')[1],`${goal.label} is the required answer, not merely a distractor`)}
+  for(const goal of weekdayGoals){const question=level8Questions.find(item=>(item.targetGoalIds||[]).includes(goal.id));assert.ok(question,`Level 8 lesson 1 has a target question for ${goal.label}`);assert.equal(question.correct,goal.label.split(' · ')[0],`${goal.label} is the required answer, not merely a distractor`);assert.match(question.context,/plant|afspraak/i)}
   const probe=context.__probe,{lessonNewWords,wordCrashCourseDeck,wordCrashCourseAccepts}=probe;
   const wordLessons=[...probe.langLessons,...Object.values(probe.advancedCourses).flatMap(course=>course.lessons)];
   for(const lesson of wordLessons){
@@ -214,7 +217,8 @@ test('all level screens render through the imported content adapter',()=>{
   lessonNewWords(fourWordLesson).forEach(word=>assert.ok(wordsMarkup.includes(word.jp),`${word.jp} appears immediately`));
   assert.match(wordsMarkup,/4 nieuwe woorden/);
   assert.doesNotMatch(wordsMarkup,/Eerst voor het patroon|Daarna uitbreiden|<details/);
-  assert.ok(probe.element('advancedWordCrashCourse').onclick);
+  assert.doesNotMatch(wordsMarkup,/Crash course woorden/);
+  assert.match(wordsMarkup,/Naar Oefenen/);
 
   const twoWordLesson=probe.advancedCourses[9].lessons.find(lesson=>lesson.id==='l10-2');
   assert.equal(lessonNewWords(twoWordLesson).length,2,'known tea and cake words are not counted again in Level 10, lesson 2');
@@ -223,7 +227,7 @@ test('all level screens render through the imported content adapter',()=>{
   assert.match(wordsMarkup,/2 nieuwe woorden/);
   assert.doesNotMatch(wordsMarkup,/おちゃ|ケーキ/);
   const manyWordLesson=probe.advancedCourses[7].lessons.find(lesson=>lesson.id==='l8-4');
-  assert.equal(lessonNewWords(manyWordLesson).length,5);
+  assert.equal(lessonNewWords(manyWordLesson).length,6);
   probe.renderAdvancedWords(probe.advancedCourses[7],manyWordLesson,7,3);
   wordsMarkup=probe.element('advancedStepBody').innerHTML;
   lessonNewWords(manyWordLesson).forEach(word=>assert.ok(wordsMarkup.includes(word.jp)));
@@ -235,71 +239,31 @@ test('all level screens render through the imported content adapter',()=>{
   assert.ok(probe.element('advancedWordsNext').onclick,'a lesson without new words keeps its normal next step');
   assert.equal(probe.state.advancedStep[5],'words','rendering a no-word lesson does not advance it');
 
-  const progressBeforeCrash=JSON.stringify(probe.state.flashcardProgress),ranksBeforeCrash=JSON.stringify(probe.rankState);
-  probe.state.advancedStep[5]='words';probe.state.advancedView[5]='lesson';probe.state.advancedLesson[5]=3;
-  probe.renderAdvancedWords(six,fourWordLesson,5,3);
-  probe.element('advancedWordCrashCourse').onclick();
-  let crash=probe.activeWordCrashCourse;
-  assert.equal(crash.phase,'intro');
-  lessonNewWords(fourWordLesson).forEach(word=>assert.ok(probe.element('advancedStepBody').innerHTML.includes(word.jp),'all words are shown before testing'));
-  probe.element('wordCrashBegin').onclick();
-  crash=probe.activeWordCrashCourse;
-  let question=crash.queue[0];
-  assert.match(probe.element('advancedStepBody').innerHTML,/flashcard-answer-options is-hidden/,'answer options start blurred');
-  assert.equal(question.revealed,false);
-  probe.element('wordCrashReveal').onclick();
-  const wrongIndex=question.choices.findIndex(choice=>!wordCrashCourseAccepts(question,choice));
-  probe.element(`wordCrashChoice${wrongIndex}`).onclick();
-  assert.match(probe.element('advancedStepBody').innerHTML,/Niet goed\. Juiste antwoord:/);
-  assert.equal(probe.answerWordCrashCourse(question.correct),false,'an answer cannot be assessed twice');
-  probe.element('wordCrashNext').onclick();
-  assert.match(probe.element('advancedStepBody').innerHTML,/flashcard-answer-options is-hidden/,'the blur resets on the next card');
-  while(crash.phase==='initial'){
-    question=crash.queue[crash.index];question.revealed=true;
-    assert.equal(probe.answerWordCrashCourse(question.correct,true),true);
-    probe.advanceWordCrashCourse();
+  const months2=probe.advancedCourses[7].lessons.find(lesson=>lesson.id==='l8-months-2');
+  assert.deepEqual(Array.from(lessonNewWords(manyWordLesson),word=>word.meaning),['januari','februari','maart','april','mei','juni']);
+  assert.deepEqual(Array.from(lessonNewWords(months2),word=>word.meaning),['juli','augustus','september','oktober','november','december']);
+  assert.equal(probe.advancedCourses[7].lessons.findIndex(lesson=>lesson.id==='l8-5'),5,'the stable hours lesson moved to position 6');
+  assert.equal(probe.advancedCourses[7].lessons.findIndex(lesson=>lesson.id==='l8-6'),6,'the stable planning lesson moved to position 7');
+  assert.ok(probe.rankState['l8-5']&&probe.rankState['l8-6'],'existing progress IDs remain addressable');
+  for(const lesson of [manyWordLesson,months2]){
+    const deck=wordCrashCourseDeck(lessonNewWords(lesson));
+    assert.equal(deck.length,24,`${lesson.id} practices six months four times each`);
+    const mini=context.__probe.advancedQuestions(context.__probe.advancedCourses[7],lesson,context.__probe.advancedCourses[7].lessons.indexOf(lesson));
+    for(const word of lessonNewWords(lesson)){const goal=`vocab:${word.id}`,question=mini.find(item=>(item.targetGoalIds||[]).includes(goal));assert.ok(question?.context,`${lesson.id} tests ${word.jp} in context`)}
   }
-  assert.equal(crash.phase,'summary');
-  assert.match(probe.element('advancedStepBody').innerHTML,/Crash course afgerond/);
-  assert.equal(Object.keys(crash.missed).length,0,'a later correct answer clears an earlier miss for the same direction');
-  assert.match(probe.element('advancedStepBody').innerHTML,/Nog een keer/);
-  assert.equal(JSON.stringify(probe.state.flashcardProgress),progressBeforeCrash,'the course does not create or reschedule SRS reviews');
-  assert.equal(JSON.stringify(probe.rankState),ranksBeforeCrash,'the course does not change lesson ranks');
-  assert.equal(probe.state.advancedStep[5],'words','the course does not mark the lesson step complete');
-  probe.element('wordCrashAgain').onclick();assert.equal(crash.phase,'intro','the short course can restart');
-  probe.element('wordCrashExit').onclick();assert.equal(probe.activeWordCrashCourse,null);
-  assert.equal(probe.state.advancedStep[5],'words','interrupting returns to the same lesson step');
-  assert.match(probe.element('advancedStepBody').innerHTML,/Naar het nieuwe patroon/);
+  assert.equal(probe.manifest.vocabulary.filter(word=>['vocab-ついたち','vocab-ふつか','vocab-みっか'].includes(word.id)&&word.introducedAt.startsWith('8-')).length,0,'date forms are no longer Level 8 targets');
 
-  probe.beginWordCrashCourse({hostId:'advancedStepBody',lesson:fourWordLesson,words:lessonNewWords(fourWordLesson),returnToLesson:()=>{}});
-  probe.element('wordCrashBegin').onclick();crash=probe.activeWordCrashCourse;
-  const retryKey=crash.deck[0].key;
-  while(crash.phase==='initial'){
-    question=crash.queue[crash.index];question.revealed=true;
-    if(question.key===retryKey){
-      const wrong=question.choices.find(choice=>!wordCrashCourseAccepts(question,choice));
-      probe.answerWordCrashCourse(wrong);
-    }else probe.answerWordCrashCourse(question.correct);
-    probe.advanceWordCrashCourse();
-  }
-  assert.equal(crash.phase,'review','words missed on both starting assessments return once');
-  assert.equal(crash.queue.length,1);
-  question=crash.queue[0];question.revealed=true;probe.answerWordCrashCourse(question.correct);probe.advanceWordCrashCourse();
-  assert.equal(crash.phase,'summary');
-  assert.equal(Object.keys(crash.missed).length,0,'a correct retry removes the miss from the summary');
-  probe.leaveWordCrashCourse();
-
-  let returnedToOneWordStep=false;probe.state.langStep='words';
-  probe.beginWordCrashCourse({hostId:'langStepBody',lesson:oneWordLesson,words:oneWord,returnToLesson:()=>{returnedToOneWordStep=probe.state.langStep==='words'}});
-  probe.element('wordCrashBegin').onclick();
-  assert.match(probe.element('langStepBody').innerHTML,/Tik om te tonen/);
-  probe.element('wordCrashReveal').onclick();
-  assert.match(probe.element('langStepBody').innerHTML,/wordCrashSelfKnown/);
-  probe.element('wordCrashSelfAgain').onclick();
-  assert.match(probe.element('langStepBody').innerHTML,/Niet goed\. Juiste antwoord:/);
-  probe.element('wordCrashNext').onclick();
-  probe.leaveWordCrashCourse();
-  assert.equal(returnedToOneWordStep,true,'self-reveal practice can be interrupted without advancing the lesson');
+  assert.match(html,/#qChoices\.quiz-options-hidden/,'all quiz option lists have a blurred state');
+  assert.match(html,/reveal\.textContent='Toon antwoorden'/,'the reveal control has a clear visible label');
+  const blurQuestion=context.__probe.lessonQuestion({kind:'mc',prompt:'test',correct:'goed',choices:['goed','fout'],category:'vocab',sourceId:'blur-test',targetConceptId:'blur-test'});
+  context.__probe.state.quiz={source:'advanced',questions:[blurQuestion],index:0,score:0,mistakes:[],optionsRevealed:false,answerUnlockAt:0};
+  assert.equal(context.__probe.revealQuizOptions(),true);
+  assert.equal(context.__probe.state.quiz.score,0,'revealing does not change the score');
+  assert.equal(context.__probe.answer(false,fakeElement('choice'),'fout'),false,'a rapid second tap cannot submit immediately after reveal');
+  assert.equal(context.__probe.state.quiz.mistakes.length,0);
+  context.__probe.state.quiz.answerUnlockAt=0;
+  assert.equal(context.__probe.answer(false,fakeElement('choice'),'fout'),true,'a later deliberate tap submits once');
+  assert.equal(context.__probe.state.quiz.mistakes.length,1);
 
   context.__probe.rankState['l4-10'].rank=null;
   context.__probe.renderLanguageExam();
@@ -340,16 +304,19 @@ test('all level screens render through the imported content adapter',()=>{
 
   const persisted=storageStateSnapshot();
   assert.equal(persisted.openPhaseId,travel.id,'the open phase is included in the saved state');
-  const saved={version:7,state:persisted,ranks:{},itemMastery:{},vocabMastery:{}};
+  const saved={version:7,state:{...persisted,advancedLesson:{...persisted.advancedLesson,7:5}},ranks:{'l8-5':{rank:'Gold',last:.9,attempts:2},'l8-6':{rank:'Silver',last:.82,attempts:1}},itemMastery:{},vocabMastery:{}};
   storage.set('taal-japanse-leerapp-v1',JSON.stringify(saved));
   state.openPhaseId=foundation.id;
   loadProgress();
   assert.equal(state.openPhaseId,travel.id,'a returning learner restores the saved phase');
+  assert.equal(state.advancedLesson[7],6,'a saved Level 8 planning position follows the same stable lesson after the inserted months lesson');
+  assert.equal(rankState['l8-5'].rank,'Gold','the existing hours rank stays attached to the hours lesson');
+  assert.equal(rankState['l8-6'].rank,'Silver','the existing planning rank stays attached to the planning lesson');
   phaseRows=coursePhases.map(phase=>renderCoursePhase(phase));
   assert.deepEqual(phaseRows.filter(row=>row.open).map(row=>row.className),['course-phase'],'a returning learner sees only the saved phase open');
 });
 
-test('crash course mixes all planned questions and safely auto-advances correct answers',()=>{
+test('lesson word practice mixes the exact word deck and safely advances answers',()=>{
   const probe=createCrashCourseProbe(),courseDef=probe.advancedCourses[5],lesson=courseDef.lessons.find(item=>item.id==='l6-4'),words=probe.lessonNewWords(lesson);
   assert.equal(words.length,4);
   const makeDeck=()=>probe.wordCrashCourseDeck(words);
@@ -369,8 +336,8 @@ test('crash course mixes all planned questions and safely auto-advances correct 
   assert.ok(twoDeck.every((question,index)=>index===0||question.word.id!==twoDeck[index-1].word.id));
 
   const progressBefore=JSON.stringify(probe.state.flashcardProgress),ranksBefore=JSON.stringify(probe.rankState);
-  const begin=()=>probe.beginWordCrashCourse({hostId:'crashHost',lesson,words,returnToLesson:()=>{probe.returned=true}});
-  begin();probe.element('wordCrashBegin').onclick();
+  const begin=()=>probe.beginWordCrashCourse({hostId:'crashHost',lesson,words,returnToLesson:()=>{probe.returned=true},onComplete:()=>{probe.completed=true}});
+  begin();
   let crash=probe.activeWordCrashCourse,question=crash.queue[0];question.revealed=true;
   const wrong=question.choices.find(choice=>!probe.wordCrashCourseAccepts(question,choice));
   assert.ok(wrong);
@@ -385,7 +352,7 @@ test('crash course mixes all planned questions and safely auto-advances correct 
   assert.equal(crash.index,1,'manual next only navigates');
   probe.leaveWordCrashCourse();
 
-  probe.returned=false;begin();probe.element('wordCrashBegin').onclick();
+  probe.returned=false;begin();
   crash=probe.activeWordCrashCourse;question=crash.queue[0];question.revealed=true;
   assert.equal(probe.answerWordCrashCourse(question.correct),true);
   const timer=probe.wordCrashCourseTimer;
@@ -400,14 +367,14 @@ test('crash course mixes all planned questions and safely auto-advances correct 
   assert.equal(probe.answerWordCrashCourse(question.correct),true);
   probe.fireCrashTimer(probe.wordCrashCourseTimer);
   assert.equal(crash.phase,'summary','the final correct answer reaches the normal summary');
-  assert.match(probe.element('crashHost').innerHTML,/Crash course afgerond/);
+  assert.match(probe.element('crashHost').innerHTML,/Oefenen afgerond/);
   const firstSessionDeck=crash.deck;
   probe.element('wordCrashAgain').onclick();
   assert.notEqual(crash.deck,firstSessionDeck,'restart shuffles a fresh question order');
-  probe.element('wordCrashExit').onclick();
+  probe.leaveWordCrashCourse();
   assert.equal(probe.activeWordCrashCourse,null);
 
-  probe.returned=false;begin();probe.element('wordCrashBegin').onclick();
+  probe.returned=false;begin();
   crash=probe.activeWordCrashCourse;question=crash.queue[0];question.revealed=true;
   probe.answerWordCrashCourse(question.correct);const pending=probe.wordCrashCourseTimer;
   probe.leaveWordCrashCourse();
@@ -415,6 +382,6 @@ test('crash course mixes all planned questions and safely auto-advances correct 
   probe.fireCrashTimer(pending);
   assert.equal(probe.activeWordCrashCourse,null,'a stale callback cannot reopen the course');
   assert.equal(probe.returned,true,'leaving returns to the originating lesson');
-  assert.equal(JSON.stringify(probe.state.flashcardProgress),progressBefore,'the crash course never writes SRS');
-  assert.equal(JSON.stringify(probe.rankState),ranksBefore,'the crash course never writes ranks');
+  assert.equal(JSON.stringify(probe.state.flashcardProgress),progressBefore,'word practice never writes SRS');
+  assert.equal(JSON.stringify(probe.rankState),ranksBefore,'word practice never writes ranks');
 });

@@ -14,14 +14,14 @@ function fakeElement(id=''){
     setAttribute(){},getAttribute(){return null},removeAttribute(){},appendChild(){},prepend(){},remove(){},addEventListener(){},querySelector(){return fakeElement()},querySelectorAll(){return []},scrollIntoView(){},focus(){},getBoundingClientRect(){return{width:300,height:200,top:0,left:0}}};
 }
 
-function createRecallApp({savedState={},now=new Date(2026,2,20,12).getTime()}={}){
+function createRecallApp({savedState={},savedRanks={},now=new Date(2026,2,20,12).getTime()}={}){
   const clock={now};
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
   const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,`const recallRenderFlashcardsScreen=renderFlashcardsScreen;globalThis.__probe={state,rankState,vocabCatalog,vocabById,flashcardDue,flashcardDueText,flashcardNextDueAt,flashcardCounts,flashcardSelectedCards,flashcardDirections,getNextRecallDueAt,flashcardAnswerChoices,flashcardQuestionIsValid,flashcardAnswerFeedback,flashcardAnswerState,flashcardAnswerFeedbackText,flashcardRate,flashcardSkip,flashcardNextCard,revealFlashcardOptions,startFlashcardSession,pauseFlashcardSession,resumeFlashcardSession,recordVocabEncounter,renderFlashcardsScreen,registeredAudioAsset,speakerButtonHtml,audioOverlayPlacement,show,viewMarkup(){return $('flashcardView').innerHTML},setNow(value){clock.now=value},enableRender(){renderFlashcardsScreen=recallRenderFlashcardsScreen},disableRender(){renderFlashcardsScreen=()=>{}}};})();`);
   const elements=new Map(),get=id=>{if(!elements.has(id))elements.set(id,fakeElement(id));return elements.get(id)};
   const document={body:fakeElement('body'),documentElement:fakeElement('html'),hidden:false,getElementById:get,createElement:()=>fakeElement(),querySelectorAll:()=>[],querySelector:()=>fakeElement(),addEventListener(){}};
   const storage=new Map();
-  storage.set('taal-japanse-leerapp-v1',JSON.stringify({version:6,state:savedState}));
+  storage.set('taal-japanse-leerapp-v1',JSON.stringify({version:6,state:savedState,ranks:savedRanks}));
   const localStorage={getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,value),removeItem:key=>storage.delete(key)};
   const documentListeners=new Map(),windowListeners=new Map(),intervals=[],windowTimeouts=[],clearedWindowTimeouts=[];
   const addListener=(listeners,type,callback)=>{if(!listeners.has(type))listeners.set(type,[]);listeners.get(type).push(callback)};
@@ -298,6 +298,33 @@ test('Recall start screen clearly separates due SRS cards from free practice',()
   assert.match(markup,/Start geplande herhaling/);
   assert.match(markup,/Vrij oefenen/);
   assert.match(markup,/Kies andere levels of lessen/);
+});
+
+test('Recall rebuilds new cards from ranked Level 7, partial Level 8, and later lesson data',()=>{
+  const ranks={'l7-1':{rank:'Copper',last:.8,attempts:1},'l8-2':{rank:'Silver',last:.9,attempts:2},'l12-3':{rank:'Gold',last:.95,attempts:3}},
+    reviewedId='vocab-ひとつ',dueAt=new Date(2026,2,23,12).getTime(),savedState={flashcardProgress:{version:1,cards:{[`${reviewedId}::jp-nl`]:{dueAt,intervalDays:3,repetitions:2,lapses:0,lastReviewedAt:new Date(2026,2,20,12).getTime(),lastGrade:'knew'}}}},
+    app=createRecallApp({savedState,savedRanks:ranks}),expected=app.vocabCatalog.filter(word=>ranks[word.lessonId]?.rank);
+  const actual=app.flashcardSelectedCards();
+  assert.deepEqual(actual.map(word=>word.id).sort(),expected.map(word=>word.id).sort(),'all and only words from ranked introduction lessons are eligible');
+  assert.equal(new Set(actual.map(word=>word.id)).size,actual.length,'each canonical vocabulary ID appears once');
+  assert.ok(expected.some(word=>word.level===7),'Level 7 core vocabulary is reconstructed');
+  assert.ok(expected.some(word=>word.level===8&&word.lessonId==='l8-2'),'the completed Level 8 lesson is reconstructed');
+  assert.ok(!actual.some(word=>word.level===8&&word.lessonId!=='l8-2'),'unfinished Level 8 lessons stay hidden');
+  assert.ok(expected.some(word=>word.level===12),'eligibility does not stop at Level 8');
+  assert.ok(!actual.some(word=>word.level===9),'an opened or future lesson without completion is not included');
+  assert.ok(app.state.introducedVocabIds.includes(expected.find(word=>word.lessonId==='l7-1').id),'stored lesson ranks migrate idempotently to introduced vocabulary IDs');
+  const counts=app.flashcardCounts(actual,['jp-nl']);
+  assert.equal(counts.new,actual.length-1,'unreviewed eligible words are immediately counted as new');
+  assert.equal(counts.upcoming,1,'an existing later-due review stays visible in the total');
+  assert.equal(app.state.flashcardProgress.cards[`${reviewedId}::jp-nl`].dueAt,dueAt,'existing SRS timing is preserved');
+  app.startFlashcardSession(actual,['jp-nl']);
+  assert.equal(app.state.flashcardSession.queue.length,actual.length-1,'the normal session includes every new/due card and leaves a later-due card scheduled');
+  assert.ok(!app.state.flashcardSession.queue.some(item=>item.cardId===reviewedId),'later-due history is not reset or forced due');
+  app.state.flashcardSelection.lessonIds=['l8-2'];
+  assert.deepEqual(app.flashcardSelectedCards().map(word=>word.lessonId),actual.filter(word=>word.lessonId==='l8-2').map(word=>word.lessonId),'lesson filters scope the same eligible pool');
+  const reloaded=createRecallApp({savedState:{introducedVocabIds:app.state.introducedVocabIds,flashcardProgress:savedState.flashcardProgress},savedRanks:ranks});
+  assert.deepEqual(reloaded.flashcardSelectedCards().map(word=>word.id).sort(),expected.map(word=>word.id).sort(),'offline reload preserves the same unique eligible pool');
+  assert.equal(reloaded.state.flashcardProgress.cards[`${reviewedId}::jp-nl`].dueAt,dueAt,'reload preserves the existing review due time');
 });
 
 test('A saved review is not hidden when old lesson-encounter flags are missing',()=>{
