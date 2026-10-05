@@ -1,0 +1,21 @@
+- generic [ref=f5e2]:
+  - navigation "Hoofdnavigatie" [ref=f5e8]:
+    - button "Leren" [ref=f5e9] [cursor=pointer]
+    - button "Recall" [ref=f5e10] [cursor=pointer]
+    - button "Voortgang" [ref=f5e11] [cursor=pointer]
+  - generic [ref=f5e12]:
+    - generic [ref=f5e325]:
+      - generic [ref=f5e326]: Japans → Nederlands · Vrij oefenen · Level 7 · Dingen tellen met つ
+      - generic [ref=f5e327]: Kaart 1 van 10 · 0 bekeken
+    - generic [ref=f5e329]:
+      - generic [ref=f5e330]: よっつ
+      - generic [ref=f5e333]:
+        - generic [ref=f5e334]: "Kies je antwoord:"
+        - button "vier dingen" [ref=f5e335] [cursor=pointer]
+        - button "dinsdag" [ref=f5e336] [cursor=pointer]
+        - button "twee dingen" [ref=f5e337] [cursor=pointer]
+        - button "één ding" [ref=f5e338] [cursor=pointer]
+      - status [ref=f5e339]
+      - generic [ref=f5e340]:
+        - button "Sla over" [ref=f5e341] [cursor=pointer]
+        - button "Onderbreek sessie" [ref=f5e342] [cursor=pointer]

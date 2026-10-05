@@ -1,0 +1,45 @@
+- generic [ref=f5e2]:
+  - generic [ref=f5e4]:
+    - button "Terug" [ref=f5e164] [cursor=pointer]: ←
+    - navigation "Hoofdnavigatie" [ref=f5e8]:
+      - button "Leren" [ref=f5e9] [cursor=pointer]
+      - button "Recall" [ref=f5e10] [cursor=pointer]
+      - button "Voortgang" [ref=f5e11] [cursor=pointer]
+  - main [ref=f5e50]:
+    - generic [ref=f5e229]:
+      - generic [ref=f5e230]:
+        - generic [ref=f5e231]:
+          - button "← Alle lessen" [ref=f5e232] [cursor=pointer]
+          - generic [ref=f5e233]: Geen rank
+        - generic [ref=f5e234]: Les 1 van 7
+        - generic [ref=f5e235]: Begin van de week
+        - generic [ref=f5e236]: Herken maandag tot en met donderdag.
+        - generic [ref=f5e237]:
+          - button "1 Woorden" [ref=f5e238] [cursor=pointer]: 1Woorden
+          - button "2 Oefenen" [ref=f5e239] [cursor=pointer]: 2Oefenen
+          - button "3 Lestoets" [ref=f5e240] [cursor=pointer]: 3Lestoets
+      - generic [ref=f5e242]:
+        - generic [ref=f5e243]: Stap 1 · voorkennis en woorden
+        - generic [ref=f5e244]: "Herhaling: alle kana zijn bekend; de vier weekdagen zijn de enige nieuwe informatie."
+        - generic [ref=f5e245]:
+          - strong [ref=f5e246]: 4 nieuwe woorden
+          - text: · bekijk ze eerst rustig; in Oefenen komen precies deze woorden terug.
+        - generic [ref=f5e247]:
+          - generic [ref=f5e248]:
+            - 'button "Open Dictionary: げつようび" [ref=f5e250] [cursor=pointer]': げつようび
+            - generic [ref=f5e251]: getsuyoubi
+            - generic [ref=f5e252]: maandag
+          - generic [ref=f5e253]:
+            - 'button "Open Dictionary: かようび" [ref=f5e255] [cursor=pointer]': かようび
+            - generic [ref=f5e256]: kayoubi
+            - generic [ref=f5e257]: dinsdag
+          - generic [ref=f5e258]:
+            - 'button "Open Dictionary: すいようび" [ref=f5e260] [cursor=pointer]': すいようび
+            - generic [ref=f5e261]: suiyoubi
+            - generic [ref=f5e262]: woensdag
+          - generic [ref=f5e263]:
+            - 'button "Open Dictionary: もくようび" [ref=f5e265] [cursor=pointer]': もくようび
+            - generic [ref=f5e266]: mokuyoubi
+            - generic [ref=f5e267]: donderdag
+        - button "Naar Oefenen →" [ref=f5e268] [cursor=pointer]
+  - text: ⌄

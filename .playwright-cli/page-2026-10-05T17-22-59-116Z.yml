@@ -1,0 +1,52 @@
+- generic [ref=f3e2]:
+  - generic [ref=f3e4]:
+    - button "App-home" [ref=f3e6] [cursor=pointer]: ⌂
+    - navigation "Hoofdnavigatie" [ref=f3e8]:
+      - button "Leren" [ref=f3e9] [cursor=pointer]
+      - button "Recall" [ref=f3e10] [cursor=pointer]
+      - button "Voortgang" [ref=f3e11] [cursor=pointer]
+  - generic [ref=f3e12]:
+    - generic [ref=f3e52]:
+      - generic [ref=f3e53]: Recall
+      - generic [ref=f3e54]:
+        - strong [ref=f3e55]: Auto
+        - switch "Auto" [checked] [ref=f3e56] [cursor=pointer]: Aan
+      - generic [ref=f3e57]: Recall volgt alle woorden die je in de leerroute hebt behandeld. Nieuwe woorden komen vanzelf erbij.
+      - status [ref=f3e58]: Auto · 7 behandelde woorden in je pool
+      - generic [ref=f3e59]: Kies één richting. De herhaalplanning wordt per richting bijgehouden.
+      - generic [ref=f3e60]: Oefen wanneer het jou uitkomt. Je kunt een sessie onderbreken en later verdergaan.
+    - generic [ref=f3e61]:
+      - generic [ref=f3e62]: Japans → Nederlands
+      - generic [ref=f3e63]: 7 actieve kaarten in deze richting
+      - generic [ref=f3e64]:
+        - generic [ref=f3e65]:
+          - strong [ref=f3e66]: "6"
+          - text: Nieuw · beschikbaar
+        - generic [ref=f3e67]:
+          - strong [ref=f3e68]: "0"
+          - text: Aan de beurt
+        - generic [ref=f3e69]:
+          - strong [ref=f3e70]: "1"
+          - text: Later gepland
+      - status [ref=f3e71]:
+        - text: "Volgende herhaling:"
+        - strong [ref=f3e72]: morgen · 19:22
+      - button "Start geplande herhaling · 6 klaar" [ref=f3e73] [cursor=pointer]
+      - button "Vrij oefenen · 7 kaarten" [ref=f3e74] [cursor=pointer]
+    - generic [ref=f3e75]:
+      - generic [ref=f3e76]: Nederlands → Japans
+      - generic [ref=f3e77]: 7 actieve kaarten in deze richting
+      - generic [ref=f3e78]:
+        - generic [ref=f3e79]:
+          - strong [ref=f3e80]: "6"
+          - text: Nieuw · beschikbaar
+        - generic [ref=f3e81]:
+          - strong [ref=f3e82]: "1"
+          - text: Aan de beurt
+        - generic [ref=f3e83]:
+          - strong [ref=f3e84]: "0"
+          - text: Later gepland
+      - button "Start geplande herhaling · 7 klaar" [ref=f3e85] [cursor=pointer]
+      - button "Vrij oefenen · 7 kaarten" [ref=f3e86] [cursor=pointer]
+    - group [ref=f3e87]:
+      - generic "Hoe werkt Recall? ⌄" [ref=f3e88] [cursor=pointer]

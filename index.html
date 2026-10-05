@@ -1611,9 +1611,10 @@ body[data-scene="journey"][data-view="main"] #mainView{
 .study-disclosure-panel{margin-top:10px}
 .study-disclosure-panel[hidden]{display:none!important}
 .progress-summary-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0 6px}.progress-summary-controls label{font-size:13px;font-weight:700}.progress-summary-controls select{width:auto;min-height:44px}
-.progress-period-sliders{display:grid;grid-template-columns:1fr 1fr;gap:16px}.progress-period-sliders label{display:grid;gap:2px;font-size:12px;color:var(--muted)}.progress-period-sliders input{width:100%;min-width:0;height:44px;margin:0;accent-color:var(--accent)}
-.progress-period-label{font-size:12px;color:var(--muted);margin-bottom:8px}.progress-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.progress-metric{min-width:0;min-height:100px;padding:12px 8px;border:1px solid var(--border);border-radius:14px;background:var(--panel);color:var(--text);font:inherit;text-align:left;cursor:pointer}.progress-metric strong{display:block;font-size:clamp(22px,4vw,32px);line-height:1.2;overflow-wrap:anywhere}.progress-metric-label{display:block;font-size:12px;margin-top:6px}.progress-metric-state{display:block;font-size:11px;margin-top:6px;color:var(--muted)}.progress-metric[aria-pressed="true"]{border:2px solid var(--accent);padding:11px 7px;background:var(--card)}.progress-metric:focus-visible,.progress-period-sliders input:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.progress-period-range{position:relative;height:52px;margin:0;touch-action:none;--low:22px;--high:calc(100% - 22px)}.progress-period-track,.progress-period-fill{position:absolute;top:23px;left:22px;right:22px;height:6px;border-radius:6px;background:var(--border)}.progress-period-fill{left:var(--low);right:calc(100% - var(--high));background:var(--accent)}.progress-period-range input{position:absolute;inset:0;width:100%;height:52px;margin:0;background:transparent;appearance:none;-webkit-appearance:none;pointer-events:none}.progress-period-range input::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;pointer-events:auto;width:44px;height:44px;border:10px solid transparent;border-radius:50%;background:var(--accent);background-clip:padding-box;cursor:grab}.progress-period-range input::-moz-range-thumb{pointer-events:auto;width:24px;height:24px;border:10px solid transparent;border-radius:50%;background:var(--accent);background-clip:padding-box;cursor:grab}.progress-period-range input:focus-visible{outline:none;z-index:3!important}.progress-period-range input:focus-visible::-webkit-slider-thumb{background:var(--card);background-clip:padding-box;box-shadow:inset 0 0 0 3px var(--accent)}.progress-period-range input:focus-visible::-moz-range-thumb{background:var(--card);background-clip:padding-box;box-shadow:inset 0 0 0 3px var(--accent)}.progress-period-range input:disabled{opacity:.4}.progress-period-label{display:flex;justify-content:space-between;gap:10px}
+.progress-period-label{font-size:12px;color:var(--muted);margin-bottom:8px}.progress-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.progress-metric{min-width:0;min-height:100px;padding:12px 8px;border:1px solid var(--border);border-radius:14px;background:var(--panel);color:var(--text);font:inherit;text-align:left;cursor:pointer}.progress-metric strong{display:block;font-size:clamp(22px,4vw,32px);line-height:1.2;overflow-wrap:anywhere}.progress-metric-label{display:block;font-size:12px;margin-top:6px}.progress-metric-state{display:block;font-size:11px;margin-top:6px;color:var(--muted)}.progress-metric[aria-pressed="true"]{border:2px solid var(--accent);padding:11px 7px;background:var(--card)}.progress-metric:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .progress-chart-empty{min-height:150px;display:flex;align-items:center;justify-content:center;padding:20px;text-align:center;background:var(--panel);border-radius:12px;color:var(--muted)}.progress-summary-chart{width:100%;height:220px;display:block;touch-action:pan-y}.progress-summary-chart text{font-size:12px;fill:var(--muted)}.progress-summary-chart .grid{stroke:var(--border)}.progress-summary-chart .line{fill:none;stroke:var(--accent);stroke-width:3}.progress-summary-chart circle{fill:var(--accent)}.progress-chart-detail{font-size:13px;min-height:24px;margin-top:4px}.progress-point-picker{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}.progress-point-picker input{flex:1;min-width:0;height:44px;accent-color:var(--accent)}.progress-chart-note{margin-top:10px;font-size:12px;color:var(--muted)}
+.progress-summary-chart{height:260px;border-radius:12px;background:color-mix(in srgb,var(--card) 88%,transparent)}.progress-summary-chart .grid{stroke-opacity:.65}.progress-summary-chart .area{fill:var(--accent);opacity:.07}.progress-summary-chart .line{stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}.progress-summary-chart .selected-guide{stroke:var(--accent);stroke-opacity:.25;stroke-dasharray:3 5}.progress-summary-chart .selected-marker{stroke:var(--card);stroke-width:3}.progress-summary-chart .latest-marker{fill:var(--card);stroke:var(--accent);stroke-width:2.5}.progress-chart-detail{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0 4px;font-size:12px;min-height:48px}.progress-chart-detail strong{font-size:20px;color:var(--text);white-space:nowrap}.progress-point-picker{display:grid;grid-template-columns:1fr;gap:0}.progress-point-picker span{display:flex;justify-content:space-between;gap:8px}.progress-point-picker input{width:100%;margin:0}.progress-metric{min-height:88px}.progress-metric strong{font-size:clamp(20px,3vw,26px)}.progress-metric-state{font-size:10px}.progress-chart-note{font-size:11px}
 .study-disclosure:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
 @media(min-width:760px){.study-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}.study-form-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:520px){.session-row{grid-template-columns:1fr}.session-actions{justify-content:flex-end}.category-bar{grid-template-columns:85px 1fr auto}.study-form-grid{grid-template-columns:1fr}}
@@ -2601,7 +2602,7 @@ const t=(key,values)=>i18n.translate(key,state.uiLanguage,values);
 function localizedLevel(index){const level=levels[index],number=index+1;return[level[0],t(`course.${state.courseId}.level.${number}.title`),t(`course.${state.courseId}.level.${number}.description`)]}
 function setUiLanguage(language){state.uiLanguage=i18n.language(language);document.documentElement.lang=state.uiLanguage;platform.savePreferences(state);scheduleSave();if(!$('sessionView').classList.contains('hidden'))renderSession();else renderMain();i18n.localizeNodes(root,state.uiLanguage)}
 state.flashcardProgress={version:1,cards:{}};
-state.flashcardSelection={lessonIds:null,direction:'jp-nl'};
+state.flashcardSelection={auto:true,lessonIds:null,direction:'jp-nl'};
 state.flashcardSession=null;
 state.thematic={level:11,lessonIndex:0,part:'A',step:'list',questionIndex:0,correct:0,answered:false,selected:null};
 state.thematicCompleted={};
@@ -2977,7 +2978,7 @@ function loadProgress(){
       });
       state.flashcardProgress={version:1,cards:migrated};
     }
-    if(s.flashcardSelection&&typeof s.flashcardSelection==='object')state.flashcardSelection={lessonIds:Array.isArray(s.flashcardSelection.lessonIds)?s.flashcardSelection.lessonIds.filter(id=>vocabCatalog.some(v=>v.lessonId===id)):null,direction:s.flashcardSelection.direction==='nl-jp'?'nl-jp':'jp-nl'};
+    if(s.flashcardSelection&&typeof s.flashcardSelection==='object')state.flashcardSelection={auto:typeof s.flashcardSelection.auto==='boolean'?s.flashcardSelection.auto:!Array.isArray(s.flashcardSelection.lessonIds),lessonIds:Array.isArray(s.flashcardSelection.lessonIds)?[...new Set(s.flashcardSelection.lessonIds.filter(id=>vocabCatalog.some(v=>v.lessonId===id)))]:null,direction:s.flashcardSelection.direction==='nl-jp'?'nl-jp':'jp-nl'};
     if(s.flashcardSession&&typeof s.flashcardSession==='object'&&Array.isArray(s.flashcardSession.queue))state.flashcardSession={mode:s.flashcardSession.mode==='free'?'free':'scheduled',queue:s.flashcardSession.queue.filter(x=>x&&vocabById[x.cardId]&&['jp-nl','nl-jp'].includes(x.direction)).map(x=>({cardId:x.cardId,direction:x.direction,answerChoices:Array.isArray(x.answerChoices)?[...new Set(x.answerChoices.filter(v=>typeof v==='string'&&v.length<200))].slice(0,4):null,round:Math.max(0,Math.floor(Number(x.round)||0))})),position:Math.max(0,Math.floor(Number(s.flashcardSession.position)||0)),status:['active','paused','complete'].includes(s.flashcardSession.status)?s.flashcardSession.status:'paused',revealed:!!s.flashcardSession.revealed,knew:Math.max(0,Math.floor(Number(s.flashcardSession.knew)||0)),again:Math.max(0,Math.floor(Number(s.flashcardSession.again)||0)),skipped:Math.max(0,Math.floor(Number(s.flashcardSession.skipped)||0)),viewed:Math.max(0,Math.floor(Number(s.flashcardSession.viewed)||0)),requeued:Array.isArray(s.flashcardSession.requeued)?s.flashcardSession.requeued:[],feedback:s.flashcardSession.feedback&&['knew','again','viewed'].includes(s.flashcardSession.feedback.grade)?{grade:s.flashcardSession.feedback.grade,chosen:typeof s.flashcardSession.feedback.chosen==='string'?s.flashcardSession.feedback.chosen.slice(0,200):null,until:Number(s.flashcardSession.feedback.until)||null,ungraded:!!s.flashcardSession.feedback.ungraded}:null,startedAt:Number(s.flashcardSession.startedAt)||Date.now()};
     if(state.flashcardSession)state.flashcardSession.optionsRevealed=!!s.flashcardSession.optionsRevealed;
     ['advancedLesson','advancedView','advancedStep','advancedStepProgress'].forEach(k=>{if(s[k]&&typeof s[k]==='object')Object.assign(state[k],s[k])});
@@ -4562,7 +4563,7 @@ function completeStudySession(extra={}){
   [['kana','kana beheerst'],['vocab','woorden geleerd'],['skills','vaardigheden bevestigd'],['rankedUnits','nieuwe ranks']].forEach(([key,label])=>{const delta=(after[key]||0)-(before[key]||0);if(delta>0)state.studyTracker.events.push({id:studyId('event'),type:'knowledge',at:endedAt,sessionId:session.id,title:`+${delta} ${label}`,detail:`Tijdens ${session.title}`})});
   if((after.rankedLevels||0)>(before.rankedLevels||0))state.studyTracker.events.push({id:studyId('event'),type:'knowledge',at:endedAt,sessionId:session.id,title:`Levelrank bevestigd`,detail:`${before.rankedLevels||0} → ${after.rankedLevels} levels met rank`});
   (after.completedLevels||[]).filter(level=>!(before.completedLevels||[]).includes(level)).forEach(level=>state.studyTracker.events.push({id:studyId('event'),type:'course',at:endedAt,sessionId:session.id,title:`Level ${level} afgerond`,detail:'Minimaal één volledige levelrank bevestigd.'}));
-  state.studyTracker.active=null;saveProgress();return session;
+  state.studyTracker.active=null;saveProgress();progressSummaryRefresh?.();return session;
 }
 function recoverInterruptedStudySession(){
   const a=state.studyTracker.active;if(!a)return;
@@ -4968,7 +4969,7 @@ function renderVocabDetail(box,id){
 }
 function flashcardGroups(){
   const levels=new Map();
-  vocabCatalog.filter(v=>!v.legacy).forEach(v=>{
+  flashcardEligibleCards().forEach(v=>{
     if(!levels.has(v.level))levels.set(v.level,new Map());
     const lessons=levels.get(v.level);
     if(!lessons.has(v.lessonId))lessons.set(v.lessonId,{id:v.lessonId,title:v.lessonTitle,words:[]});
@@ -4977,7 +4978,7 @@ function flashcardGroups(){
   return [...levels.entries()].sort((a,b)=>a[0]-b[0]).map(([level,lessons])=>({level,lessons:[...lessons.values()].sort((a,b)=>a.title.localeCompare(b.title,'nl'))}));
 }
 function openFlashcards(){state.screen='flashcards';scheduleSave();renderFlashcardsScreen()}
-function openFlashcardsForLevel(level){const ids=vocabCatalog.filter(v=>!v.legacy&&v.level===level).map(v=>v.lessonId);state.flashcardSelection.lessonIds=ids;state.flashcardSelection.direction='jp-nl';openFlashcards()}
+function openFlashcardsForLevel(level){const ids=[...new Set(flashcardEligibleCards().filter(v=>v.level===level).map(v=>v.lessonId))];state.flashcardSelection.auto=false;state.flashcardSelection.lessonIds=ids;state.flashcardSelection.direction='jp-nl';openFlashcards()}
 function flashcardSelectedLessons(){const all=vocabCatalog.filter(v=>!v.legacy).map(v=>v.lessonId);return new Set(state.flashcardSelection.lessonIds===null?all:state.flashcardSelection.lessonIds)}
 function flashcardDirections(){return[state.flashcardSelection.direction==='nl-jp'?'nl-jp':'jp-nl']}
 function flashcardProgressKey(cardId,direction){return`${cardId}::${direction}`}
@@ -4988,11 +4989,11 @@ function flashcardEligible(card){
   if(!card||card.legacy)return false;
   return state.introducedVocabIds.includes(card.id)||!!rankState[card.lessonId]?.rank||flashcardHasReviewHistory(card.id);
 }
-function flashcardEligibleCards(){return vocabCatalog.filter(flashcardEligible)}
+function flashcardEligibleCards(){const seen=new Set();return vocabCatalog.filter(card=>{if(!flashcardEligible(card)||seen.has(card.id))return false;seen.add(card.id);return true})}
 function flashcardPreview(card){return!flashcardEligible(card)}
 function flashcardSelectedCards(includePreview=false,direction=null){
   const selected=flashcardSelectedLessons();
-  let cards=flashcardEligibleCards().filter(v=>selected.has(v.lessonId));
+  let cards=flashcardEligibleCards().filter(v=>state.flashcardSelection.auto||selected.has(v.lessonId));
   if(direction==='nl-jp'){
     const known=vocabCatalog.filter(v=>!v.legacy&&!flashcardPreview(v));
     cards=cards.filter(card=>!known.some(other=>other.id!==card.id&&flashcardMeaningsOverlap(card,other)));
@@ -5043,7 +5044,14 @@ function flashcardNextDueAt(now,grade,intervalDays=0){
   date.setDate(date.getDate()+intervalDays);
   return date.getTime();
 }
-function setFlashcardLessonSelection(ids){const all=new Set(vocabCatalog.filter(v=>!v.legacy).map(v=>v.lessonId)),selected=new Set(ids.filter(id=>all.has(id)));state.flashcardSelection.lessonIds=selected.size===all.size?null:[...selected];scheduleSave();renderFlashcardsScreen()}
+function setFlashcardAuto(enabled){
+  // Keep the manual scope separate from the live, progress-derived Auto pool.
+  if(!enabled&&state.flashcardSelection.lessonIds===null)state.flashcardSelection.lessonIds=[...new Set(flashcardEligibleCards().map(card=>card.lessonId))];
+  state.flashcardSelection.auto=!!enabled;
+  if(!enabled)state.recallCustomOpen=true;
+  scheduleSave();renderFlashcardsScreen();
+}
+function setFlashcardLessonSelection(ids){const all=new Set(vocabCatalog.filter(v=>!v.legacy).map(v=>v.lessonId));state.flashcardSelection.lessonIds=[...new Set(ids.filter(id=>all.has(id)))];scheduleSave();renderFlashcardsScreen()}
 function flashcardCorrectAnswers(card,direction){const answers=direction==='jp-nl'?(card.meanings?.length?card.meanings:[card.meaning]):[card.kana];return[...new Set(answers.filter(x=>typeof x==='string'&&x.trim()))]}
 function flashcardAnswerFeedback(choices,correctAnswers,feedback){
   return{selectedAnswer:feedback?.chosen??null,correctAnswer:choices.find(choice=>correctAnswers.includes(choice))||correctAnswers[0]||null,isSubmitted:!!feedback};
@@ -5078,7 +5086,7 @@ function startFlashcardSession(cards=flashcardSelectedCards(),directions=flashca
   const now=Date.now(),queue=[];
   directions.forEach(direction=>{
     const pool=flashcardSelectedCards(mode==='free',direction),eligibleIds=new Set(pool.map(card=>card.id));
-    cards.filter(card=>eligibleIds.has(card.id)).forEach(card=>{if(mode==='free'||flashcardDue(flashcardRecord(card.id,direction),now))queue.push({cardId:card.id,direction,answerChoices:flashcardAnswerChoices(card,direction,pool),round:0})});
+    [...new Map(cards.filter(card=>eligibleIds.has(card.id)).map(card=>[card.id,card])).values()].forEach(card=>{if(mode==='free'||flashcardDue(flashcardRecord(card.id,direction),now))queue.push({cardId:card.id,direction,answerChoices:flashcardAnswerChoices(card,direction,pool),round:0})});
   });
   if(!queue.length)return;
   cancelRecallFeedbackAdvance();
@@ -5116,9 +5124,9 @@ function revealFlashcardOptions(){const session=state.flashcardSession;if(!sessi
 function flashcardSkip(){const session=state.flashcardSession;if(!session||session.status!=='active'||session.feedback)return;cancelRecallFeedbackAdvance();session.skipped=(session.skipped||0)+1;session.position++;if(session.position>=session.queue.length)session.status='complete';session.revealed=false;session.optionsRevealed=false;scheduleSave();renderFlashcardsScreen()}
 function flashcardNextCard(){const session=state.flashcardSession;if(!session||!session.feedback)return;cancelRecallFeedbackAdvance();if(session.feedback.ungraded)session.viewed=(session.viewed||0)+1;session.feedback=null;session.position++;session.revealed=false;session.optionsRevealed=false;if(session.position>=session.queue.length)session.status='complete';scheduleSave();renderFlashcardsScreen()}
 function renderFlashcardScope(box){
-  const groups=flashcardGroups(),selected=flashcardSelectedLessons(),allLessonIds=[...new Set(groups.flatMap(group=>group.lessons.map(lesson=>lesson.id)))],allSelected=allLessonIds.every(id=>selected.has(id)),direction=flashcardDirections()[0],cards=flashcardSelectedCards(false,direction),counts=flashcardCounts(cards,[direction]),freeCount=flashcardSelectedCards(true,direction).length;
+  const groups=flashcardGroups(),selected=flashcardSelectedLessons(),allLessonIds=[...new Set(groups.flatMap(group=>group.lessons.map(lesson=>lesson.id)))],allSelected=allLessonIds.length>0&&allLessonIds.every(id=>selected.has(id)),direction=flashcardDirections()[0],cards=flashcardSelectedCards(false,direction),counts=flashcardCounts(cards,[direction]),freeCount=flashcardSelectedCards(true,direction).length;
   box.innerHTML=`<div class="between"><strong>Kies levels en lessen</strong><button id="fcSelectAll" class="btn tiny">${allSelected?'Alles uit':'Alles aan'}</button></div><div class="flashcard-scope" style="margin-top:10px">${groups.map(group=>{const ids=group.lessons.map(x=>x.id),checked=ids.every(id=>selected.has(id));return`<section class="flashcard-level"><div class="flashcard-level-head"><label class="flashcard-check"><input type="checkbox" data-fc-level="${group.level}" ${checked?'checked':''}><strong>Level ${group.level}</strong></label><span class="small">${group.lessons.reduce((n,l)=>n+l.words.length,0)} woorden</span></div><div class="flashcard-lesson-list">${group.lessons.map(lesson=>`<label class="flashcard-check"><input type="checkbox" data-fc-lesson="${lesson.id}" ${selected.has(lesson.id)?'checked':''}><span>${lesson.title} <span class="muted">· ${lesson.words.length}</span></span></label>`).join('')}</div></section>`}).join('')}</div><label class="profile-field" style="margin-top:10px"><span>${t('flashcards.directionHelp')}</span><select id="fcDirection" class="select"><option value="jp-nl" ${direction==='jp-nl'?'selected':''}>${t('flashcards.direction.jpNl')}</option><option value="nl-jp" ${direction==='nl-jp'?'selected':''}>${t('flashcards.direction.nlJp')}</option></select></label><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${counts.new}</strong><span>${t('flashcards.countNew')}</span></div><div class="flashcard-stat"><strong>${counts.due}</strong><span>${t('flashcards.countDue')}</span></div><div class="flashcard-stat"><strong>${counts.upcoming}</strong><span>${t('flashcards.countUpcoming')}</span></div></div><div class="grid2" style="margin-top:12px"><button id="fcCustomStart" class="btn primary" ${counts.ready?'':'disabled'}>${counts.ready?t('flashcards.startPlanned',{count:counts.ready}):t('flashcards.noDue')}</button><button id="fcCustomFree" class="btn" ${freeCount?'':'disabled'}>${t('flashcards.startFree',{count:freeCount})}</button></div><div class="small" style="margin-top:7px">${t('flashcards.freeNote')}</div>`;
-  $('fcSelectAll').onclick=()=>{state.flashcardSelection.lessonIds=allSelected?[]:null;scheduleSave();renderFlashcardsScreen()};
+  $('fcSelectAll').onclick=()=>setFlashcardLessonSelection(allSelected?[]:allLessonIds);
   $('fcDirection').onchange=()=>{state.flashcardSelection.direction=$('fcDirection').value;scheduleSave();renderFlashcardsScreen()};
   $('fcCustomStart').onclick=()=>startFlashcardSession(cards,[direction]);$('fcCustomFree').onclick=()=>startFlashcardSession(flashcardSelectedCards(true,direction),[direction],'free');
   root.querySelectorAll('[data-fc-lesson]').forEach(input=>input.onchange=()=>{let ids=state.flashcardSelection.lessonIds===null?allLessonIds:[...state.flashcardSelection.lessonIds];const id=input.dataset.fcLesson;ids=input.checked?[...new Set([...ids,id])]:ids.filter(x=>x!==id);setFlashcardLessonSelection(ids)});
@@ -5163,7 +5171,7 @@ function renderFlashcardSummary(){
 }
 function flashcardDirectionStartHtml(direction){
   const cards=flashcardSelectedCards(false,direction),counts=flashcardCounts(cards,[direction]),freeCount=flashcardSelectedCards(true,direction).length,nextDueAt=counts.due===0?getNextRecallDueAt(cards,[direction]):null,id=direction==='jp-nl'?'JpNl':'NlJp';
-  return`<section class="card recall-direction"><div class="eyebrow">${t(direction==='jp-nl'?'flashcards.direction.jpNl':'flashcards.direction.nlJp')}</div><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${counts.new}</strong><span>${t('flashcards.countNew')}</span></div><div class="flashcard-stat"><strong>${counts.due}</strong><span>${t('flashcards.countDue')}</span></div><div class="flashcard-stat"><strong>${counts.upcoming}</strong><span>${t('flashcards.countUpcoming')}</span></div></div>${nextDueAt!==null?`<div class="flashcard-next-due" role="status">${t('flashcards.nextDue')}: <strong>${flashcardDueText(nextDueAt)}</strong></div>`:''}<button id="fcStart${id}" class="btn primary" style="width:100%;margin-top:10px" ${counts.ready?'':'disabled'}>${counts.ready?t('flashcards.startPlanned',{count:counts.ready}):t('flashcards.noDue')}</button><button id="fcFree${id}" class="btn" style="width:100%;margin-top:7px" ${freeCount?'':'disabled'}>${t('flashcards.startFree',{count:freeCount})}</button></section>`;
+  return`<section class="card recall-direction"><div class="eyebrow">${t(direction==='jp-nl'?'flashcards.direction.jpNl':'flashcards.direction.nlJp')}</div><div class="small">${t('flashcards.activeCards',{count:counts.total})}</div><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${counts.new}</strong><span>${t('flashcards.countNew')}</span></div><div class="flashcard-stat"><strong>${counts.due}</strong><span>${t('flashcards.countDue')}</span></div><div class="flashcard-stat"><strong>${counts.upcoming}</strong><span>${t('flashcards.countUpcoming')}</span></div></div>${nextDueAt!==null?`<div class="flashcard-next-due" role="status">${t('flashcards.nextDue')}: <strong>${flashcardDueText(nextDueAt)}</strong></div>`:''}<button id="fcStart${id}" class="btn primary" style="width:100%;margin-top:10px" ${counts.ready?'':'disabled'}>${counts.ready?t('flashcards.startPlanned',{count:counts.ready}):t('flashcards.noDue')}</button><button id="fcFree${id}" class="btn" style="width:100%;margin-top:7px" ${freeCount?'':'disabled'}>${t('flashcards.startFree',{count:freeCount})}</button></section>`;
 }
 function renderFlashcardsScreen(){
   ensureFlashcardDueRefresh();
@@ -5171,12 +5179,14 @@ function renderFlashcardsScreen(){
   const box=$('flashcardView');
   if(state.flashcardSession&&['active','paused','complete'].includes(state.flashcardSession.status))return renderFlashcardSession();
   const jpCards=flashcardSelectedCards(false,'jp-nl'),reverseCards=flashcardSelectedCards(false,'nl-jp');
-  box.innerHTML=`<section class="card recall-start"><div class="eyebrow">${t('flashcards.title')}</div><div class="h1">${t('flashcards.title')}</div><div class="muted">${t('flashcards.directionHelp')}</div></section>${flashcardDirectionStartHtml('jp-nl')}${flashcardDirectionStartHtml('nl-jp')}<details id="recallCustom" class="card recall-custom" ${state.recallCustomOpen?'open':''}><summary>Kies andere levels of lessen</summary><div id="flashcardScope"></div></details><details class="recall-info"><summary>Hoe werkt Recall?</summary><p>Herhaal woorden wanneer jij wilt; Recall helpt bepalen welke weer aan de beurt zijn. Tijdens geplande herhaling geef je aan of je een woord kende; dat bepaalt het volgende moment. Vrij oefenen en overslaan veranderen die planning niet. SRS betekent gespreide herhaling. Recall verandert je lesrank niet.</p></details>`;
+  const auto=state.flashcardSelection.auto,available=flashcardEligibleCards(),empty=!available.length?t('flashcards.emptyLearned'):!jpCards.length?t('flashcards.emptyManual'):'';
+  box.innerHTML=`<section class="card recall-start"><div class="h1">${t('flashcards.title')}</div><div class="between" style="margin-top:10px"><strong>${t('flashcards.auto')}</strong><button id="fcAutoSwitch" class="btn ${auto?'primary':''}" type="button" role="switch" aria-checked="${auto}" aria-label="${t('flashcards.auto')}" aria-describedby="fcAutoHelp" style="min-height:44px">${t(auto?'flashcards.autoOn':'flashcards.autoOff')}</button></div><div id="fcAutoHelp" class="small" style="margin-top:7px">${t(auto?'flashcards.autoHelp':'flashcards.manualHelp')}</div><div class="small" role="status" style="margin-top:7px">${t(auto?'flashcards.autoPool':'flashcards.manualPool',{count:jpCards.length})}</div><div class="muted" style="margin-top:10px">${t('flashcards.directionHelp')}</div><div class="small" style="margin-top:7px">${t('flashcards.sessionHelp')}</div>${empty?`<div class="panel" role="status" style="margin-top:10px">${empty}</div>`:''}</section>${flashcardDirectionStartHtml('jp-nl')}${flashcardDirectionStartHtml('nl-jp')}${auto?'':`<details id="recallCustom" class="card recall-custom" ${state.recallCustomOpen?'open':''}><summary>${t('flashcards.chooseScope')}</summary><div id="flashcardScope"></div></details>`}<details class="recall-info"><summary>Hoe werkt Recall?</summary><p>Herhaal woorden wanneer jij wilt; Recall helpt bepalen welke weer aan de beurt zijn. Tijdens geplande herhaling geef je aan of je een woord kende; dat bepaalt het volgende moment. Vrij oefenen en overslaan veranderen die planning niet. SRS betekent gespreide herhaling. Recall verandert je lesrank niet.</p></details>`;
+  $('fcAutoSwitch').onclick=()=>{setFlashcardAuto(!state.flashcardSelection.auto);$('fcAutoSwitch').focus()};
   $('fcStartJpNl').onclick=()=>startFlashcardSession(jpCards,['jp-nl']);$('fcFreeJpNl').onclick=()=>startFlashcardSession(flashcardSelectedCards(true,'jp-nl'),['jp-nl'],'free');
   $('fcStartNlJp').onclick=()=>startFlashcardSession(reverseCards,['nl-jp']);$('fcFreeNlJp').onclick=()=>startFlashcardSession(reverseCards,['nl-jp'],'free');
-  $('recallCustom').ontoggle=()=>{state.recallCustomOpen=$('recallCustom').open};
+  if(!auto)$('recallCustom').ontoggle=()=>{state.recallCustomOpen=$('recallCustom').open};
   const continueButton=$('fcContinue');if(continueButton)continueButton.onclick=resumeFlashcardSession;
-  renderFlashcardScope($('flashcardScope'));
+  if(!auto)renderFlashcardScope($('flashcardScope'));
 }
 function renderProgressVocabTab(box){
   if(state.progressVocabDetailId)return renderVocabDetail(box,state.progressVocabDetailId);
@@ -5429,8 +5439,10 @@ function renderStudyActivities(box){
 function setStudyDisclosure(buttonId,panelId,open){const button=$(buttonId),panel=$(panelId);if(!button||!panel)return;button.setAttribute('aria-expanded',String(open));panel.hidden=!open}
 function bindStudyDisclosure(buttonId,panelId){const button=$(buttonId);if(button)button.onclick=()=>setStudyDisclosure(buttonId,panelId,button.getAttribute('aria-expanded')!=='true')}
 function renderProgressSectionSafely(hostId,label,render){try{render()}catch(error){console.error(`Voortgangsonderdeel niet geladen: ${label}`,error);const host=$(hostId);if(host){host.dataset.renderError=String(error?.message||error);host.innerHTML=`<div class="panel" role="alert">${label} kon niet worden geladen. Je opgeslagen voortgang is behouden.</div>`}}}
-// Presentation-only selection: existing learning data and stored ranges stay intact.
-let progressSummarySelection={metric:'words',period:'all',low:0,high:100};
+// Presentation-only selection: raw measurements and stored learning data stay intact.
+let progressSummarySelection={metric:'words',period:'all',fromDay:null,toDay:null,selectedAt:null,followLatest:true};
+let progressSummaryRefresh=null;
+let progressSummaryRefreshTimer=null;
 function progressSummaryPoints(metric,sessions=studySessions()){
   if(metric==='kanji')return[]; // No kanji tracking exists in this course yet.
   if(metric==='words')return sessions.filter(s=>!s.manual&&!s.baseline).map(s=>{
@@ -5440,25 +5452,66 @@ function progressSummaryPoints(metric,sessions=studySessions()){
   let seconds=0;
   return sessions.filter(s=>!s.baseline&&Number.isFinite(Date.parse(s.startedAt))).sort((a,b)=>Date.parse(a.startedAt)-Date.parse(b.startedAt)).map(s=>({at:Date.parse(s.startedAt),value:seconds+=s.effectiveSeconds}));
 }
+// Calendar-day indices are calculated from local date fields, never elapsed 24-hour blocks.
+function progressLocalDayNumber(at){const d=new Date(at);return Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/86400000}
+function progressLocalDayDate(day){const d=new Date(day*86400000);return new Date(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate())}
+function progressDailyMeasurements(points,now=Date.now()){
+  const today=progressLocalDayNumber(now),historical=new Map(),current=[];
+  [...points].filter(p=>Number.isFinite(p.at)&&Number.isFinite(p.value)&&p.at<=now).sort((a,b)=>a.at-b.at).forEach(p=>{
+    const day=progressLocalDayNumber(p.at),point={...p,day,currentDay:day===today};
+    if(day===today)current.push(point);else historical.set(day,point);
+  });
+  return [...historical.values(),...current];
+}
+function progressSummaryWindow(selection,points,now=Date.now()){
+  const today=progressLocalDayNumber(now),days=points.filter(p=>Number.isFinite(p.at)&&p.at<=now).map(p=>progressLocalDayNumber(p.at)),first=days.length?Math.min(today,...days):today;
+  const from=selection.period==='custom'?(selection.fromDay??first):selection.period==='all'?first:Math.max(first,today-(selection.period==='week'?6:29));
+  const to=selection.period==='custom'?(selection.toDay??today):today;
+  const fromDay=Math.max(first,Math.min(today,from)),toDay=Math.max(fromDay,Math.min(today,to));
+  return{minDay:first,maxDay:today,fromDay,toDay,hasData:days.length>0};
+}
 function renderProgressSummary(host){
-  const sessions=studySessions(),snap=knowledgeSnapshot(),total=totalStudySeconds(),selection=progressSummarySelection;
-  host.innerHTML=`<div class="h2">Je voortgang</div><div class="progress-summary-controls"><label for="progressPeriod">Periode</label><select id="progressPeriod" class="select"><option value="all">Alles</option><option value="week">Laatste 7 dagen</option><option value="month">Laatste 30 dagen</option></select></div><div class="progress-period-sliders"><label>Begin<input id="progressPeriodLow" type="range" min="0" max="100" value="${selection.low}" aria-label="Begin van de grafiekperiode"></label><label>Einde<input id="progressPeriodHigh" type="range" min="0" max="100" value="${selection.high}" aria-label="Einde van de grafiekperiode"></label></div><div id="progressPeriodLabel" class="progress-period-label"></div><div id="progressSummaryChart"></div><div class="progress-metrics" aria-label="Kies een grafiek"><button type="button" class="progress-metric" data-progress-metric="words"><strong>${snap.vocab}</strong><span class="progress-metric-label">Woorden</span><span class="progress-metric-state"></span></button><button type="button" class="progress-metric" data-progress-metric="kanji"><strong>—</strong><span class="progress-metric-label">Kanji</span><span class="progress-metric-state"></span></button><button type="button" class="progress-metric" data-progress-metric="time"><strong>${formatDuration(total,true)}</strong><span class="progress-metric-label">Totale leertijd</span><span class="progress-metric-state"></span></button></div><div class="progress-chart-note">Kernwaarden tonen je huidige totaal. De grafiek toont alleen opgeslagen metingen binnen de gekozen periode.</div>`;
-  const period=$('progressPeriod'),low=$('progressPeriodLow'),high=$('progressPeriodHigh');period.value=selection.period;
+  const selection=progressSummarySelection;
+  host.innerHTML=`<div class="h2">Je voortgang</div><div class="progress-summary-controls"><label for="progressPeriod">Periode</label><select id="progressPeriod" class="select"><option value="all">Alles</option><option value="week">Laatste 7 dagen</option><option value="month">Laatste 30 dagen</option><option value="custom">Aangepast</option></select></div><div id="progressPeriodLabel" class="progress-period-label"></div><div id="progressPeriodRange" class="progress-period-range" role="group" aria-label="Grafiekperiode"><div class="progress-period-track"></div><div class="progress-period-fill"></div><input id="progressPeriodLow" type="range" step="1" aria-label="Begindatum van de grafiekperiode"><input id="progressPeriodHigh" type="range" step="1" aria-label="Einddatum van de grafiekperiode"></div><div id="progressSummaryChart"></div><div class="progress-metrics" aria-label="Kies een grafiek"><button type="button" class="progress-metric" data-progress-metric="words"><strong></strong><span class="progress-metric-label">Woorden</span><span class="progress-metric-state"></span></button><button type="button" class="progress-metric" data-progress-metric="kanji"><strong>—</strong><span class="progress-metric-label">Kanji</span><span class="progress-metric-state"></span></button><button type="button" class="progress-metric" data-progress-metric="time"><strong></strong><span class="progress-metric-label">Totale leertijd</span><span class="progress-metric-state"></span></button></div><div class="progress-chart-note">Kernwaarden tonen je huidige totaal. De grafiek toont alleen opgeslagen metingen binnen de gekozen periode.</div>`;
+  const period=$('progressPeriod'),low=$('progressPeriodLow'),high=$('progressPeriodHigh'),range=$('progressPeriodRange'),chart=$('progressSummaryChart');
+  let displayedPoints=[],windowRange=null,lastSignature='';
   const draw=()=>{
-    const all=[...progressSummaryPoints('words',sessions),...progressSummaryPoints('time',sessions)],latest=Date.now(),first=Math.min(latest,...all.map(p=>p.at)),base=selection.period==='all'?first:latest-(selection.period==='week'?7:30)*86400000,span=latest-base,from=base+span*selection.low/100,to=base+span*selection.high/100;
-    low.disabled=high.disabled=!all.length;low.setAttribute('aria-valuetext',studyDateLabel(from));high.setAttribute('aria-valuetext',studyDateLabel(to));
-    $('progressPeriodLabel').textContent=all.length?`${studyDateLabel(from)} → ${studyDateLabel(to)}`:'Nog geen gedateerde metingen';
+    const sessions=studySessions(),now=Date.now(),snap=knowledgeSnapshot(),total=totalStudySeconds(),all=[...progressSummaryPoints('words',sessions),...progressSummaryPoints('time',sessions)];
+    windowRange=progressSummaryWindow(selection,all,now);const{minDay,maxDay,fromDay,toDay}=windowRange;
+    selection.fromDay=fromDay;selection.toDay=toDay;period.value=selection.period;
+    host.querySelector('[data-progress-metric="words"] strong').textContent=snap.vocab;host.querySelector('[data-progress-metric="time"] strong').textContent=formatDuration(total,true);
+    [low,high].forEach(input=>{input.min=minDay;input.max=maxDay;input.disabled=!windowRange.hasData||minDay===maxDay});low.value=fromDay;high.value=toDay;
+    low.setAttribute('aria-valuetext',studyDateLabel(progressLocalDayDate(fromDay)));high.setAttribute('aria-valuetext',studyDateLabel(progressLocalDayDate(toDay)));
+    const percent=day=>maxDay===minDay?50:(day-minDay)/(maxDay-minDay)*100;const thumbPosition=day=>22+Math.max(0,range.clientWidth-44)*percent(day)/100;range.style.setProperty('--low',`${thumbPosition(fromDay)}px`);range.style.setProperty('--high',`${thumbPosition(toDay)}px`);
+    // When thumbs coincide, keep the inward-moving thumb available to touch.
+    low.style.zIndex=fromDay===toDay&&toDay===maxDay?'2':'0';
+    $('progressPeriodLabel').innerHTML=windowRange.hasData?`<span>Vanaf <strong>${studyDateLabel(progressLocalDayDate(fromDay))}</strong></span><span>Tot <strong>${studyDateLabel(progressLocalDayDate(toDay))}</strong></span>`:'<span>Nog geen gedateerde metingen</span>';
     host.querySelectorAll('[data-progress-metric]').forEach(b=>{const active=b.dataset.progressMetric===selection.metric;b.setAttribute('aria-pressed',String(active));b.querySelector('.progress-metric-state').textContent=active?'✓ Geselecteerd':b.dataset.progressMetric==='kanji'?'Niet bijgehouden':'Toon grafiek'});
-    const points=progressSummaryPoints(selection.metric,sessions).filter(p=>p.at>=from&&p.at<=to),chart=$('progressSummaryChart'),label=selection.metric==='words'?'Woorden':'Leertijd',valueLabel=v=>selection.metric==='time'?formatDuration(v,true):`${v} ${v===1?'woord':'woorden'}`;
-    if(!points.length){chart.innerHTML=`<div class="progress-chart-empty">${selection.metric==='kanji'?'Kanji wordt nog niet apart bijgehouden. Er is geen betrouwbare kanjigeschiedenis.':`Geen opgeslagen ${selection.metric==='words'?'woordmetingen':'leertijd'} in deze periode.`}</div>`;return}
-    const w=Math.max(280,Math.min(900,host.clientWidth||600)),h=220,L=60,R=22,T=24,B=38,max=Math.max(1,...points.map(p=>p.value)),x=p=>L+(span&&to>from?(p.at-from)/(to-from):.5)*(w-L-R),y=v=>h-B-v/max*(h-T-B),tick=v=>selection.metric==='time'?`${(v/3600).toFixed(v<36000?1:0)}u`:String(v);
-    chart.innerHTML=`<svg class="progress-summary-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${label}: opgeslagen metingen binnen de geselecteerde periode"><line class="grid" x1="${L}" y1="${T}" x2="${w-R}" y2="${T}"/><line class="grid" x1="${L}" y1="${h-B}" x2="${w-R}" y2="${h-B}"/><text x="${L-8}" y="${T+4}" text-anchor="end">${tick(max)}</text><text x="${L-8}" y="${h-B+4}" text-anchor="end">0</text><polyline class="line" points="${points.map(p=>`${x(p)},${y(p.value)}`).join(' ')}"/>${points.map(p=>`<circle cx="${x(p)}" cy="${y(p.value)}" r="4"/>`).join('')}<text x="${L}" y="${h-8}">${i18n.date(from,state.uiLanguage,{day:'numeric',month:'short'})}</text><text x="${w-R}" y="${h-8}" text-anchor="end">${i18n.date(to,state.uiLanguage,{day:'numeric',month:'short'})}</text></svg><div id="progressChartDetail" class="progress-chart-detail" aria-live="polite"></div><label class="progress-point-picker">Meting bekijken<input id="progressPointPicker" type="range" min="0" max="${points.length-1}" value="${points.length-1}" aria-label="Opgeslagen meting bekijken" ${points.length===1?'disabled':''}></label><div class="small">${selection.metric==='words'?'Momentopnames uit app-sessies; ontbrekende dagen zijn niet gereconstrueerd.':'Opgetelde effectieve sessietijd. Een historische basis telt alleen mee in het totaal.'}</div>`;
-    const picker=$('progressPointPicker'),detail=index=>{const p=points[index];chart.querySelectorAll('circle').forEach((dot,i)=>{dot.setAttribute('r',i===index?'7':'4');dot.setAttribute('stroke',i===index?'var(--card)':'none');dot.setAttribute('stroke-width','2')});picker.value=index;picker.setAttribute('aria-valuetext',`${studyDateTimeLabel(p.at)}: ${valueLabel(p.value)}`);$('progressChartDetail').textContent=`${studyDateTimeLabel(p.at)} · ${valueLabel(p.value)}`};picker.oninput=()=>detail(Number(picker.value));detail(points.length-1);
-    const svg=chart.querySelector('svg'),inspect=e=>{const rect=svg.getBoundingClientRect(),px=(e.clientX-rect.left)/rect.width*w;let nearest=0;points.forEach((p,i)=>{if(Math.abs(x(p)-px)<Math.abs(x(points[nearest])-px))nearest=i});detail(nearest)};svg.onpointerdown=inspect;svg.onpointermove=e=>{if(e.buttons)inspect(e)};
+    displayedPoints=progressDailyMeasurements(progressSummaryPoints(selection.metric,sessions),now).filter(p=>p.day>=fromDay&&p.day<=toDay);
+    lastSignature=JSON.stringify([progressLocalDayNumber(now),sessions,snap.vocab,total,host.clientWidth]);
+    const points=displayedPoints,label=selection.metric==='words'?'Woorden':'Leertijd',valueLabel=v=>selection.metric==='time'?formatDuration(v,true):`${v} ${v===1?'woord':'woorden'}`;
+    if(!points.length){chart.innerHTML=`<div class="progress-chart-empty">${selection.metric==='kanji'?'Kanji wordt nog niet apart bijgehouden. Er is geen betrouwbare kanjigeschiedenis.':!windowRange.hasData?'Nog geen opgeslagen metingen. Je eerste echte sessiemeting verschijnt hier.':`Geen opgeslagen ${selection.metric==='words'?'woordmetingen':'leertijd'} in deze periode. Kies een ruimer bereik.`}</div>`;return}
+    const w=Math.max(240,host.clientWidth-32),h=260,L=50,R=24,T=22,B=38,highest=Math.max(1,...points.map(p=>p.value)),max=selection.metric==='time'?highest*1.15:Math.ceil(highest*1.15),from=progressLocalDayDate(fromDay).getTime(),until=progressLocalDayDate(toDay+1).getTime(),x=p=>points.length===1?(L+w-R)/2:L+(p.at-from)/(until-from)*(w-L-R),y=v=>h-B-v/max*(h-T-B),tick=v=>selection.metric==='time'?`${(v/3600).toFixed(v<36000?1:0)}u`:String(Math.round(v));
+    const coordinates=points.map(p=>`${x(p)},${y(p.value)}`).join(' '),latest=points.at(-1),dateLabel=day=>i18n.date(progressLocalDayDate(day),state.uiLanguage,{day:'numeric',month:'short'});
+    chart.innerHTML=`<svg class="progress-summary-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${label}: laatste dagmetingen en echte sessiemetingen van vandaag"><polygon class="area" points="${x(points[0])},${h-B} ${coordinates} ${x(latest)},${h-B}"/>${[0,max/2,max].map(v=>`<line class="grid" x1="${L}" y1="${y(v)}" x2="${w-R}" y2="${y(v)}"/><text x="${L-9}" y="${y(v)+4}" text-anchor="end">${tick(v)}</text>`).join('')}<polyline class="line" points="${coordinates}"/><line id="progressSelectedGuide" class="selected-guide" y1="${T}" y2="${h-B}"/><circle class="latest-marker" cx="${x(latest)}" cy="${y(latest.value)}" r="5"/><circle id="progressSelectedMarker" class="selected-marker" r="7"/><text x="${L}" y="${h-9}">${dateLabel(fromDay)}</text>${toDay!==fromDay?`<text x="${w-R}" y="${h-9}" text-anchor="end">${dateLabel(toDay)}</text>`:''}</svg><div id="progressChartDetail" class="progress-chart-detail" aria-live="polite"></div><label class="progress-point-picker"><span><span>Meting bekijken</span><span id="progressPointPosition"></span></span><input id="progressPointPicker" type="range" min="0" max="${points.length-1}" step="1" aria-label="Opgeslagen meting bekijken" ${points.length===1?'disabled':''}></label><div class="small">${selection.metric==='words'?'Per afgeronde dag de laatste meting · vandaag per sessie.':'Opgetelde effectieve sessietijd · historische basis alleen in het totaal.'}</div>`;
+    const picker=$('progressPointPicker'),marker=$('progressSelectedMarker'),guide=$('progressSelectedGuide');
+    const detail=(index,user=false)=>{const p=points[index];selection.selectedAt=p.at;if(user)selection.followLatest=index===points.length-1;picker.value=index;const dateText=p.currentDay?`${studyDateTimeLabel(p.at)} · vandaag`:studyDateTimeLabel(p.at),text=`${dateText}: ${valueLabel(p.value)}`;picker.setAttribute('aria-valuetext',text);$('progressChartDetail').innerHTML=`<span>${dateText}${index===points.length-1?'<br>Nieuwste in dit bereik':''}</span><strong>${valueLabel(p.value)}</strong>`;$('progressPointPosition').textContent=points.length===1?'1 meting':`${index+1} / ${points.length}`;marker.setAttribute('cx',x(p));marker.setAttribute('cy',y(p.value));guide.setAttribute('x1',x(p));guide.setAttribute('x2',x(p));};
+    let index=points.length-1;if(!selection.followLatest&&selection.selectedAt!==null){index=0;points.forEach((p,i)=>{if(Math.abs(p.at-selection.selectedAt)<Math.abs(points[index].at-selection.selectedAt))index=i})}detail(index);
+    picker.oninput=()=>detail(Number(picker.value),true);
+    const svg=chart.querySelector('svg'),inspect=e=>{const rect=svg.getBoundingClientRect(),px=(e.clientX-rect.left)/rect.width*w;let nearest=0;points.forEach((p,i)=>{if(Math.abs(x(p)-px)<Math.abs(x(points[nearest])-px))nearest=i});detail(nearest,true)};
+    svg.onpointerdown=e=>{svg.setPointerCapture(e.pointerId);inspect(e)};svg.onpointermove=e=>{if(svg.hasPointerCapture(e.pointerId))inspect(e)};
   };
-  period.onchange=()=>{selection.period=period.value;selection.low=0;selection.high=100;low.value=0;high.value=100;draw()};
-  low.oninput=()=>{selection.low=Math.min(Number(low.value),selection.high);low.value=selection.low;draw()};high.oninput=()=>{selection.high=Math.max(Number(high.value),selection.low);high.value=selection.high;draw()};
-  host.querySelectorAll('[data-progress-metric]').forEach(b=>b.onclick=()=>{selection.metric=b.dataset.progressMetric;draw()});draw();
+  period.onchange=()=>{selection.period=period.value;selection.followLatest=true;draw()};
+  const move=(which,value)=>{const {minDay,maxDay,fromDay,toDay}=windowRange;selection.period='custom';selection.fromDay=which==='low'?Math.max(minDay,Math.min(value,toDay)):fromDay;selection.toDay=which==='high'?Math.min(maxDay,Math.max(value,fromDay)):toDay;draw()};
+  low.oninput=()=>move('low',Number(low.value));high.oninput=()=>move('high',Number(high.value));
+  // Native inputs supply keyboard and screen-reader semantics; the shared rail also accepts taps/drags.
+  range.onpointerdown=e=>{if(e.target===low||e.target===high||low.disabled)return;const rect=range.getBoundingClientRect(),position=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width)),day=Math.round(windowRange.minDay+position*(windowRange.maxDay-windowRange.minDay)),which=windowRange.fromDay===windowRange.toDay?(day<windowRange.fromDay?'low':'high'):Math.abs(day-windowRange.fromDay)<Math.abs(day-windowRange.toDay)?'low':'high';range.dataset.dragHandle=which;range.setPointerCapture(e.pointerId);(which==='low'?low:high).focus();move(which,day)};
+  range.onpointermove=e=>{if(!range.hasPointerCapture(e.pointerId)||!range.dataset.dragHandle)return;const rect=range.getBoundingClientRect(),day=Math.round(windowRange.minDay+Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width))*(windowRange.maxDay-windowRange.minDay));move(range.dataset.dragHandle,day)};
+  range.onpointerup=()=>{delete range.dataset.dragHandle};range.onpointercancel=range.onpointerup;
+  host.querySelectorAll('[data-progress-metric]').forEach(b=>b.onclick=()=>{selection.metric=b.dataset.progressMetric;selection.selectedAt=null;selection.followLatest=true;draw()});
+  progressSummaryRefresh=()=>{if(!host.isConnected||$('sessionView').classList.contains('hidden')||state.progressTab!=='progress')return;const sessions=studySessions(),signature=JSON.stringify([progressLocalDayNumber(Date.now()),sessions,knowledgeSnapshot().vocab,totalStudySeconds(),host.clientWidth]);if(signature!==lastSignature)draw()};
+  if(!progressSummaryRefreshTimer&&window.setInterval)progressSummaryRefreshTimer=window.setInterval(()=>progressSummaryRefresh?.(),30000);
+  draw();
 }
 function renderProgressDashboard(box){
   const sessions=studySessions(),recent=[...sessions].sort((a,b)=>new Date(b.startedAt)-new Date(a.startedAt));
@@ -5540,10 +5593,11 @@ $('retryBtn').onclick=retryCurrent;
 
 root.addEventListener('click',scheduleSave);
 root.addEventListener('change',scheduleSave);
-window.addEventListener('resize',()=>{detectLayout();updateStorageUI()},{passive:true});
+window.addEventListener('resize',()=>{detectLayout();updateStorageUI();progressSummaryRefresh?.()},{passive:true});
 window.addEventListener('orientationchange',()=>setTimeout(()=>{detectLayout();updateStorageUI()},120),{passive:true});
 window.addEventListener('pagehide',pauseActiveStudySession);
-document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseActiveStudySession();else resumeActiveStudySession()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseActiveStudySession();else{resumeActiveStudySession();progressSummaryRefresh?.()}});
+window.addEventListener('focus',()=>progressSummaryRefresh?.());
 
 detectLayout();
 let hadSavedProgress=false;

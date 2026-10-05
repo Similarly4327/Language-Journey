@@ -14,14 +14,14 @@ function fakeElement(id=''){
     setAttribute(){},getAttribute(){return null},removeAttribute(){},appendChild(){},prepend(){},remove(){},addEventListener(){},querySelector(){return fakeElement()},querySelectorAll(){return []},scrollIntoView(){},focus(){},getBoundingClientRect(){return{width:300,height:200,top:0,left:0}}};
 }
 
-function createRecallApp({savedState={},savedRanks={},now=new Date(2026,2,20,12).getTime()}={}){
+function createRecallApp({savedState={},savedRanks={},savedVersion=6,now=new Date(2026,2,20,12).getTime()}={}){
   const clock={now};
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
   const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,`const recallRenderFlashcardsScreen=renderFlashcardsScreen;globalThis.__probe={state,rankState,vocabCatalog,vocabById,flashcardDue,flashcardDueText,flashcardNextDueAt,flashcardCounts,flashcardSelectedCards,flashcardDirections,getNextRecallDueAt,flashcardAnswerChoices,flashcardQuestionIsValid,flashcardAnswerFeedback,flashcardAnswerState,flashcardAnswerFeedbackText,flashcardRate,flashcardSkip,flashcardNextCard,revealFlashcardOptions,startFlashcardSession,pauseFlashcardSession,resumeFlashcardSession,recordVocabEncounter,renderFlashcardsScreen,registeredAudioAsset,speakerButtonHtml,audioOverlayPlacement,show,viewMarkup(){return $('flashcardView').innerHTML},setNow(value){clock.now=value},enableRender(){renderFlashcardsScreen=recallRenderFlashcardsScreen},disableRender(){renderFlashcardsScreen=()=>{}}};})();`);
   const elements=new Map(),get=id=>{if(!elements.has(id))elements.set(id,fakeElement(id));return elements.get(id)};
   const document={body:fakeElement('body'),documentElement:fakeElement('html'),hidden:false,getElementById:get,createElement:()=>fakeElement(),querySelectorAll:()=>[],querySelector:()=>fakeElement(),addEventListener(){}};
   const storage=new Map();
-  storage.set('taal-japanse-leerapp-v1',JSON.stringify({version:6,state:savedState,ranks:savedRanks}));
+  storage.set('taal-japanse-leerapp-v1',JSON.stringify({version:savedVersion,state:savedState,ranks:savedRanks}));
   const localStorage={getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,value),removeItem:key=>storage.delete(key)};
   const documentListeners=new Map(),windowListeners=new Map(),intervals=[],windowTimeouts=[],clearedWindowTimeouts=[];
   const addListener=(listeners,type,callback)=>{if(!listeners.has(type))listeners.set(type,[]);listeners.get(type).push(callback)};
@@ -34,7 +34,7 @@ function createRecallApp({savedState={},savedRanks={},now=new Date(2026,2,20,12)
     if(relative==='language-journey-content/content.js')continue;
     vm.runInNewContext(fs.readFileSync(path.join(__dirname,'..',relative),'utf8'),context,{timeout:5000});
   }
-  vm.runInNewContext(inline,context,{timeout:5000});
+  vm.runInNewContext(inline.replace('globalThis.__probe={state,rankState,','globalThis.__probe={state,rankState,setFlashcardAuto,setFlashcardLessonSelection,introduceWordEntries,saveProgress,'),context,{timeout:5000});
   context.__probe.disableRender();
   context.__probe.fireInterval=()=>intervals.forEach(timer=>timer.callback());
   context.__probe.fireWindowEvent=type=>(windowListeners.get(type)||[]).forEach(callback=>callback());
@@ -43,10 +43,91 @@ function createRecallApp({savedState={},savedRanks={},now=new Date(2026,2,20,12)
   context.__probe.windowTimeouts=()=>windowTimeouts;
   context.__probe.clearedWindowTimeouts=()=>clearedWindowTimeouts;
   context.__probe.leaveRecall=()=>{context.__probe.state.screen='levels';context.__probe.show('main')};
+  context.__probe.savedProgress=()=>{context.__probe.saveProgress();return JSON.parse(storage.get('taal-japanse-leerapp-v1'))};
+  context.__probe.scopeMarkup=()=>get('flashcardScope').innerHTML;
   return context.__probe;
 }
 
 function localDay(date){return`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`}
+
+test('Auto follows recorded introductions and lesson ranks, never unlocked or selected levels',()=>{
+  const app=createRecallApp({savedVersion:8,savedState:{level:8,unlockedAvatarSkins:['skin-9'],introducedVocabIds:['vocab-ねこ'],flashcardSelection:{auto:true,lessonIds:['l9-1'],direction:'jp-nl'}},savedRanks:{'l7-1':{rank:'Copper'}}});
+  assert.equal(app.state.flashcardSelection.auto,true);
+  assert.ok(app.flashcardSelectedCards().some(word=>word.id==='vocab-ねこ'));
+  assert.ok(app.flashcardSelectedCards().some(word=>word.lessonId==='l7-1'));
+  assert.ok(!app.flashcardSelectedCards().some(word=>word.level===9));
+  const later=app.vocabCatalog.find(word=>word.lessonId==='l8-1');
+  app.introduceWordEntries([later]);app.introduceWordEntries([later]);
+  assert.equal(app.state.introducedVocabIds.filter(id=>id===later.id).length,1);
+  assert.equal(app.flashcardSelectedCards().filter(word=>word.id===later.id).length,1,'later lesson words join Auto without touching the manual filter');
+  app.vocabCatalog.push({...later,lessonId:'l9-1'});
+  assert.equal(app.flashcardSelectedCards().filter(word=>word.id===later.id).length,1,'a repeated catalog/lesson reference keeps one stable card');
+  app.startFlashcardSession([later,later],['jp-nl']);
+  assert.equal(app.state.flashcardSession.queue.length,1,'session input cannot duplicate a card');
+});
+
+test('Auto migration keeps explicit manual selections off and defaults all/new profiles to on',()=>{
+  for(const lessonIds of [['l4-1'],[]]){
+    const app=createRecallApp({savedVersion:8,savedState:{flashcardSelection:{lessonIds,direction:'nl-jp'}}});
+    assert.equal(app.state.flashcardSelection.auto,false);
+    assert.deepEqual(Array.from(app.state.flashcardSelection.lessonIds),lessonIds);
+    assert.equal(app.state.flashcardSelection.direction,'nl-jp');
+  }
+  assert.equal(createRecallApp().state.flashcardSelection.auto,true);
+  assert.equal(createRecallApp({savedState:{flashcardSelection:{lessonIds:null}}}).state.flashcardSelection.auto,true);
+});
+
+test('manual scope survives Auto changes, later learning and reload with both SRS directions intact',()=>{
+  const records={'vocab-ねこ::jp-nl':{dueAt:1900000000000,intervalDays:7,repetitions:3,lapses:1,lastReviewedAt:1800000000000,lastGrade:'knew'},'vocab-ねこ::nl-jp':{dueAt:1900100000000,intervalDays:3,repetitions:2,lapses:2,lastReviewedAt:1800100000000,lastGrade:'again'}};
+  const app=createRecallApp({savedVersion:8,savedState:{introducedVocabIds:['vocab-ねこ'],flashcardProgress:{version:1,cards:records}}});
+  app.setFlashcardAuto(false);
+  assert.deepEqual(Array.from(app.state.flashcardSelection.lessonIds),['l4-1'],'first manual selection captures currently available lessons');
+  const later=app.vocabCatalog.find(word=>word.lessonId==='l8-1');app.introduceWordEntries([later]);
+  assert.ok(!app.flashcardSelectedCards().some(word=>word.id===later.id),'manual pool stays targeted as progress grows');
+  app.setFlashcardAuto(true);
+  assert.ok(app.flashcardSelectedCards().some(word=>word.id===later.id));
+  assert.deepEqual(Array.from(app.state.flashcardSelection.lessonIds),['l4-1']);
+  const saved=app.savedProgress(),reloaded=createRecallApp({savedVersion:saved.version,savedState:saved.state,savedRanks:saved.ranks});
+  assert.equal(reloaded.state.flashcardSelection.auto,true);
+  assert.ok(reloaded.flashcardSelectedCards().some(word=>word.id===later.id));
+  reloaded.setFlashcardAuto(false);
+  assert.deepEqual(Array.from(reloaded.state.flashcardSelection.lessonIds),['l4-1']);
+  assert.ok(!reloaded.flashcardSelectedCards().some(word=>word.id===later.id));
+  assert.deepEqual(JSON.parse(JSON.stringify(reloaded.state.flashcardProgress.cards)),records);
+  const manualSaved=reloaded.savedProgress(),manualReload=createRecallApp({savedVersion:manualSaved.version,savedState:manualSaved.state});
+  assert.equal(manualReload.state.flashcardSelection.auto,false);
+  assert.deepEqual(Array.from(manualReload.state.flashcardSelection.lessonIds),['l4-1']);
+  assert.deepEqual(JSON.parse(JSON.stringify(manualReload.state.flashcardProgress.cards)),records);
+  manualReload.startFlashcardSession(manualReload.flashcardSelectedCards(),['nl-jp'],'free');
+  const session=manualReload.state.flashcardSession;session.revealed=true;manualReload.flashcardRate('knew');
+  assert.deepEqual(JSON.parse(JSON.stringify(manualReload.state.flashcardProgress.cards)),records,'free practice leaves both direction schedules unchanged');
+});
+
+test('manual selection stores exact available lesson IDs rather than a future all-lessons wildcard',()=>{
+  const app=createRecallApp({savedState:{introducedVocabIds:['vocab-ねこ']}});app.setFlashcardAuto(false);app.setFlashcardLessonSelection(['l4-1','l4-1']);
+  assert.deepEqual(Array.from(app.state.flashcardSelection.lessonIds),['l4-1']);
+  app.setFlashcardLessonSelection([]);app.setFlashcardAuto(true);app.setFlashcardAuto(false);
+  assert.equal(app.flashcardSelectedCards().length,0,'an intentionally empty manual selection remains empty');
+  assert.deepEqual(Array.from(app.state.flashcardSelection.lessonIds),[]);
+});
+
+test('Recall distinguishes no learned words from an empty manual pool and hides unavailable choices',()=>{
+  const app=createRecallApp();app.renderFlashcardsScreen();
+  assert.match(app.viewMarkup(),/Je hebt nog geen woorden behandeld/);
+  assert.match(app.viewMarkup(),/aria-describedby="fcAutoHelp"/);
+  assert.doesNotMatch(app.viewMarkup(),/id="flashcardScope"/);
+  const card=app.vocabCatalog.find(word=>word.id==='vocab-ねこ');app.introduceWordEntries([card]);app.setFlashcardAuto(false);app.setFlashcardLessonSelection([]);app.renderFlashcardsScreen();
+  const markup=app.viewMarkup();assert.match(markup,/Je handmatige selectie bevat geen beschikbare woorden/);
+  assert.match(markup,/id="recallCustom"/);assert.match(markup,/Handmatige selectie · 0 actieve woorden/);
+  app.enableRender();app.renderFlashcardsScreen();
+  // The scope counts only encountered words, even if the lesson introduces more.
+  assert.match(app.scopeMarkup(),/1 woorden/);
+  assert.match(app.scopeMarkup(),/data-fc-lesson="l4-1"/);
+  assert.doesNotMatch(app.scopeMarkup(),/data-fc-level="[5-9]"/);
+  assert.ok(!app.flashcardSelectedCards().length);
+  app.setFlashcardAuto(true);assert.equal(app.flashcardSelectedCards().length,1);
+  assert.equal(app.state.flashcardSession,null,'Auto never starts a mandatory session');
+});
 
 test('audio coach only exposes registered local recordings and chooses the opposite viewport half',()=>{
   const asset={id:'audio-test-greeting',speakerId:'ren',path:'audio/greeting.mp3',textJa:'こんにちは'};
@@ -297,7 +378,8 @@ test('Recall start screen clearly separates due SRS cards from free practice',()
   assert.match(markup,/Later gepland/);
   assert.match(markup,/Start geplande herhaling/);
   assert.match(markup,/Vrij oefenen/);
-  assert.match(markup,/Kies andere levels of lessen/);
+  assert.match(markup,/role="switch" aria-checked="true"/);
+  assert.doesNotMatch(markup,/id="recallCustom"/,'manual scope is hidden in Auto');
 });
 
 test('Recall rebuilds new cards from ranked Level 7, partial Level 8, and later lesson data',()=>{
@@ -321,6 +403,7 @@ test('Recall rebuilds new cards from ranked Level 7, partial Level 8, and later 
   assert.equal(app.state.flashcardSession.queue.length,actual.length-1,'the normal session includes every new/due card and leaves a later-due card scheduled');
   assert.ok(!app.state.flashcardSession.queue.some(item=>item.cardId===reviewedId),'later-due history is not reset or forced due');
   app.state.flashcardSelection.lessonIds=['l8-2'];
+  app.state.flashcardSelection.auto=false;
   assert.deepEqual(app.flashcardSelectedCards().map(word=>word.lessonId),actual.filter(word=>word.lessonId==='l8-2').map(word=>word.lessonId),'lesson filters scope the same eligible pool');
   const reloaded=createRecallApp({savedState:{introducedVocabIds:app.state.introducedVocabIds,flashcardProgress:savedState.flashcardProgress},savedRanks:ranks});
   assert.deepEqual(reloaded.flashcardSelectedCards().map(word=>word.id).sort(),expected.map(word=>word.id).sort(),'offline reload preserves the same unique eligible pool');

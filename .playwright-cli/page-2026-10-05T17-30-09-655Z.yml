@@ -1,0 +1,57 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - button "App-home" [ref=e6] [cursor=pointer]: ⌂
+    - navigation "Hoofdnavigatie" [ref=e8]:
+      - button "Leren" [ref=e9] [cursor=pointer]
+      - button "Recall" [ref=e10] [cursor=pointer]
+      - button "Voortgang" [ref=e11] [cursor=pointer]
+  - generic [ref=e12]:
+    - generic [ref=e13]:
+      - generic [ref=e14]: Mijn Japanse leerreis
+      - generic [ref=e15]: Je profiel, groei en bekende bouwstenen.
+    - generic [ref=e16]:
+      - tablist "Voortgang" [ref=e17]:
+        - tab "Voortgang" [selected] [ref=e18] [cursor=pointer]
+        - tab "Kennis" [ref=e19] [cursor=pointer]
+      - generic [ref=e20]:
+        - generic [ref=e21]:
+          - generic [ref=e22]: Je voortgang
+          - generic [ref=e23]:
+            - generic [ref=e24]: Periode
+            - combobox "Periode" [ref=e25]:
+              - option "Alles" [selected]
+              - option "Laatste 7 dagen"
+              - option "Laatste 30 dagen"
+              - option "Aangepast"
+          - generic [ref=e26]: Nog geen gedateerde metingen
+          - group "Grafiekperiode" [ref=e28]:
+            - slider "Begindatum van de grafiekperiode" [disabled]: "20731"
+            - slider "Einddatum van de grafiekperiode" [disabled]: "20731"
+          - generic [ref=e30]: Nog geen opgeslagen metingen. Je eerste echte sessiemeting verschijnt hier.
+          - generic "Kies een grafiek" [ref=e32]:
+            - button "64 Woorden ✓ Geselecteerd" [pressed] [ref=e33] [cursor=pointer]:
+              - strong [ref=e34]: "64"
+              - generic [ref=e35]: Woorden
+              - generic [ref=e36]: ✓ Geselecteerd
+            - button "— Kanji Niet bijgehouden" [ref=e37] [cursor=pointer]:
+              - strong [ref=e38]: —
+              - generic [ref=e39]: Kanji
+              - generic [ref=e40]: Niet bijgehouden
+            - button "0m Totale leertijd Toon grafiek" [ref=e41] [cursor=pointer]:
+              - strong [ref=e42]: 0m
+              - generic [ref=e43]: Totale leertijd
+              - generic [ref=e44]: Toon grafiek
+          - generic [ref=e45]: Kernwaarden tonen je huidige totaal. De grafiek toont alleen opgeslagen metingen binnen de gekozen periode.
+        - generic [ref=e46]:
+          - generic [ref=e47]: Je voortgang bestond al vóór de tijdmeting
+          - generic [ref=e48]: Ranks en mastery blijven volledig behouden. Er wordt geen studietijd verzonnen; je kunt wel één transparante historische startwaarde toevoegen.
+          - generic [ref=e49]:
+            - button "Historische basis toevoegen" [ref=e50] [cursor=pointer]
+            - button "Niet nu" [ref=e51] [cursor=pointer]
+        - button "Recente activiteiten (0)" [ref=e53] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e55]: ⌄
+        - button "Urenanalyse" [ref=e57] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e59]: ⌄
+        - button "Tijdlijn" [ref=e61] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e63]: ⌄
+    - button "Terug" [ref=e64] [cursor=pointer]
