@@ -378,7 +378,7 @@ test('Recall start screen clearly separates due SRS cards from free practice',()
   assert.match(markup,/Later gepland/);
   assert.match(markup,/Start geplande herhaling/);
   assert.match(markup,/Vrij oefenen/);
-  assert.match(markup,/role="switch" aria-checked="true"/);
+  assert.match(markup,/id="fcAutoOn"[^>]*aria-pressed="true"/);
   assert.doesNotMatch(markup,/id="recallCustom"/,'manual scope is hidden in Auto');
 });
 

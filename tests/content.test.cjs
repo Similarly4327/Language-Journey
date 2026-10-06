@@ -32,7 +32,7 @@ test('app script parses, imports registry and preserves storage key',()=>{
   assert.match(html,/language-journey-content\/content\.js/);
   const platform=fs.readFileSync(path.join(__dirname,'../platform.js'),'utf8');
   assert.ok(platform.includes("storageKey:'taal-japanse-leerapp-v1'"));
-  assert.match(html,/const STORAGE_VERSION=8/);
+  assert.match(html,/const STORAGE_VERSION=9/);
 });
 test('knowledge state is cumulative and excludes later and legacy words',()=>{
   const first=content.getKnowledgeState('4-1'),last=content.getKnowledgeState('10-complete');
@@ -160,7 +160,7 @@ test('foundation lesson labels and vocabulary timing match the taught sequence',
   assert.match(lesson('l6-1').review,/わたし, ひと en ともだち.*geen nieuwe woorden/);
   assert.match(lesson('l6-2').grammar,/eigen ouders.*iemand anders.*aanspreekt/);
   assert.match(lesson('l7-2').goal,/vier personen/);
-  assert.equal(lesson('l8-6').title,'Een plan met dag en tijd');
+  assert.equal(lesson('l8-6').title,'Een eenvoudige agenda lezen');
   assert.ok(!lesson('l8-6').wordIds.includes('vocab-やくそく'));
   assert.ok(lesson('l10-3').wordIds.includes('vocab-やくそく'));
   assert.equal(word('vocab-やくそく').introducedAt,'10-3');
