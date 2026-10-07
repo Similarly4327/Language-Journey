@@ -378,6 +378,34 @@ test('Level 8 checks and exams target every month, clock concept and agenda dime
   }
 });
 
+test('Level 8 time questions ask for the same granularity they display',()=>{
+  const probe=createCrashCourseProbe(),course=probe.advancedCourses[7],hours=course.lessons[4],minutes=course.lessons[5],agenda=course.lessons[6],minutePool=probe.advancedQuestionPool(course,minutes,5).current,hourPool=probe.advancedQuestionPool(course,hours,4).current;
+  const question=(pool,id)=>{const found=pool.find(item=>item.sourceId===`level8-${id}`);assert.ok(found,`missing question ${id}`);return found};
+  const fullTimeIds=['clock-12:05','clock-12:15','clock-12:30','clock-12:45','apply-two','apply-ten'];
+  for(const id of fullTimeIds){const item=question(minutePool,id);assert.match(item.correct,/^\d{2}:\d{2}$/);assert.ok(item.choices.every(choice=>/^\d{2}:\d{2}$/.test(choice)),`${id} uses full-time options consistently`)}
+  assert.equal(question(minutePool,'clock-12:30').correct,'12:30','half past twelve is the full digital time');
+  assert.equal(question(minutePool,'apply-two').correct,'13:02','ごご is consistently converted to 24-hour notation');
+  assert.equal(question(minutePool,'apply-ten').correct,'19:10');
+  const minuteOnly=question(minutePool,'minute-word-3');
+  assert.match(minuteOnly.prompt,/minutenuitdrukking.*12:15/i);
+  assert.match(minuteOnly.instruction,/minutenuitdrukking/i);
+  assert.equal(minuteOnly.correct,'じゅうごふん');
+  const half=question(minutePool,'minute-word-6');
+  assert.match(half.prompt,/Wat betekent はん.*12:30/);
+  assert.equal(half.correct,'halfuur na het genoemde uur');
+  assert.ok(half.choices.every(choice=>!/[ぁ-ヿ]/u.test(choice)),'the half-word meaning question uses Dutch meanings throughout');
+  assert.ok(!half.choices.includes('dertig minuten'),'the half-hour distractors do not contain another valid 30-minute answer');
+  assert.equal(question(hourPool,'hour-word-12').correct,'ごぜん');
+  assert.match(question(hourPool,'hour-word-12').prompt,/dagdeel/i);
+  assert.equal(question(hourPool,'digital-7').correct,'ごぜん しちじ');
+  const agendaTimes=probe.advancedQuestionPool(course,agenda,6).current.filter(item=>item.sourceId.includes('-time'));
+  assert.ok(agendaTimes.length>=4);
+  for(const item of agendaTimes.filter(item=>/^level8-agenda-.*time/.test(item.sourceId))){
+    assert.match(item.correct,/^\d{2}:\d{2}$/);
+    assert.ok(item.choices.every(choice=>/^\d{2}:\d{2}$/.test(choice)),`${item.sourceId} uses full-time options consistently`);
+  }
+});
+
 test('Level 8 migration preserves old achievements without inventing expanded mastery or SRS history',()=>{
   const srs={'vocab-いちがつ::jp-nl':{dueAt:1900000000000,intervalDays:8,repetitions:4,lapses:1,lastReviewedAt:1800000000000,lastGrade:'knew'},'vocab-いちがつ::nl-jp':{dueAt:1900100000000,intervalDays:3,repetitions:2,lapses:0,lastReviewedAt:1800100000000,lastGrade:'again'}};
   const ranks={'l8-4':{rank:'Gold',last:.95,attempts:3},'l8-5':{rank:'Silver',last:.9,attempts:2},'l8-6':{rank:'Copper',last:.8,attempts:1},'l4-1':{rank:'Gold'}};

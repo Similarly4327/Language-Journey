@@ -36,6 +36,8 @@
   --jp-chip-size:19px;
   --answer-body-size:19px;
   --answer-compact-size:16px;
+  --quiz-text-size:clamp(18px,2vw,20px);
+  --quiz-jp-size:clamp(26px,3vw,32px);
 }
 @media(prefers-color-scheme:dark){
   :root{
@@ -376,6 +378,18 @@ section{
   color:var(--text)
 }
 .prompt--example{font-size:var(--jp-example-size);line-height:1.4}
+/* Every quiz route uses text roles, never the display size for kana flashcards. */
+.question #qHint{min-height:0;font-size:14px;line-height:1.4;margin-bottom:4px}
+.question .question-context{margin:6px 0;padding:8px 10px;font-size:15px;line-height:1.45;font-weight:500;text-align:left}
+.question .question-context--jp{font-size:clamp(22px,3vw,26px);line-height:1.5;text-align:center}
+.question .prompt{font-size:var(--quiz-text-size);line-height:1.4;padding:8px 0 12px;text-align:left;word-break:normal}
+.question .prompt--jp{font-size:var(--quiz-jp-size);line-height:1.45;text-align:center}
+.question .audio-feedback:empty{display:none}
+#quizTitle{font-size:16px;line-height:1.35}
+#quizMeta{font-size:12px;line-height:1.4;margin-top:3px}
+#qNow,#qTotal{font-size:13px}
+body[data-view="quiz"] .app-header{position:relative;top:auto}
+.app:has(#mainView:not(.hidden) .word-crash-course) .app-header{position:relative;top:auto}
 .choices{
   display:grid!important;
   width:100%!important;
@@ -1118,11 +1132,11 @@ body[data-scene="classroom"]::after{
   box-shadow:0 3px 12px rgba(32,48,52,.1);
 }
 .recall-start-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.recall-auto-control{margin-left:auto;flex-shrink:0}
-.recall-auto-label{padding:0 4px;font-size:12px;font-weight:760;color:var(--muted)}
-.recall-auto-control .app-nav-item{min-height:40px;min-width:44px;padding:6px 10px;font-size:12px;cursor:pointer}
-.recall-auto-control .app-nav-item[aria-pressed="true"]{background:linear-gradient(135deg,#d65356,#bf363d);color:#fff;box-shadow:0 3px 10px rgba(144,37,43,.2)}
-.recall-auto-control .app-nav-item:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.recall-start-header .recall-info{margin:0;padding:0}
+.recall-start-header .recall-info summary{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;font-size:24px;list-style:none}
+.recall-start-header .recall-info summary::after{display:none}
+.recall-start-header .recall-info[open]{flex-basis:100%}
+.recall-custom summary .small{display:block;margin-top:4px;font-weight:400}
 .flashcard-intro{display:grid;gap:10px;grid-template-columns:minmax(0,1fr) auto;align-items:center}
 .flashcard-stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:10px}
 .flashcard-stat{padding:9px;background:var(--panel);border-radius:11px;text-align:center}
@@ -1142,9 +1156,14 @@ body[data-scene="classroom"]::after{
 .flashcard-answer-options.is-hidden .flashcard-answer-choice{filter:blur(7px);user-select:none;pointer-events:none}
 .flashcard-options-reveal{position:absolute;inset:0;z-index:1;width:100%;min-height:100%;border:1px solid color-mix(in srgb,var(--border) 75%,transparent);border-radius:13px;background:color-mix(in srgb,var(--panel) 76%,transparent);backdrop-filter:blur(2px);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer}
 .flashcard-options-reveal:hover{color:var(--text);background:color-mix(in srgb,var(--panel) 86%,transparent)}
-#qChoices.quiz-options-hidden{position:relative;min-height:54px}
-#qChoices.quiz-options-hidden button:not(.quiz-options-reveal){filter:blur(7px);user-select:none;pointer-events:none}
-.quiz-options-reveal{position:absolute;inset:0;z-index:4;width:100%;min-height:54px;border:1px solid color-mix(in srgb,var(--border) 75%,transparent);border-radius:13px;background:color-mix(in srgb,var(--panel) 78%,transparent);backdrop-filter:blur(2px);color:var(--text);font-weight:750;cursor:pointer}
+.word-crash-course .flashcard-front{min-height:0;padding:12px 0}
+.word-crash-course .flashcard-face-main{font-size:var(--quiz-text-size);line-height:1.4}
+.word-crash-course .flashcard-face-main.quiz-face--jp{font-size:var(--quiz-jp-size);line-height:1.45}
+.word-crash-course .flashcard-answer-options.is-hidden .flashcard-answer-choice{display:none}
+.word-crash-course .flashcard-options-reveal{position:static;min-height:48px;padding:12px;background:var(--panel);color:var(--text);font:inherit;font-weight:750}
+#qChoices.quiz-options-hidden{min-height:48px;grid-template-columns:1fr!important}
+#qChoices.quiz-options-hidden button:not(.quiz-options-reveal){display:none}
+.quiz-options-reveal{position:static;width:100%;min-height:48px;padding:12px;border:1px solid color-mix(in srgb,var(--border) 75%,transparent);border-radius:13px;background:var(--panel);color:var(--text);font:inherit;font-weight:750;cursor:pointer}
 .quiz-options-reveal:hover,.quiz-options-reveal:focus-visible{background:color-mix(in srgb,var(--panel) 90%,transparent)}
 .flashcard-answer-choice{width:100%;min-height:44px;text-align:left;white-space:normal;font-size:var(--jp-answer-size);line-height:1.35;overflow-wrap:anywhere}
 .flashcard-avatar{margin:0 0 2px}
@@ -1155,6 +1174,8 @@ body[data-scene="classroom"]::after{
 .flashcard-answer-choice.is-correct{border-color:var(--good,#39865c);background:color-mix(in srgb,var(--good,#39865c) 14%,var(--panel));box-shadow:inset 0 0 0 1px var(--good,#39865c)}
 .flashcard-answer-choice.is-incorrect{border-color:var(--danger,#b84b4b);background:color-mix(in srgb,var(--danger,#b84b4b) 10%,var(--panel))}
 .flashcard-feedback-status{min-height:20px;margin-top:8px;text-align:center;font-weight:700;white-space:pre-line}
+.recall-source{margin-top:8px;font-size:15px;line-height:1.45;overflow-wrap:anywhere}
+.flashcard-actions .btn{min-height:48px;padding:10px 8px;font-size:14px;white-space:nowrap}
 .flashcard-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
 .flashcard-next-due{padding:10px;background:var(--panel);border-radius:11px}
 .audio-speaker{display:inline-grid;place-items:center;vertical-align:middle;width:34px;height:34px;margin:0 4px;border:1px solid var(--border);border-radius:50%;background:var(--panel);color:var(--text);font-size:17px;line-height:1;cursor:pointer;touch-action:manipulation}
@@ -2160,15 +2181,17 @@ function renderDictionaryTab(box){
   const draw=()=>{const q=input.value.trim(),list=q?dictionarySearch(q):[...dictionaryGrammar.filter(entry=>dictionaryGrammarIsKnown(entry)),...known.map(v=>dictionaryById[v.id]).filter(Boolean)];$('dictionaryResultCount').textContent=`${list.length} ${list.length===1?'resultaat':'resultaten'}${q?' voor “'+q+'”':''}`;results.innerHTML=list.length?list.slice(0,80).map(e=>`<button type="button" aria-pressed="${e.id===state.dictionarySelectedId}" class="dictionary-result" data-dictionary-select="${escapeHtml(e.id)}"><span><strong lang="ja">${escapeHtml(e.jp)}</strong> · ${escapeHtml(e.meaning)}<small>${escapeHtml(e.label)}${e.kind==='woord'&&!knowledgeWordIsKnown(e)?' · Vooruitblik':''}</small></span><span class="dictionary-kind">${escapeHtml(e.kind)}</span></button>`).join(''):'<div class="panel">Geen treffers. Probeer de Japanse schrijfwijze, romaji of een andere Nederlandse betekenis.</div>';results.querySelectorAll('[data-dictionary-select]').forEach(b=>b.onclick=()=>showArticle(b.dataset.dictionarySelect));if(!state.dictionarySelectedId||!dictionaryById[state.dictionarySelectedId])article.innerHTML='<div class="muted">Kies een resultaat om de betekenis en lescontext te bekijken.</div>';else showArticle(state.dictionarySelectedId)};
   input.value=state.dictionaryQuery||'';input.oninput=()=>{state.dictionaryQuery=input.value;state.dictionarySelectedId=null;draw()};draw()
 }
-let dictionaryReturnFocus=null,dictionaryReturnScroll=null;
+let dictionaryReturnFocus=null,dictionaryReturnScroll=null,dictionaryRecallOpen=false;
 function openDictionaryModal(id,lessonId='',sentence='',meaning=''){
   const entry=dictionaryById[id],modal=$('dictionaryModal');if(!entry||!modal)return;
+  dictionaryRecallOpen=state.screen==='flashcards'&&!!state.flashcardSession?.feedback;
+  if(dictionaryRecallOpen)cancelRecallFeedbackAdvance();
   dictionaryReturnFocus=document.activeElement;dictionaryReturnScroll={x:window.scrollX,y:window.scrollY};
   const lesson=lessonId?langLessons.find(l=>l.id===lessonId)||smallLessons.find(l=>l.id===lessonId)||Object.values(advancedCourses).flatMap(c=>c.lessons).find(l=>l.id===lessonId):null;
   showDictionaryArticle($('dictionaryModalBody'),entry,{sentence,meaning,lessonLabel:lesson?.title||''});
   modal.classList.remove('hidden');document.body.style.overflow='hidden';$('dictionaryClose').focus()
 }
-function closeDictionaryModal(){const modal=$('dictionaryModal');if(!modal||modal.classList.contains('hidden'))return;modal.classList.add('hidden');document.body.style.overflow='';if(dictionaryReturnScroll)window.scrollTo(dictionaryReturnScroll.x,dictionaryReturnScroll.y);if(dictionaryReturnFocus?.isConnected)dictionaryReturnFocus.focus({preventScroll:true});dictionaryReturnFocus=null;dictionaryReturnScroll=null}
+function closeDictionaryModal(){const modal=$('dictionaryModal');if(!modal||modal.classList.contains('hidden'))return;modal.classList.add('hidden');document.body.style.overflow='';if(dictionaryReturnScroll)window.scrollTo(dictionaryReturnScroll.x,dictionaryReturnScroll.y);if(dictionaryReturnFocus?.isConnected)dictionaryReturnFocus.focus({preventScroll:true});dictionaryReturnFocus=null;dictionaryReturnScroll=null;const resume=dictionaryRecallOpen;dictionaryRecallOpen=false;if(resume)scheduleRecallFeedbackAdvance(state.flashcardSession)}
 
 function blankDirectionStats(){
   return{
@@ -3142,6 +3165,7 @@ function cancelRecallFeedbackAdvance(resetFeedback=false){
   if(resetFeedback&&session?.status==='active'&&recallFeedbackWasCorrect(session)&&session.feedback.until!==null){session.feedback.until=null;scheduleSave()}
 }
 function scheduleRecallFeedbackAdvance(session){
+  if(dictionaryRecallOpen)return;
   if(!session||state.flashcardSession!==session||session.status!=='active'||!recallFeedbackWasCorrect(session))return;
   const feedback=session.feedback,position=session.position;
   if(recallFeedbackTimer!==null&&recallFeedbackTimerSession===session&&recallFeedbackTimerPosition===position&&recallFeedbackTimerFeedback===feedback)return;
@@ -4210,7 +4234,7 @@ function renderWordCrashCourse(){
     ?`<div class="flashcard-answer-options${question.revealed?'':' is-hidden'}"><div class="flashcard-answer-choice" style="padding:12px">${escapeHtml(word.jp)}${word.romaji?` · ${escapeHtml(word.romaji)}`:''}<br>${escapeHtml(word.meaning)}</div>${question.revealed&&!question.answered?'<div class="grid2" style="margin-top:8px"><button id="wordCrashSelfKnown" class="btn primary">Dit wist ik</button><button id="wordCrashSelfAgain" class="btn">Nog oefenen</button></div>':''}${!question.revealed?'<button id="wordCrashReveal" class="flashcard-options-reveal" type="button" aria-label="Toon antwoorden">Toon antwoorden</button>':''}</div>`
     :`<div class="flashcard-answer-options${question.revealed?'':' is-hidden'}">${question.choices.map((choice,index)=>{const correct=question.answered&&wordCrashCourseAccepts(question,choice),wrong=question.answered&&choice===question.feedback?.selected&&!question.feedback.correct,lock=!question.revealed&&!question.answered?'disabled aria-hidden="true" tabindex="-1"':question.answered?'disabled':'';return`<button id="wordCrashChoice${index}" class="btn flashcard-answer-choice${correct?' is-correct':wrong?' is-incorrect':''}" type="button" ${lock}>${escapeHtml(choice)}</button>`}).join('')}${!question.revealed?'<button id="wordCrashReveal" class="flashcard-options-reveal" type="button" aria-label="Toon antwoorden">Toon antwoorden</button>':''}</div>`;
   const feedback=question.answered?`<div class="flashcard-feedback-status" role="status" aria-live="polite">${question.feedback.correct?'Goed!':`Niet goed. Juiste antwoord: ${escapeHtml(word.jp)} · ${escapeHtml(word.romaji||word.kana||'')} · ${escapeHtml(word.meaning)}`}</div>${question.feedback.correct?'':'<button id="wordCrashNext" class="btn primary" style="width:100%;margin-top:8px">Volgende →</button>'}`:'';
-  host.innerHTML=`<section class="card word-crash-course"><div class="between"><div><div class="eyebrow">Oefenen · ${escapeHtml(course.lesson.title)}${course.lesson.microsteps?` · blok ${state.monthLearning.block+1} van 6`:''}</div><div class="small">Vraag ${course.index+1} van ${total} · 4 vragen per nieuw woord</div></div><button id="wordCrashExit" class="btn tiny" type="button">Onderbreek</button></div><div class="progress" style="margin-top:9px"><div style="width:${Math.min(100,(course.index+1)/Math.max(1,total)*100)}%"></div></div><div class="flashcard-front"><div><div class="flashcard-face-main">${escapeHtml(front)}</div><div class="flashcard-face-sub">${question.direction==='jp-nl'?'Kies de Nederlandse betekenis':'Kies de Japanse vorm in kana'}</div></div></div>${optionPanel}${feedback}</section>`;
+  host.innerHTML=`<section class="card word-crash-course"><div class="between"><div><div class="eyebrow">Oefenen · ${escapeHtml(course.lesson.title)}${course.lesson.microsteps?` · blok ${state.monthLearning.block+1} van 6`:''}</div><div class="small">Vraag ${course.index+1} van ${total} · 4 vragen per nieuw woord</div></div><button id="wordCrashExit" class="btn tiny" type="button">Onderbreek</button></div><div class="progress" style="margin-top:9px"><div style="width:${Math.min(100,(course.index+1)/Math.max(1,total)*100)}%"></div></div><div class="flashcard-front"><div><div class="flashcard-face-main${quizTextIsJapanese(front)?' quiz-face--jp':' '}">${escapeHtml(front)}</div><div class="flashcard-face-sub">${question.direction==='jp-nl'?'Kies de Nederlandse betekenis':'Kies de Japanse vorm in kana'}</div></div></div>${optionPanel}${feedback}</section>`;
   $('wordCrashExit').onclick=leaveWordCrashCourse;
   if(!question.revealed)$('wordCrashReveal').onclick=()=>{question.revealed=true;question.answerUnlockAt=Date.now()+180;renderWordCrashCourse()};
   if(question.selfReveal&&question.revealed&&!question.answered){$('wordCrashSelfKnown').onclick=()=>answerWordCrashCourse(null,true);$('wordCrashSelfAgain').onclick=()=>answerWordCrashCourse(null,false)}
@@ -4679,7 +4703,25 @@ function startQuiz(cfg){beginStudySession(quizStudyMeta(cfg));state.lastConfig=c
 function currentQ(){return state.quiz.questions[state.quiz.index]}
 function revealQuizOptions(){const c=state.quiz;if(!c||c.optionsRevealed)return false;c.optionsRevealed=true;c.answerUnlockAt=Date.now()+180;const box=$('qChoices');box.classList.remove('quiz-options-hidden');box.querySelector('.quiz-options-reveal')?.remove();return true}
 function hideQuizOptions(box){const c=state.quiz;if(!c||!box.querySelector('button'))return;c.optionsRevealed=false;c.answerUnlockAt=0;box.classList.add('quiz-options-hidden');const reveal=document.createElement('button');reveal.type='button';reveal.className='quiz-options-reveal';reveal.textContent='Toon antwoorden';reveal.setAttribute('aria-label','Toon antwoorden');reveal.onclick=event=>{event.preventDefault();event.stopPropagation();revealQuizOptions()};box.appendChild(reveal)}
-function renderQuestion(){if(quizFeedbackTimer)clearTimeout(quizFeedbackTimer);quizFeedbackTimer=null;quizAnswerToken++;hideAvatarAudioOverlay();const c=state.quiz,q=currentQ();(q.vocabIds||[]).forEach(recordVocabEncounter);$('quizTitle').textContent=c.title;$('quizMeta').textContent=c.official?'Deze toets kan de sessierank maximaal één stap verhogen.':'Vrij oefenen / snelle check · geen rankstap.';$('qNow').textContent=c.index+1;$('qTotal').textContent=c.questions.length;$('qBar').style.width=(c.index/c.questions.length*100)+'%';$('qScore').textContent='Goed: '+c.score;$('qFeedback').textContent='';$('qHint').textContent='';$('qContext').textContent=q.context||'';$('qContext').classList.toggle('hidden',!q.context);$('qContext').classList.toggle('question-context--jp',q.contextLanguage==='ja');$('qContext').classList.toggle('question-context--schedule',q.contextPresentation==='schedule');$('qPrompt').className='prompt';$('qPrompt').classList.toggle('prompt--schedule',q.contextPresentation==='schedule');$('qPrompt').removeAttribute('style');$('qPromptAudio').innerHTML='';$('qCorrectAudio').innerHTML='';$('qCorrectAudio').dataset.autoNext='false';const box=$('qChoices');box.className='choices';box.removeAttribute('style');box.innerHTML='';if(q.type==='kana')renderKanaQ(c,q,box);else if(q.type==='scriptReverse')renderScriptReverseQ(c,q,box);else if(q.type==='number')renderNumberQ(c,q,box);else if(q.type==='math')renderMathQ(c,q,box);else renderLessonQ(c,q,box);hideQuizOptions(box);const prompt=$('qPrompt').textContent.trim();$('qPromptAudio').innerHTML=q.kind==='build'||q.promptAudio===false?'':speakerButtonHtml(prompt,q.promptAudioKey||q.audioKey);updateQuizAvatar()}
+function renderQuestion(){if(quizFeedbackTimer)clearTimeout(quizFeedbackTimer);quizFeedbackTimer=null;quizAnswerToken++;hideAvatarAudioOverlay();const c=state.quiz,q=currentQ();(q.vocabIds||[]).forEach(recordVocabEncounter);$('quizTitle').textContent=c.title;$('quizMeta').textContent=c.official?'Deze toets kan de sessierank maximaal één stap verhogen.':'Vrij oefenen / snelle check · geen rankstap.';$('qNow').textContent=c.index+1;$('qTotal').textContent=c.questions.length;$('qBar').style.width=(c.index/c.questions.length*100)+'%';$('qScore').textContent='Goed: '+c.score;$('qFeedback').textContent='';$('qHint').textContent='';$('qContext').textContent=q.context||'';$('qContext').classList.toggle('hidden',!q.context);$('qContext').classList.toggle('question-context--jp',q.contextLanguage==='ja');$('qContext').classList.toggle('question-context--schedule',q.contextPresentation==='schedule');$('qPrompt').className='prompt';$('qPrompt').classList.toggle('prompt--schedule',q.contextPresentation==='schedule');$('qPrompt').removeAttribute('style');$('qPromptAudio').innerHTML='';$('qCorrectAudio').innerHTML='';$('qCorrectAudio').dataset.autoNext='false';const box=$('qChoices');box.className='choices';box.removeAttribute('style');box.innerHTML='';if(q.type==='kana')renderKanaQ(c,q,box);else if(q.type==='scriptReverse')renderScriptReverseQ(c,q,box);else if(q.type==='number')renderNumberQ(c,q,box);else if(q.type==='math')renderMathQ(c,q,box);else renderLessonQ(c,q,box);applyQuizQuestionDisplay(q);hideQuizOptions(box);const prompt=$('qPrompt').textContent.trim();$('qPromptAudio').innerHTML=q.kind==='build'||q.promptAudio===false?'':speakerButtonHtml(prompt,q.promptAudioKey||q.audioKey);updateQuizAvatar()}
+function quizTextIsJapanese(text){return /[\u3040-\u30ff\u3400-\u9fff]/u.test(text)&&!/[a-z\u00c0-\u024f]{2,}/iu.test(text)}
+function quizQuestionDisplay(q,hint,prompt,lesson=null){
+  const normalize=text=>String(text||'').trim().replace(/\s+/g,' ');
+  let context=q.context||'',instruction=hint;
+  // Only the generated lesson-goal wrapper is redundant; authored context stays intact.
+  if(lesson&&q.category==='vocab'&&q.sourceId?.startsWith('context-')&&normalize(context)===normalize(`${lesson.goal} Gebruik het nieuwe woord in het patroon “${lesson.pattern}”.`))context=`Patroon: “${lesson.pattern}”.`;
+  const genericInstructions=new Set(['Kies het nieuwe woord dat de situatie precies aanvult.','Kies het passende Japanse woord.','Kies het juiste antwoord.','Kies de Nederlandse betekenis van dit woord.','Kies de Nederlandse betekenis van de getoonde zin.','Lees de zichtbare tekst en beantwoord de vraag.','Kies de Japanse zin die bij de getoonde betekenis past.','Kies de zin die precies bij de getoonde betekenis past.']);
+  const promptIsTask=/^(welk|welke|wat|wie|waar|wanneer|hoe|kies|vul|bouw|maak|lees)\b/iu.test(prompt);
+  if(normalize(instruction)===normalize(prompt)||(promptIsTask&&genericInstructions.has(normalize(instruction))))instruction='';
+  if(normalize(context)===normalize(prompt)||normalize(context)===normalize(instruction))context='';
+  return{instruction,context,promptJapanese:quizTextIsJapanese(prompt),contextJapanese:quizTextIsJapanese(context)};
+}
+function applyQuizQuestionDisplay(q){
+  const lesson=[...langLessons,...Object.values(advancedCourses).flatMap(c=>c.lessons)].find(l=>l.id===q.lessonId),prompt=$('qPrompt').textContent,display=quizQuestionDisplay(q,$('qHint').textContent,prompt,lesson);
+  $('qHint').textContent=display.instruction;$('qHint').classList.toggle('hidden',!display.instruction);
+  $('qContext').textContent=display.context;$('qContext').classList.toggle('hidden',!display.context);$('qContext').classList.toggle('question-context--jp',display.contextJapanese);
+  $('qPrompt').classList.toggle('prompt--jp',display.promptJapanese);$('qPrompt').setAttribute('lang',display.promptJapanese?'ja':state.uiLanguage);$('qContext').setAttribute('lang',display.contextJapanese?'ja':state.uiLanguage);
+}
 function updateQuizAvatar(ok=null){
   const host=$('quizAvatarAssist');
   if(!host)return;
@@ -5078,7 +5120,7 @@ function flashcardGroups(){
   return [...levels.entries()].sort((a,b)=>a[0]-b[0]).map(([level,lessons])=>({level,lessons:[...lessons.values()].sort((a,b)=>a.title.localeCompare(b.title,'nl'))}));
 }
 function openFlashcards(){state.screen='flashcards';scheduleSave();renderFlashcardsScreen()}
-function openFlashcardsForLevel(level){const ids=[...new Set(flashcardEligibleCards().filter(v=>v.level===level).map(v=>v.lessonId))];state.flashcardSelection.auto=false;state.flashcardSelection.lessonIds=ids;state.flashcardSelection.direction='jp-nl';openFlashcards()}
+function openFlashcardsForLevel(level){const ids=[...new Set(flashcardEligibleCards().filter(v=>v.level===level).map(v=>v.lessonId))];state.flashcardSelection.auto=false;state.flashcardSelection.lessonIds=ids;state.flashcardSelection.direction='jp-nl';state.recallCustomOpen=true;openFlashcards()}
 function flashcardSelectedLessons(){const all=vocabCatalog.filter(v=>!v.legacy).map(v=>v.lessonId);return new Set(state.flashcardSelection.lessonIds===null?all:state.flashcardSelection.lessonIds)}
 function flashcardDirections(){return[state.flashcardSelection.direction==='nl-jp'?'nl-jp':'jp-nl']}
 function flashcardProgressKey(cardId,direction){return`${cardId}::${direction}`}
@@ -5086,8 +5128,8 @@ function flashcardRecord(cardId,direction){return state.flashcardProgress.cards[
 function flashcardDue(record,now=Date.now()){return!record||!record.dueAt||record.dueAt<=now}
 function flashcardHasReviewHistory(cardId){return['jp-nl','nl-jp'].some(direction=>Object.hasOwn(state.flashcardProgress.cards,flashcardProgressKey(cardId,direction)))}
 function flashcardEligible(card){
-  if(!card||card.legacy)return false;
-  return state.introducedVocabIds.includes(card.id)||rankIntroducedWord(card)||flashcardHasReviewHistory(card.id);
+  if(!card||card.legacy||!card.recallCore||!card.sourceFound||vocabById[card.id]!==card)return false;
+  return [rankState[card.lessonId]?.rank,rankState[`l${card.level}-exam`]?.rank].some(rank=>['Copper','Silver','Gold','Platinum'].includes(rank));
 }
 function flashcardEligibleCards(){const seen=new Set();return vocabCatalog.filter(card=>{if(!flashcardEligible(card)||seen.has(card.id))return false;seen.add(card.id);return true})}
 function flashcardPreview(card){return!flashcardEligible(card)}
@@ -5099,6 +5141,38 @@ function flashcardSelectedCards(includePreview=false,direction=null){
     cards=cards.filter(card=>!known.some(other=>other.id!==card.id&&flashcardMeaningsOverlap(card,other)));
   }
   return cards;
+}
+// Manual scope belongs to free practice; Recall always follows actual introductions.
+const RECALL_DIRECTIONS=['jp-nl','nl-jp'],RECALL_SESSION_LIMIT=40,RECALL_NEW_LIMIT=20;
+function flashcardDirectionPool(cards,direction){
+  if(direction!=='nl-jp')return cards;
+  const known=flashcardEligibleCards();
+  return cards.filter(card=>!known.some(other=>other.id!==card.id&&flashcardMeaningsOverlap(card,other)));
+}
+function recallCards(direction){return flashcardDirectionPool(flashcardEligibleCards(),direction)}
+function freePracticeCards(direction=flashcardDirections()[0]){const lessons=flashcardSelectedLessons();return flashcardDirectionPool(flashcardEligibleCards().filter(card=>lessons.has(card.lessonId)),direction)}
+function getRecallSession(now=Date.now(),options={}){
+  const counts={new:0,due:0,upcoming:0,total:0,pool:flashcardEligibleCards().length},due={},fresh={};let nextSuggestedSessionAt=null;
+  for(const direction of RECALL_DIRECTIONS){
+    due[direction]=[];fresh[direction]=[];
+    for(const card of recallCards(direction)){
+      const record=flashcardRecord(card.id,direction),item={cardId:card.id,direction,round:0};counts.total++;
+      if(!record){counts.new++;fresh[direction].push(item)}
+      else if(flashcardDue(record,now)){counts.due++;due[direction].push(item)}
+      else{counts.upcoming++;if(Number.isFinite(record.dueAt)&&(nextSuggestedSessionAt===null||record.dueAt<nextSuggestedSessionAt))nextSuggestedSessionAt=record.dueAt}
+    }
+    // Preserve scheduling; prioritize weak/early due records, never pull future ones forward.
+    due[direction].sort((a,b)=>{const ar=flashcardRecord(a.cardId,direction),br=flashcardRecord(b.cardId,direction);return(ar.repetitions||0)-(br.repetitions||0)||(ar.dueAt||0)-(br.dueAt||0)});
+  }
+  const interleave=buckets=>{const result=[],lists=RECALL_DIRECTIONS.map(direction=>[...buckets[direction]]);while(lists.some(list=>list.length))for(const list of lists)if(list.length){const alternative=list.findIndex(item=>item.cardId!==result.at(-1)?.cardId);result.push(...list.splice(Math.max(0,alternative),1))}return result};
+  const limit=Math.max(0,Math.min(RECALL_SESSION_LIMIT,Number.isFinite(options.limit)?Math.floor(options.limit):RECALL_SESSION_LIMIT)),newLimit=Math.max(0,Math.min(RECALL_NEW_LIMIT,Number.isFinite(options.newLimit)?Math.floor(options.newLimit):RECALL_NEW_LIMIT));
+  const queue=interleave(due).slice(0,limit);queue.push(...interleave(fresh).slice(0,Math.min(newLimit,limit-queue.length)));
+  counts.ready=counts.new+counts.due;
+  return{queue,counts,nextSuggestedSessionAt};
+}
+function startRecallSession(){
+  const {queue}=getRecallSession();
+  createFlashcardSession(queue.map(item=>({...item,answerChoices:flashcardAnswerChoices(vocabById[item.cardId],item.direction,recallCards(item.direction))})),'scheduled');
 }
 function flashcardNormalizeMeaning(value){return String(value||'').normalize('NFKC').toLocaleLowerCase(state.uiLanguage||'nl').replace(/[\s.,!?;:()[\]{}'’"-]/g,'').trim()}
 function flashcardMeaningKeys(card){return new Set((card.meanings?.length?card.meanings:[card.meaning]).map(flashcardNormalizeMeaning).filter(Boolean))}
@@ -5118,7 +5192,11 @@ function getNextRecallDueAt(eligibleCards=flashcardSelectedCards(),directions=fl
   return nextDueAt;
 }
 let flashcardDueRefreshTimer=null,flashcardDueRefreshListenersBound=false;
-function refreshFlashcardDueDashboard(){if(state.screen==='flashcards'&&!state.flashcardSession)renderFlashcardsScreen()}
+function refreshFlashcardDueDashboard(){
+  // Do not replace a focused info panel or manual selector during keyboard/touch use.
+  if(document.activeElement?.closest?.('#recallCustom[open], #recallInfo[open]'))return;
+  if(state.screen==='flashcards'&&!state.flashcardSession)renderFlashcardsScreen();
+}
 function ensureFlashcardDueRefresh(){
   if(!flashcardDueRefreshListenersBound){
     document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshFlashcardDueDashboard()});
@@ -5185,13 +5263,16 @@ function startFlashcardSession(cards=flashcardSelectedCards(),directions=flashca
   directions=[directions.includes('nl-jp')?'nl-jp':'jp-nl'];
   const now=Date.now(),queue=[];
   directions.forEach(direction=>{
-    const pool=flashcardSelectedCards(mode==='free',direction),eligibleIds=new Set(pool.map(card=>card.id));
+    const pool=mode==='free'?freePracticeCards(direction):flashcardSelectedCards(false,direction),eligibleIds=new Set(pool.map(card=>card.id));
     [...new Map(cards.filter(card=>eligibleIds.has(card.id)).map(card=>[card.id,card])).values()].forEach(card=>{if(mode==='free'||flashcardDue(flashcardRecord(card.id,direction),now))queue.push({cardId:card.id,direction,answerChoices:flashcardAnswerChoices(card,direction,pool),round:0})});
   });
+  const ordered=shuffle(queue).sort((a,b)=>(flashcardRecord(a.cardId,a.direction)?.repetitions||0)-(flashcardRecord(b.cardId,b.direction)?.repetitions||0));
+  createFlashcardSession(ordered,mode);
+}
+function createFlashcardSession(queue,mode){
   if(!queue.length)return;
   cancelRecallFeedbackAdvance();
-  const ordered=shuffle(queue).sort((a,b)=>(flashcardRecord(a.cardId,a.direction)?.repetitions||0)-(flashcardRecord(b.cardId,b.direction)?.repetitions||0));
-  state.flashcardSession={mode:mode==='free'?'free':'scheduled',directions:[...directions],queue:ordered,position:0,status:'active',revealed:false,optionsRevealed:false,knew:0,again:0,skipped:0,requeued:[],feedback:null,startedAt:now};
+  state.flashcardSession={mode:mode==='free'?'free':'scheduled',directions:[...new Set(queue.map(item=>item.direction))],queue,position:0,status:'active',revealed:false,optionsRevealed:false,knew:0,again:0,skipped:0,requeued:[],feedback:null,startedAt:Date.now()};
   scheduleSave();renderFlashcardsScreen();
 }
 function pauseFlashcardSession(){if(!state.flashcardSession||state.flashcardSession.status!=='active')return;cancelRecallFeedbackAdvance(true);state.flashcardSession.status='paused';scheduleSave();renderFlashcardsScreen()}
@@ -5201,6 +5282,7 @@ function resumeFlashcardSession(){if(!state.flashcardSession)return;state.flashc
 function flashcardRate(grade,chosen=null){
   const session=state.flashcardSession;if(!session||session.mode==='free'||session.status!=='active'||!session.revealed||session.feedback||!['knew','again'].includes(grade))return;
   const item=session.queue[session.position],card=vocabById[item.cardId],key=flashcardProgressKey(item.cardId,item.direction),old=state.flashcardProgress.cards[key]||{repetitions:0,lapses:0,intervalDays:0},now=Date.now();
+  if(!flashcardEligible(card))return;
   recordVocabEncounter(card.id);
   let repetitions=old.repetitions||0,intervalDays;
   if(grade==='knew'){
@@ -5215,25 +5297,40 @@ function flashcardRate(grade,chosen=null){
   }
   state.flashcardProgress.cards[key]={dueAt:flashcardNextDueAt(now,grade,intervalDays),intervalDays,repetitions,lapses:old.lapses||0,lastReviewedAt:now,lastGrade:grade};
   const repeatKey=key;
-  if(grade==='again'&&session.position<session.queue.length-1&&!session.requeued.includes(repeatKey)){session.requeued.push(repeatKey);session.queue.push({...item,round:0})}
+  if(grade==='again')scheduleRecallRetry(session,item,repeatKey);
   session.feedback={grade,chosen:typeof chosen==='string'?chosen:null,until:grade==='knew'?now+AUDIO_FEEDBACK_MS:null};
   session.revealed=false;
   scheduleSave();renderFlashcardsScreen();
+}
+// Deliberate retries: 5–10 intervening cards when available, at most two.
+// Short sessions use the available gap; a lone card never repeats immediately.
+function scheduleRecallRetry(session,item,key){
+  const repeats=session.requeued.filter(value=>value===key).length;
+  if(repeats>=2)return;
+  const remaining=session.queue.length-session.position-1;if(remaining<1)return;
+  const gap=Math.min(remaining,5+Math.floor(Math.random()*6));
+  let at=session.position+gap+1;
+  while(at<=session.queue.length&&(session.queue[at-1]?.cardId===item.cardId||session.queue[at]?.cardId===item.cardId))at++;
+  if(at>session.queue.length)return;
+  session.requeued.push(key);session.queue.splice(at,0,{...item,round:repeats+1});
 }
 function revealFlashcardOptions(){const session=state.flashcardSession;if(!session||session.status!=='active'||session.feedback||session.optionsRevealed)return;session.optionsRevealed=true;scheduleSave();renderFlashcardsScreen()}
 function flashcardSkip(){const session=state.flashcardSession;if(!session||session.status!=='active'||session.feedback)return;cancelRecallFeedbackAdvance();session.skipped=(session.skipped||0)+1;session.position++;if(session.position>=session.queue.length)session.status='complete';session.revealed=false;session.optionsRevealed=false;scheduleSave();renderFlashcardsScreen()}
 function flashcardNextCard(){const session=state.flashcardSession;if(!session||!session.feedback)return;cancelRecallFeedbackAdvance();if(session.feedback.ungraded)session.viewed=(session.viewed||0)+1;session.feedback=null;session.position++;session.revealed=false;session.optionsRevealed=false;if(session.position>=session.queue.length)session.status='complete';scheduleSave();renderFlashcardsScreen()}
 function renderFlashcardScope(box){
-  const groups=flashcardGroups(),selected=flashcardSelectedLessons(),allLessonIds=[...new Set(groups.flatMap(group=>group.lessons.map(lesson=>lesson.id)))],allSelected=allLessonIds.length>0&&allLessonIds.every(id=>selected.has(id)),direction=flashcardDirections()[0],cards=flashcardSelectedCards(false,direction),counts=flashcardCounts(cards,[direction]),freeCount=flashcardSelectedCards(true,direction).length;
-  box.innerHTML=`<div class="between"><strong>Kies levels en lessen</strong><button id="fcSelectAll" class="btn tiny">${allSelected?'Alles uit':'Alles aan'}</button></div><div class="flashcard-scope" style="margin-top:10px">${groups.map(group=>{const ids=group.lessons.map(x=>x.id),checked=ids.every(id=>selected.has(id));return`<section class="flashcard-level"><div class="flashcard-level-head"><label class="flashcard-check"><input type="checkbox" data-fc-level="${group.level}" ${checked?'checked':''}><strong>Level ${group.level}</strong></label><span class="small">${group.lessons.reduce((n,l)=>n+l.words.length,0)} woorden</span></div><div class="flashcard-lesson-list">${group.lessons.map(lesson=>`<label class="flashcard-check"><input type="checkbox" data-fc-lesson="${lesson.id}" ${selected.has(lesson.id)?'checked':''}><span>${lesson.title} <span class="muted">· ${lesson.words.length}</span></span></label>`).join('')}</div></section>`}).join('')}</div><label class="profile-field" style="margin-top:10px"><span>${t('flashcards.directionHelp')}</span><select id="fcDirection" class="select"><option value="jp-nl" ${direction==='jp-nl'?'selected':''}>${t('flashcards.direction.jpNl')}</option><option value="nl-jp" ${direction==='nl-jp'?'selected':''}>${t('flashcards.direction.nlJp')}</option></select></label><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${counts.new}</strong><span>${t('flashcards.countNew')}</span></div><div class="flashcard-stat"><strong>${counts.due}</strong><span>${t('flashcards.countDue')}</span></div><div class="flashcard-stat"><strong>${counts.upcoming}</strong><span>${t('flashcards.countUpcoming')}</span></div></div><div class="grid2" style="margin-top:12px"><button id="fcCustomStart" class="btn primary" ${counts.ready?'':'disabled'}>${counts.ready?t('flashcards.startPlanned',{count:counts.ready}):t('flashcards.noDue')}</button><button id="fcCustomFree" class="btn" ${freeCount?'':'disabled'}>${t('flashcards.startFree',{count:freeCount})}</button></div><div class="small" style="margin-top:7px">${t('flashcards.freeNote')}</div>`;
+  const groups=flashcardGroups(),selected=flashcardSelectedLessons(),allLessonIds=[...new Set(groups.flatMap(group=>group.lessons.map(lesson=>lesson.id)))],allSelected=allLessonIds.length>0&&allLessonIds.every(id=>selected.has(id)),direction=flashcardDirections()[0],freeCount=freePracticeCards(direction).length;
+box.innerHTML=`<div class="between"><strong>Kies levels en lessen</strong><button id="fcSelectAll" class="btn tiny">${allSelected?'Alles uit':'Alles aan'}</button></div><div class="flashcard-scope" style="margin-top:10px">${groups.map(group=>{const ids=group.lessons.map(x=>x.id),checked=ids.every(id=>selected.has(id));return`<section class="flashcard-level"><div class="flashcard-level-head"><label class="flashcard-check"><input type="checkbox" data-fc-level="${group.level}" ${checked?'checked':''}><strong>Level ${group.level}</strong></label><span class="small">${group.lessons.reduce((n,l)=>n+l.words.length,0)} woorden</span></div><div class="flashcard-lesson-list">${group.lessons.map(lesson=>`<label class="flashcard-check"><input type="checkbox" data-fc-lesson="${lesson.id}" ${selected.has(lesson.id)?'checked':''}><span>${lesson.title} <span class="muted">· ${lesson.words.length}</span></span></label>`).join('')}</div></section>`}).join('')}</div><label class="profile-field" style="margin-top:10px"><span>${t('flashcards.freeDirection')}</span><select id="fcDirection" class="select"><option value="jp-nl" ${direction==='jp-nl'?'selected':''}>${t('flashcards.direction.jpNl')}</option><option value="nl-jp" ${direction==='nl-jp'?'selected':''}>${t('flashcards.direction.nlJp')}</option></select></label><div class="small" style="margin-top:10px">${t('flashcards.freeSelection',{count:freeCount})}</div>${!freeCount?`<div class="panel" style="margin-top:8px">${t('flashcards.emptyFree')}</div>`:''}<button id="fcCustomFree" class="btn primary" style="width:100%;margin-top:12px" ${freeCount?'':'disabled'}>${t('flashcards.startFree',{count:freeCount})}</button><div class="small" style="margin-top:7px">${t('flashcards.freeNote')}</div>`;
   $('fcSelectAll').onclick=()=>setFlashcardLessonSelection(allSelected?[]:allLessonIds);
   $('fcDirection').onchange=()=>{state.flashcardSelection.direction=$('fcDirection').value;scheduleSave();renderFlashcardsScreen()};
-  $('fcCustomStart').onclick=()=>startFlashcardSession(cards,[direction]);$('fcCustomFree').onclick=()=>startFlashcardSession(flashcardSelectedCards(true,direction),[direction],'free');
+  $('fcCustomFree').onclick=()=>startFlashcardSession(freePracticeCards(direction),[direction],'free');
   root.querySelectorAll('[data-fc-lesson]').forEach(input=>input.onchange=()=>{let ids=state.flashcardSelection.lessonIds===null?allLessonIds:[...state.flashcardSelection.lessonIds];const id=input.dataset.fcLesson;ids=input.checked?[...new Set([...ids,id])]:ids.filter(x=>x!==id);setFlashcardLessonSelection(ids)});
   root.querySelectorAll('[data-fc-level]').forEach(input=>input.onchange=()=>{let ids=state.flashcardSelection.lessonIds===null?allLessonIds:[...state.flashcardSelection.lessonIds];const group=groups.find(x=>String(x.level)===input.dataset.fcLevel);group.lessons.map(x=>x.id).forEach(id=>{ids= input.checked?[...new Set([...ids,id])]:ids.filter(x=>x!==id)});setFlashcardLessonSelection(ids)});
 }
 function renderFlashcardSession(){
   const s=state.flashcardSession;
+  sanitizeRecallSessionQueue(s);
+  while(s.position<s.queue.length&&!flashcardEligible(vocabById[s.queue[s.position].cardId])){s.position++;s.feedback=null;s.revealed=false;s.optionsRevealed=false}
+  if(s.position>=s.queue.length)s.status='complete';
   if(s.status==='complete')return renderFlashcardSummary();
   if(s.status==='paused'){
     const current=s.queue[s.position],card=current&&vocabById[current.cardId];
@@ -5241,10 +5338,11 @@ function renderFlashcardSession(){
     $('fcResume').onclick=resumeFlashcardSession;$('fcNew').onclick=()=>{state.flashcardSession=null;scheduleSave();renderFlashcardsScreen()};return;
   }
   if(s.position>=s.queue.length){s.status='complete';scheduleSave();return renderFlashcardSummary()}
-  const item=s.queue[s.position],card=vocabById[item.cardId],direction=item.direction,front=direction==='jp-nl'?card.kana:card.meaning,preview=flashcardPreview(card),record=flashcardRecord(card.id,direction),choices=item.answerChoices?.length?item.answerChoices:flashcardAnswerChoices(card,direction);
+const item=s.queue[s.position],card=vocabById[item.cardId],direction=item.direction,front=direction==='jp-nl'?card.kana:card.meaning,preview=flashcardPreview(card),record=flashcardRecord(card.id,direction),eligiblePool=s.mode==='free'?freePracticeCards(direction):recallCards(direction),choices=flashcardQuestionIsValid(card,direction,item.answerChoices,eligiblePool)?item.answerChoices:flashcardAnswerChoices(card,direction,eligiblePool);
+  item.answerChoices=choices;
   const scheduled=s.mode!=='free',done=scheduled?s.knew+s.again:s.position-(s.skipped||0),feedback=s.feedback,correctAnswers=flashcardCorrectAnswers(card,direction),answerFeedback=flashcardAnswerFeedback(choices,correctAnswers,feedback),correctChoice=answerFeedback.correctAnswer;
   if(direction==='jp-nl'||s.revealed)recordVocabEncounter(card.id);
-  $('flashcardView').innerHTML=`<section class="card"><div class="between"><div><div class="eyebrow">${t(direction==='jp-nl'?'flashcards.direction.jpNl':'flashcards.direction.nlJp')} · ${scheduled?'geplande herhaling':'Vrij oefenen'} · Level ${card.level} · ${card.lessonTitle}</div><div class="small">Kaart ${Math.min(s.position+1,s.queue.length)} van ${s.queue.length} · ${done} ${scheduled?'beoordeeld':'bekeken'}</div></div>${preview?'<span class="rank">Voorproefje</span>':''}</div><div class="progress" style="margin-top:9px"><div style="width:${Math.min(100,done/Math.max(1,s.queue.length)*100)}%"></div></div></section><section class="card"><div class="flashcard-avatar">${avatarAssistHtml({pose:feedback?(answerFeedback.selectedAnswer===correctChoice?'celebrate':'encourage'):nextAvatarMood(),message:feedback?(feedback.ungraded?'Vrij oefenen — je herhaalplanning is niet gewijzigd.':answerFeedback.selectedAnswer===correctChoice?'Goed!':'Niet goed'):'Denk rustig na over dit woord.'})}</div><div class="flashcard-front"><div><div class="flashcard-face-main">${escapeHtml(front)}</div><div class="flashcard-face-sub">${direction==='jp-nl'?'Kies de Nederlandse betekenis':'Kies het Japanse woord in kana'}</div></div></div><div class="flashcard-answer-options"><div class="small">${feedback?(feedback.ungraded?'Vrij geoefend — geen wijziging aan de herhaalplanning.':'Antwoord nagekeken:'):'Kies je antwoord:'}</div>${choices.map((answer,index)=>{const answerState=flashcardAnswerState(answer,answerFeedback),selected=answer===answerFeedback.selectedAnswer;return`<button class="btn flashcard-answer-choice${answerState==='correct'?' is-correct':answerState==='incorrect'?' is-incorrect':''}" data-fc-answer="${index}" ${feedback?'disabled':''} ${selected?'aria-pressed="true"':''}>${escapeHtml(answer)}</button>`}).join('')}</div><div class="flashcard-feedback-status" role="status" aria-live="polite">${escapeHtml(flashcardAnswerFeedbackText(answerFeedback))}</div><div class="flashcard-actions" style="margin-top:12px"><button id="fcSkip" class="btn" ${feedback?'disabled':''}>Sla over</button><button id="fcPause" class="btn" style="grid-column:1/-1" ${feedback?'disabled':''}>Onderbreek sessie</button></div>${record?`<div class="small" style="text-align:center;margin-top:9px">Huidige planning: ${flashcardDueText(record.dueAt)}</div>`:''}</section>`;
+  $('flashcardView').innerHTML=`<section class="card"><div class="between"><div><div class="eyebrow">${t(direction==='jp-nl'?'flashcards.direction.jpNl':'flashcards.direction.nlJp')} · ${scheduled?'geplande herhaling':'Vrij oefenen'} · Level ${card.level} · ${card.lessonTitle}</div><div class="small">Kaart ${Math.min(s.position+1,s.queue.length)} van ${s.queue.length} · ${done} ${scheduled?'beoordeeld':'bekeken'}</div></div>${preview?'<span class="rank">Voorproefje</span>':''}</div><div class="progress" style="margin-top:9px"><div style="width:${Math.min(100,done/Math.max(1,s.queue.length)*100)}%"></div></div></section><section class="card"><div class="flashcard-avatar">${avatarAssistHtml({pose:feedback?(answerFeedback.selectedAnswer===correctChoice?'celebrate':'encourage'):nextAvatarMood(),message:feedback?(feedback.ungraded?'Vrij oefenen — je herhaalplanning is niet gewijzigd.':answerFeedback.selectedAnswer===correctChoice?'Goed!':'Niet goed'):'Denk rustig na over dit woord.'})}</div><div class="flashcard-front"><div><div class="flashcard-face-main">${escapeHtml(front)}</div><div class="flashcard-face-sub">${direction==='jp-nl'?'Kies de Nederlandse betekenis':'Kies het Japanse woord in kana'}</div></div></div><div class="flashcard-answer-options"><div class="small">${feedback?(feedback.ungraded?'Vrij geoefend — geen wijziging aan de herhaalplanning.':'Antwoord nagekeken:'):'Kies je antwoord:'}</div>${choices.map((answer,index)=>{const answerState=flashcardAnswerState(answer,answerFeedback),selected=answer===answerFeedback.selectedAnswer;return`<button class="btn flashcard-answer-choice${answerState==='correct'?' is-correct':answerState==='incorrect'?' is-incorrect':''}" data-fc-answer="${index}" ${feedback?'disabled':''} ${selected?'aria-pressed="true"':''}>${escapeHtml(answer)}</button>`}).join('')}</div><div class="flashcard-feedback-status" role="status" aria-live="polite">${escapeHtml(flashcardAnswerFeedbackText(answerFeedback).split("\n")[0])}${feedback?`<div class="recall-source">Juiste antwoord: ${dictionaryButton(card.id,card.lessonId,card.kana,card.meaning)} · ${escapeHtml(card.meaning)}<div class="small">Geïntroduceerd in Level ${card.level} · Les ${card.lessonIndex+1} · ${escapeHtml(card.lessonTitle)}</div></div>`:''}</div><div class="flashcard-actions" style="margin-top:12px"><button id="fcSkip" class="btn" ${feedback?'disabled':''}>Sla over</button><button id="fcPause" class="btn" style="grid-column:1/-1">Onderbreek sessie</button></div>${record?`<div class="small" style="text-align:center;margin-top:9px">Huidige planning: ${flashcardDueText(record.dueAt)}</div>`:''}</section>`;
   const flashcardView=$('flashcardView'),answerPanel=flashcardView.querySelector('.flashcard-answer-options');
   flashcardView.querySelector('.flashcard-avatar')?.remove();
   flashcardView.querySelector('.flashcard-face-sub')?.remove();
@@ -5259,35 +5357,40 @@ function renderFlashcardSession(){
   if(!feedback&&s.optionsRevealed)root.querySelectorAll('[data-fc-answer]').forEach(button=>button.onclick=()=>{if(s.feedback||!s.optionsRevealed)return;const choice=choices[Number(button.dataset.fcAnswer)],correct=correctAnswers.includes(choice);s.revealed=true;if(scheduled)flashcardRate(correct?'knew':'again',choice);else{s.feedback={grade:'viewed',chosen:choice,until:correct?Date.now()+AUDIO_FEEDBACK_MS:null,ungraded:true};scheduleSave();renderFlashcardsScreen()}});
   $('fcSkip').onclick=flashcardSkip;
   $('fcPause').onclick=pauseFlashcardSession;
-  if(feedback?.grade==='again'||feedback?.ungraded){const next=document.createElement('button');next.className='btn primary';next.textContent='Volgende kaart';next.onclick=flashcardNextCard;$('flashcardView').querySelector('.flashcard-actions').appendChild(next)}
+  if(feedback){const next=document.createElement('button');next.className='btn primary';next.textContent='Volgende kaart';next.onclick=flashcardNextCard;$('flashcardView').querySelector('.flashcard-actions').insertBefore(next,$('fcPause'))}
   if(feedback&&recallFeedbackWasCorrect(s))scheduleRecallFeedbackAdvance(s)
 }
+function sanitizeRecallSessionQueue(session){
+  const completed=session.queue.slice(0,session.position),seen=new Set(completed.map(item=>flashcardProgressKey(item.cardId,item.direction))),retries=new Map();
+  completed.forEach(item=>{if(item.round>0){const key=flashcardProgressKey(item.cardId,item.direction);retries.set(key,(retries.get(key)||0)+1)}});
+  session.queue=completed.concat(session.queue.slice(session.position).filter(item=>{
+    if(!flashcardEligible(vocabById[item.cardId]))return false;
+    const key=flashcardProgressKey(item.cardId,item.direction);
+    if(item.round>0){const count=retries.get(key)||0;if(count>=2)return false;retries.set(key,count+1);return true}
+    if(seen.has(key))return false;seen.add(key);return true;
+  }));
+}
 function renderFlashcardSummary(){
-  const s=state.flashcardSession,sessionDirections=s.directions||[...new Set(s.queue.map(item=>item.direction))],selected=new Set(sessionDirections.flatMap(direction=>flashcardSelectedCards(false,direction).map(card=>card.id))),directions=new Set(sessionDirections);
-  const next=Object.entries(state.flashcardProgress.cards).filter(([key,value])=>selected.has(key.split('::')[0])&&directions.has(key.split('::')[1])&&value.dueAt>Date.now()).sort((a,b)=>a[1].dueAt-b[1].dueAt)[0],total=s.knew+s.again,free=s.mode==='free';
+  const s=state.flashcardSession;
+  const total=s.knew+s.again,free=s.mode==='free',nextAt=free?null:getRecallSession().nextSuggestedSessionAt;
   const stats=free?`<div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${s.viewed||0}</strong><span>Bekeken</span></div><div class="flashcard-stat"><strong>${s.skipped||0}</strong><span>Overgeslagen</span></div><div class="flashcard-stat"><strong>0</strong><span>Planning bijgewerkt</span></div></div>`:`<div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${total}</strong><span>Beoordelingen</span></div><div class="flashcard-stat"><strong>${s.knew}</strong><span>Wist ik</span></div><div class="flashcard-stat"><strong>${s.again}</strong><span>Komt eerder terug</span></div></div><div class="small" style="margin-top:6px">${s.skipped||0} overgeslagen · niet meegenomen in de herhaalplanning.</div>`;
-  $('flashcardView').innerHTML=`<section class="card"><div class="eyebrow">${t(sessionDirections[0]==='nl-jp'?'flashcards.direction.nlJp':'flashcards.direction.jpNl')} · Sessie afgerond · ${free?'vrije oefening':'geplande herhaling'}</div><div class="h2">Goed gedaan</div>${stats}${next?`<div class="flashcard-next-due" style="margin-top:12px">Eerstvolgende herhaling: <strong>${flashcardDueText(next[1].dueAt)}</strong> · ${escapeHtml(vocabById[next[0].split('::')[0]]?.kana||'woord')}</div>`:'<div class="small" style="margin-top:10px">Nieuwe woorden verschijnen meteen in je volgende selectie.</div>'}${avatarAssistHtml({pose:'celebrate',message:'Mooi geoefend!',detail:free?'Vrij oefenen heeft je herhaalplanning niet aangepast.':'Je volgende herhaling staat klaar wanneer het tijd is.'})}<div class="grid2" style="margin-top:13px"><button id="fcSummaryDone" class="btn">Terug naar selectie</button><button id="fcSummaryLevels" class="btn primary">Terug naar levels</button></div></section>`;
+$('flashcardView').innerHTML=`<section class="card"><div class="eyebrow">${free?t('flashcards.freeTitle'):t('flashcards.title')} · Sessie afgerond · ${free?'vrije oefening':'geplande herhaling'}</div><div class="h2">Goed gedaan</div>${stats}${nextAt!==null?`<div class="flashcard-next-due" style="margin-top:12px">${t('flashcards.nextSuggested',{time:recallSuggestedTime(nextAt)})}</div>`:''}${avatarAssistHtml({pose:'celebrate',message:'Mooi geoefend!',detail:free?'Vrij oefenen heeft je herhaalplanning niet aangepast.':'Je volgende herhaling staat klaar wanneer het tijd is.'})}<div class="grid2" style="margin-top:13px"><button id="fcSummaryDone" class="btn">Terug naar selectie</button><button id="fcSummaryLevels" class="btn primary">Terug naar levels</button></div></section>`;
   $('fcSummaryDone').onclick=()=>{state.flashcardSession=null;scheduleSave();renderFlashcardsScreen()};$('fcSummaryLevels').onclick=()=>{state.flashcardSession=null;scheduleSave();goToLevels()};
 }
-function flashcardDirectionStartHtml(direction){
-  const cards=flashcardSelectedCards(false,direction),counts=flashcardCounts(cards,[direction]),freeCount=flashcardSelectedCards(true,direction).length,nextDueAt=counts.due===0?getNextRecallDueAt(cards,[direction]):null,id=direction==='jp-nl'?'JpNl':'NlJp';
-  return`<section class="card recall-direction"><div class="eyebrow">${t(direction==='jp-nl'?'flashcards.direction.jpNl':'flashcards.direction.nlJp')}</div><div class="small">${t('flashcards.activeCards',{count:counts.total})}</div><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${counts.new}</strong><span>${t('flashcards.countNew')}</span></div><div class="flashcard-stat"><strong>${counts.due}</strong><span>${t('flashcards.countDue')}</span></div><div class="flashcard-stat"><strong>${counts.upcoming}</strong><span>${t('flashcards.countUpcoming')}</span></div></div>${nextDueAt!==null?`<div class="flashcard-next-due" role="status">${t('flashcards.nextDue')}: <strong>${flashcardDueText(nextDueAt)}</strong></div>`:''}<button id="fcStart${id}" class="btn primary" style="width:100%;margin-top:10px" ${counts.ready?'':'disabled'}>${counts.ready?t('flashcards.startPlanned',{count:counts.ready}):t('flashcards.noDue')}</button><button id="fcFree${id}" class="btn" style="width:100%;margin-top:7px" ${freeCount?'':'disabled'}>${t('flashcards.startFree',{count:freeCount})}</button></section>`;
+function recallSuggestedTime(timestamp,now=Date.now()){
+  const date=new Date(timestamp),today=new Date(now),time=date.toLocaleTimeString(state.uiLanguage||'nl',{hour:'2-digit',minute:'2-digit'});
+  return date.toDateString()===today.toDateString()?time:`${i18n.date(timestamp,state.uiLanguage,{day:'numeric',month:'short'})} · ${time}`;
 }
 function renderFlashcardsScreen(){
   ensureFlashcardDueRefresh();
   show('flashcards');document.body.dataset.scene='journey';updateHeader();
   const box=$('flashcardView');
   if(state.flashcardSession&&['active','paused','complete'].includes(state.flashcardSession.status))return renderFlashcardSession();
-  const jpCards=flashcardSelectedCards(false,'jp-nl'),reverseCards=flashcardSelectedCards(false,'nl-jp');
-  const auto=state.flashcardSelection.auto,available=flashcardEligibleCards(),empty=!available.length?t('flashcards.emptyLearned'):!jpCards.length?t('flashcards.emptyManual'):'';
-  box.innerHTML=`<section class="card recall-start"><div class="recall-start-header"><div class="h1">${t('flashcards.title')}</div><div class="app-nav recall-auto-control" role="group" aria-label="${t('flashcards.auto')}" aria-describedby="fcAutoHelp"><span class="recall-auto-label">${t('flashcards.auto')}:</span><button id="fcAutoOn" class="app-nav-item" type="button" aria-pressed="${auto}" aria-label="${t('flashcards.auto')}: ${t('flashcards.autoOn')}">${t('flashcards.autoOn')}</button><button id="fcAutoOff" class="app-nav-item" type="button" aria-pressed="${!auto}" aria-label="${t('flashcards.auto')}: ${t('flashcards.autoOff')}">${t('flashcards.autoOff')}</button></div></div><div id="fcAutoHelp" class="small" style="margin-top:7px">${t(auto?'flashcards.autoHelp':'flashcards.manualHelp')}</div><div class="small" role="status" style="margin-top:7px">${t(auto?'flashcards.autoPool':'flashcards.manualPool',{count:jpCards.length})}</div><div class="muted" style="margin-top:10px">${t('flashcards.directionHelp')}</div><div class="small" style="margin-top:7px">${t('flashcards.sessionHelp')}</div>${empty?`<div class="panel" role="status" style="margin-top:10px">${empty}</div>`:''}</section>${flashcardDirectionStartHtml('jp-nl')}${flashcardDirectionStartHtml('nl-jp')}${auto?'':`<details id="recallCustom" class="card recall-custom" ${state.recallCustomOpen?'open':''}><summary>${t('flashcards.chooseScope')}</summary><div id="flashcardScope"></div></details>`}<details class="recall-info"><summary>Hoe werkt Recall?</summary><p>Herhaal woorden wanneer jij wilt; Recall helpt bepalen welke weer aan de beurt zijn. Tijdens geplande herhaling geef je aan of je een woord kende; dat bepaalt het volgende moment. Vrij oefenen en overslaan veranderen die planning niet. SRS betekent gespreide herhaling. Recall verandert je lesrank niet.</p></details>`;
-  const chooseAuto=(enabled,id)=>{if(state.flashcardSelection.auto!==enabled)setFlashcardAuto(enabled);$(id).focus()};
-  $('fcAutoOn').onclick=()=>chooseAuto(true,'fcAutoOn');$('fcAutoOff').onclick=()=>chooseAuto(false,'fcAutoOff');
-  $('fcStartJpNl').onclick=()=>startFlashcardSession(jpCards,['jp-nl']);$('fcFreeJpNl').onclick=()=>startFlashcardSession(flashcardSelectedCards(true,'jp-nl'),['jp-nl'],'free');
-  $('fcStartNlJp').onclick=()=>startFlashcardSession(reverseCards,['nl-jp']);$('fcFreeNlJp').onclick=()=>startFlashcardSession(reverseCards,['nl-jp'],'free');
-  if(!auto)$('recallCustom').ontoggle=()=>{state.recallCustomOpen=$('recallCustom').open};
-  const continueButton=$('fcContinue');if(continueButton)continueButton.onclick=resumeFlashcardSession;
-  if(!auto)renderFlashcardScope($('flashcardScope'));
+  const {queue,counts,nextSuggestedSessionAt}=getRecallSession();
+  box.innerHTML=`<section class="card recall-start"><div class="recall-start-header"><div class="h1">${t('flashcards.title')}</div><details class="recall-info" id="recallInfo"><summary aria-label="${t('flashcards.infoLabel')}">ⓘ</summary><div class="panel">${t('flashcards.infoText')}</div></details></div><div class="small">${t('flashcards.mixedHelp')}</div><div class="small" style="margin-top:7px">${t('flashcards.poolWords',{count:counts.pool})}</div><div class="flashcard-stat-grid"><div class="flashcard-stat"><strong>${counts.due}</strong><span>${t('flashcards.countDue')}</span></div><div class="flashcard-stat"><strong>${counts.new}</strong><span>${t('flashcards.countNew')}</span></div><div class="flashcard-stat"><strong>${counts.upcoming}</strong><span>${t('flashcards.countUpcoming')}</span></div></div><div class="small">${t('flashcards.directionStats')}</div>${!counts.pool?`<div class="panel" role="status" style="margin-top:8px">${t('flashcards.emptyLearned')}</div>`:!counts.due?`<div class="small" role="status" style="margin-top:8px">${t(counts.new?'flashcards.newReady':'flashcards.nothingDue')}</div>`:''}<button id="fcStartRecall" class="btn primary" style="width:100%;margin-top:10px" ${queue.length?'':'disabled'}>${t(queue.length?'flashcards.startMixedCount':'flashcards.startMixed',{count:queue.length})}</button><div class="small" style="margin-top:7px">${t('flashcards.sessionSize')}</div>${nextSuggestedSessionAt!==null?`<div class="flashcard-next-due" role="status">${t('flashcards.nextSuggested',{time:recallSuggestedTime(nextSuggestedSessionAt)})}</div>`:''}</section><details id="recallCustom" class="card recall-custom" ${state.recallCustomOpen?'open':''}><summary><div><span class="h2">${t('flashcards.freeTitle')}</span><span class="small">${t('flashcards.freeHelp')}</span></div></summary><div id="flashcardScope" style="margin-top:12px"></div></details>`;
+  $('fcStartRecall').onclick=startRecallSession;
+  $('recallCustom').ontoggle=()=>{state.recallCustomOpen=$('recallCustom').open};
+  renderFlashcardScope($('flashcardScope'));
 }
 function renderProgressVocabTab(box){
   if(state.progressVocabDetailId)return renderVocabDetail(box,state.progressVocabDetailId);

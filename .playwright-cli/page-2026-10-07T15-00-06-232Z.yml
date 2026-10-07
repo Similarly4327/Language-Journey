@@ -1,0 +1,24 @@
+- generic [ref=f1e2]:
+  - navigation "Hoofdnavigatie" [ref=f1e6]:
+    - button "Leren" [ref=f1e7] [cursor=pointer]
+    - button "Recall" [ref=f1e8] [cursor=pointer]
+    - button "Voortgang" [ref=f1e9] [cursor=pointer]
+  - text: − ＋ ＋
+  - generic [ref=f1e10]:
+    - generic [ref=f1e12]:
+      - generic [ref=f1e13]:
+        - generic [ref=f1e14]: Level 9 · Hier en daar
+        - generic [ref=f1e15]: Vrij oefenen / snelle check · geen rankstap.
+      - generic [ref=f1e16]: 1/1
+    - generic [ref=f1e18]:
+      - generic [ref=f1e19]: Kies het nieuwe woord dat de situatie precies aanvult.
+      - generic [ref=f1e20]: Wijs een plaats dichtbij of verder weg aan. Gebruik het nieuwe woord in het patroon “どこ です か”.
+      - generic [ref=f1e21]: Welk Japans woord betekent “waar” in deze situatie?
+      - generic [ref=f1e23]:
+        - button "そこ" [ref=f1e34] [cursor=pointer]
+        - button "あそこ" [ref=f1e35] [cursor=pointer]
+        - button "どこ" [ref=f1e36] [cursor=pointer]
+      - strong [ref=f1e29]: Neem rustig de tijd.
+      - generic [ref=f1e31]:
+        - generic [ref=f1e32]: "Goed: 0"
+        - button "Stop" [ref=f1e33] [cursor=pointer]

@@ -1,0 +1,43 @@
+{
+  "total": 343,
+  "core": 325,
+  "coreWithoutSource": [],
+  "previewWithoutSource": [
+    {
+      "wordId": "vocab-ついたち",
+      "japanese": "ついたち",
+      "dutch": "de eerste dag",
+      "sourceLevel": 21,
+      "sourceLesson": "l21-1",
+      "sourceModule": null,
+      "introducedAt": "21-1",
+      "classification": "preview",
+      "recallCore": false,
+      "sourceFound": false
+    },
+    {
+      "wordId": "vocab-ふつか",
+      "japanese": "ふつか",
+      "dutch": "de tweede dag",
+      "sourceLevel": 21,
+      "sourceLesson": "l21-1",
+      "sourceModule": null,
+      "introducedAt": "21-1",
+      "classification": "preview",
+      "recallCore": false,
+      "sourceFound": false
+    },
+    {
+      "wordId": "vocab-みっか",
+      "japanese": "みっか",
+      "dutch": "de derde dag",
+      "sourceLevel": 21,
+      "sourceLesson": "l21-1",
+      "sourceModule": null,
+      "introducedAt": "21-1",
+      "classification": "preview",
+      "recallCore": false,
+      "sourceFound": false
+    }
+  ]
+}

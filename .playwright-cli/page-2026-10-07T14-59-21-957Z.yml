@@ -1,0 +1,115 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - button "App-home" [ref=e6] [cursor=pointer]: ⌂
+    - navigation "Hoofdnavigatie" [ref=e8]:
+      - button "Leren" [ref=e9] [cursor=pointer]
+      - button "Recall" [ref=e10] [cursor=pointer]
+      - button "Voortgang" [ref=e11] [cursor=pointer]
+  - main [ref=e12]:
+    - generic [ref=e13]:
+      - generic [ref=e14]: Alle levels
+      - generic [ref=e15]: Tien levels vormen steeds één grotere fase. Open alleen de fase die je nu nodig hebt.
+    - group [ref=e16]:
+      - 'generic "Fase 1 — Japanse basis De fundering leggen Schrift, eerste grammatica en bruikbaar dagelijks Japans vormen samen één absolute basis. Level 1–10 0/10 levelranks Nu: Level 1 van 10 −" [ref=e17] [cursor=pointer]':
+        - generic [ref=e18]: Fase 1 — Japanse basis
+        - generic [ref=e19]: De fundering leggen
+        - generic [ref=e20]: Schrift, eerste grammatica en bruikbaar dagelijks Japans vormen samen één absolute basis.
+        - generic [ref=e21]:
+          - generic [ref=e22]: Level 1–10
+          - generic [ref=e23]: 0/10 levelranks
+          - generic [ref=e24]: "Nu: Level 1 van 10"
+        - text: −
+      - generic [ref=e26]:
+        - generic [ref=e30]:
+          - strong [ref=e31]: Begin met Level 1.
+          - generic [ref=e32]: "Aanbevolen start: Hiragana → Leerroute → Klinkers, stap 1."
+        - generic [ref=e34]:
+          - button "Vorige levels in Fase 1 — Japanse basis" [disabled] [ref=e35]: ‹
+          - region "Fase 1 — Japanse basis" [ref=e36]:
+            - button "Level 1 Schriftbasis Hiragana · Cijfers · Katakana" [ref=e37] [cursor=pointer]:
+              - generic [ref=e38]: Level 1
+              - generic [ref=e39]: Schriftbasis
+              - generic [ref=e40]: Hiragana · Cijfers · Katakana
+            - button "Level 2 Kana Mix 92 basiskana schakelen" [ref=e41] [cursor=pointer]:
+              - generic [ref=e42]: Level 2
+              - generic [ref=e43]: Kana Mix
+              - generic [ref=e44]: 92 basiskana schakelen
+            - button "Level 3 Dakuten & Handakuten Bekende kana modificeren" [ref=e45] [cursor=pointer]:
+              - generic [ref=e46]: Level 3
+              - generic [ref=e47]: Dakuten & Handakuten
+              - generic [ref=e48]: Bekende kana modificeren
+            - button "Level 4 Eerste taalbasis Woorden + eerste zinnen" [ref=e49] [cursor=pointer]:
+              - generic [ref=e50]: Level 4
+              - generic [ref=e51]: Eerste taalbasis
+              - generic [ref=e52]: Woorden + eerste zinnen
+            - button "Level 5 Kleine kana en lange klanken ゃゅょ · っ · ー" [ref=e53] [cursor=pointer]:
+              - generic [ref=e54]: Level 5
+              - generic [ref=e55]: Kleine kana en lange klanken
+              - generic [ref=e56]: ゃゅょ · っ · ー
+            - button "Level 6 Mensen & relaties Wie iemand is · bezit met の" [ref=e57] [cursor=pointer]:
+              - generic [ref=e58]: Level 6
+              - generic [ref=e59]: Mensen & relaties
+              - generic [ref=e60]: Wie iemand is · bezit met の
+            - button "Level 7 Hoeveelheden Tellers · rangtelwoorden" [ref=e61] [cursor=pointer]:
+              - generic [ref=e62]: Level 7
+              - generic [ref=e63]: Hoeveelheden
+              - generic [ref=e64]: Tellers · rangtelwoorden
+            - button "Level 8 Tijd & agenda Dag · maand · klok · agenda" [ref=e65] [cursor=pointer]:
+              - generic [ref=e66]: Level 8
+              - generic [ref=e67]: Tijd & agenda
+              - generic [ref=e68]: Dag · maand · klok · agenda
+            - button "Level 9 Plaats & richting Waar · links · rechts" [ref=e69] [cursor=pointer]:
+              - generic [ref=e70]: Level 9
+              - generic [ref=e71]: Plaats & richting
+              - generic [ref=e72]: Waar · links · rechts
+            - button "Level 10 Dagelijks Japans Eerste praktijksituaties" [ref=e73] [cursor=pointer]:
+              - generic [ref=e74]: Level 10
+              - generic [ref=e75]: Dagelijks Japans
+              - generic [ref=e76]: Eerste praktijksituaties
+          - button "Volgende levels in Fase 1 — Japanse basis" [ref=e77] [cursor=pointer]: ›
+    - group [ref=e78]:
+      - generic "Fase 2 — Thuis voorbereiden, Japanreis Van vakantiecursus thuis naar geoefende reissituaties Je oefent thuis de app-taal en gebruikt bekende Japanse bouwstenen tijdens je reis. Level 11–20 0/10 levelranks ＋" [ref=e79] [cursor=pointer]:
+        - generic [ref=e80]: Fase 2 — Thuis voorbereiden, Japanreis
+        - generic [ref=e81]: Van vakantiecursus thuis naar geoefende reissituaties
+        - generic [ref=e82]: Je oefent thuis de app-taal en gebruikt bekende Japanse bouwstenen tijdens je reis.
+        - generic [ref=e83]:
+          - generic [ref=e84]: Level 11–20
+          - generic [ref=e85]: 0/10 levelranks
+        - text: ＋
+    - group [ref=e87]:
+      - generic "Fase 3 — Lezen & natuurlijker Japans Van eenvoudige tekst naar rijkere context Langere teksten, geleidelijke kanji, informelere taal en contextueel begrip. Level 21–30 Conceptuele route ＋" [ref=e88] [cursor=pointer]:
+        - generic [ref=e89]: Fase 3 — Lezen & natuurlijker Japans
+        - generic [ref=e90]: Van eenvoudige tekst naar rijkere context
+        - generic [ref=e91]: Langere teksten, geleidelijke kanji, informelere taal en contextueel begrip.
+        - generic [ref=e92]:
+          - generic [ref=e93]: Level 21–30
+          - generic [ref=e94]: Conceptuele route
+        - text: ＋
+    - generic [ref=e96]:
+      - generic [ref=e97]: Grote mijlpalen in de verte
+      - generic [ref=e98]: Richtinggevers zonder vast levelnummer of valse eindbelofte.
+    - generic [ref=e99]:
+      - generic [ref=e100]:
+        - generic [ref=e101]:
+          - generic [aria-hidden] [ref=e102]: 📖
+          - generic [ref=e103]: richting
+        - generic [ref=e104]: Eerste eenvoudig kinderboek
+        - generic [ref=e105]: Van losse zin via microverhaal en korte tekst naar een echt eenvoudig verhaal.
+      - generic [ref=e106]:
+        - generic [ref=e107]:
+          - generic [aria-hidden] [ref=e108]: 💬
+          - generic [ref=e109]: richting
+        - generic [ref=e110]: Manga lezen
+        - generic [ref=e111]: Meer kanji, informele grammatica, dialogen en spreekstijlen in context.
+      - generic [ref=e112]:
+        - generic [ref=e113]:
+          - generic [aria-hidden] [ref=e114]: 🎧
+          - generic [ref=e115]: richting
+        - generic [ref=e116]: Anime met Japanse ondertitels
+        - generic [ref=e117]: Lezen en luisteren groeien samen van langzame zin naar langere scène.
+      - generic [ref=e118]:
+        - generic [ref=e119]:
+          - generic [aria-hidden] [ref=e120]: 📰
+          - generic [ref=e121]: verre richting
+        - generic [ref=e122]: De hoofdlijn van algemeen nieuws volgen
+        - generic [ref=e123]: Een verre mijlpaal voor formeel taalgebruik en algemeen begrip; zonder vast levelnummer.
