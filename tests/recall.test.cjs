@@ -14,10 +14,10 @@ function fakeElement(id=''){
     setAttribute(){},getAttribute(){return null},removeAttribute(){},appendChild(){},insertBefore(){},prepend(){},remove(){},addEventListener(){},querySelector(){return fakeElement()},querySelectorAll(){return []},scrollIntoView(){},focus(){},getBoundingClientRect(){return{width:300,height:200,top:0,left:0}}};
 }
 
-function createRecallApp({isolateEligibility=false,savedState={},savedRanks={},savedVersion=6,now=new Date(2026,2,20,12).getTime()}={}){
+function createRecallApp({runtimeContent=content,locale='nl',isolateEligibility=false,savedState={},savedRanks={},savedVersion=6,now=new Date(2026,2,20,12).getTime()}={}){
   const clock={now};
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
-  const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,`const recallRenderFlashcardsScreen=renderFlashcardsScreen;${isolateEligibility?"flashcardEligible=card=>!!card&&!card.legacy&&(state.introducedVocabIds.includes(card.id)||rankIntroducedWord(card)||flashcardHasReviewHistory(card.id));":""}globalThis.__probe={state,rankState,vocabCatalog,vocabById,flashcardDue,flashcardDueText,flashcardNextDueAt,flashcardCounts,flashcardSelectedCards,flashcardDirections,getNextRecallDueAt,flashcardAnswerChoices,flashcardQuestionIsValid,flashcardAnswerFeedback,flashcardAnswerState,flashcardAnswerFeedbackText,flashcardRate,flashcardSkip,flashcardNextCard,revealFlashcardOptions,startFlashcardSession,pauseFlashcardSession,resumeFlashcardSession,recordVocabEncounter,renderFlashcardsScreen,registeredAudioAsset,speakerButtonHtml,audioOverlayPlacement,show,viewMarkup(){return $('flashcardView').innerHTML},setNow(value){clock.now=value},enableRender(){renderFlashcardsScreen=recallRenderFlashcardsScreen},disableRender(){renderFlashcardsScreen=()=>{}}};})();`);
+  const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,`const recallRenderFlashcardsScreen=renderFlashcardsScreen;${isolateEligibility?"flashcardEligible=card=>!!card&&!card.legacy&&(state.introducedVocabIds.includes(card.id)||rankIntroducedWord(card)||flashcardHasReviewHistory(card.id));":""}globalThis.__probe={state,rankState,vocabCatalog,vocabById,flashcardDue,flashcardDueText,flashcardNextDueAt,flashcardCounts,flashcardSelectedCards,flashcardDirections,getNextRecallDueAt,flashcardAnswerChoices,flashcardQuestionIsValid,flashcardAnswerFeedback,flashcardAnswerState,flashcardAnswerFeedbackText,flashcardRate,flashcardSkip,flashcardNextCard,revealFlashcardOptions,startFlashcardSession,pauseFlashcardSession,resumeFlashcardSession,recordVocabEncounter,renderFlashcardsScreen,registeredAudioAsset,speakerButtonHtml,audioOverlayPlacement,show,setAudioAssets(assets){japaneseAudioManifest.assets=assets},viewMarkup(){return $('flashcardView').innerHTML},setNow(value){clock.now=value},enableRender(){renderFlashcardsScreen=recallRenderFlashcardsScreen},disableRender(){renderFlashcardsScreen=()=>{}}};})();`);
   const elements=new Map(),get=id=>{if(!elements.has(id))elements.set(id,fakeElement(id));return elements.get(id)};
   const document={body:fakeElement('body'),documentElement:fakeElement('html'),hidden:false,getElementById:get,createElement:()=>fakeElement(),querySelectorAll:()=>[],querySelector:()=>fakeElement(),addEventListener(){}};
   const storage=new Map();
@@ -27,15 +27,15 @@ function createRecallApp({isolateEligibility=false,savedState={},savedRanks={},s
   const addListener=(listeners,type,callback)=>{if(!listeners.has(type))listeners.set(type,[]);listeners.get(type).push(callback)};
   const NativeDate=Date;
   class FixedDate extends NativeDate{constructor(...args){super(...(args.length?args:[clock.now]))}static now(){return clock.now}}
-  const window={LanguageJourneyContent:content,innerWidth:390,innerHeight:844,scrollTo(){},addEventListener:(type,callback)=>addListener(windowListeners,type,callback),setInterval:(callback,delay)=>{intervals.push({callback,delay});return intervals.length},setTimeout:(callback,delay)=>{windowTimeouts.push({callback,delay});return windowTimeouts.length},clearTimeout:id=>clearedWindowTimeouts.push(id),matchMedia:()=>({matches:false,addEventListener(){}})};
+  const window={LanguageJourneyContent:runtimeContent,innerWidth:390,innerHeight:844,scrollTo(){},addEventListener:(type,callback)=>addListener(windowListeners,type,callback),setInterval:(callback,delay)=>{intervals.push({callback,delay});return intervals.length},setTimeout:(callback,delay)=>{windowTimeouts.push({callback,delay});return windowTimeouts.length},clearTimeout:id=>clearedWindowTimeouts.push(id),matchMedia:()=>({matches:false,addEventListener(){}})};
   document.addEventListener=(type,callback)=>addListener(documentListeners,type,callback);
   const context={document,window,localStorage,location:{hash:''},clock,performance:{now:()=>0},navigator:{},console,setTimeout(){return 1},clearTimeout(){},requestAnimationFrame(){},structuredClone,URL,Date:FixedDate,Math,Intl,alert(){},Image:class{}};
   for(const [,relative] of html.matchAll(/<script src="\.\/([^"?]+)(?:\?[^"]*)?"><\/script>/g)){
     if(relative==='language-journey-content/content.js')continue;
     vm.runInNewContext(fs.readFileSync(path.join(__dirname,'..',relative),'utf8'),context,{timeout:5000});
   }
-  vm.runInNewContext(inline.replace('globalThis.__probe={state,rankState,','globalThis.__probe={state,rankState,flashcardEligible,openDictionaryModal,closeDictionaryModal,scheduleRecallRetry,getRecallSession,startRecallSession,freePracticeCards,setFlashcardAuto,setFlashcardLessonSelection,introduceWordEntries,saveProgress,'),context,{timeout:5000});
-  context.__probe.disableRender();
+  vm.runInNewContext(inline.replace('globalThis.__probe={state,rankState,','globalThis.__probe={state,rankState,recallAvailabilityReason,flashcardEligible,openDictionaryModal,closeDictionaryModal,scheduleRecallRetry,getRecallSession,startRecallSession,freePracticeCards,setFlashcardAuto,setFlashcardLessonSelection,introduceWordEntries,saveProgress,'),context,{timeout:5000});
+  context.__probe.state.uiLanguage=locale;context.__probe.disableRender();
   context.__probe.fireInterval=()=>intervals.forEach(timer=>timer.callback());
   context.__probe.fireWindowEvent=type=>(windowListeners.get(type)||[]).forEach(callback=>callback());
   context.__probe.fireDocumentEvent=type=>(documentListeners.get(type)||[]).forEach(callback=>callback());
@@ -44,6 +44,7 @@ function createRecallApp({isolateEligibility=false,savedState={},savedRanks={},s
   context.__probe.clearedWindowTimeouts=()=>clearedWindowTimeouts;
   context.__probe.leaveRecall=()=>{context.__probe.state.screen='levels';context.__probe.show('main')};
   context.__probe.savedProgress=()=>{context.__probe.saveProgress();return JSON.parse(storage.get('taal-japanse-leerapp-v1'))};
+  context.__probe.backupRaw=()=>storage.get('taal-japanse-leerapp-v1:before-recall-recovery-20261007');
   context.__probe.scopeMarkup=()=>get('flashcardScope').innerHTML;
   context.__probe.focusSelector=value=>{document.activeElement=value?{closest:()=>true}:null};
   return context.__probe;
@@ -177,7 +178,7 @@ test('manual selection stores exact available lesson IDs rather than a future al
 
 test('Recall distinguishes no learned words from an empty manual pool and hides unavailable choices',()=>{
   const app=createSrsFixture();app.renderFlashcardsScreen();
-  assert.match(app.viewMarkup(),/Je hebt nog geen woorden vrijgespeeld/);
+  assert.match(app.viewMarkup(),/Nog geen Recall-woorden vrijgespeeld/);
   assert.match(app.viewMarkup(),/summary aria-label="Hoe werkt Recall\?"/);
   assert.match(app.viewMarkup(),/id="flashcardScope"/);
   const card=app.vocabCatalog.find(word=>word.id==='vocab-ねこ');app.introduceWordEntries([card]);app.setFlashcardAuto(false);app.setFlashcardLessonSelection([]);app.renderFlashcardsScreen();
@@ -195,17 +196,15 @@ test('Recall distinguishes no learned words from an empty manual pool and hides 
 });
 
 test('audio coach only exposes registered local recordings and chooses the opposite viewport half',()=>{
-  const asset={id:'audio-test-greeting',speakerId:'ren',path:'audio/greeting.mp3',textJa:'こんにちは'};
-  content.manifest.audio.assets.push(asset);
-  try{
-    const app=createSrsFixture();
-    assert.match(app.speakerButtonHtml('こんにちは'),/data-audio-text="こんにちは"/);
-    assert.equal(app.speakerButtonHtml('さようなら'),'','no unregistered or guessed audio button');
-    app.state.audioEnabled=false;
-    assert.equal(app.speakerButtonHtml('こんにちは'),'','the global audio setting hides speakers');
-    assert.equal(app.audioOverlayPlacement({getBoundingClientRect:()=>({top:30,height:20})}),'is-bottom');
-    assert.equal(app.audioOverlayPlacement({getBoundingClientRect:()=>({top:600,height:20})}),'is-top');
-  }finally{content.manifest.audio.assets.pop()}
+  const ref=content.audioEntryById['sentence-introduction-greeting'];
+  const asset={entryId:ref.id,displayText:ref.displayText,readingId:'default',audioTextKana:ref.pronunciation.audioTextKana,voiceRole:'A',pipelineVersion:'audio-v3.1',reviewed:true,path:'assets/audio/ja/sentences/test-greeting.mp3'};
+  const app=createSrsFixture();app.setAudioAssets([asset]);
+  assert.match(app.speakerButtonHtml('こんにちは。',ref.id),/data-audio-text="こんにちは。"/);
+  assert.equal(app.speakerButtonHtml('さようなら'),'','no unregistered or guessed audio button');
+  app.state.audioEnabled=false;
+  assert.equal(app.speakerButtonHtml('こんにちは。',ref.id),'','the global audio setting hides speakers');
+  assert.equal(app.audioOverlayPlacement({getBoundingClientRect:()=>({top:30,height:20})}),'is-bottom');
+  assert.equal(app.audioOverlayPlacement({getBoundingClientRect:()=>({top:600,height:20})}),'is-top');
 });
 
 test('Recall preserves legacy per-direction reviews and interrupted sessions',()=>{
@@ -695,3 +694,49 @@ test('resumed answer choices are rebuilt if an old session contains future distr
  const cardId='vocab-ねこ';app.state.flashcardSession={mode:'scheduled',queue:[{cardId,direction:'jp-nl'},{cardId,direction:'jp-nl'},{cardId,direction:'nl-jp'}],position:0,status:'active',revealed:false,knew:0,again:0,requeued:[],feedback:null};
  app.renderFlashcardsScreen();assert.equal(app.state.flashcardSession.queue.length,2);assert.deepEqual(Array.from(app.state.flashcardSession.queue,item=>item.direction),['jp-nl','nl-jp']);
  });
+
+const recoveryFixture=name=>JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/recall-recovery',name+'.json'),'utf8'));
+function recoveryApp(name,options={}){const data=recoveryFixture(name);return createRecallApp({savedState:data.state,savedRanks:data.ranks,savedVersion:data.version,...options})}
+test('pre-remake storage snapshot is saved byte-for-byte before any migration',()=>{
+ const fixture=recoveryFixture('string-version'),app=recoveryApp('string-version');
+ assert.equal(app.backupRaw(),JSON.stringify({version:fixture.version,state:fixture.state,ranks:fixture.ranks}));
+ const before=app.backupRaw();app.savedProgress();assert.equal(app.backupRaw(),before);
+ assert.deepEqual(JSON.parse(JSON.stringify(app.state.flashcardProgress.cards)),fixture.state.flashcardProgress.cards);
+});
+test('old lesson, exam and string-version Copper all restore the pool and both review directions',()=>{
+ for(const name of ['lesson-copper','exam-copper','string-version']){
+  const app=recoveryApp(name),fixture=recoveryFixture(name);assert.ok(app.getRecallSession().counts.pool>0,name);
+  assert.equal(app.flashcardEligible(app.vocabById['vocab-ねこ']),true,name);
+  for(const direction of ['jp-nl','nl-jp'])assert.deepEqual(JSON.parse(JSON.stringify(app.state.flashcardProgress.cards[`vocab-ねこ::${direction}`])),fixture.state.flashcardProgress.cards[`vocab-ねこ::${direction}`]);
+  for(const auto of [true,false]){app.setFlashcardAuto(auto);app.setFlashcardLessonSelection(['l4-1']);assert.ok(app.flashcardSelectedCards().some(w=>w.id==='vocab-ねこ'));assert.ok(app.getRecallSession().counts.pool>0)}
+ }
+});
+test('retired month lesson Copper frees exactly its historical word IDs, not the whole new lesson',()=>{
+ const app=recoveryApp('retired-source'),retired=content.manifest.retiredLessons.find(l=>l.id==='l8-months-2');
+ assert.ok(retired.wordIds.length);assert.deepEqual(Array.from(app.flashcardSelectedCards(),w=>w.id).sort(),retired.wordIds.filter(id=>app.vocabById[id]?.recallCore).sort());
+ assert.equal(app.flashcardEligible(app.vocabById['vocab-いちがつ']),false);
+});
+test('old supermarket exam moves to Level 15 without unlocking new Level 11 words',()=>{
+ const app=createRecallApp({savedVersion:'6',savedRanks:{'l11-exam':{rank:'Copper',last:.95,attempts:2}}});
+ assert.ok(app.flashcardSelectedCards().some(w=>w.level===15));assert.ok(!app.flashcardSelectedCards().some(w=>w.level===11));
+ const saved=app.savedProgress();assert.equal(saved.state.curriculumHistory.level11Exam.original.rank,'Copper');assert.equal(saved.ranks['l15-exam'].rank,'Copper');
+});
+test('empty reasons distinguish new users, existing reviews, seen content, linking and stale assets',()=>{
+ assert.equal(recoveryApp('zero').recallAvailabilityReason(),'empty');const reviews=recoveryApp('reviews-without-copper');assert.equal(reviews.recallAvailabilityReason(),'reviewsLocked');
+ const history=createRecallApp({savedState:{introducedVocabIds:['vocab-ねこ']}});assert.equal(history.recallAvailabilityReason(),'historyLocked');
+ const missing=createRecallApp({savedRanks:{'unknown-source-exam':{rank:'Copper'}}});assert.equal(missing.recallAvailabilityReason(),'sourceError');assert.equal(missing.savedProgress().ranks['unknown-source-exam'].rank,'Copper');
+ const oldCards=content.vocabCatalog.map(w=>{const clone={...w};delete clone.recallCore;delete clone.sourceFound;return clone}),oldContent={...content,vocabCatalog:oldCards,vocabById:Object.fromEntries(oldCards.map(w=>[w.id,w]))};
+ const stale=recoveryApp('lesson-copper',{runtimeContent:oldContent});assert.equal(stale.getRecallSession().counts.pool,0);assert.equal(stale.recallAvailabilityReason(),'assetsError');
+ assert.ok(recoveryApp('lesson-copper').getRecallSession().counts.pool>0,'fresh matching assets restore existing Copper');
+});
+test('a string rank and whitespace ID are normalized conservatively; invalid formats are preserved',()=>{
+ const app=createRecallApp({savedRanks:{' l4-exam ':'copper'}});assert.ok(app.getRecallSession().counts.pool>0);
+ const unknown=createRecallApp({savedVersion:99,savedRanks:{'l4-exam':{rank:'Copper'}}});assert.equal(unknown.recallAvailabilityReason(),'loadError');assert.equal(unknown.savedProgress().version,99);assert.ok(unknown.backupRaw());
+});
+test('Recall recovery pages have all keys in each locale, with Dutch fallback and one asset version',()=>{
+ const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8'),keys=[...new Set([...html.matchAll(/t\('((?:flashcards\.)[^']+)'/g)].map(m=>m[1]))];
+ const locales={};const context={window:{},console};for(const lang of ['nl','en','de'])vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../locales',lang+'.js'),'utf8'),context);vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../locales/i18n.js'),'utf8'),context);
+ for(const lang of ['nl','en','de']){for(const key of keys)assert.ok(context.window.LanguageJourneyLocales[lang][key],lang+':'+key);for(const name of ['lesson-copper','reviews-without-copper','zero']){const app=recoveryApp(name,{locale:lang});app.renderFlashcardsScreen();assert.doesNotMatch(app.viewMarkup(),/flashcards\.[a-zA-Z]/)}}
+ delete context.window.LanguageJourneyLocales.en['flashcards.mixedHelp'];assert.equal(context.window.LanguageJourneyI18n.translate('flashcards.mixedHelp','en'),context.window.LanguageJourneyLocales.nl['flashcards.mixedHelp']);
+ const versions=[...html.matchAll(/<script src="\.\/[^"?]+\?v=([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(versions).size,1);assert.equal(versions[0],require('../scripts/version-client-assets.cjs').clientAssetRevision(html));assert.ok(versions.length>=10);assert.ok(!html.includes('20260924-levels'));
+});

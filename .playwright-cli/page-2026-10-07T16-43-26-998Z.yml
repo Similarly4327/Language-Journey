@@ -1,0 +1,38 @@
+- generic [ref=f22e2]:
+  - generic [ref=f22e4]:
+    - button "App-home" [ref=f22e6] [cursor=pointer]: ⌂
+    - navigation "Hoofdnavigatie" [ref=f22e8]:
+      - button "Lernen" [ref=f22e9] [cursor=pointer]
+      - button "Recall" [ref=f22e10] [cursor=pointer]
+      - button "Fortschritt" [ref=f22e11] [cursor=pointer]
+  - generic [ref=f22e12]:
+    - generic [ref=f22e13]:
+      - generic [ref=f22e14]:
+        - generic [ref=f22e15]: Recall
+        - group [ref=f22e16]:
+          - generic "Wie funktioniert Recall?" [ref=f22e17] [cursor=pointer]: ⓘ
+      - generic [ref=f22e18]: Recall wiederholt automatisch, was jetzt sinnvoll ist.
+      - generic [ref=f22e19]: 0 Wörter im Recall-Pool
+      - generic [ref=f22e20]:
+        - generic [ref=f22e21]:
+          - strong [ref=f22e22]: "0"
+          - text: Jetzt fällig
+        - generic [ref=f22e23]:
+          - strong [ref=f22e24]: "0"
+          - text: Neu
+        - generic [ref=f22e25]:
+          - strong [ref=f22e26]: "0"
+          - text: Später geplant
+      - generic [ref=f22e27]: Karten zählen beide Übersetzungsrichtungen.
+      - generic [ref=f22e28]: "Pool: einzigartige freigeschaltete Wörter. Fällig: Karten, deren Wiederholungszeit erreicht ist. Neu: Karten ohne Bewertung. Später geplant: Karten mit zukünftiger Wiederholungszeit."
+      - status [ref=f22e29]: Deine früheren Bewertungen und Zeitpläne bleiben erhalten. Diese Wörter benötigen noch mindestens Copper in ihrer Herkunftslektion oder Levelprüfung; eine frühere Bewertung schaltet sie nicht frei.
+      - button "Recall starten" [disabled] [ref=f22e30]
+      - generic [ref=f22e31]: Zum Start bis zu 40 Karten, höchstens 20 neue. Höre jederzeit auf; der Rest bleibt verfügbar.
+    - group [ref=f22e32]:
+      - generic "Freies Üben Wähle selbst Level, Lektionen und Richtung. ⌄" [ref=f22e33] [cursor=pointer]:
+        - generic [ref=f22e34]:
+          - text: Freies Üben
+          - generic [ref=f22e35]: Wähle selbst Level, Lektionen und Richtung.
+        - text: ⌄
+      - option "Japanisch → Niederländisch" [selected]
+      - option "Niederländisch → Japanisch"

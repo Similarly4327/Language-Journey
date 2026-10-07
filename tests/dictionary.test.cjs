@@ -99,23 +99,12 @@ assert.doesNotMatch(knowledgeView, /startSingleVocabPractice|recordVocabEncounte
 assert.match(knowledgeView, /speakerButtonHtml\(row\.jp/, 'Knowledge tiles use the registered speaker component');
 const extraPractice = html.slice(html.indexOf('function renderDictionaryPractice('), html.indexOf('function showDictionaryArticle('));
 assert.doesNotMatch(extraPractice, /startQuiz|recordQuestionMastery|flashcardRate|applyRank/, 'dictionary mini practice does not alter mastery, rank, or Recall');
-const audioStart = html.indexOf('function registeredAudioAsset(');
-const audioEnd = html.indexOf('function stopAvatarAudio(', audioStart);
-const played = [];
-const audioSandbox = {
-  state: {audioEnabled: true, audioVolume: 0.5},
-  window: {LanguageJourneyContent: {manifest: {audio: {assets: [{id: 'sample-ka', textJa: 'か', path: 'assets/audio/sample-ka.wav'}]}}}},
-  escapeHtml: value => String(value),
-  Audio: class {constructor(path){this.path=path;played.push(this)} play(){this.started=true;return Promise.resolve()} pause(){this.paused=true}}
-};
-vm.runInNewContext(`${html.slice(audioStart, audioEnd)}\nglobalThis.audioTestApi={speakerButtonHtml,playKnowledgeTileAudio};`, audioSandbox);
-assert.match(audioSandbox.audioTestApi.speakerButtonHtml('か', 'sample-ka'), /audio-speaker/, 'registered pronunciation adds a tile speaker');
-assert.equal(audioSandbox.audioTestApi.speakerButtonHtml('も'), '', 'items without audio do not show an empty speaker');
-const sampleButton = {dataset: {audioKey: 'sample-ka', audioText: 'か'}};
-audioSandbox.audioTestApi.playKnowledgeTileAudio(sampleButton);
-assert.equal(played[0].path, './assets/audio/sample-ka.wav', 'tile audio uses the registered local file');
-audioSandbox.audioTestApi.playKnowledgeTileAudio(sampleButton);
-assert.equal(played[0].paused, true, 'another tile tap stops the previous pronunciation');
+// Japanese playback is shared; Knowledge delegates rather than constructing Audio here.
+const tileAudio = html.slice(html.indexOf('function playKnowledgeTileAudio('), html.indexOf('function stopAvatarAudio('));
+assert.match(tileAudio, /playAvatarAudio\(button.dataset.audioKey/);
+assert.doesNotMatch(tileAudio, /new Audio/);
+assert.match(html, /speakerButtonHtml\(entry.jp,entry.id/);
+assert.match(html, /speakerButtonHtml\(word.jp,word.id/);
 
 const before = JSON.stringify({mastery: vocabMastery, ranks: rankState});
 dictionarySearch('も');

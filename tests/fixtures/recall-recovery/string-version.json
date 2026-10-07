@@ -1,0 +1,44 @@
+{
+  "version": "8",
+  "savedAt": "2026-10-06T18:00:00.000Z",
+  "state": {
+    "screen": "flashcards",
+    "currentCourse": "japanese",
+    "introducedVocabIds": [
+      "vocab-ねこ"
+    ],
+    "flashcardSelection": {
+      "auto": true,
+      "lessonIds": null,
+      "direction": "jp-nl"
+    },
+    "flashcardProgress": {
+      "version": 1,
+      "cards": {
+        "vocab-ねこ::jp-nl": {
+          "dueAt": 1791400000000,
+          "intervalDays": 14,
+          "repetitions": 4,
+          "lapses": 1,
+          "lastReviewedAt": 1791300000000,
+          "lastGrade": "knew"
+        },
+        "vocab-ねこ::nl-jp": {
+          "dueAt": 1791500000000,
+          "intervalDays": 3,
+          "repetitions": 2,
+          "lapses": 2,
+          "lastReviewedAt": 1791300000000,
+          "lastGrade": "again"
+        }
+      }
+    }
+  },
+  "ranks": {
+    "l4-exam": {
+      "rank": "Copper",
+      "last": 0.9,
+      "attempts": 1
+    }
+  }
+}

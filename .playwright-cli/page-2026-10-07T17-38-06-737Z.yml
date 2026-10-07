@@ -1,0 +1,88 @@
+- generic [ref=f2e2]:
+  - generic [ref=f2e4]:
+    - button "Terug" [ref=f2e26] [cursor=pointer]: ←
+    - generic [ref=f2e9]:
+      - button "Opties" [ref=f2e10] [cursor=pointer]: ☰
+      - navigation "Hoofdnavigatie" [ref=f2e11]:
+        - button "Leren" [ref=f2e12] [cursor=pointer]
+        - button "Recall" [ref=f2e13] [cursor=pointer]
+        - button "Voortgang" [ref=f2e14] [cursor=pointer]
+  - main [ref=f2e15]:
+    - generic [ref=f2e27]:
+      - generic [ref=f2e28]: Eerste taalbasis
+      - generic [ref=f2e30]: 0/10 lessen afgerond
+    - generic [ref=f2e31]:
+      - button "Leerroute" [ref=f2e32] [cursor=pointer]
+      - button "Snelle checks" [ref=f2e33] [cursor=pointer]
+      - button "Level-examen" [ref=f2e34] [cursor=pointer]
+    - generic [ref=f2e36]:
+      - 'button "Les 1 · volgende Dit is X Nog te doen 5 nieuwe woorden · Nieuw/patroon: これは X です" [ref=f2e37] [cursor=pointer]':
+        - generic [ref=f2e38]:
+          - generic [ref=f2e39]:
+            - generic [ref=f2e40]: Les 1 · volgende
+            - generic [ref=f2e41]: Dit is X
+          - generic [ref=f2e42]: Nog te doen
+        - generic [ref=f2e43]: "5 nieuwe woorden · Nieuw/patroon: これは X です"
+      - 'button "Les 2 Dit en dat Nog te doen 4 nieuwe woorden · Nieuw/patroon: X は Y です" [ref=f2e44] [cursor=pointer]':
+        - generic [ref=f2e45]:
+          - generic [ref=f2e46]:
+            - generic [ref=f2e47]: Les 2
+            - generic [ref=f2e48]: Dit en dat
+          - generic [ref=f2e49]: Nog te doen
+        - generic [ref=f2e50]: "4 nieuwe woorden · Nieuw/patroon: X は Y です"
+      - 'button "Les 3 Topicstructuur Nog te doen 3 nieuwe woorden · Nieuw/patroon: [topic] は [beschrijving] です" [ref=f2e51] [cursor=pointer]':
+        - generic [ref=f2e52]:
+          - generic [ref=f2e53]:
+            - generic [ref=f2e54]: Les 3
+            - generic [ref=f2e55]: Topicstructuur
+          - generic [ref=f2e56]: Nog te doen
+        - generic [ref=f2e57]: "3 nieuwe woorden · Nieuw/patroon: [topic] は [beschrijving] です"
+      - 'button "Les 4 Bezit met の Nog te doen 0 nieuwe woorden · Nieuw/patroon: X の Y" [ref=f2e58] [cursor=pointer]':
+        - generic [ref=f2e59]:
+          - generic [ref=f2e60]:
+            - generic [ref=f2e61]: Les 4
+            - generic [ref=f2e62]: Bezit met の
+          - generic [ref=f2e63]: Nog te doen
+        - generic [ref=f2e64]: "0 nieuwe woorden · Nieuw/patroon: X の Y"
+      - 'button "Les 5 Vraag met か Nog te doen 0 nieuwe woorden · Nieuw/patroon: ... です か" [ref=f2e65] [cursor=pointer]':
+        - generic [ref=f2e66]:
+          - generic [ref=f2e67]:
+            - generic [ref=f2e68]: Les 5
+            - generic [ref=f2e69]: Vraag met か
+          - generic [ref=f2e70]: Nog te doen
+        - generic [ref=f2e71]: "0 nieuwe woorden · Nieuw/patroon: ... です か"
+      - 'button "Les 6 Ook met も Nog te doen 0 nieuwe woorden · Nieuw/patroon: X も Y です" [ref=f2e72] [cursor=pointer]':
+        - generic [ref=f2e73]:
+          - generic [ref=f2e74]:
+            - generic [ref=f2e75]: Les 6
+            - generic [ref=f2e76]: Ook met も
+          - generic [ref=f2e77]: Nog te doen
+        - generic [ref=f2e78]: "0 nieuwe woorden · Nieuw/patroon: X も Y です"
+      - 'button "Les 7 Object + werkwoord Nog te doen 3 nieuwe woorden · Nieuw/patroon: [topic] は [object] を [werkwoord]" [ref=f2e79] [cursor=pointer]':
+        - generic [ref=f2e80]:
+          - generic [ref=f2e81]:
+            - generic [ref=f2e82]: Les 7
+            - generic [ref=f2e83]: Object + werkwoord
+          - generic [ref=f2e84]: Nog te doen
+        - generic [ref=f2e85]: "3 nieuwe woorden · Nieuw/patroon: [topic] は [object] を [werkwoord]"
+      - 'button "Les 8 Zinsvolgorde oefenen Nog te doen 1 nieuw woord · Nieuw/patroon: topic → object → werkwoord" [ref=f2e86] [cursor=pointer]':
+        - generic [ref=f2e87]:
+          - generic [ref=f2e88]:
+            - generic [ref=f2e89]: Les 8
+            - generic [ref=f2e90]: Zinsvolgorde oefenen
+          - generic [ref=f2e91]: Nog te doen
+        - generic [ref=f2e92]: "1 nieuw woord · Nieuw/patroon: topic → object → werkwoord"
+      - 'button "Les 9 Bestemming met に Nog te doen 4 nieuwe woorden · Nieuw/patroon: [topic] は [plaats] に いきます" [ref=f2e93] [cursor=pointer]':
+        - generic [ref=f2e94]:
+          - generic [ref=f2e95]:
+            - generic [ref=f2e96]: Les 9
+            - generic [ref=f2e97]: Bestemming met に
+          - generic [ref=f2e98]: Nog te doen
+        - generic [ref=f2e99]: "4 nieuwe woorden · Nieuw/patroon: [topic] は [plaats] に いきます"
+      - 'button "Les 10 Alles combineren Nog te doen 0 nieuwe woorden · Nieuw/patroon: herkennen → ontleden → bouwen" [ref=f2e100] [cursor=pointer]':
+        - generic [ref=f2e101]:
+          - generic [ref=f2e102]:
+            - generic [ref=f2e103]: Les 10
+            - generic [ref=f2e104]: Alles combineren
+          - generic [ref=f2e105]: Nog te doen
+        - generic [ref=f2e106]: "0 nieuwe woorden · Nieuw/patroon: herkennen → ontleden → bouwen"

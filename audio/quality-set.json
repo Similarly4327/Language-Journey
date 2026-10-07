@@ -1,0 +1,19 @@
+{
+  "checks": ["verstaanbaarheid", "mora-timing", "klinkerlengte", "samengestelde kana", "zinsintonatie", "geen sterk Engels stresspatroon"],
+  "items": [
+    { "entryId": "kana-hiragana-お", "feature": "korte o" },
+    { "entryId": "vocab-こうえん", "feature": "lange ou" },
+    { "entryId": "vocab-コーヒー", "feature": "lange katakana-klinkers" },
+    { "entryId": "kana-combo-きゃ", "feature": "kleine ya" },
+    { "entryId": "kana-combo-きゅ", "feature": "kleine yu" },
+    { "entryId": "kana-combo-きょ", "feature": "kleine yo" },
+    { "entryId": "vocab-きって", "feature": "kleine tsu" },
+    { "entryId": "vocab-ほん", "feature": "mora n" },
+    { "entryId": "vocab-じょせい", "feature": "ei" },
+    { "entryId": "sentence-l4-1-model-1", "feature": "korte zin, wa en desu" },
+    { "entryId": "sentence-l4-7-model-1", "feature": "o en masu" },
+    { "entryId": "sentence-introduction-greeting", "voiceRole": "A", "feature": "bestaande dialoogregel stem A" },
+    { "entryId": "sentence-introduction-greeting", "voiceRole": "B", "feature": "dezelfde dialoogregel stem B" },
+    { "entryId": "reading-l6-5", "feature": "volledig kort leesblok" }
+  ]
+}

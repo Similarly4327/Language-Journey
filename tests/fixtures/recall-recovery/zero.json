@@ -1,0 +1,19 @@
+{
+  "version": 8,
+  "savedAt": "2026-10-06T18:00:00.000Z",
+  "state": {
+    "screen": "flashcards",
+    "currentCourse": "japanese",
+    "introducedVocabIds": [],
+    "flashcardSelection": {
+      "auto": true,
+      "lessonIds": null,
+      "direction": "jp-nl"
+    },
+    "flashcardProgress": {
+      "version": 1,
+      "cards": {}
+    }
+  },
+  "ranks": {}
+}

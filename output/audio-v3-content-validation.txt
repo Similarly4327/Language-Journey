@@ -1,0 +1,7 @@
+WARNING AUDIO_COVERAGE [audio] 325 core vocabulary items have no optional recorded audio
+WARNING ORPHAN_VOCAB [vocab-ついたち] vocab-ついたち is not used by a lesson
+WARNING ORPHAN_VOCAB [vocab-ふつか] vocab-ふつか is not used by a lesson
+WARNING ORPHAN_VOCAB [vocab-みっか] vocab-みっか is not used by a lesson
+INFO LEGACY_COMPAT [vocabulary] 15 historical words remain addressable for saved mastery
+SUMMARY 15 levels · 67 lessons · 343 vocabulary · 38 grammar · 41 patterns · 327 exercises · 54 readings · 15 bonus · 0 audio
+SUMMARY 0 errors · 4 warnings · 1 info

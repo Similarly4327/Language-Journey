@@ -5,6 +5,9 @@
   "scripts": {
     "validate-content": "node language-journey-content/validate.cjs",
     "curriculum:report": "node language-journey-content/report.cjs",
-    "test": "node --test"
+    "test": "node --test",
+    "audio:batch": "node scripts/audio-batch.cjs",
+    "audio:audit": "node scripts/audio-audit.cjs",
+    "assets:version": "node scripts/version-client-assets.cjs"
   }
 }

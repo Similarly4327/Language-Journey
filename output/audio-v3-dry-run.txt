@@ -1,0 +1,131 @@
+{
+  "dryRun": true,
+  "jobs": [
+    {
+      "entryId": "kana-hiragana-お",
+      "displayText": "お",
+      "audioTextKana": "お",
+      "readingId": "default",
+      "voiceRole": "A",
+      "action": "missing",
+      "voiceConfigured": false
+    },
+    {
+      "entryId": "vocab-こうえん",
+      "displayText": "こうえん",
+      "audioTextKana": "こうえん",
+      "readingId": "default",
+      "voiceRole": "A",
+      "action": "missing",
+      "voiceConfigured": false
+    },
+    {
+      "entryId": "vocab-コーヒー",
+      "displayText": "コーヒー",
+      "audioTextKana": "コーヒー",
+      "readingId": "default",
+      "voiceRole": "A",
+      "action": "missing",
+      "voiceConfigured": false
+    },
+    {
+      "entryId": "kana-combo-きゃ",
+      "displayText": "きゃ",
+      "audioTextKana": "きゃ",
+      "readingId": "default",
+      "voiceRole": "A",
+      "action": "missing",
+      "voiceConfigured": false
+    },
+    {
+      "entryId": "kana-combo-きゅ",
+      "displayText": "きゅ",
+      "audioTextKana": "きゅ",
+      "readingId": "default",
+      "voiceRole": "A",
+      "action": "missing",
+      "voiceConfigured": false
+    },
+    {
+      "entryId": "kana-combo-きょ",
+      "displayText": "きょ",
+      "audioTextKana": "きょ",
+      "readingId": "default",
+      "voiceRole": "A",
+      "action": "missing",
+      "voiceConfigured": false
+    },
+    {
+      "entryId": "vocab-きって",
+      "displayText": "きって",
+      "audioTextKana": "きって",
+      "readingId": "default",
+      "voiceRole": "A",
+      "action": "missing",
+      "voiceConfigured": false
+    },
+    {
+      "entryId": "vocab-ほん",
+      "displayText": "ほん",
+      "audioTextKana": "ほん",
+      "readingId": "default",
+      "voiceRole": "A",
+      "action": "missing",
+      "voiceConfigured": false
+    },
+    {
+      "entryId": "vocab-じょせい",
+      "displayText": "じょせい",
+      "audioTextKana": "じょせい",
+      "readingId": "default",
+      "voiceRole": "A",
+      "action": "missing",
+      "voiceConfigured": false
+    },
+    {
+      "entryId": "sentence-l4-1-model-1",
+      "displayText": "これは ねこ です",
+      "audioTextKana": "これわ ねこ です",
+      "readingId": "default",
+      "voiceRole": "A",
+      "action": "missing",
+      "voiceConfigured": false
+    },
+    {
+      "entryId": "sentence-l4-7-model-1",
+      "displayText": "わたし は みず を のみます",
+      "audioTextKana": "わたし わ みず お のみます",
+      "readingId": "default",
+      "voiceRole": "A",
+      "action": "missing",
+      "voiceConfigured": false
+    },
+    {
+      "entryId": "sentence-introduction-greeting",
+      "displayText": "こんにちは。",
+      "audioTextKana": "こんにちわ。",
+      "readingId": "default",
+      "voiceRole": "A",
+      "action": "missing",
+      "voiceConfigured": false
+    },
+    {
+      "entryId": "sentence-introduction-greeting",
+      "displayText": "こんにちは。",
+      "audioTextKana": "こんにちわ。",
+      "readingId": "default",
+      "voiceRole": "B",
+      "action": "missing",
+      "voiceConfigured": false
+    },
+    {
+      "entryId": "reading-l6-5",
+      "displayText": "これは わたし の かぞく です。 あれは わたし の あに です。",
+      "audioTextKana": "これわ わたし の かぞく です。 あれわ わたし の あに です。",
+      "readingId": "default",
+      "voiceRole": "A",
+      "action": "missing",
+      "voiceConfigured": false
+    }
+  ]
+}

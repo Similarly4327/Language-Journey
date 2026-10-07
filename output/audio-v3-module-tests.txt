@@ -1,0 +1,21 @@
+✔ audio metadata reuses every original word and distinguishes particle/kana readings (0.6248ms)
+✔ reviewed early sentences share IDs, preserve writing and use explicit pronunciation (0.3981ms)
+✔ unverified kanji, isolated small tsu and vowel mark are rejected; lexical spelling is retained (0.2675ms)
+✔ resolver requires exact entry/reading, reviewed recording and safe static path (0.7761ms)
+✔ one central service replaces playback and ignores stale events (0.3015ms)
+✔ two-voice dialogue plays full lines in order and cancellation also stops its pause (1.6244ms)
+✔ playback failure is reported once without launching more dialogue lines (2.4454ms)
+✔ generation hash detects content, reading, voice, settings and pipeline changes (0.2661ms)
+✔ batch skips current existing files, regenerates stale/missing files and honors explicit force (0.2242ms)
+✔ batch selects real source IDs and quality set covers A/B without needing secrets for dry-run (1.2078ms)
+✔ provider receives kana only; errors never include credentials/provider response (0.278ms)
+✔ validator detects unknown IDs, duplicate refs, stale hashes and reports missing content honestly (9.2144ms)
+✔ all UI routes reuse shared service and Recall reveal never offers Japanese audio beforehand (57.0087ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 164.456

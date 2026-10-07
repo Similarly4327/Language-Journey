@@ -117,7 +117,7 @@ test('instruction resolver data and destination bridges are centrally registered
   for(const level of content.manifest.levels.filter(item=>item.number>=11&&item.nextDestinationVocabularyId))assert.ok(content.manifest.vocabulary.some(word=>word.id===level.nextDestinationVocabularyId&&content.pointOrder(word.introducedAt)<=level.number*10000+9999));
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
   assert.match(html,/savedVersion<=6&&s\.level===10\?14:s\.level/);
-  assert.match(html,/ranks\['l11-exam'\].*ranks\['l15-exam'\]/);
+  assert.match(html,/ranks\['l15-exam'\]=ranks\['l11-exam'\]/);
 });
 test('report has human-readable summary',()=>{
   const output=format(validate());
