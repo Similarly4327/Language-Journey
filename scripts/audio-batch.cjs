@@ -8,8 +8,9 @@ const quality=require('../audio/quality-set.json');
 const manifestFile=path.join(root,'assets/audio/ja/manifest.js');
 const hash=value=>crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const voiceFingerprint=voice=>hash(voice);
-function generationHash(ref,role,voice,settings=config){return hash({entryId:ref.id,displayText:ref.displayText,readingId:ref.pronunciation.readingId,audioTextKana:ref.pronunciation.audioTextKana,voiceRole:role,voiceFingerprint:voiceFingerprint(voice),settings})}
-function currentHash(ref,asset,settings=config){return hash({entryId:ref.id,displayText:ref.displayText,readingId:ref.pronunciation.readingId,audioTextKana:ref.pronunciation.audioTextKana,voiceRole:asset.voiceRole,voiceFingerprint:asset.voiceFingerprint,settings})}
+function settingsFor(ref,settings=config){const {entry_overrides,...base}=settings;const override=entry_overrides?.[ref.id];return override?{...base,...override,voice_settings:{...base.voice_settings,...override.voice_settings}}:base}
+function generationHash(ref,role,voice,settings=config){return hash({entryId:ref.id,displayText:ref.displayText,readingId:ref.pronunciation.readingId,audioTextKana:ref.pronunciation.audioTextKana,voiceRole:role,voiceFingerprint:voiceFingerprint(voice),settings:settingsFor(ref,settings)})}
+function currentHash(ref,asset,settings=config){return hash({entryId:ref.id,displayText:ref.displayText,readingId:ref.pronunciation.readingId,audioTextKana:ref.pronunciation.audioTextKana,voiceRole:asset.voiceRole,voiceFingerprint:asset.voiceFingerprint,settings:settingsFor(ref,settings)})}
 function jobsFor(ref,role='A'){
   if(ref.kind==='dialogue')return ref.entry.lines.flatMap(line=>jobsFor(content.audioEntryById[line.sentenceId],line.speakerRole));
   if(!kanaOnly(ref.pronunciation?.audioTextKana))throw new Error('Uitspraak moet eerst gecontroleerd worden: '+ref.id);
@@ -28,15 +29,32 @@ function selectJobs(args){
   }
   return [...new Map(selected.map(job=>[job.ref.id+'@'+job.role,job])).values()];
 }
-function writeManifest(manifest){const tmp=manifestFile+'.tmp';fs.writeFileSync(tmp,'(function(root){\n  const manifest='+JSON.stringify(manifest,null,2)+';\n  if(typeof module!=="undefined"&&module.exports)module.exports=manifest;else root.LanguageJourneyAudioManifest=manifest;\n})(typeof globalThis!=="undefined"?globalThis:this);\n');fs.renameSync(tmp,manifestFile)}
+function replaceManifest(tmp){
+  // Windows virus scanners or readers can briefly lock an otherwise valid destination.
+  for(let attempt=0;;attempt++){try{fs.renameSync(tmp,manifestFile);return}catch(error){
+    if(!['EPERM','EACCES','EBUSY'].includes(error.code)||attempt>=5)throw error;
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,100);
+  }}
+}
+function writeManifest(manifest){const tmp=manifestFile+'.tmp';fs.writeFileSync(tmp,'(function(root){\n  const manifest='+JSON.stringify(manifest,null,2)+';\n  if(typeof module!=="undefined"&&module.exports)module.exports=manifest;else root.LanguageJourneyAudioManifest=manifest;\n})(typeof globalThis!=="undefined"?globalThis:this);\n');replaceManifest(tmp)}
 function parseArgs(argv){const args={};for(let i=0;i<argv.length;i++){if(!argv[i].startsWith('--'))throw new Error('Onbekend argument');const name=argv[i].slice(2);if(['quality','dry-run','force','approve-quality','missing','regenerate'].includes(name))args[name.replace(/-([a-z])/g,(_,c)=>c.toUpperCase())]=true;else if(['ids','lesson','level','range','reviewer'].includes(name)){if(!argv[i+1]||argv[i+1].startsWith('--'))throw new Error('Ontbrekende waarde: --'+name);args[name]=argv[++i]}else throw new Error('Onbekende optie: --'+name)}return args}
 async function requestAudio(ref,role,{env,fetchImpl=fetch}){
   if(!kanaOnly(ref.pronunciation?.audioTextKana))throw new Error('Uitspraak moet eerst gecontroleerd worden: '+ref.id);
-  let response;try{response=await fetchImpl('https://api.elevenlabs.io/v1/text-to-speech/'+encodeURIComponent(env['VOICE_'+role+'_ID'])+'?output_format='+config.output_format,{method:'POST',signal:AbortSignal.timeout(60000),headers:{'xi-api-key':env.ELEVENLABS_API_KEY,'Content-Type':'application/json',Accept:'audio/mpeg'},body:JSON.stringify({text:ref.pronunciation.audioTextKana,model_id:config.model_id,voice_settings:config.voice_settings})})}catch{throw new Error('ElevenLabs-netwerkfout voor '+ref.id)}
+  const settings=settingsFor(ref),body={text:ref.pronunciation.audioTextKana,model_id:settings.model_id,voice_settings:settings.voice_settings};
+  if(settings.language_code)body.language_code=settings.language_code;
+  if(settings.apply_language_text_normalization!==undefined)body.apply_language_text_normalization=settings.apply_language_text_normalization;
+  let response;try{response=await fetchImpl('https://api.elevenlabs.io/v1/text-to-speech/'+encodeURIComponent(env['VOICE_'+role+'_ID'])+'?output_format='+settings.output_format,{method:'POST',signal:AbortSignal.timeout(60000),headers:{'xi-api-key':env.ELEVENLABS_API_KEY,'Content-Type':'application/json',Accept:'audio/mpeg'},body:JSON.stringify(body)})}catch{throw new Error('ElevenLabs-netwerkfout voor '+ref.id)}
   if(!response.ok)throw new Error('ElevenLabs HTTP '+response.status+' voor '+ref.id);
   const bytes=Buffer.from(await response.arrayBuffer());if(bytes.length<100)throw new Error('Lege of ongeldige audio voor '+ref.id);return bytes;
 }
-async function run(args,{env=process.env,fetchImpl=fetch,log=console.log}={}){
+async function processJobs(jobs,generate,concurrency=1){
+  if(![1,2].includes(concurrency))throw new Error('Generatie gebruikt één of twee gelijktijdige verzoeken.');
+  let cursor=0,failure;
+  const worker=async()=>{while(!failure&&cursor<jobs.length){const job=jobs[cursor++];try{await generate(job)}catch(error){failure=error}}};
+  // Wait for in-flight recordings to be saved before surfacing a failure; do not retry paid requests.
+  await Promise.all(Array.from({length:concurrency},worker));if(failure)throw failure;
+}
+async function run(args,{env=process.env,fetchImpl=fetch,log=console.log,concurrency=1}={}){
   const manifest=structuredClone(require(manifestFile)),jobs=selectJobs(args),voices={A:env.VOICE_A_ID,B:env.VOICE_B_ID};
   if(manifest.pipelineVersion!==config.pipelineVersion&&!args.dryRun)throw new Error('Werk manifest.pipelineVersion bij voor een gewijzigde pipeline.');
   const planned=planJobs(jobs,manifest.assets,voices,args);
@@ -52,8 +70,8 @@ async function run(args,{env=process.env,fetchImpl=fetch,log=console.log}={}){
   const qualityReady=manifest.qualityGate?.signature===hash(qualitySignatures)&&qualityJobs.every(({ref,role})=>manifest.assets.some(a=>a.entryId===ref.id&&a.voiceRole===role&&a.reviewed&&a.generationHash===generationHash(ref,role,voices[role])&&fs.existsSync(path.join(root,a.path))));
   if(!args.quality&&!qualityReady)throw new Error('Genereer en beluister eerst --quality; keur daarna de testset expliciet goed.');
   if(!env.ELEVENLABS_API_KEY)throw new Error('Stel ELEVENLABS_API_KEY in via de omgeving.');
-  for(const job of planned){
-    if(job.action==='skip'){log('skip '+job.ref.id+' '+job.role);continue}
+  await processJobs(planned,async job=>{
+    if(job.action==='skip'){log('skip '+job.ref.id+' '+job.role);return}
     // Never log request bodies, headers, provider responses or voice IDs.
     const bytes=await requestAudio(job.ref,job.role,{env,fetchImpl});
     const folder=job.ref.kind==='word'?'words':job.ref.kind==='passage'?'passages':job.ref.kind==='kana'?'kana':job.ref.kind==='grammar'?'grammar':'sentences';
@@ -63,8 +81,8 @@ async function run(args,{env=process.env,fetchImpl=fetch,log=console.log}={}){
     if(isQuality)delete manifest.qualityGate;
     const asset={entryId:job.ref.id,displayText:job.ref.displayText,readingId:job.ref.pronunciation.readingId,audioTextKana:job.ref.pronunciation.audioTextKana,voiceRole:job.role,voiceFingerprint:voiceFingerprint(voices[job.role]),path:relative,generationHash:job.generation,pipelineVersion:config.pipelineVersion,reviewed:!isQuality,generatedAt:new Date().toISOString()};
     manifest.assets=manifest.assets.filter(a=>!(a.entryId===asset.entryId&&a.readingId===asset.readingId&&a.voiceRole===asset.voiceRole));manifest.assets.push(asset);writeManifest(manifest);log('generated '+job.ref.id+' '+job.role);
-  }
+  },concurrency);
   log('Gereed. Voer daarna npm run assets:version en npm run audio:audit uit.');
 }
 if(require.main===module)run(parseArgs(process.argv.slice(2))).catch(error=>{console.error(error.message);process.exitCode=1});
-module.exports={hash,generationHash,currentHash,jobsFor,planJobs,selectJobs,parseArgs,requestAudio,run};
+module.exports={hash,generationHash,currentHash,settingsFor,jobsFor,planJobs,selectJobs,parseArgs,requestAudio,processJobs,run};

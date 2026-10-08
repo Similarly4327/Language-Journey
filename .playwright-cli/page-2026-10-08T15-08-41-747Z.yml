@@ -1,0 +1,29 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - button "Terug" [ref=e26] [cursor=pointer]: ←
+        - generic [ref=e6]:
+          - generic [ref=e7]: Language Journey
+          - generic [ref=e8]: Opties
+      - button "Opties" [expanded] [active] [ref=e10] [cursor=pointer]: ☰
+    - main [ref=e11]:
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]: Language Journey
+          - generic [ref=e30]: Opties
+          - generic [ref=e31]: Profiel en instellingen staan los van je lessen.
+        - button "Profiel en avatar Profiel en avatar · Miku · level 1 ›" [ref=e32] [cursor=pointer]:
+          - generic [ref=e33]:
+            - strong [ref=e34]: Profiel en avatar
+            - generic [ref=e35]: Profiel en avatar · Miku · level 1
+          - generic [ref=e36]: ›
+        - button "Audio en geluid Uitspraak, avatarhulp en antwoordgeluid ›" [ref=e37] [cursor=pointer]:
+          - generic [ref=e38]:
+            - strong [ref=e39]: Audio en geluid
+            - generic [ref=e40]: Uitspraak, avatarhulp en antwoordgeluid
+          - generic [ref=e41]: ›
+        - generic [ref=e42]:
+          - strong [ref=e43]: Later beschikbaar
+          - generic [ref=e44]: Meer cursussen, account en synchronisatie. Eventuele supporteropties blijven hier — nooit in de leerroute.
+  - status [ref=e25]

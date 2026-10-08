@@ -12,6 +12,7 @@
     "audio:status": "node scripts/audio-pipeline.cjs status",
     "audio:voices": "node scripts/audio-pipeline.cjs voices",
     "audio:pipeline": "node scripts/audio-pipeline.cjs",
+    "audio:coverage": "node scripts/audio-course-coverage.cjs",
     "assets:version": "node scripts/version-client-assets.cjs"
   }
 }

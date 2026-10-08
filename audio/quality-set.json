@@ -14,6 +14,10 @@
     { "entryId": "sentence-l4-7-model-1", "feature": "o en masu" },
     { "entryId": "sentence-introduction-greeting", "voiceRole": "A", "feature": "bestaande dialoogregel stem A" },
     { "entryId": "sentence-introduction-greeting", "voiceRole": "B", "feature": "dezelfde dialoogregel stem B" },
-    { "entryId": "reading-l6-5", "feature": "volledig kort leesblok" }
+    { "entryId": "reading-l6-5", "feature": "volledig kort leesblok" },
+    { "entryId": "reading-l11-home-5-a", "feature": "Level 11 verhaal, richtingpartikel en lange klanken" },
+    { "entryId": "reading-l12-3-a", "feature": "Level 12 verhaal, bandnummer en topicpartikel" },
+    { "entryId": "reading-l12-2-b", "feature": "Level 12 bordtekst en gesproken pijlrichting" },
+    { "entryId": "number-600", "feature": "onregelmatige getaluitspraak roppyaku" }
   ]
 }

@@ -7,6 +7,38 @@ const pipeline = require('../scripts/audio-pipeline.cjs');
 const batch = require('../scripts/audio-batch.cjs');
 const content = require('../language-journey-content/content.js');
 
+test('bounded generation preserves in-flight successes and stops queued work after failure', async () => {
+  const started=[],saved=[];let release;
+  const pending = batch.processJobs([1,2,3,4],async job=>{
+    started.push(job);
+    if(job===1){await new Promise(resolve=>release=resolve);saved.push(job);}
+    else throw Error('provider failure');
+  },2);
+  await new Promise(resolve=>setImmediate(resolve));
+  assert.deepEqual(started,[1,2]);release();
+  await assert.rejects(pending,/provider failure/);
+  assert.deepEqual(saved,[1]);assert.deepEqual(started,[1,2]);
+  await assert.rejects(batch.processJobs([],()=>{},3),/één of twee/);
+});
+
+test('coffee enforces Japanese without invalidating unrelated recordings', async () => {
+  const config = require('../audio/config.json');
+  const {entry_overrides, ...base} = config;
+  const coffee = content.audioEntryById['vocab-コーヒー'];
+  const cat = content.audioEntryById['vocab-ねこ'];
+  assert.notEqual(batch.generationHash(coffee, 'A', 'test', config), batch.generationHash(coffee, 'A', 'test', base));
+  assert.equal(batch.generationHash(cat, 'A', 'test', config), batch.generationHash(cat, 'A', 'test', base));
+  let body;
+  await batch.requestAudio(coffee, 'A', {env:{VOICE_A_ID:'test', ELEVENLABS_API_KEY:'test'}, fetchImpl:async (_, options) => {
+    body = JSON.parse(options.body);
+    return {ok:true, arrayBuffer:async () => new Uint8Array(128)};
+  }});
+  assert.equal(body.text, 'コーヒー');
+  assert.equal(body.model_id, 'eleven_turbo_v2_5');
+  assert.equal(body.language_code, 'ja');
+  assert.equal(body.apply_language_text_normalization, true);
+});
+
 test('word report counts stable catalog IDs, excluding kana and grammar', () => {
   const counts = pipeline.wordCounts();
   assert.equal(counts.total, content.vocabCatalog.length);
@@ -87,7 +119,7 @@ test('quality review and explicit approval retain the existing quality gate', as
 test('review page uses only safe local MP3 paths and reports missing samples', () => {
   const jobs = batch.selectJobs({quality:true});
   const html = pipeline.reviewHtml({assets:[{entryId:jobs[0].ref.id, voiceRole:jobs[0].role, path:'../unsafe.mp3'}]});
-  assert.equal((html.match(/<article>/g)||[]).length, 14);
+  assert.equal((html.match(/<article>/g)||[]).length, batch.selectJobs({quality:true}).length);
   assert.ok(!html.includes('unsafe.mp3'));
   assert.match(html, /Opname ontbreekt/);
 });

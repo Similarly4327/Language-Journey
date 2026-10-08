@@ -1,0 +1,24 @@
+- generic [ref=f2e1]:
+  - generic [ref=f2e2]:
+    - generic [ref=f2e4]:
+      - generic [ref=f2e6]:
+        - generic [ref=f2e7]: Language Journey
+        - generic [ref=f2e8]: Alle cursussen
+      - button "Opties" [ref=f2e10] [cursor=pointer]: ☰
+    - main [ref=f2e11]:
+      - generic [ref=f2e12]:
+        - generic [ref=f2e13]:
+          - generic [ref=f2e14]: Language Journey
+          - heading "Kies je taalreis." [level=1] [ref=f2e15]
+          - paragraph [ref=f2e16]: Een rustige plek voor al je cursussen.
+        - button "Open cursus Japans" [active] [ref=f2e18] [cursor=pointer]:
+          - generic [ref=f2e20]:
+            - generic [ref=f2e21]: Cursus
+            - strong [ref=f2e22]: Japans
+            - generic [ref=f2e23]: 日本語
+          - generic [aria-hidden] [ref=f2e24]: ↗
+  - status [ref=f2e25]
+  - status "Op weg naar Japan" [ref=f2e26]:
+    - generic [ref=f2e27]:
+      - generic [ref=f2e28]: Language Journey · 日本語
+      - strong [ref=f2e64]: Op weg naar Japan

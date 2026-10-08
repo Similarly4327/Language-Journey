@@ -1,6 +1,6 @@
 # Audio Fundament V3 — implementatie en gebruik
 
-7 oktober 2026. Status: fundament aangesloten in de app; echte Japanse opnamen nog niet gegenereerd. `ELEVENLABS_API_KEY`, `VOICE_A_ID` en `VOICE_B_ID` zijn niet ingesteld. Ontbrekende opnamen tonen geen speaker. Er is geen browser-TTS-fallback.
+8 oktober 2026. Status: de gebruiker heeft de testset met Miku (A) en Ren (B) goedgekeurd, inclusief de aangepaste Japanse uitspraak van koffie. Alle 1.018 opnamen zijn gegenereerd en gekoppeld: 343 woorden, 160 zelfstandige kana-klanken, 119 getallen, 318 zinnen en 69 lees-/bonusteksten plus 8 grammatica-uitingen en de extra begroeting met Ren. Alle bestanden hebben geldige MP3-headers; de audit vindt 0 fouten en 0 waarschuwingen. In Opties → Audio en geluid kiest de gebruiker 1× of 0,75×, met behoud van toonhoogte en lokaal opgeslagen voorkeur. De sleutel en stem-ID’s blijven uitsluitend in de genegeerde lokale configuratie. Er is geen browser-TTS-fallback.
 
 ## Audit van de bestaande bron
 
@@ -64,7 +64,7 @@ Alle API-calls gebeuren uitsluitend in de lokale developer-CLI. Configuratie zon
    npm run audio:batch -- --quality
    ```
 
-4. Beluister alle 14 opnamen in het manifest. Beoordeel verstaanbaarheid, mora-timing, klinkerlengte, kleine kana, zinsintonatie en Engels stresspatroon. De eerste set bevat onder andere お, こうえん, コーヒー, きゃ/きゅ/きょ, きって, ほん, じょせい, desu/masu-zinnen, de bestaande begroeting met beide stemmen en het kleine Level 6-leesblok. Testopnamen blijven tot goedkeuring onzichtbaar in de app.
+4. Beluister alle 18 opnamen in het manifest. Beoordeel verstaanbaarheid, mora-timing, klinkerlengte, kleine kana, zinsintonatie en Engels stresspatroon. De set bevat onder andere お, こうえん, コーヒー, きゃ/きゅ/きょ, きって, ほん, じょせい, desu/masu-zinnen, de bestaande begroeting met beide stemmen, het kleine Level 6-leesblok en de Level 11/12-/getalcontroles. Testopnamen blijven tot goedkeuring onzichtbaar in de app.
 5. Keur uitsluitend na werkelijk beluisteren goed:
 
    ```text
@@ -93,7 +93,7 @@ De CLI schrijft ieder geslaagd bestand en manifest atomair; een fout verliest ge
 - `npm run audio:audit -- --write`: volledige dekking/ontbrekende metadata in [audit.json](audit.json), geen bestaande audiokoppelingsfouten of orphan-opnamen. Alle Japanse opnamen ontbreken momenteel daadwerkelijk.
 - Echte browsercontrole in een geïsoleerde Edge-sessie op 320/375/390/1280 pixels: leswoorden, modelzin, Dictionary, beide Recall-richtingen en de gedeelde quiz zonder horizontale overflow; 44px-knoppen; stop/herstart/vervanging; eerste hiragana- en katakana-vragen gebruiken hun eigen kana-ID’s, ook na feedback. Recall NL→JP heeft vóór het antwoord geen speaker en daarna één; vrij oefenen schrijft geen SRS-kaarten. Kennis speelt direct zonder Dictionary te openen en deelt het artikel-ID. Mobiele screenshots in `output/playwright/audio-v3/` gebruiken expliciet mock-opnamen/playback; zij bewijzen layout, geen spraakkwaliteit.
 - Geen live ElevenLabs-verzoek, menselijke uitspraakbeoordeling, fysieke iPhone/Safari-afspeeltest of Pages-deploy uitgevoerd. Een geslaagde browserfixture is geen bewijs van het iOS-audiogedrag van echte MP3's.
-- 343 woorden hebben bestaande kana-readings. De audit houdt ongecontroleerde latere zinnen, leesblokken en grammatica afzonderlijk zichtbaar; ontbrekende uitspraak wordt niet gegokt. Er zijn 130 entries zonder gecontroleerde uitspraakmetadata en 529 afzonderlijke uitingen met metadata maar zonder opname. De drie contextafhankelijke tekens zijn afzonderlijk vermeld.
+- 343 woorden hebben bestaande kana-readings. De audit houdt ongecontroleerde latere zinnen, leesblokken en grammatica afzonderlijk zichtbaar; ontbrekende uitspraak wordt niet gegokt. Er blijven 30 grammaticale patroontitels zonder zelfstandige uitspraakmetadata; die worden niet als een verzonnen zin uitgesproken. Alle 1.017 geselecteerde uitingen hebben een opname (plus de begroeting van Ren uit de testset). De drie contextafhankelijke tekens zijn afzonderlijk vermeld.
 
 ## Gewijzigde bestanden voor audio
 

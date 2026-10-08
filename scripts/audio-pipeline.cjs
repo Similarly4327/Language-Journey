@@ -51,7 +51,8 @@ function plan(args, env, manifest = readManifest()) {
     // A character count is not a credit/price estimate: billing depends on the account and model.
     model: config.model_id, outputFormat: config.output_format,
     missingConfiguration: keys.filter(key => !env[key]),
-    jobs: jobs.map(j => ({entryId: j.ref.id, voiceRole: j.role, action: j.action}))};
+    jobs: jobs.map(j => ({entryId: j.ref.id, voiceRole: j.role, action: j.action,
+      model: batch.settingsFor(j.ref).model_id, language: batch.settingsFor(j.ref).language_code || 'auto'}))};
 }
 async function voices(env, fetchImpl = fetch) {
   if (!env.ELEVENLABS_API_KEY) throw new Error('Vul ELEVENLABS_API_KEY in .env.elevenlabs.local in.');

@@ -2,6 +2,10 @@
 
 De pipeline gebruikt het bestaande audiofundament en de stabiele catalogus-ID's. De browser speelt gegenereerde MP3's af; de ElevenLabs-sleutel blijft lokaal. Node.js 22 of hoger is nodig. Er zijn geen extra npm-pakketten nodig.
 
+In **Opties → Audio en geluid → Spreeksnelheid** kiest de gebruiker normaal (1×) of langzamer (0,75×). Dezelfde keuze staat bij de audio-instellingen in het profiel. De app bewaart deze keuze lokaal, gebruikt standaard 1× voor bestaande gebruikers en behoudt de toonhoogte. De snelheid geldt voor alle Japanse opnamen, inclusief dialoogregels; het antwoordgeluid blijft op normale snelheid. Er worden hiervoor geen nieuwe MP3's gegenereerd.
+
+Op Windows kan Node bij een bedrijfsproxy `SELF_SIGNED_CERT_IN_CHAIN` melden. Gebruik dan `node --use-system-ca scripts/audio-pipeline.cjs generate --all` (Node 24), zodat Windows' vertrouwde certificaten worden gebruikt. Schakel certificaatcontrole niet uit.
+
 ## 1. Instellen
 
 ```powershell
@@ -21,6 +25,8 @@ De stemlijst toont naam, ID en beschikbaar taallabel. Kies stemmen die natuurlij
 
 `audio/config.json` bevat model, formaat en steminstellingen. De huidige combinatie is `eleven_multilingual_v2` met `mp3_44100_128`. Dit model ondersteunt geen `language_code`; de app stuurt de bestaande expliciete kana-uitspraak. Bron: [ElevenLabs Create speech](https://elevenlabs.io/docs/api-reference/text-to-speech/convert). Stemmen worden met paginering uit [List voices](https://elevenlabs.io/docs/api-reference/voices/search) opgehaald.
 
+Voor `vocab-コーヒー` is na de gemelde Engelse uitspraak een gerichte proef ingesteld via `entry_overrides`: `eleven_turbo_v2_5`, `language_code: ja` en Japanse tekstnormalisatie. De tekst blijft コーヒー. Alleen de aangepaste opname wordt opnieuw gegenereerd; de andere testopnamen blijven actueel. De gebruiker heeft de nieuwe uitspraak van koffie en vervolgens de testset voor deze versie goedgekeurd op 8 oktober 2026. Overrides tellen mee in de generatiehash van het betreffende artikel.
+
 ## 2. Testset beluisteren
 
 ```powershell
@@ -28,7 +34,7 @@ npm run audio:pipeline -- plan --quality
 npm run audio:pipeline -- quality
 ```
 
-Open `output/audio-review.html` in de browser. De pagina bevat 14 opnamen met uitspraaktekst en afspeelknoppen, waaronder korte/lange klinkers, kleine kana, kleine tsu, zinnen en beide stemrollen. Je kunt de pagina ook openen als `/output/audio-review.html` via je lokale webserver. Met `npm run audio:pipeline -- review` bouw je de pagina opnieuw zonder API-verzoeken.
+Open `output/audio-review.html` in de browser. De pagina bevat 18 opnamen met uitspraaktekst en afspeelknoppen, waaronder korte/lange klinkers, kleine kana, kleine tsu, zinnen, Level 11/12-verhalen, getallen, pijlrichtingen en beide stemrollen. Je kunt de pagina ook openen als `/output/audio-review.html` via je lokale webserver. Met `npm run audio:pipeline -- review` bouw je de pagina opnieuw zonder API-verzoeken.
 
 Controleer alle opnamen op verstaanbaarheid, mora-timing, klinkerlengte en zinsintonatie. Keur daarna expliciet goed:
 
@@ -56,7 +62,7 @@ Andere selecties: `--ids vocab-ねこ,vocab-いぬ`, `--level 4` of `--range 1-5
 
 Na een geslaagde batch controleert de pipeline het manifest en de bestanden en werkt zij de clientversie bij. De bestaande speakers in lessen, quiz, Dictionary, Kennis en Recall vinden de audio via dezelfde ID's. Publiceer daarna de bijgewerkte `index.html`, het manifest en de gegenereerde MP3's met de overige websitebestanden.
 
-Actuele bestanden worden overgeslagen. Na een fout kun je dezelfde opdracht herhalen; eerder geslaagde opnamen blijven bewaard. Verzoeken hebben een timeout; er worden geen automatische betaalde herhaalverzoeken uitgevoerd. Ongecontroleerde zinnen/passages worden overgeslagen en verschijnen in `audio:status` onder `missingReadings`. De pipeline bedenkt geen lezingen en wijzigt geen voortgang of SRS.
+Actuele bestanden worden overgeslagen. Na een fout kun je dezelfde opdracht herhalen; eerder geslaagde opnamen blijven bewaard. Verzoeken hebben een timeout; er worden geen automatische betaalde herhaalverzoeken uitgevoerd. Nieuwe teksten zonder expliciete uitspraak worden overgeslagen en verschijnen in `audio:status` onder `missingReadings`. De pipeline bedenkt geen lezingen en wijzigt geen voortgang of SRS. [De volledige cursusuitbreiding](audio-v3/full-course.md) beschrijft de klanken, alle verhalen en vraagzinnen. Controleer de inhoudsdekking met `npm run audio:coverage`.
 
 ## Woordtelling op 8 oktober 2026
 

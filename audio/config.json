@@ -2,5 +2,12 @@
   "pipelineVersion": "audio-v3.1",
   "model_id": "eleven_multilingual_v2",
   "output_format": "mp3_44100_128",
-  "voice_settings": { "stability": 0.65, "similarity_boost": 0.75, "style": 0, "use_speaker_boost": true }
+  "voice_settings": { "stability": 0.65, "similarity_boost": 0.75, "style": 0, "use_speaker_boost": true },
+  "entry_overrides": {
+    "vocab-コーヒー": {
+      "model_id": "eleven_turbo_v2_5",
+      "language_code": "ja",
+      "apply_language_text_normalization": true
+    }
+  }
 }

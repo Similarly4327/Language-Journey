@@ -29,7 +29,7 @@ test('reviewed early sentences share IDs, preserve writing and use explicit pron
  assert.equal(content.audioEntryById['sentence-l4-7-model-1'].pronunciation.audioTextKana,'わたし わ みず お のみます');
  assert.deepEqual(content.audioEntryById['sentence-l4-7-model-1'].entry.linkedWordIds,['vocab-わたし','vocab-みず','vocab-のみます']);
  assert.equal(content.audioEntryById['reading-l6-5'].pronunciation.audioTextKana,'これわ わたし の かぞく です。 あれわ わたし の あに です。');
- assert.equal(content.audioEntryById['sentence-l9-1-model-1'].pronunciation.audioTextKana,null);
+ assert.equal(content.audioEntryById['sentence-l9-1-model-1'].pronunciation.audioTextKana,'えき わ どこ です か');
 });
 test('unverified kanji, isolated small tsu and vowel mark are rejected; lexical spelling is retained',()=>{
  for(const text of ['今日','学校','っ','ッ','ー','わたしは学生です','hello'])assert.equal(kanaOnly(text),false);
@@ -47,6 +47,25 @@ function playbackFixture(){
  const played=[],timers=[],states=[];const service=audio.createPlayback({createAudio:path=>{const item={path,play(){this.started=true;return Promise.resolve()},pause(){this.paused=true}};played.push(item);return item},delay:fn=>{const timer={fn};timers.push(timer);return timer},cancelDelay:timer=>timer.cancelled=true});
  return{service,played,timers,states,options:{onState:s=>states.push(s)}};
 }
+test('speed choice preserves pitch, updates active playback and every dialogue line',()=>{
+ const f=playbackFixture();
+ f.service.play([{path:'one'},{path:'two'}],{...f.options,playbackRate:.75});
+ assert.equal(f.played[0].playbackRate,.75);assert.equal(f.played[0].preservesPitch,true);
+ f.service.setRate(1);assert.equal(f.played[0].playbackRate,1);
+ f.played[0].onended();f.service.setRate(.75);f.timers[0].fn();
+ assert.equal(f.played[0].src,'./two');assert.equal(f.played[0].playbackRate,.75);
+ f.service.stop();f.service.play([{path:'signal'}]);assert.equal(f.played.at(-1).playbackRate,1);
+});
+test('saved audio speed accepts only supported rates and preserves existing progress',()=>{
+ const {createCrashCourseProbe}=require('./app-probe.cjs');
+ for(const speed of [undefined,null,0,2,'invalid',1,.75]){
+   const app=createCrashCourseProbe({savedState:{audioSpeed:speed,userName:'Learner',introducedVocabIds:['vocab-ねこ']}});
+   const expected=speed===.75?.75:1;
+   assert.equal(app.state.audioSpeed,expected);const saved=app.saved();
+   assert.equal(saved.state.audioSpeed,expected);assert.equal(saved.state.userName,'Learner');
+   assert.ok(saved.state.introducedVocabIds.includes('vocab-ねこ'));
+ }
+});
 test('one central service replaces playback and ignores stale events',async()=>{
  const f=playbackFixture();f.service.play([{path:'first'}],f.options);const stale=f.played[0].onended;
  f.played[0].onplaying();assert.equal(f.states.at(-1),'playing');f.service.play([{path:'second'}],f.options);
@@ -88,12 +107,12 @@ test('provider receives kana only; errors never include credentials/provider res
  const ref=content.audioEntryById['sentence-l4-7-model-1'],env={VOICE_A_ID:'private-voice',ELEVENLABS_API_KEY:'private-key'};let request;
  const bytes=await batch.requestAudio(ref,'A',{env,fetchImpl:async(url,options)=>{request={url,options};return{ok:true,arrayBuffer:async()=>new Uint8Array(120).buffer}}});assert.equal(bytes.length,120);assert.equal(JSON.parse(request.options.body).text,ref.pronunciation.audioTextKana);assert.ok(!request.options.body.includes(ref.displayText));
  await assert.rejects(batch.requestAudio(ref,'A',{env,fetchImpl:async()=>{throw Error('private-key private-voice')}}),error=>!error.message.includes('private-')&&/netwerkfout/.test(error.message));
- await assert.rejects(batch.requestAudio(content.audioEntryById['sentence-l9-1-model-1'],'A',{env,fetchImpl:()=>{throw Error('must not call')}}),/gecontroleerd/);
+ await assert.rejects(batch.requestAudio({...content.audioEntryById['sentence-l9-1-model-1'],pronunciation:{audioTextKana:null}},'A',{env,fetchImpl:()=>{throw Error('must not call')}}),/gecontroleerd/);
 });
 test('validator detects unknown IDs, duplicate refs, stale hashes and reports missing content honestly',()=>{
  const asset=recording('vocab-ねこ');assert.equal(audit(content,manifest([asset]),{checkFiles:false}).errors.length,0);
  const result=audit(content,manifest([asset,asset,{...asset,entryId:'missing'},{...recording('vocab-いぬ'),generationHash:'stale'}]),{checkFiles:false});assert.ok(result.errors.some(e=>e.includes('duplicate')));assert.ok(result.errors.some(e=>e.includes('unknown')));assert.ok(result.errors.some(e=>e.includes('stale')));
- const empty=audit();assert.equal(empty.coverage.word.withAudio,0);assert.ok(empty.missingReadings.includes('reading-l9-5'));assert.equal(empty.errors.length,0);
+ const empty=audit(content,manifest([]));assert.equal(empty.coverage.word.withAudio,0);assert.ok(!empty.missingReadings.includes('reading-l9-5'));assert.ok(empty.missingReadings.includes('grammar-l6-3'));assert.equal(empty.errors.length,0);
 });
 test('all UI routes reuse shared service and Recall reveal never offers Japanese audio beforehand',()=>{
  const html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');
@@ -103,7 +122,7 @@ test('all UI routes reuse shared service and Recall reveal never offers Japanese
  assert.equal(sandbox.key({lessonId:'l4-1'},'これは ねこ です'),'sentence-l4-1-model-1');
  assert.equal(sandbox.key({vocabIds:['vocab-ねこ']},'kat'),undefined,'Dutch prompts never acquire the answer ID through vocabulary metadata');
  assert.match(html,/if\(direction==='jp-nl'&&!feedback\)/);assert.match(html,/speakerButtonHtml\(spokenAnswer,card.id/);assert.match(html,/model.sentenceId/);
- assert.match(html,/contextAudio=q.context&&speakerButtonHtml/);assert.match(html,/japanesePlayback.play\(asset.assets/);assert.doesNotMatch(html,/knowledgeTilePlayback|audioCoachPlayback|speechSynthesis/);
+ assert.match(html,/contextAudio=quizTextIsJapanese\(context\)&&speakerButtonHtml/);assert.match(html,/japanesePlayback.play\(asset.assets/);assert.doesNotMatch(html,/knowledgeTilePlayback|audioCoachPlayback|speechSynthesis/);
  assert.match(html,/qPromptAudio'\).innerHTML=''/);assert.match(html,/min-width:44px/);
  const knowledge=html.slice(html.indexOf('function renderKnowledgeDashboard('),html.indexOf('function knowledgeGrowthSeries('));assert.doesNotMatch(knowledge,/knowledgeGrammarForKana\(item.front\)/);assert.match(knowledge,/dictionaryById\[`kana-\$\{script\}-\$\{item.front\}`\]/);
  const japaneseRoute=html.slice(html.indexOf('function playAvatarAudio('),html.indexOf('function playCorrectAnswerSound('));assert.doesNotMatch(japaneseRoute,/new Audio|AUDIO_COACH_DISMISS_MS/);

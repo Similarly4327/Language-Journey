@@ -22,8 +22,25 @@
   };
   // Same verified particle meanings/readings as Dictionary (IRODORI Grammar_all.pdf).
   const particleReadings={'grammar-ha':'わ','grammar-wo':'お','grammar-no':'の','grammar-ka':'か','grammar-mo':'も','grammar-ni':'に','grammar-desu':'です','grammar-l12-1':'え'};
+  function numberKana(n){
+    const digits=['ゼロ','いち','に','さん','よん','ご','ろく','なな','はち','きゅう','じゅう'];
+    if(n<=10)return digits[n];
+    if(n<100)return(n<20?'':digits[Math.floor(n/10)])+'じゅう'+(n%10?digits[n%10]:'');
+    if(n<1000)return['','ひゃく','にひゃく','さんびゃく','よんひゃく','ごひゃく','ろっぴゃく','ななひゃく','はっぴゃく','きゅうひゃく'][Math.floor(n/100)]+(n%100?numberKana(n%100):'');
+    if(n<10000)return['','せん','にせん','さんぜん','よんせん','ごせん','ろくせん','ななせん','はっせん','きゅうせん'][Math.floor(n/1000)]+(n%1000?numberKana(n%1000):'');
+    return n===10000?'いちまん':null;
+  }
+  function numberSymbol(n){
+    const digits=['〇','一','二','三','四','五','六','七','八','九'];
+    if(n<10)return digits[n];if(n<100)return(n<20?'':digits[Math.floor(n/10)])+'十'+(n%10?digits[n%10]:'');
+    if(n<1000)return(n<200?'':digits[Math.floor(n/100)])+'百'+(n%100?numberSymbol(n%100):'');
+    if(n<10000)return(n<2000?'':digits[Math.floor(n/1000)])+'千'+(n%1000?numberSymbol(n%1000):'');
+    return n===10000?'一万':null;
+  }
   function attach(api){
     const manifest=api.manifest,entries=[],byId={},aliases={};
+    const courseReadings=typeof module!=='undefined'&&module.exports?require('./audio-course-readings.js'):root.LanguageJourneyCourseReadings||[];
+    const readingsByText=new Map(courseReadings.map(([text,kana])=>[text,kana]));
     const add=(entry,kind,displayText,kana,source={})=>{
       if(byId[entry.id])throw new Error('Duplicate audio content ID: '+entry.id);
       entry.pronunciation={readingId:'default',audioTextKana:kanaOnly(kana)?kana:null,status:['っ','ッ','ー'].includes(displayText)?'context-only':kanaOnly(kana)?'specified':'needs-review'};
@@ -47,7 +64,7 @@
     manifest.sentences=[];const sentenceByText=new Map();
     for(const lesson of manifest.lessons)for(const [index,model] of (lesson.models||[]).entries()){
       let entry=sentenceByText.get(model.sentence);
-      if(!entry){const tokens=[...new Set((model.parts||[]).flatMap(part=>part[0].split(/\s+/)))],linkedWordIds=tokens.flatMap(token=>{const matches=manifest.vocabulary.filter(word=>word.coreOrContext!=='legacy'&&(word.japanese===token||word.kanjiForm===token));return matches.length===1?[matches[0].id]:[]});entry={id:`sentence-${lesson.id}-model-${index+1}`,displayText:model.sentence,meaning:model.meaning,sourceLessonIds:[],linkedWordIds:[...new Set(linkedWordIds)]};manifest.sentences.push(entry);sentenceByText.set(model.sentence,entry);add(entry,'sentence',entry.displayText,lesson.level===4?modelReadings[model.sentence]:model.audioTextKana,{level:lesson.level,lessonId:lesson.id})}
+      if(!entry){const tokens=[...new Set((model.parts||[]).flatMap(part=>part[0].split(/\s+/)))],linkedWordIds=tokens.flatMap(token=>{const matches=manifest.vocabulary.filter(word=>word.coreOrContext!=='legacy'&&(word.japanese===token||word.kanjiForm===token));return matches.length===1?[matches[0].id]:[]});entry={id:`sentence-${lesson.id}-model-${index+1}`,displayText:model.sentence,meaning:model.meaning,sourceLessonIds:[],linkedWordIds:[...new Set(linkedWordIds)]};manifest.sentences.push(entry);sentenceByText.set(model.sentence,entry);add(entry,'sentence',entry.displayText,model.audioTextKana||readingsByText.get(model.sentence)||(lesson.level===4?modelReadings[model.sentence]:null),{level:lesson.level,lessonId:lesson.id})}
       entry.sourceLessonIds.push(lesson.id);model.sentenceId=entry.id;
     }
     const greeting={id:'sentence-introduction-greeting',displayText:'こんにちは。',meaning:'Hallo.'};
@@ -56,9 +73,21 @@
     manifest.dialogues.introduction[0].sentenceId=greeting.id;
     for(const block of manifest.dialogueBlocks){byId[block.id]={id:block.id,kind:'dialogue',entry:block,displayText:block.lines.map(line=>byId[line.sentenceId].displayText).join('\n'),level:block.level,lessonId:block.lessonId};entries.push(byId[block.id])}
     for(const passage of [...manifest.readings,...(manifest.bonus||[])]){
-      const reviewed=passage.id==='reading-l6-5'&&passage.text==='これは わたし の かぞく です。 あれは わたし の あに です。'?'これわ わたし の かぞく です。 あれわ わたし の あに です。':passage.audioTextKana;
+      const reviewed=passage.audioTextKana||readingsByText.get(passage.text);
       add(passage,'passage',passage.text,reviewed,{level:Number(passage.introducedAt?.split('-')[0]),lessonId:passage.lessonId});
     }
+    // These are utterances from existing questions/examples, never a second vocabulary list.
+    manifest.audioUtterances=[];
+    for(const [text,kana,level,lessonId,id] of courseReadings){
+      if(entries.some(ref=>ref.displayText===text&&ref.pronunciation?.audioTextKana))continue;
+      // Text-based IDs remain stable when a question moves or its order changes.
+      const entry={id,displayText:text};manifest.audioUtterances.push(entry);add(entry,'sentence',text,kana,{level,lessonId});
+    }
+    // A writing sign has an effect in a word, not an independent spoken syllable.
+    const contextExamples={'kana-small-っ':'vocab-きって','kana-small-ッ':'vocab-ベッド','writing-long-vowel-mark':'vocab-コーヒー'};
+    for(const [id,exampleId] of Object.entries(contextExamples))byId[id].exampleAudioId=exampleId;
+    manifest.audioNumbers=[];
+    for(const n of new Set(manifest.numbers.lessons.flatMap(l=>l.values))){const entry={id:`number-${n}`,value:n};manifest.audioNumbers.push(entry);add(entry,'number',numberSymbol(n),numberKana(n),{level:1});aliases[`num-${n}`]=entry.id;}
     api.audioEntries=entries;api.audioEntryById=byId;api.audioAliases=aliases;
     // Legacy inline questions can resolve only when all matches have the same pronunciation.
     api.resolveAudioEntry=function(id,text){
@@ -70,6 +99,6 @@
     manifest.audio.voiceRoles=['A','B'];
     return api;
   }
-  const api={attach,kanaOnly};
+  const api={attach,kanaOnly,numberKana,numberSymbol};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.LanguageJourneyAudioFoundation=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

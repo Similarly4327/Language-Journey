@@ -9,16 +9,18 @@
     return assets.length&&assets.every(Boolean)?{id:ref.id,entry:ref,assets}:null;
   }
   function createPlayback({createAudio=path=>new Audio(path),delay=(fn,ms)=>setTimeout(fn,ms),cancelDelay=id=>clearTimeout(id),pauseMs=220}={}){
-    let active=null,token=0,timer=null,statusCallback=null;
+    let active=null,token=0,timer=null,statusCallback=null,rate=1;
+    function setRate(value){rate=Number(value)===.75?.75:1;if(active)active.audio.playbackRate=rate}
     function stop(){token++;if(timer!==null){cancelDelay(timer);timer=null}if(active){const old=active;active=null;old.audio.onended=old.audio.onerror=old.audio.onplaying=null;old.audio.pause()}if(statusCallback){statusCallback('idle');statusCallback=null}}
-    function play(assets,{volume=1,onState=()=>{},onFinish=()=>{}}={}){
-      stop();if(!assets?.length)return false;
+    function play(assets,{volume=1,playbackRate=1,onState=()=>{},onFinish=()=>{}}={}){
+      stop();setRate(playbackRate);if(!assets?.length)return false;
       const session=token;let index=0,media=null;statusCallback=onState;
       function next(){
         if(session!==token)return;
         const path='./'+assets[index].path;let audio;
         // Keep the gesture-unlocked media element for subsequent dialogue lines.
         try{if(!media)media=createAudio(path);else media.src=path;audio=media}catch{onState('error');onFinish('error');return}audio.volume=Math.max(0,Math.min(1,volume));audio.preload='auto';
+        audio.playbackRate=rate;audio.preservesPitch=true;
         active={audio,status:onState};onState('loading');
         let finished=false;
         const finish=error=>{
@@ -32,7 +34,7 @@
       }
       next();return true;
     }
-    return{play,stop};
+    return{play,stop,setRate};
   }
   const escape=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   function buttonHtml(resolved,text,label){return resolved?`<button class="audio-speaker" type="button" data-audio-key="${escape(resolved.id)}" data-audio-text="${escape(text)}" data-audio-state="idle" aria-pressed="false" aria-label="${escape(label)}" title="${escape(label)}"><span aria-hidden="true">🔊</span></button>`:''}

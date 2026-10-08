@@ -1,0 +1,40 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - button "Terug" [ref=e26] [cursor=pointer]: ←
+        - generic [ref=e6]:
+          - generic [ref=e7]: Language Journey
+          - generic [ref=e8]: Opties
+      - button "Opties" [expanded] [ref=e10] [cursor=pointer]: ☰
+    - main [ref=e11]:
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - generic [ref=e47]: Instellingen
+          - generic [ref=e48]: Audio en geluid
+          - generic [ref=e49]: Deze keuzes gelden voor je Japanse cursus en zijn altijd aanpasbaar.
+        - generic [ref=e50]:
+          - generic [ref=e51]:
+            - generic [ref=e52]:
+              - strong [ref=e53]: Uitspraak en audio
+              - text: Speel beschikbare lokale opnames af.
+            - checkbox "Uitspraak en audioSpeel beschikbare lokale opnames af." [checked] [ref=e54]
+          - generic [ref=e55]:
+            - generic [ref=e56]:
+              - strong [ref=e57]: Avatar-audiohulp
+              - text: Toon de avatar bij afspelen.
+            - checkbox "Avatar-audiohulpToon de avatar bij afspelen." [checked] [ref=e58]
+          - generic [ref=e59]:
+            - generic [ref=e60]:
+              - strong [ref=e61]: Geluid bij goed antwoord
+              - text: Een kort, subtiel signaal.
+            - checkbox "Geluid bij goed antwoordEen kort, subtiel signaal." [checked] [ref=e62]
+          - generic [ref=e63]:
+            - strong [ref=e65]: Volume
+            - slider "Audiovolume" [ref=e66]: "0.65"
+          - generic [ref=e67]:
+            - generic [ref=e68]: Spreeksnelheid
+            - combobox "Spreeksnelheid" [ref=e69]:
+              - option "Normaal (1×)"
+              - option "Langzamer (0,75×)" [selected]
+  - status [ref=e25]
