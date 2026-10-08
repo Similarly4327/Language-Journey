@@ -1660,9 +1660,12 @@ body[data-scene="journey"][data-view="main"] #mainView{
 .audio-content-block{position:relative}
 .audio-content-block:has(.audio-speaker){padding-right:54px;min-height:44px}
 .audio-content-block>.audio-speaker,.audio-content-block>.jp>.audio-speaker{position:absolute;right:0;top:0}
-.audio-speaker{width:44px;height:44px;min-width:44px;margin:0 4px;font-size:17px}
+.audio-speaker{width:44px;height:44px;min-width:44px;margin:0 4px;font-size:17px;border-radius:12px;background:var(--panel);color:var(--muted);box-shadow:none}
+/* A flat, single-wave speaker replaces the emoji visually; state text stays intact. */
+.audio-speaker[data-audio-state]:not([data-audio-state="loading"]):not([data-audio-state="error"])>span{font-size:0}
+.audio-speaker[data-audio-state]:not([data-audio-state="loading"]):not([data-audio-state="error"])>span::before{content:"";display:block;width:18px;height:18px;background:currentColor;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M11 5 6 9H3v6h3l5 4V5Z M15 8a5 5 0 0 1 0 8' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
 .audio-speaker[data-audio-state="loading"]{opacity:.65}
-.audio-speaker[data-audio-state="playing"]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--panel))}
+.audio-speaker[data-audio-state="playing"]{border-color:color-mix(in srgb,var(--accent) 45%,var(--border));color:var(--accent);background:color-mix(in srgb,var(--accent) 6%,var(--panel))}
 .audio-speaker[data-audio-state="error"]{border-color:var(--accent)}
 .question{position:relative}
 .question:has(#qPromptAudio .audio-speaker){padding-right:64px}
@@ -1672,6 +1675,15 @@ body[data-scene="journey"][data-view="main"] #mainView{
 .flashcard-feedback-status>.audio-feedback,.flashcard-feedback-status>.audio-speaker{position:absolute;right:0;top:0;margin:0}
 .flashcard-face-main:has(.audio-speaker){position:relative;padding-right:52px;min-height:44px}
 .flashcard-face-main>.audio-speaker{position:absolute;right:0;top:0}
+/* Recall anchors the compact control to the question area, inside its padding. */
+#flashcardView .flashcard-front:has(.audio-speaker){position:relative;padding-right:52px}
+#flashcardView .flashcard-front>div{min-width:0;max-width:100%}
+#flashcardView .flashcard-face-main:has(.audio-speaker){position:static;padding-right:0;min-height:0}
+#flashcardView .audio-speaker{width:32px;height:32px;min-width:32px;margin:0;border-radius:10px}
+#flashcardView .flashcard-face-main>.audio-speaker{right:8px;top:8px}
+#flashcardView .audio-speaker>span::before{width:16px;height:16px}
+/* Keep a generous tap area without making the visible button dominant. */
+#flashcardView .audio-speaker::after{content:"";position:absolute;inset:-6px}
 .kana-card>.audio-speaker{margin-top:6px}
 .knowledge-item>.audio-speaker{margin-right:5px}
 </style>
