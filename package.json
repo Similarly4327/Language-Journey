@@ -8,6 +8,10 @@
     "test": "node --test",
     "audio:batch": "node scripts/audio-batch.cjs",
     "audio:audit": "node scripts/audio-audit.cjs",
+    "audio:setup": "node scripts/audio-pipeline.cjs setup",
+    "audio:status": "node scripts/audio-pipeline.cjs status",
+    "audio:voices": "node scripts/audio-pipeline.cjs voices",
+    "audio:pipeline": "node scripts/audio-pipeline.cjs",
     "assets:version": "node scripts/version-client-assets.cjs"
   }
 }

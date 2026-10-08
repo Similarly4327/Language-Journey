@@ -1,0 +1,2588 @@
+[
+  {
+    "level": 3,
+    "status": "niet van toepassing",
+    "kanaExams": [
+      {
+        "id": "dak-examA",
+        "questions": 50,
+        "wordTurns": 0
+      },
+      {
+        "id": "dak-examB",
+        "questions": 50,
+        "wordTurns": 0
+      }
+    ],
+    "lessons": [],
+    "exam": {
+      "wordIds": [],
+      "wordTurns": 0,
+      "totalQuestions": 0,
+      "otherQuestions": 0,
+      "directions": {
+        "jp-nl": 0,
+        "nl-jp": 0
+      },
+      "forms": {},
+      "coverage": {
+        "expected": [],
+        "counts": {},
+        "missing": [],
+        "duplicates": [],
+        "unexpected": []
+      }
+    }
+  },
+  {
+    "level": 4,
+    "status": "van toepassing",
+    "lessons": [
+      {
+        "lessonId": "l4-1",
+        "source": "manifest.vocabulary.introducedAt=4-1",
+        "wordIds": [
+          "vocab-これ",
+          "vocab-ねこ",
+          "vocab-いぬ",
+          "vocab-みず",
+          "vocab-パン"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 10,
+        "coverage": {
+          "expected": [
+            "vocab-これ|jp-nl",
+            "vocab-これ|nl-jp",
+            "vocab-ねこ|jp-nl",
+            "vocab-ねこ|nl-jp",
+            "vocab-いぬ|jp-nl",
+            "vocab-いぬ|nl-jp",
+            "vocab-みず|jp-nl",
+            "vocab-みず|nl-jp",
+            "vocab-パン|jp-nl",
+            "vocab-パン|nl-jp"
+          ],
+          "counts": {
+            "vocab-パン|jp-nl": 1,
+            "vocab-いぬ|nl-jp": 1,
+            "vocab-ねこ|jp-nl": 1,
+            "vocab-みず|nl-jp": 1,
+            "vocab-いぬ|jp-nl": 1,
+            "vocab-これ|nl-jp": 1,
+            "vocab-みず|jp-nl": 1,
+            "vocab-ねこ|nl-jp": 1,
+            "vocab-これ|jp-nl": 1,
+            "vocab-パン|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l4-2",
+        "source": "manifest.vocabulary.introducedAt=4-2",
+        "wordIds": [
+          "vocab-それ",
+          "vocab-あれ",
+          "vocab-ほん",
+          "vocab-さかな"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-それ|jp-nl",
+            "vocab-それ|nl-jp",
+            "vocab-あれ|jp-nl",
+            "vocab-あれ|nl-jp",
+            "vocab-ほん|jp-nl",
+            "vocab-ほん|nl-jp",
+            "vocab-さかな|jp-nl",
+            "vocab-さかな|nl-jp"
+          ],
+          "counts": {
+            "vocab-ほん|jp-nl": 1,
+            "vocab-さかな|nl-jp": 1,
+            "vocab-あれ|jp-nl": 1,
+            "vocab-それ|nl-jp": 1,
+            "vocab-さかな|jp-nl": 1,
+            "vocab-ほん|nl-jp": 1,
+            "vocab-それ|jp-nl": 1,
+            "vocab-あれ|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l4-3",
+        "source": "manifest.vocabulary.introducedAt=4-3",
+        "wordIds": [
+          "vocab-わたし",
+          "vocab-ひと",
+          "vocab-ともだち"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 6,
+        "coverage": {
+          "expected": [
+            "vocab-わたし|jp-nl",
+            "vocab-わたし|nl-jp",
+            "vocab-ひと|jp-nl",
+            "vocab-ひと|nl-jp",
+            "vocab-ともだち|jp-nl",
+            "vocab-ともだち|nl-jp"
+          ],
+          "counts": {
+            "vocab-わたし|jp-nl": 1,
+            "vocab-ともだち|nl-jp": 1,
+            "vocab-ひと|jp-nl": 1,
+            "vocab-わたし|nl-jp": 1,
+            "vocab-ともだち|jp-nl": 1,
+            "vocab-ひと|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l4-4",
+        "source": "manifest.vocabulary.introducedAt=4-4",
+        "wordIds": [],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 0,
+        "coverage": {
+          "expected": [],
+          "counts": {},
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l4-5",
+        "source": "manifest.vocabulary.introducedAt=4-5",
+        "wordIds": [],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 0,
+        "coverage": {
+          "expected": [],
+          "counts": {},
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l4-6",
+        "source": "manifest.vocabulary.introducedAt=4-6",
+        "wordIds": [],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 0,
+        "coverage": {
+          "expected": [],
+          "counts": {},
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l4-7",
+        "source": "manifest.vocabulary.introducedAt=4-7",
+        "wordIds": [
+          "vocab-のみます",
+          "vocab-たべます",
+          "vocab-みます"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 6,
+        "coverage": {
+          "expected": [
+            "vocab-のみます|jp-nl",
+            "vocab-のみます|nl-jp",
+            "vocab-たべます|jp-nl",
+            "vocab-たべます|nl-jp",
+            "vocab-みます|jp-nl",
+            "vocab-みます|nl-jp"
+          ],
+          "counts": {
+            "vocab-のみます|nl-jp": 1,
+            "vocab-みます|jp-nl": 1,
+            "vocab-たべます|nl-jp": 1,
+            "vocab-のみます|jp-nl": 1,
+            "vocab-みます|nl-jp": 1,
+            "vocab-たべます|jp-nl": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l4-8",
+        "source": "manifest.vocabulary.introducedAt=4-8",
+        "wordIds": [
+          "vocab-よみます"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 2,
+        "coverage": {
+          "expected": [
+            "vocab-よみます|jp-nl",
+            "vocab-よみます|nl-jp"
+          ],
+          "counts": {
+            "vocab-よみます|nl-jp": 1,
+            "vocab-よみます|jp-nl": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l4-9",
+        "source": "manifest.vocabulary.introducedAt=4-9",
+        "wordIds": [
+          "vocab-いきます",
+          "vocab-みせ",
+          "vocab-えき",
+          "vocab-うち"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-いきます|jp-nl",
+            "vocab-いきます|nl-jp",
+            "vocab-みせ|jp-nl",
+            "vocab-みせ|nl-jp",
+            "vocab-えき|jp-nl",
+            "vocab-えき|nl-jp",
+            "vocab-うち|jp-nl",
+            "vocab-うち|nl-jp"
+          ],
+          "counts": {
+            "vocab-うち|jp-nl": 1,
+            "vocab-いきます|nl-jp": 1,
+            "vocab-えき|jp-nl": 1,
+            "vocab-うち|nl-jp": 1,
+            "vocab-いきます|jp-nl": 1,
+            "vocab-みせ|nl-jp": 1,
+            "vocab-えき|nl-jp": 1,
+            "vocab-みせ|jp-nl": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l4-10",
+        "source": "manifest.vocabulary.introducedAt=4-10",
+        "wordIds": [],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 0,
+        "coverage": {
+          "expected": [],
+          "counts": {},
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      }
+    ],
+    "exam": {
+      "wordIds": [
+        "vocab-これ",
+        "vocab-ねこ",
+        "vocab-いぬ",
+        "vocab-みず",
+        "vocab-パン",
+        "vocab-それ",
+        "vocab-あれ",
+        "vocab-ほん",
+        "vocab-さかな",
+        "vocab-わたし",
+        "vocab-ひと",
+        "vocab-ともだち",
+        "vocab-のみます",
+        "vocab-たべます",
+        "vocab-みます",
+        "vocab-よみます",
+        "vocab-いきます",
+        "vocab-みせ",
+        "vocab-えき",
+        "vocab-うち"
+      ],
+      "wordTurns": 40,
+      "totalQuestions": 68,
+      "otherQuestions": 28,
+      "directions": {
+        "jp-nl": 20,
+        "nl-jp": 20
+      },
+      "forms": {
+        "context-meaning": 20,
+        "context-recognition": 20
+      },
+      "coverage": {
+        "expected": [
+          "vocab-これ|jp-nl",
+          "vocab-これ|nl-jp",
+          "vocab-ねこ|jp-nl",
+          "vocab-ねこ|nl-jp",
+          "vocab-いぬ|jp-nl",
+          "vocab-いぬ|nl-jp",
+          "vocab-みず|jp-nl",
+          "vocab-みず|nl-jp",
+          "vocab-パン|jp-nl",
+          "vocab-パン|nl-jp",
+          "vocab-それ|jp-nl",
+          "vocab-それ|nl-jp",
+          "vocab-あれ|jp-nl",
+          "vocab-あれ|nl-jp",
+          "vocab-ほん|jp-nl",
+          "vocab-ほん|nl-jp",
+          "vocab-さかな|jp-nl",
+          "vocab-さかな|nl-jp",
+          "vocab-わたし|jp-nl",
+          "vocab-わたし|nl-jp",
+          "vocab-ひと|jp-nl",
+          "vocab-ひと|nl-jp",
+          "vocab-ともだち|jp-nl",
+          "vocab-ともだち|nl-jp",
+          "vocab-のみます|jp-nl",
+          "vocab-のみます|nl-jp",
+          "vocab-たべます|jp-nl",
+          "vocab-たべます|nl-jp",
+          "vocab-みます|jp-nl",
+          "vocab-みます|nl-jp",
+          "vocab-よみます|jp-nl",
+          "vocab-よみます|nl-jp",
+          "vocab-いきます|jp-nl",
+          "vocab-いきます|nl-jp",
+          "vocab-みせ|jp-nl",
+          "vocab-みせ|nl-jp",
+          "vocab-えき|jp-nl",
+          "vocab-えき|nl-jp",
+          "vocab-うち|jp-nl",
+          "vocab-うち|nl-jp"
+        ],
+        "counts": {
+          "vocab-みせ|jp-nl": 1,
+          "vocab-みます|nl-jp": 1,
+          "vocab-うち|jp-nl": 1,
+          "vocab-えき|nl-jp": 1,
+          "vocab-のみます|jp-nl": 1,
+          "vocab-いぬ|jp-nl": 1,
+          "vocab-のみます|nl-jp": 1,
+          "vocab-それ|nl-jp": 1,
+          "vocab-ほん|nl-jp": 1,
+          "vocab-いぬ|nl-jp": 1,
+          "vocab-よみます|nl-jp": 1,
+          "vocab-それ|jp-nl": 1,
+          "vocab-よみます|jp-nl": 1,
+          "vocab-パン|nl-jp": 1,
+          "vocab-うち|nl-jp": 1,
+          "vocab-みず|jp-nl": 1,
+          "vocab-ねこ|jp-nl": 1,
+          "vocab-ひと|nl-jp": 1,
+          "vocab-いきます|jp-nl": 1,
+          "vocab-あれ|nl-jp": 1,
+          "vocab-たべます|jp-nl": 1,
+          "vocab-さかな|jp-nl": 1,
+          "vocab-わたし|nl-jp": 1,
+          "vocab-みせ|nl-jp": 1,
+          "vocab-あれ|jp-nl": 1,
+          "vocab-さかな|nl-jp": 1,
+          "vocab-ほん|jp-nl": 1,
+          "vocab-いきます|nl-jp": 1,
+          "vocab-ねこ|nl-jp": 1,
+          "vocab-これ|jp-nl": 1,
+          "vocab-ひと|jp-nl": 1,
+          "vocab-これ|nl-jp": 1,
+          "vocab-ともだち|jp-nl": 1,
+          "vocab-えき|jp-nl": 1,
+          "vocab-みず|nl-jp": 1,
+          "vocab-たべます|nl-jp": 1,
+          "vocab-わたし|jp-nl": 1,
+          "vocab-パン|jp-nl": 1,
+          "vocab-ともだち|nl-jp": 1,
+          "vocab-みます|jp-nl": 1
+        },
+        "missing": [],
+        "duplicates": [],
+        "unexpected": []
+      }
+    }
+  },
+  {
+    "level": 5,
+    "status": "van toepassing",
+    "lessons": [
+      {
+        "lessonId": "l5-1",
+        "source": "manifest.vocabulary.introducedAt=5-1",
+        "wordIds": [
+          "vocab-きゃく",
+          "vocab-きょく"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 4,
+        "coverage": {
+          "expected": [
+            "vocab-きゃく|jp-nl",
+            "vocab-きゃく|nl-jp",
+            "vocab-きょく|jp-nl",
+            "vocab-きょく|nl-jp"
+          ],
+          "counts": {
+            "vocab-きょく|nl-jp": 1,
+            "vocab-きゃく|jp-nl": 1,
+            "vocab-きょく|jp-nl": 1,
+            "vocab-きゃく|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l5-2",
+        "source": "manifest.vocabulary.introducedAt=5-2",
+        "wordIds": [
+          "vocab-しゃしん",
+          "vocab-しゅみ",
+          "vocab-しょくじ"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 6,
+        "coverage": {
+          "expected": [
+            "vocab-しゃしん|jp-nl",
+            "vocab-しゃしん|nl-jp",
+            "vocab-しゅみ|jp-nl",
+            "vocab-しゅみ|nl-jp",
+            "vocab-しょくじ|jp-nl",
+            "vocab-しょくじ|nl-jp"
+          ],
+          "counts": {
+            "vocab-しょくじ|jp-nl": 1,
+            "vocab-しゃしん|nl-jp": 1,
+            "vocab-しゅみ|jp-nl": 1,
+            "vocab-しょくじ|nl-jp": 1,
+            "vocab-しゃしん|jp-nl": 1,
+            "vocab-しゅみ|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l5-3",
+        "source": "manifest.vocabulary.introducedAt=5-3",
+        "wordIds": [
+          "vocab-おちゃ",
+          "vocab-ちょきん",
+          "vocab-じゃま",
+          "vocab-じゅう",
+          "vocab-じょせい"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 10,
+        "coverage": {
+          "expected": [
+            "vocab-おちゃ|jp-nl",
+            "vocab-おちゃ|nl-jp",
+            "vocab-ちょきん|jp-nl",
+            "vocab-ちょきん|nl-jp",
+            "vocab-じゃま|jp-nl",
+            "vocab-じゃま|nl-jp",
+            "vocab-じゅう|jp-nl",
+            "vocab-じゅう|nl-jp",
+            "vocab-じょせい|jp-nl",
+            "vocab-じょせい|nl-jp"
+          ],
+          "counts": {
+            "vocab-ちょきん|nl-jp": 1,
+            "vocab-じゅう|jp-nl": 1,
+            "vocab-じゃま|nl-jp": 1,
+            "vocab-ちょきん|jp-nl": 1,
+            "vocab-じゅう|nl-jp": 1,
+            "vocab-じゃま|jp-nl": 1,
+            "vocab-じょせい|nl-jp": 1,
+            "vocab-おちゃ|jp-nl": 1,
+            "vocab-じょせい|jp-nl": 1,
+            "vocab-おちゃ|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l5-4",
+        "source": "manifest.vocabulary.introducedAt=5-4",
+        "wordIds": [
+          "vocab-きって",
+          "vocab-ざっし",
+          "vocab-ベッド"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 6,
+        "coverage": {
+          "expected": [
+            "vocab-きって|jp-nl",
+            "vocab-きって|nl-jp",
+            "vocab-ざっし|jp-nl",
+            "vocab-ざっし|nl-jp",
+            "vocab-ベッド|jp-nl",
+            "vocab-ベッド|nl-jp"
+          ],
+          "counts": {
+            "vocab-ざっし|jp-nl": 1,
+            "vocab-ベッド|nl-jp": 1,
+            "vocab-きって|jp-nl": 1,
+            "vocab-ざっし|nl-jp": 1,
+            "vocab-ベッド|jp-nl": 1,
+            "vocab-きって|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l5-5",
+        "source": "manifest.vocabulary.introducedAt=5-5",
+        "wordIds": [
+          "vocab-ケーキ",
+          "vocab-ゲーム",
+          "vocab-コーヒー",
+          "vocab-スーパー",
+          "vocab-タクシー"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 10,
+        "coverage": {
+          "expected": [
+            "vocab-ケーキ|jp-nl",
+            "vocab-ケーキ|nl-jp",
+            "vocab-ゲーム|jp-nl",
+            "vocab-ゲーム|nl-jp",
+            "vocab-コーヒー|jp-nl",
+            "vocab-コーヒー|nl-jp",
+            "vocab-スーパー|jp-nl",
+            "vocab-スーパー|nl-jp",
+            "vocab-タクシー|jp-nl",
+            "vocab-タクシー|nl-jp"
+          ],
+          "counts": {
+            "vocab-タクシー|nl-jp": 1,
+            "vocab-ケーキ|jp-nl": 1,
+            "vocab-スーパー|nl-jp": 1,
+            "vocab-ゲーム|jp-nl": 1,
+            "vocab-コーヒー|nl-jp": 1,
+            "vocab-タクシー|jp-nl": 1,
+            "vocab-ゲーム|nl-jp": 1,
+            "vocab-コーヒー|jp-nl": 1,
+            "vocab-ケーキ|nl-jp": 1,
+            "vocab-スーパー|jp-nl": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      }
+    ],
+    "exam": {
+      "wordIds": [
+        "vocab-きゃく",
+        "vocab-きょく",
+        "vocab-しゃしん",
+        "vocab-しゅみ",
+        "vocab-しょくじ",
+        "vocab-おちゃ",
+        "vocab-ちょきん",
+        "vocab-じゃま",
+        "vocab-じゅう",
+        "vocab-じょせい",
+        "vocab-きって",
+        "vocab-ざっし",
+        "vocab-ベッド",
+        "vocab-ケーキ",
+        "vocab-ゲーム",
+        "vocab-コーヒー",
+        "vocab-スーパー",
+        "vocab-タクシー"
+      ],
+      "wordTurns": 36,
+      "totalQuestions": 64,
+      "otherQuestions": 28,
+      "directions": {
+        "jp-nl": 18,
+        "nl-jp": 18
+      },
+      "forms": {
+        "meaning": 18,
+        "context-recognition": 18
+      },
+      "coverage": {
+        "expected": [
+          "vocab-きゃく|jp-nl",
+          "vocab-きゃく|nl-jp",
+          "vocab-きょく|jp-nl",
+          "vocab-きょく|nl-jp",
+          "vocab-しゃしん|jp-nl",
+          "vocab-しゃしん|nl-jp",
+          "vocab-しゅみ|jp-nl",
+          "vocab-しゅみ|nl-jp",
+          "vocab-しょくじ|jp-nl",
+          "vocab-しょくじ|nl-jp",
+          "vocab-おちゃ|jp-nl",
+          "vocab-おちゃ|nl-jp",
+          "vocab-ちょきん|jp-nl",
+          "vocab-ちょきん|nl-jp",
+          "vocab-じゃま|jp-nl",
+          "vocab-じゃま|nl-jp",
+          "vocab-じゅう|jp-nl",
+          "vocab-じゅう|nl-jp",
+          "vocab-じょせい|jp-nl",
+          "vocab-じょせい|nl-jp",
+          "vocab-きって|jp-nl",
+          "vocab-きって|nl-jp",
+          "vocab-ざっし|jp-nl",
+          "vocab-ざっし|nl-jp",
+          "vocab-ベッド|jp-nl",
+          "vocab-ベッド|nl-jp",
+          "vocab-ケーキ|jp-nl",
+          "vocab-ケーキ|nl-jp",
+          "vocab-ゲーム|jp-nl",
+          "vocab-ゲーム|nl-jp",
+          "vocab-コーヒー|jp-nl",
+          "vocab-コーヒー|nl-jp",
+          "vocab-スーパー|jp-nl",
+          "vocab-スーパー|nl-jp",
+          "vocab-タクシー|jp-nl",
+          "vocab-タクシー|nl-jp"
+        ],
+        "counts": {
+          "vocab-コーヒー|jp-nl": 1,
+          "vocab-きって|nl-jp": 1,
+          "vocab-じゃま|jp-nl": 1,
+          "vocab-しょくじ|jp-nl": 1,
+          "vocab-きって|jp-nl": 1,
+          "vocab-おちゃ|nl-jp": 1,
+          "vocab-しょくじ|nl-jp": 1,
+          "vocab-スーパー|nl-jp": 1,
+          "vocab-タクシー|jp-nl": 1,
+          "vocab-じゅう|jp-nl": 1,
+          "vocab-スーパー|jp-nl": 1,
+          "vocab-じょせい|jp-nl": 1,
+          "vocab-タクシー|nl-jp": 1,
+          "vocab-ゲーム|jp-nl": 1,
+          "vocab-きょく|nl-jp": 1,
+          "vocab-じゃま|nl-jp": 1,
+          "vocab-ケーキ|nl-jp": 1,
+          "vocab-しゅみ|jp-nl": 1,
+          "vocab-しゃしん|nl-jp": 1,
+          "vocab-ざっし|jp-nl": 1,
+          "vocab-ベッド|nl-jp": 1,
+          "vocab-ケーキ|jp-nl": 1,
+          "vocab-ちょきん|nl-jp": 1,
+          "vocab-きゃく|jp-nl": 1,
+          "vocab-しゃしん|jp-nl": 1,
+          "vocab-ざっし|nl-jp": 1,
+          "vocab-きゃく|nl-jp": 1,
+          "vocab-ちょきん|jp-nl": 1,
+          "vocab-じゅう|nl-jp": 1,
+          "vocab-じょせい|nl-jp": 1,
+          "vocab-ベッド|jp-nl": 1,
+          "vocab-しゅみ|nl-jp": 1,
+          "vocab-ゲーム|nl-jp": 1,
+          "vocab-コーヒー|nl-jp": 1,
+          "vocab-おちゃ|jp-nl": 1,
+          "vocab-きょく|jp-nl": 1
+        },
+        "missing": [],
+        "duplicates": [],
+        "unexpected": []
+      }
+    }
+  },
+  {
+    "level": 6,
+    "status": "van toepassing",
+    "lessons": [
+      {
+        "lessonId": "l6-1",
+        "source": "manifest.vocabulary.introducedAt=6-1",
+        "wordIds": [
+          "vocab-あなた",
+          "vocab-かぞく",
+          "vocab-おとこ",
+          "vocab-おんな"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-あなた|jp-nl",
+            "vocab-あなた|nl-jp",
+            "vocab-かぞく|jp-nl",
+            "vocab-かぞく|nl-jp",
+            "vocab-おとこ|jp-nl",
+            "vocab-おとこ|nl-jp",
+            "vocab-おんな|jp-nl",
+            "vocab-おんな|nl-jp"
+          ],
+          "counts": {
+            "vocab-あなた|jp-nl": 1,
+            "vocab-おんな|nl-jp": 1,
+            "vocab-おとこ|jp-nl": 1,
+            "vocab-かぞく|nl-jp": 1,
+            "vocab-おんな|jp-nl": 1,
+            "vocab-おとこ|nl-jp": 1,
+            "vocab-かぞく|jp-nl": 1,
+            "vocab-あなた|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l6-2",
+        "source": "manifest.vocabulary.introducedAt=6-2",
+        "wordIds": [
+          "vocab-ちち",
+          "vocab-はは",
+          "vocab-おとうさん",
+          "vocab-おかあさん"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-ちち|jp-nl",
+            "vocab-ちち|nl-jp",
+            "vocab-はは|jp-nl",
+            "vocab-はは|nl-jp",
+            "vocab-おとうさん|jp-nl",
+            "vocab-おとうさん|nl-jp",
+            "vocab-おかあさん|jp-nl",
+            "vocab-おかあさん|nl-jp"
+          ],
+          "counts": {
+            "vocab-ちち|jp-nl": 1,
+            "vocab-おかあさん|nl-jp": 1,
+            "vocab-おとうさん|jp-nl": 1,
+            "vocab-ちち|nl-jp": 1,
+            "vocab-おかあさん|jp-nl": 1,
+            "vocab-はは|nl-jp": 1,
+            "vocab-おとうさん|nl-jp": 1,
+            "vocab-はは|jp-nl": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l6-3",
+        "source": "manifest.vocabulary.introducedAt=6-3",
+        "wordIds": [
+          "vocab-あに",
+          "vocab-あね",
+          "vocab-きょうだい",
+          "vocab-だれ"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-あに|jp-nl",
+            "vocab-あに|nl-jp",
+            "vocab-あね|jp-nl",
+            "vocab-あね|nl-jp",
+            "vocab-きょうだい|jp-nl",
+            "vocab-きょうだい|nl-jp",
+            "vocab-だれ|jp-nl",
+            "vocab-だれ|nl-jp"
+          ],
+          "counts": {
+            "vocab-あに|nl-jp": 1,
+            "vocab-きょうだい|jp-nl": 1,
+            "vocab-だれ|nl-jp": 1,
+            "vocab-あに|jp-nl": 1,
+            "vocab-あね|nl-jp": 1,
+            "vocab-だれ|jp-nl": 1,
+            "vocab-きょうだい|nl-jp": 1,
+            "vocab-あね|jp-nl": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l6-4",
+        "source": "manifest.vocabulary.introducedAt=6-4",
+        "wordIds": [
+          "vocab-おとうと",
+          "vocab-いもうと",
+          "vocab-こども",
+          "vocab-みんな"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-おとうと|jp-nl",
+            "vocab-おとうと|nl-jp",
+            "vocab-いもうと|jp-nl",
+            "vocab-いもうと|nl-jp",
+            "vocab-こども|jp-nl",
+            "vocab-こども|nl-jp",
+            "vocab-みんな|jp-nl",
+            "vocab-みんな|nl-jp"
+          ],
+          "counts": {
+            "vocab-こども|nl-jp": 1,
+            "vocab-みんな|jp-nl": 1,
+            "vocab-おとうと|nl-jp": 1,
+            "vocab-いもうと|jp-nl": 1,
+            "vocab-みんな|nl-jp": 1,
+            "vocab-こども|jp-nl": 1,
+            "vocab-いもうと|nl-jp": 1,
+            "vocab-おとうと|jp-nl": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l6-5",
+        "source": "manifest.vocabulary.introducedAt=6-5",
+        "wordIds": [],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 0,
+        "coverage": {
+          "expected": [],
+          "counts": {},
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      }
+    ],
+    "exam": {
+      "wordIds": [
+        "vocab-あなた",
+        "vocab-かぞく",
+        "vocab-おとこ",
+        "vocab-おんな",
+        "vocab-ちち",
+        "vocab-はは",
+        "vocab-おとうさん",
+        "vocab-おかあさん",
+        "vocab-あに",
+        "vocab-あね",
+        "vocab-きょうだい",
+        "vocab-だれ",
+        "vocab-おとうと",
+        "vocab-いもうと",
+        "vocab-こども",
+        "vocab-みんな"
+      ],
+      "wordTurns": 32,
+      "totalQuestions": 57,
+      "otherQuestions": 25,
+      "directions": {
+        "jp-nl": 16,
+        "nl-jp": 16
+      },
+      "forms": {
+        "context-recognition": 16,
+        "meaning": 16
+      },
+      "coverage": {
+        "expected": [
+          "vocab-あなた|jp-nl",
+          "vocab-あなた|nl-jp",
+          "vocab-かぞく|jp-nl",
+          "vocab-かぞく|nl-jp",
+          "vocab-おとこ|jp-nl",
+          "vocab-おとこ|nl-jp",
+          "vocab-おんな|jp-nl",
+          "vocab-おんな|nl-jp",
+          "vocab-ちち|jp-nl",
+          "vocab-ちち|nl-jp",
+          "vocab-はは|jp-nl",
+          "vocab-はは|nl-jp",
+          "vocab-おとうさん|jp-nl",
+          "vocab-おとうさん|nl-jp",
+          "vocab-おかあさん|jp-nl",
+          "vocab-おかあさん|nl-jp",
+          "vocab-あに|jp-nl",
+          "vocab-あに|nl-jp",
+          "vocab-あね|jp-nl",
+          "vocab-あね|nl-jp",
+          "vocab-きょうだい|jp-nl",
+          "vocab-きょうだい|nl-jp",
+          "vocab-だれ|jp-nl",
+          "vocab-だれ|nl-jp",
+          "vocab-おとうと|jp-nl",
+          "vocab-おとうと|nl-jp",
+          "vocab-いもうと|jp-nl",
+          "vocab-いもうと|nl-jp",
+          "vocab-こども|jp-nl",
+          "vocab-こども|nl-jp",
+          "vocab-みんな|jp-nl",
+          "vocab-みんな|nl-jp"
+        ],
+        "counts": {
+          "vocab-ちち|nl-jp": 1,
+          "vocab-あなた|jp-nl": 1,
+          "vocab-あね|nl-jp": 1,
+          "vocab-いもうと|jp-nl": 1,
+          "vocab-おんな|nl-jp": 1,
+          "vocab-みんな|jp-nl": 1,
+          "vocab-おんな|jp-nl": 1,
+          "vocab-きょうだい|nl-jp": 1,
+          "vocab-おとこ|jp-nl": 1,
+          "vocab-はは|jp-nl": 1,
+          "vocab-あなた|nl-jp": 1,
+          "vocab-だれ|nl-jp": 1,
+          "vocab-おかあさん|jp-nl": 1,
+          "vocab-おとこ|nl-jp": 1,
+          "vocab-おかあさん|nl-jp": 1,
+          "vocab-こども|nl-jp": 1,
+          "vocab-あに|nl-jp": 1,
+          "vocab-みんな|nl-jp": 1,
+          "vocab-こども|jp-nl": 1,
+          "vocab-いもうと|nl-jp": 1,
+          "vocab-あね|jp-nl": 1,
+          "vocab-おとうと|jp-nl": 1,
+          "vocab-おとうさん|jp-nl": 1,
+          "vocab-きょうだい|jp-nl": 1,
+          "vocab-あに|jp-nl": 1,
+          "vocab-かぞく|jp-nl": 1,
+          "vocab-おとうと|nl-jp": 1,
+          "vocab-ちち|jp-nl": 1,
+          "vocab-はは|nl-jp": 1,
+          "vocab-かぞく|nl-jp": 1,
+          "vocab-おとうさん|nl-jp": 1,
+          "vocab-だれ|jp-nl": 1
+        },
+        "missing": [],
+        "duplicates": [],
+        "unexpected": []
+      }
+    }
+  },
+  {
+    "level": 7,
+    "status": "van toepassing",
+    "lessons": [
+      {
+        "lessonId": "l7-1",
+        "source": "manifest.vocabulary.introducedAt=7-1",
+        "wordIds": [
+          "vocab-ひとつ",
+          "vocab-ふたつ",
+          "vocab-みっつ",
+          "vocab-よっつ"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-ひとつ|jp-nl",
+            "vocab-ひとつ|nl-jp",
+            "vocab-ふたつ|jp-nl",
+            "vocab-ふたつ|nl-jp",
+            "vocab-みっつ|jp-nl",
+            "vocab-みっつ|nl-jp",
+            "vocab-よっつ|jp-nl",
+            "vocab-よっつ|nl-jp"
+          ],
+          "counts": {
+            "vocab-ひとつ|nl-jp": 1,
+            "vocab-ふたつ|jp-nl": 1,
+            "vocab-みっつ|nl-jp": 1,
+            "vocab-ひとつ|jp-nl": 1,
+            "vocab-ふたつ|nl-jp": 1,
+            "vocab-よっつ|jp-nl": 1,
+            "vocab-みっつ|jp-nl": 1,
+            "vocab-よっつ|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l7-2",
+        "source": "manifest.vocabulary.introducedAt=7-2",
+        "wordIds": [
+          "vocab-ひとり",
+          "vocab-ふたり",
+          "vocab-さんにん",
+          "vocab-よにん"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-ひとり|jp-nl",
+            "vocab-ひとり|nl-jp",
+            "vocab-ふたり|jp-nl",
+            "vocab-ふたり|nl-jp",
+            "vocab-さんにん|jp-nl",
+            "vocab-さんにん|nl-jp",
+            "vocab-よにん|jp-nl",
+            "vocab-よにん|nl-jp"
+          ],
+          "counts": {
+            "vocab-ふたり|jp-nl": 1,
+            "vocab-さんにん|nl-jp": 1,
+            "vocab-よにん|jp-nl": 1,
+            "vocab-ふたり|nl-jp": 1,
+            "vocab-さんにん|jp-nl": 1,
+            "vocab-ひとり|nl-jp": 1,
+            "vocab-よにん|nl-jp": 1,
+            "vocab-ひとり|jp-nl": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l7-3",
+        "source": "manifest.vocabulary.introducedAt=7-3",
+        "wordIds": [
+          "vocab-いっぴき",
+          "vocab-にひき",
+          "vocab-さんびき",
+          "vocab-なんびき"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-いっぴき|jp-nl",
+            "vocab-いっぴき|nl-jp",
+            "vocab-にひき|jp-nl",
+            "vocab-にひき|nl-jp",
+            "vocab-さんびき|jp-nl",
+            "vocab-さんびき|nl-jp",
+            "vocab-なんびき|jp-nl",
+            "vocab-なんびき|nl-jp"
+          ],
+          "counts": {
+            "vocab-なんびき|nl-jp": 1,
+            "vocab-にひき|jp-nl": 1,
+            "vocab-さんびき|nl-jp": 1,
+            "vocab-いっぴき|jp-nl": 1,
+            "vocab-にひき|nl-jp": 1,
+            "vocab-なんびき|jp-nl": 1,
+            "vocab-いっぴき|nl-jp": 1,
+            "vocab-さんびき|jp-nl": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l7-4",
+        "source": "manifest.vocabulary.introducedAt=7-4",
+        "wordIds": [
+          "vocab-いっぽん",
+          "vocab-にほん",
+          "vocab-いちまい",
+          "vocab-にまい"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-いっぽん|jp-nl",
+            "vocab-いっぽん|nl-jp",
+            "vocab-にほん|jp-nl",
+            "vocab-にほん|nl-jp",
+            "vocab-いちまい|jp-nl",
+            "vocab-いちまい|nl-jp",
+            "vocab-にまい|jp-nl",
+            "vocab-にまい|nl-jp"
+          ],
+          "counts": {
+            "vocab-いっぽん|jp-nl": 1,
+            "vocab-いちまい|nl-jp": 1,
+            "vocab-にほん|jp-nl": 1,
+            "vocab-いっぽん|nl-jp": 1,
+            "vocab-にまい|jp-nl": 1,
+            "vocab-にほん|nl-jp": 1,
+            "vocab-いちまい|jp-nl": 1,
+            "vocab-にまい|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l7-5",
+        "source": "manifest.vocabulary.introducedAt=7-5",
+        "wordIds": [
+          "vocab-いちばんめ",
+          "vocab-にばんめ",
+          "vocab-さんばんめ",
+          "vocab-どれ"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-いちばんめ|jp-nl",
+            "vocab-いちばんめ|nl-jp",
+            "vocab-にばんめ|jp-nl",
+            "vocab-にばんめ|nl-jp",
+            "vocab-さんばんめ|jp-nl",
+            "vocab-さんばんめ|nl-jp",
+            "vocab-どれ|jp-nl",
+            "vocab-どれ|nl-jp"
+          ],
+          "counts": {
+            "vocab-にばんめ|jp-nl": 1,
+            "vocab-さんばんめ|nl-jp": 1,
+            "vocab-いちばんめ|jp-nl": 1,
+            "vocab-にばんめ|nl-jp": 1,
+            "vocab-どれ|jp-nl": 1,
+            "vocab-いちばんめ|nl-jp": 1,
+            "vocab-さんばんめ|jp-nl": 1,
+            "vocab-どれ|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      }
+    ],
+    "exam": {
+      "wordIds": [
+        "vocab-ひとつ",
+        "vocab-ふたつ",
+        "vocab-みっつ",
+        "vocab-よっつ",
+        "vocab-ひとり",
+        "vocab-ふたり",
+        "vocab-さんにん",
+        "vocab-よにん",
+        "vocab-いっぴき",
+        "vocab-にひき",
+        "vocab-さんびき",
+        "vocab-なんびき",
+        "vocab-いっぽん",
+        "vocab-にほん",
+        "vocab-いちまい",
+        "vocab-にまい",
+        "vocab-いちばんめ",
+        "vocab-にばんめ",
+        "vocab-さんばんめ",
+        "vocab-どれ"
+      ],
+      "wordTurns": 40,
+      "totalQuestions": 59,
+      "otherQuestions": 19,
+      "directions": {
+        "jp-nl": 20,
+        "nl-jp": 20
+      },
+      "forms": {
+        "meaning": 20,
+        "context-recognition": 20
+      },
+      "coverage": {
+        "expected": [
+          "vocab-ひとつ|jp-nl",
+          "vocab-ひとつ|nl-jp",
+          "vocab-ふたつ|jp-nl",
+          "vocab-ふたつ|nl-jp",
+          "vocab-みっつ|jp-nl",
+          "vocab-みっつ|nl-jp",
+          "vocab-よっつ|jp-nl",
+          "vocab-よっつ|nl-jp",
+          "vocab-ひとり|jp-nl",
+          "vocab-ひとり|nl-jp",
+          "vocab-ふたり|jp-nl",
+          "vocab-ふたり|nl-jp",
+          "vocab-さんにん|jp-nl",
+          "vocab-さんにん|nl-jp",
+          "vocab-よにん|jp-nl",
+          "vocab-よにん|nl-jp",
+          "vocab-いっぴき|jp-nl",
+          "vocab-いっぴき|nl-jp",
+          "vocab-にひき|jp-nl",
+          "vocab-にひき|nl-jp",
+          "vocab-さんびき|jp-nl",
+          "vocab-さんびき|nl-jp",
+          "vocab-なんびき|jp-nl",
+          "vocab-なんびき|nl-jp",
+          "vocab-いっぽん|jp-nl",
+          "vocab-いっぽん|nl-jp",
+          "vocab-にほん|jp-nl",
+          "vocab-にほん|nl-jp",
+          "vocab-いちまい|jp-nl",
+          "vocab-いちまい|nl-jp",
+          "vocab-にまい|jp-nl",
+          "vocab-にまい|nl-jp",
+          "vocab-いちばんめ|jp-nl",
+          "vocab-いちばんめ|nl-jp",
+          "vocab-にばんめ|jp-nl",
+          "vocab-にばんめ|nl-jp",
+          "vocab-さんばんめ|jp-nl",
+          "vocab-さんばんめ|nl-jp",
+          "vocab-どれ|jp-nl",
+          "vocab-どれ|nl-jp"
+        ],
+        "counts": {
+          "vocab-さんばんめ|jp-nl": 1,
+          "vocab-さんにん|nl-jp": 1,
+          "vocab-にばんめ|nl-jp": 1,
+          "vocab-にほん|jp-nl": 1,
+          "vocab-いっぴき|nl-jp": 1,
+          "vocab-ひとり|nl-jp": 1,
+          "vocab-にひき|jp-nl": 1,
+          "vocab-ふたつ|jp-nl": 1,
+          "vocab-さんばんめ|nl-jp": 1,
+          "vocab-いちばんめ|nl-jp": 1,
+          "vocab-ふたり|jp-nl": 1,
+          "vocab-よにん|nl-jp": 1,
+          "vocab-なんびき|nl-jp": 1,
+          "vocab-さんびき|nl-jp": 1,
+          "vocab-いちまい|jp-nl": 1,
+          "vocab-ひとり|jp-nl": 1,
+          "vocab-いっぴき|jp-nl": 1,
+          "vocab-なんびき|jp-nl": 1,
+          "vocab-よっつ|nl-jp": 1,
+          "vocab-どれ|jp-nl": 1,
+          "vocab-さんびき|jp-nl": 1,
+          "vocab-にまい|nl-jp": 1,
+          "vocab-ひとつ|jp-nl": 1,
+          "vocab-にまい|jp-nl": 1,
+          "vocab-にひき|nl-jp": 1,
+          "vocab-にほん|nl-jp": 1,
+          "vocab-さんにん|jp-nl": 1,
+          "vocab-みっつ|jp-nl": 1,
+          "vocab-ふたつ|nl-jp": 1,
+          "vocab-にばんめ|jp-nl": 1,
+          "vocab-ひとつ|nl-jp": 1,
+          "vocab-いっぽん|nl-jp": 1,
+          "vocab-どれ|nl-jp": 1,
+          "vocab-ふたり|nl-jp": 1,
+          "vocab-よにん|jp-nl": 1,
+          "vocab-みっつ|nl-jp": 1,
+          "vocab-いちばんめ|jp-nl": 1,
+          "vocab-いちまい|nl-jp": 1,
+          "vocab-いっぽん|jp-nl": 1,
+          "vocab-よっつ|jp-nl": 1
+        },
+        "missing": [],
+        "duplicates": [],
+        "unexpected": []
+      }
+    }
+  },
+  {
+    "level": 8,
+    "status": "van toepassing",
+    "lessons": [
+      {
+        "lessonId": "l8-1",
+        "source": "manifest.vocabulary.introducedAt=8-1",
+        "wordIds": [
+          "vocab-げつようび",
+          "vocab-かようび",
+          "vocab-すいようび",
+          "vocab-もくようび"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-げつようび|jp-nl",
+            "vocab-げつようび|nl-jp",
+            "vocab-かようび|jp-nl",
+            "vocab-かようび|nl-jp",
+            "vocab-すいようび|jp-nl",
+            "vocab-すいようび|nl-jp",
+            "vocab-もくようび|jp-nl",
+            "vocab-もくようび|nl-jp"
+          ],
+          "counts": {
+            "vocab-げつようび|jp-nl": 1,
+            "vocab-もくようび|nl-jp": 1,
+            "vocab-すいようび|jp-nl": 1,
+            "vocab-かようび|nl-jp": 1,
+            "vocab-もくようび|jp-nl": 1,
+            "vocab-げつようび|nl-jp": 1,
+            "vocab-かようび|jp-nl": 1,
+            "vocab-すいようび|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l8-2",
+        "source": "manifest.vocabulary.introducedAt=8-2",
+        "wordIds": [
+          "vocab-きんようび",
+          "vocab-どようび",
+          "vocab-にちようび",
+          "vocab-なんようび"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-きんようび|jp-nl",
+            "vocab-きんようび|nl-jp",
+            "vocab-どようび|jp-nl",
+            "vocab-どようび|nl-jp",
+            "vocab-にちようび|jp-nl",
+            "vocab-にちようび|nl-jp",
+            "vocab-なんようび|jp-nl",
+            "vocab-なんようび|nl-jp"
+          ],
+          "counts": {
+            "vocab-きんようび|jp-nl": 1,
+            "vocab-どようび|nl-jp": 1,
+            "vocab-にちようび|jp-nl": 1,
+            "vocab-なんようび|nl-jp": 1,
+            "vocab-どようび|jp-nl": 1,
+            "vocab-きんようび|nl-jp": 1,
+            "vocab-なんようび|jp-nl": 1,
+            "vocab-にちようび|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l8-3",
+        "source": "manifest.vocabulary.introducedAt=8-3",
+        "wordIds": [
+          "vocab-きょう",
+          "vocab-あした",
+          "vocab-きのう",
+          "vocab-こんしゅう",
+          "vocab-らいしゅう",
+          "vocab-せんしゅう"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 12,
+        "coverage": {
+          "expected": [
+            "vocab-きょう|jp-nl",
+            "vocab-きょう|nl-jp",
+            "vocab-あした|jp-nl",
+            "vocab-あした|nl-jp",
+            "vocab-きのう|jp-nl",
+            "vocab-きのう|nl-jp",
+            "vocab-こんしゅう|jp-nl",
+            "vocab-こんしゅう|nl-jp",
+            "vocab-らいしゅう|jp-nl",
+            "vocab-らいしゅう|nl-jp",
+            "vocab-せんしゅう|jp-nl",
+            "vocab-せんしゅう|nl-jp"
+          ],
+          "counts": {
+            "vocab-きょう|nl-jp": 1,
+            "vocab-あした|jp-nl": 1,
+            "vocab-せんしゅう|nl-jp": 1,
+            "vocab-きょう|jp-nl": 1,
+            "vocab-こんしゅう|nl-jp": 1,
+            "vocab-きのう|jp-nl": 1,
+            "vocab-あした|nl-jp": 1,
+            "vocab-せんしゅう|jp-nl": 1,
+            "vocab-きのう|nl-jp": 1,
+            "vocab-らいしゅう|jp-nl": 1,
+            "vocab-こんしゅう|jp-nl": 1,
+            "vocab-らいしゅう|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l8-4",
+        "source": "manifest.vocabulary.introducedAt=8-4",
+        "wordIds": [
+          "vocab-いちがつ",
+          "vocab-にがつ",
+          "vocab-さんがつ",
+          "vocab-しがつ",
+          "vocab-ごがつ",
+          "vocab-ろくがつ",
+          "vocab-しちがつ",
+          "vocab-はちがつ",
+          "vocab-くがつ",
+          "vocab-じゅうがつ",
+          "vocab-じゅういちがつ",
+          "vocab-じゅうにがつ"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 24,
+        "coverage": {
+          "expected": [
+            "vocab-いちがつ|jp-nl",
+            "vocab-いちがつ|nl-jp",
+            "vocab-にがつ|jp-nl",
+            "vocab-にがつ|nl-jp",
+            "vocab-さんがつ|jp-nl",
+            "vocab-さんがつ|nl-jp",
+            "vocab-しがつ|jp-nl",
+            "vocab-しがつ|nl-jp",
+            "vocab-ごがつ|jp-nl",
+            "vocab-ごがつ|nl-jp",
+            "vocab-ろくがつ|jp-nl",
+            "vocab-ろくがつ|nl-jp",
+            "vocab-しちがつ|jp-nl",
+            "vocab-しちがつ|nl-jp",
+            "vocab-はちがつ|jp-nl",
+            "vocab-はちがつ|nl-jp",
+            "vocab-くがつ|jp-nl",
+            "vocab-くがつ|nl-jp",
+            "vocab-じゅうがつ|jp-nl",
+            "vocab-じゅうがつ|nl-jp",
+            "vocab-じゅういちがつ|jp-nl",
+            "vocab-じゅういちがつ|nl-jp",
+            "vocab-じゅうにがつ|jp-nl",
+            "vocab-じゅうにがつ|nl-jp"
+          ],
+          "counts": {
+            "vocab-くがつ|jp-nl": 1,
+            "vocab-はちがつ|nl-jp": 1,
+            "vocab-さんがつ|jp-nl": 1,
+            "vocab-しがつ|nl-jp": 1,
+            "vocab-じゅうがつ|jp-nl": 1,
+            "vocab-ろくがつ|nl-jp": 1,
+            "vocab-じゅうにがつ|jp-nl": 1,
+            "vocab-じゅういちがつ|nl-jp": 1,
+            "vocab-しちがつ|jp-nl": 1,
+            "vocab-ごがつ|nl-jp": 1,
+            "vocab-じゅういちがつ|jp-nl": 1,
+            "vocab-いちがつ|nl-jp": 1,
+            "vocab-しがつ|jp-nl": 1,
+            "vocab-さんがつ|nl-jp": 1,
+            "vocab-はちがつ|jp-nl": 1,
+            "vocab-くがつ|nl-jp": 1,
+            "vocab-ごがつ|jp-nl": 1,
+            "vocab-にがつ|nl-jp": 1,
+            "vocab-ろくがつ|jp-nl": 1,
+            "vocab-じゅうがつ|nl-jp": 1,
+            "vocab-いちがつ|jp-nl": 1,
+            "vocab-じゅうにがつ|nl-jp": 1,
+            "vocab-にがつ|jp-nl": 1,
+            "vocab-しちがつ|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        },
+        "blocks": [
+          {
+            "wordIds": [
+              "vocab-いちがつ",
+              "vocab-にがつ"
+            ],
+            "expectedTurns": 4
+          },
+          {
+            "wordIds": [
+              "vocab-さんがつ",
+              "vocab-しがつ"
+            ],
+            "expectedTurns": 4
+          },
+          {
+            "wordIds": [
+              "vocab-ごがつ",
+              "vocab-ろくがつ"
+            ],
+            "expectedTurns": 4
+          },
+          {
+            "wordIds": [
+              "vocab-しちがつ",
+              "vocab-はちがつ"
+            ],
+            "expectedTurns": 4
+          },
+          {
+            "wordIds": [
+              "vocab-くがつ",
+              "vocab-じゅうがつ"
+            ],
+            "expectedTurns": 4
+          },
+          {
+            "wordIds": [
+              "vocab-じゅういちがつ",
+              "vocab-じゅうにがつ"
+            ],
+            "expectedTurns": 4
+          }
+        ]
+      },
+      {
+        "lessonId": "l8-5",
+        "source": "manifest.vocabulary.introducedAt=8-5",
+        "wordIds": [
+          "vocab-いちじ",
+          "vocab-にじ",
+          "vocab-さんじ",
+          "vocab-よじ",
+          "vocab-ごじ",
+          "vocab-ろくじ",
+          "vocab-しちじ",
+          "vocab-はちじ",
+          "vocab-くじ",
+          "vocab-じゅうじ",
+          "vocab-じゅういちじ",
+          "vocab-じゅうにじ",
+          "vocab-ごぜん",
+          "vocab-ごご"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 28,
+        "coverage": {
+          "expected": [
+            "vocab-いちじ|jp-nl",
+            "vocab-いちじ|nl-jp",
+            "vocab-にじ|jp-nl",
+            "vocab-にじ|nl-jp",
+            "vocab-さんじ|jp-nl",
+            "vocab-さんじ|nl-jp",
+            "vocab-よじ|jp-nl",
+            "vocab-よじ|nl-jp",
+            "vocab-ごじ|jp-nl",
+            "vocab-ごじ|nl-jp",
+            "vocab-ろくじ|jp-nl",
+            "vocab-ろくじ|nl-jp",
+            "vocab-しちじ|jp-nl",
+            "vocab-しちじ|nl-jp",
+            "vocab-はちじ|jp-nl",
+            "vocab-はちじ|nl-jp",
+            "vocab-くじ|jp-nl",
+            "vocab-くじ|nl-jp",
+            "vocab-じゅうじ|jp-nl",
+            "vocab-じゅうじ|nl-jp",
+            "vocab-じゅういちじ|jp-nl",
+            "vocab-じゅういちじ|nl-jp",
+            "vocab-じゅうにじ|jp-nl",
+            "vocab-じゅうにじ|nl-jp",
+            "vocab-ごぜん|jp-nl",
+            "vocab-ごぜん|nl-jp",
+            "vocab-ごご|jp-nl",
+            "vocab-ごご|nl-jp"
+          ],
+          "counts": {
+            "vocab-ごご|nl-jp": 1,
+            "vocab-いちじ|jp-nl": 1,
+            "vocab-しちじ|nl-jp": 1,
+            "vocab-さんじ|jp-nl": 1,
+            "vocab-いちじ|nl-jp": 1,
+            "vocab-じゅういちじ|jp-nl": 1,
+            "vocab-さんじ|nl-jp": 1,
+            "vocab-じゅうにじ|jp-nl": 1,
+            "vocab-にじ|nl-jp": 1,
+            "vocab-ごぜん|jp-nl": 1,
+            "vocab-よじ|nl-jp": 1,
+            "vocab-しちじ|jp-nl": 1,
+            "vocab-じゅうにじ|nl-jp": 1,
+            "vocab-にじ|jp-nl": 1,
+            "vocab-くじ|nl-jp": 1,
+            "vocab-ごご|jp-nl": 1,
+            "vocab-じゅうじ|nl-jp": 1,
+            "vocab-はちじ|jp-nl": 1,
+            "vocab-じゅういちじ|nl-jp": 1,
+            "vocab-ろくじ|jp-nl": 1,
+            "vocab-はちじ|nl-jp": 1,
+            "vocab-よじ|jp-nl": 1,
+            "vocab-ごぜん|nl-jp": 1,
+            "vocab-じゅうじ|jp-nl": 1,
+            "vocab-ろくじ|nl-jp": 1,
+            "vocab-ごじ|jp-nl": 1,
+            "vocab-くじ|jp-nl": 1,
+            "vocab-ごじ|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l8-minutes",
+        "source": "manifest.vocabulary.introducedAt=8-6",
+        "wordIds": [
+          "vocab-なんじ",
+          "vocab-いま",
+          "vocab-ごふん",
+          "vocab-じゅうごふん",
+          "vocab-さんじゅっぷん",
+          "vocab-よんじゅうごふん",
+          "vocab-はん"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 14,
+        "coverage": {
+          "expected": [
+            "vocab-なんじ|jp-nl",
+            "vocab-なんじ|nl-jp",
+            "vocab-いま|jp-nl",
+            "vocab-いま|nl-jp",
+            "vocab-ごふん|jp-nl",
+            "vocab-ごふん|nl-jp",
+            "vocab-じゅうごふん|jp-nl",
+            "vocab-じゅうごふん|nl-jp",
+            "vocab-さんじゅっぷん|jp-nl",
+            "vocab-さんじゅっぷん|nl-jp",
+            "vocab-よんじゅうごふん|jp-nl",
+            "vocab-よんじゅうごふん|nl-jp",
+            "vocab-はん|jp-nl",
+            "vocab-はん|nl-jp"
+          ],
+          "counts": {
+            "vocab-さんじゅっぷん|nl-jp": 1,
+            "vocab-ごふん|jp-nl": 1,
+            "vocab-いま|nl-jp": 1,
+            "vocab-よんじゅうごふん|jp-nl": 1,
+            "vocab-じゅうごふん|nl-jp": 1,
+            "vocab-さんじゅっぷん|jp-nl": 1,
+            "vocab-よんじゅうごふん|nl-jp": 1,
+            "vocab-じゅうごふん|jp-nl": 1,
+            "vocab-なんじ|nl-jp": 1,
+            "vocab-いま|jp-nl": 1,
+            "vocab-はん|nl-jp": 1,
+            "vocab-なんじ|jp-nl": 1,
+            "vocab-ごふん|nl-jp": 1,
+            "vocab-はん|jp-nl": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l8-6",
+        "source": "manifest.vocabulary.introducedAt=8-7",
+        "wordIds": [],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 0,
+        "coverage": {
+          "expected": [],
+          "counts": {},
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      }
+    ],
+    "exam": {
+      "wordIds": [
+        "vocab-げつようび",
+        "vocab-かようび",
+        "vocab-すいようび",
+        "vocab-もくようび",
+        "vocab-きんようび",
+        "vocab-どようび",
+        "vocab-にちようび",
+        "vocab-なんようび",
+        "vocab-きょう",
+        "vocab-あした",
+        "vocab-きのう",
+        "vocab-こんしゅう",
+        "vocab-らいしゅう",
+        "vocab-せんしゅう",
+        "vocab-いちがつ",
+        "vocab-にがつ",
+        "vocab-さんがつ",
+        "vocab-しがつ",
+        "vocab-ごがつ",
+        "vocab-ろくがつ",
+        "vocab-しちがつ",
+        "vocab-はちがつ",
+        "vocab-くがつ",
+        "vocab-じゅうがつ",
+        "vocab-じゅういちがつ",
+        "vocab-じゅうにがつ",
+        "vocab-いちじ",
+        "vocab-にじ",
+        "vocab-さんじ",
+        "vocab-よじ",
+        "vocab-ごじ",
+        "vocab-ろくじ",
+        "vocab-しちじ",
+        "vocab-はちじ",
+        "vocab-くじ",
+        "vocab-じゅうじ",
+        "vocab-じゅういちじ",
+        "vocab-じゅうにじ",
+        "vocab-ごぜん",
+        "vocab-ごご",
+        "vocab-なんじ",
+        "vocab-いま",
+        "vocab-ごふん",
+        "vocab-じゅうごふん",
+        "vocab-さんじゅっぷん",
+        "vocab-よんじゅうごふん",
+        "vocab-はん"
+      ],
+      "wordTurns": 94,
+      "totalQuestions": 127,
+      "otherQuestions": 33,
+      "directions": {
+        "jp-nl": 47,
+        "nl-jp": 47
+      },
+      "forms": {
+        "meaning": 44,
+        "context-recognition": 44,
+        "context-meaning": 3,
+        "recognition": 3
+      },
+      "coverage": {
+        "expected": [
+          "vocab-げつようび|jp-nl",
+          "vocab-げつようび|nl-jp",
+          "vocab-かようび|jp-nl",
+          "vocab-かようび|nl-jp",
+          "vocab-すいようび|jp-nl",
+          "vocab-すいようび|nl-jp",
+          "vocab-もくようび|jp-nl",
+          "vocab-もくようび|nl-jp",
+          "vocab-きんようび|jp-nl",
+          "vocab-きんようび|nl-jp",
+          "vocab-どようび|jp-nl",
+          "vocab-どようび|nl-jp",
+          "vocab-にちようび|jp-nl",
+          "vocab-にちようび|nl-jp",
+          "vocab-なんようび|jp-nl",
+          "vocab-なんようび|nl-jp",
+          "vocab-きょう|jp-nl",
+          "vocab-きょう|nl-jp",
+          "vocab-あした|jp-nl",
+          "vocab-あした|nl-jp",
+          "vocab-きのう|jp-nl",
+          "vocab-きのう|nl-jp",
+          "vocab-こんしゅう|jp-nl",
+          "vocab-こんしゅう|nl-jp",
+          "vocab-らいしゅう|jp-nl",
+          "vocab-らいしゅう|nl-jp",
+          "vocab-せんしゅう|jp-nl",
+          "vocab-せんしゅう|nl-jp",
+          "vocab-いちがつ|jp-nl",
+          "vocab-いちがつ|nl-jp",
+          "vocab-にがつ|jp-nl",
+          "vocab-にがつ|nl-jp",
+          "vocab-さんがつ|jp-nl",
+          "vocab-さんがつ|nl-jp",
+          "vocab-しがつ|jp-nl",
+          "vocab-しがつ|nl-jp",
+          "vocab-ごがつ|jp-nl",
+          "vocab-ごがつ|nl-jp",
+          "vocab-ろくがつ|jp-nl",
+          "vocab-ろくがつ|nl-jp",
+          "vocab-しちがつ|jp-nl",
+          "vocab-しちがつ|nl-jp",
+          "vocab-はちがつ|jp-nl",
+          "vocab-はちがつ|nl-jp",
+          "vocab-くがつ|jp-nl",
+          "vocab-くがつ|nl-jp",
+          "vocab-じゅうがつ|jp-nl",
+          "vocab-じゅうがつ|nl-jp",
+          "vocab-じゅういちがつ|jp-nl",
+          "vocab-じゅういちがつ|nl-jp",
+          "vocab-じゅうにがつ|jp-nl",
+          "vocab-じゅうにがつ|nl-jp",
+          "vocab-いちじ|jp-nl",
+          "vocab-いちじ|nl-jp",
+          "vocab-にじ|jp-nl",
+          "vocab-にじ|nl-jp",
+          "vocab-さんじ|jp-nl",
+          "vocab-さんじ|nl-jp",
+          "vocab-よじ|jp-nl",
+          "vocab-よじ|nl-jp",
+          "vocab-ごじ|jp-nl",
+          "vocab-ごじ|nl-jp",
+          "vocab-ろくじ|jp-nl",
+          "vocab-ろくじ|nl-jp",
+          "vocab-しちじ|jp-nl",
+          "vocab-しちじ|nl-jp",
+          "vocab-はちじ|jp-nl",
+          "vocab-はちじ|nl-jp",
+          "vocab-くじ|jp-nl",
+          "vocab-くじ|nl-jp",
+          "vocab-じゅうじ|jp-nl",
+          "vocab-じゅうじ|nl-jp",
+          "vocab-じゅういちじ|jp-nl",
+          "vocab-じゅういちじ|nl-jp",
+          "vocab-じゅうにじ|jp-nl",
+          "vocab-じゅうにじ|nl-jp",
+          "vocab-ごぜん|jp-nl",
+          "vocab-ごぜん|nl-jp",
+          "vocab-ごご|jp-nl",
+          "vocab-ごご|nl-jp",
+          "vocab-なんじ|jp-nl",
+          "vocab-なんじ|nl-jp",
+          "vocab-いま|jp-nl",
+          "vocab-いま|nl-jp",
+          "vocab-ごふん|jp-nl",
+          "vocab-ごふん|nl-jp",
+          "vocab-じゅうごふん|jp-nl",
+          "vocab-じゅうごふん|nl-jp",
+          "vocab-さんじゅっぷん|jp-nl",
+          "vocab-さんじゅっぷん|nl-jp",
+          "vocab-よんじゅうごふん|jp-nl",
+          "vocab-よんじゅうごふん|nl-jp",
+          "vocab-はん|jp-nl",
+          "vocab-はん|nl-jp"
+        ],
+        "counts": {
+          "vocab-さんじゅっぷん|jp-nl": 1,
+          "vocab-さんがつ|jp-nl": 1,
+          "vocab-いちがつ|jp-nl": 1,
+          "vocab-しちがつ|nl-jp": 1,
+          "vocab-なんようび|jp-nl": 1,
+          "vocab-すいようび|nl-jp": 1,
+          "vocab-よじ|jp-nl": 1,
+          "vocab-らいしゅう|nl-jp": 1,
+          "vocab-にじ|jp-nl": 1,
+          "vocab-かようび|jp-nl": 1,
+          "vocab-にがつ|jp-nl": 1,
+          "vocab-きょう|jp-nl": 1,
+          "vocab-きのう|nl-jp": 1,
+          "vocab-かようび|nl-jp": 1,
+          "vocab-いちじ|nl-jp": 1,
+          "vocab-しちじ|nl-jp": 1,
+          "vocab-らいしゅう|jp-nl": 1,
+          "vocab-ごがつ|nl-jp": 1,
+          "vocab-さんじ|jp-nl": 1,
+          "vocab-はちじ|nl-jp": 1,
+          "vocab-ごふん|jp-nl": 1,
+          "vocab-じゅういちがつ|jp-nl": 1,
+          "vocab-ろくがつ|jp-nl": 1,
+          "vocab-にちようび|nl-jp": 1,
+          "vocab-ごご|jp-nl": 1,
+          "vocab-せんしゅう|nl-jp": 1,
+          "vocab-くじ|nl-jp": 1,
+          "vocab-はちがつ|jp-nl": 1,
+          "vocab-なんじ|jp-nl": 1,
+          "vocab-ごふん|nl-jp": 1,
+          "vocab-どようび|nl-jp": 1,
+          "vocab-こんしゅう|nl-jp": 1,
+          "vocab-じゅうがつ|jp-nl": 1,
+          "vocab-さんがつ|nl-jp": 1,
+          "vocab-あした|jp-nl": 1,
+          "vocab-はん|jp-nl": 1,
+          "vocab-いちがつ|nl-jp": 1,
+          "vocab-じゅうじ|jp-nl": 1,
+          "vocab-さんじ|nl-jp": 1,
+          "vocab-じゅうにがつ|nl-jp": 1,
+          "vocab-あした|nl-jp": 1,
+          "vocab-じゅういちじ|nl-jp": 1,
+          "vocab-きんようび|nl-jp": 1,
+          "vocab-にがつ|nl-jp": 1,
+          "vocab-さんじゅっぷん|nl-jp": 1,
+          "vocab-すいようび|jp-nl": 1,
+          "vocab-せんしゅう|jp-nl": 1,
+          "vocab-きんようび|jp-nl": 1,
+          "vocab-どようび|jp-nl": 1,
+          "vocab-もくようび|jp-nl": 1,
+          "vocab-しがつ|jp-nl": 1,
+          "vocab-げつようび|jp-nl": 1,
+          "vocab-くがつ|jp-nl": 1,
+          "vocab-じゅうにじ|nl-jp": 1,
+          "vocab-ろくじ|jp-nl": 1,
+          "vocab-よんじゅうごふん|jp-nl": 1,
+          "vocab-いま|jp-nl": 1,
+          "vocab-はちがつ|nl-jp": 1,
+          "vocab-よじ|nl-jp": 1,
+          "vocab-こんしゅう|jp-nl": 1,
+          "vocab-ごじ|nl-jp": 1,
+          "vocab-じゅうにじ|jp-nl": 1,
+          "vocab-なんじ|nl-jp": 1,
+          "vocab-しちじ|jp-nl": 1,
+          "vocab-じゅういちがつ|nl-jp": 1,
+          "vocab-ごがつ|jp-nl": 1,
+          "vocab-にじ|nl-jp": 1,
+          "vocab-じゅうにがつ|jp-nl": 1,
+          "vocab-なんようび|nl-jp": 1,
+          "vocab-じゅうじ|nl-jp": 1,
+          "vocab-よんじゅうごふん|nl-jp": 1,
+          "vocab-くじ|jp-nl": 1,
+          "vocab-はん|nl-jp": 1,
+          "vocab-にちようび|jp-nl": 1,
+          "vocab-ごぜん|nl-jp": 1,
+          "vocab-じゅういちじ|jp-nl": 1,
+          "vocab-ろくがつ|nl-jp": 1,
+          "vocab-ごぜん|jp-nl": 1,
+          "vocab-ごご|nl-jp": 1,
+          "vocab-じゅうごふん|nl-jp": 1,
+          "vocab-いま|nl-jp": 1,
+          "vocab-きのう|jp-nl": 1,
+          "vocab-ろくじ|nl-jp": 1,
+          "vocab-ごじ|jp-nl": 1,
+          "vocab-しちがつ|jp-nl": 1,
+          "vocab-げつようび|nl-jp": 1,
+          "vocab-じゅうごふん|jp-nl": 1,
+          "vocab-いちじ|jp-nl": 1,
+          "vocab-はちじ|jp-nl": 1,
+          "vocab-くがつ|nl-jp": 1,
+          "vocab-もくようび|nl-jp": 1,
+          "vocab-じゅうがつ|nl-jp": 1,
+          "vocab-しがつ|nl-jp": 1,
+          "vocab-きょう|nl-jp": 1
+        },
+        "missing": [],
+        "duplicates": [],
+        "unexpected": []
+      }
+    }
+  },
+  {
+    "level": 9,
+    "status": "van toepassing",
+    "lessons": [
+      {
+        "lessonId": "l9-1",
+        "source": "manifest.vocabulary.introducedAt=9-1",
+        "wordIds": [
+          "vocab-ここ",
+          "vocab-そこ",
+          "vocab-あそこ",
+          "vocab-どこ"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-ここ|jp-nl",
+            "vocab-ここ|nl-jp",
+            "vocab-そこ|jp-nl",
+            "vocab-そこ|nl-jp",
+            "vocab-あそこ|jp-nl",
+            "vocab-あそこ|nl-jp",
+            "vocab-どこ|jp-nl",
+            "vocab-どこ|nl-jp"
+          ],
+          "counts": {
+            "vocab-ここ|nl-jp": 1,
+            "vocab-どこ|jp-nl": 1,
+            "vocab-あそこ|nl-jp": 1,
+            "vocab-ここ|jp-nl": 1,
+            "vocab-そこ|nl-jp": 1,
+            "vocab-あそこ|jp-nl": 1,
+            "vocab-どこ|nl-jp": 1,
+            "vocab-そこ|jp-nl": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l9-2",
+        "source": "manifest.vocabulary.introducedAt=9-2",
+        "wordIds": [
+          "vocab-ひだり",
+          "vocab-みぎ",
+          "vocab-まっすぐ",
+          "vocab-みち"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-ひだり|jp-nl",
+            "vocab-ひだり|nl-jp",
+            "vocab-みぎ|jp-nl",
+            "vocab-みぎ|nl-jp",
+            "vocab-まっすぐ|jp-nl",
+            "vocab-まっすぐ|nl-jp",
+            "vocab-みち|jp-nl",
+            "vocab-みち|nl-jp"
+          ],
+          "counts": {
+            "vocab-みぎ|nl-jp": 1,
+            "vocab-まっすぐ|jp-nl": 1,
+            "vocab-ひだり|nl-jp": 1,
+            "vocab-みぎ|jp-nl": 1,
+            "vocab-まっすぐ|nl-jp": 1,
+            "vocab-みち|jp-nl": 1,
+            "vocab-ひだり|jp-nl": 1,
+            "vocab-みち|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l9-3",
+        "source": "manifest.vocabulary.introducedAt=9-3",
+        "wordIds": [
+          "vocab-まえ",
+          "vocab-うしろ",
+          "vocab-となり",
+          "vocab-なか"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-まえ|jp-nl",
+            "vocab-まえ|nl-jp",
+            "vocab-うしろ|jp-nl",
+            "vocab-うしろ|nl-jp",
+            "vocab-となり|jp-nl",
+            "vocab-となり|nl-jp",
+            "vocab-なか|jp-nl",
+            "vocab-なか|nl-jp"
+          ],
+          "counts": {
+            "vocab-なか|nl-jp": 1,
+            "vocab-まえ|jp-nl": 1,
+            "vocab-となり|nl-jp": 1,
+            "vocab-なか|jp-nl": 1,
+            "vocab-うしろ|nl-jp": 1,
+            "vocab-となり|jp-nl": 1,
+            "vocab-まえ|nl-jp": 1,
+            "vocab-うしろ|jp-nl": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l9-4",
+        "source": "manifest.vocabulary.introducedAt=9-4",
+        "wordIds": [
+          "vocab-うえ",
+          "vocab-した",
+          "vocab-そと",
+          "vocab-ちかく"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-うえ|jp-nl",
+            "vocab-うえ|nl-jp",
+            "vocab-した|jp-nl",
+            "vocab-した|nl-jp",
+            "vocab-そと|jp-nl",
+            "vocab-そと|nl-jp",
+            "vocab-ちかく|jp-nl",
+            "vocab-ちかく|nl-jp"
+          ],
+          "counts": {
+            "vocab-ちかく|jp-nl": 1,
+            "vocab-うえ|nl-jp": 1,
+            "vocab-そと|jp-nl": 1,
+            "vocab-した|nl-jp": 1,
+            "vocab-うえ|jp-nl": 1,
+            "vocab-ちかく|nl-jp": 1,
+            "vocab-した|jp-nl": 1,
+            "vocab-そと|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l9-5",
+        "source": "manifest.vocabulary.introducedAt=9-5",
+        "wordIds": [
+          "vocab-こうえん",
+          "vocab-がっこう",
+          "vocab-レストラン",
+          "vocab-ちず"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-こうえん|jp-nl",
+            "vocab-こうえん|nl-jp",
+            "vocab-がっこう|jp-nl",
+            "vocab-がっこう|nl-jp",
+            "vocab-レストラン|jp-nl",
+            "vocab-レストラン|nl-jp",
+            "vocab-ちず|jp-nl",
+            "vocab-ちず|nl-jp"
+          ],
+          "counts": {
+            "vocab-レストラン|jp-nl": 1,
+            "vocab-がっこう|nl-jp": 1,
+            "vocab-ちず|jp-nl": 1,
+            "vocab-こうえん|nl-jp": 1,
+            "vocab-がっこう|jp-nl": 1,
+            "vocab-ちず|nl-jp": 1,
+            "vocab-こうえん|jp-nl": 1,
+            "vocab-レストラン|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      }
+    ],
+    "exam": {
+      "wordIds": [
+        "vocab-ここ",
+        "vocab-そこ",
+        "vocab-あそこ",
+        "vocab-どこ",
+        "vocab-ひだり",
+        "vocab-みぎ",
+        "vocab-まっすぐ",
+        "vocab-みち",
+        "vocab-まえ",
+        "vocab-うしろ",
+        "vocab-となり",
+        "vocab-なか",
+        "vocab-うえ",
+        "vocab-した",
+        "vocab-そと",
+        "vocab-ちかく",
+        "vocab-こうえん",
+        "vocab-がっこう",
+        "vocab-レストラン",
+        "vocab-ちず"
+      ],
+      "wordTurns": 40,
+      "totalQuestions": 61,
+      "otherQuestions": 21,
+      "directions": {
+        "jp-nl": 20,
+        "nl-jp": 20
+      },
+      "forms": {
+        "meaning": 20,
+        "context-recognition": 20
+      },
+      "coverage": {
+        "expected": [
+          "vocab-ここ|jp-nl",
+          "vocab-ここ|nl-jp",
+          "vocab-そこ|jp-nl",
+          "vocab-そこ|nl-jp",
+          "vocab-あそこ|jp-nl",
+          "vocab-あそこ|nl-jp",
+          "vocab-どこ|jp-nl",
+          "vocab-どこ|nl-jp",
+          "vocab-ひだり|jp-nl",
+          "vocab-ひだり|nl-jp",
+          "vocab-みぎ|jp-nl",
+          "vocab-みぎ|nl-jp",
+          "vocab-まっすぐ|jp-nl",
+          "vocab-まっすぐ|nl-jp",
+          "vocab-みち|jp-nl",
+          "vocab-みち|nl-jp",
+          "vocab-まえ|jp-nl",
+          "vocab-まえ|nl-jp",
+          "vocab-うしろ|jp-nl",
+          "vocab-うしろ|nl-jp",
+          "vocab-となり|jp-nl",
+          "vocab-となり|nl-jp",
+          "vocab-なか|jp-nl",
+          "vocab-なか|nl-jp",
+          "vocab-うえ|jp-nl",
+          "vocab-うえ|nl-jp",
+          "vocab-した|jp-nl",
+          "vocab-した|nl-jp",
+          "vocab-そと|jp-nl",
+          "vocab-そと|nl-jp",
+          "vocab-ちかく|jp-nl",
+          "vocab-ちかく|nl-jp",
+          "vocab-こうえん|jp-nl",
+          "vocab-こうえん|nl-jp",
+          "vocab-がっこう|jp-nl",
+          "vocab-がっこう|nl-jp",
+          "vocab-レストラン|jp-nl",
+          "vocab-レストラン|nl-jp",
+          "vocab-ちず|jp-nl",
+          "vocab-ちず|nl-jp"
+        ],
+        "counts": {
+          "vocab-こうえん|jp-nl": 1,
+          "vocab-そこ|jp-nl": 1,
+          "vocab-みぎ|jp-nl": 1,
+          "vocab-そと|jp-nl": 1,
+          "vocab-まえ|nl-jp": 1,
+          "vocab-こうえん|nl-jp": 1,
+          "vocab-うしろ|nl-jp": 1,
+          "vocab-ひだり|nl-jp": 1,
+          "vocab-みち|nl-jp": 1,
+          "vocab-まっすぐ|nl-jp": 1,
+          "vocab-がっこう|jp-nl": 1,
+          "vocab-ひだり|jp-nl": 1,
+          "vocab-あそこ|jp-nl": 1,
+          "vocab-レストラン|nl-jp": 1,
+          "vocab-ちかく|jp-nl": 1,
+          "vocab-うえ|jp-nl": 1,
+          "vocab-がっこう|nl-jp": 1,
+          "vocab-どこ|nl-jp": 1,
+          "vocab-あそこ|nl-jp": 1,
+          "vocab-となり|jp-nl": 1,
+          "vocab-そと|nl-jp": 1,
+          "vocab-うえ|nl-jp": 1,
+          "vocab-となり|nl-jp": 1,
+          "vocab-ちかく|nl-jp": 1,
+          "vocab-まっすぐ|jp-nl": 1,
+          "vocab-そこ|nl-jp": 1,
+          "vocab-ちず|jp-nl": 1,
+          "vocab-まえ|jp-nl": 1,
+          "vocab-ここ|jp-nl": 1,
+          "vocab-ちず|nl-jp": 1,
+          "vocab-みぎ|nl-jp": 1,
+          "vocab-なか|nl-jp": 1,
+          "vocab-した|jp-nl": 1,
+          "vocab-した|nl-jp": 1,
+          "vocab-みち|jp-nl": 1,
+          "vocab-うしろ|jp-nl": 1,
+          "vocab-どこ|jp-nl": 1,
+          "vocab-レストラン|jp-nl": 1,
+          "vocab-ここ|nl-jp": 1,
+          "vocab-なか|jp-nl": 1
+        },
+        "missing": [],
+        "duplicates": [],
+        "unexpected": []
+      }
+    }
+  },
+  {
+    "level": 10,
+    "status": "van toepassing",
+    "lessons": [
+      {
+        "lessonId": "l10-1",
+        "source": "manifest.vocabulary.introducedAt=10-1",
+        "wordIds": [
+          "vocab-ください",
+          "vocab-いくら",
+          "vocab-おかね",
+          "vocab-かいます"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-ください|jp-nl",
+            "vocab-ください|nl-jp",
+            "vocab-いくら|jp-nl",
+            "vocab-いくら|nl-jp",
+            "vocab-おかね|jp-nl",
+            "vocab-おかね|nl-jp",
+            "vocab-かいます|jp-nl",
+            "vocab-かいます|nl-jp"
+          ],
+          "counts": {
+            "vocab-ください|nl-jp": 1,
+            "vocab-かいます|jp-nl": 1,
+            "vocab-いくら|nl-jp": 1,
+            "vocab-おかね|jp-nl": 1,
+            "vocab-かいます|nl-jp": 1,
+            "vocab-いくら|jp-nl": 1,
+            "vocab-おかね|nl-jp": 1,
+            "vocab-ください|jp-nl": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l10-2",
+        "source": "manifest.vocabulary.introducedAt=10-2",
+        "wordIds": [
+          "vocab-メニュー",
+          "vocab-みせて"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 4,
+        "coverage": {
+          "expected": [
+            "vocab-メニュー|jp-nl",
+            "vocab-メニュー|nl-jp",
+            "vocab-みせて|jp-nl",
+            "vocab-みせて|nl-jp"
+          ],
+          "counts": {
+            "vocab-みせて|nl-jp": 1,
+            "vocab-メニュー|jp-nl": 1,
+            "vocab-みせて|jp-nl": 1,
+            "vocab-メニュー|nl-jp": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l10-3",
+        "source": "manifest.vocabulary.introducedAt=10-3",
+        "wordIds": [
+          "vocab-やくそく",
+          "vocab-あいます",
+          "vocab-いつ",
+          "vocab-いっしょに",
+          "vocab-だいじょうぶ"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 10,
+        "coverage": {
+          "expected": [
+            "vocab-やくそく|jp-nl",
+            "vocab-やくそく|nl-jp",
+            "vocab-あいます|jp-nl",
+            "vocab-あいます|nl-jp",
+            "vocab-いつ|jp-nl",
+            "vocab-いつ|nl-jp",
+            "vocab-いっしょに|jp-nl",
+            "vocab-いっしょに|nl-jp",
+            "vocab-だいじょうぶ|jp-nl",
+            "vocab-だいじょうぶ|nl-jp"
+          ],
+          "counts": {
+            "vocab-いっしょに|nl-jp": 1,
+            "vocab-あいます|jp-nl": 1,
+            "vocab-いつ|nl-jp": 1,
+            "vocab-だいじょうぶ|jp-nl": 1,
+            "vocab-やくそく|nl-jp": 1,
+            "vocab-いつ|jp-nl": 1,
+            "vocab-だいじょうぶ|nl-jp": 1,
+            "vocab-いっしょに|jp-nl": 1,
+            "vocab-あいます|nl-jp": 1,
+            "vocab-やくそく|jp-nl": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l10-4",
+        "source": "manifest.vocabulary.introducedAt=10-4",
+        "wordIds": [
+          "vocab-でんしゃ",
+          "vocab-バス",
+          "vocab-のります",
+          "vocab-おります"
+        ],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 8,
+        "coverage": {
+          "expected": [
+            "vocab-でんしゃ|jp-nl",
+            "vocab-でんしゃ|nl-jp",
+            "vocab-バス|jp-nl",
+            "vocab-バス|nl-jp",
+            "vocab-のります|jp-nl",
+            "vocab-のります|nl-jp",
+            "vocab-おります|jp-nl",
+            "vocab-おります|nl-jp"
+          ],
+          "counts": {
+            "vocab-のります|nl-jp": 1,
+            "vocab-でんしゃ|jp-nl": 1,
+            "vocab-バス|nl-jp": 1,
+            "vocab-おります|jp-nl": 1,
+            "vocab-でんしゃ|nl-jp": 1,
+            "vocab-のります|jp-nl": 1,
+            "vocab-おります|nl-jp": 1,
+            "vocab-バス|jp-nl": 1
+          },
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      },
+      {
+        "lessonId": "l10-5",
+        "source": "manifest.vocabulary.introducedAt=10-5",
+        "wordIds": [],
+        "invalidRefs": [],
+        "unlinkedIntroductions": [],
+        "expectedTurns": 0,
+        "coverage": {
+          "expected": [],
+          "counts": {},
+          "missing": [],
+          "duplicates": [],
+          "unexpected": []
+        }
+      }
+    ],
+    "exam": {
+      "wordIds": [
+        "vocab-ください",
+        "vocab-いくら",
+        "vocab-おかね",
+        "vocab-かいます",
+        "vocab-メニュー",
+        "vocab-みせて",
+        "vocab-やくそく",
+        "vocab-あいます",
+        "vocab-いつ",
+        "vocab-いっしょに",
+        "vocab-だいじょうぶ",
+        "vocab-でんしゃ",
+        "vocab-バス",
+        "vocab-のります",
+        "vocab-おります"
+      ],
+      "wordTurns": 30,
+      "totalQuestions": 51,
+      "otherQuestions": 21,
+      "directions": {
+        "jp-nl": 15,
+        "nl-jp": 15
+      },
+      "forms": {
+        "meaning": 15,
+        "context-recognition": 15
+      },
+      "coverage": {
+        "expected": [
+          "vocab-ください|jp-nl",
+          "vocab-ください|nl-jp",
+          "vocab-いくら|jp-nl",
+          "vocab-いくら|nl-jp",
+          "vocab-おかね|jp-nl",
+          "vocab-おかね|nl-jp",
+          "vocab-かいます|jp-nl",
+          "vocab-かいます|nl-jp",
+          "vocab-メニュー|jp-nl",
+          "vocab-メニュー|nl-jp",
+          "vocab-みせて|jp-nl",
+          "vocab-みせて|nl-jp",
+          "vocab-やくそく|jp-nl",
+          "vocab-やくそく|nl-jp",
+          "vocab-あいます|jp-nl",
+          "vocab-あいます|nl-jp",
+          "vocab-いつ|jp-nl",
+          "vocab-いつ|nl-jp",
+          "vocab-いっしょに|jp-nl",
+          "vocab-いっしょに|nl-jp",
+          "vocab-だいじょうぶ|jp-nl",
+          "vocab-だいじょうぶ|nl-jp",
+          "vocab-でんしゃ|jp-nl",
+          "vocab-でんしゃ|nl-jp",
+          "vocab-バス|jp-nl",
+          "vocab-バス|nl-jp",
+          "vocab-のります|jp-nl",
+          "vocab-のります|nl-jp",
+          "vocab-おります|jp-nl",
+          "vocab-おります|nl-jp"
+        ],
+        "counts": {
+          "vocab-いくら|jp-nl": 1,
+          "vocab-いっしょに|nl-jp": 1,
+          "vocab-あいます|nl-jp": 1,
+          "vocab-バス|nl-jp": 1,
+          "vocab-でんしゃ|jp-nl": 1,
+          "vocab-あいます|jp-nl": 1,
+          "vocab-おります|nl-jp": 1,
+          "vocab-ください|nl-jp": 1,
+          "vocab-みせて|jp-nl": 1,
+          "vocab-いくら|nl-jp": 1,
+          "vocab-おります|jp-nl": 1,
+          "vocab-のります|jp-nl": 1,
+          "vocab-でんしゃ|nl-jp": 1,
+          "vocab-だいじょうぶ|nl-jp": 1,
+          "vocab-やくそく|jp-nl": 1,
+          "vocab-いっしょに|jp-nl": 1,
+          "vocab-いつ|nl-jp": 1,
+          "vocab-おかね|jp-nl": 1,
+          "vocab-いつ|jp-nl": 1,
+          "vocab-のります|nl-jp": 1,
+          "vocab-メニュー|jp-nl": 1,
+          "vocab-ください|jp-nl": 1,
+          "vocab-みせて|nl-jp": 1,
+          "vocab-だいじょうぶ|jp-nl": 1,
+          "vocab-かいます|jp-nl": 1,
+          "vocab-やくそく|nl-jp": 1,
+          "vocab-メニュー|nl-jp": 1,
+          "vocab-おかね|nl-jp": 1,
+          "vocab-バス|jp-nl": 1,
+          "vocab-かいます|nl-jp": 1
+        },
+        "missing": [],
+        "duplicates": [],
+        "unexpected": []
+      }
+    }
+  }
+]

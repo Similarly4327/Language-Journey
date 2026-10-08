@@ -47,6 +47,8 @@ Dialogen gebruiken opeenvolgende **volledige regelopnamen**, met 220 ms pauze. D
 
 ## ElevenLabs-batchworkflow
 
+De instelpipeline met lokale configuratie, stemlijst, beluisterpagina en automatische controles staat in [ElevenLabs instellen en koppelen](../elevenlabs-pipeline.md). De onderstaande directe batchcommando's blijven beschikbaar.
+
 Alle API-calls gebeuren uitsluitend in de lokale developer-CLI. Configuratie zonder secrets: `audio/config.json`; daadwerkelijke sleutel en stem-ID's: environment variables. De CLI gebruikt het officiële [Text to Speech convert-endpoint](https://elevenlabs.io/docs/api-reference/text-to-speech/convert). `eleven_multilingual_v2` ondersteunt volgens die documentatie geen `language_code`; daarom wordt uitsluitend expliciete kana gestuurd, zonder die parameter.
 
 1. Stel `ELEVENLABS_API_KEY`, `VOICE_A_ID` en `VOICE_B_ID` veilig in de procesomgeving in. Zet ze niet in een repositorybestand of frontendscript.
