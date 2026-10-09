@@ -23,6 +23,22 @@ test('audio metadata reuses every original word and distinguishes particle/kana 
  assert.equal(content.resolveAudioEntry('missing-id','ねこ'),null,'an invalid explicit ID cannot fall back to text');
  assert.equal(content.resolveAudioEntry('vocab-はは').pronunciation.audioTextKana,'はは');
 });
+test('avatar celebrations are ambient audio content, separate from vocabulary and Recall',()=>{
+ const celebrations=content.manifest.avatarCelebrations;
+ assert.equal(celebrations.length,10);assert.equal(new Set(celebrations.map(entry=>entry.id)).size,10);
+ assert.ok(celebrations.every(entry=>entry.japaneseText&&entry.meaning&&entry.audioTextKana&&entry.audioProfile==='celebration'));
+ assert.ok(celebrations.every(entry=>content.audioEntryById[entry.id]?.kind==='avatarCelebration'));
+ assert.ok(celebrations.every(entry=>!content.manifest.vocabulary.some(word=>word.id===entry.id)));
+ assert.equal(content.audioEntryById[celebrations[0].id].audioProfile,'celebration');
+ const jobs=batch.selectJobs({ids:celebrations[0].id});assert.deepEqual(jobs.map(job=>job.role),['A','B']);
+ assert.ok(jobs.every(job=>job.ref.kind==='avatarCelebration'));
+});
+test('celebration profile is central and included in generated asset hashes',()=>{
+ const ref=content.audioEntryById['avatar-celebration-01'];
+ assert.equal(batch.settingsFor(ref).voice_settings.style,config.audio_profiles.celebration.voice_settings.style);
+ assert.notEqual(batch.generationHash(ref,'A','test'),batch.generationHash(ref,'A','test',{...config,audio_profiles:{}}));
+ const current=recording(ref.id,'A');assert.equal(batch.currentHash(ref,current),current.generationHash);
+});
 test('reviewed early sentences share IDs, preserve writing and use explicit pronunciation',()=>{
  const first=content.langLessons[0].models[0],duplicate=content.langLessons[5].models[0];assert.equal(first.sentenceId,duplicate.sentenceId);
  const ref=content.audioEntryById[first.sentenceId];assert.equal(ref.displayText,'これは ねこ です');assert.equal(ref.pronunciation.audioTextKana,'これわ ねこ です');
@@ -42,6 +58,13 @@ test('resolver requires exact entry/reading, reviewed recording and safe static 
  assert.equal(audio.resolve(content,manifest([]),id),null);
  const contextOnly=recording('kana-small-っ');assert.equal(audio.resolve(content,manifest([contextOnly]),contextOnly.entryId),null,'a recording cannot turn a context-only writing sign into an isolated sound');
  const html=audio.buttonHtml(audio.resolve(content,m,id),'ねこ','Luister naar kat');assert.match(html,/type="button"/);assert.match(html,/aria-label="Luister naar kat"/);assert.match(html,/data-audio-key="vocab-ねこ"/);
+});
+test('avatar celebration resolver selects the selected avatar voice and needs reviewed static files',()=>{
+ const id='avatar-celebration-01',female=recording(id,'A'),male=recording(id,'B');
+ assert.equal(audio.resolve(content,manifest([female]),id,undefined,'B'),null);
+ assert.equal(audio.resolve(content,manifest([female,{...male,reviewed:false}]),id,undefined,'B'),null);
+ assert.equal(audio.resolve(content,manifest([female,male]),id,undefined,'A').assets[0].voiceRole,'A');
+ assert.equal(audio.resolve(content,manifest([female,male]),id,undefined,'B').assets[0].voiceRole,'B');
 });
 function playbackFixture(){
  const played=[],timers=[],states=[];const service=audio.createPlayback({createAudio:path=>{const item={path,play(){this.started=true;return Promise.resolve()},pause(){this.paused=true}};played.push(item);return item},delay:fn=>{const timer={fn};timers.push(timer);return timer},cancelDelay:timer=>timer.cancelled=true});
@@ -123,6 +146,9 @@ test('all UI routes reuse shared service and Recall reveal never offers Japanese
  assert.equal(sandbox.key({vocabIds:['vocab-ねこ']},'kat'),undefined,'Dutch prompts never acquire the answer ID through vocabulary metadata');
  assert.match(html,/if\(direction==='jp-nl'&&!feedback\)/);assert.match(html,/speakerButtonHtml\(spokenAnswer,card.id/);assert.match(html,/model.sentenceId/);
  assert.match(html,/contextAudio=quizTextIsJapanese\(context\)&&speakerButtonHtml/);assert.match(html,/japanesePlayback.play\(asset.assets/);assert.doesNotMatch(html,/knowledgeTilePlayback|audioCoachPlayback|speechSynthesis/);
+ assert.match(html,/function answerOptionAudioHtml\(text,preferredIds=\[\]\)/);assert.match(html,/answerOptionAudioHtml\(text,quizAudioKey\(currentQ\(\),text,'choice'\)\)/);
+ assert.match(html,/event\.preventDefault\(\);event\.stopPropagation\(\)/,'speaker taps are intercepted before the answer option receives them');
+ assert.match(html,/celebrationTap:c\.passed/);assert.match(html,/data-avatar-celebration/);assert.match(html,/state\.avatarGender==='male'\?'B':'A'/);assert.match(html,/japanesePlayback\.play\(selected\.asset\.assets/);assert.doesNotMatch(html,/speechSynthesis/);
  assert.match(html,/qPromptAudio'\).innerHTML=''/);assert.match(html,/min-width:44px/);
  const knowledge=html.slice(html.indexOf('function renderKnowledgeDashboard('),html.indexOf('function knowledgeGrowthSeries('));assert.doesNotMatch(knowledge,/knowledgeGrammarForKana\(item.front\)/);assert.match(knowledge,/dictionaryById\[`kana-\$\{script\}-\$\{item.front\}`\]/);
  const japaneseRoute=html.slice(html.indexOf('function playAvatarAudio('),html.indexOf('function playCorrectAnswerSound('));assert.doesNotMatch(japaneseRoute,/new Audio|AUDIO_COACH_DISMISS_MS/);

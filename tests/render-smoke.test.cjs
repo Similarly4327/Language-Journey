@@ -256,7 +256,7 @@ test('all level screens render through the imported content adapter',()=>{
   const travel=coursePhases.find(phase=>phase.id==='usable-japanese');
   assert.ok(foundation&&travel,'both current phases are available');
   Object.values(rankState).forEach(record=>{record.rank=null;record.last=null;record.attempts=0});
-  state.level=0;state.openPhaseId=foundation.id;state.introducedVocabIds=[];state.studyTracker={sessions:[]};
+  state.level=0;state.screen='levels';state.openPhaseId=foundation.id;state.introducedVocabIds=[];state.langView='list';state.langLesson=0;state.langStepProgress={};state.smallLesson=0;state.advancedView={5:'list',6:'list',7:'list',8:'list',9:'list'};state.advancedStepProgress={};state.thematic.step='list';state.thematicCompleted={};state.studyTracker={sessions:[]};
   let phaseRows=coursePhases.map(phase=>renderCoursePhase(phase));
   assert.deepEqual(phaseRows.filter(row=>row.open).map(row=>row.className),['course-phase'],'a new learner sees only the first phase open');
   assert.match(phaseGuideCopy(foundation).detail,/Hiragana → Leerroute → Klinkers, stap 1/);
@@ -274,7 +274,7 @@ test('all level screens render through the imported content adapter',()=>{
   assert.equal(state.openPhaseId,travel.id,'opening another phase updates the remembered phase');
   assert.equal(foundationRow.open,false,'opening another phase closes the previous phase');
   assert.ok(phaseRows.filter(row=>row.open).every(row=>row===travelRow));
-  assert.match(phaseGuideCopy(travel).message,/8\/10 goed/,'the avatar uses a real completed exercise result');
+  assert.match(phaseGuideCopy(travel).detail,/8\/10 goed/,'the avatar keeps the real completed exercise result in its secondary detail');
 
   const persisted=storageStateSnapshot();
   assert.equal(persisted.openPhaseId,travel.id,'the open phase is included in the saved state');

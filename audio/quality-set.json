@@ -18,6 +18,8 @@
     { "entryId": "reading-l11-home-5-a", "feature": "Level 11 verhaal, richtingpartikel en lange klanken" },
     { "entryId": "reading-l12-3-a", "feature": "Level 12 verhaal, bandnummer en topicpartikel" },
     { "entryId": "reading-l12-2-b", "feature": "Level 12 bordtekst en gesproken pijlrichting" },
-    { "entryId": "number-600", "feature": "onregelmatige getaluitspraak roppyaku" }
+    { "entryId": "number-600", "feature": "onregelmatige getaluitspraak roppyaku" },
+    { "entryId": "avatar-celebration-01", "voiceRole": "A", "feature": "vrolijke korte avatarzin · Miku · celebration-profiel" },
+    { "entryId": "avatar-celebration-01", "voiceRole": "B", "feature": "vrolijke korte avatarzin · Ren · celebration-profiel" }
   ]
 }

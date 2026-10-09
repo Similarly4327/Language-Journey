@@ -3,6 +3,11 @@
   "model_id": "eleven_multilingual_v2",
   "output_format": "mp3_44100_128",
   "voice_settings": { "stability": 0.65, "similarity_boost": 0.75, "style": 0, "use_speaker_boost": true },
+  "audio_profiles": {
+    "celebration": {
+      "voice_settings": { "stability": 0.48, "similarity_boost": 0.75, "style": 0.22, "use_speaker_boost": true }
+    }
+  },
   "entry_overrides": {
     "vocab-コーヒー": {
       "model_id": "eleven_turbo_v2_5",

@@ -49,6 +49,17 @@ test('blank answers play the completed Japanese sentence only after answering',(
   assert.equal(probe.quizAudioKey(q,'は','answer'),'grammar-ha');
   assert.equal(probe.speakerButtonHtml('Welke zin past?'),'');
 });
+test('Japanese answer options reuse exact central word and sentence audio entries',()=>{
+  const probe=createProbe(recordings());probe.state.audioEnabled=true;
+  const word=probe.answerOptionAudioHtml('ねこ','vocab-みず');
+  assert.match(word,/data-audio-key="vocab-ねこ"/,'a mismatched preferred ID cannot make a distractor play another word');
+  assert.match(probe.answerOptionAudioHtml('これは ねこ です'),/data-audio-key="sentence-l4-1-model-1"/,'a complete known phrase uses its existing sentence ID');
+  assert.equal(probe.answerOptionAudioHtml('未知の文章です'),'','unknown Japanese text has no speaker');
+  assert.equal(probe.answerOptionAudioHtml('water'),'','native-language options have no Japanese speaker');
+  const themed=probe.thematicChoiceHtml({prompt:'Welke zin?',answer:'これは ねこ です',choices:['これは ねこ です','未知の文章です']},'test');
+  assert.match(themed,/data-audio-key="sentence-l4-1-model-1"/);
+  assert.doesNotMatch(themed,/data-audio-key="vocab-ねこ"/,'phrase options do not stitch word clips');
+});
 test('reading context remains audible even with a Dutch question and promptAudio disabled',()=>{
   const probe=createProbe(recordings());probe.state.audioEnabled=true;
   const p=content.manifest.readings.find(r=>r.id==='reading-l6-5');
@@ -62,5 +73,5 @@ test('thematic Japanese instructions and examples resolve without speaking Dutch
   probe.state.introducedVocabIds=content.manifest.vocabulary.map(w=>w.id);
   const html=probe.thematicInstructionHtml('listen-audio');assert.match(html,/data-audio-text="おんせい を きいてください。"/);
   probe.state.thematic.answered=false;
-  assert.ok(!probe.thematicChoiceHtml({prompt:'Wat doe je?',answer:'こたえ',choices:['こたえ','レベル']},'test').includes('data-audio-key'));
+  assert.ok(!probe.thematicChoiceHtml({prompt:'Wat doe je?',answer:'antwoord',choices:['antwoord','oplossing']},'test').includes('data-audio-key'));
 });

@@ -76,6 +76,19 @@
       const reviewed=passage.audioTextKana||readingsByText.get(passage.text);
       add(passage,'passage',passage.text,reviewed,{level:Number(passage.introducedAt?.split('-')[0]),lessonId:passage.lessonId});
     }
+    manifest.avatarCelebrations=[
+      {id:'avatar-celebration-01',japaneseText:'よくできたね！',audioTextKana:'よくできたね！',meaning:'Goed gedaan!',audioProfile:'celebration'},
+      {id:'avatar-celebration-02',japaneseText:'やったね！',audioTextKana:'やったね！',meaning:'Yes, het is gelukt!',audioProfile:'celebration'},
+      {id:'avatar-celebration-03',japaneseText:'すごい！',audioTextKana:'すごい！',meaning:'Geweldig!',audioProfile:'celebration'},
+      {id:'avatar-celebration-04',japaneseText:'いいね！',audioTextKana:'いいね！',meaning:'Mooi!',audioProfile:'celebration'},
+      {id:'avatar-celebration-05',japaneseText:'その調子！',audioTextKana:'そのちょうし！',meaning:'Ga zo door!',audioProfile:'celebration'},
+      {id:'avatar-celebration-06',japaneseText:'ばっちり！',audioTextKana:'ばっちり！',meaning:'Helemaal goed!',audioProfile:'celebration'},
+      {id:'avatar-celebration-07',japaneseText:'やっぱりできたね！',audioTextKana:'やっぱりできたね！',meaning:'Ik wist dat je het kon!',audioProfile:'celebration'},
+      {id:'avatar-celebration-08',japaneseText:'よくがんばったね！',audioTextKana:'よくがんばったね！',meaning:'Je hebt goed je best gedaan!',audioProfile:'celebration'},
+      {id:'avatar-celebration-09',japaneseText:'いい感じ！',audioTextKana:'いいかんじ！',meaning:'Dat gaat lekker!',audioProfile:'celebration'},
+      {id:'avatar-celebration-10',japaneseText:'おめでとう！',audioTextKana:'おめでとう！',meaning:'Gefeliciteerd!',audioProfile:'celebration'}
+    ];
+    for(const entry of manifest.avatarCelebrations)add(entry,'avatarCelebration',entry.japaneseText,entry.audioTextKana,{audioProfile:'celebration'});
     // These are utterances from existing questions/examples, never a second vocabulary list.
     manifest.audioUtterances=[];
     for(const [text,kana,level,lessonId,id] of courseReadings){

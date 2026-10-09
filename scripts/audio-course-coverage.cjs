@@ -17,7 +17,7 @@ function createProbe(recordings) {
     if (file !== 'language-journey-content/content.js') vm.runInNewContext(fs.readFileSync(path.join(root,file),'utf8'),sandbox,{timeout:5000});
   }
   const source = html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,
-    'globalThis.audioProbe={state,level4QuestionBank,smallQuestionPool,advancedQuestionPool,speakerButtonHtml,quizAnswerAudioHtml,quizAudioKey,thematicInstructionHtml,thematicChoiceHtml,renderQuestion,element(id){return document.getElementById(id)}};})();');
+    'globalThis.audioProbe={state,level4QuestionBank,smallQuestionPool,advancedQuestionPool,speakerButtonHtml,answerOptionAudioHtml,answerOptionAudioKey,quizAnswerAudioHtml,quizAudioKey,thematicInstructionHtml,thematicChoiceHtml,renderQuestion,element(id){return document.getElementById(id)}};})();');
   if(recordings)window.LanguageJourneyAudioManifest=recordings;
   vm.runInNewContext(source,sandbox,{timeout:5000});
   return sandbox.audioProbe;

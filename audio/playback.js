@@ -1,10 +1,10 @@
 (function(root){
   'use strict';
   const safePath=path=>typeof path==='string'&&/^assets\/audio\/ja\/[a-zA-Z0-9_./-]+\.mp3$/.test(path)&&!path.includes('..');
-  function resolve(content,manifest,id,text){
+  function resolve(content,manifest,id,text,voiceRole='A'){
     const ref=content.resolveAudioEntry(id,text);if(!ref)return null;
     const lineAsset=(entry,role)=>entry.pronunciation?.status==='specified'&&entry.pronunciation.audioTextKana?manifest.assets.find(asset=>asset.entryId===entry.id&&asset.displayText===entry.displayText&&asset.readingId===entry.pronunciation.readingId&&asset.audioTextKana===entry.pronunciation.audioTextKana&&asset.voiceRole===role&&asset.reviewed===true&&asset.pipelineVersion===manifest.pipelineVersion&&safePath(asset.path)):null;
-    const lines=ref.kind==='dialogue'?ref.entry.lines.map(line=>({entry:content.audioEntryById[line.sentenceId],role:line.speakerRole})): [{entry:ref,role:'A'}];
+    const lines=ref.kind==='dialogue'?ref.entry.lines.map(line=>({entry:content.audioEntryById[line.sentenceId],role:line.speakerRole})): [{entry:ref,role:ref.kind==='avatarCelebration'?voiceRole:'A'}];
     const assets=lines.map(line=>line.entry&&lineAsset(line.entry,line.role));
     return assets.length&&assets.every(Boolean)?{id:ref.id,entry:ref,assets}:null;
   }

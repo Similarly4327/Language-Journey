@@ -14,7 +14,7 @@ function fakeElement(id=''){
 
 function createAvatarApp({savedState={},ranks={}}={}){
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
-  const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,`globalThis.__probe={state,rankState,levelRankIds,levelRank,getAvatarProgressLevel,activeLearningLevel,activeAvatarSkin,activeAvatarOutfit,syncAvatarState,renderAvatarSettings};})();`);
+  const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)[1].replace(/\}\)\(\);\s*$/,`globalThis.__probe={state,rankState,vocabMastery,itemMastery,levelRankIds,levelRank,getAvatarProgressLevel,activeLearningLevel,activeAvatarSkin,activeAvatarOutfit,syncAvatarState,renderAvatarSettings,getAvatarLearningSuggestion,avatarLearningSuggestionTemplates,avatarAvailableLevels,advancedCourses,curriculumRevision};})();`);
   const elements=new Map(),get=id=>{if(!elements.has(id))elements.set(id,fakeElement(id));return elements.get(id)};
   const document={body:fakeElement('body'),documentElement:fakeElement('html'),hidden:false,getElementById:get,createElement:()=>fakeElement(),querySelectorAll:()=>[],querySelector:()=>fakeElement(),addEventListener(){}};
   const storage=new Map();
@@ -31,7 +31,12 @@ function createAvatarApp({savedState={},ranks={}}={}){
 }
 
 function giveLevelRank(app,level,rank='Copper'){
-  for(const id of app.levelRankIds(level-1))app.rankState[id].rank=rank;
+  for(const id of app.levelRankIds(level-1)){app.rankState[id].rank=rank;app.rankState[id].curriculumRevision=app.curriculumRevision(id)}
+}
+
+function giveLessonRank(app,id,rank='Copper'){
+  app.rankState[id].rank=rank;
+  app.rankState[id].curriculumRevision=app.curriculumRevision(id);
 }
 
 test('avatar progress level follows highest current Copper rank, not navigation',()=>{
@@ -92,4 +97,72 @@ test('automatic outfit follows active level while manual selection remains fixed
   assert.equal(app.activeAvatarOutfit().id,'school');
   assert.equal(app.activeAvatarSkin().id,'skin-2');
   assert.equal(app.getAvatarProgressLevel(),7);
+});
+
+test('avatar learning advice moves from the highest completed lesson to the exam and next level',()=>{
+  const app=createAvatarApp();
+  for(let level=1;level<=8;level++)giveLevelRank(app,level);
+  const lessons=app.advancedCourses[8].lessons;
+  assert.ok(lessons.length>=4,'Level 9 has enough lessons for the regression scenario');
+  lessons.slice(0,3).forEach(lesson=>giveLessonRank(app,lesson.id));
+  app.state.level=8;
+  let suggestion=app.getAvatarLearningSuggestion();
+  assert.equal(suggestion.type,'lessonCompleted');
+  assert.match(suggestion.message,/Les 3/);
+  assert.match(suggestion.message,/Les 4/);
+  assert.equal(suggestion.primaryDestination.level,9);
+  assert.equal(suggestion.primaryDestination.lesson,4);
+  app.state.level=6;
+  suggestion=app.getAvatarLearningSuggestion();
+  assert.equal(suggestion.primaryDestination.level,9,'opening a lower level does not hide higher unfinished curriculum progress');
+  assert.equal(suggestion.primaryDestination.lesson,4);
+
+  lessons.slice(3).forEach(lesson=>giveLessonRank(app,lesson.id));
+  suggestion=app.getAvatarLearningSuggestion();
+  assert.equal(suggestion.type,'levelLessonsCompleted');
+  assert.match(suggestion.message,/Level 9-examen/);
+  assert.equal(suggestion.primaryDestination.kind,'exam');
+  giveLevelRank(app,9);
+  app.state.level=7;
+  suggestion=app.getAvatarLearningSuggestion();
+  assert.equal(suggestion.type,'nextLevel','reopening Level 8 cannot lower the recommendation');
+  assert.match(suggestion.message,/Level 10/);
+  assert.equal(suggestion.primaryDestination.kind,'level');
+  assert.equal(suggestion.primaryDestination.level,10);
+});
+
+test('avatar learning advice resumes an unfinished lesson in a higher active level',()=>{
+  const app=createAvatarApp();
+  for(let level=1;level<=8;level++)giveLevelRank(app,level);
+  const lesson=app.advancedCourses[9].lessons[0];
+  app.state.level=3;
+  app.state.studyTracker.active={activityType:'les',level:10,title:`Level 10 · ${lesson.title}`};
+  const suggestion=app.getAvatarLearningSuggestion();
+  assert.equal(suggestion.type,'resumeLesson');
+  assert.equal(suggestion.primaryDestination.level,10);
+  assert.equal(suggestion.primaryDestination.lesson,1);
+});
+
+test('avatar advice ignores an outdated curriculum rank and stops at the current course end',()=>{
+  const app=createAvatarApp();
+  for(let level=1;level<=7;level++)giveLevelRank(app,level);
+  app.rankState['l8-exam'].rank='Gold';
+  app.rankState['l8-exam'].curriculumRevision=1;
+  app.state.level=7;
+  assert.equal(app.getAvatarLearningSuggestion().primaryDestination.level,8,'a stale exam rank does not skip Level 8');
+
+  const completed=createAvatarApp();
+  completed.avatarAvailableLevels().forEach(level=>giveLevelRank(completed,level));
+  const ending=completed.getAvatarLearningSuggestion();
+  assert.equal(ending.type,'courseCurrentEnd');
+  assert.equal(ending.primaryDestination,null);
+});
+
+test('avatar advice reads progress without changing it and uses varied centralized templates',()=>{
+  const app=createAvatarApp();
+  const before=JSON.stringify({state:app.state,ranks:app.rankState,vocabMastery:app.vocabMastery,itemMastery:app.itemMastery});
+  app.getAvatarLearningSuggestion();
+  assert.equal(JSON.stringify({state:app.state,ranks:app.rankState,vocabMastery:app.vocabMastery,itemMastery:app.itemMastery}),before);
+  const templates=JSON.parse(JSON.stringify(app.avatarLearningSuggestionTemplates));
+  for(const [category,choices] of Object.entries(templates))assert.ok(choices.length>=2,`${category} has multiple variants`);
 });

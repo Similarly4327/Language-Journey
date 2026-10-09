@@ -8,7 +8,7 @@ const quality=require('../audio/quality-set.json');
 const manifestFile=path.join(root,'assets/audio/ja/manifest.js');
 const hash=value=>crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const voiceFingerprint=voice=>hash(voice);
-function settingsFor(ref,settings=config){const {entry_overrides,...base}=settings;const override=entry_overrides?.[ref.id];return override?{...base,...override,voice_settings:{...base.voice_settings,...override.voice_settings}}:base}
+function settingsFor(ref,settings=config){const {entry_overrides,audio_profiles,...base}=settings,profile=audio_profiles?.[ref.audioProfile],override=entry_overrides?.[ref.id];return{...base,...profile,...override,voice_settings:{...base.voice_settings,...profile?.voice_settings,...override?.voice_settings}}}
 function generationHash(ref,role,voice,settings=config){return hash({entryId:ref.id,displayText:ref.displayText,readingId:ref.pronunciation.readingId,audioTextKana:ref.pronunciation.audioTextKana,voiceRole:role,voiceFingerprint:voiceFingerprint(voice),settings:settingsFor(ref,settings)})}
 function currentHash(ref,asset,settings=config){return hash({entryId:ref.id,displayText:ref.displayText,readingId:ref.pronunciation.readingId,audioTextKana:ref.pronunciation.audioTextKana,voiceRole:asset.voiceRole,voiceFingerprint:asset.voiceFingerprint,settings:settingsFor(ref,settings)})}
 function jobsFor(ref,role='A'){
@@ -25,7 +25,7 @@ function selectJobs(args){
     if(!ids&&!args.lesson&&!args.level&&!range)throw new Error('Kies --quality, --ids, --lesson, --level of --range.');
     if(range&&(range.length!==2||!range.every(Number.isInteger)||range[0]>range[1]))throw new Error('Bereik: --range 1-5');
     if(ids)for(const id of ids)if(!content.audioEntryById[id])throw new Error('Onbekend content-ID: '+id);
-    selected=content.audioEntries.filter(ref=>ids?ids.includes(ref.id):args.lesson?ref.lessonId===args.lesson:range?ref.level>=range[0]&&ref.level<=range[1]:ref.level===level).filter(ref=>ref.kind==='dialogue'||kanaOnly(ref.pronunciation?.audioTextKana)).flatMap(ref=>jobsFor(ref));
+    selected=content.audioEntries.filter(ref=>ids?ids.includes(ref.id):args.lesson?ref.lessonId===args.lesson:range?ref.level>=range[0]&&ref.level<=range[1]:ref.level===level).filter(ref=>ref.kind==='dialogue'||kanaOnly(ref.pronunciation?.audioTextKana)).flatMap(ref=>ref.kind==='dialogue'?jobsFor(ref):ref.kind==='avatarCelebration'?['A','B'].flatMap(role=>jobsFor(ref,role)):jobsFor(ref));
   }
   return [...new Map(selected.map(job=>[job.ref.id+'@'+job.role,job])).values()];
 }

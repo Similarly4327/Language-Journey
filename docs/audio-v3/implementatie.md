@@ -43,6 +43,23 @@ Zin-ID's benoemen een bestaand modelslot, bijvoorbeeld `sentence-l4-7-model-1`. 
 - Goede feedback wacht tijdens expliciet beluisteren tot de opname klaar is. Een passage wordt niet na vijf seconden afgeknipt.
 - Audioinstellingen en de optionele bestaande avatar-overlay blijven behouden. Stemrollen A/B zijn onafhankelijk van Ren/Miku en profielinstellingen.
 
+## Avatar-celebrations
+
+`manifest.avatarCelebrations` bevat tien korte, nagekeken Japanse reacties met stabiele `avatar-celebration-*` IDs. Ze staan niet in `manifest.vocabulary`, veranderen de Recall-selectie dus niet en leveren geen encounter-, mastery- of progressiedata op. Alleen de al bestaande avatar op een succesvol toetsresultaat is aanklikbaar. De avatarvariant kiest Voice A (Miku) of B (Ren); per tik wordt willekeurig een aanwezige clip gekozen, zonder directe herhaling. Er verschijnt geen vertaling of extra speakerknop. Playback gaat via dezelfde exclusieve service en gebruikt geen browser-TTS.
+
+Het centrale `celebration`-profiel verhoogt alleen licht de expressieve stijl; er is geen pitch-shift. De quality-set bevat de eerste zin met beide stemmen, zodat de twee nieuwe profielopnamen eerst beluisterd en expliciet goedgekeurd kunnen worden. Daarna kan de volledige set veilig in batch worden gegenereerd:
+
+```text
+npm run audio:batch -- --quality --dry-run
+npm run audio:batch -- --quality
+npm run audio:batch -- --quality --approve-quality --reviewer "naam beoordelaar"
+npm run audio:batch -- --ids avatar-celebration-01,avatar-celebration-02,avatar-celebration-03,avatar-celebration-04,avatar-celebration-05,avatar-celebration-06,avatar-celebration-07,avatar-celebration-08,avatar-celebration-09,avatar-celebration-10
+npm run assets:version
+npm run audio:audit
+```
+
+De batchcalls vereisen de bestaande lokale ElevenLabs-configuratie. In deze codewijziging is alleen de dry-run uitgevoerd; er zijn geen externe API-calls of betaalde opnamen gestart. Totdat goedgekeurde statische clips bestaan, geeft de tap veilig niets af.
+
 Dialogen gebruiken opeenvolgende **volledige regelopnamen**, met 220 ms pauze. Deze eenvoudige aanpak hergebruikt natuurlijke zinsopnamen, houdt stemmen vervangbaar en voorkomt overlap. Stoppen tijdens de pauze annuleert ook de volgende regel. De dialoog hergebruikt hetzelfde audio-element voor volgende regels; bronwissel op één element volgt het ontwerpprincipe uit [WebKits afspeeladvies](https://webkit.org/blog/7734/auto-play-policy-changes-for-macos/). Dit vervangt geen fysieke iPhone-test. Passages worden als volledige tekst gegenereerd.
 
 ## ElevenLabs-batchworkflow

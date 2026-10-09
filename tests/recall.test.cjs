@@ -11,7 +11,7 @@ function fakeElement(id=''){
   const classes=new Set();
   return {id,dataset:{},style:{},value:'',textContent:'',innerHTML:'',hidden:false,disabled:false,
     classList:{add:(...names)=>names.forEach(x=>classes.add(x)),remove:(...names)=>names.forEach(x=>classes.delete(x)),toggle:(name,force)=>{if(force===undefined)force=!classes.has(name);force?classes.add(name):classes.delete(name);return force},contains:name=>classes.has(name)},
-    setAttribute(){},getAttribute(){return null},removeAttribute(){},appendChild(){},insertBefore(){},prepend(){},remove(){},addEventListener(){},querySelector(){return fakeElement()},querySelectorAll(){return []},scrollIntoView(){},focus(){},getBoundingClientRect(){return{width:300,height:200,top:0,left:0}}};
+    setAttribute(){},getAttribute(){return null},removeAttribute(){},appendChild(){},insertAdjacentHTML(){},insertBefore(){},prepend(){},remove(){},addEventListener(){},querySelector(){return fakeElement()},querySelectorAll(){return []},scrollIntoView(){},focus(){},getBoundingClientRect(){return{width:300,height:200,top:0,left:0}}};
 }
 
 function createRecallApp({runtimeContent=content,locale='nl',isolateEligibility=false,savedState={},savedRanks={},savedVersion=6,now=new Date(2026,2,20,12).getTime()}={}){
@@ -292,6 +292,7 @@ test('Leaving Recall cancels its timer and returning shows feedback before conti
   app.setNow(Date.now()+2000);timer.callback();
   assert.equal(session.position,0,'a timer cannot reopen Recall after leaving it');
   state.screen='flashcards';app.renderFlashcardsScreen();
+  assert.equal(session.status,'paused');assert.match(app.viewMarkup(),/Hervat sessie/);app.resumeFlashcardSession();
   assert.match(app.viewMarkup(),/Goed!/);
   const resumedTimer=app.windowTimeouts().at(-1);
   app.startFlashcardSession([second],['jp-nl'],'free');
