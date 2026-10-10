@@ -33,19 +33,20 @@ async page => {
   const recovered=await page.evaluate(()=>({sessions:window.__timeProbe.studySessions(),status:window.__timeProbe.state.flashcardSession?.status,total:window.__timeProbe.totalStudySeconds()}));
   if(recovered.total!==2400||recovered.status!=='paused'||new Set(recovered.sessions.map(s=>s.id)).size!==4)throw new Error('Reload recovery failed');
   await page.locator('#sessionBtn').click();await page.locator('[data-progress-metric="time"]').click();
-  await page.locator('[data-time-series="recall"]').waitFor();await page.waitForTimeout(500);
-  if(await page.locator('#progressSummaryChart polyline').count()!==2)throw new Error('Wrong number of time series');
+  await page.locator('[data-time-series="total"]').waitFor();await page.waitForTimeout(500);
+  if(await page.locator('#progressSummaryChart polyline').count()!==1)throw new Error('Wrong number of time series');
   await page.screenshot({path:'output/playwright/study-time/mobile-time.png',fullPage:true});
   const chart=await page.locator('#progressChartDetail').innerText();
+  if(!/Leren 20m/.test(chart)||!/Recall 20m/.test(chart)||!/Totaal 40m/.test(chart))throw new Error('Selected total breakdown failed');
   const widths=await page.evaluate(()=>({viewport:innerWidth,content:document.documentElement.scrollWidth}));
   if(widths.content>widths.viewport)throw new Error('Mobile horizontal overflow');
   await page.locator('#recentActivitiesToggle').click();await page.locator('#activityManagerToggle').click();
   const activities=await page.locator('#studySessionList').innerText();
-  if(!activities.includes('Recall')||!activities.includes('Vrij oefenen')||!activities.includes('Curriculum'))throw new Error('Activity groups missing');
+  if(!activities.includes('Recall')||!activities.includes('Vrij oefenen')||!activities.includes('Leren'))throw new Error('Activity groups missing');
   const record=await page.evaluate(()=>window.__timeProbe.studySessions().find(s=>s.activityType==='freePractice'));
   await page.locator(`[data-edit-session="${record.id}"]`).click();await page.locator('[name="effectiveMinutes"]').fill('6');await page.locator('#studyForm button[type="submit"]').click();
   const corrected=await page.evaluate(id=>window.__timeProbe.studySessions().find(s=>s.id===id),record.id);
   if(corrected.rawSeconds!==480||corrected.effectiveSeconds!==360||corrected.activityGroup!=='recall')throw new Error('Manual Recall correction failed');
   if(errors.length)throw new Error(errors.join('\n'));
-  return {totalsBeforeCorrection:result,totalsAfterCorrection:await totals(),sessions:recovered.sessions.map(({id,activityGroup,activityType,effectiveSeconds})=>({id,activityGroup,activityType,effectiveSeconds})),chart,widths,activities,errors,corrected:{raw:corrected.rawSeconds,effective:corrected.effectiveSeconds,group:corrected.activityGroup}};
+  return {totalAfterRefresh:recovered.total,totalsAfterCorrection:await totals(),sessions:recovered.sessions.map(({id,activityGroup,activityType,effectiveSeconds})=>({id,activityGroup,activityType,effectiveSeconds})),chart,widths,activities,errors,corrected:{raw:corrected.rawSeconds,effective:corrected.effectiveSeconds,group:corrected.activityGroup}};
 }

@@ -88,9 +88,26 @@ test('word crash courses are curriculum time even when opened directly',()=>{
   assert.equal(p.studySessions()[0].activityGroup,'curriculum');assert.equal(p.studySessions()[0].effectiveSeconds,90);
 });
 
-test('time graph contains exactly Curriculum and Recall series with shared navigation',()=>{
+test('time graph has one total series and selected Leren/Recall/Total detail with shared navigation',()=>{
   const fs=require('node:fs'),html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');
-  assert.match(html,/data-time-series="recall"/);assert.match(html,/isTime\?'curriculum'/);
-  assert.match(html,/progressSelectedRecallMarker/);assert.match(html,/progress-time-legend/);
+  assert.match(html,/data-time-series="\$\{isTime\?'total':'words'\}"/);
+  assert.doesNotMatch(html,/progressSelectedRecallMarker|progress-time-legend|line-recall/);
+  assert.match(html,/coordinates=lineCoordinates\('value'\)/);
+  assert.match(html,/highest=Math.max\(1,\.\.\.points.map\(p=>p.value\)\)/);
+  assert.match(html,/<span>Leren \$\{valueLabel\(p.curriculum\)\}/);
+  assert.match(html,/<span>Recall \$\{valueLabel\(p.recall\)\}/);
+  assert.match(html,/isTime\?'Totaal '/);
   assert.match(html,/name="activityGroup"/);assert.match(html,/data-study-filter="activityGroup"/);
+});
+
+test('12h36 Leren plus 4h52 Recall end at one cumulative 17h28 total',()=>{
+  const p=app(),sessions=[
+    {activityGroup:'curriculum',startedAt:new Date(now-3600000).toISOString(),effectiveSeconds:45360},
+    {activityGroup:'recall',activityType:'scheduledRecall',startedAt:new Date(now-1800000).toISOString(),effectiveSeconds:12000},
+    {activityGroup:'recall',activityType:'freePractice',startedAt:new Date(now).toISOString(),effectiveSeconds:5520},
+  ];
+  const points=p.progressSummaryPoints('time',sessions),last=points.at(-1);
+  assert.deepEqual(Array.from(points,x=>x.value),[45360,57360,62880]);
+  assert.equal(last.curriculum,45360);assert.equal(last.recall,17520);
+  assert.equal(last.value,last.curriculum+last.recall);
 });

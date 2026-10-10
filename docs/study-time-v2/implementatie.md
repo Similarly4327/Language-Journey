@@ -1,6 +1,6 @@
 # Tijdregistratie V2 — implementatie
 
-Bijgewerkt: 9 oktober 2026.
+Bijgewerkt: 10 oktober 2026, volgens de prompt van 9 oktober 19:08 CEST en de leidende aanvullende UI-nuance.
 
 ## Oorzaak en oplossing
 
@@ -24,17 +24,19 @@ De bestaande timer meet zichtbare activiteit en pauzeert wanneer de pagina naar 
 
 Een herstelde Recall-queue staat gepauzeerd totdat de gebruiker hervat. Er worden geen SRS-records, ranks, mastery of eerdere voortgang gewist. Een oude queue zonder tijdregistratie levert geen geschatte historische uren op.
 
-Lange sessies worden niet afgekapt. Vanaf zes ruwe uren toont Activiteiten een controleaanduiding. De gebruiker kan effectieve minuten corrigeren; de ruwe registratie blijft behouden. Activiteiten toont de hoofdgroep, het type en een filter voor Curriculum/Recall. Ook handmatige activiteiten hebben een hoofdgroep.
+Lange sessies worden niet afgekapt. Vanaf zes ruwe uren toont Activiteiten een controleaanduiding. De gebruiker kan effectieve minuten corrigeren; de ruwe registratie blijft behouden. Activiteiten toont de hoofdgroep, het type en een filter voor Leren/Recall. Ook handmatige activiteiten hebben een hoofdgroep. Intern blijven de groepen `curriculum` en `recall` heten.
 
 ## Voortgangsgrafiek
 
-De tijdmetriek toont twee cumulatieve lijnen: Curriculum en Recall. De bestaande periodebediening, lokale daggroepering en meetnavigatie blijven gedeeld. De geselecteerde meting noemt beide deelwaarden en hun totaal; het kerngetal blijft de totale leertijd. Woorden en kanji behouden hun bestaande betekenis.
+De tijdmetriek toont **één cumulatieve lijn: Totale leertijd**. Elke waarde is de som van curriculumtijd en Recall-tijd, inclusief Vrij oefenen. De schaal, nieuwste marker en geselecteerde marker volgen deze totale waarde. De twee afzonderlijke lijnen, extra markers en legenda uit de eerdere implementatie zijn verwijderd.
+
+De bestaande periodebediening, lokale daggroepering en meetnavigatie blijven intact. Bij een geselecteerde tijdmeting staan compact **Leren**, **Recall** en **Totaal**; de twee bronnen tellen exact op tot de totale meetwaarde. Het kerngetal blijft de totale leertijd. Woorden en kanji behouden hun bestaande betekenis.
 
 ## Uitgevoerde controles
 
-De volledige Node-regressiesuite behaalde **154 geslaagde tests, nul fouten**. Daarnaast zijn tien gerichte tijdregistratietests toegevoegd voor geplande Recall, Vrij oefenen, passieve schermen, curriculum, optelling op dezelfde dag, achtergrondpauze, navigatie/hervatten, herladen/deduplicatie, historische gegevens, lange sessies en directe woordoefeningen. De grafiektests controleren onder andere lokale daggrenzen en zomer-/wintertijd.
+De volledige Node-regressiesuite behaalde **155 geslaagde tests, nul fouten**. De elf gerichte tijdregistratietests controleren geplande Recall, Vrij oefenen, passieve schermen, curriculum, optelling op dezelfde dag, achtergrondpauze, navigatie/hervatten, herladen/deduplicatie, historische gegevens, lange sessies en directe woordoefeningen. De grafiektests controleren onder andere lokale daggrenzen en zomer-/wintertijd.
 
-Na de laatste aanpassingen aan lesvervolgstappen, de Dakuten-lesselectie en behoud van het basiskenmerk zijn de 25 tests voor studietijd, grafiek en schermrendering opnieuw geslaagd. De inhoudsvalidator rapporteerde nul fouten en vier waarschuwingen over optionele audio en ongebruikte cataloguswoorden. `git diff --check` gaf geen fouten.
+De nieuwe regressietest controleert dat Leren 12u36 plus Recall 4u52 (verdeeld over geplande herhaling en Vrij oefenen) eindigt op één cumulatieve waarde van 17u28. Daarnaast controleren de tests dat de grafiek slechts één totale serie heeft, de schaal de som gebruikt en de uitsplitsing in de detailtekst blijft staan. `git diff --check` gaf geen fouten.
 
 De echte UI is met Playwright in Edge op 375 CSS-pixels gecontroleerd, met synthetische gegevens in een afzonderlijk browserprofiel en een bestuurbare testklok:
 
@@ -45,7 +47,7 @@ De echte UI is met Playwright in Edge op 375 CSS-pixels gecontroleerd, met synth
 | Geplande Recall | 10 minuten Recall |
 | Vrij oefenen | 8 minuten Recall |
 | Hervatten en herladen | 2 extra minuten; vier unieke activiteiten; queue gepauzeerd |
-| Grafiek na herladen | Curriculum 20m, Recall 20m, totaal 40m; twee lijnen |
+| Grafiek na herladen | Leren 20m, Recall 20m, Totaal 40m; exact één lijn |
 | Handmatige correctie van Vrij oefenen | 8 naar 6 effectieve minuten; ruwe 8 minuten behouden; totaal 38m |
 
 Geen JavaScript-fouten of horizontale overflow tijdens deze UI-controle. De mobiele screenshot is visueel bekeken. Er is geen echte Safari-/iPhone-sessie of publieke deployment gecontroleerd. Na deployment moeten achtergrondgedrag en herladen op het echte toestel nog worden nagegaan.
@@ -60,4 +62,4 @@ Geen JavaScript-fouten of horizontale overflow tijdens deze UI-controle. De mobi
 - `output/playwright/study-time/mobile-time.png`: mobiele screenshot.
 - Dit verslag.
 
-De SRS-scheduler, woordselectie, ranking en lesinhoud zijn niet gewijzigd voor Tijdregistratie V2. Tegelijk verschenen audio- en avatarwijzigingen uit ander werk in dezelfde werkmap; die zijn behouden en vallen buiten dit verslag.
+De SRS-scheduler, woordselectie, ranking en lesinhoud zijn niet gewijzigd voor Tijdregistratie V2. Voor deze aanvulling zijn alleen `index.html`, `tests/study-time.test.cjs`, `scripts/study-time-ui.js`, de screenshot en dit verslag aangepast. De timerkoppeling en bestaande opslag zijn behouden. Er is geen commit, push of deployment uitgevoerd.
