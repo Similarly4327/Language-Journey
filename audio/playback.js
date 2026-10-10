@@ -10,7 +10,7 @@
   }
   function createPlayback({createAudio=path=>new Audio(path),delay=(fn,ms)=>setTimeout(fn,ms),cancelDelay=id=>clearTimeout(id),pauseMs=220}={}){
     let active=null,token=0,timer=null,statusCallback=null,rate=1;
-    function setRate(value){rate=Number(value)===.75?.75:1;if(active)active.audio.playbackRate=rate}
+    function setRate(value){rate=Number(value)===.75?.75:1;if(active){active.audio.defaultPlaybackRate=rate;active.audio.playbackRate=rate}}
     function stop(){token++;if(timer!==null){cancelDelay(timer);timer=null}if(active){const old=active;active=null;old.audio.onended=old.audio.onerror=old.audio.onplaying=null;old.audio.pause()}if(statusCallback){statusCallback('idle');statusCallback=null}}
     function play(assets,{volume=1,playbackRate=1,onState=()=>{},onFinish=()=>{}}={}){
       stop();setRate(playbackRate);if(!assets?.length)return false;
@@ -20,7 +20,7 @@
         const path='./'+assets[index].path;let audio;
         // Keep the gesture-unlocked media element for subsequent dialogue lines.
         try{if(!media)media=createAudio(path);else media.src=path;audio=media}catch{onState('error');onFinish('error');return}audio.volume=Math.max(0,Math.min(1,volume));audio.preload='auto';
-        audio.playbackRate=rate;audio.preservesPitch=true;
+        audio.defaultPlaybackRate=rate;audio.playbackRate=rate;audio.preservesPitch=true;
         active={audio,status:onState};onState('loading');
         let finished=false;
         const finish=error=>{

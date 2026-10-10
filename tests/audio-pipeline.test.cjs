@@ -7,6 +7,42 @@ const pipeline = require('../scripts/audio-pipeline.cjs');
 const batch = require('../scripts/audio-batch.cjs');
 const content = require('../language-journey-content/content.js');
 
+test('explicit voice selection adds Ren without regenerating approved Miku words',()=>{
+  const args=pipeline.selection(['--ids','vocab-ここ,vocab-はは','--voice-role','both']);
+  const jobs=batch.selectJobs(args);
+  assert.equal(jobs.length,4);assert.deepEqual(jobs.map(j=>j.role),['A','B','A','B']);
+  assert.ok(batch.selectJobs(batch.parseArgs(['--ids','vocab-ここ','--voice-role','B'])).every(j=>j.role==='B'));
+  assert.throws(()=>batch.selectJobs({ids:'vocab-ここ',voiceRole:'invalid'}),/Stemrol/);
+  assert.throws(()=>batch.selectJobs({quality:true,voiceRole:'B'}),/eigen stemrollen/);
+});
+test('mother context stays outside the spoken word and invalidates only its recording',async()=>{
+  const ref=content.audioEntryById['vocab-はは'];let body;
+  await batch.requestAudio(ref,'B',{env:{VOICE_B_ID:'test',ELEVENLABS_API_KEY:'test'},fetchImpl:async(_,options)=>{
+    body=JSON.parse(options.body);return{ok:true,arrayBuffer:async()=>new Uint8Array(128)};
+  }});
+  assert.equal(body.text,'はは');assert.equal(body.language_code,'ja');
+  assert.equal(body.previous_text,'かぞくのことばです。');
+  assert.ok(body.next_text.includes('おかあさん'));assert.equal(body.voice_settings.style,0);
+  const config=require('../audio/config.json'),before=structuredClone(config);
+  delete before.entry_overrides['vocab-はは'].previous_text;delete before.entry_overrides['vocab-はは'].next_text;
+  assert.notEqual(batch.generationHash(ref,'B','test'),batch.generationHash(ref,'B','test',before));
+  const other=content.audioEntryById['vocab-ここ'];assert.equal(batch.generationHash(other,'A','test'),batch.generationHash(other,'A','test',before));
+});
+
+test('new avatar profile tests do not revoke unchanged approved course audio',()=>{
+  const all=batch.selectJobs({quality:true}),original=all.filter(j=>!j.ref.audioProfile),voices={A:'test-A',B:'test-B'};
+  const manifest={qualityGate:{signature:batch.hash(original.map(j=>batch.generationHash(j.ref,j.role,voices[j.role])))},assets:original.map(j=>({entryId:j.ref.id,voiceRole:j.role,reviewed:true,generationHash:batch.generationHash(j.ref,j.role,voices[j.role]),path:'test.mp3'}))};
+  const words=batch.selectJobs({ids:'vocab-ここ,vocab-はは'});
+  assert.equal(batch.qualityApprovedFor(words,all,manifest,voices,()=>true),true);
+  assert.equal(batch.qualityApprovedFor(words,all,manifest,{...voices,A:'changed'},()=>true),false);
+  assert.equal(batch.qualityApprovedFor(words,all,manifest,voices,()=>false),false);
+  const newProfile=all.filter(j=>j.ref.audioProfile);
+  assert.ok(newProfile.length);
+  assert.equal(batch.qualityApprovedFor(newProfile,all,manifest,voices,()=>true),false);
+  manifest.assets[0].reviewed=false;
+  assert.equal(batch.qualityApprovedFor(words,all,manifest,voices,()=>true),false);
+});
+
 test('bounded generation preserves in-flight successes and stops queued work after failure', async () => {
   const started=[],saved=[];let release;
   const pending = batch.processJobs([1,2,3,4],async job=>{

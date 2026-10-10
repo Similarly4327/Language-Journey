@@ -34,6 +34,11 @@
       "total": 69,
       "withReading": 69,
       "withAudio": 69
+    },
+    "avatarCelebration": {
+      "total": 10,
+      "withReading": 10,
+      "withAudio": 0
     }
   },
   "contextOnly": [
@@ -73,8 +78,36 @@
     "grammar-l11-1",
     "grammar-l8-minutes"
   ],
-  "missingAudio": [],
-  "orphanFiles": [],
+  "missingAudio": [
+    "avatar-celebration-01@A",
+    "avatar-celebration-01@B",
+    "avatar-celebration-02@A",
+    "avatar-celebration-02@B",
+    "avatar-celebration-03@A",
+    "avatar-celebration-03@B",
+    "avatar-celebration-04@A",
+    "avatar-celebration-04@B",
+    "avatar-celebration-05@A",
+    "avatar-celebration-05@B",
+    "avatar-celebration-06@A",
+    "avatar-celebration-06@B",
+    "avatar-celebration-07@A",
+    "avatar-celebration-07@B",
+    "avatar-celebration-08@A",
+    "avatar-celebration-08@B",
+    "avatar-celebration-09@A",
+    "avatar-celebration-09@B",
+    "avatar-celebration-10@A",
+    "avatar-celebration-10@B"
+  ],
+  "orphanFiles": [
+    "assets/audio/ja/words/0f0b05d9b00c5d89-A-6dfc8e5e7351b9ca.mp3",
+    "assets/audio/ja/words/1adfde9f9b968775-A-f1f876bfd4f33424.mp3",
+    "assets/audio/ja/words/52e444933d96d025-A-173e4cd0b09c1eb8.mp3",
+    "assets/audio/ja/words/52e444933d96d025-A-d124ee70d550aa4c.mp3",
+    "assets/audio/ja/words/998693973d7ad140-A-167f1f63ba1f42c0.mp3",
+    "assets/audio/ja/words/bc1a259dfb410e3b-A-36cdde93d3f72756.mp3"
+  ],
   "errors": [],
   "warnings": []
 }

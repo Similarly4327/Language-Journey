@@ -73,8 +73,8 @@ function playbackFixture(){
 test('speed choice preserves pitch, updates active playback and every dialogue line',()=>{
  const f=playbackFixture();
  f.service.play([{path:'one'},{path:'two'}],{...f.options,playbackRate:.75});
- assert.equal(f.played[0].playbackRate,.75);assert.equal(f.played[0].preservesPitch,true);
- f.service.setRate(1);assert.equal(f.played[0].playbackRate,1);
+ assert.equal(f.played[0].playbackRate,.75);assert.equal(f.played[0].defaultPlaybackRate,.75);assert.equal(f.played[0].preservesPitch,true);
+ f.service.setRate(1);assert.equal(f.played[0].playbackRate,1);assert.equal(f.played[0].defaultPlaybackRate,1);
  f.played[0].onended();f.service.setRate(.75);f.timers[0].fn();
  assert.equal(f.played[0].src,'./two');assert.equal(f.played[0].playbackRate,.75);
  f.service.stop();f.service.play([{path:'signal'}]);assert.equal(f.played.at(-1).playbackRate,1);

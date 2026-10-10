@@ -1,0 +1,52 @@
+- generic [active] [ref=e1]:
+  - heading "Miku en Ren beluisteren" [level=1] [ref=e2]
+  - paragraph [ref=e3]: はは heeft een nieuwe proefopname met familiecontext. De vier andere nieuwe Miku-opnamen zijn door jou goedgekeurd. Voor alle vijf woorden kun je nu ook Ren controleren.
+  - generic [ref=e4]:
+    - text: Karakter
+    - combobox "Karakter" [ref=e5]:
+      - option "Miku · karakter 1"
+      - option "Ren · karakter 2" [selected]
+  - generic [ref=e6]:
+    - text: Spreeksnelheid
+    - combobox "Spreeksnelheid" [ref=e7]:
+      - option "Normaal (1×)" [selected]
+      - option "Langzamer (0,75×)"
+  - paragraph [ref=e8]:
+    - button "Luister naar alle vijf" [ref=e9]
+    - button "Stop" [ref=e10]
+  - status
+  - article [ref=e11]:
+    - heading "はは" [level=2] [ref=e12]
+    - paragraph [ref=e13]: vocab-はは
+    - paragraph [ref=e14]: "Nieuwe proef met familiecontext. Miku en Ren: nog controleren."
+    - generic [ref=e15]: Vorige Miku-opname
+    - generic [ref=e17]: Miku · karakter 1
+    - generic [ref=e19]: Ren · karakter 2
+  - article [ref=e21]:
+    - heading "ここ" [level=2] [ref=e22]
+    - paragraph [ref=e23]: vocab-ここ
+    - paragraph [ref=e24]: "Miku: door jou goedgekeurd. Ren: nog controleren."
+    - generic [ref=e25]: Vorige Miku-opname
+    - generic [ref=e27]: Miku · karakter 1
+    - generic [ref=e29]: Ren · karakter 2
+  - article [ref=e31]:
+    - heading "ちかく" [level=2] [ref=e32]
+    - paragraph [ref=e33]: vocab-ちかく
+    - paragraph [ref=e34]: "Miku: door jou goedgekeurd. Ren: nog controleren."
+    - generic [ref=e35]: Vorige Miku-opname
+    - generic [ref=e37]: Miku · karakter 1
+    - generic [ref=e39]: Ren · karakter 2
+  - article [ref=e41]:
+    - heading "ちち" [level=2] [ref=e42]
+    - paragraph [ref=e43]: vocab-ちち
+    - paragraph [ref=e44]: "Miku: door jou goedgekeurd. Ren: nog controleren."
+    - generic [ref=e45]: Vorige Miku-opname
+    - generic [ref=e47]: Miku · karakter 1
+    - generic [ref=e49]: Ren · karakter 2
+  - article [ref=e51]:
+    - heading "かいます" [level=2] [ref=e52]
+    - paragraph [ref=e53]: vocab-かいます
+    - paragraph [ref=e54]: "Miku: door jou goedgekeurd. Ren: nog controleren."
+    - generic [ref=e55]: Vorige Miku-opname
+    - generic [ref=e57]: Miku · karakter 1
+    - generic [ref=e59]: Ren · karakter 2
