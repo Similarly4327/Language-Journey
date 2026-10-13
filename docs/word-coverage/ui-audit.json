@@ -215,66 +215,1869 @@
       "runs": [
         {
           "rankId": "dak-examA",
-          "questions": 50
+          "questions": 30,
+          "targetKanaIds": [
+            "dak-hiragana-づ",
+            "dak-hiragana-ぶ",
+            "dak-katakana-ダ",
+            "dak-katakana-ゴ",
+            "dak-katakana-ド",
+            "dak-katakana-ポ",
+            "dak-katakana-ガ",
+            "dak-katakana-ゼ",
+            "dak-hiragana-ぱ",
+            "dak-hiragana-で",
+            "dak-hiragana-ぢ",
+            "dak-katakana-ブ",
+            "dak-katakana-バ",
+            "dak-katakana-グ",
+            "dak-hiragana-ぽ",
+            "dak-hiragana-ぼ",
+            "dak-hiragana-げ",
+            "dak-hiragana-ぞ",
+            "dak-katakana-プ",
+            "dak-hiragana-ざ",
+            "dak-katakana-ジ",
+            "dak-hiragana-び",
+            "dak-katakana-ヂ",
+            "dak-katakana-ボ",
+            "dak-hiragana-じ",
+            "dak-katakana-ペ",
+            "dak-hiragana-が",
+            "dak-hiragana-ぎ",
+            "dak-katakana-ゾ",
+            "dak-hiragana-ぺ"
+          ],
+          "attempt": 1
+        },
+        {
+          "rankId": "dak-examA",
+          "questions": 30,
+          "targetKanaIds": [
+            "dak-hiragana-び",
+            "dak-hiragana-ぼ",
+            "dak-hiragana-ぜ",
+            "dak-katakana-ボ",
+            "dak-katakana-ゼ",
+            "dak-katakana-ギ",
+            "dak-katakana-プ",
+            "dak-hiragana-ぎ",
+            "dak-hiragana-ぽ",
+            "dak-katakana-ゴ",
+            "dak-katakana-ヅ",
+            "dak-hiragana-ぐ",
+            "dak-hiragana-べ",
+            "dak-katakana-ピ",
+            "dak-hiragana-ぞ",
+            "dak-hiragana-ぴ",
+            "dak-hiragana-だ",
+            "dak-hiragana-づ",
+            "dak-katakana-ダ",
+            "dak-katakana-パ",
+            "dak-katakana-ビ",
+            "dak-hiragana-で",
+            "dak-katakana-ゲ",
+            "dak-katakana-ブ",
+            "dak-hiragana-ざ",
+            "dak-katakana-ゾ",
+            "dak-hiragana-ご",
+            "dak-katakana-ジ",
+            "dak-hiragana-ぺ",
+            "dak-katakana-ヂ"
+          ],
+          "attempt": 2
+        },
+        {
+          "rankId": "dak-examA",
+          "questions": 30,
+          "targetKanaIds": [
+            "dak-katakana-ザ",
+            "dak-hiragana-ぼ",
+            "dak-katakana-ビ",
+            "dak-hiragana-び",
+            "dak-katakana-ゾ",
+            "dak-hiragana-ぺ",
+            "dak-katakana-ゲ",
+            "dak-hiragana-ぷ",
+            "dak-hiragana-ご",
+            "dak-hiragana-ど",
+            "dak-katakana-グ",
+            "dak-hiragana-ぱ",
+            "dak-katakana-ダ",
+            "dak-katakana-ヅ",
+            "dak-hiragana-げ",
+            "dak-hiragana-ぢ",
+            "dak-katakana-ピ",
+            "dak-hiragana-ず",
+            "dak-katakana-ゴ",
+            "dak-hiragana-ぜ",
+            "dak-hiragana-ぎ",
+            "dak-katakana-ズ",
+            "dak-hiragana-じ",
+            "dak-katakana-バ",
+            "dak-hiragana-ば",
+            "dak-katakana-ド",
+            "dak-hiragana-で",
+            "dak-katakana-ベ",
+            "dak-katakana-ペ",
+            "dak-katakana-パ"
+          ],
+          "attempt": 3
         },
         {
           "rankId": "dak-examB",
-          "questions": 50
+          "questions": 30,
+          "targetKanaIds": [
+            "dak-hiragana-ぶ",
+            "dak-hiragana-だ",
+            "dak-hiragana-げ",
+            "dak-katakana-グ",
+            "dak-hiragana-じ",
+            "dak-katakana-プ",
+            "dak-hiragana-ぎ",
+            "dak-katakana-パ",
+            "dak-katakana-ジ",
+            "dak-katakana-ブ",
+            "dak-hiragana-ぜ",
+            "dak-hiragana-ご",
+            "dak-katakana-ゾ",
+            "dak-hiragana-べ",
+            "dak-hiragana-ざ",
+            "dak-katakana-ゲ",
+            "dak-hiragana-ぷ",
+            "dak-hiragana-で",
+            "dak-katakana-ゴ",
+            "dak-katakana-ポ",
+            "dak-katakana-ズ",
+            "dak-katakana-デ",
+            "dak-hiragana-ぼ",
+            "dak-katakana-バ",
+            "dak-katakana-ド",
+            "dak-hiragana-ぱ",
+            "dak-hiragana-ど",
+            "dak-katakana-ダ",
+            "dak-katakana-ビ",
+            "dak-hiragana-ぴ"
+          ],
+          "attempt": 1
+        },
+        {
+          "rankId": "dak-examB",
+          "questions": 30,
+          "targetKanaIds": [
+            "dak-hiragana-ば",
+            "dak-katakana-ズ",
+            "dak-hiragana-が",
+            "dak-hiragana-ぽ",
+            "dak-katakana-ベ",
+            "dak-hiragana-だ",
+            "dak-hiragana-ぶ",
+            "dak-katakana-グ",
+            "dak-hiragana-ぴ",
+            "dak-katakana-ギ",
+            "dak-hiragana-げ",
+            "dak-katakana-ブ",
+            "dak-hiragana-ざ",
+            "dak-katakana-ボ",
+            "dak-katakana-ヂ",
+            "dak-katakana-ゴ",
+            "dak-hiragana-ぎ",
+            "dak-hiragana-ど",
+            "dak-katakana-デ",
+            "dak-hiragana-で",
+            "dak-katakana-ザ",
+            "dak-katakana-ピ",
+            "dak-hiragana-ぜ",
+            "dak-hiragana-ぷ",
+            "dak-hiragana-べ",
+            "dak-katakana-ペ",
+            "dak-katakana-ヅ",
+            "dak-katakana-プ",
+            "dak-katakana-ゾ",
+            "dak-hiragana-ず"
+          ],
+          "attempt": 2
+        },
+        {
+          "rankId": "dak-examB",
+          "questions": 30,
+          "targetKanaIds": [
+            "dak-hiragana-ぷ",
+            "dak-katakana-ジ",
+            "dak-katakana-ギ",
+            "dak-hiragana-ぢ",
+            "dak-katakana-ゼ",
+            "dak-hiragana-ぐ",
+            "dak-katakana-ペ",
+            "dak-hiragana-べ",
+            "dak-hiragana-ぼ",
+            "dak-katakana-ボ",
+            "dak-katakana-ダ",
+            "dak-hiragana-ぞ",
+            "dak-katakana-デ",
+            "dak-hiragana-げ",
+            "dak-hiragana-が",
+            "dak-hiragana-ぜ",
+            "dak-katakana-ゲ",
+            "dak-hiragana-ど",
+            "dak-katakana-ピ",
+            "dak-hiragana-ぴ",
+            "dak-katakana-ブ",
+            "dak-katakana-ズ",
+            "dak-katakana-ド",
+            "dak-katakana-ビ",
+            "dak-katakana-プ",
+            "dak-hiragana-ぱ",
+            "dak-hiragana-ぶ",
+            "dak-hiragana-づ",
+            "dak-katakana-ゴ",
+            "dak-hiragana-ざ"
+          ],
+          "attempt": 3
         }
       ]
     },
     {
       "level": 4,
-      "total": 68,
-      "wordTurns": 40,
-      "other": 28
+      "runs": [
+        {
+          "level": 4,
+          "total": 30,
+          "parts": {
+            "vocab": 13,
+            "grammar": 7,
+            "context": 10
+          },
+          "lessonCounts": {
+            "l4-1": 4,
+            "l4-2": 4,
+            "l4-3": 3,
+            "l4-4": 2,
+            "l4-9": 5,
+            "l4-7": 4,
+            "l4-5": 3,
+            "l4-6": 2,
+            "l4-8": 2,
+            "l4-10": 1
+          },
+          "directions": {
+            "jp-nl": 6,
+            "nl-jp": 7
+          },
+          "targets": [
+            {
+              "id": "vocab-これ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ひと",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-さかな",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-パン",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-のみます",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-いきます",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-たべます",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-うち",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-みせ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-よみます",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-あれ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ほん",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-わたし",
+              "direction": "nl-jp"
+            }
+          ],
+          "attempt": 1
+        },
+        {
+          "level": 4,
+          "total": 30,
+          "parts": {
+            "vocab": 13,
+            "grammar": 7,
+            "context": 10
+          },
+          "lessonCounts": {
+            "l4-6": 2,
+            "l4-8": 4,
+            "l4-2": 3,
+            "l4-3": 4,
+            "l4-4": 2,
+            "l4-1": 3,
+            "l4-9": 4,
+            "l4-5": 3,
+            "l4-7": 4,
+            "l4-10": 1
+          },
+          "directions": {
+            "jp-nl": 6,
+            "nl-jp": 7
+          },
+          "targets": [
+            {
+              "id": "vocab-よみます",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-あれ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-わたし",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-いぬ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ともだち",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-みます",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-うち",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ねこ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-のみます",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-たべます",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ひと",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ほん",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-えき",
+              "direction": "jp-nl"
+            }
+          ],
+          "attempt": 2
+        },
+        {
+          "level": 4,
+          "total": 30,
+          "parts": {
+            "vocab": 13,
+            "grammar": 7,
+            "context": 10
+          },
+          "lessonCounts": {
+            "l4-6": 3,
+            "l4-4": 2,
+            "l4-8": 3,
+            "l4-5": 3,
+            "l4-3": 4,
+            "l4-2": 4,
+            "l4-1": 3,
+            "l4-9": 4,
+            "l4-10": 1,
+            "l4-7": 3
+          },
+          "directions": {
+            "jp-nl": 7,
+            "nl-jp": 6
+          },
+          "targets": [
+            {
+              "id": "vocab-それ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-パン",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-うち",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-たべます",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-わたし",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-あれ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ひと",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-よみます",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-みず",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ほん",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-みます",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-いきます",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ともだち",
+              "direction": "jp-nl"
+            }
+          ],
+          "attempt": 3
+        }
+      ]
     },
     {
       "level": 5,
-      "total": 64,
-      "wordTurns": 36,
-      "other": 28
+      "runs": [
+        {
+          "level": 5,
+          "total": 30,
+          "parts": {
+            "vocab": 9,
+            "grammar": 21,
+            "context": 0
+          },
+          "lessonCounts": {
+            "l5-3": 8,
+            "l5-1": 8,
+            "l5-5": 2,
+            "l5-2": 8,
+            "l5-4": 4
+          },
+          "directions": {
+            "jp-nl": 4,
+            "nl-jp": 5
+          },
+          "targets": [
+            {
+              "id": "vocab-おちゃ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-しょくじ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-じゅう",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-コーヒー",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-きょく",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-しゃしん",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-きゃく",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-きって",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ベッド",
+              "direction": "nl-jp"
+            }
+          ],
+          "attempt": 1
+        },
+        {
+          "level": 5,
+          "total": 30,
+          "parts": {
+            "vocab": 9,
+            "grammar": 21,
+            "context": 0
+          },
+          "lessonCounts": {
+            "l5-1": 8,
+            "l5-2": 8,
+            "l5-3": 8,
+            "l5-4": 3,
+            "l5-5": 3
+          },
+          "directions": {
+            "jp-nl": 5,
+            "nl-jp": 4
+          },
+          "targets": [
+            {
+              "id": "vocab-しゅみ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-きゃく",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-おちゃ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-きって",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ゲーム",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-じゅう",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-しゃしん",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-きょく",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-タクシー",
+              "direction": "jp-nl"
+            }
+          ],
+          "attempt": 2
+        },
+        {
+          "level": 5,
+          "total": 30,
+          "parts": {
+            "vocab": 9,
+            "grammar": 21,
+            "context": 0
+          },
+          "lessonCounts": {
+            "l5-2": 8,
+            "l5-1": 8,
+            "l5-5": 3,
+            "l5-4": 3,
+            "l5-3": 8
+          },
+          "directions": {
+            "jp-nl": 5,
+            "nl-jp": 4
+          },
+          "targets": [
+            {
+              "id": "vocab-きゃく",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-コーヒー",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-きって",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-しょくじ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ちょきん",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-タクシー",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-しゅみ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-じょせい",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-きょく",
+              "direction": "jp-nl"
+            }
+          ],
+          "attempt": 3
+        }
+      ]
     },
     {
       "level": 6,
-      "total": 57,
-      "wordTurns": 32,
-      "other": 25
+      "runs": [
+        {
+          "level": 6,
+          "total": 25,
+          "parts": {
+            "vocab": 11,
+            "grammar": 1,
+            "context": 13
+          },
+          "lessonCounts": {
+            "l6-1": 6,
+            "l6-2": 6,
+            "l6-3": 6,
+            "l6-5": 3,
+            "l6-4": 4
+          },
+          "directions": {
+            "jp-nl": 5,
+            "nl-jp": 6
+          },
+          "targets": [
+            {
+              "id": "vocab-あなた",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-はは",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-だれ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-みんな",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-おかあさん",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-おとこ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-おんな",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-おとうと",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-きょうだい",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-あね",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ちち",
+              "direction": "nl-jp"
+            }
+          ],
+          "attempt": 1
+        },
+        {
+          "level": 6,
+          "total": 25,
+          "parts": {
+            "vocab": 11,
+            "grammar": 0,
+            "context": 14
+          },
+          "lessonCounts": {
+            "l6-1": 6,
+            "l6-3": 6,
+            "l6-4": 5,
+            "l6-2": 6,
+            "l6-5": 2
+          },
+          "directions": {
+            "jp-nl": 6,
+            "nl-jp": 5
+          },
+          "targets": [
+            {
+              "id": "vocab-あなた",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-きょうだい",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-こども",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-かぞく",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-あね",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-おとうと",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-あに",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-おんな",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ちち",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-おとうさん",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-おかあさん",
+              "direction": "nl-jp"
+            }
+          ],
+          "attempt": 2
+        },
+        {
+          "level": 6,
+          "total": 25,
+          "parts": {
+            "vocab": 11,
+            "grammar": 0,
+            "context": 14
+          },
+          "lessonCounts": {
+            "l6-3": 6,
+            "l6-4": 5,
+            "l6-1": 6,
+            "l6-2": 5,
+            "l6-5": 3
+          },
+          "directions": {
+            "jp-nl": 5,
+            "nl-jp": 6
+          },
+          "targets": [
+            {
+              "id": "vocab-あね",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-こども",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-おとこ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-はは",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-みんな",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-だれ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-おんな",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-おとうさん",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-あに",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-かぞく",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ちち",
+              "direction": "nl-jp"
+            }
+          ],
+          "attempt": 3
+        }
+      ]
     },
     {
       "level": 7,
-      "total": 59,
-      "wordTurns": 40,
-      "other": 19
+      "runs": [
+        {
+          "level": 7,
+          "total": 30,
+          "parts": {
+            "vocab": 14,
+            "grammar": 1,
+            "context": 15
+          },
+          "lessonCounts": {
+            "l7-4": 7,
+            "l7-2": 6,
+            "l7-5": 5,
+            "l7-3": 6,
+            "l7-1": 6
+          },
+          "directions": {
+            "jp-nl": 7,
+            "nl-jp": 7
+          },
+          "targets": [
+            {
+              "id": "vocab-いちばんめ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-さんにん",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ふたつ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-にまい",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-なんびき",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ひとり",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-にひき",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-さんばんめ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-にほん",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-みっつ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-よっつ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-いっぴき",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-いっぽん",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ふたり",
+              "direction": "nl-jp"
+            }
+          ],
+          "attempt": 1
+        },
+        {
+          "level": 7,
+          "total": 30,
+          "parts": {
+            "vocab": 14,
+            "grammar": 1,
+            "context": 15
+          },
+          "lessonCounts": {
+            "l7-5": 6,
+            "l7-2": 6,
+            "l7-4": 6,
+            "l7-1": 6,
+            "l7-3": 6
+          },
+          "directions": {
+            "jp-nl": 7,
+            "nl-jp": 7
+          },
+          "targets": [
+            {
+              "id": "vocab-どれ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ひとり",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-いちまい",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-さんにん",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ふたり",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-にまい",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-にばんめ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-いっぴき",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-さんばんめ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ひとつ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ふたつ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-みっつ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-なんびき",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-さんびき",
+              "direction": "jp-nl"
+            }
+          ],
+          "attempt": 2
+        },
+        {
+          "level": 7,
+          "total": 30,
+          "parts": {
+            "vocab": 14,
+            "grammar": 1,
+            "context": 15
+          },
+          "lessonCounts": {
+            "l7-2": 6,
+            "l7-4": 7,
+            "l7-3": 5,
+            "l7-5": 6,
+            "l7-1": 6
+          },
+          "directions": {
+            "jp-nl": 7,
+            "nl-jp": 7
+          },
+          "targets": [
+            {
+              "id": "vocab-ひとり",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ふたり",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-いっぽん",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-いちまい",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-さんびき",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-さんにん",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-いっぴき",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ふたつ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-いちばんめ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-にほん",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ひとつ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-みっつ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-にばんめ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-さんばんめ",
+              "direction": "nl-jp"
+            }
+          ],
+          "attempt": 3
+        }
+      ]
     },
     {
       "level": 8,
-      "total": 127,
-      "wordTurns": 94,
-      "other": 33
+      "runs": [
+        {
+          "level": 8,
+          "total": 40,
+          "parts": {
+            "vocab": 18,
+            "grammar": 0,
+            "context": 22
+          },
+          "lessonCounts": {
+            "l8-4": 2,
+            "l8-minutes": 10,
+            "l8-3": 6,
+            "l8-5": 10,
+            "l8-6": 7,
+            "l8-2": 3,
+            "l8-1": 2
+          },
+          "directions": {
+            "jp-nl": 9,
+            "nl-jp": 9
+          },
+          "targets": [
+            {
+              "id": "vocab-じゅういちがつ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-くじ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-にがつ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-はん",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-じゅういちじ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-どようび",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-こんしゅう",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-もくようび",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-きんようび",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ごぜん",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-にちようび",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-いま",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ごがつ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-らいしゅう",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-げつようび",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-あした",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ごふん",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-かようび",
+              "direction": "nl-jp"
+            }
+          ],
+          "attempt": 1
+        },
+        {
+          "level": 8,
+          "total": 40,
+          "parts": {
+            "vocab": 18,
+            "grammar": 0,
+            "context": 22
+          },
+          "lessonCounts": {
+            "l8-4": 2,
+            "l8-5": 10,
+            "l8-2": 3,
+            "l8-3": 6,
+            "l8-minutes": 10,
+            "l8-6": 7,
+            "l8-1": 2
+          },
+          "directions": {
+            "jp-nl": 9,
+            "nl-jp": 9
+          },
+          "targets": [
+            {
+              "id": "vocab-しがつ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-にちようび",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-らいしゅう",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-はん",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-もくようび",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-きのう",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-さんじ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-さんじゅっぷん",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-どようび",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-すいようび",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-あした",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-じゅうじ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-じゅういちじ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-きんようび",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ごふん",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-にがつ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-げつようび",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-じゅうがつ",
+              "direction": "nl-jp"
+            }
+          ],
+          "attempt": 2
+        },
+        {
+          "level": 8,
+          "total": 40,
+          "parts": {
+            "vocab": 18,
+            "grammar": 0,
+            "context": 22
+          },
+          "lessonCounts": {
+            "l8-5": 10,
+            "l8-3": 6,
+            "l8-6": 7,
+            "l8-1": 2,
+            "l8-minutes": 10,
+            "l8-2": 3,
+            "l8-4": 2
+          },
+          "directions": {
+            "jp-nl": 9,
+            "nl-jp": 9
+          },
+          "targets": [
+            {
+              "id": "vocab-あした",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-すいようび",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-にがつ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-なんじ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-せんしゅう",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ごふん",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-なんようび",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-いま",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-くじ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-じゅうがつ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ごぜん",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-さんがつ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-もくようび",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-にちようび",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-こんしゅう",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-どようび",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-げつようび",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ろくじ",
+              "direction": "jp-nl"
+            }
+          ],
+          "attempt": 3
+        }
+      ]
     },
     {
       "level": 9,
-      "total": 61,
-      "wordTurns": 40,
-      "other": 21
+      "runs": [
+        {
+          "level": 9,
+          "total": 30,
+          "parts": {
+            "vocab": 13,
+            "grammar": 2,
+            "context": 15
+          },
+          "lessonCounts": {
+            "l9-5": 7,
+            "l9-3": 6,
+            "l9-1": 6,
+            "l9-4": 6,
+            "l9-2": 5
+          },
+          "directions": {
+            "jp-nl": 6,
+            "nl-jp": 7
+          },
+          "targets": [
+            {
+              "id": "vocab-なか",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-がっこう",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-レストラン",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-そこ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-まっすぐ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ちかく",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-した",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-こうえん",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-あそこ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-となり",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-どこ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-うえ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-みち",
+              "direction": "nl-jp"
+            }
+          ],
+          "attempt": 1
+        },
+        {
+          "level": 9,
+          "total": 30,
+          "parts": {
+            "vocab": 13,
+            "grammar": 2,
+            "context": 15
+          },
+          "lessonCounts": {
+            "l9-5": 7,
+            "l9-4": 6,
+            "l9-3": 6,
+            "l9-2": 6,
+            "l9-1": 5
+          },
+          "directions": {
+            "jp-nl": 7,
+            "nl-jp": 6
+          },
+          "targets": [
+            {
+              "id": "vocab-がっこう",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-そと",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-となり",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-まっすぐ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-そこ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ひだり",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ちず",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-うしろ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ちかく",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-みち",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-うえ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-ここ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-こうえん",
+              "direction": "jp-nl"
+            }
+          ],
+          "attempt": 2
+        },
+        {
+          "level": 9,
+          "total": 30,
+          "parts": {
+            "vocab": 13,
+            "grammar": 2,
+            "context": 15
+          },
+          "lessonCounts": {
+            "l9-4": 6,
+            "l9-1": 6,
+            "l9-5": 7,
+            "l9-3": 6,
+            "l9-2": 5
+          },
+          "directions": {
+            "jp-nl": 7,
+            "nl-jp": 6
+          },
+          "targets": [
+            {
+              "id": "vocab-した",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-そと",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-どこ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-こうえん",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-まえ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-まっすぐ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-がっこう",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ひだり",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ちかく",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-あそこ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-なか",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-そこ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-レストラン",
+              "direction": "nl-jp"
+            }
+          ],
+          "attempt": 3
+        }
+      ]
     },
     {
       "level": 10,
-      "total": 51,
-      "wordTurns": 30,
-      "other": 21
+      "runs": [
+        {
+          "level": 10,
+          "total": 30,
+          "parts": {
+            "vocab": 13,
+            "grammar": 2,
+            "context": 15
+          },
+          "lessonCounts": {
+            "l10-2": 5,
+            "l10-3": 8,
+            "l10-4": 7,
+            "l10-1": 7,
+            "l10-5": 3
+          },
+          "directions": {
+            "jp-nl": 7,
+            "nl-jp": 6
+          },
+          "targets": [
+            {
+              "id": "vocab-ください",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-おります",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-みせて",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-のります",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-おかね",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-メニュー",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-いっしょに",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-バス",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-かいます",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-いつ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-いくら",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-だいじょうぶ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-やくそく",
+              "direction": "jp-nl"
+            }
+          ],
+          "attempt": 1
+        },
+        {
+          "level": 10,
+          "total": 30,
+          "parts": {
+            "vocab": 13,
+            "grammar": 3,
+            "context": 14
+          },
+          "lessonCounts": {
+            "l10-3": 8,
+            "l10-2": 5,
+            "l10-4": 7,
+            "l10-5": 3,
+            "l10-1": 7
+          },
+          "directions": {
+            "jp-nl": 6,
+            "nl-jp": 7
+          },
+          "targets": [
+            {
+              "id": "vocab-だいじょうぶ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-いつ",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-いくら",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-おかね",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-メニュー",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-いっしょに",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-おります",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-かいます",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-のります",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ください",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-みせて",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-やくそく",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-バス",
+              "direction": "jp-nl"
+            }
+          ],
+          "attempt": 2
+        },
+        {
+          "level": 10,
+          "total": 30,
+          "parts": {
+            "vocab": 13,
+            "grammar": 3,
+            "context": 14
+          },
+          "lessonCounts": {
+            "l10-4": 7,
+            "l10-1": 7,
+            "l10-2": 6,
+            "l10-5": 4,
+            "l10-3": 6
+          },
+          "directions": {
+            "jp-nl": 7,
+            "nl-jp": 6
+          },
+          "targets": [
+            {
+              "id": "vocab-でんしゃ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-かいます",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-だいじょうぶ",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-のります",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-おかね",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-いくら",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-メニュー",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-みせて",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-ください",
+              "direction": "nl-jp"
+            },
+            {
+              "id": "vocab-いっしょに",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-バス",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-おります",
+              "direction": "jp-nl"
+            },
+            {
+              "id": "vocab-やくそく",
+              "direction": "jp-nl"
+            }
+          ],
+          "attempt": 3
+        }
+      ]
     }
   ],
   "errors": [],
   "completedFourWordRound": [
-    "vocab-いもうと|jp-nl",
-    "vocab-みんな|nl-jp",
-    "vocab-こども|jp-nl",
-    "vocab-いもうと|nl-jp",
-    "vocab-おとうと|jp-nl",
     "vocab-こども|nl-jp",
-    "vocab-みんな|jp-nl",
-    "vocab-おとうと|nl-jp"
+    "vocab-おとうと|jp-nl",
+    "vocab-いもうと|nl-jp",
+    "vocab-こども|jp-nl",
+    "vocab-みんな|nl-jp",
+    "vocab-いもうと|jp-nl",
+    "vocab-おとうと|nl-jp",
+    "vocab-みんな|jp-nl"
   ]
 }

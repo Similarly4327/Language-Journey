@@ -1,0 +1,105 @@
+- generic [active] [ref=e1]:
+  - heading "Weekdagen en maanden beluisteren" [level=1] [ref=e2]
+  - paragraph [ref=e3]: Vier gemelde woorden opnieuw opgenomen, plus alle twaalf maanden voor Miku en Ren. Vergelijk bij de meldingen de vorige opname. De nieuwe uitspraak moet nog worden beluisterd.
+  - generic [ref=e4]:
+    - text: Karakter
+    - combobox "Karakter" [ref=e5]:
+      - option "Miku · karakter 1" [selected]
+      - option "Ren · karakter 2"
+  - generic [ref=e6]:
+    - text: Spreeksnelheid
+    - combobox "Spreeksnelheid" [ref=e7]:
+      - option "Normaal (1×)" [selected]
+      - option "Langzamer (0,75×)"
+  - paragraph [ref=e8]:
+    - button "Luister naar alle veertien" [ref=e9]
+    - button "Stop" [ref=e10]
+  - status
+  - article [ref=e11]:
+    - heading "かようび" [level=2] [ref=e12]
+    - paragraph [ref=e13]: dinsdag · vocab-かようび
+    - paragraph [ref=e14]: Nieuwe proef voor gemelde audiofout. Luistercontrole nog open.
+    - generic [ref=e15]: Vorige Miku
+    - generic [ref=e17]: Miku · karakter 1
+    - generic [ref=e19]: Ren · karakter 2
+  - article [ref=e21]:
+    - heading "きんようび" [level=2] [ref=e22]
+    - paragraph [ref=e23]: vrijdag · vocab-きんようび
+    - paragraph [ref=e24]: Nieuwe proef voor gemelde audiofout. Luistercontrole nog open.
+    - generic [ref=e25]: Vorige Miku
+    - generic [ref=e27]: Miku · karakter 1
+    - generic [ref=e29]: Ren · karakter 2
+  - article [ref=e31]:
+    - heading "いちがつ" [level=2] [ref=e32]
+    - paragraph [ref=e33]: januari · vocab-いちがつ
+    - paragraph [ref=e34]: Nieuwe proef voor gemelde audiofout. Luistercontrole nog open.
+    - generic [ref=e35]: Vorige Miku
+    - generic [ref=e37]: Miku · karakter 1
+    - generic [ref=e39]: Ren · karakter 2
+  - article [ref=e41]:
+    - heading "にがつ" [level=2] [ref=e42]
+    - paragraph [ref=e43]: februari · vocab-にがつ
+    - paragraph [ref=e44]: "Maandenaudit: bestaande Miku behouden, Ren toegevoegd. Luistercontrole nog open."
+    - generic [ref=e45]: Miku · karakter 1
+    - generic [ref=e47]: Ren · karakter 2
+  - article [ref=e49]:
+    - heading "さんがつ" [level=2] [ref=e50]
+    - paragraph [ref=e51]: maart · vocab-さんがつ
+    - paragraph [ref=e52]: "Maandenaudit: bestaande Miku behouden, Ren toegevoegd. Luistercontrole nog open."
+    - generic [ref=e53]: Miku · karakter 1
+    - generic [ref=e55]: Ren · karakter 2
+  - article [ref=e57]:
+    - heading "しがつ" [level=2] [ref=e58]
+    - paragraph [ref=e59]: april · vocab-しがつ
+    - paragraph [ref=e60]: "Maandenaudit: bestaande Miku behouden, Ren toegevoegd. Luistercontrole nog open."
+    - generic [ref=e61]: Miku · karakter 1
+    - generic [ref=e63]: Ren · karakter 2
+  - article [ref=e65]:
+    - heading "ごがつ" [level=2] [ref=e66]
+    - paragraph [ref=e67]: mei · vocab-ごがつ
+    - paragraph [ref=e68]: "Maandenaudit: bestaande Miku behouden, Ren toegevoegd. Luistercontrole nog open."
+    - generic [ref=e69]: Miku · karakter 1
+    - generic [ref=e71]: Ren · karakter 2
+  - article [ref=e73]:
+    - heading "ろくがつ" [level=2] [ref=e74]
+    - paragraph [ref=e75]: juni · vocab-ろくがつ
+    - paragraph [ref=e76]: "Maandenaudit: bestaande Miku behouden, Ren toegevoegd. Luistercontrole nog open."
+    - generic [ref=e77]: Miku · karakter 1
+    - generic [ref=e79]: Ren · karakter 2
+  - article [ref=e81]:
+    - heading "しちがつ" [level=2] [ref=e82]
+    - paragraph [ref=e83]: juli · vocab-しちがつ
+    - paragraph [ref=e84]: "Maandenaudit: bestaande Miku behouden, Ren toegevoegd. Luistercontrole nog open."
+    - generic [ref=e85]: Miku · karakter 1
+    - generic [ref=e87]: Ren · karakter 2
+  - article [ref=e89]:
+    - heading "はちがつ" [level=2] [ref=e90]
+    - paragraph [ref=e91]: augustus · vocab-はちがつ
+    - paragraph [ref=e92]: "Maandenaudit: bestaande Miku behouden, Ren toegevoegd. Luistercontrole nog open."
+    - generic [ref=e93]: Miku · karakter 1
+    - generic [ref=e95]: Ren · karakter 2
+  - article [ref=e97]:
+    - heading "くがつ" [level=2] [ref=e98]
+    - paragraph [ref=e99]: september · vocab-くがつ
+    - paragraph [ref=e100]: "Maandenaudit: bestaande Miku behouden, Ren toegevoegd. Luistercontrole nog open."
+    - generic [ref=e101]: Miku · karakter 1
+    - generic [ref=e103]: Ren · karakter 2
+  - article [ref=e105]:
+    - heading "じゅうがつ" [level=2] [ref=e106]
+    - paragraph [ref=e107]: oktober · vocab-じゅうがつ
+    - paragraph [ref=e108]: "Maandenaudit: bestaande Miku behouden, Ren toegevoegd. Luistercontrole nog open."
+    - generic [ref=e109]: Miku · karakter 1
+    - generic [ref=e111]: Ren · karakter 2
+  - article [ref=e113]:
+    - heading "じゅういちがつ" [level=2] [ref=e114]
+    - paragraph [ref=e115]: november · vocab-じゅういちがつ
+    - paragraph [ref=e116]: "Maandenaudit: bestaande Miku behouden, Ren toegevoegd. Luistercontrole nog open."
+    - generic [ref=e117]: Miku · karakter 1
+    - generic [ref=e119]: Ren · karakter 2
+  - article [ref=e121]:
+    - heading "じゅうにがつ" [level=2] [ref=e122]
+    - paragraph [ref=e123]: december · vocab-じゅうにがつ
+    - paragraph [ref=e124]: Nieuwe proef voor gemelde audiofout. Luistercontrole nog open.
+    - generic [ref=e125]: Vorige Miku
+    - generic [ref=e127]: Miku · karakter 1
+    - generic [ref=e129]: Ren · karakter 2

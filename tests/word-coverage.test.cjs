@@ -5,15 +5,25 @@ const content=require('../language-journey-content/content.js');
 
 const {audit}=require('../scripts/word-coverage-audit.cjs');
 
-test('every lesson and exam in levels 3–10 has exact ID/direction coverage across shuffles',()=>{
+test('levels 3–10 keep exact lesson word decks and budgeted exams across shuffles',()=>{
+  const selections=new Map(),directions=new Map();
   for(let seed=1;seed<=20;seed++){
     const probe=createCrashCourseProbe({seed}),report=audit(probe);
     for(const row of report){
-      assert.equal(row.exam.wordTurns,row.exam.wordIds.length*2);
+      if(row.level===3){for(const exam of row.exams){assert.equal(exam.totalQuestions,30);assert.ok(Object.values(exam.spread).every(n=>n===3))}continue}
+      assert.equal(row.exam.totalQuestions,probe.examQuestionBudget(row.level));
+      assert.ok(row.exam.totalQuestions<=40);
+      assert.ok(Object.values(row.exam.wordCounts).every(count=>count===1));
+      if(!selections.has(row.level)){selections.set(row.level,new Set());directions.set(row.level,new Set())}
+      selections.get(row.level).add(Object.keys(row.exam.wordCounts).sort().join('|'));
+      directions.get(row.level).add(row.exam.targets.filter(q=>q.wordId).map(q=>`${q.wordId}:${q.direction}`).sort().join('|'));
       const lessons=row.level===4?probe.langLessons:row.level===5?probe.smallLessons:probe.advancedCourses[row.level-1]?.lessons||[];
       const questions=row.level===4?probe.buildLanguageExamQuestions():row.level===5?probe.buildSmallExamQuestions():row.level>5?probe.buildAdvancedExamQuestions(probe.advancedCourses[row.level-1]):[];
       const structural=lessons.flatMap(probe.lessonCanonicalGoals).filter(g=>g.kind!=='vocab');
+      probe.assertCompactExam(lessons,questions,probe.examQuestionBudget(row.level));
       assert.ok(questions.filter(q=>!q.targetWordId).every(q=>q.category!=='vocab'),'no untracked lexical filler');
+      const currentWords=lessons.flatMap(probe.lessonNewWords);
+      for(const q of questions.filter(q=>q.kind!=='build')){const matches=currentWords.filter(w=>q.correct===w.jp||q.correct===w.meaning);if(matches.length===1)assert.equal(q.targetWordId,matches[0].id,'a focus or agenda answer that tests a word consumes that word’s single exam turn')}
       for(const q of questions.filter(q=>q.targetWordId)){
         const word=content.vocabById[q.targetWordId];
         assert.equal(q.correct,q.targetDirection==='jp-nl'?word.meaning:word.jp,'declared direction matches the tested answer');
@@ -26,6 +36,7 @@ test('every lesson and exam in levels 3–10 has exact ID/direction coverage acr
       }
     }
   }
+  for(let level=4;level<=10;level++){assert.ok(selections.get(level).size>5,`Level ${level} varies its sampled words`);assert.ok(directions.get(level).size>5,`Level ${level} varies word directions`)}
 });
 
 test('four words, small sets and duplicate/shared IDs do not change mandatory turns',()=>{
@@ -39,7 +50,7 @@ test('four words, small sets and duplicate/shared IDs do not change mandatory tu
       assert.ok(deck.every(q=>!q.context&&!q.instruction&&!q.prompt&&q.choices.length>=2));
     }
     orders.add(p.wordCrashCourseDeck(words).map(q=>q.key).join(','));
-    const course=p.advancedCourses[5],single=p.buildWordCoveredExam([l],()=>p.advancedQuestionPool(course,l,3).current,5,'test'),shared=p.buildWordCoveredExam([l,l],()=>p.advancedQuestionPool(course,l,3).current,5,'shared');
+    const course=p.advancedCourses[5],single=p.buildWordCoveredExam([l],()=>p.advancedQuestionPool(course,l,3).current,10,'test'),shared=p.buildWordCoveredExam([l,l],()=>p.advancedQuestionPool(course,l,3).current,10,'shared');
     assert.equal(shared.filter(q=>q.targetWordId).length,single.filter(q=>q.targetWordId).length);
     assert.throws(()=>p.assertWordCoverage(words,[...p.wordCrashCourseDeck(words),p.wordCrashCourseDeck(words)[0]]));
   }
@@ -53,9 +64,15 @@ test('UI handlers for practice and exams use the covered generators and preserve
   p.assertWordCoverage(p.lessonNewWords(p.langLessons[1]),p.activeWordCrashCourse.deck);p.leaveWordCrashCourse();
   p.renderSmallLessonCard(p.smallLessons[0],0);p.element('smallQuick').onclick();
   p.assertWordCoverage(p.lessonNewWords(p.smallLessons[0]),p.activeWordCrashCourse.deck);p.leaveWordCrashCourse();
-  p.startLanguageExam();p.assertWordCoverage(p.langLessons.flatMap(p.lessonNewWords),p.state.quiz.questions);
-  p.startSmallExam();p.assertWordCoverage(p.smallLessons.flatMap(p.lessonNewWords),p.state.quiz.questions);
+  p.startLanguageExam();p.assertCompactExam(p.langLessons,p.state.quiz.questions,30);
+  p.startSmallExam();p.assertCompactExam(p.smallLessons,p.state.quiz.questions,30);
   assert.equal(JSON.stringify({r:p.rankState,s:p.state.flashcardProgress}),before);
+  const srs=JSON.stringify(p.state.flashcardProgress);p.startLanguageExam();
+  p.state.quiz.score=p.state.quiz.questions.length;p.state.quiz.index=p.state.quiz.questions.length;p.finishQuiz();
+  assert.equal(p.element('resultScore').textContent,'30 / 30');assert.equal(p.rankState['l4-exam'].rank,'Copper');
+  assert.equal(p.rankState['l4-1'].attempts,7);assert.equal(JSON.stringify(p.state.flashcardProgress),srs);
+  const saved=p.saved(),reloaded=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});
+  assert.equal(reloaded.rankState['l4-exam'].rank,'Copper');assert.equal(JSON.stringify(reloaded.state.flashcardProgress),srs);
   p.startDakExam('dak-examA');assert.ok(p.state.quiz.questions.every(q=>!q.targetWordId));
   p.startDakExam('dak-examB');assert.ok(p.state.quiz.questions.every(q=>!q.targetWordId));
 });

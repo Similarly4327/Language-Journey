@@ -1521,7 +1521,7 @@
       ],
       "meaning": "boek",
       "romaji": "hon",
-      "partOfSpeech": "unspecified",
+      "partOfSpeech": "noun",
       "introducedAt": "4-2",
       "availableFrom": "4-2",
       "themes": [],
@@ -3948,7 +3948,7 @@
       ],
       "meaning": "alstublieft / geef mij",
       "romaji": "kudasai",
-      "partOfSpeech": "unspecified",
+      "partOfSpeech": "verb",
       "introducedAt": "10-1",
       "availableFrom": "10-1",
       "themes": [],
@@ -4048,7 +4048,7 @@
       ],
       "meaning": "laat zien",
       "romaji": "misete",
-      "partOfSpeech": "unspecified",
+      "partOfSpeech": "verb",
       "introducedAt": "10-2",
       "availableFrom": "10-2",
       "themes": [],
@@ -13620,11 +13620,11 @@
   writeFocus('l9-3',['fill','みせ ___ となり','の',['の','を','に'],'structure'],'Vul “naast de winkel” aan.','Naast de winkel.','place:l9-next-to');
   writeFocus('l9-4',['fill','ベッド の ___','うえ',['うえ','した','となり'],'structure'],'Het voorwerp ligt bovenop het bed. Vul het plaatswoord in.','Het voorwerp ligt bovenop het bed.','place:l9-above');
   writeFocus('l9-5',['fill','レストラン ___ パン を たべます','で',['で','に','の'],'structure'],'Vul de plaats in waar de handeling gebeurt.','Ik eet brood in het restaurant.','grammar:l9-action-place-de');
-  writeFocus('l10-1',['fill','パン を ふたつ ___','ください',['ください','いきます','です'],'structure'],'Maak het beleefde verzoek af: twee stuks brood, alstublieft.','Twee stuks brood, alstublieft.','grammar:l10-request-kudasai');
-  writeFocus('l10-2',['fill','おちゃ を ___ ください','ひとつ',['ひとつ','ひとり','いっぴき'],'structure'],'Eén thee, alstublieft. Vul de hoeveelheid in.','Eén thee, alstublieft.','counter:l10-one-tea');
-  writeFocus('l10-3',['fill','ともだち ___ あいます','と',['と','を','で'],'structure'],'Vul aan volgens de in deze les geleerde vorm “met een vriend afspreken”.','Met een vriend afspreken.','grammar:l10-meet-with-to');
-  writeFocus('l10-4',['fill','でんしゃ ___ のります','に',['に','で','を'],'structure'],'Ik stap in de trein. Vul het partikel in.','Ik stap in de trein.','grammar:l10-board-train-ni');
-  writeFocus('l10-5',['mc','あした ともだち と えき に いきます','ともだち と',['あした','ともだち と','えき に'],'integration'],'Welk blok zegt met wie ik ga?','','grammar:l10-with-person-to');
+  writeFocus('l10-1',['fill','パン を ふたつ ___','ください',['ください','いきます','です','かいます'],'structure'],'Maak het beleefde verzoek af: twee stuks brood, alstublieft.','Twee stuks brood, alstublieft.','grammar:l10-request-kudasai');
+  writeFocus('l10-2',['fill','おちゃ を ___ ください','ひとつ',['ひとつ','ふたつ','ひとり','いっぴき'],'structure'],'Eén thee, alstublieft. Vul de hoeveelheid in.','Eén thee, alstublieft.','counter:l10-one-tea');
+  writeFocus('l10-3',['fill','ともだち ___ あいます','と',['と','を','で','の'],'structure'],'Vul aan volgens de in deze les geleerde vorm “met een vriend afspreken”.','Met een vriend afspreken.','grammar:l10-meet-with-to');
+  writeFocus('l10-4',['fill','でんしゃ ___ のります','に',['に','で','を','の'],'structure'],'Ik stap in de trein. Vul het partikel in.','Ik stap in de trein.','grammar:l10-board-train-ni');
+  writeFocus('l10-5',['mc','あした ともだち と えき に いきます','ともだち と',['あした','ともだち と','えき に','いきます'],'integration'],'Welk blok zegt met wie ik ga?','','grammar:l10-with-person-to');
 
   const l10Mission=lessonIndexById.get('l10-5');
   if(l10Mission)l10Mission.models=[...(l10Mission.models||[]),
@@ -13640,7 +13640,7 @@
   const l9Reading=manifest.readings.find(item=>item.id==='reading-l9-5');
   if(l9Reading)l9Reading.question='Waar eet de verteller brood?';
   const l10Reading=manifest.readings.find(item=>item.id==='reading-l10-5');
-  if(l10Reading){l10Reading.text='あした は どようび です。 さんじ に ともだち と えき に いきます。 えき で でんしゃ に のります。';l10Reading.question='Wat doet de verteller als eerste?';l10Reading.answer='met een vriend naar het station gaan';l10Reading.choices=['met een vriend naar het station gaan','in de trein stappen','thuis eten']}
+  if(l10Reading){l10Reading.text='あした は どようび です。 さんじ に ともだち と えき に いきます。 えき で でんしゃ に のります。';l10Reading.question='Wat doet de verteller als eerste?';l10Reading.answer='met een vriend naar het station gaan';l10Reading.choices=['met een vriend naar het station gaan','in de trein stappen','thuis eten','met een vriend naar het park gaan']}
 
   const homePreparationLessons=[
     {title:'De les begint',goal:'Herken de woorden voor een level, les, vraag, antwoord en keuze.',A:{instructionId:'choose-answer',label:'Leskaart',words:[['レベル','level','reberu'],['レッスン','les','ressun'],['しつもん','vraag','shitsumon'],['こたえ','antwoord','kotae'],['えらびます','kiezen','erabimasu']],example:'しつもん と こたえ。',text:'レベル 11\nレッスン 1\nしつもん：しつもん\nこたえ：こたえ',translation:'Level 11, les 1. Dit zijn het label voor een vraag en het label voor een antwoord.',questions:[['Welk woord betekent antwoord?','こたえ','レッスン','レベル'],['Wat doe je bij een keuzevraag?','een antwoord kiezen','een level overslaan','een woord schrijven']]},B:{instructionId:'choose-answer',type:'notice',label:'Korte oefening',words:[['もんだい','opgave','mondai'],['れんしゅう','oefening','renshū'],['ただしい','juist','tadashii'],['まちがい','fout','machigai'],['もういちど','nog een keer','mō ichido']],example:'ただしい こたえ を えらびます。',text:'れんしゅう\nもんだい 1：ただしい こたえ を えらんでください。\nもんだい 2：まちがい を もういちど みます。',translation:'Oefening. Kies het juiste antwoord bij opgave 1. Bekijk de fout bij opgave 2 nog een keer.',questions:[['Wat kies je bij opgave 1?','het juiste antwoord','een level','een luchthaven'],['Wat doe je na een fout?','de fout nog een keer bekijken','de les afsluiten','de tekst overslaan']] }},
@@ -13756,7 +13756,10 @@
     for(const order of [1,3,5]){
       const lessonId=lessonIdFor(order),id=`bonus-${lessonId}`,reading=manifest.readings.find(item=>item.id===`reading-${lessonId}-a`),bonusPrefix=plan.lessonPrefix==='l11'?'11':plan.lessonPrefix==='l11-home'?'11-home':String(plan.number),bonus=thematicBonuses[`${bonusPrefix}-${order}`];
       const optionalBonus=bonus||{text:reading.text,translation:reading.translation,question:reading.question,answer:reading.answer,choices:reading.choices};
-      manifest.bonus.push({id,lessonId,introducedAt:`${plan.number}-${order}`,availableFrom:`${plan.number}-${order}`,type:'micro-story',optional:true,requiredVocabIds:reading.requiredVocabIds,contextVocabIds:[],text:optionalBonus.text,translation:optionalBonus.translation,question:optionalBonus.question,answer:optionalBonus.answer,choices:optionalBonus.choices,audioId:null});manifest.lessons.find(item=>item.id===lessonId).bonusIds.push(id)
+      // Older bonus IDs stay in the catalog for existing audio and saved history.
+      // Only the integrative fifth-lesson bonus is active as the level's one optional module.
+      manifest.bonus.push({id,lessonId,introducedAt:`${plan.number}-${order}`,availableFrom:`${plan.number}-${order}`,type:'micro-story',optional:true,legacy:order!==5,requiredVocabIds:reading.requiredVocabIds,contextVocabIds:[],text:optionalBonus.text,translation:optionalBonus.translation,question:optionalBonus.question,answer:optionalBonus.answer,choices:optionalBonus.choices,audioId:null});
+      if(order===5)manifest.levels.find(item=>item.number===plan.number).bonusId=id;
     }
     const phase=manifest.phases.find(item=>item.id==='usable-japanese');
     if(phase){const item=phase.levels.find(level=>level.number===plan.number);Object.assign(item,{title:plan.theme,description:plan.subtitle,status:'playable',levelIndex:plan.number-1});phase.status='active'}
@@ -13865,7 +13868,7 @@
   const smallLessons=manifest.lessons.filter(l=>l.level===5).map(materializeLesson);
   const advancedCompetencies={6:'Ik kan eenvoudige personen en familierelaties benoemen.',7:'Ik kan enkele veelgebruikte dingen, mensen en dieren tellen.',8:'Ik kan eenvoudige dagen, maanden, tijden en plannen begrijpen.',9:'Ik kan eenvoudige plaats, positie en beweging begrijpen.',10:'Ik kan eenvoudige dagelijkse situaties combineren.'};
   const advancedCourses={};for(let n=6;n<=10;n++){const level=manifest.levels[n-1];advancedCourses[n-1]={number:n,title:level.theme,competency:advancedCompetencies[n],lessons:manifest.lessons.filter(l=>l.level===n).map(materializeLesson)}}
-  const thematicCourses={};for(const plan of thematicPlans)thematicCourses[plan.number-1]={number:plan.number,title:plan.theme,competency:plan.competency,lessons:manifest.lessons.filter(l=>l.level===plan.number).map(materializeLesson)};
+  const thematicCourses={};for(const plan of thematicPlans)thematicCourses[plan.number-1]={number:plan.number,title:plan.theme,competency:plan.competency,bonusId:manifest.levels.find(l=>l.number===plan.number)?.bonusId,lessons:manifest.lessons.filter(l=>l.level===plan.number).map(materializeLesson)};
   const legacyLessonTitles={'l4-2':'Dit, dat en meer','l4-3':'Van wie?','l4-4':'Niet X','l4-5':'Een vraag maken','l4-6':'Ook','l4-7':'Iets doen','l4-8':'Niet doen','l4-9':'Naar een plaats'};
   const vocabCatalog=manifest.vocabulary.map(v=>{
     const match=v.introducedAt?.match(/^(\d+)-(\d+)/),level=match?Number(match[1]):4,order=match?Number(match[2]):null;

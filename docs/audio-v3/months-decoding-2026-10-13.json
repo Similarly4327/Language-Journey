@@ -1,0 +1,197 @@
+{
+  "files": [
+    {
+      "path": "assets/audio/ja/words/568c455b64ad3e8a-A-1db092519949e8f7.mp3",
+      "duration": 1.3003125,
+      "trailingBelowMinus40DbMs": 389.79166666666663,
+      "role": "previous"
+    },
+    {
+      "path": "assets/audio/ja/words/568c455b64ad3e8a-A-c29ab432ba5e96a0.mp3",
+      "duration": 1.0216666666666667,
+      "trailingBelowMinus40DbMs": 362.875,
+      "role": "A"
+    },
+    {
+      "path": "assets/audio/ja/words/568c455b64ad3e8a-B-bfd8d725530cc321.mp3",
+      "duration": 0.9752291666666667,
+      "trailingBelowMinus40DbMs": 368.16666666666663,
+      "role": "B"
+    },
+    {
+      "path": "assets/audio/ja/words/97c078cdc66ca8a1-A-13db8329c84b5e38.mp3",
+      "duration": 1.0681041666666666,
+      "trailingBelowMinus40DbMs": 365.6458333333333,
+      "role": "previous"
+    },
+    {
+      "path": "assets/audio/ja/words/97c078cdc66ca8a1-A-65a3166da160ad25.mp3",
+      "duration": 1.0681041666666666,
+      "trailingBelowMinus40DbMs": 373.1041666666667,
+      "role": "A"
+    },
+    {
+      "path": "assets/audio/ja/words/97c078cdc66ca8a1-B-03fcbf0633013f2f.mp3",
+      "duration": 1.0681041666666666,
+      "trailingBelowMinus40DbMs": 409.875,
+      "role": "B"
+    },
+    {
+      "path": "assets/audio/ja/words/5352d2d0ad68b485-A-1e011faf75426053.mp3",
+      "duration": 0.9752291666666667,
+      "trailingBelowMinus40DbMs": 427.4375,
+      "role": "previous"
+    },
+    {
+      "path": "assets/audio/ja/words/5352d2d0ad68b485-A-7dc28d98dd82d8b3.mp3",
+      "duration": 0.9287916666666667,
+      "trailingBelowMinus40DbMs": 425.9375,
+      "role": "A"
+    },
+    {
+      "path": "assets/audio/ja/words/5352d2d0ad68b485-B-7029f3ba6af5abcf.mp3",
+      "duration": 0.8359166666666666,
+      "trailingBelowMinus40DbMs": 426.25,
+      "role": "B"
+    },
+    {
+      "path": "assets/audio/ja/words/66d2b74dca3f316a-A-56ea54de68466b90.mp3",
+      "duration": 0.9287916666666667,
+      "trailingBelowMinus40DbMs": 489.8125,
+      "role": "A"
+    },
+    {
+      "path": "assets/audio/ja/words/66d2b74dca3f316a-B-20791451b2e71b25.mp3",
+      "duration": 0.7894583333333334,
+      "trailingBelowMinus40DbMs": 281.27083333333337,
+      "role": "B"
+    },
+    {
+      "path": "assets/audio/ja/words/fc0e25c72c1c9406-A-e2cdd970dbea9a6e.mp3",
+      "duration": 1.1609791666666667,
+      "trailingBelowMinus40DbMs": 352.75,
+      "role": "A"
+    },
+    {
+      "path": "assets/audio/ja/words/fc0e25c72c1c9406-B-3ff2126521441038.mp3",
+      "duration": 0.9752291666666667,
+      "trailingBelowMinus40DbMs": 278.8541666666667,
+      "role": "B"
+    },
+    {
+      "path": "assets/audio/ja/words/9c1313c4bff3eaf0-A-5d54b5f95fab2249.mp3",
+      "duration": 0.9752291666666667,
+      "trailingBelowMinus40DbMs": 381.875,
+      "role": "A"
+    },
+    {
+      "path": "assets/audio/ja/words/9c1313c4bff3eaf0-B-4aa2ac015d7d1c92.mp3",
+      "duration": 1.0216666666666667,
+      "trailingBelowMinus40DbMs": 241.58333333333334,
+      "role": "B"
+    },
+    {
+      "path": "assets/audio/ja/words/4b19650e58fa7326-A-1cc8b67bf90d0c8e.mp3",
+      "duration": 0.9752291666666667,
+      "trailingBelowMinus40DbMs": 470.5,
+      "role": "A"
+    },
+    {
+      "path": "assets/audio/ja/words/4b19650e58fa7326-B-e4daf5da47f98be2.mp3",
+      "duration": 1.0216666666666667,
+      "trailingBelowMinus40DbMs": 255.625,
+      "role": "B"
+    },
+    {
+      "path": "assets/audio/ja/words/83c32b64f9a411dc-A-9a693cb6b3122b6c.mp3",
+      "duration": 1.1609791666666667,
+      "trailingBelowMinus40DbMs": 343,
+      "role": "A"
+    },
+    {
+      "path": "assets/audio/ja/words/83c32b64f9a411dc-B-92903c4e428b6660.mp3",
+      "duration": 0.9287916666666667,
+      "trailingBelowMinus40DbMs": 256.25,
+      "role": "B"
+    },
+    {
+      "path": "assets/audio/ja/words/dfa47c0da55142f2-A-a34971a53b89c969.mp3",
+      "duration": 1.1609791666666667,
+      "trailingBelowMinus40DbMs": 321.375,
+      "role": "A"
+    },
+    {
+      "path": "assets/audio/ja/words/dfa47c0da55142f2-B-6ab8ef268f14627d.mp3",
+      "duration": 1.1609791666666667,
+      "trailingBelowMinus40DbMs": 263.47916666666663,
+      "role": "B"
+    },
+    {
+      "path": "assets/audio/ja/words/fcbdf8c74659ecbd-A-7e6f405850ef6ffb.mp3",
+      "duration": 1.2074375,
+      "trailingBelowMinus40DbMs": 301.5833333333333,
+      "role": "A"
+    },
+    {
+      "path": "assets/audio/ja/words/fcbdf8c74659ecbd-B-e50ff1b8e785b539.mp3",
+      "duration": 1.0216666666666667,
+      "trailingBelowMinus40DbMs": 250.6875,
+      "role": "B"
+    },
+    {
+      "path": "assets/audio/ja/words/fb0e880620e5182c-A-38967f8d2f27fbfb.mp3",
+      "duration": 0.9287916666666667,
+      "trailingBelowMinus40DbMs": 279.2916666666667,
+      "role": "A"
+    },
+    {
+      "path": "assets/audio/ja/words/fb0e880620e5182c-B-1058df7090bf2486.mp3",
+      "duration": 1.0216666666666667,
+      "trailingBelowMinus40DbMs": 323.7291666666667,
+      "role": "B"
+    },
+    {
+      "path": "assets/audio/ja/words/15bed82fb58ae9a9-A-398de1fb26c61bbd.mp3",
+      "duration": 1.2074375,
+      "trailingBelowMinus40DbMs": 635.3333333333333,
+      "role": "A"
+    },
+    {
+      "path": "assets/audio/ja/words/15bed82fb58ae9a9-B-2ac2149c0ec25926.mp3",
+      "duration": 0.9752291666666667,
+      "trailingBelowMinus40DbMs": 219.3125,
+      "role": "B"
+    },
+    {
+      "path": "assets/audio/ja/words/dcd464bc66f12e35-A-da1f840ea851ad30.mp3",
+      "duration": 1.253875,
+      "trailingBelowMinus40DbMs": 316.66666666666663,
+      "role": "A"
+    },
+    {
+      "path": "assets/audio/ja/words/dcd464bc66f12e35-B-856280dcc7464e28.mp3",
+      "duration": 1.1145416666666668,
+      "trailingBelowMinus40DbMs": 226.6875,
+      "role": "B"
+    },
+    {
+      "path": "assets/audio/ja/words/395132967a178935-A-9b903cc0559fa493.mp3",
+      "duration": 1.1145416666666668,
+      "trailingBelowMinus40DbMs": 381.29166666666663,
+      "role": "previous"
+    },
+    {
+      "path": "assets/audio/ja/words/395132967a178935-A-bc715828a508b872.mp3",
+      "duration": 1.0216666666666667,
+      "trailingBelowMinus40DbMs": 322.2083333333333,
+      "role": "A"
+    },
+    {
+      "path": "assets/audio/ja/words/395132967a178935-B-dbfd3d68871f1f0d.mp3",
+      "duration": 0.9287916666666667,
+      "trailingBelowMinus40DbMs": 332.5416666666667,
+      "role": "B"
+    }
+  ],
+  "overflow": false
+}

@@ -66,6 +66,9 @@ function validate(manifest = content.manifest, options = {}) {
     if(level.lessonIds?.length!==5)add('ERROR','FUTURE_LEVEL_STRUCTURE',`Level ${level.number} must have five lessons`,`level-${level.number}`);
     const modules=(manifest.modules||[]).filter(x=>x.level===level.number);
     if(!modules.some(x=>x.name==='A')||!modules.some(x=>x.name==='B'))add('ERROR','FUTURE_LEVEL_STRUCTURE',`Level ${level.number} needs Modules A and B`,`level-${level.number}`);
+    const bonus=maps.bonus.get(level.bonusId);
+    if(!bonus||bonus.legacy||bonus.optional!==true||!level.lessonIds.includes(bonus.lessonId))add('ERROR','LEVEL_BONUS',`Level ${level.number} needs one optional active bonus`,`level-${level.number}`);
+    if((manifest.bonus||[]).filter(item=>!item.legacy&&level.lessonIds.includes(item.lessonId)).length!==1)add('ERROR','LEVEL_BONUS',`Level ${level.number} must expose exactly one active bonus`,`level-${level.number}`);
   }
   for(const level of manifest.levels||[])if(level.nextDestinationVocabularyId){
     const word=maps.vocabulary.get(level.nextDestinationVocabularyId);

@@ -1,0 +1,3417 @@
+{
+  "scope": "Levels 4–10 generated lesson pools; kana/number pools additionally depend on selected taught rows",
+  "rows": [
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-word-これ-meaning",
+      "prompt": "これ",
+      "correct": "dit",
+      "options": [
+        "dit",
+        "brood"
+      ],
+      "count": 2,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-word-これ-spelling",
+      "prompt": "dit",
+      "correct": "これ",
+      "options": [
+        "ねこ",
+        "これ"
+      ],
+      "count": 2,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-word-ねこ-meaning",
+      "prompt": "ねこ",
+      "correct": "kat",
+      "options": [
+        "hond",
+        "kat",
+        "water"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-word-ねこ-spelling",
+      "prompt": "kat",
+      "correct": "ねこ",
+      "options": [
+        "いぬ",
+        "みず",
+        "ねこ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-word-いぬ-meaning",
+      "prompt": "いぬ",
+      "correct": "hond",
+      "options": [
+        "kat",
+        "water",
+        "hond"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-word-いぬ-spelling",
+      "prompt": "hond",
+      "correct": "いぬ",
+      "options": [
+        "いぬ",
+        "ねこ",
+        "みず"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-word-みず-meaning",
+      "prompt": "みず",
+      "correct": "water",
+      "options": [
+        "kat",
+        "water",
+        "hond"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-word-みず-spelling",
+      "prompt": "water",
+      "correct": "みず",
+      "options": [
+        "みず",
+        "ねこ",
+        "いぬ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-word-パン-meaning",
+      "prompt": "パン",
+      "correct": "brood",
+      "options": [
+        "brood",
+        "hond"
+      ],
+      "count": 2,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-word-パン-spelling",
+      "prompt": "brood",
+      "correct": "パン",
+      "options": [
+        "みず",
+        "パン"
+      ],
+      "count": 2,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-これ-は-ねこ-です-は",
+      "prompt": "これ ___ ねこ です",
+      "correct": "は",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-これ-は-ねこ-です-です",
+      "prompt": "これ は ねこ ___",
+      "correct": "です",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-これ-は-いぬ-です-は",
+      "prompt": "これ ___ いぬ です",
+      "correct": "は",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-これ-は-いぬ-です-です",
+      "prompt": "これ は いぬ ___",
+      "correct": "です",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-これ-は-みず-です-は",
+      "prompt": "これ ___ みず です",
+      "correct": "は",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-これ-は-みず-です-です",
+      "prompt": "これ は みず ___",
+      "correct": "です",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-これ-は-パン-です-は",
+      "prompt": "これ ___ パン です",
+      "correct": "は",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-1",
+      "sourceId": "generated-l4-これ-は-パン-です-です",
+      "prompt": "これ は パン ___",
+      "correct": "です",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-word-それ-meaning",
+      "prompt": "それ",
+      "correct": "dat bij jou",
+      "options": [
+        "dat daar",
+        "dat bij jou",
+        "dit"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-word-それ-spelling",
+      "prompt": "dat bij jou",
+      "correct": "それ",
+      "options": [
+        "それ",
+        "これ",
+        "あれ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-word-あれ-meaning",
+      "prompt": "あれ",
+      "correct": "dat daar",
+      "options": [
+        "dat daar",
+        "dit",
+        "dat bij jou"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-word-あれ-spelling",
+      "prompt": "dat daar",
+      "correct": "あれ",
+      "options": [
+        "それ",
+        "これ",
+        "あれ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-これ-は-ほん-です-は",
+      "prompt": "これ ___ ほん です",
+      "correct": "は",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-これ-は-ほん-です-です",
+      "prompt": "これ は ほん ___",
+      "correct": "です",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-これ-は-さかな-です-は",
+      "prompt": "これ ___ さかな です",
+      "correct": "は",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-これ-は-さかな-です-です",
+      "prompt": "これ は さかな ___",
+      "correct": "です",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-それ-は-ねこ-です-は",
+      "prompt": "それ ___ ねこ です",
+      "correct": "は",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-それ-は-ねこ-です-です",
+      "prompt": "それ は ねこ ___",
+      "correct": "です",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-それ-は-いぬ-です-は",
+      "prompt": "それ ___ いぬ です",
+      "correct": "は",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-それ-は-いぬ-です-です",
+      "prompt": "それ は いぬ ___",
+      "correct": "です",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-それ-は-みず-です-は",
+      "prompt": "それ ___ みず です",
+      "correct": "は",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-それ-は-みず-です-です",
+      "prompt": "それ は みず ___",
+      "correct": "です",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-それ-は-パン-です-は",
+      "prompt": "それ ___ パン です",
+      "correct": "は",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-それ-は-パン-です-です",
+      "prompt": "それ は パン ___",
+      "correct": "です",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-それ-は-ほん-です-は",
+      "prompt": "それ ___ ほん です",
+      "correct": "は",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-それ-は-ほん-です-です",
+      "prompt": "それ は ほん ___",
+      "correct": "です",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-それ-は-さかな-です-は",
+      "prompt": "それ ___ さかな です",
+      "correct": "は",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-それ-は-さかな-です-です",
+      "prompt": "それ は さかな ___",
+      "correct": "です",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-あれ-は-ねこ-です-は",
+      "prompt": "あれ ___ ねこ です",
+      "correct": "は",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-あれ-は-ねこ-です-です",
+      "prompt": "あれ は ねこ ___",
+      "correct": "です",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-あれ-は-いぬ-です-は",
+      "prompt": "あれ ___ いぬ です",
+      "correct": "は",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-あれ-は-いぬ-です-です",
+      "prompt": "あれ は いぬ ___",
+      "correct": "です",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-あれ-は-みず-です-は",
+      "prompt": "あれ ___ みず です",
+      "correct": "は",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-あれ-は-みず-です-です",
+      "prompt": "あれ は みず ___",
+      "correct": "です",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-あれ-は-パン-です-は",
+      "prompt": "あれ ___ パン です",
+      "correct": "は",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-あれ-は-パン-です-です",
+      "prompt": "あれ は パン ___",
+      "correct": "です",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-あれ-は-ほん-です-は",
+      "prompt": "あれ ___ ほん です",
+      "correct": "は",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-あれ-は-ほん-です-です",
+      "prompt": "あれ は ほん ___",
+      "correct": "です",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-あれ-は-さかな-です-は",
+      "prompt": "あれ ___ さかな です",
+      "correct": "は",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-2",
+      "sourceId": "generated-l4-あれ-は-さかな-です-です",
+      "prompt": "あれ は さかな ___",
+      "correct": "です",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-3",
+      "sourceId": "generated-l4-meaning-わたし は ひと です",
+      "prompt": "わたし は ひと です",
+      "correct": "Ik ben een persoon.",
+      "options": [
+        "Ik ben een vriend.",
+        "Ik ben een persoon."
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-3",
+      "sourceId": "generated-l4-order-わたし は ひと です",
+      "prompt": "Welke Japanse zin past?",
+      "correct": "わたし は ひと です",
+      "options": [
+        "わたし は ひと です",
+        "わたし は ともだち です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-3",
+      "sourceId": "generated-l4-わたし-は-ひと-です-は",
+      "prompt": "わたし ___ ひと です",
+      "correct": "は",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-3",
+      "sourceId": "generated-l4-わたし-は-ひと-です-です",
+      "prompt": "わたし は ひと ___",
+      "correct": "です",
+      "options": [
+        "です",
+        "は"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-3",
+      "sourceId": "generated-l4-meaning-わたし は ともだち です",
+      "prompt": "わたし は ともだち です",
+      "correct": "Ik ben een vriend.",
+      "options": [
+        "Ik ben een vriend.",
+        "Ik ben een persoon."
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-3",
+      "sourceId": "generated-l4-order-わたし は ともだち です",
+      "prompt": "Welke Japanse zin past?",
+      "correct": "わたし は ともだち です",
+      "options": [
+        "わたし は ひと です",
+        "わたし は ともだち です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-3",
+      "sourceId": "generated-l4-わたし-は-ともだち-です-は",
+      "prompt": "わたし ___ ともだち です",
+      "correct": "は",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-3",
+      "sourceId": "generated-l4-わたし-は-ともだち-です-です",
+      "prompt": "わたし は ともだち ___",
+      "correct": "です",
+      "options": [
+        "は",
+        "です"
+      ],
+      "count": 2,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-わたし-の-ほん-です-は",
+      "prompt": "これ ___ わたし の ほん です",
+      "correct": "は",
+      "options": [
+        "の",
+        "です",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-わたし-の-ほん-です-の",
+      "prompt": "これ は わたし ___ ほん です",
+      "correct": "の",
+      "options": [
+        "は",
+        "の",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-わたし-の-ほん-です-です",
+      "prompt": "これ は わたし の ほん ___",
+      "correct": "です",
+      "options": [
+        "は",
+        "です",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-わたし-の-ねこ-です-は",
+      "prompt": "これ ___ わたし の ねこ です",
+      "correct": "は",
+      "options": [
+        "の",
+        "は",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-わたし-の-ねこ-です-の",
+      "prompt": "これ は わたし ___ ねこ です",
+      "correct": "の",
+      "options": [
+        "の",
+        "です",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-わたし-の-ねこ-です-です",
+      "prompt": "これ は わたし の ねこ ___",
+      "correct": "です",
+      "options": [
+        "の",
+        "は",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-わたし-の-いぬ-です-は",
+      "prompt": "これ ___ わたし の いぬ です",
+      "correct": "は",
+      "options": [
+        "は",
+        "の",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-わたし-の-いぬ-です-の",
+      "prompt": "これ は わたし ___ いぬ です",
+      "correct": "の",
+      "options": [
+        "は",
+        "です",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-わたし-の-いぬ-です-です",
+      "prompt": "これ は わたし の いぬ ___",
+      "correct": "です",
+      "options": [
+        "の",
+        "は",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-ともだち-の-ほん-です-は",
+      "prompt": "これ ___ ともだち の ほん です",
+      "correct": "は",
+      "options": [
+        "です",
+        "の",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-ともだち-の-ほん-です-の",
+      "prompt": "これ は ともだち ___ ほん です",
+      "correct": "の",
+      "options": [
+        "は",
+        "です",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-ともだち-の-ほん-です-です",
+      "prompt": "これ は ともだち の ほん ___",
+      "correct": "です",
+      "options": [
+        "は",
+        "の",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-ともだち-の-ねこ-です-は",
+      "prompt": "これ ___ ともだち の ねこ です",
+      "correct": "は",
+      "options": [
+        "です",
+        "は",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-ともだち-の-ねこ-です-の",
+      "prompt": "これ は ともだち ___ ねこ です",
+      "correct": "の",
+      "options": [
+        "は",
+        "の",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-ともだち-の-ねこ-です-です",
+      "prompt": "これ は ともだち の ねこ ___",
+      "correct": "です",
+      "options": [
+        "は",
+        "の",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-ともだち-の-いぬ-です-は",
+      "prompt": "これ ___ ともだち の いぬ です",
+      "correct": "は",
+      "options": [
+        "は",
+        "の",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-ともだち-の-いぬ-です-の",
+      "prompt": "これ は ともだち ___ いぬ です",
+      "correct": "の",
+      "options": [
+        "です",
+        "の",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-これ-は-ともだち-の-いぬ-です-です",
+      "prompt": "これ は ともだち の いぬ ___",
+      "correct": "です",
+      "options": [
+        "の",
+        "です",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-わたし-の-ほん-です-は",
+      "prompt": "それ ___ わたし の ほん です",
+      "correct": "は",
+      "options": [
+        "は",
+        "の",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-わたし-の-ほん-です-の",
+      "prompt": "それ は わたし ___ ほん です",
+      "correct": "の",
+      "options": [
+        "は",
+        "です",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-わたし-の-ほん-です-です",
+      "prompt": "それ は わたし の ほん ___",
+      "correct": "です",
+      "options": [
+        "の",
+        "です",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-わたし-の-ねこ-です-は",
+      "prompt": "それ ___ わたし の ねこ です",
+      "correct": "は",
+      "options": [
+        "です",
+        "は",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-わたし-の-ねこ-です-の",
+      "prompt": "それ は わたし ___ ねこ です",
+      "correct": "の",
+      "options": [
+        "です",
+        "は",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-わたし-の-ねこ-です-です",
+      "prompt": "それ は わたし の ねこ ___",
+      "correct": "です",
+      "options": [
+        "は",
+        "の",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-わたし-の-いぬ-です-は",
+      "prompt": "それ ___ わたし の いぬ です",
+      "correct": "は",
+      "options": [
+        "の",
+        "です",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-わたし-の-いぬ-です-の",
+      "prompt": "それ は わたし ___ いぬ です",
+      "correct": "の",
+      "options": [
+        "です",
+        "の",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-わたし-の-いぬ-です-です",
+      "prompt": "それ は わたし の いぬ ___",
+      "correct": "です",
+      "options": [
+        "の",
+        "です",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-ともだち-の-ほん-です-は",
+      "prompt": "それ ___ ともだち の ほん です",
+      "correct": "は",
+      "options": [
+        "は",
+        "です",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-ともだち-の-ほん-です-の",
+      "prompt": "それ は ともだち ___ ほん です",
+      "correct": "の",
+      "options": [
+        "です",
+        "は",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-ともだち-の-ほん-です-です",
+      "prompt": "それ は ともだち の ほん ___",
+      "correct": "です",
+      "options": [
+        "です",
+        "の",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-ともだち-の-ねこ-です-は",
+      "prompt": "それ ___ ともだち の ねこ です",
+      "correct": "は",
+      "options": [
+        "の",
+        "です",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-ともだち-の-ねこ-です-の",
+      "prompt": "それ は ともだち ___ ねこ です",
+      "correct": "の",
+      "options": [
+        "の",
+        "は",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-ともだち-の-ねこ-です-です",
+      "prompt": "それ は ともだち の ねこ ___",
+      "correct": "です",
+      "options": [
+        "の",
+        "です",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-ともだち-の-いぬ-です-は",
+      "prompt": "それ ___ ともだち の いぬ です",
+      "correct": "は",
+      "options": [
+        "です",
+        "は",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-ともだち-の-いぬ-です-の",
+      "prompt": "それ は ともだち ___ いぬ です",
+      "correct": "の",
+      "options": [
+        "は",
+        "です",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-それ-は-ともだち-の-いぬ-です-です",
+      "prompt": "それ は ともだち の いぬ ___",
+      "correct": "です",
+      "options": [
+        "は",
+        "の",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-わたし-の-ほん-です-は",
+      "prompt": "あれ ___ わたし の ほん です",
+      "correct": "は",
+      "options": [
+        "は",
+        "の",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-わたし-の-ほん-です-の",
+      "prompt": "あれ は わたし ___ ほん です",
+      "correct": "の",
+      "options": [
+        "です",
+        "の",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-わたし-の-ほん-です-です",
+      "prompt": "あれ は わたし の ほん ___",
+      "correct": "です",
+      "options": [
+        "の",
+        "は",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-わたし-の-ねこ-です-は",
+      "prompt": "あれ ___ わたし の ねこ です",
+      "correct": "は",
+      "options": [
+        "です",
+        "は",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-わたし-の-ねこ-です-の",
+      "prompt": "あれ は わたし ___ ねこ です",
+      "correct": "の",
+      "options": [
+        "です",
+        "は",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-わたし-の-ねこ-です-です",
+      "prompt": "あれ は わたし の ねこ ___",
+      "correct": "です",
+      "options": [
+        "です",
+        "の",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-わたし-の-いぬ-です-は",
+      "prompt": "あれ ___ わたし の いぬ です",
+      "correct": "は",
+      "options": [
+        "は",
+        "です",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-わたし-の-いぬ-です-の",
+      "prompt": "あれ は わたし ___ いぬ です",
+      "correct": "の",
+      "options": [
+        "です",
+        "は",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-わたし-の-いぬ-です-です",
+      "prompt": "あれ は わたし の いぬ ___",
+      "correct": "です",
+      "options": [
+        "の",
+        "は",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-ともだち-の-ほん-です-は",
+      "prompt": "あれ ___ ともだち の ほん です",
+      "correct": "は",
+      "options": [
+        "の",
+        "です",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-ともだち-の-ほん-です-の",
+      "prompt": "あれ は ともだち ___ ほん です",
+      "correct": "の",
+      "options": [
+        "です",
+        "は",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-ともだち-の-ほん-です-です",
+      "prompt": "あれ は ともだち の ほん ___",
+      "correct": "です",
+      "options": [
+        "の",
+        "です",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-ともだち-の-ねこ-です-は",
+      "prompt": "あれ ___ ともだち の ねこ です",
+      "correct": "は",
+      "options": [
+        "の",
+        "です",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-ともだち-の-ねこ-です-の",
+      "prompt": "あれ は ともだち ___ ねこ です",
+      "correct": "の",
+      "options": [
+        "です",
+        "は",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-ともだち-の-ねこ-です-です",
+      "prompt": "あれ は ともだち の ねこ ___",
+      "correct": "です",
+      "options": [
+        "です",
+        "の",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-ともだち-の-いぬ-です-は",
+      "prompt": "あれ ___ ともだち の いぬ です",
+      "correct": "は",
+      "options": [
+        "です",
+        "は",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-ともだち-の-いぬ-です-の",
+      "prompt": "あれ は ともだち ___ いぬ です",
+      "correct": "の",
+      "options": [
+        "です",
+        "は",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-4",
+      "sourceId": "generated-l4-あれ-は-ともだち-の-いぬ-です-です",
+      "prompt": "あれ は ともだち の いぬ ___",
+      "correct": "です",
+      "options": [
+        "の",
+        "です",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-7",
+      "sourceId": "generated-l4-word-のみます-meaning",
+      "prompt": "のみます",
+      "correct": "drinken",
+      "options": [
+        "eten",
+        "drinken",
+        "kijken / zien"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-7",
+      "sourceId": "generated-l4-word-のみます-spelling",
+      "prompt": "drinken",
+      "correct": "のみます",
+      "options": [
+        "みます",
+        "のみます",
+        "たべます"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-7",
+      "sourceId": "generated-l4-word-たべます-meaning",
+      "prompt": "たべます",
+      "correct": "eten",
+      "options": [
+        "kijken / zien",
+        "eten",
+        "drinken"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-7",
+      "sourceId": "generated-l4-word-たべます-spelling",
+      "prompt": "eten",
+      "correct": "たべます",
+      "options": [
+        "たべます",
+        "のみます",
+        "みます"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-7",
+      "sourceId": "generated-l4-word-みます-meaning",
+      "prompt": "みます",
+      "correct": "kijken / zien",
+      "options": [
+        "drinken",
+        "eten",
+        "kijken / zien"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-7",
+      "sourceId": "generated-l4-word-みます-spelling",
+      "prompt": "kijken / zien",
+      "correct": "みます",
+      "options": [
+        "のみます",
+        "みます",
+        "たべます"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l4-9",
+      "sourceId": "generated-l4-meaning-わたし は みせ に いきます",
+      "prompt": "わたし は みせ に いきます",
+      "correct": "Ik ga naar de winkel.",
+      "options": [
+        "Ik ga naar het station.",
+        "Ik ga naar huis.",
+        "Ik ga naar de winkel."
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-9",
+      "sourceId": "generated-l4-order-わたし は みせ に いきます",
+      "prompt": "Welke Japanse zin past?",
+      "correct": "わたし は みせ に いきます",
+      "options": [
+        "わたし は えき に いきます",
+        "わたし は みせ に いきます",
+        "わたし は うち に いきます"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-9",
+      "sourceId": "generated-l4-meaning-わたし は えき に いきます",
+      "prompt": "わたし は えき に いきます",
+      "correct": "Ik ga naar het station.",
+      "options": [
+        "Ik ga naar het station.",
+        "Ik ga naar de winkel.",
+        "Ik ga naar huis."
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-9",
+      "sourceId": "generated-l4-order-わたし は えき に いきます",
+      "prompt": "Welke Japanse zin past?",
+      "correct": "わたし は えき に いきます",
+      "options": [
+        "わたし は えき に いきます",
+        "わたし は みせ に いきます",
+        "わたし は うち に いきます"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-9",
+      "sourceId": "generated-l4-meaning-わたし は うち に いきます",
+      "prompt": "わたし は うち に いきます",
+      "correct": "Ik ga naar huis.",
+      "options": [
+        "Ik ga naar het station.",
+        "Ik ga naar de winkel.",
+        "Ik ga naar huis."
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-9",
+      "sourceId": "generated-l4-order-わたし は うち に いきます",
+      "prompt": "Welke Japanse zin past?",
+      "correct": "わたし は うち に いきます",
+      "options": [
+        "わたし は みせ に いきます",
+        "わたし は えき に いきます",
+        "わたし は うち に いきます"
+      ],
+      "count": 3,
+      "reasonCode": "pool-2"
+    },
+    {
+      "lessonId": "l4-10",
+      "sourceId": "exercise-l4-10-1",
+      "prompt": "わたし の ともだち は ほん を よみます",
+      "correct": "Mijn vriend leest een boek.",
+      "options": [
+        "Ik lees het boek van een vriend.",
+        "Mijn vriend drinkt water.",
+        "Mijn vriend leest een boek."
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-1",
+      "sourceId": "exercise-l5-1-1",
+      "prompt": "きゃ",
+      "correct": "kya",
+      "options": [
+        "kya",
+        "ka",
+        "kiya"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-1",
+      "sourceId": "exercise-l5-1-2",
+      "prompt": "kyu",
+      "correct": "きゅ",
+      "options": [
+        "きょ",
+        "きゅ",
+        "きゃ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-1",
+      "sourceId": "exercise-l5-1-3",
+      "prompt": "キョ",
+      "correct": "kyo",
+      "options": [
+        "kiyo",
+        "kyo",
+        "ko"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-1",
+      "sourceId": "exercise-l5-1-4",
+      "prompt": "Welke schrijfwijze klinkt als kya en gebruikt kleine ゃ?",
+      "correct": "きゃ",
+      "options": [
+        "きや",
+        "きゃ",
+        "きょ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-1",
+      "sourceId": "exercise-l5-1-5",
+      "prompt": "きゃく",
+      "correct": "gast",
+      "options": [
+        "muziekstuk",
+        "boek",
+        "gast"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-1",
+      "sourceId": "exercise-l5-1-6",
+      "prompt": "きゃく",
+      "correct": "きゃく",
+      "options": [
+        "きょく",
+        "きゃく",
+        "きやく"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-1",
+      "sourceId": "exercise-l5-1-7",
+      "prompt": "きょく",
+      "correct": "きょ",
+      "options": [
+        "きゅ",
+        "きょ",
+        "きよ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-1",
+      "sourceId": "exercise-l5-1-8",
+      "prompt": "これは きゃく です。",
+      "correct": "きゃ",
+      "options": [
+        "きゅ",
+        "きょ",
+        "きゃ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-2",
+      "sourceId": "exercise-l5-2-1",
+      "prompt": "しゃ",
+      "correct": "sha",
+      "options": [
+        "sha",
+        "sa",
+        "shiya"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-2",
+      "sourceId": "exercise-l5-2-2",
+      "prompt": "shu",
+      "correct": "しゅ",
+      "options": [
+        "しょ",
+        "しゃ",
+        "しゅ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-2",
+      "sourceId": "exercise-l5-2-3",
+      "prompt": "ショ",
+      "correct": "sho",
+      "options": [
+        "sho",
+        "so",
+        "shiyo"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-2",
+      "sourceId": "exercise-l5-2-4",
+      "prompt": "sho",
+      "correct": "しょ",
+      "options": [
+        "しよ",
+        "しょ",
+        "しょう"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-2",
+      "sourceId": "exercise-l5-2-5",
+      "prompt": "しゃしん",
+      "correct": "foto",
+      "options": [
+        "hobby",
+        "maaltijd",
+        "foto"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-2",
+      "sourceId": "exercise-l5-2-6",
+      "prompt": "しゅみ",
+      "correct": "hobby",
+      "options": [
+        "foto",
+        "hobby",
+        "maaltijd"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-2",
+      "sourceId": "exercise-l5-2-7",
+      "prompt": "しょくじ",
+      "correct": "しょ",
+      "options": [
+        "しよ",
+        "しゃ",
+        "しょ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-2",
+      "sourceId": "exercise-l5-2-8",
+      "prompt": "しょくじ",
+      "correct": "maaltijd",
+      "options": [
+        "hobby",
+        "maaltijd",
+        "foto"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-3",
+      "sourceId": "exercise-l5-3-1",
+      "prompt": "ちゃ",
+      "correct": "cha",
+      "options": [
+        "ja",
+        "cha",
+        "ta"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-3",
+      "sourceId": "exercise-l5-3-2",
+      "prompt": "ja",
+      "correct": "じゃ",
+      "options": [
+        "ちゃ",
+        "じょ",
+        "じゃ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-3",
+      "sourceId": "exercise-l5-3-3",
+      "prompt": "じゅ",
+      "correct": "ju",
+      "options": [
+        "chu",
+        "jo",
+        "ju"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-3",
+      "sourceId": "exercise-l5-3-4",
+      "prompt": "cho",
+      "correct": "ちょ",
+      "options": [
+        "ちょ",
+        "ちよ",
+        "じょ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-3",
+      "sourceId": "exercise-l5-3-5",
+      "prompt": "おちゃ",
+      "correct": "thee",
+      "options": [
+        "water",
+        "hinder",
+        "thee"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-3",
+      "sourceId": "exercise-l5-3-6",
+      "prompt": "じゃま",
+      "correct": "hinder / in de weg",
+      "options": [
+        "spaargeld",
+        "vrouw",
+        "hinder / in de weg"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-3",
+      "sourceId": "exercise-l5-3-7",
+      "prompt": "josei",
+      "correct": "じょせい",
+      "options": [
+        "じよせい",
+        "じょせい",
+        "ちょせい"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-3",
+      "sourceId": "exercise-l5-3-8",
+      "prompt": "わたし は じょせい です。",
+      "correct": "Ik ben een vrouw.",
+      "options": [
+        "Ik ben een vrouw.",
+        "Ik drink thee.",
+        "Ik ga naar huis."
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-4",
+      "sourceId": "context-l5-4-word-vocab-ベッド",
+      "prompt": "Welk Japans woord betekent “bed” in deze situatie?",
+      "correct": "ベッド",
+      "options": [
+        "パン",
+        "ベッド"
+      ],
+      "count": 2,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l5-4",
+      "sourceId": "exercise-l5-4-1",
+      "prompt": "kitte",
+      "correct": "きって",
+      "options": [
+        "きて",
+        "きって",
+        "きつて"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-4",
+      "sourceId": "exercise-l5-4-2",
+      "prompt": "zasshi",
+      "correct": "ざっし",
+      "options": [
+        "ざっし",
+        "さっし",
+        "ざし"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-4",
+      "sourceId": "exercise-l5-4-3",
+      "prompt": "ざっし",
+      "correct": "tijdschrift",
+      "options": [
+        "tijdschrift",
+        "postzegel",
+        "bed"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-4",
+      "sourceId": "exercise-l5-4-4",
+      "prompt": "きって",
+      "correct": "postzegel",
+      "options": [
+        "tijdschrift",
+        "foto",
+        "postzegel"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-4",
+      "sourceId": "exercise-l5-4-5",
+      "prompt": "kitte",
+      "correct": "きって",
+      "options": [
+        "きつて",
+        "きて",
+        "きって"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-4",
+      "sourceId": "exercise-l5-4-6",
+      "prompt": "beddo",
+      "correct": "ベッド",
+      "options": [
+        "ベッド",
+        "ベツド",
+        "ベド"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-4",
+      "sourceId": "exercise-l5-4-7",
+      "prompt": "きって",
+      "correct": "Een korte stop vóór de t.",
+      "options": [
+        "Het verlengt de i.",
+        "Een korte stop vóór de t.",
+        "Het klinkt als tsu."
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-4",
+      "sourceId": "exercise-l5-4-8",
+      "prompt": "ざっし",
+      "correct": "っ",
+      "options": [
+        "っ",
+        "ざ",
+        "し"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-5",
+      "sourceId": "exercise-l5-5-1",
+      "prompt": "ケーキ",
+      "correct": "e",
+      "options": [
+        "e",
+        "o",
+        "a"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-5",
+      "sourceId": "exercise-l5-5-2",
+      "prompt": "geemu",
+      "correct": "ゲーム",
+      "options": [
+        "ゲエム",
+        "ゲム",
+        "ゲーム"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-5",
+      "sourceId": "exercise-l5-5-3",
+      "prompt": "コーヒー",
+      "correct": "koffie",
+      "options": [
+        "taxi",
+        "koffie",
+        "cake"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-5",
+      "sourceId": "exercise-l5-5-4",
+      "prompt": "スーパー",
+      "correct": "supermarkt",
+      "options": [
+        "hotel",
+        "station",
+        "supermarkt"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-5",
+      "sourceId": "exercise-l5-5-5",
+      "prompt": "ー",
+      "correct": "Het verlengt de klinker ervoor.",
+      "options": [
+        "Het maakt een kleine ゃ-klank.",
+        "Het verlengt de klinker ervoor.",
+        "Het maakt een korte stop."
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-5",
+      "sourceId": "exercise-l5-5-6",
+      "prompt": "takushii",
+      "correct": "タクシー",
+      "options": [
+        "タクーシ",
+        "タクシ",
+        "タクシー"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-5",
+      "sourceId": "exercise-l5-5-7",
+      "prompt": "koffie",
+      "correct": "コーヒー",
+      "options": [
+        "コオヒ",
+        "コヒ",
+        "コーヒー"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l5-5",
+      "sourceId": "exercise-l5-5-8",
+      "prompt": "わたし は ケーキ を たべます。",
+      "correct": "Ik eet cake.",
+      "options": [
+        "Ik eet cake.",
+        "Ik speel een spel.",
+        "Ik drink koffie."
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l6-1",
+      "sourceId": "exercise-l6-1-focus-1",
+      "prompt": "あなた ___ ともだち です",
+      "correct": "は",
+      "options": [
+        "の",
+        "を",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l6-2",
+      "sourceId": "exercise-l6-2-focus-1",
+      "prompt": "わたし ___ はは",
+      "correct": "の",
+      "options": [
+        "の",
+        "に",
+        "は"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l6-3",
+      "sourceId": "exercise-l6-3-focus-1",
+      "prompt": "これは だれ です ___",
+      "correct": "か",
+      "options": [
+        "を",
+        "か",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l6-4",
+      "sourceId": "exercise-l6-4-focus-1",
+      "prompt": "ともだち ___ いもうと",
+      "correct": "の",
+      "options": [
+        "に",
+        "の",
+        "を"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l6-5",
+      "sourceId": "exercise-l6-5-focus-1",
+      "prompt": "これは ともだち の いもうと です",
+      "correct": "の",
+      "options": [
+        "は",
+        "の",
+        "です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l6-5",
+      "sourceId": "reading-l6-5",
+      "prompt": "Wie is het familielid dat met あれ wordt aangewezen?",
+      "correct": "mijn oudere broer",
+      "options": [
+        "een vriend",
+        "mijn oudere broer",
+        "mijn vader"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l7-1",
+      "sourceId": "exercise-l7-1-focus-1",
+      "prompt": "みっつ",
+      "correct": "drie",
+      "options": [
+        "drie",
+        "één",
+        "twee"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l7-2",
+      "sourceId": "exercise-l7-2-focus-1",
+      "prompt": "かぞく は ___ です",
+      "correct": "よにん",
+      "options": [
+        "さんにん",
+        "ふたり",
+        "よにん"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l7-3",
+      "sourceId": "exercise-l7-3-focus-1",
+      "prompt": "いぬ は ___ です",
+      "correct": "さんびき",
+      "options": [
+        "さんびき",
+        "にひき",
+        "いっぴき"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l7-4",
+      "sourceId": "exercise-l7-4-focus-1",
+      "prompt": "きって は に___ です",
+      "correct": "まい",
+      "options": [
+        "まい",
+        "ほん",
+        "ひき"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l7-5",
+      "sourceId": "exercise-l7-5-focus-1",
+      "prompt": "いぬ は ___ です",
+      "correct": "にばんめ",
+      "options": [
+        "にばんめ",
+        "いちばんめ",
+        "さんばんめ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-1",
+      "sourceId": "exercise-l8-1-focus-1",
+      "prompt": "すいようび",
+      "correct": "woensdag",
+      "options": [
+        "donderdag",
+        "woensdag",
+        "maandag"
+      ],
+      "count": 3,
+      "reasonCode": "pool-1"
+    },
+    {
+      "lessonId": "l8-2",
+      "sourceId": "exercise-l8-2-focus-1",
+      "prompt": "なんようび です ___",
+      "correct": "か",
+      "options": [
+        "に",
+        "か",
+        "を"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-3",
+      "sourceId": "exercise-l8-3-focus-1",
+      "prompt": "___ えき に いきます",
+      "correct": "あした",
+      "options": [
+        "きょう",
+        "こんしゅう",
+        "あした"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-4",
+      "sourceId": "level8-month-1",
+      "prompt": "In welke maand lees je het boek?",
+      "correct": "いちがつ",
+      "options": [
+        "にがつ",
+        "いちがつ",
+        "さんがつ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-4",
+      "sourceId": "level8-month-2",
+      "prompt": "In welke maand lees je het boek?",
+      "correct": "にがつ",
+      "options": [
+        "にがつ",
+        "さんがつ",
+        "いちがつ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-4",
+      "sourceId": "level8-month-3",
+      "prompt": "In welke maand lees je het boek?",
+      "correct": "さんがつ",
+      "options": [
+        "いちがつ",
+        "さんがつ",
+        "にがつ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-4",
+      "sourceId": "level8-month-4",
+      "prompt": "In welke maand lees je het boek?",
+      "correct": "しがつ",
+      "options": [
+        "しがつ",
+        "にがつ",
+        "いちがつ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-4",
+      "sourceId": "level8-month-5",
+      "prompt": "In welke maand lees je het boek?",
+      "correct": "ごがつ",
+      "options": [
+        "にがつ",
+        "ごがつ",
+        "いちがつ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-4",
+      "sourceId": "level8-month-6",
+      "prompt": "In welke maand lees je het boek?",
+      "correct": "ろくがつ",
+      "options": [
+        "ろくがつ",
+        "いちがつ",
+        "にがつ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-4",
+      "sourceId": "level8-month-7",
+      "prompt": "In welke maand lees je het boek?",
+      "correct": "しちがつ",
+      "options": [
+        "いちがつ",
+        "にがつ",
+        "しちがつ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-4",
+      "sourceId": "level8-month-8",
+      "prompt": "In welke maand lees je het boek?",
+      "correct": "はちがつ",
+      "options": [
+        "はちがつ",
+        "にがつ",
+        "いちがつ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-4",
+      "sourceId": "level8-month-9",
+      "prompt": "In welke maand lees je het boek?",
+      "correct": "くがつ",
+      "options": [
+        "にがつ",
+        "くがつ",
+        "いちがつ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-4",
+      "sourceId": "level8-month-10",
+      "prompt": "In welke maand lees je het boek?",
+      "correct": "じゅうがつ",
+      "options": [
+        "じゅうがつ",
+        "にがつ",
+        "いちがつ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-4",
+      "sourceId": "level8-month-11",
+      "prompt": "In welke maand lees je het boek?",
+      "correct": "じゅういちがつ",
+      "options": [
+        "いちがつ",
+        "にがつ",
+        "じゅういちがつ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-4",
+      "sourceId": "level8-month-12",
+      "prompt": "In welke maand lees je het boek?",
+      "correct": "じゅうにがつ",
+      "options": [
+        "にがつ",
+        "いちがつ",
+        "じゅうにがつ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-hour-word-0",
+      "prompt": "Welke uurvorm hoort bij deze klok?",
+      "correct": "いちじ",
+      "options": [
+        "にじ",
+        "さんじ",
+        "いちじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-hour-word-1",
+      "prompt": "Welke uurvorm hoort bij deze klok?",
+      "correct": "にじ",
+      "options": [
+        "いちじ",
+        "さんじ",
+        "にじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-hour-word-2",
+      "prompt": "Welke uurvorm hoort bij deze klok?",
+      "correct": "さんじ",
+      "options": [
+        "いちじ",
+        "にじ",
+        "さんじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-hour-word-3",
+      "prompt": "Welke uurvorm hoort bij deze klok?",
+      "correct": "よじ",
+      "options": [
+        "にじ",
+        "いちじ",
+        "よじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-hour-word-4",
+      "prompt": "Welke uurvorm hoort bij deze klok?",
+      "correct": "ごじ",
+      "options": [
+        "いちじ",
+        "にじ",
+        "ごじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-hour-word-5",
+      "prompt": "Welke uurvorm hoort bij deze klok?",
+      "correct": "ろくじ",
+      "options": [
+        "いちじ",
+        "にじ",
+        "ろくじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-hour-word-6",
+      "prompt": "Welke uurvorm hoort bij deze klok?",
+      "correct": "しちじ",
+      "options": [
+        "いちじ",
+        "にじ",
+        "しちじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-hour-word-7",
+      "prompt": "Welke uurvorm hoort bij deze klok?",
+      "correct": "はちじ",
+      "options": [
+        "にじ",
+        "はちじ",
+        "いちじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-hour-word-8",
+      "prompt": "Welke uurvorm hoort bij deze klok?",
+      "correct": "くじ",
+      "options": [
+        "いちじ",
+        "にじ",
+        "くじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-hour-word-9",
+      "prompt": "Welke uurvorm hoort bij deze klok?",
+      "correct": "じゅうじ",
+      "options": [
+        "にじ",
+        "じゅうじ",
+        "いちじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-hour-word-10",
+      "prompt": "Welke uurvorm hoort bij deze klok?",
+      "correct": "じゅういちじ",
+      "options": [
+        "いちじ",
+        "じゅういちじ",
+        "にじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-hour-word-11",
+      "prompt": "Welke uurvorm hoort bij deze klok?",
+      "correct": "じゅうにじ",
+      "options": [
+        "じゅうにじ",
+        "にじ",
+        "いちじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-hour-word-12",
+      "prompt": "Welk dagdeel hoort bij deze klok?",
+      "correct": "ごぜん",
+      "options": [
+        "ごご",
+        "ごぜん"
+      ],
+      "count": 2,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-hour-word-13",
+      "prompt": "Welk dagdeel hoort bij deze klok?",
+      "correct": "ごご",
+      "options": [
+        "ごぜん",
+        "ごご"
+      ],
+      "count": 2,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-0",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごぜん じゅうにじ",
+      "options": [
+        "ごぜん じゅうにじ",
+        "ごご じゅうにじ",
+        "ごぜん いちじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-1",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごぜん いちじ",
+      "options": [
+        "ごぜん いちじ",
+        "ごご いちじ",
+        "ごぜん にじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-2",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごぜん にじ",
+      "options": [
+        "ごぜん さんじ",
+        "ごご にじ",
+        "ごぜん にじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-3",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごぜん さんじ",
+      "options": [
+        "ごぜん さんじ",
+        "ごご さんじ",
+        "ごぜん よじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-4",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごぜん よじ",
+      "options": [
+        "ごぜん ごじ",
+        "ごご よじ",
+        "ごぜん よじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-5",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごぜん ごじ",
+      "options": [
+        "ごご ごじ",
+        "ごぜん ろくじ",
+        "ごぜん ごじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-6",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごぜん ろくじ",
+      "options": [
+        "ごぜん ろくじ",
+        "ごぜん しちじ",
+        "ごご ろくじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-7",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごぜん しちじ",
+      "options": [
+        "ごぜん しちじ",
+        "ごご しちじ",
+        "ごぜん はちじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-8",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごぜん はちじ",
+      "options": [
+        "ごぜん はちじ",
+        "ごぜん くじ",
+        "ごご はちじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-9",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごぜん くじ",
+      "options": [
+        "ごぜん じゅうじ",
+        "ごご くじ",
+        "ごぜん くじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-10",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごぜん じゅうじ",
+      "options": [
+        "ごご じゅうじ",
+        "ごぜん じゅうじ",
+        "ごぜん じゅういちじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-11",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごぜん じゅういちじ",
+      "options": [
+        "ごご じゅういちじ",
+        "ごぜん じゅうにじ",
+        "ごぜん じゅういちじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-12",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごご じゅうにじ",
+      "options": [
+        "ごぜん じゅうにじ",
+        "ごご いちじ",
+        "ごご じゅうにじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-13",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごご いちじ",
+      "options": [
+        "ごご にじ",
+        "ごご いちじ",
+        "ごぜん いちじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-14",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごご にじ",
+      "options": [
+        "ごご にじ",
+        "ごご さんじ",
+        "ごぜん にじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-15",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごご さんじ",
+      "options": [
+        "ごご よじ",
+        "ごぜん さんじ",
+        "ごご さんじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-16",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごご よじ",
+      "options": [
+        "ごご ごじ",
+        "ごぜん よじ",
+        "ごご よじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-17",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごご ごじ",
+      "options": [
+        "ごぜん ごじ",
+        "ごご ごじ",
+        "ごご ろくじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-18",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごご ろくじ",
+      "options": [
+        "ごご しちじ",
+        "ごご ろくじ",
+        "ごぜん ろくじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-19",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごご しちじ",
+      "options": [
+        "ごご はちじ",
+        "ごご しちじ",
+        "ごぜん しちじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-20",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごご はちじ",
+      "options": [
+        "ごぜん はちじ",
+        "ごご はちじ",
+        "ごご くじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-21",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごご くじ",
+      "options": [
+        "ごご くじ",
+        "ごぜん くじ",
+        "ごご じゅうじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-22",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごご じゅうじ",
+      "options": [
+        "ごぜん じゅうじ",
+        "ごご じゅういちじ",
+        "ごご じゅうじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-digital-23",
+      "prompt": "Welke gesproken tijd is dezelfde als deze digitale klok?",
+      "correct": "ごご じゅういちじ",
+      "options": [
+        "ごご じゅういちじ",
+        "ごぜん じゅういちじ",
+        "ごご じゅうにじ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-5",
+      "sourceId": "level8-midnight",
+      "prompt": "Welke tijd staat hier?",
+      "correct": "00:00",
+      "options": [
+        "12:00",
+        "01:00",
+        "00:00"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-minutes",
+      "sourceId": "level8-minute-word-0",
+      "prompt": "Wat betekent なんじ in deze vraag?",
+      "correct": "hoe laat",
+      "options": [
+        "morgen",
+        "op welke dag",
+        "hoe laat"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-minutes",
+      "sourceId": "level8-minute-word-1",
+      "prompt": "Wat betekent いま in deze tijdsvraag?",
+      "correct": "nu",
+      "options": [
+        "op welke dag",
+        "nu",
+        "morgen"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-minutes",
+      "sourceId": "level8-minute-word-2",
+      "prompt": "Welke Japanse minutenuitdrukking hoort bij 12:05?",
+      "correct": "ごふん",
+      "options": [
+        "じゅうごふん",
+        "さんじゅっぷん",
+        "ごふん"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-minutes",
+      "sourceId": "level8-minute-word-3",
+      "prompt": "Welke Japanse minutenuitdrukking hoort bij 12:15?",
+      "correct": "じゅうごふん",
+      "options": [
+        "じゅうごふん",
+        "さんじゅっぷん",
+        "ごふん"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-minutes",
+      "sourceId": "level8-minute-word-4",
+      "prompt": "Welke Japanse minutenuitdrukking hoort bij 12:30?",
+      "correct": "さんじゅっぷん",
+      "options": [
+        "さんじゅっぷん",
+        "ごふん",
+        "じゅうごふん"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-minutes",
+      "sourceId": "level8-minute-word-5",
+      "prompt": "Welke Japanse minutenuitdrukking hoort bij 12:45?",
+      "correct": "よんじゅうごふん",
+      "options": [
+        "ごふん",
+        "よんじゅうごふん",
+        "じゅうごふん"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-minutes",
+      "sourceId": "level8-minute-word-6",
+      "prompt": "Wat betekent はん in de aanduiding 12:30?",
+      "correct": "halfuur na het genoemde uur",
+      "options": [
+        "vijf minuten",
+        "vijftien minuten",
+        "halfuur na het genoemde uur"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-minutes",
+      "sourceId": "level8-clock-12:05",
+      "prompt": "Welke volledige tijd staat op de klok?",
+      "correct": "12:05",
+      "options": [
+        "12:00",
+        "12:05",
+        "11:30"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-minutes",
+      "sourceId": "level8-clock-12:15",
+      "prompt": "Welke volledige tijd staat op de klok?",
+      "correct": "12:15",
+      "options": [
+        "12:15",
+        "11:30",
+        "12:00"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-minutes",
+      "sourceId": "level8-clock-12:30",
+      "prompt": "Welke volledige tijd staat op de klok?",
+      "correct": "12:30",
+      "options": [
+        "11:30",
+        "12:00",
+        "12:30"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-minutes",
+      "sourceId": "level8-clock-12:45",
+      "prompt": "Welke volledige tijd staat op de klok?",
+      "correct": "12:45",
+      "options": [
+        "11:30",
+        "12:45",
+        "12:00"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-minutes",
+      "sourceId": "level8-dialogue",
+      "prompt": "Welk antwoord geeft de gevraagde tijd?",
+      "correct": "じゅうにじはん です",
+      "options": [
+        "じゅうにじはん です",
+        "にがつ です",
+        "げつようび です"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-minutes",
+      "sourceId": "level8-question-meaning",
+      "prompt": "Wat wil de spreker weten?",
+      "correct": "hoe laat het nu is",
+      "options": [
+        "welke maand het is",
+        "waar het station is",
+        "hoe laat het nu is"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-minutes",
+      "sourceId": "level8-apply-two",
+      "prompt": "Welke tijd is dit?",
+      "correct": "13:02",
+      "options": [
+        "01:20",
+        "13:20",
+        "13:02"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-minutes",
+      "sourceId": "level8-apply-ten",
+      "prompt": "Welke tijd is dit?",
+      "correct": "19:10",
+      "options": [
+        "19:10",
+        "19:01",
+        "07:01"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-6",
+      "sourceId": "level8-agenda-month",
+      "prompt": "In welke maand ga je naar het station?",
+      "correct": "にがつ",
+      "options": [
+        "しちがつ",
+        "にがつ",
+        "しがつ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-6",
+      "sourceId": "level8-agenda-day",
+      "prompt": "Op welke dag ga je naar de winkel?",
+      "correct": "もくようび",
+      "options": [
+        "げつようび",
+        "きんようび",
+        "もくようび"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-6",
+      "sourceId": "level8-agenda-time",
+      "prompt": "Hoe laat ga je naar het station?",
+      "correct": "13:30",
+      "options": [
+        "13:30",
+        "07:15",
+        "19:45"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-6",
+      "sourceId": "level8-agenda-appointment",
+      "prompt": "Welke afspraak is om 19:45?",
+      "correct": "een boek lezen",
+      "options": [
+        "naar de winkel",
+        "naar het station",
+        "een boek lezen"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-6",
+      "sourceId": "level8-agenda-spoken",
+      "prompt": "Welke gesproken tijd hoort bij de winkelafspraak?",
+      "correct": "ごぜん しちじ じゅうごふん",
+      "options": [
+        "ごご しちじ じゅうごふん",
+        "ごぜん しちじ じゅうごふん",
+        "ごぜん しちじはん"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-6",
+      "sourceId": "level8-agenda-station-month",
+      "prompt": "In welke maand staat “naar het station” gepland?",
+      "correct": "にがつ",
+      "options": [
+        "しちがつ",
+        "にがつ",
+        "しがつ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-6",
+      "sourceId": "level8-agenda-station-day",
+      "prompt": "Op welke dag staat “naar het station” gepland?",
+      "correct": "げつようび",
+      "options": [
+        "げつようび",
+        "もくようび",
+        "きんようび"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-6",
+      "sourceId": "level8-agenda-station-time",
+      "prompt": "Hoe laat staat “naar het station” gepland?",
+      "correct": "13:30",
+      "options": [
+        "19:45",
+        "07:15",
+        "13:30"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-6",
+      "sourceId": "level8-agenda-shop-month",
+      "prompt": "In welke maand staat “naar de winkel” gepland?",
+      "correct": "しがつ",
+      "options": [
+        "しちがつ",
+        "にがつ",
+        "しがつ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-6",
+      "sourceId": "level8-agenda-shop-day",
+      "prompt": "Op welke dag staat “naar de winkel” gepland?",
+      "correct": "もくようび",
+      "options": [
+        "もくようび",
+        "げつようび",
+        "きんようび"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-6",
+      "sourceId": "level8-agenda-shop-time",
+      "prompt": "Hoe laat staat “naar de winkel” gepland?",
+      "correct": "07:15",
+      "options": [
+        "19:45",
+        "07:15",
+        "13:30"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-6",
+      "sourceId": "level8-agenda-book-month",
+      "prompt": "In welke maand staat “een boek lezen” gepland?",
+      "correct": "しちがつ",
+      "options": [
+        "にがつ",
+        "しちがつ",
+        "しがつ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-6",
+      "sourceId": "level8-agenda-book-day",
+      "prompt": "Op welke dag staat “een boek lezen” gepland?",
+      "correct": "きんようび",
+      "options": [
+        "げつようび",
+        "もくようび",
+        "きんようび"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l8-6",
+      "sourceId": "level8-agenda-book-time",
+      "prompt": "Hoe laat staat “een boek lezen” gepland?",
+      "correct": "19:45",
+      "options": [
+        "13:30",
+        "19:45",
+        "07:15"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l9-1",
+      "sourceId": "exercise-l9-1-focus-1",
+      "prompt": "えき は ___ です か",
+      "correct": "どこ",
+      "options": [
+        "だれ",
+        "どこ",
+        "どれ"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l9-2",
+      "sourceId": "exercise-l9-2-focus-1",
+      "prompt": "えき は ___ です",
+      "correct": "みぎ",
+      "options": [
+        "みぎ",
+        "まっすぐ",
+        "ひだり"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l9-3",
+      "sourceId": "exercise-l9-3-focus-1",
+      "prompt": "みせ ___ となり",
+      "correct": "の",
+      "options": [
+        "を",
+        "に",
+        "の"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l9-4",
+      "sourceId": "exercise-l9-4-focus-1",
+      "prompt": "ベッド の ___",
+      "correct": "うえ",
+      "options": [
+        "した",
+        "うえ",
+        "となり"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l9-5",
+      "sourceId": "exercise-l9-5-focus-1",
+      "prompt": "レストラン ___ パン を たべます",
+      "correct": "で",
+      "options": [
+        "の",
+        "で",
+        "に"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    },
+    {
+      "lessonId": "l9-5",
+      "sourceId": "reading-l9-5",
+      "prompt": "Waar eet de verteller brood?",
+      "correct": "in het park",
+      "options": [
+        "in het park",
+        "op het station",
+        "thuis"
+      ],
+      "count": 3,
+      "reasonCode": "pool-3"
+    }
+  ],
+  "reasons": {
+    "pool-1": "Known word pool with matching word kind/script and distinct meaning; first word of a kind/script uses a minimal known contrast.",
+    "pool-2": "Only this many distinct taught symbols/labels in the supplied pool.",
+    "pool-3": "Closed authored context question: this many individually vetted choices in the source; no unchecked fill-in distractors."
+  }
+}

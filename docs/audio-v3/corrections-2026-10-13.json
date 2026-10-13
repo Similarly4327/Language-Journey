@@ -1,0 +1,724 @@
+{
+  "date": "2026-10-13",
+  "sourceSpreadsheetId": "1EreIhTkk6WhTeJKjAAkS3MPQFRVgs_gSsO9uPi5Hqss",
+  "rows": [
+    {
+      "entryId": "vocab-かようび",
+      "kana": "かようび",
+      "meaning": "dinsdag",
+      "reported": true,
+      "previousAssets": [
+        {
+          "entryId": "vocab-かようび",
+          "displayText": "かようび",
+          "readingId": "default",
+          "audioTextKana": "かようび",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/568c455b64ad3e8a-A-1db092519949e8f7.mp3",
+          "generationHash": "1db092519949e8f7ff639f47682533d90a233a373637a8328633136a19f9599c",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:19.954Z"
+        }
+      ],
+      "assets": [
+        {
+          "entryId": "vocab-かようび",
+          "displayText": "かようび",
+          "readingId": "default",
+          "audioTextKana": "かようび",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/568c455b64ad3e8a-A-c29ab432ba5e96a0.mp3",
+          "generationHash": "c29ab432ba5e96a04f65295b03f8e140109025f69e81d439aac63e55ff8dd095",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:36.564Z"
+        },
+        {
+          "entryId": "vocab-かようび",
+          "displayText": "かようび",
+          "readingId": "default",
+          "audioTextKana": "かようび",
+          "voiceRole": "B",
+          "voiceFingerprint": "3ccee7a03263b9a5b8e3b71aed4521ac33e27c1bc112feba172a1c0e726ff8a2",
+          "path": "assets/audio/ja/words/568c455b64ad3e8a-B-bfd8d725530cc321.mp3",
+          "generationHash": "bfd8d725530cc32167f7f16267f905ce5bfc08263c35d15e44fafa40a95f6fd9",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:38.055Z"
+        }
+      ],
+      "listeningReview": "pending"
+    },
+    {
+      "entryId": "vocab-きんようび",
+      "kana": "きんようび",
+      "meaning": "vrijdag",
+      "reported": true,
+      "previousAssets": [
+        {
+          "entryId": "vocab-きんようび",
+          "displayText": "きんようび",
+          "readingId": "default",
+          "audioTextKana": "きんようび",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/97c078cdc66ca8a1-A-13db8329c84b5e38.mp3",
+          "generationHash": "13db8329c84b5e38365afffa91c4e85f9ae2990c5cb5db17b0e4061ad399442c",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:22.402Z"
+        }
+      ],
+      "assets": [
+        {
+          "entryId": "vocab-きんようび",
+          "displayText": "きんようび",
+          "readingId": "default",
+          "audioTextKana": "きんようび",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/97c078cdc66ca8a1-A-65a3166da160ad25.mp3",
+          "generationHash": "65a3166da160ad25897bd025ec230588cd7da11fee84685cbb962b3fbf2b2070",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:38.975Z"
+        },
+        {
+          "entryId": "vocab-きんようび",
+          "displayText": "きんようび",
+          "readingId": "default",
+          "audioTextKana": "きんようび",
+          "voiceRole": "B",
+          "voiceFingerprint": "3ccee7a03263b9a5b8e3b71aed4521ac33e27c1bc112feba172a1c0e726ff8a2",
+          "path": "assets/audio/ja/words/97c078cdc66ca8a1-B-03fcbf0633013f2f.mp3",
+          "generationHash": "03fcbf0633013f2f5e67bc681bab37adea4bcb827334d6b21412f64f090f7220",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:39.976Z"
+        }
+      ],
+      "listeningReview": "pending"
+    },
+    {
+      "entryId": "vocab-いちがつ",
+      "kana": "いちがつ",
+      "meaning": "januari",
+      "reported": true,
+      "previousAssets": [
+        {
+          "entryId": "vocab-いちがつ",
+          "displayText": "いちがつ",
+          "readingId": "default",
+          "audioTextKana": "いちがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/5352d2d0ad68b485-A-1e011faf75426053.mp3",
+          "generationHash": "1e011faf7542605393fc0ab40c8017a87d871ec58729e25dfa31969ae2560098",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:28.871Z"
+        }
+      ],
+      "assets": [
+        {
+          "entryId": "vocab-いちがつ",
+          "displayText": "いちがつ",
+          "readingId": "default",
+          "audioTextKana": "いちがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/5352d2d0ad68b485-A-7dc28d98dd82d8b3.mp3",
+          "generationHash": "7dc28d98dd82d8b3755d75aab74a22de444ba4b7389dd45b9d2994c3feabbf23",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:41.083Z"
+        },
+        {
+          "entryId": "vocab-いちがつ",
+          "displayText": "いちがつ",
+          "readingId": "default",
+          "audioTextKana": "いちがつ",
+          "voiceRole": "B",
+          "voiceFingerprint": "3ccee7a03263b9a5b8e3b71aed4521ac33e27c1bc112feba172a1c0e726ff8a2",
+          "path": "assets/audio/ja/words/5352d2d0ad68b485-B-7029f3ba6af5abcf.mp3",
+          "generationHash": "7029f3ba6af5abcf15004ac9d23de37b042e0148af49f4f7a6dfda7f893d4e8d",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:42.171Z"
+        }
+      ],
+      "listeningReview": "pending"
+    },
+    {
+      "entryId": "vocab-にがつ",
+      "kana": "にがつ",
+      "meaning": "februari",
+      "reported": false,
+      "previousAssets": [
+        {
+          "entryId": "vocab-にがつ",
+          "displayText": "にがつ",
+          "readingId": "default",
+          "audioTextKana": "にがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/66d2b74dca3f316a-A-56ea54de68466b90.mp3",
+          "generationHash": "56ea54de68466b902702d7ceed4a4dd31028c868af73fc04904014ec71b145e4",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:29.664Z"
+        }
+      ],
+      "assets": [
+        {
+          "entryId": "vocab-にがつ",
+          "displayText": "にがつ",
+          "readingId": "default",
+          "audioTextKana": "にがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/66d2b74dca3f316a-A-56ea54de68466b90.mp3",
+          "generationHash": "56ea54de68466b902702d7ceed4a4dd31028c868af73fc04904014ec71b145e4",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:29.664Z"
+        },
+        {
+          "entryId": "vocab-にがつ",
+          "displayText": "にがつ",
+          "readingId": "default",
+          "audioTextKana": "にがつ",
+          "voiceRole": "B",
+          "voiceFingerprint": "3ccee7a03263b9a5b8e3b71aed4521ac33e27c1bc112feba172a1c0e726ff8a2",
+          "path": "assets/audio/ja/words/66d2b74dca3f316a-B-20791451b2e71b25.mp3",
+          "generationHash": "20791451b2e71b2585cb7a877c9ae1a0b7c3de8d52c34476b538d20d9013a553",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:42.983Z"
+        }
+      ],
+      "listeningReview": "pending"
+    },
+    {
+      "entryId": "vocab-さんがつ",
+      "kana": "さんがつ",
+      "meaning": "maart",
+      "reported": false,
+      "previousAssets": [
+        {
+          "entryId": "vocab-さんがつ",
+          "displayText": "さんがつ",
+          "readingId": "default",
+          "audioTextKana": "さんがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/fc0e25c72c1c9406-A-e2cdd970dbea9a6e.mp3",
+          "generationHash": "e2cdd970dbea9a6e2ea9159474bc59338daf592de5ff737fb3293d4ce70aed4a",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:30.469Z"
+        }
+      ],
+      "assets": [
+        {
+          "entryId": "vocab-さんがつ",
+          "displayText": "さんがつ",
+          "readingId": "default",
+          "audioTextKana": "さんがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/fc0e25c72c1c9406-A-e2cdd970dbea9a6e.mp3",
+          "generationHash": "e2cdd970dbea9a6e2ea9159474bc59338daf592de5ff737fb3293d4ce70aed4a",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:30.469Z"
+        },
+        {
+          "entryId": "vocab-さんがつ",
+          "displayText": "さんがつ",
+          "readingId": "default",
+          "audioTextKana": "さんがつ",
+          "voiceRole": "B",
+          "voiceFingerprint": "3ccee7a03263b9a5b8e3b71aed4521ac33e27c1bc112feba172a1c0e726ff8a2",
+          "path": "assets/audio/ja/words/fc0e25c72c1c9406-B-3ff2126521441038.mp3",
+          "generationHash": "3ff2126521441038e12fa6b2b61b795741bc84c9fe132c89b6e88d241027a4a7",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:43.796Z"
+        }
+      ],
+      "listeningReview": "pending"
+    },
+    {
+      "entryId": "vocab-しがつ",
+      "kana": "しがつ",
+      "meaning": "april",
+      "reported": false,
+      "previousAssets": [
+        {
+          "entryId": "vocab-しがつ",
+          "displayText": "しがつ",
+          "readingId": "default",
+          "audioTextKana": "しがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/9c1313c4bff3eaf0-A-5d54b5f95fab2249.mp3",
+          "generationHash": "5d54b5f95fab22492ddd9e2bc3e8b9c4c595c7a1c2b689c5a2ab456fd32deb27",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:31.272Z"
+        }
+      ],
+      "assets": [
+        {
+          "entryId": "vocab-しがつ",
+          "displayText": "しがつ",
+          "readingId": "default",
+          "audioTextKana": "しがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/9c1313c4bff3eaf0-A-5d54b5f95fab2249.mp3",
+          "generationHash": "5d54b5f95fab22492ddd9e2bc3e8b9c4c595c7a1c2b689c5a2ab456fd32deb27",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:31.272Z"
+        },
+        {
+          "entryId": "vocab-しがつ",
+          "displayText": "しがつ",
+          "readingId": "default",
+          "audioTextKana": "しがつ",
+          "voiceRole": "B",
+          "voiceFingerprint": "3ccee7a03263b9a5b8e3b71aed4521ac33e27c1bc112feba172a1c0e726ff8a2",
+          "path": "assets/audio/ja/words/9c1313c4bff3eaf0-B-4aa2ac015d7d1c92.mp3",
+          "generationHash": "4aa2ac015d7d1c92c095edbf2d35c6339246abc152bf4ce842828dbd80444a23",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:44.617Z"
+        }
+      ],
+      "listeningReview": "pending"
+    },
+    {
+      "entryId": "vocab-ごがつ",
+      "kana": "ごがつ",
+      "meaning": "mei",
+      "reported": false,
+      "previousAssets": [
+        {
+          "entryId": "vocab-ごがつ",
+          "displayText": "ごがつ",
+          "readingId": "default",
+          "audioTextKana": "ごがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/4b19650e58fa7326-A-1cc8b67bf90d0c8e.mp3",
+          "generationHash": "1cc8b67bf90d0c8e8e359f39188b0fbfd757309c19f698e67f29fe14d29c3070",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:32.112Z"
+        }
+      ],
+      "assets": [
+        {
+          "entryId": "vocab-ごがつ",
+          "displayText": "ごがつ",
+          "readingId": "default",
+          "audioTextKana": "ごがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/4b19650e58fa7326-A-1cc8b67bf90d0c8e.mp3",
+          "generationHash": "1cc8b67bf90d0c8e8e359f39188b0fbfd757309c19f698e67f29fe14d29c3070",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:32.112Z"
+        },
+        {
+          "entryId": "vocab-ごがつ",
+          "displayText": "ごがつ",
+          "readingId": "default",
+          "audioTextKana": "ごがつ",
+          "voiceRole": "B",
+          "voiceFingerprint": "3ccee7a03263b9a5b8e3b71aed4521ac33e27c1bc112feba172a1c0e726ff8a2",
+          "path": "assets/audio/ja/words/4b19650e58fa7326-B-e4daf5da47f98be2.mp3",
+          "generationHash": "e4daf5da47f98be2055cdc284a61472e72a28dbf6d870d71068701a15367ba0f",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:45.418Z"
+        }
+      ],
+      "listeningReview": "pending"
+    },
+    {
+      "entryId": "vocab-ろくがつ",
+      "kana": "ろくがつ",
+      "meaning": "juni",
+      "reported": false,
+      "previousAssets": [
+        {
+          "entryId": "vocab-ろくがつ",
+          "displayText": "ろくがつ",
+          "readingId": "default",
+          "audioTextKana": "ろくがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/83c32b64f9a411dc-A-9a693cb6b3122b6c.mp3",
+          "generationHash": "9a693cb6b3122b6c36aee6451b69752d90a70c464c2393f33850df2af7289fc2",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:32.911Z"
+        }
+      ],
+      "assets": [
+        {
+          "entryId": "vocab-ろくがつ",
+          "displayText": "ろくがつ",
+          "readingId": "default",
+          "audioTextKana": "ろくがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/83c32b64f9a411dc-A-9a693cb6b3122b6c.mp3",
+          "generationHash": "9a693cb6b3122b6c36aee6451b69752d90a70c464c2393f33850df2af7289fc2",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:32.911Z"
+        },
+        {
+          "entryId": "vocab-ろくがつ",
+          "displayText": "ろくがつ",
+          "readingId": "default",
+          "audioTextKana": "ろくがつ",
+          "voiceRole": "B",
+          "voiceFingerprint": "3ccee7a03263b9a5b8e3b71aed4521ac33e27c1bc112feba172a1c0e726ff8a2",
+          "path": "assets/audio/ja/words/83c32b64f9a411dc-B-92903c4e428b6660.mp3",
+          "generationHash": "92903c4e428b66609ed7b4c88ac1522b14e9241d8831553e492a1951fd5e41a0",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:46.229Z"
+        }
+      ],
+      "listeningReview": "pending"
+    },
+    {
+      "entryId": "vocab-しちがつ",
+      "kana": "しちがつ",
+      "meaning": "juli",
+      "reported": false,
+      "previousAssets": [
+        {
+          "entryId": "vocab-しちがつ",
+          "displayText": "しちがつ",
+          "readingId": "default",
+          "audioTextKana": "しちがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/dfa47c0da55142f2-A-a34971a53b89c969.mp3",
+          "generationHash": "a34971a53b89c969a347a6a7f8bb6b305fcb4b23e47de9623138db55db2350c0",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:33.721Z"
+        }
+      ],
+      "assets": [
+        {
+          "entryId": "vocab-しちがつ",
+          "displayText": "しちがつ",
+          "readingId": "default",
+          "audioTextKana": "しちがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/dfa47c0da55142f2-A-a34971a53b89c969.mp3",
+          "generationHash": "a34971a53b89c969a347a6a7f8bb6b305fcb4b23e47de9623138db55db2350c0",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:33.721Z"
+        },
+        {
+          "entryId": "vocab-しちがつ",
+          "displayText": "しちがつ",
+          "readingId": "default",
+          "audioTextKana": "しちがつ",
+          "voiceRole": "B",
+          "voiceFingerprint": "3ccee7a03263b9a5b8e3b71aed4521ac33e27c1bc112feba172a1c0e726ff8a2",
+          "path": "assets/audio/ja/words/dfa47c0da55142f2-B-6ab8ef268f14627d.mp3",
+          "generationHash": "6ab8ef268f14627dcd127017c8aee0c30d585ef718b01473adee5cd4a2e62453",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:47.051Z"
+        }
+      ],
+      "listeningReview": "pending"
+    },
+    {
+      "entryId": "vocab-はちがつ",
+      "kana": "はちがつ",
+      "meaning": "augustus",
+      "reported": false,
+      "previousAssets": [
+        {
+          "entryId": "vocab-はちがつ",
+          "displayText": "はちがつ",
+          "readingId": "default",
+          "audioTextKana": "はちがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/fcbdf8c74659ecbd-A-7e6f405850ef6ffb.mp3",
+          "generationHash": "7e6f405850ef6ffbd61cb21d8e2787cd61ce79cf61f9968f74b0e84d394435dd",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:34.528Z"
+        }
+      ],
+      "assets": [
+        {
+          "entryId": "vocab-はちがつ",
+          "displayText": "はちがつ",
+          "readingId": "default",
+          "audioTextKana": "はちがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/fcbdf8c74659ecbd-A-7e6f405850ef6ffb.mp3",
+          "generationHash": "7e6f405850ef6ffbd61cb21d8e2787cd61ce79cf61f9968f74b0e84d394435dd",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:34.528Z"
+        },
+        {
+          "entryId": "vocab-はちがつ",
+          "displayText": "はちがつ",
+          "readingId": "default",
+          "audioTextKana": "はちがつ",
+          "voiceRole": "B",
+          "voiceFingerprint": "3ccee7a03263b9a5b8e3b71aed4521ac33e27c1bc112feba172a1c0e726ff8a2",
+          "path": "assets/audio/ja/words/fcbdf8c74659ecbd-B-e50ff1b8e785b539.mp3",
+          "generationHash": "e50ff1b8e785b5393cf22ed4a1b1b74c2b536a5b93638565c3f63fe68fc779e5",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:47.878Z"
+        }
+      ],
+      "listeningReview": "pending"
+    },
+    {
+      "entryId": "vocab-くがつ",
+      "kana": "くがつ",
+      "meaning": "september",
+      "reported": false,
+      "previousAssets": [
+        {
+          "entryId": "vocab-くがつ",
+          "displayText": "くがつ",
+          "readingId": "default",
+          "audioTextKana": "くがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/fb0e880620e5182c-A-38967f8d2f27fbfb.mp3",
+          "generationHash": "38967f8d2f27fbfbd2e95e67345dd3c9bca1d9ed5832c15b1ae091251c7dcac8",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:35.318Z"
+        }
+      ],
+      "assets": [
+        {
+          "entryId": "vocab-くがつ",
+          "displayText": "くがつ",
+          "readingId": "default",
+          "audioTextKana": "くがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/fb0e880620e5182c-A-38967f8d2f27fbfb.mp3",
+          "generationHash": "38967f8d2f27fbfbd2e95e67345dd3c9bca1d9ed5832c15b1ae091251c7dcac8",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:35.318Z"
+        },
+        {
+          "entryId": "vocab-くがつ",
+          "displayText": "くがつ",
+          "readingId": "default",
+          "audioTextKana": "くがつ",
+          "voiceRole": "B",
+          "voiceFingerprint": "3ccee7a03263b9a5b8e3b71aed4521ac33e27c1bc112feba172a1c0e726ff8a2",
+          "path": "assets/audio/ja/words/fb0e880620e5182c-B-1058df7090bf2486.mp3",
+          "generationHash": "1058df7090bf2486abf74df8bc0f67e1ff27adcdc921841a4457e4df0057539d",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:48.686Z"
+        }
+      ],
+      "listeningReview": "pending"
+    },
+    {
+      "entryId": "vocab-じゅうがつ",
+      "kana": "じゅうがつ",
+      "meaning": "oktober",
+      "reported": false,
+      "previousAssets": [
+        {
+          "entryId": "vocab-じゅうがつ",
+          "displayText": "じゅうがつ",
+          "readingId": "default",
+          "audioTextKana": "じゅうがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/15bed82fb58ae9a9-A-398de1fb26c61bbd.mp3",
+          "generationHash": "398de1fb26c61bbd318caffa795f308205782dcbb88d5b5c9f23d989fda8911d",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:36.146Z"
+        }
+      ],
+      "assets": [
+        {
+          "entryId": "vocab-じゅうがつ",
+          "displayText": "じゅうがつ",
+          "readingId": "default",
+          "audioTextKana": "じゅうがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/15bed82fb58ae9a9-A-398de1fb26c61bbd.mp3",
+          "generationHash": "398de1fb26c61bbd318caffa795f308205782dcbb88d5b5c9f23d989fda8911d",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:36.146Z"
+        },
+        {
+          "entryId": "vocab-じゅうがつ",
+          "displayText": "じゅうがつ",
+          "readingId": "default",
+          "audioTextKana": "じゅうがつ",
+          "voiceRole": "B",
+          "voiceFingerprint": "3ccee7a03263b9a5b8e3b71aed4521ac33e27c1bc112feba172a1c0e726ff8a2",
+          "path": "assets/audio/ja/words/15bed82fb58ae9a9-B-2ac2149c0ec25926.mp3",
+          "generationHash": "2ac2149c0ec25926ad12cedf7a6dfcb9249edda119aa0a88d8325d2c9d95302d",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:49.496Z"
+        }
+      ],
+      "listeningReview": "pending"
+    },
+    {
+      "entryId": "vocab-じゅういちがつ",
+      "kana": "じゅういちがつ",
+      "meaning": "november",
+      "reported": false,
+      "previousAssets": [
+        {
+          "entryId": "vocab-じゅういちがつ",
+          "displayText": "じゅういちがつ",
+          "readingId": "default",
+          "audioTextKana": "じゅういちがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/dcd464bc66f12e35-A-da1f840ea851ad30.mp3",
+          "generationHash": "da1f840ea851ad3036e289a2ac691bd77dd7203414b75a65e5e67f2d28f1aefb",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:36.964Z"
+        }
+      ],
+      "assets": [
+        {
+          "entryId": "vocab-じゅういちがつ",
+          "displayText": "じゅういちがつ",
+          "readingId": "default",
+          "audioTextKana": "じゅういちがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/dcd464bc66f12e35-A-da1f840ea851ad30.mp3",
+          "generationHash": "da1f840ea851ad3036e289a2ac691bd77dd7203414b75a65e5e67f2d28f1aefb",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:36.964Z"
+        },
+        {
+          "entryId": "vocab-じゅういちがつ",
+          "displayText": "じゅういちがつ",
+          "readingId": "default",
+          "audioTextKana": "じゅういちがつ",
+          "voiceRole": "B",
+          "voiceFingerprint": "3ccee7a03263b9a5b8e3b71aed4521ac33e27c1bc112feba172a1c0e726ff8a2",
+          "path": "assets/audio/ja/words/dcd464bc66f12e35-B-856280dcc7464e28.mp3",
+          "generationHash": "856280dcc7464e2827f12a89cf8f7a1a206fe84641dd88ced653302bf0664d96",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:50.320Z"
+        }
+      ],
+      "listeningReview": "pending"
+    },
+    {
+      "entryId": "vocab-じゅうにがつ",
+      "kana": "じゅうにがつ",
+      "meaning": "december",
+      "reported": true,
+      "previousAssets": [
+        {
+          "entryId": "vocab-じゅうにがつ",
+          "displayText": "じゅうにがつ",
+          "readingId": "default",
+          "audioTextKana": "じゅうにがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/395132967a178935-A-9b903cc0559fa493.mp3",
+          "generationHash": "9b903cc0559fa493136794b8d15e253107dbbb483e72f79d3c6146cf61b9ae13",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-08T15:09:37.765Z"
+        }
+      ],
+      "assets": [
+        {
+          "entryId": "vocab-じゅうにがつ",
+          "displayText": "じゅうにがつ",
+          "readingId": "default",
+          "audioTextKana": "じゅうにがつ",
+          "voiceRole": "A",
+          "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+          "path": "assets/audio/ja/words/395132967a178935-A-bc715828a508b872.mp3",
+          "generationHash": "bc715828a508b872a3f8b87eafb64c2d2ff8f8786685b9d05bbe87e424711597",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:51.333Z"
+        },
+        {
+          "entryId": "vocab-じゅうにがつ",
+          "displayText": "じゅうにがつ",
+          "readingId": "default",
+          "audioTextKana": "じゅうにがつ",
+          "voiceRole": "B",
+          "voiceFingerprint": "3ccee7a03263b9a5b8e3b71aed4521ac33e27c1bc112feba172a1c0e726ff8a2",
+          "path": "assets/audio/ja/words/395132967a178935-B-dbfd3d68871f1f0d.mp3",
+          "generationHash": "dbfd3d68871f1f0d9f9be0a2ee5894ff23ff9e3cb932d4490a0493917bf571d1",
+          "pipelineVersion": "audio-v3.1",
+          "reviewed": true,
+          "generatedAt": "2026-10-13T15:51:52.317Z"
+        }
+      ],
+      "listeningReview": "pending"
+    }
+  ],
+  "verification": {
+    "decodedFiles": 32,
+    "audioTestsPassed": 40,
+    "playlists": {
+      "roles": [
+        "A",
+        "B"
+      ],
+      "tracksPerRole": 14,
+      "rates": [
+        1,
+        0.75
+      ],
+      "completed": true
+    },
+    "spreadsheetReadback": true,
+    "pendingGenerations": 0
+  }
+}

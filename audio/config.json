@@ -54,6 +54,26 @@
       "model_id": "eleven_turbo_v2_5",
       "language_code": "ja",
       "apply_language_text_normalization": true
+    },
+    "vocab-かようび": {
+      "model_id": "eleven_turbo_v2_5",
+      "language_code": "ja",
+      "apply_language_text_normalization": true
+    },
+    "vocab-きんようび": {
+      "model_id": "eleven_turbo_v2_5",
+      "language_code": "ja",
+      "apply_language_text_normalization": true
+    },
+    "vocab-いちがつ": {
+      "model_id": "eleven_turbo_v2_5",
+      "language_code": "ja",
+      "apply_language_text_normalization": true
+    },
+    "vocab-じゅうにがつ": {
+      "model_id": "eleven_turbo_v2_5",
+      "language_code": "ja",
+      "apply_language_text_normalization": true
     }
   }
 }

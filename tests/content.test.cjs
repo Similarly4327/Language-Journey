@@ -129,6 +129,11 @@ test('Levels 11–15 have five two-part lessons with staged words and optional b
     const level=content.manifest.levels.find(l=>l.number===number);
     assert.equal(level.status,'playable');
     assert.equal(level.lessonIds.length,5);
+    const activeBonus=content.manifest.bonus.filter(bonus=>!bonus.legacy&&level.lessonIds.includes(bonus.lessonId));
+    assert.equal(activeBonus.length,1);
+    assert.equal(level.bonusId,activeBonus[0].id);
+    assert.equal(activeBonus[0].optional,true);
+    assert.ok(activeBonus[0].text);
     for(const lessonId of level.lessonIds){
       const lesson=content.manifest.lessons.find(l=>l.id===lessonId);
       assert.equal(lesson.applications.length,2);
@@ -140,11 +145,7 @@ test('Levels 11–15 have five two-part lessons with staged words and optional b
         assert.ok(app.questions.length>=2);
         assert.ok(content.manifest.readings.some(r=>r.id===app.readingId&&r.translation));
       }
-      for(const bonusId of lesson.bonusIds){
-        const bonus=content.manifest.bonus.find(b=>b.id===bonusId);
-        assert.equal(bonus.optional,true);
-        assert.ok(bonus.text);
-      }
+      assert.deepEqual(lesson.bonusIds,[],'the level bonus is separate from Modules A and B and from lesson completion');
     }
   }
   const a=content.getKnowledgeState('15-1-A'),b=content.getKnowledgeState('15-1-B');

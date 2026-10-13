@@ -1,110 +1,77 @@
-# Eerlijke woorddekking — level 3 t/m 10
+# Woordrondes en compacte examens — Level 3 t/m 10
 
-Bijgewerkt: 8 oktober 2026. Lokaal geïmplementeerd en gecontroleerd; niet gepubliceerd.
+Bijgewerkt: 13 oktober 2026. Uitgevoerd volgens de aanvulling van 12 oktober: volledige 2N-dekking geldt voor de losse woordoefening; een examen heeft vooraf een totaalbudget van maximaal 40 vragen. Lokaal gecontroleerd, niet gepubliceerd.
 
-## Resultaat per level
+## Aantallen en verdeling
 
-Een woordronde bevat exact twee doelbeurten per unieke nieuwe woord-ID: één Japans → Nederlands en één Nederlands → Japans. Fouten voegen geen extra beurten toe; opnieuw oefenen is een aparte, vrijwillige ronde. Examens combineren deze verplichte dekking met de bestaande overige leerdoelen. De volgorde wordt gemengd zonder opeenvolgende doelen met hetzelfde woord waar dat mogelijk is.
+De oude aantallen zijn gemeten vóór deze correctie. De nieuwe verdeling hieronder is de reproduceerbare auditronde met seed 1; de verdeling grammatica/context kan tussen pogingen iets verschillen. Het totaalbudget en de verplichte leerdoelen blijven gelijk.
 
-| Level | Unieke nieuwe woorden | JP → NL | NL → JP | Overige examenopgaven | Totaal examen |
+| Level | Oud totaal | Nieuw totaal | Woordvragen | Grammatica/kana | Zins-/situatiebegrip |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| 3 | 0 | 0 | 0 | 0 | 2 × 50 kana-opgaven |
-| 4 | 20 | 20 | 20 | 28 | 68 |
-| 5 | 18 | 18 | 18 | 28 | 64 |
-| 6 | 16 | 16 | 16 | 25 | 57 |
-| 7 | 20 | 20 | 20 | 19 | 59 |
-| 8 | 47 | 47 | 47 | 33 | 127 |
-| 9 | 20 | 20 | 20 | 21 | 61 |
-| 10 | 15 | 15 | 15 | 21 | 51 |
+| 3, examen A | 50 | 30 | 0 | 30 | 0 |
+| 3, examen B | 50 | 30 | 0 | 30 | 0 |
+| 4 | 68 | 30 | 13 | 7 | 10 |
+| 5 | 64 | 30 | 9 | 21 | 0 |
+| 6 | 57 | 25 | 11 | 0 | 14 |
+| 7 | 59 | 30 | 14 | 1 | 15 |
+| 8 | **127** | **40** | 18 | 0 | 22 |
+| 9 | 61 | 30 | 13 | 1 | 16 |
+| 10 | 51 | 30 | 13 | 2 | 15 |
 
-De aantallen hierboven zijn de gegenereerde auditronde. De interface start exact de samengestelde ronde waarvan zij de lengte toont. De ID-lijsten, aantallen per ID/richting en verdeling over woordvraagvormen staan volledig in `audit.json`. Context-meaning en context-recognition gebruiken bestaande situatievragen; meaning en recognition zijn directe vertalingen. Andere examenopgaven blijven afzonderlijk meetellen.
+Alle oude examens waren langer dan 40. Level 8 was bovendien langer dan 100. Geen gemeten examen was langer dan 150. De categorie context bevat ook vragen die grammaticale patronen toepassen; daadwerkelijke doeldekking wordt op de bestaande goal-ID’s gecontroleerd, niet op het categorielabel.
 
-## Wat eerst misging
+Level 3 heeft geen nieuwe lexicale woorden: woordrondes zijn **niet van toepassing**. Ieder kana-examen trekt drie verschillende kana per patroon én schrift, dus 10 groepen × 3 = 30. Alle dakuten/handakuten-patronen blijven vertegenwoordigd in Hiragana en Katakana; welke kana gekozen worden varieert.
 
-- **Level 3:** geen nieuwe lexicale woorden. Woorddekking is niet van toepassing. Beide bestaande examens blijven 50 kana-opgaven bevatten; er zijn geen woordvragen toegevoegd.
-- **Level 4:** vier beurten per woord in Oefenen, examendekking zonder richtingscontrole. Lessen l4-5 en l4-6 zonder actuele woordintroductie kregen bovendien oude woorden via de legacy-fallback. Nu uitsluitend actuele introducties en één beurt per richting.
-- **Level 5:** Oefen herkenning startte een gemengde kana/woordcheck. Nu start Oefen woorden de pure woordronde; de aparte snelle checks en lestoets behouden hun kana-doelen. Examens toetsen ook beide woordrichtingen naast de kana-opgaven.
-- **Level 6:** vier oefenbeurten per woord; examenwoordvragen voornamelijk Nederlands → Japans. Nu 2N en beide examenrichtingen. l6-5 heeft geen nieuwe woorden.
-- **Level 7:** dezelfde richtingsfout, plus een losse doelvraag over みっつ met een kaal vocab-ID als concept zonder dekkingslabel. Die expliciete bronkoppeling wordt in de examenpool naar het gedeelde vocab-doel vertaald. Losse woordvragen komen niet als ongetelde opvulling terug.
-- **Level 8:** aparte maandenroute verwachtte acht vragen voor twee woorden en dezelfde structuur in checkpoints. Nu vier per blok, zes blokken samen 24. Oude checkpoints behouden beantwoorde unieke beurten en kunnen worden hervat. Weekdagen, tijdwoorden en maanden verschijnen in beide examenrichtingen; klok- en agenda-doelen blijven aanwezig. l8-6 voegt geen woorden toe.
-- **Level 9:** vier oefenbeurten en examenwoorddekking zonder verplichte tweede richting. Nu 2N en 40 gerichte woordbeurten in het examen.
-- **Level 10:** dezelfde fouten; l10-2 verwijst ook naar eerder geïntroduceerde woorden. Alleen zijn twee werkelijk nieuwe woorden zijn verplichte doelen. Dubbele of gedeelde ID-verwijzingen vergroten de verplichte dekking niet. l10-5 heeft geen nieuwe woorden.
+Level 5 krijgt 30 vragen omdat de 21 individuele nieuwe kana-doelen allemaal behouden blijven, naast negen woordvragen. Level 6 krijgt 25 vragen voor vijf korte lessen. Levels 4, 7, 9 en 10 krijgen 30; de uitgebreide kalender-, klok- en agendastof van Level 8 krijgt het maximum van 40.
 
-De actuele oorzaak was de expliciete dubbele lus in `wordCrashCourseDeck` en selectie op `targetGoalIds` zonder richting in de verschillende examengeneratoren. De examens konden al groeien met het aantal leerdoelen, maar daarmee was beide richtingen toetsen niet gegarandeerd. Er is in deze huidige examenroute geen aparte harde achtvragenlimiet gevonden. De oudere `selectDistinctLessonQuestions`-helper onderscheidt lemmas zonder richting; de nieuwe examenroutes gebruiken haar niet. Willekeurige kana-selectie met teruglegging blijft uitsluitend onderdeel van bestaande kana-oefeningen: Level 1 en 2 krijgen geen nieuwe woordrondes of extra examenvragen.
+## Oorzaak en correctie
 
-## Broncontrole en lesaudit
+De bestaande `buildWordCoveredExam` telde per les eerst structuurvragen op en voegde vervolgens **ieder nieuw woord in beide richtingen** toe. Die combinatie verklaart 94 woordvragen plus 33 overige vragen in Level 8. De woordoefening zelf was in de huidige code al 2N; deze blijft volledig en wordt afzonderlijk gecontroleerd.
 
-Bron: `manifest.vocabulary.introducedAt` op het actuele level en de actuele lesvolgorde. Elke nieuwe ID is ook gecontroleerd tegen `wordIds` of `exampleIds` van de centrale les en `vocabById`. Geen ongeldige verwijzingen of ontbrekende introductiekoppelingen gevonden. De kale conceptverwijzing bij de Level 7-vraag wordt hierboven apart verantwoord. Legacy woorden blijven beschikbaar voor bestaande opslag, maar worden geen nieuwe doelen via een fallback.
+De examengenerator legt nu vóór het vullen twee quota vast. Hij dekt eerst de bestaande niet-lexicale leerdoelen en vertegenwoordigt iedere les. Daarna bepaalt hij, binnen het levelbudget, hoeveel overige vragen en unieke doelwoorden passen. De woordsteekproef wordt gelijkmatig over introductielessen verdeeld; beide richtingen worden evenwichtig toegewezen. Iedere doelwoord-ID wordt hooguit eenmaal getoetst. Er wordt niets achteraf van een te lange ronde afgeknipt.
 
-| Les | Unieke nieuwe woord-ID’s | Verwachte beurten | Beide richtingen |
-| --- | --- | ---: | --- |
-| l4-1 | `vocab-これ`, `vocab-ねこ`, `vocab-いぬ`, `vocab-みず`, `vocab-パン` | 10 | ja |
-| l4-2 | `vocab-それ`, `vocab-あれ`, `vocab-ほん`, `vocab-さかな` | 8 | ja |
-| l4-3 | `vocab-わたし`, `vocab-ひと`, `vocab-ともだち` | 6 | ja |
-| l4-4 | niet van toepassing | 0 | niet van toepassing |
-| l4-5 | niet van toepassing | 0 | niet van toepassing |
-| l4-6 | niet van toepassing | 0 | niet van toepassing |
-| l4-7 | `vocab-のみます`, `vocab-たべます`, `vocab-みます` | 6 | ja |
-| l4-8 | `vocab-よみます` | 2 | ja |
-| l4-9 | `vocab-いきます`, `vocab-みせ`, `vocab-えき`, `vocab-うち` | 8 | ja |
-| l4-10 | niet van toepassing | 0 | niet van toepassing |
-| l5-1 | `vocab-きゃく`, `vocab-きょく` | 4 | ja |
-| l5-2 | `vocab-しゃしん`, `vocab-しゅみ`, `vocab-しょくじ` | 6 | ja |
-| l5-3 | `vocab-おちゃ`, `vocab-ちょきん`, `vocab-じゃま`, `vocab-じゅう`, `vocab-じょせい` | 10 | ja |
-| l5-4 | `vocab-きって`, `vocab-ざっし`, `vocab-ベッド` | 6 | ja |
-| l5-5 | `vocab-ケーキ`, `vocab-ゲーム`, `vocab-コーヒー`, `vocab-スーパー`, `vocab-タクシー` | 10 | ja |
-| l6-1 | `vocab-あなた`, `vocab-かぞく`, `vocab-おとこ`, `vocab-おんな` | 8 | ja |
-| l6-2 | `vocab-ちち`, `vocab-はは`, `vocab-おとうさん`, `vocab-おかあさん` | 8 | ja |
-| l6-3 | `vocab-あに`, `vocab-あね`, `vocab-きょうだい`, `vocab-だれ` | 8 | ja |
-| l6-4 | `vocab-おとうと`, `vocab-いもうと`, `vocab-こども`, `vocab-みんな` | 8 | ja |
-| l6-5 | niet van toepassing | 0 | niet van toepassing |
-| l7-1 | `vocab-ひとつ`, `vocab-ふたつ`, `vocab-みっつ`, `vocab-よっつ` | 8 | ja |
-| l7-2 | `vocab-ひとり`, `vocab-ふたり`, `vocab-さんにん`, `vocab-よにん` | 8 | ja |
-| l7-3 | `vocab-いっぴき`, `vocab-にひき`, `vocab-さんびき`, `vocab-なんびき` | 8 | ja |
-| l7-4 | `vocab-いっぽん`, `vocab-にほん`, `vocab-いちまい`, `vocab-にまい` | 8 | ja |
-| l7-5 | `vocab-いちばんめ`, `vocab-にばんめ`, `vocab-さんばんめ`, `vocab-どれ` | 8 | ja |
-| l8-1 | `vocab-げつようび`, `vocab-かようび`, `vocab-すいようび`, `vocab-もくようび` | 8 | ja |
-| l8-2 | `vocab-きんようび`, `vocab-どようび`, `vocab-にちようび`, `vocab-なんようび` | 8 | ja |
-| l8-3 | `vocab-きょう`, `vocab-あした`, `vocab-きのう`, `vocab-こんしゅう`, `vocab-らいしゅう`, `vocab-せんしゅう` | 12 | ja |
-| l8-4 | `vocab-いちがつ`, `vocab-にがつ`, `vocab-さんがつ`, `vocab-しがつ`, `vocab-ごがつ`, `vocab-ろくがつ`, `vocab-しちがつ`, `vocab-はちがつ`, `vocab-くがつ`, `vocab-じゅうがつ`, `vocab-じゅういちがつ`, `vocab-じゅうにがつ` | 24 | ja |
-| l8-5 | `vocab-いちじ`, `vocab-にじ`, `vocab-さんじ`, `vocab-よじ`, `vocab-ごじ`, `vocab-ろくじ`, `vocab-しちじ`, `vocab-はちじ`, `vocab-くじ`, `vocab-じゅうじ`, `vocab-じゅういちじ`, `vocab-じゅうにじ`, `vocab-ごぜん`, `vocab-ごご` | 28 | ja |
-| l8-minutes | `vocab-なんじ`, `vocab-いま`, `vocab-ごふん`, `vocab-じゅうごふん`, `vocab-さんじゅっぷん`, `vocab-よんじゅうごふん`, `vocab-はん` | 14 | ja |
-| l8-6 | niet van toepassing | 0 | niet van toepassing |
-| l9-1 | `vocab-ここ`, `vocab-そこ`, `vocab-あそこ`, `vocab-どこ` | 8 | ja |
-| l9-2 | `vocab-ひだり`, `vocab-みぎ`, `vocab-まっすぐ`, `vocab-みち` | 8 | ja |
-| l9-3 | `vocab-まえ`, `vocab-うしろ`, `vocab-となり`, `vocab-なか` | 8 | ja |
-| l9-4 | `vocab-うえ`, `vocab-した`, `vocab-そと`, `vocab-ちかく` | 8 | ja |
-| l9-5 | `vocab-こうえん`, `vocab-がっこう`, `vocab-レストラン`, `vocab-ちず` | 8 | ja |
-| l10-1 | `vocab-ください`, `vocab-いくら`, `vocab-おかね`, `vocab-かいます` | 8 | ja |
-| l10-2 | `vocab-メニュー`, `vocab-みせて` | 4 | ja |
-| l10-3 | `vocab-やくそく`, `vocab-あいます`, `vocab-いつ`, `vocab-いっしょに`, `vocab-だいじょうぶ` | 10 | ja |
-| l10-4 | `vocab-でんしゃ`, `vocab-バス`, `vocab-のります`, `vocab-おります` | 8 | ja |
-| l10-5 | niet van toepassing | 0 | niet van toepassing |
+Weekdag- en maandvragen uit Level 8 die ook een patroondoel toetsen, tellen expliciet als woordvraag en nemen een plaats in diezelfde steekproef in. Ook oudere focus-/agendavragen zonder lexicale metadata krijgen een doelwoord-ID wanneer het daadwerkelijk te geven antwoord precies dat woord is. Een dergelijk woord kan niet nogmaals als vertaalvraag worden gekozen. Woorden die uitsluitend in scenario’s, zinnen of distractors voorkomen worden niet als getoetst woord geteld.
 
-Voor l8-4 is de bronlijst verdeeld in zes expliciet geregistreerde microstappen van telkens twee maanden. Elke microstap bevat vier beurten; alle twaalf maanden samen 24. De IDs per blok staan in `audit.json`.
+Wat per level vervalt of wordt samengevoegd:
+
+| Level | Oude → nieuwe woordvragen | Oude → nieuwe overige vragen | Correctie |
+| --- | ---: | ---: | --- |
+| 3 | 0 → 0 | 50 → 30, per examen | Gespreide kana-steekproef uit alle patronen en beide schriften |
+| 4 | 40 → 13 | 28 → 17 | Verplichte dubbele woorddekking vervangen; equivalente patroonvragen gespreid geselecteerd |
+| 5 | 36 → 9 | 28 → 21 | Woordsteekproef naast volledige kana-doeldekking; extra equivalente opgaven vervallen |
+| 6 | 32 → 11 | 25 → 14 | Eerlijke steekproef naast familie- en relatiebegrip uit alle lessen |
+| 7 | 40 → 14 | 19 → 16 | Unieke telwoorddoelen naast alle telpatronen |
+| 8 | 94 → 18 | 33 → 22 | Kalenderwoordsteekproef; 24-uursklok, middernacht, dagdelen, minuten, halfuur en agenda blijven gedekt |
+| 9 | 40 → 13 | 21 → 17 | Woordsteekproef naast alle plaats-/richtingpatronen |
+| 10 | 30 → 13 | 21 → 17 | Woordsteekproef naast verzoeken, afspreken en vervoerssituaties |
+
+## Volledige les- en doel-ID-audit
+
+[audit.json](audit.json) bevat iedere les van Level 4–10 en iedere patroon/schriftgroep van Level 3. Per les staan de unieke nieuwe woord-ID’s, hun centrale introductiebron, de verwachte 2N-beurten, beide richtingen en eventuele maandenmicrostappen. Lessen zonder nieuwe woorden zijn expliciet als niet van toepassing geregistreerd. Geen ongeldige woordverwijzingen of ontbrekende leskoppelingen gevonden. De bestaande normalisatie van het kale `vocab-みっつ`-concept blijft gebruikt.
+
+Dezelfde audit bevat per examen het oude/nieuwe totaal, quota, categorieën, lesverdeling, iedere getoetste woord-ID/richting, en per grammatica-, kana-, patroon- of toepassingsdoel de werkelijk geselecteerde vraag-ID’s. Alle verplichte niet-lexicale doelen hebben een geselecteerde vraag.
 
 ## Verificatie
 
-- `node --test`: 116 tests, allemaal geslaagd.
-- Alle lessen en examens level 3–10 gecontroleerd over 20 schudseeds; telling per woord-ID en richting, geen afhankelijkheid van vaste volgorde.
-- Sets van één, twee en vier woorden; dubbele IDs en gedeelde lesbronnen over 30 seeds; aangrenzende gelijke woorden vermeden waar mogelijk; meerdere echte schudvolgordes aangetoond.
-- Correct antwoord gecontroleerd tegen het centrale woord en de gedeclareerde richting. Ongetelde lexicale opvulvragen worden uitgesloten. Overige canonical doelen blijven gedekt.
-- Oude maandencheckpoint van acht beurten hervat met vier unieke beurten en behoud van reeds beantwoorde vragen. Ranks, SRS-planning en aangeleverde opslagfixture blijven intact.
-- Werkelijke browserinterface: Edge op 375 × 812 CSS-pixels, geïsoleerde testopslag. 40 oefenroutes geopend, waaronder alle zes maandenblokken; antwoordopties onthuld. Eén vierwoordenronde volledig via knoppen beantwoord: acht verschillende ID/richting-paren en daarna het resultaat.
-- Beide Level 3-examens en alle Level 4–10-examens gestart via hun knoppen. Werkelijke quizvragen gecontroleerd op dekking; getoonde examenlengte gelijk aan de gestarte sessie. Geen JavaScript-paginafouten. Resultaten: `ui-audit.json`.
-- Mobiele oefen- en examenscreenshot visueel beoordeeld. Screenshots: `output/playwright/word-coverage/mobile-practice.png` en `mobile-exam.png`.
-- `node language-journey-content/validate.cjs`: 0 fouten. Bestaande waarschuwingen: ontbrekende optionele audio en drie niet meer gebruikte datumwoorden; bestaande legacy-compatibiliteit blijft intact.
-- `git diff --check`: geslaagd. `node scripts/version-client-assets.cjs` uitgevoerd; externe assets zijn niet gewijzigd, dus hun versie bleef gelijk.
+- Volledige regressiesuite `node --test`: **163 tests geslaagd, 0 mislukt**.
+- Alle leswoordrondes en alle Level 3–10-examens over 20 random seeds gecontroleerd. Woordselectie en richtingen varieerden per examen; geen doelwoord kwam tweemaal voor.
+- Sets van vier, twee en één woord en dubbele IDs over 30 seeds: exact 2N pure woordbeurten; elk woord eenmaal per richting; aangrenzende gelijke woorden vermeden waar mogelijk.
+- De generatiecontrole bewaakt budget, geplande lengte, verplichte doeldekking, les-/woordspreiding, unieke vraagbronnen, unieke woorddoelen en passende vertaalrichtingen.
+- Werkelijke Edge-interface op 375 × 812: 40 oefenroutes, waaronder de zes maandenmicrostappen, geopend via de oefenknoppen. Eén vierwoordenronde volledig beantwoord: acht unieke ID/richting-paren en de normale afronding.
+- Beide Level 3-examens en ieder Level 4–10-examen driemaal gestart via de echte startknop: 27 examenstarts, correcte getoonde lengte, variërende woordkeuze, geen paginafouten. Resultaat: [ui-audit.json](ui-audit.json).
+- Resultaatverwerking van het compacte examen en herladen gecontroleerd: 30/30 blijft een normaal resultaat, examenrank stijgt één stap naar Copper, bestaande lesrank/attempts en beide SRS-richtingen blijven behouden.
+- Oude maandencheckpoints blijven compatibel; de invoersnapshot wordt niet gewijzigd.
+- Contentvalidator: 0 fouten, vier bestaande waarschuwingen over optionele audio en ongebruikte historische datumwoorden. Diffcontrole zonder whitespacefouten.
 
-Niet geverifieerd: daadwerkelijk iPhone/Safari-toestel, publieke deployment, of elk antwoord van elk lang examen door handmatig klikken. Alle gegenereerde examenvragen zijn wel geteld en de bestaande beantwoording is door de regressietests gecontroleerd. Er is geen echte gebruikersopslag gewijzigd.
+Level 1 en 2 zijn niet aangepast. De antwoordhandlers, ranking, resultaten, opslag en Recall-scheduler zijn behouden. Browserdata is uitsluitend in een geïsoleerd testprofiel gebruikt. Geen echte iPhone/Safari, publieke deployment of handmatige volledige beantwoording van ieder examen getest.
 
-## Gewijzigde bestanden en herhalen
+## Bestanden en herhalen
 
-- `index.html`: woordbron, 2N-woordronde, veilige afleiders, gedeelde ID/richting-dekking, examengeneratoren en lengte, Level 5-oefenknop en compatibele maandencheckpoint.
-- `tests/app-probe.cjs`: gedeelde applicatieprobe uit bestaande render-smoketests.
-- `tests/render-smoke.test.cjs`: verwachtingen aangepast van vier naar twee beurten, gedeelde probe gebruikt.
-- `tests/word-coverage.test.cjs`: robuuste dekkings-, bron-, route- en checkpointtests.
-- `scripts/word-coverage-audit.cjs`: reproduceerbare volledige JSON-audit (`node scripts/word-coverage-audit.cjs`).
-- `scripts/word-coverage-ui.js`: browsercontrole voor Playwright CLI (`playwright-cli -s=word-coverage run-code --filename scripts/word-coverage-ui.js`), met lokale preview op poort 8766. Alleen het onderschepte testdocument krijgt een observatieprobe; er staat geen debug-interface in de app. Testdata blijft in het geïsoleerde browserprofiel.
-- `docs/word-coverage/`: dit rapport, `audit.json` en `ui-audit.json`.
-- `output/playwright/word-coverage/`: twee mobiele screenshots.
+- `index.html`: compact examenbudget, gedeelde balanscontrole, selectie en correcte examenbeschrijvingen; beide Level 3-startacties.
+- `tests/app-probe.cjs`, `tests/word-coverage.test.cjs`, `tests/render-smoke.test.cjs`: werkelijke appfuncties, multi-seed selectie, 2N-dekking, resultaat/rank/opslagcontrole en bijgewerkte examenverwachtingen.
+- `scripts/word-coverage-audit.cjs`: `node scripts/word-coverage-audit.cjs` regenereert de gedetailleerde audit.
+- `scripts/word-coverage-preview.cjs`: tijdelijke localhost-preview op poort 8766.
+- `scripts/word-coverage-ui.js`: browsercontrole via Playwright CLI `run-code --filename scripts/word-coverage-ui.js`.
+- `docs/word-coverage/` en `output/playwright/word-coverage/`: auditrapporten en visueel gecontroleerde mobiele screenshots.
+
+Reeds aanwezige en gelijktijdige wijzigingen aan audio/content vallen buiten deze correctie en zijn behouden. De client-assetlinks zijn met de bestaande versiehelper gesynchroniseerd.

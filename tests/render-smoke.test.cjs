@@ -140,15 +140,15 @@ test('all level screens render through the imported content adapter',()=>{
   for(let run=0;run<100;run++){
     seededMath.random=seededRandom(run+1);
     const level4Exam=context.__probe.buildLanguageExamQuestions();
-    assert.equal(context.__probe.levelCoverageReport(context.__probe.langLessons,level4Exam).missing.length,0,`Level 4 exam run ${run+1} covers every level goal`);
+    assert.equal(context.__probe.levelCoverageReport(context.__probe.langLessons,level4Exam).missing.filter(g=>g.kind!=='vocab').length,0,`Level 4 exam run ${run+1} covers every non-lexical goal`);
     const level5Exam=context.__probe.buildSmallExamQuestions();
-    assert.equal(context.__probe.levelCoverageReport(context.__probe.smallLessons,level5Exam).missing.length,0,`Level 5 exam run ${run+1} covers every level goal`);
+    assert.equal(context.__probe.levelCoverageReport(context.__probe.smallLessons,level5Exam).missing.filter(g=>g.kind!=='vocab').length,0,`Level 5 exam run ${run+1} covers every kana goal`);
     for(const course of Object.values(context.__probe.advancedCourses)){
       const checkLesson=course.lessons[run%course.lessons.length],check=context.__probe.advancedQuestions(course,checkLesson,run%course.lessons.length);
       const missing=context.__probe.lessonCoverageReport(checkLesson,check).missing;
       assert.equal(missing.length,0,`${checkLesson.id} seeded run ${run+1} missing ${missing.map(goal=>goal.id).join(', ')}`);
       const exam=context.__probe.buildAdvancedExamQuestions(course),examMissing=context.__probe.levelCoverageReport(course.lessons,exam).missing;
-      assert.equal(examMissing.length,0,`Level ${course.number} exam run ${run+1} missing ${examMissing.map(goal=>goal.id).join(', ')}`);
+      assert.equal(examMissing.filter(g=>course.number>10||g.kind!=='vocab').length,0,`Level ${course.number} exam run ${run+1} missing ${examMissing.filter(g=>g.kind!=='vocab').map(goal=>goal.id).join(', ')}`);
     }
   }
   const level8Lesson1=context.__probe.advancedCourses[7].lessons[0],level8Questions=context.__probe.advancedQuestions(context.__probe.advancedCourses[7],level8Lesson1,0),weekdayGoals=context.__probe.lessonCanonicalGoals(level8Lesson1).filter(goal=>goal.kind==='vocab');
@@ -169,8 +169,10 @@ test('all level screens render through the imported content adapter',()=>{
     if(words.length>1)assert.ok(deck.every((question,index)=>index===0||question.word.id!==deck[index-1].word.id),`${lesson.id} avoids consecutive word repeats when possible`);
     if(words.length)assert.ok(deck.filter((question,index)=>index>0&&question.direction!==deck[index-1].direction).length>=1,`${lesson.id} interleaves the two directions`);
     for(const question of deck.filter(question=>!question.selfReveal)){
-      const sameLessonAnswers=new Set(words.map(word=>question.direction==='jp-nl'?word.meaning:word.jp));
-      assert.ok(words.length===1||question.choices.every(choice=>sameLessonAnswers.has(choice)),`${lesson.id} uses only words introduced there as answer options`);
+      const earlier=content.vocabCatalog.filter(word=>!word.legacy&&(word.level<question.word.level||(word.level===question.word.level&&word.lessonIndex<=question.word.lessonIndex))&&(words.length===1||probe.state.introducedVocabIds.includes(word.id)));
+      const knownAnswers=new Set([...words,...earlier].map(word=>question.direction==='jp-nl'?word.meaning:word.jp));
+      assert.ok(question.choices.every(choice=>knownAnswers.has(choice)),`${lesson.id} uses only current or previously introduced words as answer options: ${JSON.stringify(question.choices.filter(choice=>!knownAnswers.has(choice)))}`);
+      assert.ok(question.choices.length<=4,`${lesson.id} keeps at most four distinct choices`);
       assert.ok(question.choices.includes(question.correct));
     }
   }
@@ -343,8 +345,8 @@ test('Level 8 checks and exams target every month, clock concept and agenda dime
     const agendaCheck=probe.advancedQuestions(course,agenda,6);assert.ok(agendaCheck.every(q=>q.context===agenda.agendaText));
     assert.ok([...check,...hourPool,...minCheck,...agendaCheck].every(q=>q.contextPresentation==='schedule'),'clock and agenda context retains its compact reading presentation');
     for(const goal of agenda.learningGoals)assert.ok(agendaCheck.some(q=>q.targetGoalIds.includes(goal.id)));
-    const exam=probe.buildAdvancedExamQuestions(course);assert.equal(probe.levelCoverageReport(course.lessons,exam).missing.length,0);
-    for(const lesson of course.lessons.slice(0,2))for(const id of lesson.wordIds){const q=exam.find(q=>q.targetWordId===id&&q.targetDirection==='nl-jp');assert.equal(q.correct,content.vocabById[id].jp);assert.match(q.context,/Weekplanning|dag van de week/)}
+    const exam=probe.buildAdvancedExamQuestions(course);assert.equal(exam.length,40);assert.equal(probe.levelCoverageReport(course.lessons,exam).missing.filter(g=>g.kind!=='vocab').length,0);
+    for(const lesson of course.lessons.slice(0,2)){const sample=exam.filter(q=>q.lessonId===lesson.id&&q.targetWordId);assert.ok(sample.length>0);for(const q of sample)assert.equal(q.correct,q.targetDirection==='nl-jp'?content.vocabById[q.targetWordId].jp:content.vocabById[q.targetWordId].meaning)}
     assert.ok(exam.some(q=>q.sourceId.startsWith('level8-agenda-')&&q.context===agenda.agendaText));
   }
 });

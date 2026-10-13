@@ -5,7 +5,7 @@ async (page) => {
   await page.route('http://127.0.0.1:8766/**',async route=>{
     if(route.request().resourceType()!=='document')return route.continue();
     const response=await route.fetch();
-    const html=(await response.text()).replace(/(<script>\s*)([\s\S]*?)(<\/script>)/,(_,a,code,b)=>a+code.replace(/\}\)\(\);\s*$/,'window.__coverage={state,langLessons,smallLessons,advancedCourses,lessonNewWords,assertWordCoverage,get round(){return activeWordCrashCourse}};})();')+b);
+    const html=(await response.text()).replace(/(<script>\s*)([\s\S]*?)(<\/script>)/,(_,a,code,b)=>a+code.replace(/\}\)\(\);\s*$/,'window.__coverage={state,langLessons,smallLessons,advancedCourses,lessonNewWords,assertWordCoverage,assertCompactExam,examQuestionBudget,get round(){return activeWordCrashCourse}};})();')+b);
     await route.fulfill({response,body:html});
   });
   await page.addInitScript(()=>{
@@ -55,20 +55,23 @@ async (page) => {
     await load(level,{tabs:{[tab]:'exams'}});
     if(level===3){
       const runs=[];
-      for(const id of ['dak-examA','dak-examB']){await load(3,{tabs:{dakuten:'exams'}});await page.locator(`.dakExam[data-id="${id}"]`).click();runs.push(await page.evaluate(()=>({rankId:window.__coverage.state.quiz.rankId,questions:window.__coverage.state.quiz.questions.length})));}
+      for(const id of ['dak-examA','dak-examB'])for(let attempt=1;attempt<=3;attempt++){await load(3,{tabs:{dakuten:'exams'}});await page.locator(`.dakExam[data-id="${id}"]`).click();const run=await page.evaluate(()=>({rankId:window.__coverage.state.quiz.rankId,questions:window.__coverage.state.quiz.questions.length,targetKanaIds:window.__coverage.state.quiz.questions.map(q=>q.item.id)}));if(run.questions!==30)throw new Error('Level 3 budget mismatch');runs.push({...run,attempt});}
       report.exams.push({level,lexicalWords:0,status:'niet van toepassing',runs});
       continue;
     }
-    const start=page.locator(level===4?'#langExam':level===5?'#smallExam':'#advancedExamStart'),label=await start.innerText();
-    await start.click();
-    const result=await page.evaluate(n=>{const p=window.__coverage,lessons=n===4?p.langLessons:n===5?p.smallLessons:p.advancedCourses[n-1].lessons,q=p.state.quiz.questions;p.assertWordCoverage(lessons.flatMap(p.lessonNewWords),q);return{level:n,total:q.length,wordTurns:q.filter(q=>q.targetWordId).length,other:q.filter(q=>!q.targetWordId).length}},level);
-    await page.locator('#qPrompt').waitFor({state:'visible'});
-    await page.waitForTimeout(450);
-    if(!label.includes(String(result.total)))throw new Error('Exam length label differs from session');
-    if(level===8)await page.screenshot({path:'output/playwright/word-coverage/mobile-exam.png',fullPage:true});
-    report.exams.push(result);
+    const runs=[];
+    for(let attempt=1;attempt<=3;attempt++){
+      await load(level,{tabs:{[tab]:'exams'}});
+      const start=page.locator(level===4?'#langExam':level===5?'#smallExam':'#advancedExamStart'),label=await start.innerText();await start.click();
+      const result=await page.evaluate(n=>{const p=window.__coverage,lessons=n===4?p.langLessons:n===5?p.smallLessons:p.advancedCourses[n-1].lessons,q=p.state.quiz.questions,balance=p.assertCompactExam(lessons,q,p.examQuestionBudget(n));return{level:n,total:q.length,parts:balance.parts,lessonCounts:balance.lessonCounts,directions:balance.directions,targets:q.filter(q=>q.targetWordId).map(q=>({id:q.targetWordId,direction:q.targetDirection}))}},level);
+      await page.locator('#qPrompt').waitFor({state:'visible'});if(!label.includes(String(result.total)))throw new Error('Exam length label differs from session');
+      if(level===8&&attempt===1){await page.waitForTimeout(700);await page.screenshot({path:'output/playwright/word-coverage/mobile-exam.png',fullPage:true})}runs.push({...result,attempt});
+    }
+    if(new Set(runs.map(r=>r.targets.map(t=>t.id).sort().join('|'))).size<2)throw new Error(`Level ${level} word sample did not vary across UI attempts`);
+    report.exams.push({level,runs});
   }
   if(errors.length)throw new Error(errors.join('\n'));
   await page.evaluate(report=>sessionStorage.setItem('__coverageResult',JSON.stringify(report)),report);
-  return report;
+  const downloading=page.waitForEvent('download');await page.evaluate(report=>{const link=document.createElement('a');link.href=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)],{type:'application/json'}));link.download='ui-audit.json';link.click()},report);await(await downloading).saveAs('docs/word-coverage/ui-audit.json');
+  return{practiceRoutes:report.practice.length,fourWordRound:report.completedFourWordRound,exams:report.exams.map(r=>({level:r.level,attempts:r.runs.length,counts:r.runs.map(run=>run.total||run.questions)})),errors};
 }
