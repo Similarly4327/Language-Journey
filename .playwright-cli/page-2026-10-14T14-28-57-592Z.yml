@@ -1,0 +1,62 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - button "Terug" [ref=e6] [cursor=pointer]: ←
+      - navigation "Hoofdnavigatie" [ref=e8]:
+        - button "Leren" [ref=e9] [cursor=pointer]
+        - button "Recall" [ref=e10] [cursor=pointer]
+        - button "Voortgang" [ref=e11] [cursor=pointer]
+    - main [ref=e12]:
+      - generic [ref=e13]:
+        - generic [ref=e14]: Level 11 · thematische module
+        - generic [ref=e15]: Vakantiecursus thuis
+        - generic [ref=e16]: Ik herken veelgebruikte Japanse lesinstructies, voer de bijbehorende taak uit en lees een korte vertrekcheck.
+        - generic [ref=e18]: 0/5 lessen afgerond
+        - generic [ref=e19]: Level 1–10 was de basis. Vanaf nu lees je per les een kort verhaal én een praktische bron. Reken op ongeveer 20–25 minuten als richttempo; sneller of langzamer is allebei goed. Bonus is vrijwillig.
+      - generic [ref=e20]:
+        - button "Les 1 De les begint Geen rank Herken de woorden voor een level, les, vraag, antwoord en keuze. · 0/2 onderdelen" [ref=e21] [cursor=pointer]:
+          - generic [ref=e22]:
+            - generic [ref=e23]:
+              - generic [ref=e24]: Les 1
+              - generic [ref=e25]: De les begint
+            - generic [ref=e26]: Geen rank
+          - generic [ref=e27]: Herken de woorden voor een level, les, vraag, antwoord en keuze. · 0/2 onderdelen
+        - button "Les 2 Lezen en betekenis Geen rank Lees een korte Japanse zin en zoek het woord met de gevraagde betekenis. · 0/2 onderdelen" [ref=e28] [cursor=pointer]:
+          - generic [ref=e29]:
+            - generic [ref=e30]:
+              - generic [ref=e31]: Les 2
+              - generic [ref=e32]: Lezen en betekenis
+            - generic [ref=e33]: Geen rank
+          - generic [ref=e34]: Lees een korte Japanse zin en zoek het woord met de gevraagde betekenis. · 0/2 onderdelen
+        - button "Les 3 Luisteren en invullen Geen rank Herken de opdracht voor een invulvak en voer die uit in een korte oefening. · 0/2 onderdelen" [ref=e35] [cursor=pointer]:
+          - generic [ref=e36]:
+            - generic [ref=e37]:
+              - generic [ref=e38]: Les 3
+              - generic [ref=e39]: Luisteren en invullen
+            - generic [ref=e40]: Geen rank
+          - generic [ref=e41]: Herken de opdracht voor een invulvak en voer die uit in een korte oefening. · 0/2 onderdelen
+        - button "Les 4 Volgorde en volgende stap Geen rank Volg woorden die de volgorde van een korte oefening aangeven. · 0/2 onderdelen" [ref=e42] [cursor=pointer]:
+          - generic [ref=e43]:
+            - generic [ref=e44]:
+              - generic [ref=e45]: Les 4
+              - generic [ref=e46]: Volgorde en volgende stap
+            - generic [ref=e47]: Geen rank
+          - generic [ref=e48]: Volg woorden die de volgorde van een korte oefening aangeven. · 0/2 onderdelen
+        - button "Les 5 Klaar voor vertrek Geen rank Combineer bekende opdrachtwoorden met een korte vertrekcheck en herken de eerstvolgende bestemming. · 0/2 onderdelen" [ref=e49] [cursor=pointer]:
+          - generic [ref=e50]:
+            - generic [ref=e51]:
+              - generic [ref=e52]: Les 5
+              - generic [ref=e53]: Klaar voor vertrek
+            - generic [ref=e54]: Geen rank
+          - generic [ref=e55]: Combineer bekende opdrachtwoorden met een korte vertrekcheck en herken de eerstvolgende bestemming. · 0/2 onderdelen
+        - button "Bonus · vrijwillig Een extra scène Beschikbaar nadat je de vijf kernlessen hebt doorlopen." [disabled] [ref=e56]:
+          - generic [ref=e57]: Bonus · vrijwillig
+          - generic [ref=e58]: Een extra scène
+          - generic [ref=e59]: Beschikbaar nadat je de vijf kernlessen hebt doorlopen.
+      - generic [ref=e60]:
+        - generic [ref=e61]:
+          - strong [ref=e62]: Level 11 · integratie
+          - generic [ref=e63]: Geen rank
+        - generic [ref=e64]: Twintig begripsvragen uit beide onderdelen van de vijf lessen. Bonus is niet verplicht.
+        - button "Levelcheck →" [disabled] [ref=e65]
+  - status [ref=e66]

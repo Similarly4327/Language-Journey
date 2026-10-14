@@ -13692,6 +13692,23 @@
   const germanInstructions={'choose-answer':'Wähle die richtige Antwort.','read-text':'Lies den Satz.','listen-audio':'Höre dir die Audioaufnahme an.','fill-answer':'Fülle die Lücke aus.','order-steps':'Bringe die Schritte in die richtige Reihenfolge.','next-step':'Gehe zum nächsten Schritt weiter.'};
   instructionCatalog.forEach(instruction=>instruction.translations.de=germanInstructions[instruction.id]);
   manifest.instructions=instructionCatalog;
+  // Presentation only: reuse taught lexical IDs, never infer knowledge from route position.
+  manifest.interfaceLabels=Object.fromEntries(['レベル','レッスン','しつもん','もんだい','こたえ','れんしゅう','つぎ','もういちど','ただしい','まちがい','はじめます','よんでください','きいてください'].map(form=>[form,{textJa:form,requiredVocabIds:[`vocab-${form}`]}]));
+  const thematicTitleWords={
+    'l11-home-1':['しつもん と こたえ',['しつもん','こたえ']],
+    'l11-home-2':['ことば と いみ',['ことば','いみ']],
+    'l11-home-3':['おんせい と くうらん',['おんせい','くうらん']],
+    'l11-home-4':['じゅんばん と つぎ',['じゅんばん','つぎ']],
+    'l11-home-5':['りょこう の じゅんび',['りょこう','じゅんび']],
+    'l12-1':['くうこう',['くうこう']], 'l12-2':['くうこう の ひょうじ',['くうこう','ひょうじ']],
+    'l12-3':['にもつ',['にもつ']], 'l12-4':['でぐち',['でぐち']], 'l12-5':['くうこう の でぐち',['くうこう','でぐち']],
+    'l13-1':['でんしゃ と バス',['でんしゃ','バス']], 'l13-2':['きっぷ',['きっぷ']],
+    'l13-3':['みぎ と ひだり',['みぎ','ひだり']], 'l13-4':['でんしゃ の ひょうじ',['でんしゃ','ひょうじ']], 'l13-5':['ホテル',['ホテル']],
+    'l14-1':['ホテル',['ホテル']], 'l14-2':['へや',['へや']], 'l14-3':['ホテル の ひょうじ',['ホテル','ひょうじ']],
+    'l14-4':['おねがいします',['おねがいします']], 'l14-5':['ホテル の じゅんび',['ホテル','じゅんび']],
+    'l11-1':['みせ',['みせ']], 'l11-2':['さがします',['さがします']], 'l11-3':['えらびます',['えらびます']],
+    'l11-4':['レジ',['レジ']], 'l11-5':['みせ と うち',['みせ','うち']]
+  };
   const thematicPlans=[homePreparationPlan,
     routePlan(13,'Vervoer naar het hotel','transit','Van luchthaven naar hotel','Ik kan een eenvoudig vervoermiddel kiezen, een kaartje lezen en de route naar het hotel volgen.',{id:'grammar-l13-1',title:'から als vertrekpunt',explanation:'から geeft aan waar iets begint: くうこう から betekent vanaf de luchthaven.'},transitRows,'vocab-ホテル'),
     routePlan(14,'Inchecken in het hotel','hotel','Receptie, kamer en verblijf','Ik kan inchecken, mijn kamer vinden en eenvoudige hotelinformatie begrijpen.',{id:'grammar-l14-1',title:'ありますか als vraag',explanation:'ありますか vraagt of iets aanwezig is: タオル が ありますか betekent is er een handdoek?'},hotelRows,'vocab-みせ'),
@@ -13749,7 +13766,8 @@
         manifest.readings.push({id:readingId,introducedAt:point,lessonId:id,type:part==='A'?'micro-story':app.type,text:app.text,translation:app.translation,question:app.questions[0][0],answer:app.questions[0][1],choices:app.questions[0].slice(1),requiredVocabIds:wordIds,contextVocabIds:[],coreOrContext:'core',audioId:null});
         return{id:`${id}-${part}`,part,kind:part==='A'?'story':'real-world',label:app.label||'Kort verhaal',wordIds,example:app.example,readingId,instructionId:app.instructionId||null,questions:app.questions.map(([prompt,answer,...distractors])=>({prompt,answer,choices:[answer,...distractors]})),grammarHint:plan.grammar.explanation,audioId:null};
       });
-      manifest.lessons.push({id,title:entry.title,goal:entry.goal,level:plan.number,order,kind:'thematic',module:'A+B',wordIds:applications.flatMap(app=>app.wordIds),grammarIds:order===1?[plan.grammar.id]:[],patternIds:order===1?[patternId]:[],applications,readingId:applications[0].readingId,bonusIds:[]});
+      const [titleJa,titleWords]=thematicTitleWords[id];
+      manifest.lessons.push({id,title:entry.title,titleJa,titleVocabIds:titleWords.map(form=>`vocab-${form}`),goal:entry.goal,level:plan.number,order,kind:'thematic',module:'A+B',wordIds:applications.flatMap(app=>app.wordIds),grammarIds:order===1?[plan.grammar.id]:[],patternIds:order===1?[patternId]:[],applications,readingId:applications[0].readingId,bonusIds:[]});
       for(const app of applications)for(const [questionIndex,question] of app.questions.entries())manifest.exercises.push({id:`exercise-${id}-${app.part}-${questionIndex+1}`,lessonId:id,type:'comprehension',payload:['mc',question.prompt,question.answer,question.choices],requiredVocabIds:app.wordIds,requiredGrammarIds:order===1?[plan.grammar.id]:[],contextVocabIds:[]});
     }
     for(const part of ['A','B'])manifest.modules.push({id:`l${plan.number}-module-${part.toLowerCase()}`,level:plan.number,name:part,lessonIds:plan.lessons.map((_,i)=>lessonIdFor(i+1)),readingIds:plan.lessons.map((_,i)=>`reading-${lessonIdFor(i+1)}-${part.toLowerCase()}`)});

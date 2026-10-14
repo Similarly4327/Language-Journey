@@ -1,0 +1,62 @@
+- generic [active] [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - generic [ref=f1e4]:
+      - button "Terug" [ref=f1e6] [cursor=pointer]: ←
+      - navigation "Hoofdnavigatie" [ref=f1e8]:
+        - button "Leren" [ref=f1e9] [cursor=pointer]
+        - button "Recall" [ref=f1e10] [cursor=pointer]
+        - button "Voortgang" [ref=f1e11] [cursor=pointer]
+    - main [ref=f1e12]:
+      - generic [ref=f1e82]:
+        - generic [ref=f1e83]: レベル 12 · thematische module
+        - generic [ref=f1e84]: くうこう
+        - generic [ref=f1e85]: Het vliegveld
+        - generic [ref=f1e86]: Ik kan eenvoudige aankomst-, bagage- en uitgangsinformatie volgen en daarna vervoer naar het hotel vinden.
+        - generic [ref=f1e88]: レッスン 0/5 · ✓
+      - generic [ref=f1e89]:
+        - button "レッスン 1 Aankomsthal en terminal Geen rank Herken de aankomsthal, terminal en aankomstinformatie. · 0/2 onderdelen" [ref=f1e90] [cursor=pointer]:
+          - generic [ref=f1e91]:
+            - generic [ref=f1e92]:
+              - generic [ref=f1e93]: レッスン 1
+              - generic [ref=f1e94]: Aankomsthal en terminal
+            - generic [ref=f1e95]: Geen rank
+          - generic [ref=f1e96]: Herken de aankomsthal, terminal en aankomstinformatie. · 0/2 onderdelen
+        - button "レッスン 2 Volg de aankomstborden Geen rank Volg de borden naar immigratie en bagageafhandeling. · 0/2 onderdelen" [ref=f1e97] [cursor=pointer]:
+          - generic [ref=f1e98]:
+            - generic [ref=f1e99]:
+              - generic [ref=f1e100]: レッスン 2
+              - generic [ref=f1e101]: Volg de aankomstborden
+            - generic [ref=f1e102]: Geen rank
+          - generic [ref=f1e103]: Volg de borden naar immigratie en bagageafhandeling. · 0/2 onderdelen
+        - button "レッスン 3 Haal je bagage op Geen rank Lees bagageband- en bagage-informatie. · 0/2 onderdelen" [ref=f1e104] [cursor=pointer]:
+          - generic [ref=f1e105]:
+            - generic [ref=f1e106]:
+              - generic [ref=f1e107]: レッスン 3
+              - generic [ref=f1e108]: Haal je bagage op
+            - generic [ref=f1e109]: Geen rank
+          - generic [ref=f1e110]: Lees bagageband- en bagage-informatie. · 0/2 onderdelen
+        - button "レッスン 4 Vind de uitgang Geen rank Volg een eenvoudige route van bagageafhaling naar de uitgang. · 0/2 onderdelen" [ref=f1e111] [cursor=pointer]:
+          - generic [ref=f1e112]:
+            - generic [ref=f1e113]:
+              - generic [ref=f1e114]: レッスン 4
+              - generic [ref=f1e115]: Vind de uitgang
+            - generic [ref=f1e116]: Geen rank
+          - generic [ref=f1e117]: Volg een eenvoudige route van bagageafhaling naar de uitgang. · 0/2 onderdelen
+        - button "レッスン 5 De aankomst afronden Geen rank Combineer aankomst, bagage, uitgang en de volgende bestemming. · 0/2 onderdelen" [ref=f1e118] [cursor=pointer]:
+          - generic [ref=f1e119]:
+            - generic [ref=f1e120]:
+              - generic [ref=f1e121]: レッスン 5
+              - generic [ref=f1e122]: De aankomst afronden
+            - generic [ref=f1e123]: Geen rank
+          - generic [ref=f1e124]: Combineer aankomst, bagage, uitgang en de volgende bestemming. · 0/2 onderdelen
+        - button "Bonus · vrijwillig Een extra scène Beschikbaar nadat je de vijf kernlessen hebt doorlopen." [disabled] [ref=f1e125]:
+          - generic [ref=f1e126]: Bonus · vrijwillig
+          - generic [ref=f1e127]: Een extra scène
+          - generic [ref=f1e128]: Beschikbaar nadat je de vijf kernlessen hebt doorlopen.
+      - generic [ref=f1e129]:
+        - generic [ref=f1e130]:
+          - strong [ref=f1e131]: レベル 12 · integratie
+          - generic [ref=f1e132]: Geen rank
+        - generic [ref=f1e133]: Twintig begripsvragen uit beide onderdelen van de vijf lessen. Bonus is niet verplicht.
+        - button "レベル · もんだい →" [disabled] [ref=f1e134]
+  - status [ref=f1e37]

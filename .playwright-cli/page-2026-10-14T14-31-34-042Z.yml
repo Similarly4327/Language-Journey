@@ -1,0 +1,34 @@
+- generic [active] [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - generic [ref=f1e4]:
+      - button "Terug" [ref=f1e6] [cursor=pointer]: ←
+      - navigation "Hoofdnavigatie" [ref=f1e8]:
+        - button "Leren" [ref=f1e9] [cursor=pointer]
+        - button "Recall" [ref=f1e10] [cursor=pointer]
+        - button "Voortgang" [ref=f1e11] [cursor=pointer]
+    - main [ref=f1e12]:
+      - generic [ref=f1e13]:
+        - generic [ref=f1e14]: レベル 11 · レッスン 2/5
+        - generic [ref=f1e15]: Lezen en betekenis
+        - generic [ref=f1e16]: Lees een korte Japanse zin en zoek het woord met de gevraagde betekenis.
+        - generic [ref=f1e17]: A · verhaal B · praktische bron · geen kalenderdruk
+      - generic [ref=f1e18]:
+        - generic [ref=f1e19]:
+          - generic [ref=f1e20]:
+            - generic [ref=f1e21]: Module A · verhalende context
+            - generic [ref=f1e22]: Kort verhaal
+            - generic [ref=f1e23]: Nieuwe woorden → korte recall → verhaal → begrip
+          - button "Start A" [ref=f1e24] [cursor=pointer]
+        - generic [ref=f1e25]:
+          - generic [ref=f1e26]:
+            - generic [ref=f1e27]: Module B · real-world context
+            - generic [ref=f1e28]: Voorbeeldblad
+            - generic [ref=f1e29]: Extra woorden → korte recall → praktische bron → toepassing · open na A
+          - button "Start B" [disabled] [ref=f1e30]
+        - generic [ref=f1e31]:
+          - generic [ref=f1e32]:
+            - strong [ref=f1e33]: レッスン · もんだい
+            - generic [ref=f1e34]: Geen rank
+          - generic [ref=f1e35]: Vier begripsvragen uit A en B. Een herkansing blijft mogelijk.
+          - button "レッスン · もんだい →" [disabled] [ref=f1e36]
+  - status [ref=f1e37]
