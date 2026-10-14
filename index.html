@@ -430,7 +430,16 @@ body[data-view="quiz"] .app-header{position:relative;top:auto}
 .answer-option-row>.flashcard-answer-choice,.answer-option-row>.thematic-choice,.answer-option-row>.btn{flex:1;min-width:0}
 .jp-word{display:inline-block;white-space:nowrap;word-break:normal;overflow-wrap:normal;max-width:100%;overflow-x:auto;vertical-align:bottom}
 .thematic-reading,.question-context--jp,.prompt--jp,.model-sentence{word-break:normal;overflow-wrap:normal;line-break:auto}
-.choices:not(.choices-text):has(.jp-word){grid-template-columns:1fr!important}
+.thematic-resource{margin:12px 0;border:2px solid var(--border);border-radius:12px;overflow:hidden;font-size:var(--jp-example-size);line-height:1.65}
+.thematic-resource-row{padding:10px 14px;border-bottom:1px solid var(--border);background:var(--panel)}
+.thematic-resource-row:last-child{border-bottom:0}
+.thematic-choices-hidden{position:relative}
+.thematic-choices-hidden .answer-option-row{filter:blur(8px);pointer-events:none;user-select:none}
+.dialogue-turn{margin-top:10px;padding:10px;border-left:3px solid var(--accent);background:var(--panel);border-radius:8px}
+.dialogue-turn[data-dialogue-role="B"]{margin-left:18px;border-left-color:var(--muted)}
+.dialogue-identity{display:flex;align-items:center;gap:8px}
+.dialogue-identity img{width:38px;height:55px;object-fit:contain}
+.choices:not(.choices-text):has(.jp-word),.question .choices:not(.choices-text):has(.jp-word){grid-template-columns:1fr!important}
 .answer-option-row:has(.jp-word){flex-wrap:wrap}
 .answer-option-row:has(.jp-word)>.audio-speaker{flex:0 0 44px}
 .thematic-choices>.answer-option-row>.thematic-choice{flex:1 1 0}
@@ -1715,7 +1724,7 @@ body[data-scene="journey"][data-view="main"] #mainView{
 .knowledge-item>.audio-speaker{margin-right:5px}
 .progress-time-values{text-align:right;min-width:0}.progress-time-values span{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}
 </style>
-<link rel="stylesheet" href="./scenes.css?v=recall-recovery-7d9228e5f517f497">
+<link rel="stylesheet" href="./scenes.css?v=recall-recovery-836c147ec7e5c258">
 </head>
 <body data-scene="journey" data-view="main">
 <div id="app" class="app stack">
@@ -1782,20 +1791,21 @@ body[data-scene="journey"][data-view="main"] #mainView{
     <g class="flight-plane" fill="#bf4949"><path d="m0 0 33-7-12 11 3 11-8 2-8-11-14 4-5-5 17-9Z"/></g>
   </svg><strong>Op weg naar Japan</strong></div>
 </div>
-<script src="./locales/nl.js?v=recall-recovery-7d9228e5f517f497"></script>
-<script src="./locales/en.js?v=recall-recovery-7d9228e5f517f497"></script>
-<script src="./locales/de.js?v=recall-recovery-7d9228e5f517f497"></script>
-<script src="./locales/legacy-translations.js?v=recall-recovery-7d9228e5f517f497"></script>
-<script src="./locales/i18n.js?v=recall-recovery-7d9228e5f517f497"></script>
-<script src="./locales/legacy-ui.js?v=recall-recovery-7d9228e5f517f497"></script>
-<script src="./platform.js?v=recall-recovery-7d9228e5f517f497"></script>
-<script src="./navigation.js?v=recall-recovery-7d9228e5f517f497"></script>
-<script src="./scenes.js?v=recall-recovery-7d9228e5f517f497"></script>
-<script src="./language-journey-content/audio-course-readings.js?v=recall-recovery-7d9228e5f517f497"></script>
-<script src="./language-journey-content/audio-foundation.js?v=recall-recovery-7d9228e5f517f497"></script>
-<script src="./assets/audio/ja/manifest.js?v=recall-recovery-7d9228e5f517f497"></script>
-<script src="./audio/playback.js?v=recall-recovery-7d9228e5f517f497"></script>
-<script src="./language-journey-content/content.js?v=recall-recovery-7d9228e5f517f497"></script>
+<script src="./locales/nl.js?v=recall-recovery-836c147ec7e5c258"></script>
+<script src="./locales/en.js?v=recall-recovery-836c147ec7e5c258"></script>
+<script src="./locales/de.js?v=recall-recovery-836c147ec7e5c258"></script>
+<script src="./locales/legacy-translations.js?v=recall-recovery-836c147ec7e5c258"></script>
+<script src="./locales/i18n.js?v=recall-recovery-836c147ec7e5c258"></script>
+<script src="./locales/legacy-ui.js?v=recall-recovery-836c147ec7e5c258"></script>
+<script src="./platform.js?v=recall-recovery-836c147ec7e5c258"></script>
+<script src="./navigation.js?v=recall-recovery-836c147ec7e5c258"></script>
+<script src="./scenes.js?v=recall-recovery-836c147ec7e5c258"></script>
+<script src="./language-journey-content/audio-course-readings.js?v=recall-recovery-836c147ec7e5c258"></script>
+<script src="./language-journey-content/audio-foundation.js?v=recall-recovery-836c147ec7e5c258"></script>
+<script src="./assets/audio/ja/manifest.js?v=recall-recovery-836c147ec7e5c258"></script>
+<script src="./audio/playback.js?v=recall-recovery-836c147ec7e5c258"></script>
+<script src="./language-journey-content/thematic-didactics.js?v=recall-recovery-836c147ec7e5c258"></script>
+<script src="./language-journey-content/content.js?v=recall-recovery-836c147ec7e5c258"></script>
 <script>
 (() => {
 const platform=window.LanguageJourneyPlatform,preferences=platform.preferences(),i18n=window.LanguageJourneyI18n,scenes=window.LanguageJourneyScenes,navigation=window.LanguageJourneyNavigation;
@@ -2125,9 +2135,9 @@ function dictionaryGrammarIsKnown(entry,lessonId=''){
 }
 function curriculumRevision(id){return id==='l8-exam'?2:window.LanguageJourneyContent.manifest.lessons.find(lesson=>lesson.id===id)?.revision||0}
 function currentLessonRank(id){const record=rankState[id];return record?.rank&&(!curriculumRevision(id)||record.curriculumRevision===curriculumRevision(id))?record.rank:null}
-function rankIntroducedWord(word){return!!currentLessonRank(word.lessonId)}
+function rankIntroducedWord(word){return!state.deferredVocabIntroductions?.includes(word.id)&&!!currentLessonRank(word.lessonId)}
 function lessonRevisionNotice(id){return rankState[id]?.rank&&!currentLessonRank(id)?`<div class="notice" style="margin-top:10px">Je eerdere rank en historie blijven bewaard. ${id==='l8-exam'?'Dit level heeft aanvullende leerdoelen; maak het nieuwe level-examen':'Deze les heeft aanvullende leerdoelen; maak de nieuwe Lestoets'} om de uitgebreide stof te bevestigen.</div>`:''}
-function knowledgeWordIsKnown(entry){return entry.kind==='woord'&&(state.introducedVocabIds.includes(entry.id)||!!state.vocabFirstSeen[entry.id]||rankIntroducedWord(entry))}
+function knowledgeWordIsKnown(entry){return entry.kind==='woord'&&!state.deferredVocabIntroductions?.includes(entry.id)&&(state.introducedVocabIds.includes(entry.id)||!!state.vocabFirstSeen[entry.id]||rankIntroducedWord(entry))}
 function knowledgeGrammarIsKnown(entry){
   if(entry.kind!=='grammatica'||!entry.lessonId)return false;
   const id=entry.lessonId,steps=[...(state.langStepProgress[id]||[]),...(state.advancedStepProgress[id]||[])];
@@ -2743,6 +2753,9 @@ state.monthLearning={block:0,completed:[],practice:{}};
 state.curriculumHistory={};
 state.thematic={level:11,lessonIndex:0,part:'A',step:'list',questionIndex:0,correct:0,answered:false,selected:null};
 state.thematicCompleted={};
+state.thematicRevision=1;
+state.historicalIntroducedVocabIds=[];
+state.deferredVocabIntroductions=[];
 state.thematicScores={};
 state.dictionaryQuery='';
 state.dictionarySelectedId=null;
@@ -2874,6 +2887,7 @@ const japaneseAudio=window.LanguageJourneyAudio||globalThis.LanguageJourneyAudio
 const japaneseAudioManifest=window.LanguageJourneyAudioManifest||globalThis.LanguageJourneyAudioManifest;
 const japanesePlayback=japaneseAudio.createPlayback();
 function registeredAudioAsset(key='',text='',voiceRole='A'){
+  if(window.LanguageJourneyContent.audioEntryById[key]?.entry?.speakerPolicy==='avatars')voiceRole=state.avatarGender==='male'?'B':'A';
   return japaneseAudio.resolve(window.LanguageJourneyContent,japaneseAudioManifest,key,text,voiceRole);
 }
 function playAvatarCelebration(source){
@@ -3021,6 +3035,9 @@ function storageStateSnapshot(){
     flashcardSession:state.flashcardSession,
     thematic:state.thematic,
     thematicCompleted:state.thematicCompleted,
+    thematicRevision:state.thematicRevision,
+    historicalIntroducedVocabIds:state.historicalIntroducedVocabIds,
+    deferredVocabIntroductions:state.deferredVocabIntroductions,
     thematicScores:state.thematicScores,
     vocabFirstSeen:state.vocabFirstSeen,
     kanaFirstSeen:state.kanaFirstSeen,
@@ -3169,7 +3186,11 @@ function loadProgress(){
     state.level8Revision=2;state.curriculumHistory=s.curriculumHistory||{};
     if(s.monthLearning&&typeof s.monthLearning==='object')state.monthLearning={block:Math.max(0,Math.min(6,Number(s.monthLearning.block)||0)),completed:Array.isArray(s.monthLearning.completed)?[...new Set(s.monthLearning.completed.filter(index=>Number.isInteger(index)&&index>=0&&index<6))]:[],practice:s.monthLearning.practice&&typeof s.monthLearning.practice==='object'?s.monthLearning.practice:{}};
     if(s.instructionKnowledge&&typeof s.instructionKnowledge==='object')for(const [id,value] of Object.entries(s.instructionKnowledge))if(window.LanguageJourneyContent.manifest.instructions.some(item=>item.id===id))state.instructionKnowledge[id]={attempts:Math.max(0,Math.floor(Number(value?.attempts)||0)),correct:Math.max(0,Math.floor(Number(value?.correct)||0))};
-    if(s.thematic&&typeof s.thematic==='object'&&[11,12,13,14,15].includes(savedVersion<=6&&s.thematic.level===11?15:s.thematic.level)){const thematicLevel=savedVersion<=6&&s.thematic.level===11?15:s.thematic.level;state.thematic={level:thematicLevel,lessonIndex:Math.max(0,Math.min(4,Number(s.thematic.lessonIndex)||0)),part:s.thematic.part==='B'?'B':'A',step:['list','lesson','bonus','words','practice','reading','questions','done'].includes(s.thematic.step)?s.thematic.step:'list',questionIndex:Math.max(0,Math.floor(Number(s.thematic.questionIndex)||0)),correct:Math.max(0,Math.floor(Number(s.thematic.correct)||0)),answered:!!s.thematic.answered,selected:typeof s.thematic.selected==='string'?s.thematic.selected:null};}
+    if(s.thematic&&typeof s.thematic==='object'&&[11,12,13,14,15].includes(savedVersion<=6&&s.thematic.level===11?15:s.thematic.level)){const thematicLevel=savedVersion<=6&&s.thematic.level===11?15:s.thematic.level;state.thematic={level:thematicLevel,lessonIndex:Math.max(0,Math.min(4,Number(s.thematic.lessonIndex)||0)),part:s.thematic.part==='B'?'B':'A',step:['list','lesson','bonus','words','practice','sentences','reading','questions','done'].includes(s.thematic.step)?s.thematic.step:'list',questionIndex:Math.max(0,Math.floor(Number(s.thematic.questionIndex)||0)),correct:Math.max(0,Math.floor(Number(s.thematic.correct)||0)),answered:!!s.thematic.answered,selected:typeof s.thematic.selected==='string'?s.thematic.selected:null,preparedLesson:!!s.thematic.preparedLesson,wordBlockIndex:Math.max(0,Math.floor(Number(s.thematic.wordBlockIndex)||0)),sentenceIndex:Math.max(0,Math.floor(Number(s.thematic.sentenceIndex)||0)),flowRevision:Number(s.thematic.flowRevision)||0};
+      // Old in-flight questions refer to replaced texts. Return to the lesson, not a
+      // different question; completion, scores and ranks remain untouched.
+      if(thematicLevel<=14&&state.thematic.flowRevision!==1&&!['list','lesson','bonus','done'].includes(state.thematic.step))state.thematic.step='lesson';
+    }
     if(s.thematicCompleted&&typeof s.thematicCompleted==='object')for(const [id,parts] of Object.entries(s.thematicCompleted))if(/^l(?:11-home|11|12|13|14|15)-[1-5]$/.test(id)&&parts&&typeof parts==='object')state.thematicCompleted[id]={A:!!parts.A,B:!!parts.B};
     if(s.thematicScores&&typeof s.thematicScores==='object')for(const [id,scores] of Object.entries(s.thematicScores))if(/^l(?:11-home|11|12|13|14|15)-[1-5]$/.test(id)&&scores&&typeof scores==='object')state.thematicScores[id]={A:Math.max(0,Number(scores.A)||0),B:Math.max(0,Number(scores.B)||0)};
     if(['hiragana','katakana'].includes(s.dakScript))state.dakScript=s.dakScript;
@@ -3232,6 +3253,15 @@ function loadProgress(){
       if(Number.isFinite(src.attempts)&&src.attempts>=0)rankState[id].attempts=Math.floor(src.attempts);
       rankState[id].curriculumRevision=Number(src.curriculumRevision)||0;
     });
+    state.historicalIntroducedVocabIds=Array.isArray(s.historicalIntroducedVocabIds)?s.historicalIntroducedVocabIds.filter(id=>vocabById[id]):[];
+    if(parsed&&!s.thematicRevision){
+      for(const [id,source] of Object.entries(window.LanguageJourneyContent.manifest.didacticMigration.wordSources)){
+        if([source.lessonId,`l${source.level}-exam`].some(key=>!!rankState[key]?.rank)&&!state.historicalIntroducedVocabIds.includes(id))state.historicalIntroducedVocabIds.push(id);
+      }
+    }
+    state.thematicRevision=1;
+    state.deferredVocabIntroductions=Array.isArray(s.deferredVocabIntroductions)?s.deferredVocabIntroductions.filter(id=>vocabById[id]):parsed&&!s.thematicRevision?['vocab-country-japan']:[];
+    for(const id of state.historicalIntroducedVocabIds)if(!state.introducedVocabIds.includes(id))state.introducedVocabIds.push(id);
     if(saved.itemMastery&&typeof saved.itemMastery==='object'){
       Object.entries(saved.itemMastery).forEach(([id,src])=>{
         if(!src||typeof src!=='object')return;
@@ -3312,6 +3342,7 @@ function scheduleRecallFeedbackAdvance(session){
   },delay);
 }
 function show(which){
+  cancelQuestionAdvance();
   hideAvatarAudioOverlay(false);
   if(which!=='flashcards'&&state.flashcardSession?.status==='active'){
     cancelRecallFeedbackAdvance(true);finishRecallStudy('verlaten');state.flashcardSession.status='paused';scheduleSave();
@@ -3842,9 +3873,9 @@ function courseLessonLabel(level,number){return thematicCourses[level-1]?themati
 function thematicLessonTitle(lesson){return lesson.titleJa&&thematicUiKnown(lesson.titleVocabIds||[])?lesson.titleJa:lesson.title}
 function displayedLessonTitle(id,fallback=''){const lesson=window.LanguageJourneyContent.manifest.lessons.find(item=>item.id===id);return lesson?.kind==='thematic'?thematicLessonTitle(lesson):lesson?.title||fallback}
 function thematicLessonCount(done,total){return thematicUiLabel('レッスン','')?`${thematicUiLabel('レッスン','')} ${done}/${total} · ✓`:`${done}/${total} lessen afgerond`}
-function thematicCheckLabel(kind='lesson'){const form=kind==='lesson'?'レッスン':'レベル';return thematicUiKnown([`vocab-${form}`,'vocab-もんだい'])?`${thematicUiLabel(form,'')} · ${thematicUiLabel('もんだい','')}`:kind==='lesson'?'Lescheck':'Levelcheck'}
+function thematicCheckLabel(kind='lesson'){return kind==='lesson'?'Lestoets':'Leveltoets'}
 function thematicQuizTitle(course,lesson=null){return lesson?`${thematicLevelLabel(course.number)} · ${thematicLessonLabel(lesson.order)} · ${thematicLessonTitle(lesson)} · ${thematicCheckLabel()}`:`${thematicLevelLabel(course.number)} · ${thematicCheckLabel('level')}`}
-function thematicQuestions(lesson){return lesson.applications.flatMap((part,partIndex)=>part.questions.map((q,index)=>({kind:'order',instruction:thematicUiKnown(window.LanguageJourneyContent.manifest.instructions.find(item=>item.id==='choose-answer').requiredVocabIds)?window.LanguageJourneyContent.manifest.instructions.find(item=>item.id==='choose-answer').textJa:'Kies het antwoord dat bij de tekst past.',prompt:q.prompt,correct:q.answer,choices:q.choices.slice((index+partIndex+1)%q.choices.length).concat(q.choices.slice(0,(index+partIndex+1)%q.choices.length))}))) }
+function thematicQuestions(lesson){return lesson.applications.flatMap((part,partIndex)=>part.questions.map((q,index)=>({kind:'order',sourceId:q.sourceId,lessonId:lesson.id,context:thematicReadingById[part.readingId].text,contextLanguage:'ja',instruction:thematicUiKnown(window.LanguageJourneyContent.manifest.instructions.find(item=>item.id==='choose-answer').requiredVocabIds)?window.LanguageJourneyContent.manifest.instructions.find(item=>item.id==='choose-answer').textJa:'Kies het antwoord dat bij de tekst past.',prompt:q.prompt,correct:q.answer,choices:q.choices.slice((index+partIndex+1)%q.choices.length).concat(q.choices.slice(0,(index+partIndex+1)%q.choices.length))}))) }
 function openThematicLesson(index){state.thematic={level:state.level+1,lessonIndex:index,part:'A',step:'lesson',questionIndex:0,correct:0,answered:false,selected:null};state.screen='module';scheduleSave();renderMain()}
 function openThematicBonus(course){
   if(course.lessons.some(lesson=>thematicProgress(lesson)!==2)||!thematicBonusById[course.bonusId])return;
@@ -3862,30 +3893,104 @@ function thematicAvatarMoment(kind,course){
 }
 function startThematicPart(part){
   const lesson=thematicLesson();if(!lesson)return;
+  if(lesson.didactics){
+    const prepared=state.thematic.preparedLesson&&part==='B';
+    state.thematic={level:state.level+1,lessonIndex:state.thematic.lessonIndex,part,step:prepared?'reading':'words',questionIndex:0,correct:0,answered:false,selected:null,preparedLesson:prepared,wordBlockIndex:0,sentenceIndex:0,flowRevision:1};
+    beginStudySession({title:`Level ${state.level+1} · ${lesson.title} · ${part}`,activityType:'les',category:'app',source:'lesson:thematic',level:state.level+1,skills:['lezen','woordenschat']});
+    scheduleSave();renderMain();return;
+  }
   state.thematic={level:state.level+1,lessonIndex:state.thematic.lessonIndex,part,step:'words',questionIndex:0,correct:0,answered:false,selected:null};
   beginStudySession({title:`Level ${state.level+1} · ${lesson.title} · ${part}`,activityType:'les',category:'app',source:'lesson:thematic',level:state.level+1,tags:['verhaal','praktische bron'],skills:['lezen','woordenschat']});
   for(const id of thematicPart().wordIds){if(!state.introducedVocabIds.includes(id))state.introducedVocabIds.push(id);recordVocabEncounter(id)}
   scheduleSave();renderMain();
 }
-function thematicAdvance(step){state.thematic.step=step;state.thematic.questionIndex=0;state.thematic.answered=false;state.thematic.selected=null;scheduleSave();renderMain()}
+function thematicAdvance(step){cancelQuestionAdvance();state.thematic.step=step;state.thematic.questionIndex=0;state.thematic.answered=false;state.thematic.selected=null;scheduleSave();renderMain()}
 function thematicFinishPart(){
   const lesson=thematicLesson(),part=state.thematic.part;
   if(!state.thematicCompleted[lesson.id])state.thematicCompleted[lesson.id]={A:false,B:false};
   state.thematicCompleted[lesson.id][part]=true;
   if(!state.thematicScores[lesson.id])state.thematicScores[lesson.id]={A:0,B:0};
   state.thematicScores[lesson.id][part]=state.thematic.correct;
-  completeStudySession({status:'afgerond',result:{score:state.thematic.correct,total:thematicPart().wordIds.length+thematicPart().questions.length}});
+  completeStudySession({status:'afgerond',result:{score:state.thematic.correct,total:(lesson.didactics?0:thematicPart().wordIds.length)+thematicPart().questions.length}});
   thematicAdvance('done');
 }
 function thematicAnswer(answer,correct){
-  if(state.thematic.answered)return;
+  if(state.thematic.answered||(thematicLesson()?.didactics&&(!state.thematic.optionsRevealed||Date.now()<(state.thematic.answerUnlockAt||0))))return;
   state.thematic.answered=true;state.thematic.selected=answer;
   if(answer===correct){state.thematic.correct++;const id=thematicPart()?.instructionId;if(id){const progress=state.instructionKnowledge[id]||{attempts:0,correct:0};progress.attempts++;progress.correct++;state.instructionKnowledge[id]=progress}}
   else{const id=thematicPart()?.instructionId;if(id){const progress=state.instructionKnowledge[id]||{attempts:0,correct:0};progress.attempts++;state.instructionKnowledge[id]=progress}}
   scheduleSave();renderMain();
 }
+// One feedback clock for the Phase-1 quiz and thematic questions. Navigation and
+// a new answer invalidate the same token; no per-level timing implementation.
+function cancelQuestionAdvance(){if(quizFeedbackTimer!==null)clearTimeout(quizFeedbackTimer);quizFeedbackTimer=null;quizAnswerToken++}
+function scheduleQuestionAdvance(callback,valid=()=>true){
+  cancelQuestionAdvance();const token=quizAnswerToken;
+  quizFeedbackTimer=setTimeout(()=>{quizFeedbackTimer=null;if(token===quizAnswerToken&&valid())callback()},AUDIO_FEEDBACK_MS);
+}
+function dialogueHtml(id){
+  const content=window.LanguageJourneyContent,block=content.audioEntryById[id]?.entry;if(!block?.lines)return'';
+  const names={A:resolveProfileText('{{avatarName}}'),B:avatarDefaults(state.avatarGender==='male'?'female':'male').name};
+  const audio=speakerButtonHtml('',id,'Luister naar het gesprek');
+  return`<section class="panel dialogue-block"><div class="between"><strong>Kort gesprek</strong>${audio||'<span class="small">Audio wordt voorbereid</span>'}</div>${block.lines.map(line=>{const sentence=content.audioEntryById[line.sentenceId]?.entry,gender=line.speakerRole==='A'?state.avatarGender:state.avatarGender==='male'?'female':'male',portrait=avatarAssetFor(activeAvatarOutfit(),'neutral',gender,state.avatarHairstyle);return`<div class="dialogue-turn" data-dialogue-role="${line.speakerRole}"><div class="dialogue-identity">${portrait?`<img src="assets/${escapeHtml(portrait)}" alt="" loading="lazy">`:''}<strong class="small">${escapeHtml(names[line.speakerRole])}</strong></div><div lang="ja" class="jp-question-copy">${escapeHtml(sentence.displayText)}</div><div class="small">${escapeHtml(sentence.meaning)}</div></div>`}).join('')}</section>`;
+}
+function thematicResourceHtml(part,reading){
+  if(part.part==='A')return`<div class="thematic-reading" lang="ja">${thematicReadingHtml(reading.text)}</div>`;
+  return`<div class="thematic-resource" data-resource-kind="${escapeHtml(part.resourceKind||'notice')}" lang="ja">${reading.text.split('\n').map(line=>`<div class="thematic-resource-row">${thematicReadingHtml(line)}</div>`).join('')}</div>`;
+}
+function renderDidacticLesson(host,lesson,part,reading,done){
+  const session=state.thematic,step=session.step,newWords=lesson.didactics.newWordIds.map(id=>vocabById[id]);
+  const nextButton=(id,label)=>`<button id="${id}" class="btn primary" style="width:100%;margin-top:12px">${label} →</button>`;
+  if(step==='lesson'){
+    host.innerHTML=`<section class="card"><div class="h2">${lesson.didactics.integration?'Combineren wat je kent':'Van woord naar toepassing'}</div><p class="small">${newWords.length} nieuwe kernwoorden · in blokjes van maximaal 3.<br>Woorden → oefenen → korte zinnen → verhaal A → praktische bron B → Lestoets.</p>${nextButton('thematicStartA',done.A?thematicUiLabel('もういちど','Opnieuw oefenen'):thematicUiLabel('はじめます','Begin de les'))}</section><section class="card"><strong>Praktische bron B</strong><p class="small">${escapeHtml(lesson.applications[1].label)} · de woorden zijn vóór het verhaal voorbereid.</p><button id="thematicStartB" class="btn" ${done.A?'':'disabled'}>B →</button></section><section class="card"><strong>Lestoets</strong><p class="small">Vier toepassingsvragen met de bron erbij. Bestaande rank: ${rankText(rankState[lesson.id]?.rank)}.</p><button id="thematicCheck" class="btn" ${done.A&&done.B?'':'disabled'}>Lestoets →</button></section>`;
+    $('thematicStartA').onclick=()=>startThematicPart('A');if(done.A)$('thematicStartB').onclick=()=>startThematicPart('B');
+    if(done.A&&done.B)$('thematicCheck').onclick=()=>startQuiz({source:'advanced',title:thematicQuizTitle(thematicCourse(),lesson),rankId:lesson.id,rankThreshold:.75,official:true,pool:[],questions:shuffle(thematicQuestions(lesson)),choices:3});return;
+  }
+  if(step==='words'){
+    const blocks=Math.max(1,Math.ceil(newWords.length/3));session.wordBlockIndex=Math.min(session.wordBlockIndex||0,blocks-1);
+    const words=newWords.slice(session.wordBlockIndex*3,session.wordBlockIndex*3+3);
+    for(const v of words){state.deferredVocabIntroductions=state.deferredVocabIntroductions.filter(id=>id!==v.id);if(!state.introducedVocabIds.includes(v.id))state.introducedVocabIds.push(v.id);recordVocabEncounter(v.id)}
+    host.innerHTML=`<section class="card"><div class="eyebrow">Woorden · ${session.wordBlockIndex+1}/${blocks}</div><div class="thematic-words">${words.map(v=>`<div class="panel audio-content-block"><strong lang="ja">${japaneseWordHtml(v.kana)}</strong>${speakerButtonHtml(v.kana,v.id)}<div class="small">${escapeHtml(v.romaji)} · ${escapeHtml(v.meaning)}</div></div>`).join('')||'<p>Geen nieuwe woorden: je combineert de bekende bouwstenen.</p>'}</div>${nextButton('thematicWordsNext',session.wordBlockIndex+1<blocks?thematicUiLabel('つぎ','Volgende woorden'):thematicUiLabel('れんしゅう','Oefenen'))}</section>`;
+    $('thematicWordsNext').onclick=()=>{if(++session.wordBlockIndex<blocks){scheduleSave();renderMain()}else thematicAdvance(newWords.length?'practice':'sentences')};scheduleSave();return;
+  }
+  if(step==='practice'){
+    beginWordCrashCourse({hostId:'thematicBody',lesson,words:newWords,returnToLesson:()=>thematicAdvance('lesson'),onComplete:()=>{session.sentenceIndex=0;thematicAdvance('sentences')}});return;
+  }
+  if(step==='sentences'){
+    const models=lesson.models,index=Math.min(session.sentenceIndex||0,Math.max(0,models.length-1)),model=models[index];
+    const grammar=index===0?`<div class="notice">${escapeHtml(part.grammarHint)}</div>`:'';
+    host.innerHTML=`<section class="card"><div class="eyebrow">Korte zinnen · ${index+1}/${models.length}</div>${grammar}${model?modelAnalysisHtml(model,lesson.id):'<p>Je kent de bouwstenen al. Combineer ze nu in het verhaal.</p>'}${nextButton('thematicSentenceNext',index+1<models.length?thematicUiLabel('つぎ','Volgende zin'):'Naar de tekst')}</section>`;
+    $('thematicSentenceNext').onclick=()=>{if(index+1<models.length){session.sentenceIndex=index+1;scheduleSave();renderMain()}else{session.preparedLesson=true;thematicAdvance('reading')}};return;
+  }
+  if(step==='reading'){
+    host.innerHTML=`<section class="card"><div class="eyebrow">${part.part==='A'?'Verhaal A':'Praktische bron B'}</div><div class="audio-content-block">${thematicResourceHtml(part,reading)}${speakerButtonHtml(reading.text,reading.id,'Luister naar de tekst')}</div>${part.dialogueId?dialogueHtml(part.dialogueId):''}<details class="thematic-hint"><summary>Vertaling en woordhulp</summary><p>${escapeHtml(reading.translation)}</p>${lesson.wordIds.map(id=>`<div>${japaneseWordHtml(vocabById[id].kana)} · ${escapeHtml(vocabById[id].meaning)}</div>`).join('')}</details>${nextButton('thematicQuestionsStart',thematicUiLabel('しつもん','Vragen'))}</section>`;
+    $('thematicQuestionsStart').onclick=()=>thematicAdvance('questions');return;
+  }
+  if(step==='questions'){
+    session.questionIndex=Math.min(session.questionIndex,part.questions.length-1);
+    const base=part.questions[session.questionIndex],q={...base,choices:thematicOrderedChoices(base.choices)};
+    host.innerHTML=`<section class="card"><div class="small">${thematicUiLabel('しつもん','Vraag')} ${session.questionIndex+1}/${part.questions.length}</div>${thematicResourceHtml(part,reading)}</section>${thematicChoiceHtml(q,'Toepassen',part.instructionId)}`;
+    if(!session.answered&&!session.optionsRevealed){
+      const choices=host.querySelector('.thematic-choices');choices.classList.add('thematic-choices-hidden');
+      choices.querySelectorAll('button').forEach(b=>{b.disabled=true;b.setAttribute('aria-hidden','true');b.tabIndex=-1});
+      choices.insertAdjacentHTML('beforeend','<button id="thematicReveal" class="flashcard-options-reveal" aria-label="Toon antwoordopties">Toon opties</button>');
+      $('thematicReveal').onclick=event=>{event.preventDefault();event.stopPropagation();session.optionsRevealed=true;session.answerUnlockAt=Date.now()+180;renderMain()};
+    }
+    host.querySelectorAll('[data-thematic-choice]').forEach(button=>button.onclick=()=>thematicAnswer(q.choices[Number(button.dataset.thematicChoice)],q.answer));
+    if(session.answered){
+      const next=()=>thematicNextQuestion(part.questions.length,'done');
+      if(session.selected===q.answer){$('thematicNext').remove();const index=session.questionIndex;scheduleQuestionAdvance(next,()=>state.screen==='module'&&state.thematic===session&&session.step==='questions'&&session.questionIndex===index)}
+      else $('thematicNext').onclick=next;
+    }return;
+  }
+  if(step==='done'){
+    host.innerHTML=`<section class="card"><div class="h2">Onderdeel ${part.part} afgerond</div><p>${session.correct} van ${part.questions.length} toepassingsvragen goed.</p>${nextButton('thematicDoneNext',part.part==='A'?'Praktische bron B':'Terug naar de les')}</section>`;
+    $('thematicDoneNext').onclick=()=>part.part==='A'?startThematicPart('B'):thematicAdvance('lesson');
+  }
+}
 function thematicNextQuestion(length,nextStep){
-  state.thematic.answered=false;state.thematic.selected=null;state.thematic.questionIndex++;
+  if(!state.thematic.answered)return;
+  cancelQuestionAdvance();state.thematic.answered=false;state.thematic.selected=null;state.thematic.optionsRevealed=false;state.thematic.questionIndex++;
   if(state.thematic.questionIndex>=length){if(nextStep==='done')return thematicFinishPart();state.thematic.step=nextStep;state.thematic.questionIndex=0}
   scheduleSave();renderMain();
 }
@@ -3909,7 +4014,7 @@ function thematicChoiceHtml(question,kind,instructionId=null){
 function thematicReadingHtml(text){
   return text.split(/(\s+|[。、：])/u).map(token=>{
     if(!token.trim())return token.includes('\n')?token.replace(/\n/g,'<br>'):' ';
-    const word=vocabCatalog.find(item=>!item.legacy&&item.jp===token);
+    const matches=vocabCatalog.filter(item=>!item.legacy&&item.jp===token),word=matches.findLast(item=>state.introducedVocabIds.includes(item.id))||matches[0];
     return word?`<button type="button" class="thematic-token" data-dictionary-open="${escapeHtml(word.id)}">${escapeHtml(token)}</button>`:escapeHtml(token);
   }).join('');
 }
@@ -3932,6 +4037,7 @@ function renderThematicLesson(box,course){
   const lesson=thematicLesson(),step=state.thematic.step,part=thematicPart(),reading=thematicReadingById[part.readingId],done=state.thematicCompleted[lesson.id]||{};
   box.innerHTML=step==='bonus'?`<section class="card"><div class="eyebrow">${thematicLevelLabel(course.number)} · bonus</div><div class="h1">Een extra scène</div><div class="muted">Los van de vijf lessen en de levelcheck.</div></section><div id="thematicBody" class="stack"></div>`:`<section class="card"><div class="eyebrow">${thematicLevelLabel(course.number)} · ${thematicLessonLabel(state.thematic.lessonIndex+1)}/5</div><div class="h1">${escapeHtml(thematicLessonTitle(lesson))}</div><div class="muted">${escapeHtml(lesson.goal)}</div><div class="small" style="margin-top:8px">A · verhaal ${done.A?'✓':''}　B · praktische bron ${done.B?'✓':''} · geen kalenderdruk</div></section><div id="thematicBody" class="stack"></div>`;
   const host=$('thematicBody');
+  if(lesson.didactics&&step!=='bonus')return renderDidacticLesson(host,lesson,part,reading,done);
   if(step==='lesson'||step==='bonus'){
     if(step==='bonus')return renderThematicBonus(host,course);
     host.innerHTML=`${lesson.grammarIds.length?`<section class="card"><div class="eyebrow">Nieuwe bouwsteen</div><div class="h2">${escapeHtml(window.LanguageJourneyContent.manifest.grammar.find(g=>g.id===lesson.grammarIds[0]).title)}</div><div class="muted">${escapeHtml(window.LanguageJourneyContent.manifest.grammar.find(g=>g.id===lesson.grammarIds[0]).shortExplanation)}</div></section>`:''}<section class="card thematic-module"><div><div class="eyebrow">Module A · verhalende context</div><div class="h2">Kort verhaal</div><div class="small">Nieuwe woorden → korte recall → verhaal → begrip</div></div><button id="thematicStartA" class="btn primary">${done.A?thematicUiLabel('もういちど','Opnieuw lezen'):thematicUiLabel('はじめます','Start')+' A'}</button></section><section class="card thematic-module"><div><div class="eyebrow">Module B · real-world context</div><div class="h2">${escapeHtml(lesson.applications[1].label)}</div><div class="small">Extra woorden → korte recall → praktische bron → toepassing${done.A?'':' · open na A'}</div></div><button id="thematicStartB" class="btn primary" ${done.A?'':'disabled'}>${done.B?thematicUiLabel('もういちど','Opnieuw oefenen'):thematicUiLabel('はじめます','Start')+' B'}</button></section><section class="card"><div class="between"><strong>${thematicCheckLabel()}</strong><span class="rank ${rankClass(rankState[lesson.id]?.rank)}">${rankText(rankState[lesson.id]?.rank)}</span></div><div class="small">Vier begripsvragen uit A en B. Een herkansing blijft mogelijk.</div><button id="thematicCheck" class="btn" style="width:100%;margin-top:10px" ${done.A&&done.B?'':'disabled'}>${thematicCheckLabel()} →</button></section>`;
@@ -4596,7 +4702,7 @@ function advanceWordCrashCourse(){
   if(course.index<course.queue.length-1){course.index++;return renderWordCrashCourse()}
   course.phase='summary';renderWordCrashCourse();return true;
 }
-function modelAnalysisHtml(model,lessonId=''){return`<div class="model-sentence audio-content-block">${escapeHtml(model.sentence)} ${speakerButtonHtml(model.sentence,model.sentenceId,'Luister naar de voorbeeldzin')}</div><div class="sentence-analysis">${model.parts.map(([token,role,gloss])=>{const entry=dictionaryEntryForToken(token,lessonId);return`<div class="sentence-part"><div class="token">${entry?dictionaryButton(entry.id,lessonId,model.sentence,model.meaning):escapeHtml(token)}</div><div class="role">${escapeHtml(role)}</div><div class="gloss">${escapeHtml(gloss)}</div></div>`}).join('')}</div><div class="small" style="text-align:center;margin-top:9px">${escapeHtml(model.meaning)}</div>`}
+function modelAnalysisHtml(model,lessonId=''){return`<div class="model-sentence audio-content-block">${escapeHtml(model.sentence)} ${speakerButtonHtml(model.sentence,model.sentenceId,'Luister naar de voorbeeldzin')}</div><div class="sentence-analysis">${model.parts.map(([token,role,gloss])=>{const entry=dictionaryEntryForToken(token,lessonId);return`<div class="sentence-part"><div class="token">${entry?dictionaryButton(entry.id,lessonId,model.sentence,model.meaning):escapeHtml(token)}</div><div class="role">${escapeHtml(role)}</div><div class="gloss">${escapeHtml(gloss)}</div></div>`}).join('')}</div><div class="small" style="text-align:center;margin-top:9px">${escapeHtml(model.meaning)}</div>${model.dialogueId?dialogueHtml(model.dialogueId):''}`}
 function renderLanguageModel(l,index){const didactic=level4Didactics[index],words=lessonNewWords(l),count=wordCrashCourseDeck(words).length;$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 2 · uitleg + oefenen</div><div class="h2">${l.pattern}</div><div class="notice" style="margin-top:9px">${l.grammar}</div><div class="small" style="margin-top:8px"><strong>Let op:</strong> ${didactic.watch}</div>${l.spaceNote?'<div class="small" style="margin-top:5px">De spaties zijn een leerhulpmiddel; gewone Japanse tekst gebruikt ze meestal niet.</div>':''}<div id="modelList" class="stack" style="margin-top:10px"></div><button id="modelNext" class="btn primary" style="width:100%;margin-top:12px">${words.length?`Start Oefenen · ${count} woordvragen`:'Naar Lestoets →'}</button></section>`;const host=$('modelList');l.models.slice(0,MAX_LEVEL4_MODEL_SENTENCES).forEach(model=>{const d=document.createElement('div');d.className='panel';d.innerHTML=modelAnalysisHtml(model,l.id);host.appendChild(d)});$('modelNext').onclick=()=>{const complete=()=>{markLanguageStep(l.id,'practice');state.langStep='check';scheduleSave();renderMain()};if(!words.length)return complete();beginWordCrashCourse({hostId:'langStepBody',lesson:l,words,returnToLesson:()=>renderMain(),onComplete:complete})}}
 function understandingQuestions(l,index=langLessons.indexOf(l)){return selectQuestionsWithCoverage(l,level4QuestionBank(index).filter(q=>q.kind!=='build'),10,'Level 4-begripsoefening')}
 function languagePracticeQuestions(l,index){
@@ -5180,7 +5286,7 @@ function renderLessonQ(c,q,box){if(q.kind==='build')return renderBuilderQuizQ(c,
 function renderBuilderQuizQ(c,q,box){let selected=[];$('qHint').textContent=c.source==='small'?`Level 5 · ${lessonQuestionInstruction(q)}`:lessonQuestionInstruction(q);$('qPrompt').classList.add('prompt--example');$('qPrompt').textContent=q.prompt;box.className='';const draw=()=>{box.innerHTML='<div id="quizBuilderAnswer" class="builder-answer"></div><div id="quizBuilderBank" class="builder-bank"></div><button id="quizBuilderCheck" class="btn primary" style="width:100%;margin-top:10px">Controleer</button>';const answerBox=$('quizBuilderAnswer'),bank=$('quizBuilderBank');if(!selected.length)answerBox.innerHTML='<span class="builder-placeholder">Je zin verschijnt hier…</span>';selected.forEach((entry,i)=>{const b=document.createElement('button');b.className='sentence-chip placed';b.textContent=entry.text;b.onclick=()=>{selected.splice(i,1);draw()};answerBox.appendChild(b)});q.choices.forEach((text,pos)=>{if(selected.some(x=>x.pos===pos))return;const b=document.createElement('button');b.className='sentence-chip';b.textContent=text;b.onclick=()=>{selected.push({text,pos});draw()};bank.appendChild(b)});$('quizBuilderCheck').disabled=!selected.length;$('quizBuilderCheck').onclick=()=>{const made=selected.map(x=>x.text).join(' '),accepted=q.accepted?.length?q.accepted:[q.correct];answer(accepted.includes(made),$('quizBuilderCheck'),made||'geen antwoord')}};draw()}
 function addChoice(box,text,ok){const row=document.createElement('div');row.className='answer-option-row';const b=document.createElement('button');b.className='choice';if(/[\u3040-\u30ff\u3400-\u9fff]/u.test(String(text)))b.classList.add('choice-jp');b.dataset.correct=ok?'1':'0';b.innerHTML=japaneseWordHtml(text);b.onclick=()=>answer(ok,b,text);row.appendChild(b);const audio=document.createElement('span');audio.innerHTML=answerOptionAudioHtml(text,quizAudioKey(currentQ(),text,'choice'));if(audio.firstElementChild)row.appendChild(audio.firstElementChild);box.appendChild(row)}
 function qData(q){if(q.type==='kana')return{asked:q.mode==='forward'?q.item.front:hasDakutenSourceContext(q)?dakutenReversePrompt(q.item):q.item.back,correct:q.mode==='forward'?q.item.back:q.item.front,detail:`${q.item.base?`${q.item.base} → `:''}${q.item.front} ↔ ${q.item.back}`};if(q.type==='scriptReverse')return{asked:hasDakutenSourceContext(q)?dakutenReversePrompt(q.item):`${q.item.back} · ${q.script}`,correct:q.item.front,detail:`${q.item.base?`${q.item.base} → `:''}${q.item.front} ↔ ${q.item.back}`};if(q.type==='number')return{asked:fieldText(q.item,q.from),correct:fieldText(q.item,q.to),detail:`${q.item.symbol} ↔ ${q.item.valueText} ↔ ${q.item.reading}`};if(q.type==='math')return{asked:`${numberSymbol(q.a)} ${q.op} ${numberSymbol(q.b)}`,correct:numberSymbol(q.answer),detail:`${numberSymbol(q.answer)} ↔ ${q.answer} ↔ ${numberReading(q.answer)}`};return{asked:[q.context,q.prompt].filter(Boolean).join('\n'),correct:q.correct,detail:q.correct}}
-function answer(ok,b,chosen){const c=state.quiz;if(!c?.optionsRevealed||Date.now()<(c.answerUnlockAt||0))return false;const q=currentQ(),answerToken=++quizAnswerToken;hideAvatarAudioOverlay(false);c.optionsRevealed=false;[...$('qChoices').querySelectorAll('button')].forEach(x=>x.disabled=true);recordQuestionMastery(q,ok,c);if(ok){c.score++;if(c.errorBankPractice)resolveErrorBank(c.source,q);b.classList.add('correct');$('qFeedback').innerHTML='<div class="feedback-message">✓ Goed</div>';playCorrectAnswerSound();const correct=qData(q).correct;$('qCorrectAudio').dataset.autoNext='true';$('qCorrectAudio').innerHTML=speakerButtonHtml(correct,quizAudioKey(q,correct,'answer'),'Luister naar het juiste antwoord');if($('qCorrectAudio').innerHTML)$('qPromptAudio').innerHTML='';c.index++;quizFeedbackTimer=setTimeout(()=>{if(answerToken===quizAnswerToken)nextQuestion()},AUDIO_FEEDBACK_MS)}else{const d=qData(q);c.mistakes.push({number:c.index+1,chosen,...d,source:c.source,question:q});b.classList.add('incorrect');[...$('qChoices').querySelectorAll('button')].forEach(x=>{if(x.dataset.correct==='1')x.classList.add('correct')});$('qFeedback').innerHTML=`<div class="feedback-message">Niet goed · juist is <strong>${escapeHtml(d.correct)}</strong></div>`;$('qCorrectAudio').dataset.autoNext='false';$('qCorrectAudio').innerHTML=quizAnswerAudioHtml(q,d.correct);if($('qCorrectAudio').innerHTML)$('qPromptAudio').innerHTML='';c.index++;const next=document.createElement('button');next.type='button';next.className='btn primary feedback-next';next.textContent='Volgende vraag →';next.onclick=()=>{if(answerToken!==quizAnswerToken)return;if(quizFeedbackTimer)clearTimeout(quizFeedbackTimer);quizFeedbackTimer=null;nextQuestion()};$('qFeedback').appendChild(next)}updateQuizAvatar(ok);$('qBar').style.width=(c.index/c.questions.length*100)+'%';scheduleSave();return true}
+function answer(ok,b,chosen){const c=state.quiz;if(!c?.optionsRevealed||Date.now()<(c.answerUnlockAt||0))return false;const q=currentQ(),answerToken=++quizAnswerToken;hideAvatarAudioOverlay(false);c.optionsRevealed=false;[...$('qChoices').querySelectorAll('button')].forEach(x=>x.disabled=true);recordQuestionMastery(q,ok,c);if(ok){c.score++;if(c.errorBankPractice)resolveErrorBank(c.source,q);b.classList.add('correct');$('qFeedback').innerHTML='<div class="feedback-message">✓ Goed</div>';playCorrectAnswerSound();const correct=qData(q).correct;$('qCorrectAudio').dataset.autoNext='true';$('qCorrectAudio').innerHTML=speakerButtonHtml(correct,quizAudioKey(q,correct,'answer'),'Luister naar het juiste antwoord');if($('qCorrectAudio').innerHTML)$('qPromptAudio').innerHTML='';c.index++;scheduleQuestionAdvance(nextQuestion,()=>state.quiz===c)}else{const d=qData(q);c.mistakes.push({number:c.index+1,chosen,...d,source:c.source,question:q});b.classList.add('incorrect');[...$('qChoices').querySelectorAll('button')].forEach(x=>{if(x.dataset.correct==='1')x.classList.add('correct')});$('qFeedback').innerHTML=`<div class="feedback-message">Niet goed · juist is <strong>${escapeHtml(d.correct)}</strong></div>`;$('qCorrectAudio').dataset.autoNext='false';$('qCorrectAudio').innerHTML=quizAnswerAudioHtml(q,d.correct);if($('qCorrectAudio').innerHTML)$('qPromptAudio').innerHTML='';c.index++;const next=document.createElement('button');next.type='button';next.className='btn primary feedback-next';next.textContent='Volgende vraag →';next.onclick=()=>{if(answerToken!==quizAnswerToken)return;cancelQuestionAdvance();nextQuestion()};$('qFeedback').appendChild(next)}updateQuizAvatar(ok);$('qBar').style.width=(c.index/c.questions.length*100)+'%';scheduleSave();return true}
 function nextQuestion(){if(state.quiz.index>=state.quiz.questions.length)finishQuiz();else renderQuestion()}
 function finishQuiz(){const c=state.quiz,acc=c.score/c.questions.length;c.passed=acc>=(c.rankThreshold??.9);let rr=null;if(c.official&&c.rankId)rr=applyRank(c.rankId,acc,c.rankThreshold??.9);if(state.lastErrors[c.source])state.lastErrors[c.source]=[...c.mistakes];mergeErrorBank(c.source,c.mistakes);const study=completeStudySession({status:'afgerond',result:{score:c.score,total:c.questions.length,accuracy:acc,passed:c.passed}});show('result');$('resultTitle').textContent=c.title;$('resultScore').textContent=`${c.score} / ${c.questions.length}`;$('resultStats').textContent=`Goed: ${c.score} · Fout: ${c.questions.length-c.score} · Nauwkeurigheid: ${pct(acc)}`;if(rr){$('resultRank').classList.remove('hidden');$('resultRank').innerHTML=`${c.rankId&&/-row-/.test(c.rankId)?'Rijrank':'Sessierank'}: <strong>${rankText(rr.next)}</strong>${rr.prev!==rr.next?` · vorige: ${rankText(rr.prev)}`:''}. Een succesvolle volledige toets stijgt maximaal één stap.`}else $('resultRank').classList.add('hidden');$('resultAvatarAssist').innerHTML=avatarAssistHtml({pose:c.passed?'celebrate':'encourage',size:'medium',message:c.passed?'Mooi gedaan!':'Je bent aan het leren.',detail:c.passed?'Neem je resultaat even in je op.':'Bekijk je fouten en probeer het opnieuw.',celebrationTap:c.passed});renderErrors(c.mistakes);$('practiceErrors').disabled=!c.mistakes.length;configureNext(c);if(study)renderStudyAdjustment(study.id);saveProgress()}
 function renderErrors(errors){const box=$('errorList');box.innerHTML='';$('errorIntro').textContent=errors.length?'Score blijft staan. Bekijk kort wat misging.':'Geen fouten.';if(!errors.length){box.innerHTML='<div class="panel">Alles correct.</div>';return}errors.forEach(e=>{const d=document.createElement('div');d.className='error';const asked=escapeHtml(e.asked||'').replace(/\n/g,'<br>');d.innerHTML=`<div class="small">Vraag ${e.number}</div><div style="font-weight:750;margin-top:4px">${asked}</div><div style="margin-top:5px">Jouw antwoord: ${escapeHtml(e.chosen||'')}</div><div>Correct: <strong>${escapeHtml(e.correct||'')}</strong></div><div class="small" style="margin-top:4px">${escapeHtml(e.detail||'')}</div>`;box.appendChild(d)})}
@@ -5498,8 +5604,9 @@ function flashcardDue(record,now=Date.now()){return!record||!record.dueAt||recor
 function flashcardHasReviewHistory(cardId){return['jp-nl','nl-jp'].some(direction=>Object.hasOwn(state.flashcardProgress.cards,flashcardProgressKey(cardId,direction)))}
 function flashcardEligible(card){
   if(!card||card.legacy||!card.recallCore||!card.sourceFound||vocabById[card.id]!==card)return false;
+  if(state.deferredVocabIntroductions.includes(card.id))return false;
   const sources=[card.lessonId,...(window.LanguageJourneyContent.manifest.retiredLessons||[]).filter(lesson=>lesson.level===card.level&&lesson.wordIds?.includes(card.id)).map(lesson=>lesson.id)];
-  return [...sources.map(id=>rankState[id]?.rank),rankState[`l${card.level}-exam`]?.rank].some(rank=>['Copper','Silver','Gold','Platinum'].includes(rank));
+  return state.historicalIntroducedVocabIds.includes(card.id)||[...sources.map(id=>rankState[id]?.rank),rankState[`l${card.level}-exam`]?.rank].some(rank=>['Copper','Silver','Gold','Platinum'].includes(rank));
 }
 function recallAvailabilityReason(){
   if(progressLoadIssue)return 'loadError';
@@ -5736,6 +5843,8 @@ const item=s.queue[s.position],card=vocabById[item.cardId],direction=item.direct
   const flashcardView=$('flashcardView'),answerPanel=flashcardView.querySelector('.flashcard-answer-options');
   flashcardView.querySelector('.flashcard-avatar')?.remove();
   flashcardView.querySelector('.flashcard-face-sub')?.remove();
+  const recallHint=window.LanguageJourneyContent.manifest.vocabulary.find(word=>word.id===card.id)?.recallHint;
+  if(direction==='jp-nl'&&recallHint)flashcardView.querySelector('.flashcard-front')?.insertAdjacentHTML('beforebegin',`<div class="small recall-context">${escapeHtml(recallHint)}</div>`);
   if(direction==='jp-nl'&&!feedback){const face=flashcardView.querySelector('.flashcard-face-main');if(face)face.innerHTML+=speakerButtonHtml(card.kana,card.id,'Luister naar het Japanse woord')}
   if(feedback){const spokenAnswer=direction==='nl-jp'?correctChoice:card.kana,status=flashcardView.querySelector('.flashcard-feedback-status');if(spokenAnswer&&status)status.innerHTML+=`<div class="audio-feedback">${speakerButtonHtml(spokenAnswer,card.id,'Luister naar het juiste Japanse woord')}</div>`}
   if(!feedback&&!s.optionsRevealed&&answerPanel){
@@ -6187,6 +6296,8 @@ document.addEventListener('click',event=>{
   let completion=null;
   if(button.closest('#quizView')&&$('qCorrectAudio').dataset.autoNext==='true'){if(quizFeedbackTimer)clearTimeout(quizFeedbackTimer);quizFeedbackTimer=null;const token=quizAnswerToken;completion=()=>{hideAvatarAudioOverlay();if(token===quizAnswerToken)nextQuestion()}}
   const session=state.flashcardSession;if(recallFeedbackWasCorrect(session)&&button.closest('#flashcardView')){cancelRecallFeedbackAdvance();completion=()=>{hideAvatarAudioOverlay();if(state.flashcardSession===session)flashcardNextCard()}}
+  const thematic=state.thematic,thematicQuestion=thematicPart()?.questions[thematic.questionIndex];
+  if(button.closest('#thematicBody')&&thematic.step==='questions'&&thematic.answered&&thematic.selected===thematicQuestion?.answer){const index=thematic.questionIndex;cancelQuestionAdvance();completion=()=>{if(state.thematic===thematic&&thematic.questionIndex===index&&state.screen==='module')thematicNextQuestion(thematicPart().questions.length,'done')}}
   const course=activeWordCrashCourse,question=course?.queue[course.index];if(button.closest('.word-crash-course')&&question?.answered&&question.feedback?.correct){cancelWordCrashCourseTimer();completion=()=>{if(activeWordCrashCourse===course&&course.queue[course.index]===question)advanceWordCrashCourse()}};
   const audio=playAvatarAudio(button.dataset.audioKey,button.dataset.audioText,button);audioCoachCompletion=audio?completion:null;
 },true);

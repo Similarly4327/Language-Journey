@@ -1,0 +1,5293 @@
+{
+  "pipeline": "audio-v3.1",
+  "paidRequests": 0,
+  "summary": {
+    "current": 185,
+    "stale": 40,
+    "missing": 303,
+    "missing-file": 0,
+    "needs-review": 0
+  },
+  "jobs": [
+    {
+      "entryId": "vocab-かばん",
+      "lessonId": "l12-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "かばん",
+      "audioTextKana": "かばん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ホテル",
+      "lessonId": "l12-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ホテル",
+      "audioTextKana": "ホテル",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-レベル",
+      "lessonId": "l11-home-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "レベル",
+      "audioTextKana": "レベル",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-レッスン",
+      "lessonId": "l11-home-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "レッスン",
+      "audioTextKana": "レッスン",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-しつもん",
+      "lessonId": "l11-home-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "しつもん",
+      "audioTextKana": "しつもん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-こたえ",
+      "lessonId": "l11-home-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "こたえ",
+      "audioTextKana": "こたえ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-えらびます",
+      "lessonId": "l11-home-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "えらびます",
+      "audioTextKana": "えらびます",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-もんだい",
+      "lessonId": "l11-home-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "もんだい",
+      "audioTextKana": "もんだい",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-れんしゅう",
+      "lessonId": "l11-home-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "れんしゅう",
+      "audioTextKana": "れんしゅう",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ただしい",
+      "lessonId": "l11-home-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ただしい",
+      "audioTextKana": "ただしい",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-まちがい",
+      "lessonId": "l11-home-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "まちがい",
+      "audioTextKana": "まちがい",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-もういちど",
+      "lessonId": "l11-home-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "もういちど",
+      "audioTextKana": "もういちど",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-せつめい",
+      "lessonId": "l11-home-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "せつめい",
+      "audioTextKana": "せつめい",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ぶん",
+      "lessonId": "l11-home-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ぶん",
+      "audioTextKana": "ぶん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ことば",
+      "lessonId": "l11-home-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ことば",
+      "audioTextKana": "ことば",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-いみ",
+      "lessonId": "l11-home-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "いみ",
+      "audioTextKana": "いみ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-みつけます",
+      "lessonId": "l11-home-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "みつけます",
+      "audioTextKana": "みつけます",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-よんでください",
+      "lessonId": "l11-home-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "よんでください",
+      "audioTextKana": "よんでください",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ページ",
+      "lessonId": "l11-home-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ページ",
+      "audioTextKana": "ページ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-タイトル",
+      "lessonId": "l11-home-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "タイトル",
+      "audioTextKana": "タイトル",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-もじ",
+      "lessonId": "l11-home-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "もじ",
+      "audioTextKana": "もじ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-しるし",
+      "lessonId": "l11-home-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "しるし",
+      "audioTextKana": "しるし",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-きいてください",
+      "lessonId": "l11-home-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "きいてください",
+      "audioTextKana": "きいてください",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-おと",
+      "lessonId": "l11-home-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "おと",
+      "audioTextKana": "おと",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-おんせい",
+      "lessonId": "l11-home-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "おんせい",
+      "audioTextKana": "おんせい",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ゆっくり",
+      "lessonId": "l11-home-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ゆっくり",
+      "audioTextKana": "ゆっくり",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-くりかえします",
+      "lessonId": "l11-home-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "くりかえします",
+      "audioTextKana": "くりかえします",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-うめてください",
+      "lessonId": "l11-home-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "うめてください",
+      "audioTextKana": "うめてください",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-くうらん",
+      "lessonId": "l11-home-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "くうらん",
+      "audioTextKana": "くうらん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-かいてください",
+      "lessonId": "l11-home-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "かいてください",
+      "audioTextKana": "かいてください",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-きごう",
+      "lessonId": "l11-home-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "きごう",
+      "audioTextKana": "きごう",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-まる",
+      "lessonId": "l11-home-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "まる",
+      "audioTextKana": "まる",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-じゅんばん",
+      "lessonId": "l11-home-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "じゅんばん",
+      "audioTextKana": "じゅんばん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ならべます",
+      "lessonId": "l11-home-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ならべます",
+      "audioTextKana": "ならべます",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-さいしょ",
+      "lessonId": "l11-home-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "さいしょ",
+      "audioTextKana": "さいしょ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-つぎ",
+      "lessonId": "l11-home-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "つぎ",
+      "audioTextKana": "つぎ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-おわり",
+      "lessonId": "l11-home-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "おわり",
+      "audioTextKana": "おわり",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ぜんぶ",
+      "lessonId": "l11-home-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ぜんぶ",
+      "audioTextKana": "ぜんぶ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-あと",
+      "lessonId": "l11-home-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "あと",
+      "audioTextKana": "あと",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-すすめます",
+      "lessonId": "l11-home-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "すすめます",
+      "audioTextKana": "すすめます",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-はじめます",
+      "lessonId": "l11-home-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "はじめます",
+      "audioTextKana": "はじめます",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-かくにん",
+      "lessonId": "l11-home-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "かくにん",
+      "audioTextKana": "かくにん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-りょこう",
+      "lessonId": "l11-home-5",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "りょこう",
+      "audioTextKana": "りょこう",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-じゅんび",
+      "lessonId": "l11-home-5",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "じゅんび",
+      "audioTextKana": "じゅんび",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-しゅっぱつ",
+      "lessonId": "l12-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "しゅっぱつ",
+      "audioTextKana": "しゅっぱつ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-にもつ",
+      "lessonId": "l12-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "にもつ",
+      "audioTextKana": "にもつ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ひこうき",
+      "lessonId": "l11-home-5",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ひこうき",
+      "audioTextKana": "ひこうき",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-くうこう",
+      "lessonId": "l12-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "くうこう",
+      "audioTextKana": "くうこう",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-あんないじょ",
+      "lessonId": "l12-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "あんないじょ",
+      "audioTextKana": "あんないじょ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ひょうじ",
+      "lessonId": "l12-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ひょうじ",
+      "audioTextKana": "ひょうじ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-でぐち",
+      "lessonId": "l12-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "でぐち",
+      "audioTextKana": "でぐち",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-のりば",
+      "lessonId": "l12-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "のりば",
+      "audioTextKana": "のりば",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-きっぷ",
+      "lessonId": "l13-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "きっぷ",
+      "audioTextKana": "きっぷ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-いきさき",
+      "lessonId": "l13-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "いきさき",
+      "audioTextKana": "いきさき",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ばんせん",
+      "lessonId": "l13-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ばんせん",
+      "audioTextKana": "ばんせん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-こちら",
+      "lessonId": "l12-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "こちら",
+      "audioTextKana": "こちら",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-かたみち",
+      "lessonId": "l13-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "かたみち",
+      "audioTextKana": "かたみち",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-おとな",
+      "lessonId": "l13-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "おとな",
+      "audioTextKana": "おとな",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-きっぷうりば",
+      "lessonId": "l13-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "きっぷうりば",
+      "audioTextKana": "きっぷうりば",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-まどぐち",
+      "lessonId": "l12-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "まどぐち",
+      "audioTextKana": "まどぐち",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-まがります",
+      "lessonId": "l13-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "まがります",
+      "audioTextKana": "まがります",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-かいだん",
+      "lessonId": "l13-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "かいだん",
+      "audioTextKana": "かいだん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ちか",
+      "lessonId": "l13-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ちか",
+      "audioTextKana": "ちか",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ちじょう",
+      "lessonId": "l13-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ちじょう",
+      "audioTextKana": "ちじょう",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ちかてつ",
+      "lessonId": "l13-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ちかてつ",
+      "audioTextKana": "ちかてつ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-いりぐち",
+      "lessonId": "l12-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "いりぐち",
+      "audioTextKana": "いりぐち",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-でます",
+      "lessonId": "l13-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "でます",
+      "audioTextKana": "でます",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-はやい",
+      "lessonId": "l13-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "はやい",
+      "audioTextKana": "はやい",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-おそい",
+      "lessonId": "l13-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "おそい",
+      "audioTextKana": "おそい",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-じ",
+      "lessonId": "l13-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "じ",
+      "audioTextKana": "じ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ふん",
+      "lessonId": "l13-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ふん",
+      "audioTextKana": "ふん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-おくれ",
+      "lessonId": "l13-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "おくれ",
+      "audioTextKana": "おくれ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-てんじ",
+      "lessonId": "l13-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "てんじ",
+      "audioTextKana": "てんじ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ばん",
+      "lessonId": "l12-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ばん",
+      "audioTextKana": "ばん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-まちます",
+      "lessonId": "l12-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "まちます",
+      "audioTextKana": "まちます",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-つきます",
+      "lessonId": "l13-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "つきます",
+      "audioTextKana": "つきます",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-のりかえ",
+      "lessonId": "l13-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "のりかえ",
+      "audioTextKana": "のりかえ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-じかん",
+      "lessonId": "l13-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "じかん",
+      "audioTextKana": "じかん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-うんてんしゅ",
+      "lessonId": "l13-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "うんてんしゅ",
+      "audioTextKana": "うんてんしゅ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-おりば",
+      "lessonId": "l13-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "おりば",
+      "audioTextKana": "おりば",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-しゅうてん",
+      "lessonId": "l13-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "しゅうてん",
+      "audioTextKana": "しゅうてん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ホテルまえ",
+      "lessonId": "l13-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ホテルまえ",
+      "audioTextKana": "ホテルまえ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-フロント",
+      "lessonId": "l14-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "フロント",
+      "audioTextKana": "フロント",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-よやく",
+      "lessonId": "l14-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "よやく",
+      "audioTextKana": "よやく",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-なまえ",
+      "lessonId": "l14-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "なまえ",
+      "audioTextKana": "なまえ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-あります",
+      "lessonId": "l14-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "あります",
+      "audioTextKana": "あります",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-パスポート",
+      "lessonId": "l12-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "パスポート",
+      "audioTextKana": "パスポート",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-みせます",
+      "lessonId": "l14-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "みせます",
+      "audioTextKana": "みせます",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-よやくばんごう",
+      "lessonId": "l14-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "よやくばんごう",
+      "audioTextKana": "よやくばんごう",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-おねがいします",
+      "lessonId": "l14-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "おねがいします",
+      "audioTextKana": "おねがいします",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-へや",
+      "lessonId": "l14-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "へや",
+      "audioTextKana": "へや",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-かい",
+      "lessonId": "l14-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "かい",
+      "audioTextKana": "かい",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-エレベーター",
+      "lessonId": "l14-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "エレベーター",
+      "audioTextKana": "エレベーター",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ばんごう",
+      "lessonId": "l12-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ばんごう",
+      "audioTextKana": "ばんごう",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-かぎ",
+      "lessonId": "l14-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "かぎ",
+      "audioTextKana": "かぎ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-カード",
+      "lessonId": "l14-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "カード",
+      "audioTextKana": "カード",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-つかいます",
+      "lessonId": "l14-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "つかいます",
+      "audioTextKana": "つかいます",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ひらきます",
+      "lessonId": "l14-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ひらきます",
+      "audioTextKana": "ひらきます",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ドア",
+      "lessonId": "l14-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ドア",
+      "audioTextKana": "ドア",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-トイレ",
+      "lessonId": "l14-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "トイレ",
+      "audioTextKana": "トイレ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-できます",
+      "lessonId": "l14-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "できます",
+      "audioTextKana": "できます",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-かりる",
+      "lessonId": "l14-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "かりる",
+      "audioTextKana": "かりる",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-タオル",
+      "lessonId": "l14-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "タオル",
+      "audioTextKana": "タオル",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-きんえん",
+      "lessonId": "l14-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "きんえん",
+      "audioTextKana": "きんえん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-じはんき",
+      "lessonId": "l14-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "じはんき",
+      "audioTextKana": "じはんき",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-あんない",
+      "lessonId": "l14-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "あんない",
+      "audioTextKana": "あんない",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-あずけます",
+      "lessonId": "l14-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "あずけます",
+      "audioTextKana": "あずけます",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-あずかります",
+      "lessonId": "l14-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "あずかります",
+      "audioTextKana": "あずかります",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-あとで",
+      "lessonId": "l14-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "あとで",
+      "audioTextKana": "あとで",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-あさ",
+      "lessonId": "l14-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "あさ",
+      "audioTextKana": "あさ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-よる",
+      "lessonId": "l14-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "よる",
+      "audioTextKana": "よる",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-あいています",
+      "lessonId": "l14-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "あいています",
+      "audioTextKana": "あいています",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-しめます",
+      "lessonId": "l14-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "しめます",
+      "audioTextKana": "しめます",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-とまります",
+      "lessonId": "l14-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "とまります",
+      "audioTextKana": "とまります",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ひとばん",
+      "lessonId": "l14-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ひとばん",
+      "audioTextKana": "ひとばん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-あさごはん",
+      "lessonId": "l14-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "あさごはん",
+      "audioTextKana": "あさごはん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ひつよう",
+      "lessonId": "l14-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ひつよう",
+      "audioTextKana": "ひつよう",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-さがします",
+      "lessonId": "l14-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "さがします",
+      "audioTextKana": "さがします",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-えん",
+      "lessonId": "l13-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "えん",
+      "audioTextKana": "えん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ならびます",
+      "lessonId": "l12-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ならびます",
+      "audioTextKana": "ならびます",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-とうちゃく",
+      "lessonId": "l12-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "とうちゃく",
+      "audioTextKana": "とうちゃく",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ターミナル",
+      "lessonId": "l12-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ターミナル",
+      "audioTextKana": "ターミナル",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ひこうじょう",
+      "lessonId": "l12-5",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ひこうじょう",
+      "audioTextKana": "ひこうじょう",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-つきました",
+      "lessonId": "l12-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "つきました",
+      "audioTextKana": "つきました",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-あんないばん",
+      "lessonId": "l12-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "あんないばん",
+      "audioTextKana": "あんないばん",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-にゅうこく",
+      "lessonId": "l12-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "にゅうこく",
+      "audioTextKana": "にゅうこく",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-てつづき",
+      "lessonId": "l12-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "てつづき",
+      "audioTextKana": "てつづき",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-すすみます",
+      "lessonId": "l12-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "すすみます",
+      "audioTextKana": "すすみます",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ゆうどう",
+      "lessonId": "l12-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ゆうどう",
+      "audioTextKana": "ゆうどう",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ゆか",
+      "lessonId": "l12-2",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ゆか",
+      "audioTextKana": "ゆか",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-うけとります",
+      "lessonId": "l12-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "うけとります",
+      "audioTextKana": "うけとります",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ベルト",
+      "lessonId": "l12-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ベルト",
+      "audioTextKana": "ベルト",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-おおきい",
+      "lessonId": "l12-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "おおきい",
+      "audioTextKana": "おおきい",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-ちいさい",
+      "lessonId": "l12-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "ちいさい",
+      "audioTextKana": "ちいさい",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-くろ",
+      "lessonId": "l12-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "くろ",
+      "audioTextKana": "くろ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-あか",
+      "lessonId": "l12-3",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "あか",
+      "audioTextKana": "あか",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-しゅうりょう",
+      "lessonId": "l12-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "しゅうりょう",
+      "audioTextKana": "しゅうりょう",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-でむかえ",
+      "lessonId": "l12-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "でむかえ",
+      "audioTextKana": "でむかえ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-まちあい",
+      "lessonId": "l12-4",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "まちあい",
+      "audioTextKana": "まちあい",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "vocab-country-japan",
+      "lessonId": "l12-1",
+      "kind": "word",
+      "voiceRole": "A",
+      "displayText": "にほん",
+      "audioTextKana": "にほん",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "grammar-l11-home-1",
+      "lessonId": null,
+      "kind": "grammar",
+      "voiceRole": "A",
+      "displayText": "〜てください",
+      "audioTextKana": "てください",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "grammar-l13-1",
+      "lessonId": null,
+      "kind": "grammar",
+      "voiceRole": "A",
+      "displayText": "から … まで",
+      "audioTextKana": "から まで",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "grammar-l14-1",
+      "lessonId": null,
+      "kind": "grammar",
+      "voiceRole": "A",
+      "displayText": "が あります",
+      "audioTextKana": "が あります",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "grammar-l12-1",
+      "lessonId": null,
+      "kind": "grammar",
+      "voiceRole": "A",
+      "displayText": "へ als richting",
+      "audioTextKana": "え",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "grammar-l13-price",
+      "lessonId": null,
+      "kind": "grammar",
+      "voiceRole": "A",
+      "displayText": "えん",
+      "audioTextKana": "えん",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-レベル",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは レベル 11 です。",
+      "audioTextKana": "これわ レベル じゅういち です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-レッスン",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは レッスン 1 です。",
+      "audioTextKana": "これわ レッスン いち です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-しつもん",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは しつもん です。",
+      "audioTextKana": "これわ しつもん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-こたえ",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは こたえ です。",
+      "audioTextKana": "これわ こたえ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-えらびます",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "こたえ を えらびます。",
+      "audioTextKana": "こたえ お えらびます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-もんだい",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは もんだい です。",
+      "audioTextKana": "これわ もんだい です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-れんしゅう",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは れんしゅう です。",
+      "audioTextKana": "これわ れんしゅう です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ただしい",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "こたえ は ただしい です。",
+      "audioTextKana": "こたえ わ ただしい です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-まちがい",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは まちがい です。",
+      "audioTextKana": "これわ まちがい です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-もういちど",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "もういちど こたえ を みます。",
+      "audioTextKana": "もういちど こたえ お みます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-せつめい",
+      "lessonId": "l11-home-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは せつめい です。",
+      "audioTextKana": "これわ せつめい です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ぶん",
+      "lessonId": "l11-home-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは ぶん です。",
+      "audioTextKana": "これわ ぶん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ことば",
+      "lessonId": "l11-home-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは ことば です。",
+      "audioTextKana": "これわ ことば です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-いみ",
+      "lessonId": "l11-home-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは いみ です。",
+      "audioTextKana": "これわ いみ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-みつけます",
+      "lessonId": "l11-home-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ことば の いみ を みつけます。",
+      "audioTextKana": "ことば の いみ お みつけます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-よんでください",
+      "lessonId": "l11-home-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ぶん を よんでください。",
+      "audioTextKana": "ぶん お よんでください。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ページ",
+      "lessonId": "l11-home-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは ページ です。",
+      "audioTextKana": "これわ ページ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-タイトル",
+      "lessonId": "l11-home-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは タイトル です。",
+      "audioTextKana": "これわ タイトル です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-もじ",
+      "lessonId": "l11-home-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは もじ です。",
+      "audioTextKana": "これわ もじ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-しるし",
+      "lessonId": "l11-home-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは しるし です。",
+      "audioTextKana": "これわ しるし です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-きいてください",
+      "lessonId": "l11-home-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "おんせい を きいてください。",
+      "audioTextKana": "おんせい お きいてください。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-おと",
+      "lessonId": "l11-home-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは おと です。",
+      "audioTextKana": "これわ おと です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-おんせい",
+      "lessonId": "l11-home-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは おんせい です。",
+      "audioTextKana": "これわ おんせい です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ゆっくり",
+      "lessonId": "l11-home-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ゆっくり ぶん を よみます。",
+      "audioTextKana": "ゆっくり ぶん お よみます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-くりかえします",
+      "lessonId": "l11-home-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "おと を くりかえします。",
+      "audioTextKana": "おと お くりかえします。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-うめてください",
+      "lessonId": "l11-home-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "くうらん を うめてください。",
+      "audioTextKana": "くうらん お うめてください。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-くうらん",
+      "lessonId": "l11-home-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは くうらん です。",
+      "audioTextKana": "これわ くうらん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-かいてください",
+      "lessonId": "l11-home-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "こたえ を かいてください。",
+      "audioTextKana": "こたえ お かいてください。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-きごう",
+      "lessonId": "l11-home-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは きごう です。",
+      "audioTextKana": "これわ きごう です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-まる",
+      "lessonId": "l11-home-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "きごう は まる です。",
+      "audioTextKana": "きごう わ まる です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-じゅんばん",
+      "lessonId": "l11-home-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは じゅんばん です。",
+      "audioTextKana": "これわ じゅんばん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ならべます",
+      "lessonId": "l11-home-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ことば を ならべます。",
+      "audioTextKana": "ことば お ならべます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-さいしょ",
+      "lessonId": "l11-home-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "さいしょ に ぶん を よみます。",
+      "audioTextKana": "さいしょ に ぶん お よみます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-つぎ",
+      "lessonId": "l11-home-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "つぎ は こたえ です。",
+      "audioTextKana": "つぎ わ こたえ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-おわり",
+      "lessonId": "l11-home-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これで おわり です。",
+      "audioTextKana": "これで おわり です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ぜんぶ",
+      "lessonId": "l11-home-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ぜんぶ よみます。",
+      "audioTextKana": "ぜんぶ よみます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-あと",
+      "lessonId": "l11-home-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "れんしゅう の あと です。",
+      "audioTextKana": "れんしゅう の あと です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-すすめます",
+      "lessonId": "l11-home-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "れんしゅう を すすめます。",
+      "audioTextKana": "れんしゅう お すすめます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-はじめます",
+      "lessonId": "l11-home-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "れんしゅう を はじめます。",
+      "audioTextKana": "れんしゅう お はじめます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-かくにん",
+      "lessonId": "l11-home-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "こたえ を かくにん します。",
+      "audioTextKana": "こたえ お かくにん します。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-りょこう",
+      "lessonId": "l11-home-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは りょこう の じゅんび です。",
+      "audioTextKana": "これわ りょこう の じゅんび です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ひこうき",
+      "lessonId": "l11-home-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは ひこうき です。",
+      "audioTextKana": "これわ ひこうき です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-l11-home-5-integration-1",
+      "lessonId": "l11-home-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ごぜん しちじ に えき に いきます。",
+      "audioTextKana": "ごぜん しちじ に えき に いきます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-きっぷ",
+      "lessonId": "l13-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは きっぷ です。",
+      "audioTextKana": "これわ きっぷ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-いきさき",
+      "lessonId": "l13-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "いきさき は ホテル です。",
+      "audioTextKana": "いきさき わ ホテル です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ばんせん",
+      "lessonId": "l13-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "3ばんせん です。",
+      "audioTextKana": "さんばんせん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-つきます",
+      "lessonId": "l13-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ホテル に つきます。",
+      "audioTextKana": "ホテル に つきます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-のりかえ",
+      "lessonId": "l13-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "えき で のりかえ です。",
+      "audioTextKana": "えき で のりかえ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-かたみち",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "きっぷ は かたみち です。",
+      "audioTextKana": "きっぷ わ かたみち です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-おとな",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "おとな の きっぷ です。",
+      "audioTextKana": "おとな の きっぷ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-きっぷうりば",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは きっぷうりば です。",
+      "audioTextKana": "これわ きっぷうりば です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-うんてんしゅ",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "タクシー の うんてんしゅ です。",
+      "audioTextKana": "タクシー の うんてんしゅ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-えん",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "500えん です。",
+      "audioTextKana": "ごひゃくえん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-えん",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "500えん です。",
+      "audioTextKana": "ごひゃくえん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-まがります",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ひだり に まがります。",
+      "audioTextKana": "ひだり に まがります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-かいだん",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "かいだん は みぎ です。",
+      "audioTextKana": "かいだん わ みぎ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ちか",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ちか に いきます。",
+      "audioTextKana": "ちか に いきます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ちじょう",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ちじょう に いきます。",
+      "audioTextKana": "ちじょう に いきます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ちかてつ",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ちかてつ に のります。",
+      "audioTextKana": "ちかてつ に のります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-おりば",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "おりば は ホテルまえ です。",
+      "audioTextKana": "おりば わ ホテルまえ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-しゅうてん",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "しゅうてん は ホテルまえ です。",
+      "audioTextKana": "しゅうてん わ ホテルまえ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ホテルまえ",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ホテルまえ で おります。",
+      "audioTextKana": "ホテルまえ で おります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-でます",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でんしゃ は じゅうじ に でます。",
+      "audioTextKana": "でんしゃ わ じゅうじ に でます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-はやい",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でんしゃ の しゅっぱつ は はやい です。",
+      "audioTextKana": "でんしゃ の しゅっぱつ わ はやい です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-おそい",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "バス の しゅっぱつ は おそい です。",
+      "audioTextKana": "バス の しゅっぱつ わ おそい です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-じ",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "じゅうじ です。",
+      "audioTextKana": "じゅうじ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ふん",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "じゅうごふん です。",
+      "audioTextKana": "じゅうごふん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-おくれ",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "おくれ は 0ふん です。",
+      "audioTextKana": "おくれ わ ゼロふん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-てんじ",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは てんじ です。",
+      "audioTextKana": "これわ てんじ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-じかん",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "しゅっぱつ の じかん です。",
+      "audioTextKana": "しゅっぱつ の じかん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-l13-5-integration-1",
+      "lessonId": "l13-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "えき で バス に のりかえ です。",
+      "audioTextKana": "えき で バス に のりかえ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-フロント",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "フロント に いきます。",
+      "audioTextKana": "フロント に いきます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-よやく",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "よやく が あります。",
+      "audioTextKana": "よやく が あります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-よやく",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "よやく が あります。",
+      "audioTextKana": "よやく が あります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-なまえ",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "なまえ を かいてください。",
+      "audioTextKana": "なまえ お かいてください。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-みせます",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "パスポート を みせます。",
+      "audioTextKana": "パスポート お みせます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-よやくばんごう",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは よやくばんごう です。",
+      "audioTextKana": "これわ よやくばんごう です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-おねがいします",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "かくにん を おねがいします。",
+      "audioTextKana": "かくにん お おねがいします。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-とまります",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ホテル に ひとばん とまります。",
+      "audioTextKana": "ホテル に ひとばん とまります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-へや",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "へや は 3かい です。",
+      "audioTextKana": "へや わ さんがい です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-エレベーター",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "エレベーター で 3かい に いきます。",
+      "audioTextKana": "エレベーター で さんがい に いきます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-かぎ",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは へや の かぎ です。",
+      "audioTextKana": "これわ へや の かぎ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-カード",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは へや の カード です。",
+      "audioTextKana": "これわ へや の カード です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-つかいます",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "カード を つかいます。",
+      "audioTextKana": "カード お つかいます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ひらきます",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ドア は ひらきます。",
+      "audioTextKana": "ドア わ ひらきます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ドア",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは ドア です。",
+      "audioTextKana": "これわ ドア です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-トイレ",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "トイレ は こちら です。",
+      "audioTextKana": "トイレ わ こちら です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-かりる",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "タオル を かります。",
+      "audioTextKana": "タオル お かります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-タオル",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "タオル が あります。",
+      "audioTextKana": "タオル が あります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-タオル",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "タオル が あります。",
+      "audioTextKana": "タオル が あります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-きんえん",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは きんえん です。",
+      "audioTextKana": "これわ きんえん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-じはんき",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは じはんき です。",
+      "audioTextKana": "これわ じはんき です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-あんない",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは あんない です。",
+      "audioTextKana": "これわ あんない です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-あさごはん",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "あさごはん は しちじ です。",
+      "audioTextKana": "あさごはん わ しちじ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ひつよう",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "みず が ひつよう です。",
+      "audioTextKana": "みず が ひつよう です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-さがします",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ちかく の みせ を さがします。",
+      "audioTextKana": "ちかく の みせ お さがします。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-できます",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ここ で れんしゅう が できます。",
+      "audioTextKana": "ここ で れんしゅう が できます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-あずけます",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にもつ を あずけます。",
+      "audioTextKana": "にもつ お あずけます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-あずかります",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にもつ を あずかります。",
+      "audioTextKana": "にもつ お あずかります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-あずかります",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "にもつ を あずかります。",
+      "audioTextKana": "にもつ お あずかります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-あとで",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "あとで にもつ を うけとります。",
+      "audioTextKana": "あとで にもつ お うけとります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-あさ",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "あさ に フロント に いきます。",
+      "audioTextKana": "あさ に フロント に いきます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-よる",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "よる に フロント に いきます。",
+      "audioTextKana": "よる に フロント に いきます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-あいています",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "フロント は あいています。",
+      "audioTextKana": "フロント わ あいています。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-しめます",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ドア を しめます。",
+      "audioTextKana": "ドア お しめます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-l14-5-integration-2",
+      "lessonId": "l14-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "よやくばんごう を かくにん します。",
+      "audioTextKana": "よやくばんごう お かくにん します。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-くうこう",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ここ は くうこう です。",
+      "audioTextKana": "ここ わ くうこう です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-あんないじょ",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは あんないじょ です。",
+      "audioTextKana": "これわ あんないじょ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ひょうじ",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは ひょうじ です。",
+      "audioTextKana": "これわ ひょうじ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-でぐち",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは でぐち です。",
+      "audioTextKana": "これわ でぐち です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-いりぐち",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは いりぐち です。",
+      "audioTextKana": "これわ いりぐち です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-とうちゃく",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "とうちゃく は ごご いちじ です。",
+      "audioTextKana": "とうちゃく わ ごご いちじ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ターミナル",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ここ は ターミナル です。",
+      "audioTextKana": "ここ わ ターミナル です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-つきました",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にほん に つきました。",
+      "audioTextKana": "にほん に つきました。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-あんないばん",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは あんないばん です。",
+      "audioTextKana": "これわ あんないばん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-country-japan",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ここ は にほん です。",
+      "audioTextKana": "ここ わ にほん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-l12-1-direction",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でぐち へ いきます。",
+      "audioTextKana": "でぐち え いきます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-にもつ",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは わたし の にもつ です。",
+      "audioTextKana": "これわ わたし の にもつ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-こちら",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でぐち は こちら です。",
+      "audioTextKana": "でぐち わ こちら です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-パスポート",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは パスポート です。",
+      "audioTextKana": "これわ パスポート です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ならびます",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ここ で ならびます。",
+      "audioTextKana": "ここ で ならびます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-にゅうこく",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは にゅうこく てつづき です。",
+      "audioTextKana": "これわ にゅうこく てつづき です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-すすみます",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "こちら に すすみます。",
+      "audioTextKana": "こちら に すすみます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ゆうどう",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは ゆうどう です。",
+      "audioTextKana": "これわ ゆうどう です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ゆか",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは ゆか です。",
+      "audioTextKana": "これわ ゆか です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-かばん",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは かばん です。",
+      "audioTextKana": "これわ かばん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ばん",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ばんごう は 3ばん です。",
+      "audioTextKana": "ばんごう わ さんばん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ばんごう",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ばんごう は 5 です。",
+      "audioTextKana": "ばんごう わ ご です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-うけとります",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にもつ を うけとります。",
+      "audioTextKana": "にもつ お うけとります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ベルト",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは ベルト です。",
+      "audioTextKana": "これわ ベルト です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-おおきい",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "おおきい かばん です。",
+      "audioTextKana": "おおきい かばん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ちいさい",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ちいさい かばん です。",
+      "audioTextKana": "ちいさい かばん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-くろ",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "くろい かばん です。",
+      "audioTextKana": "くろい かばん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-あか",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "あかい かばん です。",
+      "audioTextKana": "あかい かばん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ホテル",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ホテル に いきます。",
+      "audioTextKana": "ホテル に いきます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-しゅっぱつ",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "しゅっぱつ は ごご いちじ です。",
+      "audioTextKana": "しゅっぱつ わ ごご いちじ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-のりば",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは のりば です。",
+      "audioTextKana": "これわ のりば です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-まどぐち",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは まどぐち です。",
+      "audioTextKana": "これわ まどぐち です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-まちます",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でぐち で ともだち を まちます。",
+      "audioTextKana": "でぐち で ともだち お まちます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-しゅうりょう",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "てつづき は しゅうりょう です。",
+      "audioTextKana": "てつづき わ しゅうりょう です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-でむかえ",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは でむかえ です。",
+      "audioTextKana": "これわ でむかえ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-まちあい",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは まちあい です。",
+      "audioTextKana": "これわ まちあい です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-prepare-vocab-ひこうじょう",
+      "lessonId": "l12-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "これは ひこうじょう です。",
+      "audioTextKana": "これわ ひこうじょう です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-l12-5-integration-1",
+      "lessonId": "l12-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "パスポート と にもつ を かくにん します。",
+      "audioTextKana": "パスポート と にもつ お かくにん します。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l9-1-example-1",
+      "lessonId": "l9-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "えき は どこ です か。",
+      "audioTextKana": "えき わ どこ です か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l9-1-example-1",
+      "lessonId": "l9-1",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "えき は どこ です か。",
+      "audioTextKana": "えき わ どこ です か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l9-1-example-2",
+      "lessonId": "l9-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "えき は あそこ です。",
+      "audioTextKana": "えき わ あそこ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l9-1-example-2",
+      "lessonId": "l9-1",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "えき は あそこ です。",
+      "audioTextKana": "えき わ あそこ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l9-5-example-1",
+      "lessonId": "l9-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "どこ で たべます か。",
+      "audioTextKana": "どこ で たべます か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l9-5-example-1",
+      "lessonId": "l9-5",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "どこ で たべます か。",
+      "audioTextKana": "どこ で たべます か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l9-5-example-2",
+      "lessonId": "l9-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "こうえん で パン を たべます。",
+      "audioTextKana": "こうえん で パン お たべます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l9-5-example-2",
+      "lessonId": "l9-5",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "こうえん で パン を たべます。",
+      "audioTextKana": "こうえん で パン お たべます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l10-5-example-1",
+      "lessonId": "l10-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "どこ に いきます か。",
+      "audioTextKana": "どこ に いきます か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l10-5-example-1",
+      "lessonId": "l10-5",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "どこ に いきます か。",
+      "audioTextKana": "どこ に いきます か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l10-5-example-2",
+      "lessonId": "l10-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "えき に いきます。",
+      "audioTextKana": "えき に いきます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l10-5-example-2",
+      "lessonId": "l10-5",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "えき に いきます。",
+      "audioTextKana": "えき に いきます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l12-4-B-1",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "のりば は どこ です か。",
+      "audioTextKana": "のりば わ どこ です か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l12-4-B-1",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "のりば は どこ です か。",
+      "audioTextKana": "のりば わ どこ です か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l12-4-B-2",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "のりば は みぎ です。",
+      "audioTextKana": "のりば わ みぎ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l12-4-B-2",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "のりば は みぎ です。",
+      "audioTextKana": "のりば わ みぎ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l13-2-B-1",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "きっぷ を ひとつ ください。",
+      "audioTextKana": "きっぷ お ひとつ ください。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l13-2-B-1",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "きっぷ を ひとつ ください。",
+      "audioTextKana": "きっぷ お ひとつ ください。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l13-5-B-1",
+      "lessonId": "l13-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ホテルまえ は つぎ です か。",
+      "audioTextKana": "ホテルまえ わ つぎ です か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l13-5-B-1",
+      "lessonId": "l13-5",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "ホテルまえ は つぎ です か。",
+      "audioTextKana": "ホテルまえ わ つぎ です か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l13-5-B-2",
+      "lessonId": "l13-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "つぎ は ホテルまえ です。",
+      "audioTextKana": "つぎ わ ホテルまえ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l13-5-B-2",
+      "lessonId": "l13-5",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "つぎ は ホテルまえ です。",
+      "audioTextKana": "つぎ わ ホテルまえ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l14-1-B-2",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "パスポート を みせてください。",
+      "audioTextKana": "パスポート お みせてください。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l14-1-B-2",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "パスポート を みせてください。",
+      "audioTextKana": "パスポート お みせてください。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l14-1-B-3",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "おねがいします。",
+      "audioTextKana": "おねがいします。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l14-1-B-3",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "おねがいします。",
+      "audioTextKana": "おねがいします。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l14-3-B-1",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "タオル は あります か。",
+      "audioTextKana": "タオル わ あります か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l14-3-B-1",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "タオル は あります か。",
+      "audioTextKana": "タオル わ あります か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l14-4-B-1",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にもつ を あずけます。おねがいします。",
+      "audioTextKana": "にもつ お あずけます。おねがいします。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l14-4-B-1",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "にもつ を あずけます。おねがいします。",
+      "audioTextKana": "にもつ お あずけます。おねがいします。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l14-5-B-1",
+      "lessonId": "l14-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "あさごはん は なんじ です か。",
+      "audioTextKana": "あさごはん わ なんじ です か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l14-5-B-1",
+      "lessonId": "l14-5",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "あさごはん は なんじ です か。",
+      "audioTextKana": "あさごはん わ なんじ です か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l14-5-B-2",
+      "lessonId": "l14-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "しちじ です。",
+      "audioTextKana": "しちじ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-dialogue-l14-5-B-2",
+      "lessonId": "l14-5",
+      "kind": "sentence",
+      "voiceRole": "B",
+      "displayText": "しちじ です。",
+      "audioTextKana": "しちじ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l11-home-1-a",
+      "lessonId": "l11-home-1",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "レベル 11、レッスン 1 です。これは しつもん です。こたえ を えらびます。",
+      "audioTextKana": "レベル じゅういち、レッスン いち です。これわ しつもん です。こたえ お えらびます。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l11-home-1-b",
+      "lessonId": "l11-home-1",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "もんだい：これは パン です。\nただしい こたえ：○\nまちがい：×\nまちがい を もういちど みます。",
+      "audioTextKana": "もんだい、これわ パン です。ただしい こたえ、まる。まちがい、ばつ。まちがい お もういちど みます。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l11-home-2-a",
+      "lessonId": "l11-home-2",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "せつめい を よみます。これは ぶん です。ことば の いみ を みつけます。",
+      "audioTextKana": "せつめい お よみます。これわ ぶん です。ことば の いみ お みつけます。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l11-home-2-b",
+      "lessonId": "l11-home-2",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "ページ 1\nタイトル：パン\nよんでください：これ は パン です。\nことば：パン\nしるし：○",
+      "audioTextKana": "ページ いち。タイトル、パン。よんでください。これ わ パン です。ことば、パン。しるし、まる。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l11-home-3-a",
+      "lessonId": "l11-home-3",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "おんせい を きいてください。ゆっくり ききます。おと を くりかえします。",
+      "audioTextKana": "おんせい お きいてください。ゆっくり ききます。おと お くりかえします。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l11-home-3-b",
+      "lessonId": "l11-home-3",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "ことば：おと\nくうらん：＿＿\nうめてください。\nきごう：まる ○\nこたえ を かいてください。",
+      "audioTextKana": "ことば、おと。くうらん。うめてください。きごう、まる。こたえ お かいてください。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l11-home-4-a",
+      "lessonId": "l11-home-4",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "じゅんばん です。さいしょ に ぶん を よみます。つぎ は こたえ です。ことば を ならべます。これで おわり です。",
+      "audioTextKana": "じゅんばん です。さいしょ に ぶん お よみます。つぎ わ こたえ です。ことば お ならべます。これで おわり です。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l11-home-4-b",
+      "lessonId": "l11-home-4",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "さいしょ：れんしゅう を はじめます。\nつぎ：ぜんぶ よみます。\nあと：こたえ を かくにん します。\nつぎ：れんしゅう を すすめます。",
+      "audioTextKana": "さいしょ、れんしゅう お はじめます。つぎ、ぜんぶ よみます。あと、こたえ お かくにん します。つぎ、れんしゅう お すすめます。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l11-home-5-a",
+      "lessonId": "l11-home-5",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "あした は げつようび です。りょこう の じゅんび です。これは わたし の ちず です。ごぜん しちじ に えき に いきます。でんしゃ に のります。つぎ は ひこうき です。",
+      "audioTextKana": "あした わ げつようび です。りょこう の じゅんび です。これわ わたし の ちず です。ごぜん しちじ に えき に いきます。でんしゃ に のります。つぎ わ ひこうき です。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l11-home-5-b",
+      "lessonId": "l11-home-5",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "りょこう の じゅんび\nさいしょ：ちず を みます。\nげつようび 7:00：えき に いきます。\nつぎ：でんしゃ に のります。\nおわり：こたえ を かくにん します。",
+      "audioTextKana": "りょこう の じゅんび。さいしょ、ちず お みます。げつようび しちじ、えき に いきます。つぎ、でんしゃ に のります。おわり、こたえ お かくにん します。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l13-1-a",
+      "lessonId": "l13-1",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "くうこう から ホテル まで いきます。でんしゃ に のります。えき で おります。ホテル に つきます。",
+      "audioTextKana": "くうこう から ホテル まで いきます。でんしゃ に のります。えき で おります。ホテル に つきます。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l13-1-b",
+      "lessonId": "l13-1",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "きっぷ\nいきさき：ホテル\nばんせん：3\nのりかえ：えき",
+      "audioTextKana": "きっぷ。いきさき、ホテル。ばんせん、さん。のりかえ、えき。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l13-2-a",
+      "lessonId": "l13-2",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "きっぷ を ひとつ ください。かたみち です。おとな です。500えん です。",
+      "audioTextKana": "きっぷ お ひとつ ください。かたみち です。おとな です。ごひゃくえん です。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l13-2-b",
+      "lessonId": "l13-2",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "まどぐち\nおとな：500えん\nこども：300えん\nきっぷ を ひとつ ください。\nタクシー：うんてんしゅ",
+      "audioTextKana": "まどぐち。おとな、ごひゃくえん。こども、さんびゃくえん。きっぷ お ひとつ ください。タクシー、うんてんしゅ。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l13-3-a",
+      "lessonId": "l13-3",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "まっすぐ いきます。かいだん の まえ で ひだり に まがります。えき は そこ です。",
+      "audioTextKana": "まっすぐ いきます。かいだん の まえ で ひだり に まがります。えき わ そこ です。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l13-3-b",
+      "lessonId": "l13-3",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "ちか：ちかてつ いりぐち ↓\nちじょう：でぐち →\nバス おりば：ホテルまえ\nしゅうてん：ホテルまえ",
+      "audioTextKana": "ちか、ちかてつ いりぐち、した。ちじょう、でぐち、みぎ。バス おりば、ホテルまえ。しゅうてん、ホテルまえ。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l13-4-a",
+      "lessonId": "l13-4",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "しゅっぱつ の じかん を みます。でんしゃ は 10じ15ふん に でます。バス は 11じ に でます。でんしゃ の しゅっぱつ は はやい です。バス は おそい です。",
+      "audioTextKana": "しゅっぱつ の じかん お みます。でんしゃ わ じゅうじ じゅうごふん に でます。バス わ じゅういちじ に でます。でんしゃ の しゅっぱつ わ はやい です。バス わ おそい です。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l13-4-b",
+      "lessonId": "l13-4",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "ホテルいき\nしゅっぱつ：10:15\nばん：3\nおくれ：0ふん",
+      "audioTextKana": "ホテルいき。しゅっぱつ、じゅうじ じゅうごふん。ばん、さん。おくれ、ゼロふん。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l13-5-a",
+      "lessonId": "l13-5",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "くうこう から ホテル まで いきます。きっぷ は 500えん です。10じ15ふん に でんしゃ に のります。えき で おります。つぎ は バス です。11じ に バス に のります。ホテルまえ で おります。ホテル に つきます。",
+      "audioTextKana": "くうこう から ホテル まで いきます。きっぷ わ ごひゃくえん です。じゅうじ じゅうごふん に でんしゃ に のります。えき で おります。つぎ わ バス です。じゅういちじ に バス に のります。ホテルまえ で おります。ホテル に つきます。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l13-5-b",
+      "lessonId": "l13-5",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "くうこう → えき\nでんしゃ：3ばんせん 10:15\nえき → ホテルまえ\nバス：11:00\nおりば：ホテルまえ\nしゅうてん：ホテルまえ",
+      "audioTextKana": "くうこう から えき。でんしゃ、さんばんせん、じゅうじ じゅうごふん。えき から ホテルまえ。バス、じゅういちじ。おりば、ホテルまえ。しゅうてん、ホテルまえ。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l14-1-a",
+      "lessonId": "l14-1",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "ホテル に ひとばん とまります。フロント に いきます。よやく が あります。なまえ を かくにん します。",
+      "audioTextKana": "ホテル に ひとばん とまります。フロント に いきます。よやく が あります。なまえ お かくにん します。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l14-1-b",
+      "lessonId": "l14-1",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "よやくばんごう：215\nなまえ：＿＿\nパスポート を みせてください。\nかくにん を おねがいします。",
+      "audioTextKana": "よやくばんごう、にひゃくじゅうご。なまえ。パスポート お みせてください。かくにん お おねがいします。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l14-2-a",
+      "lessonId": "l14-2",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "へや の ばんごう は 305 です。3かい です。エレベーター で 3かい に いきます。",
+      "audioTextKana": "へや の ばんごう わ さんびゃくご です。さんがい です。エレベーター で さんがい に いきます。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l14-2-b",
+      "lessonId": "l14-2",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "へや：305\nかぎ：カード\nカード を つかいます。\nドア は ひらきます。",
+      "audioTextKana": "へや、さんびゃくご。かぎ、カード。カード お つかいます。ドア わ ひらきます。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l14-3-a",
+      "lessonId": "l14-3",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "トイレ は こちら です。タオル が あります。タオル を かります。",
+      "audioTextKana": "トイレ わ こちら です。タオル が あります。タオル お かります。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l14-3-b",
+      "lessonId": "l14-3",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "じはんき →\nかいだん ↑\nきんえん\nあさごはん：7:00\nみず が ひつよう です。ちかく の みせ を さがします。",
+      "audioTextKana": "じはんき、みぎ。かいだん、うえ。きんえん。あさごはん、しちじ。みず が ひつよう です。ちかく の みせ お さがします。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l14-4-a",
+      "lessonId": "l14-4",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "にもつ を あずけます。おねがいします。フロント で あずかります。あとで にもつ を うけとります。ここ で れんしゅう が できます。",
+      "audioTextKana": "にもつ お あずけます。おねがいします。フロント で あずかります。あとで にもつ お うけとります。ここ で れんしゅう が できます。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l14-4-b",
+      "lessonId": "l14-4",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "フロント\nあさ 7じ から よる 10じ まで あいています。\nよる 10じ に しめます。",
+      "audioTextKana": "フロント。あさ しちじ から よる じゅうじ まで あいています。よる じゅうじ に しめます。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l14-5-a",
+      "lessonId": "l14-5",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "ホテル に つきます。ひとばん とまります。フロント で よやく を かくにん します。へや は 3かい です。カード を つかいます。あさごはん は しちじ です。みず が ひつよう です。じはんき は みぎ です。",
+      "audioTextKana": "ホテル に つきます。ひとばん とまります。フロント で よやく お かくにん します。へや わ さんがい です。カード お つかいます。あさごはん わ しちじ です。みず が ひつよう です。じはんき わ みぎ です。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l14-5-b",
+      "lessonId": "l14-5",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "ホテル\nよやくばんごう：215\nへや：305・3かい\nあさごはん：7:00\nみず：じはんき →\nちかく の みせ ←",
+      "audioTextKana": "ホテル。よやくばんごう、にひゃくじゅうご。へや、さんびゃくご、さんがい。あさごはん、しちじ。みず、じはんき、みぎ。ちかく の みせ、ひだり。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l12-1-a",
+      "lessonId": "l12-1",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "ひこうき で にほん に つきました。ここ は くうこう です。とうちゃく ターミナル は 2 です。でぐち へ いきます。",
+      "audioTextKana": "ひこうき で にほん に つきました。ここ わ くうこう です。とうちゃく ターミナル わ に です。でぐち え いきます。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l12-1-b",
+      "lessonId": "l12-1",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "あんないばん\nとうちゃく：ターミナル 2\nでぐち →\nあんないじょ ←\nいりぐち ↑\nひょうじ を みます。",
+      "audioTextKana": "あんないばん。とうちゃく、ターミナル に。でぐち、みぎ。あんないじょ、ひだり。いりぐち、まっすぐ。ひょうじ お みます。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l12-2-a",
+      "lessonId": "l12-2",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "こちら は にゅうこく てつづき です。パスポート は ここ です。ゆっくり すすみます。ここ で ならびます。",
+      "audioTextKana": "こちら わ にゅうこく てつづき です。パスポート わ ここ です。ゆっくり すすみます。ここ で ならびます。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l12-2-b",
+      "lessonId": "l12-2",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "ゆか の ゆうどう\nにゅうこく →\nにもつ ↓\nこちら に すすみます。",
+      "audioTextKana": "ゆか の ゆうどう。にゅうこく、みぎ。にもつ、した。こちら に すすみます。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l12-3-a",
+      "lessonId": "l12-3",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "ベルト の ばんごう は 5 です。5ばん の ベルト です。ベルト で にもつ を うけとります。",
+      "audioTextKana": "ベルト の ばんごう わ ご です。ごばん の ベルト です。ベルト で にもつ お うけとります。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l12-3-b",
+      "lessonId": "l12-3",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "にもつ\nおおきい かばん：くろい\nちいさい かばん：あかい\nわたし の かばん は おおきい です。くろい かばん です。",
+      "audioTextKana": "にもつ。おおきい かばん、くろい。ちいさい かばん、あかい。わたし の かばん わ おおきい です。くろい かばん です。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l12-4-a",
+      "lessonId": "l12-4",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "にゅうこく てつづき は しゅうりょう です。にもつ は ここ です。でぐち は みぎ です。そと に いきます。しゅっぱつ は ごご いちじはん です。",
+      "audioTextKana": "にゅうこく てつづき わ しゅうりょう です。にもつ わ ここ です。でぐち わ みぎ です。そと に いきます。しゅっぱつ わ ごご いちじはん です。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l12-4-b",
+      "lessonId": "l12-4",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "でむかえ：A\nまちあい：A\nタクシー・バス のりば →\nまどぐち：ホテル\nしゅっぱつ：13:30\nここ で まちます。",
+      "audioTextKana": "でむかえ、エー。まちあい、エー。タクシー、バス のりば、みぎ。まどぐち、ホテル。しゅっぱつ、ごご いちじはん。ここ で まちます。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l12-5-a",
+      "lessonId": "l12-5",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "にほん に つきました。ここ は くうこう です。ここ は ひこうじょう です。パスポート を かくにん します。5ばん の ベルト で にもつ を うけとります。でぐち は みぎ です。そと の A で ともだち は まちます。",
+      "audioTextKana": "にほん に つきました。ここ わ くうこう です。ここ わ ひこうじょう です。パスポート お かくにん します。ごばん の ベルト で にもつ お うけとります。でぐち わ みぎ です。そと の エー で ともだち わ まちます。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "reading-l12-5-b",
+      "lessonId": "l12-5",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "とうちゃく：ターミナル 2\nにゅうこく：しゅうりょう\nにもつ：ベルト 5\nでぐち →\nでむかえ：A\nホテル：でんしゃ",
+      "audioTextKana": "とうちゃく、ターミナル に。にゅうこく、しゅうりょう。にもつ、ベルト ご。でぐち、みぎ。でむかえ、エー。ホテル、でんしゃ。",
+      "action": "stale",
+      "regenerate": true
+    },
+    {
+      "entryId": "bonus-l11-home-1",
+      "lessonId": "l11-home-1",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "しつもん を よみます。こたえ を えらびます。",
+      "audioTextKana": "しつもん お よみます。こたえ お えらびます。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "bonus-l11-home-3",
+      "lessonId": "l11-home-3",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "おんせい を きいてください。くうらん を うめてください。",
+      "audioTextKana": "おんせい お きいてください。くうらん お うめてください。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "bonus-l11-home-5",
+      "lessonId": "l11-home-5",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "りょこう の じゅんび を します。くうこう の ちず を みます。",
+      "audioTextKana": "りょこう の じゅんび お します。くうこう の ちず お みます。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "bonus-l13-1",
+      "lessonId": "l13-1",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "くうこう から でんしゃ に のります。\nホテル へ いきます。",
+      "audioTextKana": "くうこう から でんしゃ に のります。\nホテル え いきます。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "bonus-l13-3",
+      "lessonId": "l13-3",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "まっすぐ いきます。\nかいだん の まえ で ひだり に まがります。",
+      "audioTextKana": "まっすぐ いきます。\nかいだん の まえ で ひだり に まがります。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "bonus-l13-5",
+      "lessonId": "l13-5",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "ホテル の ちかく の えき で おります。\nのりかえ は ありません。",
+      "audioTextKana": "ホテル の ちかく の えき で おります。\nのりかえ わ ありません。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "bonus-l14-1",
+      "lessonId": "l14-1",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "フロント で よやく を つたえます。\nなまえ は ミナ です。",
+      "audioTextKana": "フロント で よやく お つたえます。\nなまえ わ ミナ です。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "bonus-l14-3",
+      "lessonId": "l14-3",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "トイレ は こちら です。\nタオル を かりる こと が できます。",
+      "audioTextKana": "トイレ わ こちら です。\nタオル お かりる こと が できます。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "bonus-l14-5",
+      "lessonId": "l14-5",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "ホテル に ひとばん とまります。\nあさごはん は 7じ です。",
+      "audioTextKana": "ホテル に ひとばん とまります。\nあさごはん わ しちじ です。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "bonus-l12-1",
+      "lessonId": "l12-1",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "きょう、くうこう へ いきます。\nひこうき の しゅっぱつ は さんじ です。\nにもつ を はこびます。",
+      "audioTextKana": "きょう、くうこう え いきます。\nひこうき の しゅっぱつ わ さんじ です。\nにもつ お はこびます。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "bonus-l12-3",
+      "lessonId": "l12-3",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "くうこう の けんさ で まちます。\nくつ を だします。\nもちこみ の にもつ を かくにん します。",
+      "audioTextKana": "くうこう の けんさ で まちます。\nくつ お だします。\nもちこみ の にもつ お かくにん します。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "bonus-l12-5",
+      "lessonId": "l12-5",
+      "kind": "passage",
+      "voiceRole": "A",
+      "displayText": "チケット を みせます。\nゲート 4 で ひこうき に のります。\nまど の ちかく の せき に すわります。",
+      "audioTextKana": "チケット お みせます。\nゲート よん で ひこうき に のります。\nまど の ちかく の せき に すわります。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-didactic-question-1",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ただしい こたえ は？",
+      "audioTextKana": "ただしい こたえ わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-2",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "まちがい を もういちど みます。",
+      "audioTextKana": "まちがい お もういちど みます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-3",
+      "lessonId": "l11-home-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ことば は？",
+      "audioTextKana": "ことば わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-4",
+      "lessonId": "l11-home-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "よんでください。",
+      "audioTextKana": "よんでください。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-5",
+      "lessonId": "l11-home-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ゆっくり ききます。",
+      "audioTextKana": "ゆっくり ききます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-6",
+      "lessonId": "l11-home-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "くうらん を うめてください。ことば は？",
+      "audioTextKana": "くうらん お うめてください。ことば わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-7",
+      "lessonId": "l11-home-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "まる は？",
+      "audioTextKana": "まる わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-8",
+      "lessonId": "l11-home-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "さいしょ は？",
+      "audioTextKana": "さいしょ わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-9",
+      "lessonId": "l11-home-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "つぎ は？",
+      "audioTextKana": "つぎ わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-10",
+      "lessonId": "l11-home-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "あした は？",
+      "audioTextKana": "あした わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-11",
+      "lessonId": "l11-home-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ごぜん しちじ に どこ に いきます か。",
+      "audioTextKana": "ごぜん しちじ に どこ に いきます か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-12",
+      "lessonId": "l11-home-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ちず を みます。",
+      "audioTextKana": "ちず お みます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-13",
+      "lessonId": "l11-home-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でんしゃ に のります。",
+      "audioTextKana": "でんしゃ に のります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-14",
+      "lessonId": "l11-home-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "えき に いきます。なんじ です か。",
+      "audioTextKana": "えき に いきます。なんじ です か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-15",
+      "lessonId": "l13-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "どこ から いきます か。",
+      "audioTextKana": "どこ から いきます か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-16",
+      "lessonId": "l13-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "どこ に つきます か。",
+      "audioTextKana": "どこ に つきます か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-17",
+      "lessonId": "l13-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ばんせん は？",
+      "audioTextKana": "ばんせん わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-18",
+      "lessonId": "l13-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "いきさき は？",
+      "audioTextKana": "いきさき わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-19",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "おとな の きっぷ は？",
+      "audioTextKana": "おとな の きっぷ わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-20",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "500えん",
+      "audioTextKana": "ごひゃくえん",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-21",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "300えん",
+      "audioTextKana": "さんびゃくえん",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-22",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "100えん",
+      "audioTextKana": "ひゃくえん",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-23",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "かたみち は？",
+      "audioTextKana": "かたみち わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-24",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "こども の きっぷ は？",
+      "audioTextKana": "こども の きっぷ わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-25",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "どこ で まがります か。",
+      "audioTextKana": "どこ で まがります か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-26",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "かいだん の まえ",
+      "audioTextKana": "かいだん の まえ",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-27",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ホテル の なか",
+      "audioTextKana": "ホテル の なか",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-28",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でんしゃ の なか",
+      "audioTextKana": "でんしゃ の なか",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-29",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "まがります。みぎ？ ひだり？",
+      "audioTextKana": "まがります。みぎ？ ひだり？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-30",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ちじょう の でぐち は？",
+      "audioTextKana": "ちじょう の でぐち わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-31",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "しゅうてん は？",
+      "audioTextKana": "しゅうてん わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-32",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でんしゃ の しゅっぱつ は？",
+      "audioTextKana": "でんしゃ の しゅっぱつ わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-33",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "はやい しゅっぱつ は？",
+      "audioTextKana": "はやい しゅっぱつ わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-34",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "おくれ は？",
+      "audioTextKana": "おくれ わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-35",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "0ふん",
+      "audioTextKana": "ゼロふん",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-36",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "15ふん",
+      "audioTextKana": "じゅうごふん",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-37",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "30ふん",
+      "audioTextKana": "さんじゅっぷん",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-38",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ばん は？",
+      "audioTextKana": "ばん わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-39",
+      "lessonId": "l13-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でんしゃ の あと は？",
+      "audioTextKana": "でんしゃ の あと わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-40",
+      "lessonId": "l13-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ホテルまえ で？",
+      "audioTextKana": "ホテルまえ で？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-41",
+      "lessonId": "l13-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "バス は なんじ です か。",
+      "audioTextKana": "バス わ なんじ です か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-42",
+      "lessonId": "l13-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "おりば は？",
+      "audioTextKana": "おりば わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-43",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ホテル に とまります。",
+      "audioTextKana": "ホテル に とまります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-44",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "みせてください。",
+      "audioTextKana": "みせてください。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-45",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "よやくばんごう は？",
+      "audioTextKana": "よやくばんごう わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-46",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "へや の ばんごう は？",
+      "audioTextKana": "へや の ばんごう わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-47",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "へや は？",
+      "audioTextKana": "へや わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-48",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "3かい",
+      "audioTextKana": "さんがい",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-49",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "1かい",
+      "audioTextKana": "いっかい",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-50",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "2かい",
+      "audioTextKana": "にかい",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-51",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "かぎ は？",
+      "audioTextKana": "かぎ わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-52",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "カード を つかいます。ドア は？",
+      "audioTextKana": "カード お つかいます。ドア わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-53",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "かります。",
+      "audioTextKana": "かります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-54",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "トイレ は？",
+      "audioTextKana": "トイレ わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-55",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "あさごはん は？",
+      "audioTextKana": "あさごはん わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-56",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "あとで にもつ を？",
+      "audioTextKana": "あとで にもつ お？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-57",
+      "lessonId": null,
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "かきます",
+      "audioTextKana": "かきます",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-58",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "あさ なんじ から？",
+      "audioTextKana": "あさ なんじ から？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-59",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "よる なんじ に しめます か。",
+      "audioTextKana": "よる なんじ に しめます か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-60",
+      "lessonId": "l14-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "みず は どこ です か。",
+      "audioTextKana": "みず わ どこ です か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-61",
+      "lessonId": "l14-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ちかく の みせ は？",
+      "audioTextKana": "ちかく の みせ わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-62",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "とうちゃく ターミナル は？",
+      "audioTextKana": "とうちゃく ターミナル わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-63",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "どこ に つきました か。",
+      "audioTextKana": "どこ に つきました か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-64",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でぐち は？",
+      "audioTextKana": "でぐち わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-65",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "あんないじょ は？",
+      "audioTextKana": "あんないじょ わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-66",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "こちら は？",
+      "audioTextKana": "こちら わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-67",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にゅうこく てつづき",
+      "audioTextKana": "にゅうこく てつづき",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-68",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "りょこう の じゅんび",
+      "audioTextKana": "りょこう の じゅんび",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-69",
+      "lessonId": null,
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でんしゃ の じかん",
+      "audioTextKana": "でんしゃ の じかん",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-70",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "パスポート は？",
+      "audioTextKana": "パスポート わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-71",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にもつ は？",
+      "audioTextKana": "にもつ わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-72",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にゅうこく は？",
+      "audioTextKana": "にゅうこく わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-73",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ベルト の ばんごう は？",
+      "audioTextKana": "ベルト の ばんごう わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-74",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ベルト で うけとります。",
+      "audioTextKana": "ベルト で うけとります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-75",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "わたし の かばん：くろ？ あか？",
+      "audioTextKana": "わたし の かばん、くろ？ あか？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-76",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "わたし の かばん は？",
+      "audioTextKana": "わたし の かばん わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-77",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にゅうこく てつづき は？",
+      "audioTextKana": "にゅうこく てつづき わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-78",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でむかえ は？",
+      "audioTextKana": "でむかえ わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-79",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "しゅっぱつ は？",
+      "audioTextKana": "しゅっぱつ わ？",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-80",
+      "lessonId": "l12-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "5ばん の ベルト",
+      "audioTextKana": "ごばん の ベルト",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-81",
+      "lessonId": "l12-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "2ばん の ベルト",
+      "audioTextKana": "にばん の ベルト",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-82",
+      "lessonId": "l12-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "3ばん の ベルト",
+      "audioTextKana": "さんばん の ベルト",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-83",
+      "lessonId": "l12-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ともだち は どこ です か。",
+      "audioTextKana": "ともだち わ どこ です か。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-84",
+      "lessonId": "l12-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "そと の A",
+      "audioTextKana": "そと の エー",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-85",
+      "lessonId": "l12-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ターミナル 2",
+      "audioTextKana": "ターミナル に",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-didactic-question-86",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "れんしゅう の あと",
+      "audioTextKana": "れんしゅう の あと",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-57d77c0372d7e7c2",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "しつもん と こたえ。",
+      "audioTextKana": "しつもん と こたえ。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-f7a58eb56bc93f4b",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ただしい こたえ を えらびます。",
+      "audioTextKana": "ただしい こたえ お えらびます。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-6aa8f4ac2fb0f2e0",
+      "lessonId": "l11-home-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ぶん を よみます。",
+      "audioTextKana": "ぶん お よみます。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-306b2724b6737dfc",
+      "lessonId": "l11-home-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "タイトル を よんでください。",
+      "audioTextKana": "タイトル お よんでください。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-7538a1c551ab615f",
+      "lessonId": "l11-home-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "じゅんばん に ならべます。",
+      "audioTextKana": "じゅんばん に ならべます。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-a71f1438fe1ddf83",
+      "lessonId": "l11-home-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "つぎ へ すすめます。",
+      "audioTextKana": "つぎ え すすめます。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-1cb39fde6653d1c2",
+      "lessonId": "l11-home-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "りょこう の じゅんび。",
+      "audioTextKana": "りょこう の じゅんび。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-4c66280c16136640",
+      "lessonId": "l11-home-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "くうこう の ひょうじ。",
+      "audioTextKana": "くうこう の ひょうじ。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-1032f26167ff8538",
+      "lessonId": "l13-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "くうこう から でんしゃ に のります。",
+      "audioTextKana": "くうこう から でんしゃ に のります。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-cc9cc62fe11d2347",
+      "lessonId": "l13-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でんしゃ のりば →",
+      "audioTextKana": "でんしゃ のりば、みぎ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-5935453dc5b8958d",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ホテル まで の きっぷ を かいます。",
+      "audioTextKana": "ホテル まで の きっぷ お かいます。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-2e9783b59b52da77",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "まっすぐ いきます。",
+      "audioTextKana": "まっすぐ いきます。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-ac0a1862a1ed2065",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ちかてつ いりぐち ↓",
+      "audioTextKana": "ちかてつ いりぐち、した",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-93fa7939d38cfbd8",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でんしゃ は 10じ 15ふん に でます。",
+      "audioTextKana": "でんしゃ わ じゅうじ じゅうごふん に でます。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-f50cf9ad23c40185",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ホテル いき",
+      "audioTextKana": "ホテル いき",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-bed42b1315091d74",
+      "lessonId": "l13-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ホテル の ちかく の えき で おります。",
+      "audioTextKana": "ホテル の ちかく の えき で おります。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-aef722347e504ce8",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "フロント で よやく を つたえます。",
+      "audioTextKana": "フロント で よやく お つたえます。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-a4e730622aa04dd5",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "よやくばんごう：215",
+      "audioTextKana": "よやくばんごう、にひゃくじゅうご",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-107530f7ad6a1c97",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "へや は 305ごう です。",
+      "audioTextKana": "へや わ さんびゃくごごう です。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-6150b2a65554ee14",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "305ごうしつ",
+      "audioTextKana": "さんびゃくご ごうしつ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-9776a490131ae761",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "じはんき →",
+      "audioTextKana": "じはんき、みぎ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-0f6a30174f8ab4d0",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にもつ を あずける こと が できます か。",
+      "audioTextKana": "にもつ お あずける こと が できます か。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-1dc2426f89bf92bf",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "フロント：24じかん あいています。",
+      "audioTextKana": "フロント、にじゅうよじかん あいています。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-ba78d1bc29a1d9d6",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "とうちゃく：2ターミナル",
+      "audioTextKana": "とうちゃく、に ターミナル",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-24cc32f3410f7a55",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にゅうこく てつづき へ すすみます。",
+      "audioTextKana": "にゅうこく てつづき え すすみます。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-fd6124e44604033d",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にゅうこく →",
+      "audioTextKana": "にゅうこく、みぎ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-fe309b8da3833eac",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にもつ は 5ばん ベルト から でます。",
+      "audioTextKana": "にもつ わ ごばん ベルト から でます。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-4c4ab47235e81811",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "5ばん ベルト",
+      "audioTextKana": "ごばん ベルト",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-da8a2c9719eaf4f8",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にもつ を うけとりました。",
+      "audioTextKana": "にもつ お うけとりました。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-0d472ec5aa6c45a2",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でぐち →",
+      "audioTextKana": "でぐち、みぎ",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-b3b4d4c0e3694a0d",
+      "lessonId": "l12-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "くうこう から ホテル へ。",
+      "audioTextKana": "くうこう から ホテル え。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-10a5b7c922a36815",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ただしい こたえ を えらんでください。",
+      "audioTextKana": "ただしい こたえ お えらんでください。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-e94330f4403e7d4e",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "じゅんばん に ならべてください。",
+      "audioTextKana": "じゅんばん に ならべてください。",
+      "action": "current",
+      "regenerate": false
+    },
+    {
+      "entryId": "sentence-course-0438106bebd1fa04",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "レベル 11\nレッスン 1\nしつもん：しつもん\nこたえ：こたえ",
+      "audioTextKana": "レベル じゅういち\nレッスン いち\nしつもん、しつもん\nこたえ、こたえ",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-703d265990908f76",
+      "lessonId": "l11-home-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "れんしゅう\nもんだい 1：ただしい こたえ を えらんでください。\nもんだい 2：まちがい を もういちど みます。",
+      "audioTextKana": "れんしゅう\nもんだい いち、ただしい こたえ お えらんでください。\nもんだい に、まちがい お もういちど みます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-bac0a1ae08ebcaf8",
+      "lessonId": "l11-home-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ぶん を よみます。\nことば の いみ を みつけます。",
+      "audioTextKana": "ぶん お よみます。\nことば の いみ お みつけます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-4412d2db80819494",
+      "lessonId": "l11-home-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ページ 1\nタイトル：よんでください\nもじ に しるし を つけます。",
+      "audioTextKana": "ページ いち\nタイトル、よんでください\nもじ に しるし お つけます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-d2714302f7db0cfb",
+      "lessonId": "l11-home-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "おんせい を きいてください。\nゆっくり ききます。\nおと を くりかえします。",
+      "audioTextKana": "おんせい お きいてください。\nゆっくり ききます。\nおと お くりかえします。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-2ee1ab613ecadf69",
+      "lessonId": "l11-home-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ことば：おと\nくうらん：＿＿＿\nきごう：○\nかいてください。",
+      "audioTextKana": "ことば、おと\nくうらん、、\nきごう、まる\nかいてください。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-1072ce4efbd2c574",
+      "lessonId": "l11-home-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "さいしょ：ぶん を よみます。\nつぎ：こたえ を えらびます。\nおわり：こたえ を みます。",
+      "audioTextKana": "さいしょ、ぶん お よみます。\nつぎ、こたえ お えらびます。\nおわり、こたえ お みます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-29eb04304f3e4935",
+      "lessonId": "l11-home-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "はじめます → よみます → えらびます → かくにん → つぎ へ",
+      "audioTextKana": "はじめます、つぎに よみます、つぎに えらびます、つぎに かくにん、つぎに つぎ え",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-d05c1e17fb9814a0",
+      "lessonId": "l11-home-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "りょこう の じゅんび を します。\nしゅっぱつ の まえ に にもつ を かくにん します。\nひこうき で にほん へ いきます。",
+      "audioTextKana": "りょこう の じゅんび お します。\nしゅっぱつ の まえ に にもつ お かくにん します。\nひこうき で にほん え いきます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-4b3ab0449a70e0bf",
+      "lessonId": "l11-home-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "くうこう\nでぐち →\nのりば →\nちず と ひょうじ を かくにん します。",
+      "audioTextKana": "くうこう\nでぐち、みぎ\nのりば、みぎ\nちず と ひょうじ お かくにん します。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-b3a4bffecad842d8",
+      "lessonId": "l13-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でんしゃ のりば →\nきっぷ：ホテル まえ\n3ばんせん",
+      "audioTextKana": "でんしゃ のりば、みぎ\nきっぷ、ホテル まえ\nさんばんせん",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-7947fbf5b94f40e7",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ホテル まで の きっぷ を かいます。\nおとな の きっぷ は 500えん です。",
+      "audioTextKana": "ホテル まで の きっぷ お かいます。\nおとな の きっぷ わ ごひゃくえん です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-e339b1c9bf6d7519",
+      "lessonId": "l13-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "きっぷうりば\nホテル まで：500えん\nひとつ ください。",
+      "audioTextKana": "きっぷうりば\nホテル まで、ごひゃくえん\nひとつ ください。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-f6ab1385cadad8f9",
+      "lessonId": "l13-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ちかてつ いりぐち ↓\nでぐち：みぎ\nちか 1かい",
+      "audioTextKana": "ちかてつ いりぐち、した\nでぐち、みぎ\nちか いっかい",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-0d2acce88d2562da",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でんしゃ は 10じ 15ふん に でます。\nホテル へ いきます。",
+      "audioTextKana": "でんしゃ わ じゅうじ じゅうごふん に でます。\nホテル え いきます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-cac4bf6ef82ce134",
+      "lessonId": "l13-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "ホテル いき\n10じ 15ふん\nおくれ：ありません",
+      "audioTextKana": "ホテル いき\nじゅうじ じゅうごふん\nおくれ、ありません",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-1b2b7afbe398de05",
+      "lessonId": "l13-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "つぎ は ホテルまえ です。\nおりば で おります。",
+      "audioTextKana": "つぎ わ ホテルまえ です。\nおりば で おります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-b7e661da90ed65c6",
+      "lessonId": "l14-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "よやくばんごう：215\nパスポート を みせてください。",
+      "audioTextKana": "よやくばんごう、にひゃくじゅうご\nパスポート お みせてください。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-1986ac4e9c8cc0a4",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "へや は 305ごう です。\nエレベーター で 3かい へ いきます。",
+      "audioTextKana": "へや わ さんびゃくごごう です。\nエレベーター で さんがい え いきます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-9f5f87ec769db012",
+      "lessonId": "l14-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "305ごうしつ\nカードキー を つかいます。",
+      "audioTextKana": "さんびゃくご ごうしつ\nカードキー お つかいます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-73224d1e0a2a3bf4",
+      "lessonId": "l14-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "じはんき →\nかいだん ↑\nきんえん",
+      "audioTextKana": "じはんき、みぎ\nかいだん、うえ\nきんえん",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-b12529d00ef3f6cc",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にもつ を あずける こと が できます か。\nはい、できます。",
+      "audioTextKana": "にもつ お あずける こと が できます か。\nはい、できます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-5756bff4561be812",
+      "lessonId": "l14-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "フロント：24じかん あいています。\nいつ でも どうぞ。",
+      "audioTextKana": "フロント、にじゅうよじかん あいています。\nいつ でも どうぞ。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-2bc929274329dae4",
+      "lessonId": "l14-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "みず が ひつよう です。\nちかく の みせ を さがします。",
+      "audioTextKana": "みず が ひつよう です。\nちかく の みせ お さがします。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-0124688eaa066c1b",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にほん に つきました。\nとうちゃく ターミナル は 2 です。",
+      "audioTextKana": "にほん に つきました。\nとうちゃく ターミナル わ に です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-f38421b54eb0a95a",
+      "lessonId": "l12-1",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "とうちゃく：2ターミナル\nあんないばん を かくにん します。",
+      "audioTextKana": "とうちゃく、に ターミナル\nあんないばん お かくにん します。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-3ea7519e92982bec",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にゅうこく てつづき へ すすみます。\nここ で ならびます。",
+      "audioTextKana": "にゅうこく てつづき え すすみます。\nここ で ならびます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-d83bb2b82e8fc203",
+      "lessonId": "l12-2",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にゅうこく →\nまっすぐ\nにもつ うけとり ↓",
+      "audioTextKana": "にゅうこく、みぎ\nまっすぐ\nにもつ うけとり、した",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-46b7bfd83b002636",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にもつ は 5ばん ベルト から でます。\nにもつ を うけとります。",
+      "audioTextKana": "にもつ わ ごばん ベルト から でます。\nにもつ お うけとります。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-5456093d0ccf030a",
+      "lessonId": "l12-3",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "5ばん ベルト\nくろい かばん\nにもつ が でます。",
+      "audioTextKana": "ごばん ベルト\nくろい かばん\nにもつ が でます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-ba924890b7a80e3a",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "にもつ を うけとりました。\nでぐち は みぎ です。",
+      "audioTextKana": "にもつ お うけとりました。\nでぐち わ みぎ です。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-5be5aa2c13c2260d",
+      "lessonId": "l12-4",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でぐち →\nタクシー・バス のりば\nでむかえ：A",
+      "audioTextKana": "でぐち、みぎ\nタクシー・バス のりば\nでむかえ、エー",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-4ffb4b4a761f7aa8",
+      "lessonId": "l12-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "でぐち で ともだち を まちます。\nともだち に あいます。",
+      "audioTextKana": "でぐち で ともだち お まちます。\nともだち に あいます。",
+      "action": "missing",
+      "regenerate": true
+    },
+    {
+      "entryId": "sentence-course-40e369e3b18d1164",
+      "lessonId": "l12-5",
+      "kind": "sentence",
+      "voiceRole": "A",
+      "displayText": "くうこう から ホテル へ。\nつぎ は でんしゃ です。",
+      "audioTextKana": "くうこう から ホテル え。\nつぎ わ でんしゃ です。",
+      "action": "missing",
+      "regenerate": true
+    }
+  ]
+}

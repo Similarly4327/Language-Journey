@@ -1,0 +1,1442 @@
+{
+  "lessons": [
+    {
+      "id": "l11-home-1",
+      "newWords": 10,
+      "wordBlocks": [
+        3,
+        3,
+        3,
+        1
+      ],
+      "planned": [
+        {
+          "id": "vocab-こたえ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-もんだい",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-しつもん",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-レッスン",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-れんしゅう",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-こたえ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-えらびます",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ただしい",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-レベル",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-もういちど",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ただしい",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-えらびます",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-もういちど",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-まちがい",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-もんだい",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-れんしゅう",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-レッスン",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-レベル",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-まちがい",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-しつもん",
+          "direction": "jp-nl"
+        }
+      ],
+      "sentences": 10,
+      "story": true,
+      "resource": "app-screen",
+      "resourceRows": 4,
+      "overflow": false
+    },
+    {
+      "id": "l11-home-2",
+      "newWords": 10,
+      "wordBlocks": [
+        3,
+        3,
+        3,
+        1
+      ],
+      "planned": [
+        {
+          "id": "vocab-よんでください",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-もじ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ぶん",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-せつめい",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-タイトル",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-いみ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ページ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-よんでください",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-せつめい",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-タイトル",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-みつけます",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-しるし",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-いみ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ページ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-もじ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-みつけます",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-しるし",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ことば",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ぶん",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ことば",
+          "direction": "nl-jp"
+        }
+      ],
+      "sentences": 10,
+      "story": true,
+      "resource": "lesson-page",
+      "resourceRows": 5,
+      "overflow": false
+    },
+    {
+      "id": "l11-home-3",
+      "newWords": 10,
+      "wordBlocks": [
+        3,
+        3,
+        3,
+        1
+      ],
+      "planned": [
+        {
+          "id": "vocab-かいてください",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-まる",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-おんせい",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-うめてください",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-まる",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-おと",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-くうらん",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-くりかえします",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-おと",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-きいてください",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-きごう",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-くうらん",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-うめてください",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-おんせい",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-くりかえします",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ゆっくり",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-きいてください",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-かいてください",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ゆっくり",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-きごう",
+          "direction": "jp-nl"
+        }
+      ],
+      "sentences": 10,
+      "story": true,
+      "resource": "fill-card",
+      "resourceRows": 5,
+      "overflow": false
+    },
+    {
+      "id": "l11-home-4",
+      "newWords": 10,
+      "wordBlocks": [
+        3,
+        3,
+        3,
+        1
+      ],
+      "planned": [
+        {
+          "id": "vocab-かくにん",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-つぎ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-おわり",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-さいしょ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-はじめます",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-かくにん",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-すすめます",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-じゅんばん",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ぜんぶ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-おわり",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-あと",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ぜんぶ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-さいしょ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-あと",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-つぎ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ならべます",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-じゅんばん",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-はじめます",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ならべます",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-すすめます",
+          "direction": "nl-jp"
+        }
+      ],
+      "sentences": 10,
+      "story": true,
+      "resource": "instruction-plan",
+      "resourceRows": 4,
+      "overflow": false
+    },
+    {
+      "id": "l11-home-5",
+      "newWords": 3,
+      "wordBlocks": [
+        3
+      ],
+      "planned": [
+        {
+          "id": "vocab-りょこう",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ひこうき",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-じゅんび",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-りょこう",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ひこうき",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-じゅんび",
+          "direction": "nl-jp"
+        }
+      ],
+      "sentences": 3,
+      "story": true,
+      "resource": "travel-plan",
+      "resourceRows": 5,
+      "overflow": false
+    },
+    {
+      "id": "l13-1",
+      "newWords": 5,
+      "wordBlocks": [
+        3,
+        2
+      ],
+      "planned": [
+        {
+          "id": "vocab-のりかえ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-きっぷ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ばんせん",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-のりかえ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-きっぷ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-いきさき",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-つきます",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ばんせん",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-いきさき",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-つきます",
+          "direction": "nl-jp"
+        }
+      ],
+      "sentences": 5,
+      "story": true,
+      "resource": "ticket",
+      "resourceRows": 4,
+      "overflow": false
+    },
+    {
+      "id": "l13-2",
+      "newWords": 5,
+      "wordBlocks": [
+        3,
+        2
+      ],
+      "planned": [
+        {
+          "id": "vocab-おとな",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-きっぷうりば",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-かたみち",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-えん",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-うんてんしゅ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-おとな",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-えん",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-かたみち",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-きっぷうりば",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-うんてんしゅ",
+          "direction": "jp-nl"
+        }
+      ],
+      "sentences": 5,
+      "story": true,
+      "resource": "fare-board",
+      "resourceRows": 5,
+      "overflow": false
+    },
+    {
+      "id": "l13-3",
+      "newWords": 8,
+      "wordBlocks": [
+        3,
+        3,
+        2
+      ],
+      "planned": [
+        {
+          "id": "vocab-ちかてつ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-かいだん",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ホテルまえ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-おりば",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-しゅうてん",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-まがります",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ちか",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ホテルまえ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ちじょう",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ちか",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-まがります",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ちじょう",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-かいだん",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ちかてつ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-おりば",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-しゅうてん",
+          "direction": "nl-jp"
+        }
+      ],
+      "sentences": 8,
+      "story": true,
+      "resource": "route-map",
+      "resourceRows": 4,
+      "overflow": false
+    },
+    {
+      "id": "l13-4",
+      "newWords": 8,
+      "wordBlocks": [
+        3,
+        3,
+        2
+      ],
+      "planned": [
+        {
+          "id": "vocab-はやい",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-おそい",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-じ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-でます",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-てんじ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-はやい",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-おくれ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-じかん",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-おそい",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ふん",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-でます",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-おくれ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ふん",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-てんじ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-じかん",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-じ",
+          "direction": "nl-jp"
+        }
+      ],
+      "sentences": 8,
+      "story": true,
+      "resource": "departure-board",
+      "resourceRows": 4,
+      "overflow": false
+    },
+    {
+      "id": "l13-5",
+      "newWords": 0,
+      "wordBlocks": [
+        0
+      ],
+      "planned": [],
+      "sentences": 1,
+      "story": true,
+      "resource": "journey-card",
+      "resourceRows": 6,
+      "overflow": false
+    },
+    {
+      "id": "l14-1",
+      "newWords": 9,
+      "wordBlocks": [
+        3,
+        3,
+        3
+      ],
+      "planned": [
+        {
+          "id": "vocab-フロント",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-よやくばんごう",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-とまります",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-あります",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-おねがいします",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-みせます",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-なまえ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ひとばん",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-あります",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-とまります",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-よやく",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-なまえ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-よやくばんごう",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-フロント",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ひとばん",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-おねがいします",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-みせます",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-よやく",
+          "direction": "jp-nl"
+        }
+      ],
+      "sentences": 7,
+      "story": true,
+      "resource": "check-in-form",
+      "resourceRows": 4,
+      "overflow": false
+    },
+    {
+      "id": "l14-2",
+      "newWords": 8,
+      "wordBlocks": [
+        3,
+        3,
+        2
+      ],
+      "planned": [
+        {
+          "id": "vocab-つかいます",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-かい",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ひらきます",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ドア",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-かい",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-つかいます",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ドア",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-エレベーター",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-カード",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ひらきます",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-エレベーター",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-へや",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-かぎ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-カード",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-へや",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-かぎ",
+          "direction": "jp-nl"
+        }
+      ],
+      "sentences": 7,
+      "story": true,
+      "resource": "key-card",
+      "resourceRows": 4,
+      "overflow": false
+    },
+    {
+      "id": "l14-3",
+      "newWords": 9,
+      "wordBlocks": [
+        3,
+        3,
+        3
+      ],
+      "planned": [
+        {
+          "id": "vocab-トイレ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-あさごはん",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-きんえん",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ひつよう",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-あさごはん",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-じはんき",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-タオル",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-トイレ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-かりる",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-タオル",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ひつよう",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-あんない",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-じはんき",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-きんえん",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-あんない",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-さがします",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-かりる",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-さがします",
+          "direction": "nl-jp"
+        }
+      ],
+      "sentences": 9,
+      "story": true,
+      "resource": "hotel-guide",
+      "resourceRows": 5,
+      "overflow": false
+    },
+    {
+      "id": "l14-4",
+      "newWords": 8,
+      "wordBlocks": [
+        3,
+        3,
+        2
+      ],
+      "planned": [
+        {
+          "id": "vocab-あさ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-あいています",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-しめます",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-あずかります",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-よる",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-あとで",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-できます",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-しめます",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-あとで",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-よる",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-あいています",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-あさ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-あずけます",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-できます",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-あずかります",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-あずけます",
+          "direction": "nl-jp"
+        }
+      ],
+      "sentences": 8,
+      "story": true,
+      "resource": "opening-hours",
+      "resourceRows": 3,
+      "overflow": false
+    },
+    {
+      "id": "l14-5",
+      "newWords": 0,
+      "wordBlocks": [
+        0
+      ],
+      "planned": [],
+      "sentences": 2,
+      "story": true,
+      "resource": "hotel-card",
+      "resourceRows": 6,
+      "overflow": false
+    },
+    {
+      "id": "l12-1",
+      "newWords": 10,
+      "wordBlocks": [
+        3,
+        3,
+        3,
+        1
+      ],
+      "planned": [
+        {
+          "id": "vocab-でぐち",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-とうちゃく",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-あんないじょ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ひょうじ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-あんないばん",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-country-japan",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ターミナル",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-でぐち",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-つきました",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-あんないばん",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-いりぐち",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-くうこう",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-country-japan",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ターミナル",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-くうこう",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-いりぐち",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ひょうじ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-あんないじょ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-とうちゃく",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-つきました",
+          "direction": "jp-nl"
+        }
+      ],
+      "sentences": 10,
+      "story": true,
+      "resource": "sign",
+      "resourceRows": 6,
+      "overflow": false
+    },
+    {
+      "id": "l12-2",
+      "newWords": 9,
+      "wordBlocks": [
+        3,
+        3,
+        3
+      ],
+      "planned": [
+        {
+          "id": "vocab-てつづき",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ゆうどう",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-こちら",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-にゅうこく",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ゆうどう",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ゆか",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-すすみます",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-てつづき",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ならびます",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-にもつ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ゆか",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ならびます",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-にゅうこく",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-パスポート",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-にもつ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-こちら",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-パスポート",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-すすみます",
+          "direction": "jp-nl"
+        }
+      ],
+      "sentences": 8,
+      "story": true,
+      "resource": "floor-guide",
+      "resourceRows": 4,
+      "overflow": false
+    },
+    {
+      "id": "l12-3",
+      "newWords": 9,
+      "wordBlocks": [
+        3,
+        3,
+        3
+      ],
+      "planned": [
+        {
+          "id": "vocab-ちいさい",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ばんごう",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-あか",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-くろ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ベルト",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ばん",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-うけとります",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ちいさい",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-おおきい",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-うけとります",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ばんごう",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-おおきい",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-くろ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-かばん",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ばん",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-あか",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-かばん",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ベルト",
+          "direction": "jp-nl"
+        }
+      ],
+      "sentences": 9,
+      "story": true,
+      "resource": "baggage-label",
+      "resourceRows": 4,
+      "overflow": false
+    },
+    {
+      "id": "l12-4",
+      "newWords": 8,
+      "wordBlocks": [
+        3,
+        3,
+        2
+      ],
+      "planned": [
+        {
+          "id": "vocab-しゅっぱつ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-まちあい",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-しゅうりょう",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-まどぐち",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ホテル",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-のりば",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-まちます",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-でむかえ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-まちあい",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-しゅっぱつ",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-のりば",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-しゅうりょう",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-でむかえ",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-ホテル",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-まどぐち",
+          "direction": "jp-nl"
+        },
+        {
+          "id": "vocab-まちます",
+          "direction": "nl-jp"
+        }
+      ],
+      "sentences": 8,
+      "story": true,
+      "resource": "pickup-board",
+      "resourceRows": 6,
+      "overflow": false
+    },
+    {
+      "id": "l12-5",
+      "newWords": 1,
+      "wordBlocks": [
+        1
+      ],
+      "planned": [
+        {
+          "id": "vocab-ひこうじょう",
+          "direction": "nl-jp"
+        },
+        {
+          "id": "vocab-ひこうじょう",
+          "direction": "jp-nl"
+        }
+      ],
+      "sentences": 2,
+      "story": true,
+      "resource": "arrival-plan",
+      "resourceRows": 6,
+      "overflow": false
+    }
+  ],
+  "feedback": "correct auto / wrong manual / final auto / stale timer cancelled",
+  "mobileWidths": [
+    320,
+    390
+  ]
+}

@@ -30,7 +30,8 @@ function validate(manifest = content.manifest, options = {}) {
   const knownKanji=new Set((manifest.kanji||[]).flatMap(k=>[...String(k.character||'')]));
   const seenForms=new Map();
   for(const word of manifest.vocabulary||[]){
-    if(seenForms.has(word.japanese)&&seenForms.get(word.japanese)!==word.id)add('ERROR','DUPLICATE_VOCAB_FORM',`${word.japanese} is defined by two IDs`,word.id);
+    const previous=maps.vocabulary.get(seenForms.get(word.japanese)),distinct=previous&&word.distinctSenseOf===previous.id&&word.partOfSpeech!==previous.partOfSpeech&&!word.meanings.some(meaning=>previous.meanings.includes(meaning));
+    if(previous&&previous.id!==word.id&&!distinct)add('ERROR','DUPLICATE_VOCAB_FORM',`${word.japanese} is defined by two IDs without distinct vetted senses`,word.id);
     seenForms.set(word.japanese,word.id);
   }
   const inspectSentence=(text,at,location,contextIds=[])=>{
@@ -103,7 +104,9 @@ function validate(manifest = content.manifest, options = {}) {
     const lesson=maps.lessons.get(reading.lessonId);
     if(!lesson){add('ERROR','UNKNOWN_REFERENCE',`Reading ${reading.id} has unknown lesson ${reading.lessonId}`,reading.id);continue}
     if(!['story','micro-story','dialogue','shopping-list','menu','sign','notice'].includes(reading.type))add('ERROR','READING_TYPE',`${reading.type} is unsupported`,reading.id);
-    const at=reading.introducedAt||`${lesson.level}-${lesson.order}`;
+    const preparationPoint=`${lesson.level}-${lesson.order}-B`;
+    const prepared=lesson.didactics?.flow?.indexOf('sentences')<lesson.didactics?.flow?.indexOf('story-A')&&reading.preparedAt===preparationPoint;
+    const at=prepared?preparationPoint:reading.introducedAt||`${lesson.level}-${lesson.order}`;
     for(const id of reading.requiredVocabIds||[])known('vocabulary',id,at,reading.id);
     for(const id of reading.contextVocabIds||[]){
       known('vocabulary',id,at,reading.id,{context:true});

@@ -13877,6 +13877,8 @@
   for(const lesson of [hours,minutes,agenda]){lesson.focus=null;lesson.builders=[]}
   for(const lesson of [months,hours,minutes,agenda])for(const raw of lesson.targetQuestions)manifest.exercises.push({id:raw.sourceId,lessonId:lesson.id,type:raw.kind,payload:[raw.kind,raw.prompt,raw.correct,raw.choices],instruction:raw.instruction,context:raw.context,targetGoalIds:raw.targetGoalIds,requiredVocabIds:[],requiredGrammarIds:lesson.grammarIds,contextVocabIds:[]});
   manifest.contentVersion='1.5.0';
+  const thematicDidactics=typeof module!=='undefined'&&module.exports?require('./thematic-didactics.js'):root.LanguageJourneyThematicDidactics;
+  thematicDidactics.apply(manifest);
   const byId=Object.fromEntries(manifest.vocabulary.map(v=>[v.id,v]));
   const lessonById=Object.fromEntries(manifest.lessons.map(l=>[l.id,l]));
   const readingById=Object.fromEntries(manifest.readings.map(r=>[r.id,r]));

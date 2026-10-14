@@ -450,7 +450,7 @@ test('Recall start screen clearly separates due SRS cards from free practice',()
 test('Recall rebuilds new cards from ranked Level 7, partial Level 8, and later lesson data',()=>{
   const ranks={'l7-1':{rank:'Copper',last:.8,attempts:1},'l8-2':{rank:'Silver',last:.9,attempts:2},'l12-3':{rank:'Gold',last:.95,attempts:3}},
     reviewedId='vocab-ひとつ',dueAt=new Date(2026,2,23,12).getTime(),savedState={flashcardProgress:{version:1,cards:{[`${reviewedId}::jp-nl`]:{dueAt,intervalDays:3,repetitions:2,lapses:0,lastReviewedAt:new Date(2026,2,20,12).getTime(),lastGrade:'knew'}}}},
-    app=createSrsFixture({savedState,savedRanks:ranks}),expected=app.vocabCatalog.filter(word=>ranks[word.lessonId]?.rank);
+    app=createSrsFixture({savedState,savedRanks:ranks}),expected=app.vocabCatalog.filter(word=>ranks[word.lessonId]?.rank||app.state.historicalIntroducedVocabIds.includes(word.id));
   const actual=app.flashcardSelectedCards();
   assert.deepEqual(actual.map(word=>word.id).sort(),expected.map(word=>word.id).sort(),'all and only words from ranked introduction lessons are eligible');
   assert.equal(new Set(actual.map(word=>word.id)).size,actual.length,'each canonical vocabulary ID appears once');

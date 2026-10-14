@@ -12,7 +12,7 @@ function settingsFor(ref,settings=config){const {entry_overrides,audio_profiles,
 function generationHash(ref,role,voice,settings=config){return hash({entryId:ref.id,displayText:ref.displayText,readingId:ref.pronunciation.readingId,audioTextKana:ref.pronunciation.audioTextKana,voiceRole:role,voiceFingerprint:voiceFingerprint(voice),settings:settingsFor(ref,settings)})}
 function currentHash(ref,asset,settings=config){return hash({entryId:ref.id,displayText:ref.displayText,readingId:ref.pronunciation.readingId,audioTextKana:ref.pronunciation.audioTextKana,voiceRole:asset.voiceRole,voiceFingerprint:asset.voiceFingerprint,settings:settingsFor(ref,settings)})}
 function jobsFor(ref,role='A'){
-  if(ref.kind==='dialogue')return ref.entry.lines.flatMap(line=>jobsFor(content.audioEntryById[line.sentenceId],line.speakerRole));
+  if(ref.kind==='dialogue')return ref.entry.lines.flatMap(line=>(ref.entry.speakerPolicy==='avatars'?['A','B']:[line.speakerRole]).flatMap(role=>jobsFor(content.audioEntryById[line.sentenceId],role)));
   if(!kanaOnly(ref.pronunciation?.audioTextKana))throw new Error('Uitspraak moet eerst gecontroleerd worden: '+ref.id);
   return[{ref,role}];
 }

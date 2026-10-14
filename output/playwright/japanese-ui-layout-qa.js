@@ -6,7 +6,7 @@ async (page) => {
     const render=new Function('vocabCatalog','escapeHtml',functionSource+'; return japaneseWordHtml;')(window.LanguageJourneyContent.vocabCatalog,escapeHtml);
     const speaker=document.querySelector('.audio-speaker').cloneNode(true);
     const host=document.getElementById('mainView');
-    host.innerHTML='<section class="card"><div class="h2">Woordunits en normale zinnen · layoutcontrole</div><div class="choices" id="qaChoices"></div><div class="panel" style="margin-top:12px">Een langere context voor het losse leerwoord '+render('ください')+'</div><div class="prompt prompt--jp" id="qaSentence" lang="ja">'+render('きっぷをひとつください。ホテルまでのでんしゃにのります。'.repeat(5))+'</div></section>';
+    host.innerHTML='<section class="card question"><div class="h2">Woordunits en normale zinnen · layoutcontrole</div><div class="choices" id="qaChoices"></div><div class="panel" style="margin-top:12px">Een langere context voor het losse leerwoord '+render('ください')+'</div><div class="prompt prompt--jp" id="qaSentence" lang="ja">'+render('きっぷをひとつください。ホテルまでのでんしゃにのります。'.repeat(5))+'</div></section>';
     for(const word of ['ください','おねがいします','よんでください']){
       const row=document.createElement('div');row.className='answer-option-row';
       row.innerHTML='<button class="choice choice-jp">'+render(word)+'</button>';
@@ -25,7 +25,7 @@ async (page) => {
         }),sentenceLines:rects(document.getElementById('qaSentence')).length,sentenceHasWordUnit:!!document.querySelector('#qaSentence .jp-word')};
     });
     if(metrics.pageWidth>width+1||metrics.sentenceLines<2||metrics.sentenceHasWordUnit||metrics.words.some(word=>word.lines!==1||!word.fullyVisible||!word.noOverlap||word.audioWidth<43||word.audioHeight<43))throw new Error(JSON.stringify(metrics));
-    results.push(metrics);await page.screenshot({path:'output/playwright/japanese-word-units-'+width+'.png',fullPage:true});
+    results.push(metrics);await page.screenshot({path:'output/playwright/japanese-word-units-final-'+width+'.png',fullPage:true});
   }
-  console.log(JSON.stringify(results));
+  await page.evaluate(results=>{window.japaneseUiQaMetrics=results},results);
 }

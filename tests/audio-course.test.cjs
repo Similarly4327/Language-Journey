@@ -10,13 +10,13 @@ function recordings(){return {pipelineVersion:config.pipelineVersion,assets:cont
   voiceRole:'A',reviewed:true,pipelineVersion:config.pipelineVersion,path:'assets/audio/ja/sentences/test.mp3'}))};}
 test('actual Japanese question banks, examples, completed blanks and stories all have readings',()=>{
   const report=audit();assert.ok(report.japaneseTexts>550);assert.deepEqual(report.missing,[]);
-  assert.equal(content.manifest.vocabulary.length,343);
+  assert.equal(content.manifest.vocabulary.length,344);
   assert.ok(content.audioEntries.filter(r=>r.kind==='sentence').every(r=>foundation.kanaOnly(r.pronunciation.audioTextKana)));
 });
 test('every story and bonus including Levels 11 and 12 retains its ID and has kana-only audio',()=>{
   const passages=[...content.manifest.readings,...content.manifest.bonus];assert.equal(passages.length,69);
   for(const p of passages){const ref=content.audioEntryById[p.id];assert.equal(ref.entry,p);assert.equal(ref.displayText,p.text);assert.ok(foundation.kanaOnly(ref.pronunciation.audioTextKana),p.id);}
-  const ref=content.audioEntryById['reading-l12-3-a'];assert.match(ref.pronunciation.audioTextKana,/にもつ わ ごばん/);
+  const ref=content.audioEntryById['reading-l12-3-a'];assert.match(ref.pronunciation.audioTextKana,/ごばん の ベルト/);
   assert.match(content.audioEntryById['reading-l12-2-b'].pronunciation.audioTextKana,/した/);
   assert.match(content.audioEntryById['reading-l12-4-b'].pronunciation.audioTextKana,/エー/);
   assert.match(content.audioEntryById['reading-l11-home-1-a'].pronunciation.audioTextKana,/レベル じゅういち/);

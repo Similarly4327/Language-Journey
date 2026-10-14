@@ -64,13 +64,21 @@
     manifest.sentences=[];const sentenceByText=new Map();
     for(const lesson of manifest.lessons)for(const [index,model] of (lesson.models||[]).entries()){
       let entry=sentenceByText.get(model.sentence);
-      if(!entry){const tokens=[...new Set((model.parts||[]).flatMap(part=>part[0].split(/\s+/)))],linkedWordIds=tokens.flatMap(token=>{const matches=manifest.vocabulary.filter(word=>word.coreOrContext!=='legacy'&&(word.japanese===token||word.kanjiForm===token));return matches.length===1?[matches[0].id]:[]});entry={id:`sentence-${lesson.id}-model-${index+1}`,displayText:model.sentence,meaning:model.meaning,sourceLessonIds:[],linkedWordIds:[...new Set(linkedWordIds)]};manifest.sentences.push(entry);sentenceByText.set(model.sentence,entry);add(entry,'sentence',entry.displayText,model.audioTextKana||readingsByText.get(model.sentence)||(lesson.level===4?modelReadings[model.sentence]:null),{level:lesson.level,lessonId:lesson.id})}
+      if(!entry){const tokens=[...new Set((model.parts||[]).flatMap(part=>part[0].split(/\s+/)))],linkedWordIds=tokens.flatMap(token=>{const matches=manifest.vocabulary.filter(word=>word.coreOrContext!=='legacy'&&(word.japanese===token||word.kanjiForm===token));return matches.length===1?[matches[0].id]:[]});entry={id:model.id||`sentence-${lesson.id}-model-${index+1}`,displayText:model.sentence,meaning:model.meaning,sourceLessonIds:[],linkedWordIds:[...new Set([...(model.linkedWordIds||[]),...linkedWordIds])]};manifest.sentences.push(entry);sentenceByText.set(model.sentence,entry);add(entry,'sentence',entry.displayText,model.audioTextKana||readingsByText.get(model.sentence)||(lesson.level===4?modelReadings[model.sentence]:null),{level:lesson.level,lessonId:lesson.id})}
       entry.sourceLessonIds.push(lesson.id);model.sentenceId=entry.id;
     }
     const greeting={id:'sentence-introduction-greeting',displayText:'こんにちは。',meaning:'Hallo.'};
     manifest.sentences.push(greeting);add(greeting,'sentence',greeting.displayText,'こんにちわ。',{level:4,lessonId:'l4-3'});
     manifest.dialogueBlocks=[{id:'dialogue-introduction',lines:[{sentenceId:greeting.id,speakerRole:'A'}],level:4,lessonId:'l4-3'}];
     manifest.dialogues.introduction[0].sentenceId=greeting.id;
+    for(const definition of manifest.didacticDialogues||[]){
+      const lines=definition.lines.map(line=>{
+        let entry=sentenceByText.get(line.text);
+        if(!entry){entry={id:line.sentenceId,displayText:line.text,meaning:line.meaning,sourceLessonIds:[definition.lessonId],linkedWordIds:[]};manifest.sentences.push(entry);sentenceByText.set(line.text,entry);add(entry,'sentence',entry.displayText,line.audioTextKana,{level:definition.level,lessonId:definition.lessonId})}
+        return{sentenceId:entry.id,speakerRole:line.speakerRole};
+      });
+      manifest.dialogueBlocks.push({...definition,lines});
+    }
     for(const block of manifest.dialogueBlocks){byId[block.id]={id:block.id,kind:'dialogue',entry:block,displayText:block.lines.map(line=>byId[line.sentenceId].displayText).join('\n'),level:block.level,lessonId:block.lessonId};entries.push(byId[block.id])}
     for(const passage of [...manifest.readings,...(manifest.bonus||[])]){
       const reviewed=passage.audioTextKana||readingsByText.get(passage.text);
@@ -91,6 +99,10 @@
     for(const entry of manifest.avatarCelebrations)add(entry,'avatarCelebration',entry.japaneseText,entry.audioTextKana,{audioProfile:'celebration'});
     // These are utterances from existing questions/examples, never a second vocabulary list.
     manifest.audioUtterances=[];
+    for(const entry of manifest.didacticUtterances||[]){
+      if(entries.some(ref=>ref.displayText===entry.text&&ref.pronunciation?.audioTextKana))continue;
+      manifest.audioUtterances.push(entry);add(entry,'sentence',entry.text,entry.audioTextKana,{level:entry.level,lessonId:entry.lessonId});
+    }
     for(const [text,kana,level,lessonId,id] of courseReadings){
       if(entries.some(ref=>ref.displayText===text&&ref.pronunciation?.audioTextKana))continue;
       // Text-based IDs remain stable when a question moves or its order changes.

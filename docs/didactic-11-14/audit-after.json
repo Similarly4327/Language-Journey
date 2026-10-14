@@ -1,0 +1,7005 @@
+[
+  {
+    "id": "l11-home-1",
+    "level": 11,
+    "title": "De les begint",
+    "goal": "Een Japanse vraag, antwoord en goed/fout-aanduiding in de app herkennen.",
+    "canDo": "Een Japanse vraag, antwoord en goed/fout-aanduiding in de app herkennen.",
+    "newGrammar": [
+      {
+        "id": "grammar-l11-home-1",
+        "title": "〜てください"
+      }
+    ],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l11-home-1-A",
+        "label": "Leskaart",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-レベル",
+            "japanese": "レベル",
+            "meaning": "level"
+          },
+          {
+            "id": "vocab-レッスン",
+            "japanese": "レッスン",
+            "meaning": "les"
+          },
+          {
+            "id": "vocab-しつもん",
+            "japanese": "しつもん",
+            "meaning": "vraag"
+          },
+          {
+            "id": "vocab-こたえ",
+            "japanese": "こたえ",
+            "meaning": "antwoord"
+          },
+          {
+            "id": "vocab-えらびます",
+            "japanese": "えらびます",
+            "meaning": "kiezen"
+          }
+        ],
+        "reusedWordIds": [],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l11-home-1-a",
+        "text": "レベル 11、レッスン 1 です。これは しつもん です。こたえ を えらびます。",
+        "classifiedText": [
+          {
+            "token": "レベル",
+            "id": "vocab-レベル",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "レッスン",
+            "id": "vocab-レッスン",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "これは",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "しつもん",
+            "id": "vocab-しつもん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "こたえ",
+            "id": "vocab-こたえ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "えらびます",
+            "id": "vocab-えらびます",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "こたえ",
+            "id": "vocab-こたえ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "えらびます",
+            "id": "vocab-えらびます",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "これは",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "しつもん",
+            "id": "vocab-しつもん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "こたえ を えらびます。",
+            "answer": "het antwoord kiezen",
+            "choices": [
+              "het antwoord kiezen",
+              "de vraag lezen",
+              "opnieuw luisteren"
+            ],
+            "sourceId": "exercise-l11-home-1-A-1"
+          },
+          {
+            "prompt": "これは しつもん です。",
+            "answer": "Dit is een vraag.",
+            "choices": [
+              "Dit is een vraag.",
+              "Dit is een antwoord.",
+              "Dit is een les."
+            ],
+            "sourceId": "exercise-l11-home-1-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l11-home-1-B",
+        "label": "Korte oefening",
+        "kind": "real-world",
+        "newWords": [
+          {
+            "id": "vocab-もんだい",
+            "japanese": "もんだい",
+            "meaning": "opgave"
+          },
+          {
+            "id": "vocab-れんしゅう",
+            "japanese": "れんしゅう",
+            "meaning": "oefening"
+          },
+          {
+            "id": "vocab-ただしい",
+            "japanese": "ただしい",
+            "meaning": "juist"
+          },
+          {
+            "id": "vocab-まちがい",
+            "japanese": "まちがい",
+            "meaning": "fout"
+          },
+          {
+            "id": "vocab-もういちど",
+            "japanese": "もういちど",
+            "meaning": "nog een keer"
+          }
+        ],
+        "reusedWordIds": [],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l11-home-1-b",
+        "text": "もんだい：これは パン です。\nただしい こたえ：○\nまちがい：×\nまちがい を もういちど みます。",
+        "classifiedText": [
+          {
+            "token": "もんだい",
+            "id": "vocab-もんだい",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "これは",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "パン",
+            "id": "vocab-パン",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ただしい",
+            "id": "vocab-ただしい",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "こたえ",
+            "id": "vocab-こたえ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "まちがい",
+            "id": "vocab-まちがい",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "もういちど",
+            "id": "vocab-もういちど",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "みます",
+            "id": "vocab-みます",
+            "status": "eerder bekend"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "ただしい",
+            "id": "vocab-ただしい",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "こたえ",
+            "id": "vocab-こたえ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "まちがい",
+            "id": "vocab-まちがい",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "もういちど",
+            "id": "vocab-もういちど",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "みます",
+            "id": "vocab-みます",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "ただしい こたえ は？",
+            "answer": "○",
+            "choices": [
+              "○",
+              "×",
+              "→"
+            ],
+            "sourceId": "exercise-l11-home-1-B-1"
+          },
+          {
+            "prompt": "まちがい を もういちど みます。",
+            "answer": "de fout nog eens bekijken",
+            "choices": [
+              "de fout nog eens bekijken",
+              "het juiste antwoord kiezen",
+              "de les beginnen"
+            ],
+            "sourceId": "exercise-l11-home-1-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      }
+    ],
+    "newWordCount": 10
+  },
+  {
+    "id": "l11-home-2",
+    "level": 11,
+    "title": "Lezen en betekenis",
+    "goal": "Een korte Japanse leesinstructie volgen en een woord in een zin vinden.",
+    "canDo": "Een korte Japanse leesinstructie volgen en een woord in een zin vinden.",
+    "newGrammar": [],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l11-home-2-A",
+        "label": "Leeskaart",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-せつめい",
+            "japanese": "せつめい",
+            "meaning": "uitleg"
+          },
+          {
+            "id": "vocab-ぶん",
+            "japanese": "ぶん",
+            "meaning": "zin"
+          },
+          {
+            "id": "vocab-ことば",
+            "japanese": "ことば",
+            "meaning": "woord"
+          },
+          {
+            "id": "vocab-いみ",
+            "japanese": "いみ",
+            "meaning": "betekenis"
+          },
+          {
+            "id": "vocab-みつけます",
+            "japanese": "みつけます",
+            "meaning": "vinden"
+          }
+        ],
+        "reusedWordIds": [],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l11-home-2-a",
+        "text": "せつめい を よみます。これは ぶん です。ことば の いみ を みつけます。",
+        "classifiedText": [
+          {
+            "token": "せつめい",
+            "id": "vocab-せつめい",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "よみます",
+            "id": "vocab-よみます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "これは",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ぶん",
+            "id": "vocab-ぶん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ことば",
+            "id": "vocab-ことば",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "いみ",
+            "id": "vocab-いみ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "みつけます",
+            "id": "vocab-みつけます",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "ぶん",
+            "id": "vocab-ぶん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "よみます",
+            "id": "vocab-よみます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ことば",
+            "id": "vocab-ことば",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "いみ",
+            "id": "vocab-いみ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "みつけます",
+            "id": "vocab-みつけます",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "ぶん を よみます。",
+            "answer": "de zin lezen",
+            "choices": [
+              "de zin lezen",
+              "de zin schrijven",
+              "naar de zin luisteren"
+            ],
+            "sourceId": "exercise-l11-home-2-A-1"
+          },
+          {
+            "prompt": "ことば の いみ を みつけます。",
+            "answer": "de betekenis vinden",
+            "choices": [
+              "de betekenis vinden",
+              "woorden in volgorde zetten",
+              "nog een keer luisteren"
+            ],
+            "sourceId": "exercise-l11-home-2-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l11-home-2-B",
+        "label": "Voorbeeldblad",
+        "kind": "real-world",
+        "newWords": [
+          {
+            "id": "vocab-よんでください",
+            "japanese": "よんでください",
+            "meaning": "lees alstublieft"
+          },
+          {
+            "id": "vocab-ページ",
+            "japanese": "ページ",
+            "meaning": "pagina"
+          },
+          {
+            "id": "vocab-タイトル",
+            "japanese": "タイトル",
+            "meaning": "titel"
+          },
+          {
+            "id": "vocab-もじ",
+            "japanese": "もじ",
+            "meaning": "teken / letter"
+          },
+          {
+            "id": "vocab-しるし",
+            "japanese": "しるし",
+            "meaning": "markering"
+          }
+        ],
+        "reusedWordIds": [],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l11-home-2-b",
+        "text": "ページ 1\nタイトル：パン\nよんでください：これ は パン です。\nことば：パン\nしるし：○",
+        "classifiedText": [
+          {
+            "token": "ページ",
+            "id": "vocab-ページ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "タイトル",
+            "id": "vocab-タイトル",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "パン",
+            "id": "vocab-パン",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "よんでください",
+            "id": "vocab-よんでください",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "これ",
+            "id": "vocab-これ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ことば",
+            "id": "vocab-ことば",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "しるし",
+            "id": "vocab-しるし",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "ことば",
+            "id": "vocab-ことば",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "パン",
+            "id": "vocab-パン",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ねこ",
+            "id": "vocab-ねこ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "みず",
+            "id": "vocab-みず",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "よんでください",
+            "id": "vocab-よんでください",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "ことば は？",
+            "answer": "パン",
+            "choices": [
+              "パン",
+              "ねこ",
+              "みず"
+            ],
+            "sourceId": "exercise-l11-home-2-B-1"
+          },
+          {
+            "prompt": "よんでください。",
+            "answer": "Lees de zin.",
+            "choices": [
+              "Lees de zin.",
+              "Kies het geluid.",
+              "Schrijf het nummer."
+            ],
+            "sourceId": "exercise-l11-home-2-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      }
+    ],
+    "newWordCount": 10
+  },
+  {
+    "id": "l11-home-3",
+    "level": 11,
+    "title": "Luisteren en invullen",
+    "goal": "Luister- en invulinstructies begrijpen en het juiste woord of symbool aanwijzen.",
+    "canDo": "Luister- en invulinstructies begrijpen en het juiste woord of symbool aanwijzen.",
+    "newGrammar": [],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l11-home-3-A",
+        "label": "Luisteropdracht",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-きいてください",
+            "japanese": "きいてください",
+            "meaning": "luister alstublieft"
+          },
+          {
+            "id": "vocab-おと",
+            "japanese": "おと",
+            "meaning": "geluid"
+          },
+          {
+            "id": "vocab-おんせい",
+            "japanese": "おんせい",
+            "meaning": "audio / stemgeluid"
+          },
+          {
+            "id": "vocab-ゆっくり",
+            "japanese": "ゆっくり",
+            "meaning": "langzaam"
+          },
+          {
+            "id": "vocab-くりかえします",
+            "japanese": "くりかえします",
+            "meaning": "herhalen"
+          }
+        ],
+        "reusedWordIds": [],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l11-home-3-a",
+        "text": "おんせい を きいてください。ゆっくり ききます。おと を くりかえします。",
+        "classifiedText": [
+          {
+            "token": "おんせい",
+            "id": "vocab-おんせい",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "きいてください",
+            "id": "vocab-きいてください",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ゆっくり",
+            "id": "vocab-ゆっくり",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ききます",
+            "id": "vocab-きいてください",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "おと",
+            "id": "vocab-おと",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "くりかえします",
+            "id": "vocab-くりかえします",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "おんせい",
+            "id": "vocab-おんせい",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "きいてください",
+            "id": "vocab-きいてください",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ゆっくり",
+            "id": "vocab-ゆっくり",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ききます",
+            "id": "vocab-きいてください",
+            "status": "bekende / voorbereide vorm"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "おんせい を きいてください。",
+            "answer": "Luister naar de audio.",
+            "choices": [
+              "Luister naar de audio.",
+              "Lees de titel.",
+              "Kies de afbeelding."
+            ],
+            "sourceId": "exercise-l11-home-3-A-1"
+          },
+          {
+            "prompt": "ゆっくり ききます。",
+            "answer": "langzaam luisteren",
+            "choices": [
+              "langzaam luisteren",
+              "snel schrijven",
+              "alles lezen"
+            ],
+            "sourceId": "exercise-l11-home-3-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "listen-audio",
+          "text": "おんせい を きいてください。",
+          "requiredWordIds": [
+            "vocab-おんせい",
+            "vocab-きいてください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l11-home-3-B",
+        "label": "Invuloefening",
+        "kind": "real-world",
+        "newWords": [
+          {
+            "id": "vocab-うめてください",
+            "japanese": "うめてください",
+            "meaning": "vul alstublieft in"
+          },
+          {
+            "id": "vocab-くうらん",
+            "japanese": "くうらん",
+            "meaning": "open vak"
+          },
+          {
+            "id": "vocab-かいてください",
+            "japanese": "かいてください",
+            "meaning": "schrijf alstublieft"
+          },
+          {
+            "id": "vocab-きごう",
+            "japanese": "きごう",
+            "meaning": "symbool"
+          },
+          {
+            "id": "vocab-まる",
+            "japanese": "まる",
+            "meaning": "cirkel"
+          }
+        ],
+        "reusedWordIds": [],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l11-home-3-b",
+        "text": "ことば：おと\nくうらん：＿＿\nうめてください。\nきごう：まる ○\nこたえ を かいてください。",
+        "classifiedText": [
+          {
+            "token": "ことば",
+            "id": "vocab-ことば",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "おと",
+            "id": "vocab-おと",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "くうらん",
+            "id": "vocab-くうらん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "うめてください",
+            "id": "vocab-うめてください",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "きごう",
+            "id": "vocab-きごう",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "まる",
+            "id": "vocab-まる",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "こたえ",
+            "id": "vocab-こたえ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "かいてください",
+            "id": "vocab-かいてください",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "くうらん",
+            "id": "vocab-くうらん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "うめてください",
+            "id": "vocab-うめてください",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ことば",
+            "id": "vocab-ことば",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "おと",
+            "id": "vocab-おと",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "パン",
+            "id": "vocab-パン",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "いぬ",
+            "id": "vocab-いぬ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "まる",
+            "id": "vocab-まる",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "くうらん を うめてください。ことば は？",
+            "answer": "おと",
+            "choices": [
+              "おと",
+              "パン",
+              "いぬ"
+            ],
+            "sourceId": "exercise-l11-home-3-B-1"
+          },
+          {
+            "prompt": "まる は？",
+            "answer": "○",
+            "choices": [
+              "○",
+              "×",
+              "→"
+            ],
+            "sourceId": "exercise-l11-home-3-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "fill-answer",
+          "text": "くうらん を うめてください。",
+          "requiredWordIds": [
+            "vocab-くうらん",
+            "vocab-うめてください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      }
+    ],
+    "newWordCount": 10
+  },
+  {
+    "id": "l11-home-4",
+    "level": 11,
+    "title": "Volgorde en volgende stap",
+    "goal": "Een korte volgorde van Japanse instructies volgen en controleren.",
+    "canDo": "Een korte volgorde van Japanse instructies volgen en controleren.",
+    "newGrammar": [],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l11-home-4-A",
+        "label": "Stappenkaart",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-じゅんばん",
+            "japanese": "じゅんばん",
+            "meaning": "volgorde"
+          },
+          {
+            "id": "vocab-ならべます",
+            "japanese": "ならべます",
+            "meaning": "op volgorde zetten"
+          },
+          {
+            "id": "vocab-さいしょ",
+            "japanese": "さいしょ",
+            "meaning": "eerst"
+          },
+          {
+            "id": "vocab-つぎ",
+            "japanese": "つぎ",
+            "meaning": "volgende"
+          },
+          {
+            "id": "vocab-おわり",
+            "japanese": "おわり",
+            "meaning": "einde"
+          }
+        ],
+        "reusedWordIds": [],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l11-home-4-a",
+        "text": "じゅんばん です。さいしょ に ぶん を よみます。つぎ は こたえ です。ことば を ならべます。これで おわり です。",
+        "classifiedText": [
+          {
+            "token": "じゅんばん",
+            "id": "vocab-じゅんばん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "さいしょ",
+            "id": "vocab-さいしょ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ぶん",
+            "id": "vocab-ぶん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "よみます",
+            "id": "vocab-よみます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "つぎ",
+            "id": "vocab-つぎ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "こたえ",
+            "id": "vocab-こたえ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ことば",
+            "id": "vocab-ことば",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ならべます",
+            "id": "vocab-ならべます",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "これで",
+            "id": "vocab-おわり",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "おわり",
+            "id": "vocab-おわり",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "さいしょ",
+            "id": "vocab-さいしょ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ぶん",
+            "id": "vocab-ぶん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "よみます",
+            "id": "vocab-よみます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ことば",
+            "id": "vocab-ことば",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ならべます",
+            "id": "vocab-ならべます",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "これで",
+            "id": "vocab-おわり",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "おわり",
+            "id": "vocab-おわり",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "つぎ",
+            "id": "vocab-つぎ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "こたえ",
+            "id": "vocab-こたえ",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "さいしょ は？",
+            "answer": "ぶん を よみます。",
+            "choices": [
+              "ぶん を よみます。",
+              "ことば を ならべます。",
+              "これで おわり です。"
+            ],
+            "sourceId": "exercise-l11-home-4-A-1"
+          },
+          {
+            "prompt": "つぎ は？",
+            "answer": "こたえ",
+            "choices": [
+              "こたえ",
+              "ぶん",
+              "おわり"
+            ],
+            "sourceId": "exercise-l11-home-4-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "order-steps",
+          "text": "じゅんばん に ならべてください。",
+          "requiredWordIds": [
+            "vocab-じゅんばん",
+            "vocab-ならべます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l11-home-4-B",
+        "label": "Route door een les",
+        "kind": "real-world",
+        "newWords": [
+          {
+            "id": "vocab-ぜんぶ",
+            "japanese": "ぜんぶ",
+            "meaning": "alles"
+          },
+          {
+            "id": "vocab-あと",
+            "japanese": "あと",
+            "meaning": "erna"
+          },
+          {
+            "id": "vocab-すすめます",
+            "japanese": "すすめます",
+            "meaning": "verdergaan"
+          },
+          {
+            "id": "vocab-はじめます",
+            "japanese": "はじめます",
+            "meaning": "beginnen"
+          },
+          {
+            "id": "vocab-かくにん",
+            "japanese": "かくにん",
+            "meaning": "controleren"
+          }
+        ],
+        "reusedWordIds": [],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l11-home-4-b",
+        "text": "さいしょ：れんしゅう を はじめます。\nつぎ：ぜんぶ よみます。\nあと：こたえ を かくにん します。\nつぎ：れんしゅう を すすめます。",
+        "classifiedText": [
+          {
+            "token": "さいしょ",
+            "id": "vocab-さいしょ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "れんしゅう",
+            "id": "vocab-れんしゅう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "はじめます",
+            "id": "vocab-はじめます",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "つぎ",
+            "id": "vocab-つぎ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ぜんぶ",
+            "id": "vocab-ぜんぶ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "よみます",
+            "id": "vocab-よみます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "あと",
+            "id": "vocab-あと",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "こたえ",
+            "id": "vocab-こたえ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "かくにん",
+            "id": "vocab-かくにん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "します",
+            "id": "vocab-かくにん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "すすめます",
+            "id": "vocab-すすめます",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "ぜんぶ",
+            "id": "vocab-ぜんぶ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "よみます",
+            "id": "vocab-よみます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "こたえ",
+            "id": "vocab-こたえ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "かくにん",
+            "id": "vocab-かくにん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "します",
+            "id": "vocab-かくにん",
+            "status": "bekende / voorbereide vorm"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "ぜんぶ よみます。",
+            "answer": "alles lezen",
+            "choices": [
+              "alles lezen",
+              "alleen de titel lezen",
+              "het geluid herhalen"
+            ],
+            "sourceId": "exercise-l11-home-4-B-1"
+          },
+          {
+            "prompt": "こたえ を かくにん します。",
+            "answer": "het antwoord controleren",
+            "choices": [
+              "het antwoord controleren",
+              "de les beginnen",
+              "woorden in volgorde zetten"
+            ],
+            "sourceId": "exercise-l11-home-4-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "next-step",
+          "text": "つぎ",
+          "requiredWordIds": [
+            "vocab-つぎ"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      }
+    ],
+    "newWordCount": 10
+  },
+  {
+    "id": "l11-home-5",
+    "level": 11,
+    "title": "Klaar voor vertrek",
+    "goal": "Een eenvoudig vertrekplan lezen met bekende dag-, tijd- en vervoerswoorden.",
+    "canDo": "Een eenvoudig vertrekplan lezen met bekende dag-, tijd- en vervoerswoorden.",
+    "newGrammar": [],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l11-home-5-A",
+        "label": "Vertrekcheck",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-りょこう",
+            "japanese": "りょこう",
+            "meaning": "reis"
+          },
+          {
+            "id": "vocab-じゅんび",
+            "japanese": "じゅんび",
+            "meaning": "voorbereiding"
+          },
+          {
+            "id": "vocab-ひこうき",
+            "japanese": "ひこうき",
+            "meaning": "vliegtuig"
+          }
+        ],
+        "reusedWordIds": [],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l11-home-5-a",
+        "text": "あした は げつようび です。りょこう の じゅんび です。これは わたし の ちず です。ごぜん しちじ に えき に いきます。でんしゃ に のります。つぎ は ひこうき です。",
+        "classifiedText": [
+          {
+            "token": "あした",
+            "id": "vocab-あした",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "げつようび",
+            "id": "vocab-げつようび",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "りょこう",
+            "id": "vocab-りょこう",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "じゅんび",
+            "id": "vocab-じゅんび",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "これは",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "わたし",
+            "id": "vocab-わたし",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ちず",
+            "id": "vocab-ちず",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ごぜん",
+            "id": "vocab-ごぜん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "しちじ",
+            "id": "vocab-しちじ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "えき",
+            "id": "vocab-えき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "いきます",
+            "id": "vocab-いきます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "でんしゃ",
+            "id": "vocab-でんしゃ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "のります",
+            "id": "vocab-のります",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "つぎ",
+            "id": "vocab-つぎ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ひこうき",
+            "id": "vocab-ひこうき",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "あした",
+            "id": "vocab-あした",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "げつようび",
+            "id": "vocab-げつようび",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "きんようび",
+            "id": "vocab-きんようび",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "にちようび",
+            "id": "vocab-にちようび",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ごぜん",
+            "id": "vocab-ごぜん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "しちじ",
+            "id": "vocab-しちじ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "どこ",
+            "id": "vocab-どこ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "いきます",
+            "id": "vocab-いきます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "か",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "えき",
+            "id": "vocab-えき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "みせ",
+            "id": "vocab-みせ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "こうえん",
+            "id": "vocab-こうえん",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "あした は？",
+            "answer": "げつようび",
+            "choices": [
+              "げつようび",
+              "きんようび",
+              "にちようび"
+            ],
+            "sourceId": "exercise-l11-home-5-A-1"
+          },
+          {
+            "prompt": "ごぜん しちじ に どこ に いきます か。",
+            "answer": "えき",
+            "choices": [
+              "えき",
+              "みせ",
+              "こうえん"
+            ],
+            "sourceId": "exercise-l11-home-5-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l11-home-5-B",
+        "label": "Vertrekbord",
+        "kind": "real-world",
+        "newWords": [],
+        "reusedWordIds": [
+          "vocab-えき",
+          "vocab-でんしゃ",
+          "vocab-ちず"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l11-home-5-b",
+        "text": "りょこう の じゅんび\nさいしょ：ちず を みます。\nげつようび 7:00：えき に いきます。\nつぎ：でんしゃ に のります。\nおわり：こたえ を かくにん します。",
+        "classifiedText": [
+          {
+            "token": "りょこう",
+            "id": "vocab-りょこう",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "じゅんび",
+            "id": "vocab-じゅんび",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "さいしょ",
+            "id": "vocab-さいしょ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ちず",
+            "id": "vocab-ちず",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "みます",
+            "id": "vocab-みます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "げつようび",
+            "id": "vocab-げつようび",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "えき",
+            "id": "vocab-えき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "いきます",
+            "id": "vocab-いきます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "つぎ",
+            "id": "vocab-つぎ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "でんしゃ",
+            "id": "vocab-でんしゃ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "のります",
+            "id": "vocab-のります",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "おわり",
+            "id": "vocab-おわり",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "こたえ",
+            "id": "vocab-こたえ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "かくにん",
+            "id": "vocab-かくにん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "します",
+            "id": "vocab-かくにん",
+            "status": "bekende / voorbereide vorm"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "さいしょ",
+            "id": "vocab-さいしょ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ちず",
+            "id": "vocab-ちず",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "みます",
+            "id": "vocab-みます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "でんしゃ",
+            "id": "vocab-でんしゃ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "のります",
+            "id": "vocab-のります",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "こたえ",
+            "id": "vocab-こたえ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "かくにん",
+            "id": "vocab-かくにん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "します",
+            "id": "vocab-かくにん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "えき",
+            "id": "vocab-えき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "いきます",
+            "id": "vocab-いきます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "なんじ",
+            "id": "vocab-なんじ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "か",
+            "status": "bekende / voorbereide vorm"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "さいしょ は？",
+            "answer": "ちず を みます。",
+            "choices": [
+              "ちず を みます。",
+              "でんしゃ に のります。",
+              "こたえ を かくにん します。"
+            ],
+            "sourceId": "exercise-l11-home-5-B-1"
+          },
+          {
+            "prompt": "えき に いきます。なんじ です か。",
+            "answer": "7:00",
+            "choices": [
+              "7:00",
+              "10:00",
+              "19:00"
+            ],
+            "sourceId": "exercise-l11-home-5-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      }
+    ],
+    "newWordCount": 3
+  },
+  {
+    "id": "l12-1",
+    "level": 12,
+    "title": "Aankomsthal en terminal",
+    "goal": "Op een aankomstbord terminal, uitgang en informatiepunt vinden.",
+    "canDo": "Op een aankomstbord terminal, uitgang en informatiepunt vinden.",
+    "newGrammar": [
+      {
+        "id": "grammar-l12-1",
+        "title": "へ als richting"
+      }
+    ],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l12-1-A",
+        "label": "Korte scène",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-とうちゃく",
+            "japanese": "とうちゃく",
+            "meaning": "aankomst"
+          },
+          {
+            "id": "vocab-ターミナル",
+            "japanese": "ターミナル",
+            "meaning": "terminal"
+          },
+          {
+            "id": "vocab-つきました",
+            "japanese": "つきました",
+            "meaning": "aangekomen"
+          },
+          {
+            "id": "vocab-くうこう",
+            "japanese": "くうこう",
+            "meaning": "luchthaven"
+          },
+          {
+            "id": "vocab-country-japan",
+            "japanese": "にほん",
+            "meaning": "Japan"
+          }
+        ],
+        "reusedWordIds": [],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l12-1-a",
+        "text": "ひこうき で にほん に つきました。ここ は くうこう です。とうちゃく ターミナル は 2 です。でぐち へ いきます。",
+        "classifiedText": [
+          {
+            "token": "ひこうき",
+            "id": "vocab-ひこうき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "で",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "にほん",
+            "id": "vocab-country-japan",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "つきました",
+            "id": "vocab-つきました",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ここ",
+            "id": "vocab-ここ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "くうこう",
+            "id": "vocab-くうこう",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "とうちゃく",
+            "id": "vocab-とうちゃく",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ターミナル",
+            "id": "vocab-ターミナル",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "でぐち",
+            "id": "vocab-でぐち",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "へ",
+            "id": "vocab-いきます",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "いきます",
+            "id": "vocab-いきます",
+            "status": "eerder bekend"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "とうちゃく",
+            "id": "vocab-とうちゃく",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ターミナル",
+            "id": "vocab-ターミナル",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "どこ",
+            "id": "vocab-どこ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "つきました",
+            "id": "vocab-つきました",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "か",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "にほん",
+            "id": "vocab-country-japan",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "えき",
+            "id": "vocab-えき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "こうえん",
+            "id": "vocab-こうえん",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "とうちゃく ターミナル は？",
+            "answer": "2",
+            "choices": [
+              "2",
+              "1",
+              "3"
+            ],
+            "sourceId": "exercise-l12-1-A-1"
+          },
+          {
+            "prompt": "どこ に つきました か。",
+            "answer": "にほん",
+            "choices": [
+              "にほん",
+              "えき",
+              "こうえん"
+            ],
+            "sourceId": "exercise-l12-1-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l12-1-B",
+        "label": "Praktische informatie",
+        "kind": "real-world",
+        "newWords": [
+          {
+            "id": "vocab-あんないばん",
+            "japanese": "あんないばん",
+            "meaning": "informatiebord"
+          },
+          {
+            "id": "vocab-ひょうじ",
+            "japanese": "ひょうじ",
+            "meaning": "aanduiding / display"
+          },
+          {
+            "id": "vocab-いりぐち",
+            "japanese": "いりぐち",
+            "meaning": "ingang"
+          },
+          {
+            "id": "vocab-でぐち",
+            "japanese": "でぐち",
+            "meaning": "uitgang"
+          },
+          {
+            "id": "vocab-あんないじょ",
+            "japanese": "あんないじょ",
+            "meaning": "informatiebalie"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-かくにん"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l12-1-b",
+        "text": "あんないばん\nとうちゃく：ターミナル 2\nでぐち →\nあんないじょ ←\nいりぐち ↑\nひょうじ を みます。",
+        "classifiedText": [
+          {
+            "token": "あんないばん",
+            "id": "vocab-あんないばん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "とうちゃく",
+            "id": "vocab-とうちゃく",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ターミナル",
+            "id": "vocab-ターミナル",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "でぐち",
+            "id": "vocab-でぐち",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "あんないじょ",
+            "id": "vocab-あんないじょ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "いりぐち",
+            "id": "vocab-いりぐち",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ひょうじ",
+            "id": "vocab-ひょうじ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "みます",
+            "id": "vocab-みます",
+            "status": "eerder bekend"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "でぐち",
+            "id": "vocab-でぐち",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "みぎ",
+            "id": "vocab-みぎ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ひだり",
+            "id": "vocab-ひだり",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "うえ",
+            "id": "vocab-うえ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "あんないじょ",
+            "id": "vocab-あんないじょ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "した",
+            "id": "vocab-した",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "でぐち は？",
+            "answer": "みぎ",
+            "choices": [
+              "みぎ",
+              "ひだり",
+              "うえ"
+            ],
+            "sourceId": "exercise-l12-1-B-1"
+          },
+          {
+            "prompt": "あんないじょ は？",
+            "answer": "ひだり",
+            "choices": [
+              "ひだり",
+              "みぎ",
+              "した"
+            ],
+            "sourceId": "exercise-l12-1-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      }
+    ],
+    "newWordCount": 10
+  },
+  {
+    "id": "l12-2",
+    "level": 12,
+    "title": "Volg de aankomstborden",
+    "goal": "De paspoortcontrole en de richting naar de bagage herkennen.",
+    "canDo": "De paspoortcontrole en de richting naar de bagage herkennen.",
+    "newGrammar": [],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l12-2-A",
+        "label": "Korte scène",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-にゅうこく",
+            "japanese": "にゅうこく",
+            "meaning": "immigratie / binnenkomst"
+          },
+          {
+            "id": "vocab-てつづき",
+            "japanese": "てつづき",
+            "meaning": "procedure"
+          },
+          {
+            "id": "vocab-すすみます",
+            "japanese": "すすみます",
+            "meaning": "verdergaan"
+          },
+          {
+            "id": "vocab-ならびます",
+            "japanese": "ならびます",
+            "meaning": "in de rij staan"
+          },
+          {
+            "id": "vocab-こちら",
+            "japanese": "こちら",
+            "meaning": "deze kant"
+          },
+          {
+            "id": "vocab-パスポート",
+            "japanese": "パスポート",
+            "meaning": "paspoort"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-ひと"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l12-2-a",
+        "text": "こちら は にゅうこく てつづき です。パスポート は ここ です。ゆっくり すすみます。ここ で ならびます。",
+        "classifiedText": [
+          {
+            "token": "こちら",
+            "id": "vocab-こちら",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "にゅうこく",
+            "id": "vocab-にゅうこく",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "てつづき",
+            "id": "vocab-てつづき",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "パスポート",
+            "id": "vocab-パスポート",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ここ",
+            "id": "vocab-ここ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ゆっくり",
+            "id": "vocab-ゆっくり",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "すすみます",
+            "id": "vocab-すすみます",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "で",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ならびます",
+            "id": "vocab-ならびます",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "こちら",
+            "id": "vocab-こちら",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "にゅうこく",
+            "id": "vocab-にゅうこく",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "てつづき",
+            "id": "vocab-てつづき",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "りょこう",
+            "id": "vocab-りょこう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "じゅんび",
+            "id": "vocab-じゅんび",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "れんしゅう",
+            "id": "vocab-れんしゅう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "あと",
+            "id": "vocab-あと",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "パスポート",
+            "id": "vocab-パスポート",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ここ",
+            "id": "vocab-ここ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "えき",
+            "id": "vocab-えき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "みせ",
+            "id": "vocab-みせ",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "こちら は？",
+            "answer": "にゅうこく てつづき",
+            "choices": [
+              "にゅうこく てつづき",
+              "りょこう の じゅんび",
+              "れんしゅう の あと"
+            ],
+            "sourceId": "exercise-l12-2-A-1"
+          },
+          {
+            "prompt": "パスポート は？",
+            "answer": "ここ",
+            "choices": [
+              "ここ",
+              "えき",
+              "みせ"
+            ],
+            "sourceId": "exercise-l12-2-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l12-2-B",
+        "label": "Praktische informatie",
+        "kind": "real-world",
+        "newWords": [
+          {
+            "id": "vocab-ゆうどう",
+            "japanese": "ゆうどう",
+            "meaning": "routegeleiding"
+          },
+          {
+            "id": "vocab-ゆか",
+            "japanese": "ゆか",
+            "meaning": "vloer"
+          },
+          {
+            "id": "vocab-にもつ",
+            "japanese": "にもつ",
+            "meaning": "bagage"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-した",
+          "vocab-まっすぐ",
+          "vocab-つぎ"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l12-2-b",
+        "text": "ゆか の ゆうどう\nにゅうこく →\nにもつ ↓\nこちら に すすみます。",
+        "classifiedText": [
+          {
+            "token": "ゆか",
+            "id": "vocab-ゆか",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ゆうどう",
+            "id": "vocab-ゆうどう",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "にゅうこく",
+            "id": "vocab-にゅうこく",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "にもつ",
+            "id": "vocab-にもつ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "こちら",
+            "id": "vocab-こちら",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "すすみます",
+            "id": "vocab-すすみます",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "にもつ",
+            "id": "vocab-にもつ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "した",
+            "id": "vocab-した",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "うえ",
+            "id": "vocab-うえ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ひだり",
+            "id": "vocab-ひだり",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "にゅうこく",
+            "id": "vocab-にゅうこく",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "みぎ",
+            "id": "vocab-みぎ",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "にもつ は？",
+            "answer": "した",
+            "choices": [
+              "した",
+              "うえ",
+              "ひだり"
+            ],
+            "sourceId": "exercise-l12-2-B-1"
+          },
+          {
+            "prompt": "にゅうこく は？",
+            "answer": "みぎ",
+            "choices": [
+              "みぎ",
+              "ひだり",
+              "うえ"
+            ],
+            "sourceId": "exercise-l12-2-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      }
+    ],
+    "newWordCount": 9
+  },
+  {
+    "id": "l12-3",
+    "level": 12,
+    "title": "Haal je bagage op",
+    "goal": "Het juiste bagagebandnummer lezen en een tas aan kleur en grootte herkennen.",
+    "canDo": "Het juiste bagagebandnummer lezen en een tas aan kleur en grootte herkennen.",
+    "newGrammar": [],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l12-3-A",
+        "label": "Korte scène",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-うけとります",
+            "japanese": "うけとります",
+            "meaning": "in ontvangst nemen"
+          },
+          {
+            "id": "vocab-ベルト",
+            "japanese": "ベルト",
+            "meaning": "band"
+          },
+          {
+            "id": "vocab-ばんごう",
+            "japanese": "ばんごう",
+            "meaning": "nummer"
+          },
+          {
+            "id": "vocab-ばん",
+            "japanese": "ばん",
+            "meaning": "nummer"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-にもつ"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l12-3-a",
+        "text": "ベルト の ばんごう は 5 です。5ばん の ベルト です。ベルト で にもつ を うけとります。",
+        "classifiedText": [
+          {
+            "token": "ベルト",
+            "id": "vocab-ベルト",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ばんごう",
+            "id": "vocab-ばんごう",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "5ばん",
+            "id": "vocab-ばん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "で",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "にもつ",
+            "id": "vocab-にもつ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "うけとります",
+            "id": "vocab-うけとります",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "ベルト",
+            "id": "vocab-ベルト",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ばんごう",
+            "id": "vocab-ばんごう",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "で",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "うけとります",
+            "id": "vocab-うけとります",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "にもつ",
+            "id": "vocab-にもつ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "パスポート",
+            "id": "vocab-パスポート",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ちず",
+            "id": "vocab-ちず",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "ベルト の ばんごう は？",
+            "answer": "5",
+            "choices": [
+              "5",
+              "3",
+              "2"
+            ],
+            "sourceId": "exercise-l12-3-A-1"
+          },
+          {
+            "prompt": "ベルト で うけとります。",
+            "answer": "にもつ",
+            "choices": [
+              "にもつ",
+              "パスポート",
+              "ちず"
+            ],
+            "sourceId": "exercise-l12-3-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l12-3-B",
+        "label": "Praktische informatie",
+        "kind": "real-world",
+        "newWords": [
+          {
+            "id": "vocab-おおきい",
+            "japanese": "おおきい",
+            "meaning": "groot"
+          },
+          {
+            "id": "vocab-ちいさい",
+            "japanese": "ちいさい",
+            "meaning": "klein"
+          },
+          {
+            "id": "vocab-くろ",
+            "japanese": "くろ",
+            "meaning": "zwart"
+          },
+          {
+            "id": "vocab-あか",
+            "japanese": "あか",
+            "meaning": "rood"
+          },
+          {
+            "id": "vocab-かばん",
+            "japanese": "かばん",
+            "meaning": "tas"
+          }
+        ],
+        "reusedWordIds": [],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l12-3-b",
+        "text": "にもつ\nおおきい かばん：くろい\nちいさい かばん：あかい\nわたし の かばん は おおきい です。くろい かばん です。",
+        "classifiedText": [
+          {
+            "token": "にもつ",
+            "id": "vocab-にもつ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "おおきい",
+            "id": "vocab-おおきい",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "かばん",
+            "id": "vocab-かばん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "くろい",
+            "id": "vocab-くろ",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ちいさい",
+            "id": "vocab-ちいさい",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "あかい",
+            "id": "vocab-あか",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "わたし",
+            "id": "vocab-わたし",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "わたし",
+            "id": "vocab-わたし",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "かばん",
+            "id": "vocab-かばん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "くろ",
+            "id": "vocab-くろ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "あか",
+            "id": "vocab-あか",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "おおきい",
+            "id": "vocab-おおきい",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ちいさい",
+            "id": "vocab-ちいさい",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "わたし の かばん：くろ？ あか？",
+            "answer": "くろ",
+            "choices": [
+              "くろ",
+              "あか"
+            ],
+            "sourceId": "exercise-l12-3-B-1"
+          },
+          {
+            "prompt": "わたし の かばん は？",
+            "answer": "おおきい",
+            "choices": [
+              "おおきい",
+              "ちいさい"
+            ],
+            "sourceId": "exercise-l12-3-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      }
+    ],
+    "newWordCount": 9
+  },
+  {
+    "id": "l12-4",
+    "level": 12,
+    "title": "Vind de uitgang",
+    "goal": "Na de aankomst de uitgang, ontmoetingsplek en vertrektijd vinden.",
+    "canDo": "Na de aankomst de uitgang, ontmoetingsplek en vertrektijd vinden.",
+    "newGrammar": [],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l12-4-A",
+        "label": "Korte scène",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-しゅうりょう",
+            "japanese": "しゅうりょう",
+            "meaning": "klaar / afgerond"
+          },
+          {
+            "id": "vocab-しゅっぱつ",
+            "japanese": "しゅっぱつ",
+            "meaning": "vertrek"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-そと",
+          "vocab-でぐち",
+          "vocab-みぎ",
+          "vocab-ひだり"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l12-4-a",
+        "text": "にゅうこく てつづき は しゅうりょう です。にもつ は ここ です。でぐち は みぎ です。そと に いきます。しゅっぱつ は ごご いちじはん です。",
+        "classifiedText": [
+          {
+            "token": "にゅうこく",
+            "id": "vocab-にゅうこく",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "てつづき",
+            "id": "vocab-てつづき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "しゅうりょう",
+            "id": "vocab-しゅうりょう",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "にもつ",
+            "id": "vocab-にもつ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ここ",
+            "id": "vocab-ここ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "でぐち",
+            "id": "vocab-でぐち",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "みぎ",
+            "id": "vocab-みぎ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "そと",
+            "id": "vocab-そと",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "いきます",
+            "id": "vocab-いきます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "しゅっぱつ",
+            "id": "vocab-しゅっぱつ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ごご",
+            "id": "vocab-ごご",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "いちじはん",
+            "status": "bekende / voorbereide vorm"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "でぐち",
+            "id": "vocab-でぐち",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "みぎ",
+            "id": "vocab-みぎ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ひだり",
+            "id": "vocab-ひだり",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "した",
+            "id": "vocab-した",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "にゅうこく",
+            "id": "vocab-にゅうこく",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "てつづき",
+            "id": "vocab-てつづき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "しゅうりょう",
+            "id": "vocab-しゅうりょう",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "じゅんび",
+            "id": "vocab-じゅんび",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "もういちど",
+            "id": "vocab-もういちど",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "でぐち は？",
+            "answer": "みぎ",
+            "choices": [
+              "みぎ",
+              "ひだり",
+              "した"
+            ],
+            "sourceId": "exercise-l12-4-A-1"
+          },
+          {
+            "prompt": "にゅうこく てつづき は？",
+            "answer": "しゅうりょう",
+            "choices": [
+              "しゅうりょう",
+              "じゅんび",
+              "もういちど"
+            ],
+            "sourceId": "exercise-l12-4-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l12-4-B",
+        "label": "Praktische informatie",
+        "kind": "real-world",
+        "newWords": [
+          {
+            "id": "vocab-でむかえ",
+            "japanese": "でむかえ",
+            "meaning": "ophalen / verwelkomen"
+          },
+          {
+            "id": "vocab-まちあい",
+            "japanese": "まちあい",
+            "meaning": "ontmoetingsplek"
+          },
+          {
+            "id": "vocab-まどぐち",
+            "japanese": "まどぐち",
+            "meaning": "loket"
+          },
+          {
+            "id": "vocab-ホテル",
+            "japanese": "ホテル",
+            "meaning": "hotel"
+          },
+          {
+            "id": "vocab-のりば",
+            "japanese": "のりば",
+            "meaning": "instapplek / perron"
+          },
+          {
+            "id": "vocab-まちます",
+            "japanese": "まちます",
+            "meaning": "wachten"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-タクシー",
+          "vocab-バス"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l12-4-b",
+        "text": "でむかえ：A\nまちあい：A\nタクシー・バス のりば →\nまどぐち：ホテル\nしゅっぱつ：13:30\nここ で まちます。",
+        "classifiedText": [
+          {
+            "token": "でむかえ",
+            "id": "vocab-でむかえ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "まちあい",
+            "id": "vocab-まちあい",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "タクシー",
+            "id": "vocab-タクシー",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "バス",
+            "id": "vocab-バス",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "のりば",
+            "id": "vocab-のりば",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "まどぐち",
+            "id": "vocab-まどぐち",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ホテル",
+            "id": "vocab-ホテル",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "しゅっぱつ",
+            "id": "vocab-しゅっぱつ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ここ",
+            "id": "vocab-ここ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "で",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "まちます",
+            "id": "vocab-まちます",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "でむかえ",
+            "id": "vocab-でむかえ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "しゅっぱつ",
+            "id": "vocab-しゅっぱつ",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "でむかえ は？",
+            "answer": "A",
+            "choices": [
+              "A",
+              "B",
+              "C"
+            ],
+            "sourceId": "exercise-l12-4-B-1"
+          },
+          {
+            "prompt": "しゅっぱつ は？",
+            "answer": "13:30",
+            "choices": [
+              "13:30",
+              "13:00",
+              "15:30"
+            ],
+            "sourceId": "exercise-l12-4-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": "dialogue-l12-4-B"
+      }
+    ],
+    "newWordCount": 8
+  },
+  {
+    "id": "l12-5",
+    "level": 12,
+    "title": "De aankomst afronden",
+    "goal": "Een eenvoudige aankomst van terminal tot ontmoetingsplek zelfstandig volgen.",
+    "canDo": "Een eenvoudige aankomst van terminal tot ontmoetingsplek zelfstandig volgen.",
+    "newGrammar": [],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l12-5-A",
+        "label": "Korte scène",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-ひこうじょう",
+            "japanese": "ひこうじょう",
+            "meaning": "luchthaven"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-かぞく",
+          "vocab-ともだち",
+          "vocab-まちます",
+          "vocab-あいます"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l12-5-a",
+        "text": "にほん に つきました。ここ は くうこう です。ここ は ひこうじょう です。パスポート を かくにん します。5ばん の ベルト で にもつ を うけとります。でぐち は みぎ です。そと の A で ともだち は まちます。",
+        "classifiedText": [
+          {
+            "token": "にほん",
+            "id": "vocab-country-japan",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "つきました",
+            "id": "vocab-つきました",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ここ",
+            "id": "vocab-ここ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "くうこう",
+            "id": "vocab-くうこう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ひこうじょう",
+            "id": "vocab-ひこうじょう",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "パスポート",
+            "id": "vocab-パスポート",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "かくにん",
+            "id": "vocab-かくにん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "します",
+            "id": "vocab-かくにん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "5ばん",
+            "id": "vocab-ばん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ベルト",
+            "id": "vocab-ベルト",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "で",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "にもつ",
+            "id": "vocab-にもつ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "うけとります",
+            "id": "vocab-うけとります",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "でぐち",
+            "id": "vocab-でぐち",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "みぎ",
+            "id": "vocab-みぎ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "そと",
+            "id": "vocab-そと",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ともだち",
+            "id": "vocab-ともだち",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "まちます",
+            "id": "vocab-まちます",
+            "status": "eerder bekend"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "にもつ",
+            "id": "vocab-にもつ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "5ばん",
+            "id": "vocab-ばん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ベルト",
+            "id": "vocab-ベルト",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "2ばん",
+            "id": "vocab-ばん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "3ばん",
+            "id": "vocab-ばん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ともだち",
+            "id": "vocab-ともだち",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "どこ",
+            "id": "vocab-どこ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "か",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "そと",
+            "id": "vocab-そと",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ターミナル",
+            "id": "vocab-ターミナル",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "あんないじょ",
+            "id": "vocab-あんないじょ",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "にもつ は？",
+            "answer": "5ばん の ベルト",
+            "choices": [
+              "5ばん の ベルト",
+              "2ばん の ベルト",
+              "3ばん の ベルト"
+            ],
+            "sourceId": "exercise-l12-5-A-1"
+          },
+          {
+            "prompt": "ともだち は どこ です か。",
+            "answer": "そと の A",
+            "choices": [
+              "そと の A",
+              "ターミナル 2",
+              "あんないじょ"
+            ],
+            "sourceId": "exercise-l12-5-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l12-5-B",
+        "label": "Praktische informatie",
+        "kind": "real-world",
+        "newWords": [],
+        "reusedWordIds": [
+          "vocab-くうこう",
+          "vocab-ホテル",
+          "vocab-いきます",
+          "vocab-つぎ",
+          "vocab-でんしゃ"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l12-5-b",
+        "text": "とうちゃく：ターミナル 2\nにゅうこく：しゅうりょう\nにもつ：ベルト 5\nでぐち →\nでむかえ：A\nホテル：でんしゃ",
+        "classifiedText": [
+          {
+            "token": "とうちゃく",
+            "id": "vocab-とうちゃく",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ターミナル",
+            "id": "vocab-ターミナル",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "にゅうこく",
+            "id": "vocab-にゅうこく",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "しゅうりょう",
+            "id": "vocab-しゅうりょう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "にもつ",
+            "id": "vocab-にもつ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ベルト",
+            "id": "vocab-ベルト",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "でぐち",
+            "id": "vocab-でぐち",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "でむかえ",
+            "id": "vocab-でむかえ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ホテル",
+            "id": "vocab-ホテル",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "でんしゃ",
+            "id": "vocab-でんしゃ",
+            "status": "eerder bekend"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "でぐち",
+            "id": "vocab-でぐち",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "みぎ",
+            "id": "vocab-みぎ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ひだり",
+            "id": "vocab-ひだり",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "した",
+            "id": "vocab-した",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ホテル",
+            "id": "vocab-ホテル",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "いきます",
+            "id": "vocab-いきます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "でんしゃ",
+            "id": "vocab-でんしゃ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "バス",
+            "id": "vocab-バス",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "タクシー",
+            "id": "vocab-タクシー",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "でぐち は？",
+            "answer": "みぎ",
+            "choices": [
+              "みぎ",
+              "ひだり",
+              "した"
+            ],
+            "sourceId": "exercise-l12-5-B-1"
+          },
+          {
+            "prompt": "ホテル に いきます。",
+            "answer": "でんしゃ",
+            "choices": [
+              "でんしゃ",
+              "バス",
+              "タクシー"
+            ],
+            "sourceId": "exercise-l12-5-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      }
+    ],
+    "newWordCount": 1
+  },
+  {
+    "id": "l13-1",
+    "level": 13,
+    "title": "Kies je vervoer",
+    "goal": "Een route van luchthaven naar hotel en het juiste spoor op een ticket herkennen.",
+    "canDo": "Een route van luchthaven naar hotel en het juiste spoor op een ticket herkennen.",
+    "newGrammar": [
+      {
+        "id": "grammar-l13-1",
+        "title": "から … まで"
+      }
+    ],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l13-1-A",
+        "label": "Korte scène",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-つきます",
+            "japanese": "つきます",
+            "meaning": "aankomen"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-でんしゃ",
+          "vocab-バス",
+          "vocab-タクシー",
+          "vocab-えき",
+          "vocab-ホテル"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l13-1-a",
+        "text": "くうこう から ホテル まで いきます。でんしゃ に のります。えき で おります。ホテル に つきます。",
+        "classifiedText": [
+          {
+            "token": "くうこう",
+            "id": "vocab-くうこう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "から",
+            "id": "vocab-くうこう",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ホテル",
+            "id": "vocab-ホテル",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "まで",
+            "id": "vocab-ホテル",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "いきます",
+            "id": "vocab-いきます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "でんしゃ",
+            "id": "vocab-でんしゃ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "のります",
+            "id": "vocab-のります",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "えき",
+            "id": "vocab-えき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "で",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "おります",
+            "id": "vocab-おります",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "つきます",
+            "id": "vocab-つきます",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "どこ",
+            "id": "vocab-どこ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "から",
+            "id": "vocab-くうこう",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "いきます",
+            "id": "vocab-いきます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "か",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "くうこう",
+            "id": "vocab-くうこう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ホテル",
+            "id": "vocab-ホテル",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "みせ",
+            "id": "vocab-みせ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "つきます",
+            "id": "vocab-つきます",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "こうえん",
+            "id": "vocab-こうえん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "あんないじょ",
+            "id": "vocab-あんないじょ",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "どこ から いきます か。",
+            "answer": "くうこう",
+            "choices": [
+              "くうこう",
+              "ホテル",
+              "みせ"
+            ],
+            "sourceId": "exercise-l13-1-A-1"
+          },
+          {
+            "prompt": "どこ に つきます か。",
+            "answer": "ホテル",
+            "choices": [
+              "ホテル",
+              "こうえん",
+              "あんないじょ"
+            ],
+            "sourceId": "exercise-l13-1-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l13-1-B",
+        "label": "Praktische informatie",
+        "kind": "real-world",
+        "newWords": [
+          {
+            "id": "vocab-きっぷ",
+            "japanese": "きっぷ",
+            "meaning": "kaartje"
+          },
+          {
+            "id": "vocab-いきさき",
+            "japanese": "いきさき",
+            "meaning": "bestemming"
+          },
+          {
+            "id": "vocab-ばんせん",
+            "japanese": "ばんせん",
+            "meaning": "spoor"
+          },
+          {
+            "id": "vocab-のりかえ",
+            "japanese": "のりかえ",
+            "meaning": "overstap"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-のりば",
+          "vocab-こちら"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l13-1-b",
+        "text": "きっぷ\nいきさき：ホテル\nばんせん：3\nのりかえ：えき",
+        "classifiedText": [
+          {
+            "token": "きっぷ",
+            "id": "vocab-きっぷ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "いきさき",
+            "id": "vocab-いきさき",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ホテル",
+            "id": "vocab-ホテル",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ばんせん",
+            "id": "vocab-ばんせん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "のりかえ",
+            "id": "vocab-のりかえ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "えき",
+            "id": "vocab-えき",
+            "status": "eerder bekend"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "ばんせん",
+            "id": "vocab-ばんせん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "いきさき",
+            "id": "vocab-いきさき",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ホテル",
+            "id": "vocab-ホテル",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "くうこう",
+            "id": "vocab-くうこう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "みせ",
+            "id": "vocab-みせ",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "ばんせん は？",
+            "answer": "3",
+            "choices": [
+              "3",
+              "2",
+              "5"
+            ],
+            "sourceId": "exercise-l13-1-B-1"
+          },
+          {
+            "prompt": "いきさき は？",
+            "answer": "ホテル",
+            "choices": [
+              "ホテル",
+              "くうこう",
+              "みせ"
+            ],
+            "sourceId": "exercise-l13-1-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      }
+    ],
+    "newWordCount": 5
+  },
+  {
+    "id": "l13-2",
+    "level": 13,
+    "title": "Koop een kaartje",
+    "goal": "Een enkele reis kiezen, het aantal kaartjes aangeven en een eenvoudige prijs lezen.",
+    "canDo": "Een enkele reis kiezen, het aantal kaartjes aangeven en een eenvoudige prijs lezen.",
+    "newGrammar": [
+      {
+        "id": "grammar-l13-price",
+        "title": "Getal + えん"
+      }
+    ],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l13-2-A",
+        "label": "Korte scène",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-かたみち",
+            "japanese": "かたみち",
+            "meaning": "enkele reis"
+          },
+          {
+            "id": "vocab-おとな",
+            "japanese": "おとな",
+            "meaning": "volwassene"
+          },
+          {
+            "id": "vocab-えん",
+            "japanese": "えん",
+            "meaning": "yen"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-かいます",
+          "vocab-こども",
+          "vocab-いくら"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l13-2-a",
+        "text": "きっぷ を ひとつ ください。かたみち です。おとな です。500えん です。",
+        "classifiedText": [
+          {
+            "token": "きっぷ",
+            "id": "vocab-きっぷ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ひとつ",
+            "id": "vocab-ひとつ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ください",
+            "id": "vocab-ください",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "かたみち",
+            "id": "vocab-かたみち",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "おとな",
+            "id": "vocab-おとな",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "500えん",
+            "id": "vocab-えん",
+            "status": "bekende / voorbereide vorm"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "おとな",
+            "id": "vocab-おとな",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "きっぷ",
+            "id": "vocab-きっぷ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "500えん",
+            "id": "vocab-えん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "300えん",
+            "id": "vocab-えん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "100えん",
+            "id": "vocab-えん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "かたみち",
+            "id": "vocab-かたみち",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "おとな の きっぷ は？",
+            "answer": "500えん",
+            "choices": [
+              "500えん",
+              "300えん",
+              "100えん"
+            ],
+            "sourceId": "exercise-l13-2-A-1"
+          },
+          {
+            "prompt": "かたみち は？",
+            "answer": "enkele reis",
+            "choices": [
+              "enkele reis",
+              "heen en terug",
+              "overstappen"
+            ],
+            "sourceId": "exercise-l13-2-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l13-2-B",
+        "label": "Praktische informatie",
+        "kind": "real-world",
+        "newWords": [
+          {
+            "id": "vocab-きっぷうりば",
+            "japanese": "きっぷうりば",
+            "meaning": "kaartjesloket"
+          },
+          {
+            "id": "vocab-うんてんしゅ",
+            "japanese": "うんてんしゅ",
+            "meaning": "chauffeur"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-おかね",
+          "vocab-ひとつ",
+          "vocab-ください",
+          "vocab-まどぐち"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l13-2-b",
+        "text": "まどぐち\nおとな：500えん\nこども：300えん\nきっぷ を ひとつ ください。\nタクシー：うんてんしゅ",
+        "classifiedText": [
+          {
+            "token": "まどぐち",
+            "id": "vocab-まどぐち",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "おとな",
+            "id": "vocab-おとな",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "500えん",
+            "id": "vocab-えん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "こども",
+            "id": "vocab-こども",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "300えん",
+            "id": "vocab-えん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "きっぷ",
+            "id": "vocab-きっぷ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ひとつ",
+            "id": "vocab-ひとつ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ください",
+            "id": "vocab-ください",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "タクシー",
+            "id": "vocab-タクシー",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "うんてんしゅ",
+            "id": "vocab-うんてんしゅ",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "こども",
+            "id": "vocab-こども",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "きっぷ",
+            "id": "vocab-きっぷ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "300えん",
+            "id": "vocab-えん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "500えん",
+            "id": "vocab-えん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "100えん",
+            "id": "vocab-えん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ひとつ",
+            "id": "vocab-ひとつ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ください",
+            "id": "vocab-ください",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "こども の きっぷ は？",
+            "answer": "300えん",
+            "choices": [
+              "300えん",
+              "500えん",
+              "100えん"
+            ],
+            "sourceId": "exercise-l13-2-B-1"
+          },
+          {
+            "prompt": "きっぷ を ひとつ ください。",
+            "answer": "één kaartje",
+            "choices": [
+              "één kaartje",
+              "twee kaartjes",
+              "drie kaartjes"
+            ],
+            "sourceId": "exercise-l13-2-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": "dialogue-l13-2-B"
+      }
+    ],
+    "newWordCount": 5
+  },
+  {
+    "id": "l13-3",
+    "level": 13,
+    "title": "Volg de richting",
+    "goal": "Een korte looproute en informatie over metro en eindhalte begrijpen.",
+    "canDo": "Een korte looproute en informatie over metro en eindhalte begrijpen.",
+    "newGrammar": [],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l13-3-A",
+        "label": "Korte scène",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-まがります",
+            "japanese": "まがります",
+            "meaning": "afslaan"
+          },
+          {
+            "id": "vocab-かいだん",
+            "japanese": "かいだん",
+            "meaning": "trap"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-ひだり",
+          "vocab-みぎ",
+          "vocab-まっすぐ"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l13-3-a",
+        "text": "まっすぐ いきます。かいだん の まえ で ひだり に まがります。えき は そこ です。",
+        "classifiedText": [
+          {
+            "token": "まっすぐ",
+            "id": "vocab-まっすぐ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "いきます",
+            "id": "vocab-いきます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "かいだん",
+            "id": "vocab-かいだん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "まえ",
+            "id": "vocab-まえ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "で",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ひだり",
+            "id": "vocab-ひだり",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "まがります",
+            "id": "vocab-まがります",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "えき",
+            "id": "vocab-えき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "そこ",
+            "id": "vocab-そこ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "どこ",
+            "id": "vocab-どこ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "で",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "まがります",
+            "id": "vocab-まがります",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "か",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "かいだん",
+            "id": "vocab-かいだん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "まえ",
+            "id": "vocab-まえ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ホテル",
+            "id": "vocab-ホテル",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "なか",
+            "id": "vocab-なか",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "でんしゃ",
+            "id": "vocab-でんしゃ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "みぎ",
+            "id": "vocab-みぎ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ひだり",
+            "id": "vocab-ひだり",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "まっすぐ",
+            "id": "vocab-まっすぐ",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "どこ で まがります か。",
+            "answer": "かいだん の まえ",
+            "choices": [
+              "かいだん の まえ",
+              "ホテル の なか",
+              "でんしゃ の なか"
+            ],
+            "sourceId": "exercise-l13-3-A-1"
+          },
+          {
+            "prompt": "まがります。みぎ？ ひだり？",
+            "answer": "ひだり",
+            "choices": [
+              "ひだり",
+              "みぎ",
+              "まっすぐ"
+            ],
+            "sourceId": "exercise-l13-3-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l13-3-B",
+        "label": "Praktische informatie",
+        "kind": "real-world",
+        "newWords": [
+          {
+            "id": "vocab-ちか",
+            "japanese": "ちか",
+            "meaning": "ondergronds"
+          },
+          {
+            "id": "vocab-ちじょう",
+            "japanese": "ちじょう",
+            "meaning": "bovengronds"
+          },
+          {
+            "id": "vocab-ちかてつ",
+            "japanese": "ちかてつ",
+            "meaning": "metro"
+          },
+          {
+            "id": "vocab-おりば",
+            "japanese": "おりば",
+            "meaning": "uitstapplek"
+          },
+          {
+            "id": "vocab-しゅうてん",
+            "japanese": "しゅうてん",
+            "meaning": "eindhalte"
+          },
+          {
+            "id": "vocab-ホテルまえ",
+            "japanese": "ホテルまえ",
+            "meaning": "voor het hotel"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-いりぐち",
+          "vocab-でぐち"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l13-3-b",
+        "text": "ちか：ちかてつ いりぐち ↓\nちじょう：でぐち →\nバス おりば：ホテルまえ\nしゅうてん：ホテルまえ",
+        "classifiedText": [
+          {
+            "token": "ちか",
+            "id": "vocab-ちか",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ちかてつ",
+            "id": "vocab-ちかてつ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "いりぐち",
+            "id": "vocab-いりぐち",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ちじょう",
+            "id": "vocab-ちじょう",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "でぐち",
+            "id": "vocab-でぐち",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "バス",
+            "id": "vocab-バス",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "おりば",
+            "id": "vocab-おりば",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ホテルまえ",
+            "id": "vocab-ホテルまえ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "しゅうてん",
+            "id": "vocab-しゅうてん",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "ちじょう",
+            "id": "vocab-ちじょう",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "でぐち",
+            "id": "vocab-でぐち",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "みぎ",
+            "id": "vocab-みぎ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ひだり",
+            "id": "vocab-ひだり",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "した",
+            "id": "vocab-した",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "しゅうてん",
+            "id": "vocab-しゅうてん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ホテルまえ",
+            "id": "vocab-ホテルまえ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "くうこう",
+            "id": "vocab-くうこう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "えき",
+            "id": "vocab-えき",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "ちじょう の でぐち は？",
+            "answer": "みぎ",
+            "choices": [
+              "みぎ",
+              "ひだり",
+              "した"
+            ],
+            "sourceId": "exercise-l13-3-B-1"
+          },
+          {
+            "prompt": "しゅうてん は？",
+            "answer": "ホテルまえ",
+            "choices": [
+              "ホテルまえ",
+              "くうこう",
+              "えき"
+            ],
+            "sourceId": "exercise-l13-3-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      }
+    ],
+    "newWordCount": 8
+  },
+  {
+    "id": "l13-4",
+    "level": 13,
+    "title": "Lees het vertrekbord",
+    "goal": "Vertrektijden vergelijken en bestemming, spoor en vertraging op een bord lezen.",
+    "canDo": "Vertrektijden vergelijken en bestemming, spoor en vertraging op een bord lezen.",
+    "newGrammar": [],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l13-4-A",
+        "label": "Korte scène",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-でます",
+            "japanese": "でます",
+            "meaning": "vertrekken"
+          },
+          {
+            "id": "vocab-はやい",
+            "japanese": "はやい",
+            "meaning": "vroeg / snel"
+          },
+          {
+            "id": "vocab-おそい",
+            "japanese": "おそい",
+            "meaning": "laat / langzaam"
+          },
+          {
+            "id": "vocab-じ",
+            "japanese": "じ",
+            "meaning": "uur"
+          },
+          {
+            "id": "vocab-ふん",
+            "japanese": "ふん",
+            "meaning": "minuut"
+          },
+          {
+            "id": "vocab-じかん",
+            "japanese": "じかん",
+            "meaning": "tijd"
+          }
+        ],
+        "reusedWordIds": [],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l13-4-a",
+        "text": "しゅっぱつ の じかん を みます。でんしゃ は 10じ15ふん に でます。バス は 11じ に でます。でんしゃ の しゅっぱつ は はやい です。バス は おそい です。",
+        "classifiedText": [
+          {
+            "token": "しゅっぱつ",
+            "id": "vocab-しゅっぱつ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "じかん",
+            "id": "vocab-じかん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "みます",
+            "id": "vocab-みます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "でんしゃ",
+            "id": "vocab-でんしゃ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "10じ15ふん",
+            "id": "vocab-じ",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "でます",
+            "id": "vocab-でます",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "バス",
+            "id": "vocab-バス",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "11じ",
+            "id": "vocab-じ",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "はやい",
+            "id": "vocab-はやい",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "おそい",
+            "id": "vocab-おそい",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "でんしゃ",
+            "id": "vocab-でんしゃ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "しゅっぱつ",
+            "id": "vocab-しゅっぱつ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "はやい",
+            "id": "vocab-はやい",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "バス",
+            "id": "vocab-バス",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "でんしゃ の しゅっぱつ は？",
+            "answer": "10:15",
+            "choices": [
+              "10:15",
+              "11:00",
+              "10:50"
+            ],
+            "sourceId": "exercise-l13-4-A-1"
+          },
+          {
+            "prompt": "はやい しゅっぱつ は？",
+            "answer": "でんしゃ",
+            "choices": [
+              "でんしゃ",
+              "バス"
+            ],
+            "sourceId": "exercise-l13-4-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l13-4-B",
+        "label": "Praktische informatie",
+        "kind": "real-world",
+        "newWords": [
+          {
+            "id": "vocab-おくれ",
+            "japanese": "おくれ",
+            "meaning": "vertraging"
+          },
+          {
+            "id": "vocab-てんじ",
+            "japanese": "てんじ",
+            "meaning": "display"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-つぎ",
+          "vocab-ばん",
+          "vocab-まちます"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l13-4-b",
+        "text": "ホテルいき\nしゅっぱつ：10:15\nばん：3\nおくれ：0ふん",
+        "classifiedText": [
+          {
+            "token": "ホテルいき",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "しゅっぱつ",
+            "id": "vocab-しゅっぱつ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ばん",
+            "id": "vocab-ばん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "おくれ",
+            "id": "vocab-おくれ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "0ふん",
+            "id": "vocab-ふん",
+            "status": "bekende / voorbereide vorm"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "おくれ",
+            "id": "vocab-おくれ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "0ふん",
+            "id": "vocab-ふん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "15ふん",
+            "id": "vocab-ふん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "30ふん",
+            "id": "vocab-ふん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ばん",
+            "id": "vocab-ばん",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "おくれ は？",
+            "answer": "0ふん",
+            "choices": [
+              "0ふん",
+              "15ふん",
+              "30ふん"
+            ],
+            "sourceId": "exercise-l13-4-B-1"
+          },
+          {
+            "prompt": "ばん は？",
+            "answer": "3",
+            "choices": [
+              "3",
+              "2",
+              "5"
+            ],
+            "sourceId": "exercise-l13-4-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      }
+    ],
+    "newWordCount": 8
+  },
+  {
+    "id": "l13-5",
+    "level": 13,
+    "title": "Van luchthaven naar hotel",
+    "goal": "Een complete eenvoudige reis met trein, overstap en bus naar het hotel volgen.",
+    "canDo": "Een complete eenvoudige reis met trein, overstap en bus naar het hotel volgen.",
+    "newGrammar": [],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l13-5-A",
+        "label": "Korte scène",
+        "kind": "story",
+        "newWords": [],
+        "reusedWordIds": [
+          "vocab-おります",
+          "vocab-つきます",
+          "vocab-のりかえ",
+          "vocab-じかん",
+          "vocab-ちかく"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l13-5-a",
+        "text": "くうこう から ホテル まで いきます。きっぷ は 500えん です。10じ15ふん に でんしゃ に のります。えき で おります。つぎ は バス です。11じ に バス に のります。ホテルまえ で おります。ホテル に つきます。",
+        "classifiedText": [
+          {
+            "token": "くうこう",
+            "id": "vocab-くうこう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "から",
+            "id": "vocab-くうこう",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ホテル",
+            "id": "vocab-ホテル",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "まで",
+            "id": "vocab-ホテル",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "いきます",
+            "id": "vocab-いきます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "きっぷ",
+            "id": "vocab-きっぷ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "500えん",
+            "id": "vocab-えん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "10じ15ふん",
+            "id": "vocab-じ",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "でんしゃ",
+            "id": "vocab-でんしゃ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "のります",
+            "id": "vocab-のります",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "えき",
+            "id": "vocab-えき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "で",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "おります",
+            "id": "vocab-おります",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "つぎ",
+            "id": "vocab-つぎ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "バス",
+            "id": "vocab-バス",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "11じ",
+            "id": "vocab-じ",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ホテルまえ",
+            "id": "vocab-ホテルまえ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "つきます",
+            "id": "vocab-つきます",
+            "status": "eerder bekend"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "でんしゃ",
+            "id": "vocab-でんしゃ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "あと",
+            "id": "vocab-あと",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "バス",
+            "id": "vocab-バス",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "タクシー",
+            "id": "vocab-タクシー",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ひこうき",
+            "id": "vocab-ひこうき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ホテルまえ",
+            "id": "vocab-ホテルまえ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "で",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "おります",
+            "id": "vocab-おります",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "のります",
+            "id": "vocab-のります",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "よみます",
+            "id": "vocab-よみます",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "でんしゃ の あと は？",
+            "answer": "バス",
+            "choices": [
+              "バス",
+              "タクシー",
+              "ひこうき"
+            ],
+            "sourceId": "exercise-l13-5-A-1"
+          },
+          {
+            "prompt": "ホテルまえ で？",
+            "answer": "おります",
+            "choices": [
+              "おります",
+              "のります",
+              "よみます"
+            ],
+            "sourceId": "exercise-l13-5-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l13-5-B",
+        "label": "Praktische informatie",
+        "kind": "real-world",
+        "newWords": [],
+        "reusedWordIds": [
+          "vocab-うんてんしゅ",
+          "vocab-つぎ",
+          "vocab-おりば",
+          "vocab-しゅうてん",
+          "vocab-ホテルまえ"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l13-5-b",
+        "text": "くうこう → えき\nでんしゃ：3ばんせん 10:15\nえき → ホテルまえ\nバス：11:00\nおりば：ホテルまえ\nしゅうてん：ホテルまえ",
+        "classifiedText": [
+          {
+            "token": "くうこう",
+            "id": "vocab-くうこう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "えき",
+            "id": "vocab-えき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "でんしゃ",
+            "id": "vocab-でんしゃ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "3ばんせん",
+            "id": "vocab-ばんせん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ホテルまえ",
+            "id": "vocab-ホテルまえ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "バス",
+            "id": "vocab-バス",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "おりば",
+            "id": "vocab-おりば",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "しゅうてん",
+            "id": "vocab-しゅうてん",
+            "status": "eerder bekend"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "バス",
+            "id": "vocab-バス",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "なんじ",
+            "id": "vocab-なんじ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "か",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "おりば",
+            "id": "vocab-おりば",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ホテルまえ",
+            "id": "vocab-ホテルまえ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "くうこう",
+            "id": "vocab-くうこう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "あんないじょ",
+            "id": "vocab-あんないじょ",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "バス は なんじ です か。",
+            "answer": "11:00",
+            "choices": [
+              "11:00",
+              "10:15",
+              "13:30"
+            ],
+            "sourceId": "exercise-l13-5-B-1"
+          },
+          {
+            "prompt": "おりば は？",
+            "answer": "ホテルまえ",
+            "choices": [
+              "ホテルまえ",
+              "くうこう",
+              "あんないじょ"
+            ],
+            "sourceId": "exercise-l13-5-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": "dialogue-l13-5-B"
+      }
+    ],
+    "newWordCount": 0
+  },
+  {
+    "id": "l14-1",
+    "level": 14,
+    "title": "Bij de receptie",
+    "goal": "Een reservering aangeven en de juiste gegevens voor het inchecken herkennen.",
+    "canDo": "Een reservering aangeven en de juiste gegevens voor het inchecken herkennen.",
+    "newGrammar": [
+      {
+        "id": "grammar-l14-1",
+        "title": "N が あります"
+      }
+    ],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l14-1-A",
+        "label": "Korte scène",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-フロント",
+            "japanese": "フロント",
+            "meaning": "receptie"
+          },
+          {
+            "id": "vocab-よやく",
+            "japanese": "よやく",
+            "meaning": "reservering"
+          },
+          {
+            "id": "vocab-なまえ",
+            "japanese": "なまえ",
+            "meaning": "naam"
+          },
+          {
+            "id": "vocab-あります",
+            "japanese": "あります",
+            "meaning": "er is"
+          },
+          {
+            "id": "vocab-とまります",
+            "japanese": "とまります",
+            "meaning": "overnachten"
+          },
+          {
+            "id": "vocab-ひとばん",
+            "japanese": "ひとばん",
+            "meaning": "één nacht"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-ホテル"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l14-1-a",
+        "text": "ホテル に ひとばん とまります。フロント に いきます。よやく が あります。なまえ を かくにん します。",
+        "classifiedText": [
+          {
+            "token": "ホテル",
+            "id": "vocab-ホテル",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ひとばん",
+            "id": "vocab-ひとばん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "とまります",
+            "id": "vocab-とまります",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "フロント",
+            "id": "vocab-フロント",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "いきます",
+            "id": "vocab-いきます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "よやく",
+            "id": "vocab-よやく",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "が",
+            "id": "vocab-あります",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "あります",
+            "id": "vocab-あります",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "なまえ",
+            "id": "vocab-なまえ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "かくにん",
+            "id": "vocab-かくにん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "します",
+            "id": "vocab-かくにん",
+            "status": "bekende / voorbereide vorm"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "ホテル",
+            "id": "vocab-ホテル",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "とまります",
+            "id": "vocab-とまります",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ひとばん",
+            "id": "vocab-ひとばん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ひとつ",
+            "id": "vocab-ひとつ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ひとり",
+            "id": "vocab-ひとり",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "よやく",
+            "id": "vocab-よやく",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "が",
+            "id": "vocab-あります",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "あります",
+            "id": "vocab-あります",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "ホテル に とまります。",
+            "answer": "ひとばん",
+            "choices": [
+              "ひとばん",
+              "ひとつ",
+              "ひとり"
+            ],
+            "sourceId": "exercise-l14-1-A-1"
+          },
+          {
+            "prompt": "よやく が あります。",
+            "answer": "Ik heb een reservering.",
+            "choices": [
+              "Ik heb een reservering.",
+              "Ik zoek de uitgang.",
+              "Ik heb een kaartje."
+            ],
+            "sourceId": "exercise-l14-1-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l14-1-B",
+        "label": "Praktische informatie",
+        "kind": "real-world",
+        "newWords": [
+          {
+            "id": "vocab-みせます",
+            "japanese": "みせます",
+            "meaning": "laten zien"
+          },
+          {
+            "id": "vocab-よやくばんごう",
+            "japanese": "よやくばんごう",
+            "meaning": "reserveringsnummer"
+          },
+          {
+            "id": "vocab-おねがいします",
+            "japanese": "おねがいします",
+            "meaning": "alstublieft"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-パスポート",
+          "vocab-かくにん"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l14-1-b",
+        "text": "よやくばんごう：215\nなまえ：＿＿\nパスポート を みせてください。\nかくにん を おねがいします。",
+        "classifiedText": [
+          {
+            "token": "よやくばんごう",
+            "id": "vocab-よやくばんごう",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "なまえ",
+            "id": "vocab-なまえ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "パスポート",
+            "id": "vocab-パスポート",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "みせてください",
+            "id": "vocab-みせます",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "かくにん",
+            "id": "vocab-かくにん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "おねがいします",
+            "id": "vocab-おねがいします",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "みせてください",
+            "id": "vocab-みせます",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "パスポート",
+            "id": "vocab-パスポート",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "きっぷ",
+            "id": "vocab-きっぷ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ちず",
+            "id": "vocab-ちず",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "よやくばんごう",
+            "id": "vocab-よやくばんごう",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "みせてください。",
+            "answer": "パスポート",
+            "choices": [
+              "パスポート",
+              "きっぷ",
+              "ちず"
+            ],
+            "sourceId": "exercise-l14-1-B-1"
+          },
+          {
+            "prompt": "よやくばんごう は？",
+            "answer": "215",
+            "choices": [
+              "215",
+              "305",
+              "500"
+            ],
+            "sourceId": "exercise-l14-1-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": "dialogue-l14-1-B"
+      }
+    ],
+    "newWordCount": 9
+  },
+  {
+    "id": "l14-2",
+    "level": 14,
+    "title": "Vind je kamer",
+    "goal": "Kamernummer en verdieping vinden en een sleutelkaart herkennen.",
+    "canDo": "Kamernummer en verdieping vinden en een sleutelkaart herkennen.",
+    "newGrammar": [],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l14-2-A",
+        "label": "Korte scène",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-へや",
+            "japanese": "へや",
+            "meaning": "kamer"
+          },
+          {
+            "id": "vocab-かい",
+            "japanese": "かい",
+            "meaning": "verdieping"
+          },
+          {
+            "id": "vocab-エレベーター",
+            "japanese": "エレベーター",
+            "meaning": "lift"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-いきます",
+          "vocab-ばんごう"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l14-2-a",
+        "text": "へや の ばんごう は 305 です。3かい です。エレベーター で 3かい に いきます。",
+        "classifiedText": [
+          {
+            "token": "へや",
+            "id": "vocab-へや",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ばんごう",
+            "id": "vocab-ばんごう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "3かい",
+            "id": "vocab-かい",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "エレベーター",
+            "id": "vocab-エレベーター",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "で",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "いきます",
+            "id": "vocab-いきます",
+            "status": "eerder bekend"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "へや",
+            "id": "vocab-へや",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ばんごう",
+            "id": "vocab-ばんごう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "3かい",
+            "id": "vocab-かい",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "1かい",
+            "id": "vocab-かい",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "2かい",
+            "id": "vocab-かい",
+            "status": "bekende / voorbereide vorm"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "へや の ばんごう は？",
+            "answer": "305",
+            "choices": [
+              "305",
+              "215",
+              "500"
+            ],
+            "sourceId": "exercise-l14-2-A-1"
+          },
+          {
+            "prompt": "へや は？",
+            "answer": "3かい",
+            "choices": [
+              "3かい",
+              "1かい",
+              "2かい"
+            ],
+            "sourceId": "exercise-l14-2-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l14-2-B",
+        "label": "Praktische informatie",
+        "kind": "real-world",
+        "newWords": [
+          {
+            "id": "vocab-かぎ",
+            "japanese": "かぎ",
+            "meaning": "sleutel"
+          },
+          {
+            "id": "vocab-カード",
+            "japanese": "カード",
+            "meaning": "kaart"
+          },
+          {
+            "id": "vocab-つかいます",
+            "japanese": "つかいます",
+            "meaning": "gebruiken"
+          },
+          {
+            "id": "vocab-ひらきます",
+            "japanese": "ひらきます",
+            "meaning": "opengaan"
+          },
+          {
+            "id": "vocab-ドア",
+            "japanese": "ドア",
+            "meaning": "deur"
+          }
+        ],
+        "reusedWordIds": [],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l14-2-b",
+        "text": "へや：305\nかぎ：カード\nカード を つかいます。\nドア は ひらきます。",
+        "classifiedText": [
+          {
+            "token": "へや",
+            "id": "vocab-へや",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "かぎ",
+            "id": "vocab-かぎ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "カード",
+            "id": "vocab-カード",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "つかいます",
+            "id": "vocab-つかいます",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ドア",
+            "id": "vocab-ドア",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ひらきます",
+            "id": "vocab-ひらきます",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "かぎ",
+            "id": "vocab-かぎ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "カード",
+            "id": "vocab-カード",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "きっぷ",
+            "id": "vocab-きっぷ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ちず",
+            "id": "vocab-ちず",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "つかいます",
+            "id": "vocab-つかいます",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ドア",
+            "id": "vocab-ドア",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ひらきます",
+            "id": "vocab-ひらきます",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "かぎ は？",
+            "answer": "カード",
+            "choices": [
+              "カード",
+              "きっぷ",
+              "ちず"
+            ],
+            "sourceId": "exercise-l14-2-B-1"
+          },
+          {
+            "prompt": "カード を つかいます。ドア は？",
+            "answer": "ひらきます",
+            "choices": [
+              "ひらきます",
+              "つかいます"
+            ],
+            "sourceId": "exercise-l14-2-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      }
+    ],
+    "newWordCount": 8
+  },
+  {
+    "id": "l14-3",
+    "level": 14,
+    "title": "Begrijp hotelaanduidingen",
+    "goal": "Een handdoek lenen en toilet, ontbijt en hotelvoorzieningen vinden.",
+    "canDo": "Een handdoek lenen en toilet, ontbijt en hotelvoorzieningen vinden.",
+    "newGrammar": [],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l14-3-A",
+        "label": "Korte scène",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-トイレ",
+            "japanese": "トイレ",
+            "meaning": "toilet"
+          },
+          {
+            "id": "vocab-かりる",
+            "japanese": "かりる",
+            "meaning": "lenen"
+          },
+          {
+            "id": "vocab-タオル",
+            "japanese": "タオル",
+            "meaning": "handdoek"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-あります"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l14-3-a",
+        "text": "トイレ は こちら です。タオル が あります。タオル を かります。",
+        "classifiedText": [
+          {
+            "token": "トイレ",
+            "id": "vocab-トイレ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "こちら",
+            "id": "vocab-こちら",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "タオル",
+            "id": "vocab-タオル",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "が",
+            "id": "vocab-あります",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "あります",
+            "id": "vocab-あります",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "かります",
+            "id": "vocab-かりる",
+            "status": "bekende / voorbereide vorm"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "かります",
+            "id": "vocab-かりる",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "タオル",
+            "id": "vocab-タオル",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "ホテル",
+            "id": "vocab-ホテル",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "トイレ",
+            "id": "vocab-トイレ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "こちら",
+            "id": "vocab-こちら",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ちか",
+            "id": "vocab-ちか",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "くうこう",
+            "id": "vocab-くうこう",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "かります。",
+            "answer": "タオル",
+            "choices": [
+              "タオル",
+              "ホテル",
+              "トイレ"
+            ],
+            "sourceId": "exercise-l14-3-A-1"
+          },
+          {
+            "prompt": "トイレ は？",
+            "answer": "こちら",
+            "choices": [
+              "こちら",
+              "ちか",
+              "くうこう"
+            ],
+            "sourceId": "exercise-l14-3-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l14-3-B",
+        "label": "Praktische informatie",
+        "kind": "real-world",
+        "newWords": [
+          {
+            "id": "vocab-きんえん",
+            "japanese": "きんえん",
+            "meaning": "niet roken"
+          },
+          {
+            "id": "vocab-じはんき",
+            "japanese": "じはんき",
+            "meaning": "automaat"
+          },
+          {
+            "id": "vocab-あんない",
+            "japanese": "あんない",
+            "meaning": "informatie"
+          },
+          {
+            "id": "vocab-あさごはん",
+            "japanese": "あさごはん",
+            "meaning": "ontbijt"
+          },
+          {
+            "id": "vocab-ひつよう",
+            "japanese": "ひつよう",
+            "meaning": "nodig"
+          },
+          {
+            "id": "vocab-さがします",
+            "japanese": "さがします",
+            "meaning": "zoeken"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-かいだん",
+          "vocab-ちず"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l14-3-b",
+        "text": "じはんき →\nかいだん ↑\nきんえん\nあさごはん：7:00\nみず が ひつよう です。ちかく の みせ を さがします。",
+        "classifiedText": [
+          {
+            "token": "じはんき",
+            "id": "vocab-じはんき",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "かいだん",
+            "id": "vocab-かいだん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "きんえん",
+            "id": "vocab-きんえん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "あさごはん",
+            "id": "vocab-あさごはん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "みず",
+            "id": "vocab-みず",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "が",
+            "id": "vocab-あります",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ひつよう",
+            "id": "vocab-ひつよう",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ちかく",
+            "id": "vocab-ちかく",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "みせ",
+            "id": "vocab-みせ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "さがします",
+            "id": "vocab-さがします",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "きんえん",
+            "id": "vocab-きんえん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "あさごはん",
+            "id": "vocab-あさごはん",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "きんえん",
+            "answer": "niet roken",
+            "choices": [
+              "niet roken",
+              "uitgang",
+              "open"
+            ],
+            "sourceId": "exercise-l14-3-B-1"
+          },
+          {
+            "prompt": "あさごはん は？",
+            "answer": "7:00",
+            "choices": [
+              "7:00",
+              "10:00",
+              "19:00"
+            ],
+            "sourceId": "exercise-l14-3-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": "dialogue-l14-3-B"
+      }
+    ],
+    "newWordCount": 9
+  },
+  {
+    "id": "l14-4",
+    "level": 14,
+    "title": "Vraag om hulp",
+    "goal": "Bagage in bewaring geven en openings- en sluitingstijden lezen.",
+    "canDo": "Bagage in bewaring geven en openings- en sluitingstijden lezen.",
+    "newGrammar": [],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l14-4-A",
+        "label": "Korte scène",
+        "kind": "story",
+        "newWords": [
+          {
+            "id": "vocab-あずけます",
+            "japanese": "あずけます",
+            "meaning": "in bewaring geven"
+          },
+          {
+            "id": "vocab-あずかります",
+            "japanese": "あずかります",
+            "meaning": "bewaren"
+          },
+          {
+            "id": "vocab-できます",
+            "japanese": "できます",
+            "meaning": "kunnen"
+          },
+          {
+            "id": "vocab-あとで",
+            "japanese": "あとで",
+            "meaning": "later"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-にもつ"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l14-4-a",
+        "text": "にもつ を あずけます。おねがいします。フロント で あずかります。あとで にもつ を うけとります。ここ で れんしゅう が できます。",
+        "classifiedText": [
+          {
+            "token": "にもつ",
+            "id": "vocab-にもつ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "あずけます",
+            "id": "vocab-あずけます",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "おねがいします",
+            "id": "vocab-おねがいします",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "フロント",
+            "id": "vocab-フロント",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "で",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "あずかります",
+            "id": "vocab-あずかります",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "あとで",
+            "id": "vocab-あとで",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "うけとります",
+            "id": "vocab-うけとります",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ここ",
+            "id": "vocab-ここ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "れんしゅう",
+            "id": "vocab-れんしゅう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "が",
+            "id": "vocab-あります",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "できます",
+            "id": "vocab-できます",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "にもつ",
+            "id": "vocab-にもつ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "あずけます",
+            "id": "vocab-あずけます",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "あとで",
+            "id": "vocab-あとで",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "うけとります",
+            "id": "vocab-うけとります",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "よみます",
+            "id": "vocab-よみます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "みます",
+            "id": "vocab-みます",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "にもつ を あずけます。",
+            "answer": "de gast geeft bagage in bewaring",
+            "choices": [
+              "de gast geeft bagage in bewaring",
+              "de gast haalt bagage op",
+              "de chauffeur verkoopt een kaartje"
+            ],
+            "sourceId": "exercise-l14-4-A-1"
+          },
+          {
+            "prompt": "あとで にもつ を？",
+            "answer": "うけとります",
+            "choices": [
+              "うけとります",
+              "よみます",
+              "みます"
+            ],
+            "sourceId": "exercise-l14-4-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l14-4-B",
+        "label": "Praktische informatie",
+        "kind": "real-world",
+        "newWords": [
+          {
+            "id": "vocab-あさ",
+            "japanese": "あさ",
+            "meaning": "ochtend"
+          },
+          {
+            "id": "vocab-よる",
+            "japanese": "よる",
+            "meaning": "avond"
+          },
+          {
+            "id": "vocab-あいています",
+            "japanese": "あいています",
+            "meaning": "open zijn"
+          },
+          {
+            "id": "vocab-しめます",
+            "japanese": "しめます",
+            "meaning": "sluiten"
+          }
+        ],
+        "reusedWordIds": [
+          "vocab-じかん"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l14-4-b",
+        "text": "フロント\nあさ 7じ から よる 10じ まで あいています。\nよる 10じ に しめます。",
+        "classifiedText": [
+          {
+            "token": "フロント",
+            "id": "vocab-フロント",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "あさ",
+            "id": "vocab-あさ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "7じ",
+            "id": "vocab-じ",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "から",
+            "id": "vocab-くうこう",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "よる",
+            "id": "vocab-よる",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "10じ",
+            "id": "vocab-じ",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "まで",
+            "id": "vocab-ホテル",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "あいています",
+            "id": "vocab-あいています",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "しめます",
+            "id": "vocab-しめます",
+            "status": "nieuw in deze les"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "あさ",
+            "id": "vocab-あさ",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "なんじ",
+            "id": "vocab-なんじ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "から",
+            "id": "vocab-くうこう",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "よる",
+            "id": "vocab-よる",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "しめます",
+            "id": "vocab-しめます",
+            "status": "nieuw in deze les"
+          },
+          {
+            "token": "か",
+            "status": "bekende / voorbereide vorm"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "あさ なんじ から？",
+            "answer": "7:00",
+            "choices": [
+              "7:00",
+              "10:00",
+              "22:00"
+            ],
+            "sourceId": "exercise-l14-4-B-1"
+          },
+          {
+            "prompt": "よる なんじ に しめます か。",
+            "answer": "22:00",
+            "choices": [
+              "22:00",
+              "7:00",
+              "10:00"
+            ],
+            "sourceId": "exercise-l14-4-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": "dialogue-l14-4-B"
+      }
+    ],
+    "newWordCount": 8
+  },
+  {
+    "id": "l14-5",
+    "level": 14,
+    "title": "Aankomen en voorbereiden",
+    "goal": "Een eenvoudige hotelkaart gebruiken voor kamer, ontbijt en voorzieningen.",
+    "canDo": "Een eenvoudige hotelkaart gebruiken voor kamer, ontbijt en voorzieningen.",
+    "newGrammar": [],
+    "flow": [
+      "words",
+      "word-practice",
+      "sentences",
+      "story-A",
+      "comprehension-A",
+      "practical-B",
+      "application-B",
+      "Lestoets"
+    ],
+    "parts": [
+      {
+        "id": "l14-5-A",
+        "label": "Korte scène",
+        "kind": "story",
+        "newWords": [],
+        "reusedWordIds": [
+          "vocab-とまります",
+          "vocab-ひとばん",
+          "vocab-あした",
+          "vocab-あさごはん",
+          "vocab-なんじ"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l14-5-a",
+        "text": "ホテル に つきます。ひとばん とまります。フロント で よやく を かくにん します。へや は 3かい です。カード を つかいます。あさごはん は しちじ です。みず が ひつよう です。じはんき は みぎ です。",
+        "classifiedText": [
+          {
+            "token": "ホテル",
+            "id": "vocab-ホテル",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "に",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "つきます",
+            "id": "vocab-つきます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ひとばん",
+            "id": "vocab-ひとばん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "とまります",
+            "id": "vocab-とまります",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "フロント",
+            "id": "vocab-フロント",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "で",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "よやく",
+            "id": "vocab-よやく",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "を",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "かくにん",
+            "id": "vocab-かくにん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "します",
+            "id": "vocab-かくにん",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "へや",
+            "id": "vocab-へや",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "3かい",
+            "id": "vocab-かい",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "カード",
+            "id": "vocab-カード",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "つかいます",
+            "id": "vocab-つかいます",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "あさごはん",
+            "id": "vocab-あさごはん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "しちじ",
+            "id": "vocab-しちじ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "みず",
+            "id": "vocab-みず",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "が",
+            "id": "vocab-あります",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "ひつよう",
+            "id": "vocab-ひつよう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "じはんき",
+            "id": "vocab-じはんき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "みぎ",
+            "id": "vocab-みぎ",
+            "status": "eerder bekend"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "へや",
+            "id": "vocab-へや",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "3かい",
+            "id": "vocab-かい",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "1かい",
+            "id": "vocab-かい",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "2かい",
+            "id": "vocab-かい",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "あさごはん",
+            "id": "vocab-あさごはん",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "へや は？",
+            "answer": "3かい",
+            "choices": [
+              "3かい",
+              "1かい",
+              "2かい"
+            ],
+            "sourceId": "exercise-l14-5-A-1"
+          },
+          {
+            "prompt": "あさごはん は？",
+            "answer": "7:00",
+            "choices": [
+              "7:00",
+              "10:00",
+              "22:00"
+            ],
+            "sourceId": "exercise-l14-5-A-2"
+          }
+        ],
+        "instruction": {
+          "id": "read-text",
+          "text": "ぶん を よんでください。",
+          "requiredWordIds": [
+            "vocab-ぶん",
+            "vocab-よんでください"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": null
+      },
+      {
+        "id": "l14-5-B",
+        "label": "Praktische informatie",
+        "kind": "real-world",
+        "newWords": [],
+        "reusedWordIds": [
+          "vocab-ひつよう",
+          "vocab-かいます",
+          "vocab-ちかく",
+          "vocab-みせ",
+          "vocab-さがします"
+        ],
+        "missingSentencePreparation": [],
+        "readingId": "reading-l14-5-b",
+        "text": "ホテル\nよやくばんごう：215\nへや：305・3かい\nあさごはん：7:00\nみず：じはんき →\nちかく の みせ ←",
+        "classifiedText": [
+          {
+            "token": "ホテル",
+            "id": "vocab-ホテル",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "よやくばんごう",
+            "id": "vocab-よやくばんごう",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "へや",
+            "id": "vocab-へや",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "3かい",
+            "id": "vocab-かい",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "あさごはん",
+            "id": "vocab-あさごはん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "みず",
+            "id": "vocab-みず",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "じはんき",
+            "id": "vocab-じはんき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ちかく",
+            "id": "vocab-ちかく",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "みせ",
+            "id": "vocab-みせ",
+            "status": "eerder bekend"
+          }
+        ],
+        "classifiedQuestions": [
+          {
+            "token": "みず",
+            "id": "vocab-みず",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "は",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "どこ",
+            "id": "vocab-どこ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "です",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "か",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "じはんき",
+            "id": "vocab-じはんき",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "かいだん",
+            "id": "vocab-かいだん",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "エレベーター",
+            "id": "vocab-エレベーター",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ちかく",
+            "id": "vocab-ちかく",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "の",
+            "status": "bekende / voorbereide vorm"
+          },
+          {
+            "token": "みせ",
+            "id": "vocab-みせ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "ひだり",
+            "id": "vocab-ひだり",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "みぎ",
+            "id": "vocab-みぎ",
+            "status": "eerder bekend"
+          },
+          {
+            "token": "うえ",
+            "id": "vocab-うえ",
+            "status": "eerder bekend"
+          }
+        ],
+        "questions": [
+          {
+            "prompt": "みず は どこ です か。",
+            "answer": "じはんき",
+            "choices": [
+              "じはんき",
+              "かいだん",
+              "エレベーター"
+            ],
+            "sourceId": "exercise-l14-5-B-1"
+          },
+          {
+            "prompt": "ちかく の みせ は？",
+            "answer": "ひだり",
+            "choices": [
+              "ひだり",
+              "みぎ",
+              "うえ"
+            ],
+            "sourceId": "exercise-l14-5-B-2"
+          }
+        ],
+        "instruction": {
+          "id": "choose-answer",
+          "text": "ただしい こたえ を えらんでください。",
+          "requiredWordIds": [
+            "vocab-ただしい",
+            "vocab-こたえ",
+            "vocab-えらびます"
+          ],
+          "tooEarly": []
+        },
+        "dialogueId": "dialogue-l14-5-B"
+      }
+    ],
+    "newWordCount": 0
+  }
+]

@@ -29,7 +29,7 @@ test('Level 11 lessons 2–5, later headers and quiz contexts share the same lea
       app.renderThematicLesson(app.element('testThematic'),course);
       assert.match(app.element('testThematic').innerHTML,new RegExp(`レベル ${level} · レッスン ${index+1}/5`));
       assert.ok(app.thematicQuizTitle(course,course.lessons[index]).includes(`レッスン ${index+1}`));
-      assert.match(app.element('thematicBody').innerHTML,/レッスン · もんだい/);
+      assert.match(app.element('thematicBody').innerHTML,/Lestoets/);
       assert.doesNotMatch(app.element('testThematic').innerHTML,/\bLes \d/);
     }
   }
@@ -46,8 +46,8 @@ test('central Japanese titles require their own known vocabulary; grammar explan
   }
   for(const lesson of content.manifest.lessons.filter(lesson=>lesson.kind==='thematic'))for(const id of lesson.titleVocabIds)assert.ok(content.manifest.vocabulary.some(word=>word.id===id),`${lesson.id} title has stable vocabulary`);
   for(const label of Object.values(content.manifest.interfaceLabels))for(const id of label.requiredVocabIds)assert.ok(content.manifest.vocabulary.some(word=>word.id===id));
-  app.state.level=12;app.state.thematic={level:13,lessonIndex:0,part:'A',step:'lesson'};app.renderThematicLesson(app.element('testThematic'),app.thematicCourses[12]);
-  assert.match(app.element('thematicBody').innerHTML,/geeft aan waar iets begint/);
+  app.state.level=12;app.state.thematic={level:13,lessonIndex:0,part:'A',step:'sentences',sentenceIndex:0};app.renderThematicLesson(app.element('testThematic'),app.thematicCourses[12]);
+  assert.match(app.element('thematicBody').innerHTML,/het beginpunt/);
 });
 
 test('only lexical Japanese items get an unbreakable word unit, not sentences or arbitrary text',()=>{
