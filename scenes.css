@@ -97,6 +97,8 @@ body[data-app-shell="app"]::after{background:linear-gradient(180deg,#ffffff38,#f
 .thematic-words{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
 .thematic-words .panel{min-width:0}
 .thematic-words strong{font-size:23px}
+.thematic-words-five .jp-word{white-space:nowrap;overflow-wrap:normal}
+@media(max-width:520px){.thematic-words-five{grid-template-columns:1fr}.thematic-words-five .panel{padding:9px 12px}}
 .thematic-choices{display:grid;gap:8px;margin-top:12px}
 .thematic-choice{width:100%;min-height:48px;text-align:left;white-space:normal;font-size:var(--answer-body-size,18px);line-height:1.35;overflow-wrap:anywhere}
 .thematic-choice-jp{font-size:var(--jp-answer-size,20px);text-align:center}

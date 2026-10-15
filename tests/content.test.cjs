@@ -108,7 +108,7 @@ test('Level 11–15 travel route is chronological and preserves supermarket less
   assert.deepEqual(levels.slice(10).map(level=>level.number),[11,12,13,14,15]);
   assert.deepEqual(levels.slice(10).map(level=>level.theme),['Vakantiecursus thuis','くうこう','Vervoer naar het hotel','Inchecken in het hotel','Boodschappen doen']);
   assert.deepEqual(levels.find(level=>level.number===15).lessonIds,['l11-1','l11-2','l11-3','l11-4','l11-5']);
-  assert.equal(content.manifest.vocabulary.filter(word=>word.themes.includes('home-preparation')&&word.introducedAt?.startsWith('11-')).length,43);
+  assert.equal(content.manifest.vocabulary.filter(word=>word.themes.includes('home-preparation')&&word.introducedAt?.startsWith('11-')).length,40);
   assert.deepEqual(content.manifest.phases.find(phase=>phase.id==='foundation').levels.map(level=>level.number),[1,2,3,4,5,6,7,8,9,10]);
 });
 test('instruction resolver data and destination bridges are centrally registered',()=>{
@@ -141,7 +141,7 @@ test('Levels 11–15 have five two-part lessons with staged words and optional b
       assert.equal(lesson.applications[1].kind,'real-world');
       assert.notEqual(lesson.applications[0].readingId,lesson.applications[1].readingId);
       for(const app of lesson.applications){
-        assert.ok(app.wordIds.length>=2);
+        if(lesson.integrationExam)assert.equal(app.wordIds.length,0);else assert.ok(app.wordIds.length>=2);
         assert.ok(app.questions.length>=2);
         assert.ok(content.manifest.readings.some(r=>r.id===app.readingId&&r.translation));
       }

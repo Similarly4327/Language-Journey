@@ -13879,6 +13879,8 @@
   manifest.contentVersion='1.5.0';
   const thematicDidactics=typeof module!=='undefined'&&module.exports?require('./thematic-didactics.js'):root.LanguageJourneyThematicDidactics;
   thematicDidactics.apply(manifest);
+  const level11Integration=typeof module!=='undefined'&&module.exports?require('./level11-integration.js'):root.LanguageJourneyLevel11Integration;
+  level11Integration.apply(manifest);
   const byId=Object.fromEntries(manifest.vocabulary.map(v=>[v.id,v]));
   const lessonById=Object.fromEntries(manifest.lessons.map(l=>[l.id,l]));
   const readingById=Object.fromEntries(manifest.readings.map(r=>[r.id,r]));

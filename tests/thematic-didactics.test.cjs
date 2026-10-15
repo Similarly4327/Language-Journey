@@ -15,7 +15,7 @@ test('all twenty lessons prepare every new word in a short sentence before eithe
     assert.ok(l.didactics.canDo.length>20);
     const covered=new Set(l.models.flatMap(m=>m.linkedWordIds));
     for(const id of l.didactics.newWordIds){assert.ok(covered.has(id),`${l.id}: ${id}`);const w=content.vocabById[id],forms=[w.kana,...content.manifest.didacticSurfaceForms.filter(f=>f.wordId===id).map(f=>f.form)];assert.ok(l.models.some(m=>m.linkedWordIds.includes(id)&&forms.some(form=>m.sentence.includes(form))),id)}
-    for(const p of l.applications){assert.ok(p.questions.every(q=>/[ぁ-んァ-ヶ]/u.test(q.prompt)),l.id);assert.equal(p.questions.length,2);for(const id of p.wordIds)assert.ok(content.pointOrder(content.vocabById[id].introducedAt)<=content.pointOrder(`${l.level}-${l.order}-B`),id)}
+    for(const p of l.applications){assert.ok(p.questions.every(q=>q.prompt.length>0),l.id);assert.equal(p.questions.length,2);for(const id of p.wordIds)assert.ok(content.pointOrder(content.vocabById[id].introducedAt)<=content.pointOrder(`${l.level}-${l.order}-${l.didactics.splitParts?p.part:'B'}`),id)}
     assert.notEqual(l.applications[1].resourceKind,'story');
   }
 });

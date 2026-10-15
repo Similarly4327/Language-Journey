@@ -13,7 +13,7 @@ test('Japanese UI follows actual introduced words, not a level or lesson number'
   assert.equal(app.thematicUiLabel('れんしゅう','Oefenen'),'Oefenen','part B is not inferred from part A');
   app.state.introducedVocabIds=[...first.wordIds];
   assert.equal(app.thematicUiLabel('れんしゅう','Oefenen'),'れんしゅう');
-  assert.match(app.thematicInstructionHtml('choose-answer'),/ただしい こたえ を えらんでください/);
+  assert.match(app.thematicInstructionHtml('choose-answer'),/こたえ を えらびます/);
   assert.doesNotMatch(app.thematicInstructionHtml('read-text'),/lang="ja"/,'unintroduced reading instructions retain support language');
   assert.equal(app.thematicUiLabel('つぎ','Volgende'),'Volgende','next is actually introduced in lesson 4, not lesson 1');
   assert.equal(app.localizedLevel(3)[0],'Level 4','earlier levels keep their interface');
@@ -27,6 +27,7 @@ test('Level 11 lessons 2–5, later headers and quiz contexts share the same lea
     for(let index=level===11?1:0;index<5;index++){
       app.state.thematic={level,lessonIndex:index,part:'A',step:'lesson',correct:0};
       app.renderThematicLesson(app.element('testThematic'),course);
+      if(course.lessons[index].integrationExam){assert.match(app.element('testThematic').innerHTML,/Integratie-examen/);continue}
       assert.match(app.element('testThematic').innerHTML,new RegExp(`レベル ${level} · レッスン ${index+1}/5`));
       assert.ok(app.thematicQuizTitle(course,course.lessons[index]).includes(`レッスン ${index+1}`));
       assert.match(app.element('thematicBody').innerHTML,/Lestoets/);
@@ -41,7 +42,7 @@ test('central Japanese titles require their own known vocabulary; grammar explan
   assert.equal(app.thematicLessonTitle(second),second.title);
   app.state.introducedVocabIds=[...second.applications[0].wordIds];assert.equal(app.thematicLessonTitle(second),'ことば と いみ');
   for(const level of [12,13,14,15]){
-    const state=content.getKnowledgeState(`${level}-5-B`);app.state.introducedVocabIds=state.vocabulary.map(word=>word.id);
+    const state=content.getKnowledgeState(`${level}-5-B`);app.state.introducedVocabIds=state.vocabulary.map(word=>word.id);app.state.deferredVocabIntroductions=[];
     for(const lesson of app.thematicCourses[level-1].lessons){assert.ok(lesson.titleJa);assert.equal(app.thematicLessonTitle(lesson),lesson.titleJa)}
   }
   for(const lesson of content.manifest.lessons.filter(lesson=>lesson.kind==='thematic'))for(const id of lesson.titleVocabIds)assert.ok(content.manifest.vocabulary.some(word=>word.id===id),`${lesson.id} title has stable vocabulary`);

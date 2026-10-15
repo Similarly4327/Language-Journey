@@ -7,8 +7,8 @@ function audit(api=content){
     id:l.id,level:l.level,title:l.title,goal:l.goal,canDo:l.didactics?.canDo||l.goal,newGrammar:l.grammarIds.map(id=>m.grammar.find(g=>g.id===id)).filter(g=>g&&g.introducedAt.startsWith(`${l.level}-${l.order}`)).map(g=>({id:g.id,title:g.title})),
     flow:l.didactics?.flow||['woorden A','woordherkenning A','verhaal A','begrip A','woorden B','woordherkenning B','bron B','begrip B','lescheck'],
     parts:l.applications.map(p=>{
-      const at=`${l.level}-${l.order}-${p.part}`,reading=m.readings.find(r=>r.id===p.readingId),newWords=p.wordIds.map(id=>words.get(id)).filter(w=>w?.introducedAt===at),examples=l.models||[],prepared=new Set(examples.flatMap(model=>model.linkedWordIds||[]));
-      const effectiveAt=l.didactics?`${l.level}-${l.order}-B`:at;
+      const at=`${l.level}-${l.order}-${p.part}`,reading=m.readings.find(r=>r.id===p.readingId),newWords=p.wordIds.map(id=>words.get(id)).filter(w=>w?.introducedAt===at),examples=p.models||l.models||[],prepared=new Set(examples.flatMap(model=>model.linkedWordIds||[]));
+      const effectiveAt=l.didactics&&!l.didactics.splitParts?`${l.level}-${l.order}-B`:at;
       const classify=text=>[...new Set(text.split(/[\s。、！？!?：:→↑↓・]+/u).filter(t=>/[ぁ-んァ-ヶ]/u.test(t)))].map(token=>{
         const word=forms.get(token),surface=m.didacticSurfaceForms?.find(f=>f.form===token&&order(f.introducedAt)<=order(effectiveAt));
         if(word)return{token,id:word.id,status:order(word.introducedAt)<=order(effectiveAt)?word.introducedAt.startsWith(`${l.level}-${l.order}`)?'nieuw in deze les':'eerder bekend':'toekomstig'};
@@ -18,7 +18,9 @@ function audit(api=content){
         return{token,id:surface?.wordId||unit?.id,status:basic.has(token)||surface||time||boundFor||(unit&&order(unit.introducedAt)<=order(effectiveAt))?'bekende / voorbereide vorm':'onvoorbereid of nader beoordelen'};
       });
       const classified=classify(reading?.text||''),questionTokens=classify(p.questions.flatMap(q=>[q.prompt,...q.choices]).join(' '));
-      const instruction=m.instructions.find(i=>i.id===p.instructionId);
+      const authoredInstruction=m.instructions.find(i=>i.id===p.instructionId);
+      // UI deliberately uses the Dutch fallback until every instruction word is known.
+      const instruction=l.didactics?.splitParts&&authoredInstruction?.requiredVocabIds.some(id=>order(words.get(id).introducedAt)>order(effectiveAt))?null:authoredInstruction;
       return{id:p.id,label:p.label,kind:p.kind,newWords:newWords.map(w=>({id:w.id,japanese:w.japanese,meaning:w.meaning})),reusedWordIds:p.wordIds.filter(id=>words.get(id)?.introducedAt!==at),missingSentencePreparation:newWords.filter(w=>!prepared.has(w.id)).map(w=>w.id),readingId:reading?.id,text:reading?.text,classifiedText:classified,classifiedQuestions:questionTokens,questions:p.questions,instruction:instruction?{id:instruction.id,text:instruction.textJa,requiredWordIds:instruction.requiredVocabIds,tooEarly:instruction.requiredVocabIds.filter(id=>order(words.get(id).introducedAt)>order(effectiveAt))}:null,dialogueId:p.dialogueId||null};
     }),newWordCount:l.applications.reduce((sum,p)=>sum+p.wordIds.filter(id=>words.get(id)?.introducedAt===`${l.level}-${l.order}-${p.part}`).length,0)
   }));
