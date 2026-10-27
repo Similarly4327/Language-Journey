@@ -10,7 +10,7 @@ test('levels 3–10 keep exact lesson word decks and budgeted exams across shuff
   for(let seed=1;seed<=20;seed++){
     const probe=createCrashCourseProbe({seed}),report=audit(probe);
     for(const row of report){
-      if(row.level===3){for(const exam of row.exams){assert.equal(exam.totalQuestions,30);assert.ok(Object.values(exam.spread).every(n=>n===3))}continue}
+      if(row.level===3){assert.deepEqual(row.exams.map(exam=>exam.id),['dak-examA']);for(const exam of row.exams){assert.equal(exam.totalQuestions,30);assert.ok(Object.values(exam.spread).every(n=>n===3))}continue}
       assert.equal(row.exam.totalQuestions,probe.examQuestionBudget(row.level));
       assert.ok(row.exam.totalQuestions<=40);
       assert.ok(Object.values(row.exam.wordCounts).every(count=>count===1));
@@ -22,6 +22,19 @@ test('levels 3–10 keep exact lesson word decks and budgeted exams across shuff
       const structural=lessons.flatMap(probe.lessonCanonicalGoals).filter(g=>g.kind!=='vocab');
       probe.assertCompactExam(lessons,questions,probe.examQuestionBudget(row.level));
       assert.ok(questions.filter(q=>!q.targetWordId).every(q=>q.category!=='vocab'),'no untracked lexical filler');
+      if(row.level===5){
+        const forms=new Map(probe.smallLessons.flatMap(lesson=>lesson.newItems||[]).map(([form,reading])=>[form,reading]));
+        const sounds=questions.filter(q=>(q.targetGoalIds||[]).some(goal=>goal.startsWith('kana:')));
+        assert.equal(sounds.length,forms.size,'the exam tests each Level 5 kana sign once');
+        for(const question of sounds){
+          const form=question.targetGoalIds.find(goal=>goal.startsWith('kana:')).slice(5);
+          assert.equal(question.prompt,form,`${form} is shown before the answer`);
+          assert.equal(question.correct,forms.get(form),`${form} is tested toward its sound`);
+          assert.match(question.instruction,/uitspraak|spreek/iu,`${form} asks about pronunciation`);
+          assert.ok(question.choices.includes(question.correct));
+          assert.ok(question.choices.every(choice=>!/[\u3040-\u30ff\u3400-\u9fff]/u.test(choice)),`${form} offers sounds rather than kana or meanings`);
+        }
+      }
       const currentWords=lessons.flatMap(probe.lessonNewWords);
       for(const q of questions.filter(q=>q.kind!=='build')){const matches=currentWords.filter(w=>q.correct===w.jp||q.correct===w.meaning);if(matches.length===1)assert.equal(q.targetWordId,matches[0].id,'a focus or agenda answer that tests a word consumes that word’s single exam turn')}
       for(const q of questions.filter(q=>q.targetWordId)){
@@ -37,6 +50,29 @@ test('levels 3–10 keep exact lesson word decks and budgeted exams across shuff
     }
   }
   for(let level=4;level<=10;level++){assert.ok(selections.get(level).size>5,`Level ${level} varies its sampled words`);assert.ok(directions.get(level).size>5,`Level ${level} varies word directions`)}
+});
+
+test('Level 3 Exam B is retired while historical ranks and Exam A remain intact',()=>{
+  const p=createCrashCourseProbe({savedRanks:{'dak-examA':{rank:'Copper',attempts:2},'dak-examB':{rank:'Gold',attempts:4}}});
+  assert.deepEqual(Array.from(p.levelRankIds(2)),['dak-examA']);
+  assert.equal(p.levelRank(2),'Copper','the retained Exam B rank does not change Level 3 rank');
+  assert.equal(p.rankState['dak-examB'].rank,'Gold','legacy rank stays stored');
+  assert.deepEqual(Array.from(p.buildDakExamQuestions('dak-examB')),[],'the retired exam has no question source');
+  p.state.quiz=null;p.startDakExam('dak-examB');assert.equal(p.state.quiz,null,'retired exam cannot be started by its old ID');
+  p.startDakExam('dak-examA');assert.ok(p.state.quiz.questions.every(q=>q.type==='kana'&&q.mode==='forward'));
+  for(const rank of Object.keys(p.rankState))if(rank!=='dak-examB')p.rankState[rank].rank='Copper';
+  assert.doesNotMatch(p.recommendedNextStep(),/dak-examB|Examen B/i,'recommendations ignore the retired exam');
+});
+
+test('level-exam question headers omit the repeated rank notice without changing other quiz guidance',()=>{
+  const p=createCrashCourseProbe();
+  for(let level=0;level<12;level++){
+    p.state.level=level;
+    for(const id of p.levelRankIds(level))assert.equal(p.quizMetaText({official:true,rankId:id}),'',`${id} keeps a compact question header`);
+  }
+  p.state.level=4;
+  assert.equal(p.quizMetaText({official:true,rankId:'l5-1'}),'Deze toets kan de sessierank maximaal één stap verhogen.','lesson checks retain their rank guidance');
+  assert.equal(p.quizMetaText({official:false}),'Vrij oefenen / snelle check · geen rankstap.','free practice retains its own explanation');
 });
 
 test('four words, small sets and duplicate/shared IDs do not change mandatory turns',()=>{
