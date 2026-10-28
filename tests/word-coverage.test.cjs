@@ -71,7 +71,7 @@ test('level-exam question headers omit the repeated rank notice without changing
     for(const id of p.levelRankIds(level))assert.equal(p.quizMetaText({official:true,rankId:id}),'',`${id} keeps a compact question header`);
   }
   p.state.level=4;
-  assert.equal(p.quizMetaText({official:true,rankId:'l5-1'}),'Deze toets kan de sessierank maximaal één stap verhogen.','lesson checks retain their rank guidance');
+  assert.equal(p.quizMetaText({official:true,rankId:'l5-1'}),'','lesson checks also keep the compact header');
   assert.equal(p.quizMetaText({official:false}),'Vrij oefenen / snelle check · geen rankstap.','free practice retains its own explanation');
 });
 

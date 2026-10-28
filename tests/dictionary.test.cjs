@@ -30,7 +30,7 @@ assert.match(html, /data-knowledge="dictionary"/, 'Dictionary is available from 
 assert.match(html, /id="dictionaryModal"/, 'lesson-linked articles have a dedicated modal');
 assert.match(html, /function renderDictionaryTab\(/, 'the searchable Dictionary view is rendered');
 assert.match(html, /function openDictionaryModal\(/, 'lesson links open articles without replacing the lesson');
-assert.equal(Object.keys(dictionaryById).length, vocabCatalog.length + 177, 'all word, kana, combination, writing-rule and grammar IDs stay unique');
+assert.equal(Object.keys(dictionaryById).length, vocabCatalog.length + 163 + content.manifest.grammar.filter(g=>g.symbol&&!g.referenceAliasOf).length, 'all word, kana, combination, writing-rule and canonical grammar IDs stay unique');
 for (const word of vocabCatalog) {
   const entry = dictionaryById[word.id];
   assert.ok(entry, `word keeps its stable ID: ${word.id}`);

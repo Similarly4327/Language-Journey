@@ -387,6 +387,7 @@ section{
 .question .audio-feedback:empty{display:none}
 #quizTitle{font-size:16px;line-height:1.35}
 #quizMeta{font-size:12px;line-height:1.4;margin-top:3px}
+#quizMeta:empty{display:none}
 #qNow,#qTotal{font-size:13px}
 body[data-view="quiz"] .app-header{position:relative;top:auto}
 .app:has(#mainView:not(.hidden) .word-crash-course) .app-header{position:relative;top:auto}
@@ -1727,7 +1728,7 @@ body[data-scene="journey"][data-view="main"] #mainView{
 .knowledge-item>.audio-speaker{margin-right:5px}
 .progress-time-values{text-align:right;min-width:0}.progress-time-values span{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}
 </style>
-<link rel="stylesheet" href="./scenes.css?v=recall-recovery-064e4e27a23293bf">
+<link rel="stylesheet" href="./scenes.css?v=recall-recovery-07db00317b11a996">
 </head>
 <body data-scene="journey" data-view="main">
 <div id="app" class="app stack">
@@ -1794,22 +1795,24 @@ body[data-scene="journey"][data-view="main"] #mainView{
     <g class="flight-plane" fill="#bf4949"><path d="m0 0 33-7-12 11 3 11-8 2-8-11-14 4-5-5 17-9Z"/></g>
   </svg><strong>Op weg naar Japan</strong></div>
 </div>
-<script src="./locales/nl.js?v=recall-recovery-064e4e27a23293bf"></script>
-<script src="./locales/en.js?v=recall-recovery-064e4e27a23293bf"></script>
-<script src="./locales/de.js?v=recall-recovery-064e4e27a23293bf"></script>
-<script src="./locales/legacy-translations.js?v=recall-recovery-064e4e27a23293bf"></script>
-<script src="./locales/i18n.js?v=recall-recovery-064e4e27a23293bf"></script>
-<script src="./locales/legacy-ui.js?v=recall-recovery-064e4e27a23293bf"></script>
-<script src="./platform.js?v=recall-recovery-064e4e27a23293bf"></script>
-<script src="./navigation.js?v=recall-recovery-064e4e27a23293bf"></script>
-<script src="./scenes.js?v=recall-recovery-064e4e27a23293bf"></script>
-<script src="./language-journey-content/audio-course-readings.js?v=recall-recovery-064e4e27a23293bf"></script>
-<script src="./language-journey-content/audio-foundation.js?v=recall-recovery-064e4e27a23293bf"></script>
-<script src="./assets/audio/ja/manifest.js?v=recall-recovery-064e4e27a23293bf"></script>
-<script src="./audio/playback.js?v=recall-recovery-064e4e27a23293bf"></script>
-<script src="./language-journey-content/thematic-didactics.js?v=recall-recovery-064e4e27a23293bf"></script>
-<script src="./language-journey-content/level11-integration.js?v=recall-recovery-064e4e27a23293bf"></script>
-<script src="./language-journey-content/content.js?v=recall-recovery-064e4e27a23293bf"></script>
+<script src="./locales/nl.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./locales/en.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./locales/de.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./locales/legacy-translations.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./locales/i18n.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./locales/legacy-ui.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./platform.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./navigation.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./scenes.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./language-journey-content/audio-course-readings.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./language-journey-content/audio-foundation.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./assets/audio/ja/manifest.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./audio/playback.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./language-journey-content/thematic-didactics.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./language-journey-content/level11-integration.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./language-journey-content/level9-exam.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./language-journey-content/grammar-reference.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./language-journey-content/content.js?v=recall-recovery-07db00317b11a996"></script>
 <script>
 (() => {
 const platform=window.LanguageJourneyPlatform,preferences=platform.preferences(),i18n=window.LanguageJourneyI18n,scenes=window.LanguageJourneyScenes,navigation=window.LanguageJourneyNavigation;
@@ -2091,17 +2094,17 @@ const vocabMastery={};
    Particle readings/functions cross-checked against Japan Foundation IRODORI
    Grammar_all.pdf (https://www.irodori.jpf.go.jp/assets/data/Grammar_all.pdf)
    and IRODORI Starter Lesson 1 kana chart. */
-const grammarDictionaryIds={'grammar-ha':'grammar-particle-ha','grammar-no':'grammar-particle-no','grammar-ka':'grammar-particle-ka','grammar-mo':'grammar-particle-mo','grammar-wo':'grammar-particle-wo','grammar-ni':'grammar-particle-ni'};
-const dictionaryGrammar=window.LanguageJourneyContent.manifest.grammar.filter(item=>item.symbol).map(item=>{
+const grammarDictionaryIds={'grammar-ha':'grammar-particle-ha','grammar-no':'grammar-particle-no','grammar-ka':'grammar-particle-ka','grammar-mo':'grammar-particle-mo','grammar-wo':'grammar-particle-wo','grammar-ni':'grammar-particle-ni','grammar-l12-1':'grammar-particle-he'};
+const dictionaryGrammar=window.LanguageJourneyContent.manifest.grammar.filter(item=>item.symbol&&!item.referenceAliasOf).map(item=>{
   const lesson=window.LanguageJourneyContent.manifest.lessons.find(candidate=>candidate.grammarIds?.includes(item.id));
   const point=(item.availableFrom||item.introducedAt||'').match(/^(\d+)-(\d+)/),level=lesson?.level||(point?Number(point[1]):1),lessonIndex=lesson?lesson.order-1:(point?Number(point[2])-1:0);
   const exampleTranslations=item.exampleTranslations||[];
-  return{id:grammarDictionaryIds[item.id]||item.id,sourceGrammarId:item.id,jp:item.symbol,kana:item.symbol,romaji:item.romaji||'',audioKey:item.audioKey||item.audioId||'',kind:'grammatica',label:`${item.category||'Grammatica'} · Level ${level} · Les ${lessonIndex+1}`,meaning:item.dictionaryMeaning||item.shortExplanation||item.title,fullExplanation:item.fullExplanation||item.shortExplanation,pronunciationNote:item.pronunciationNote||'',synonyms:item.synonyms||[],level,lessonId:lesson?.id||`l${level}-${lessonIndex+1}`,lessonIndex,examples:(item.examples||[]).map((example,index)=>[example,exampleTranslations[index]?.translation||'',exampleTranslations[index]?.note||''])}
+  return{id:grammarDictionaryIds[item.id]||item.id,sourceGrammarId:item.id,jp:item.symbol,kana:item.symbol,romaji:item.romaji||'',audioKey:item.audioKey||item.audioId||'',kind:'grammatica',grammarKind:item.grammarKind,label:`${item.category||'Grammatica'} · Level ${level} · Les ${lessonIndex+1}`,meaning:item.dictionaryMeaning||item.shortExplanation||item.title,fullExplanation:item.fullExplanation||item.shortExplanation,pronunciationNote:item.pronunciationNote||'',exampleLimitNote:item.exampleLimitNote||'',synonyms:item.synonyms||[],level,lessonId:lesson?.id||`l${level}-${lessonIndex+1}`,lessonIndex,examples:(item.examples||[]).map((example,index)=>[example,exampleTranslations[index]?.translation||'',exampleTranslations[index]?.note||''])}
 });
 dictionaryGrammar.forEach(entry=>{
   entry.relatedPattern=window.LanguageJourneyContent.manifest.patterns.find(pattern=>pattern.dependencies?.includes(entry.sourceGrammarId))||null;
 });
-dictionaryGrammar.push({id:'grammar-particle-he',jp:'へ',kana:'へ',romaji:'e',kind:'grammatica',label:'Partikel · richting · Level 9',meaning:'Kan de richting markeren waarheen iemand gaat. Als partikel wordt へ als e uitgesproken; als los kana lees je he.',synonyms:['richting','naar','e'],level:9,lessonId:null,introducedAt:'9-1',examples:[['にほん へ いきます','Ik ga naar Japan.','へ markeert hier de richting.']]});
+// The direction particle now resolves to its canonical, actually taught Level 12 entry.
 function dictionaryKanaEntries(){
   const basic=Object.entries(kanaModules).flatMap(([script,module])=>module.rows.flatMap(row=>row.kana.map(([jp,romaji])=>({id:`kana-${script}-${jp}`,jp,kana:jp,romaji:jp==='を'?'o':romaji,kind:'kana',label:`${module.label} · schriftteken`,meaning:'Dit is een kana: een schriftteken dat een klank weergeeft. Het heeft op zichzelf geen Nederlandse woordbetekenis.',synonyms:jp==='を'?['wo']:[],level:1,lessonId:null,script,lexical:false}))));
   const voiced=dakutenPatterns.flatMap(pattern=>[['hiragana',pattern.newH],['katakana',pattern.newK]].flatMap(([script,items])=>items.map(([jp,romaji])=>({id:`kana-${script}-${jp}`,jp,kana:jp,romaji,kind:'kana',label:`${kanaModules[script].label} · dakuten`,meaning:'Dit is een kana met een stemteken. Het teken verandert de klank van de basis-kana; op zichzelf is het geen Nederlands woord.',synonyms:[],level:3,lessonId:null,script,lexical:false}))));
@@ -2144,12 +2147,14 @@ function lessonRevisionNotice(id){return rankState[id]?.rank&&!currentLessonRank
 function knowledgeWordIsKnown(entry){return entry.kind==='woord'&&!state.deferredVocabIntroductions?.includes(entry.id)&&(state.introducedVocabIds.includes(entry.id)||!!state.vocabFirstSeen[entry.id]||rankIntroducedWord(entry))}
 function knowledgeGrammarIsKnown(entry){
   if(entry.kind!=='grammatica'||!entry.lessonId)return false;
+  const aliases=window.LanguageJourneyContent.manifest.grammar.filter(g=>g.referenceAliasOf===entry.sourceGrammarId).map(g=>g.id);
+  if(aliases.length&&window.LanguageJourneyContent.manifest.lessons.some(l=>l.grammarIds?.some(id=>aliases.includes(id))&&(rankState[l.id]?.rank||rankState[`l${l.level}-exam`]?.rank||state.thematicCompleted[l.id]?.A||state.thematicCompleted[l.id]?.B)))return true;
   const id=entry.lessonId,steps=[...(state.langStepProgress[id]||[]),...(state.advancedStepProgress[id]||[])];
-  if(rankState[id]?.rank||steps.some(step=>['model','understand','build','practice','check'].includes(step))||state.thematicCompleted[id]?.A||state.thematicCompleted[id]?.B)return true;
+  if(rankState[id]?.rank||rankState[`l${entry.level}-exam`]?.rank||steps.some(step=>['model','understand','build','practice','check'].includes(step))||state.thematicCompleted[id]?.A||state.thematicCompleted[id]?.B)return true;
   if(state.langView==='lesson'&&langLessons[state.langLesson]?.id===id&&!['overview','words'].includes(state.langStep))return true;
-  const advanced=advancedCourses[entry.level];
-  if(advanced&&state.advancedView?.[entry.level]==='lesson'&&advanced.lessons[state.advancedLesson?.[entry.level]]?.id===id&&!['overview','words'].includes(state.advancedStep?.[entry.level]))return true;
-  const course=thematicCourses[state.thematic?.level],active=course?.lessons[state.thematic.lessonIndex];
+  const advancedIndex=entry.level-1,advanced=advancedCourses[advancedIndex];
+  if(advanced&&state.advancedView?.[advancedIndex]==='lesson'&&advanced.lessons[state.advancedLesson?.[advancedIndex]]?.id===id&&!['overview','words'].includes(state.advancedStep?.[advancedIndex]))return true;
+  const course=thematicCourses[(state.thematic?.level||0)-1],active=course?.lessons[state.thematic.lessonIndex];
   return active?.id===id&&state.thematic.step!=='list';
 }
 function knowledgeGrammarForKana(symbol){return dictionaryGrammar.find(entry=>entry.jp===symbol&&knowledgeGrammarIsKnown(entry))||null}
@@ -2165,7 +2170,7 @@ function dictionaryRomajiVariants(value){
 function dictionarySearch(query){
   const q=dictionaryNormalize(query);if(!q)return[];
   const qVariants=/[a-zāīūēō]/i.test(query)&&!/[\u3040-\u30ff\u3400-\u9fff]/.test(query)?dictionaryRomajiVariants(query):[q];
-  return Object.values(dictionaryById).filter(entry=>entry.kind!=='grammatica'||dictionaryGrammarIsKnown(entry)).map(entry=>{
+  return Object.values(dictionaryById).filter(entry=>entry.kind!=='grammatica'||knowledgeGrammarIsKnown(entry)||dictionaryGrammarIsKnown(entry)).map(entry=>{
     const fields=[entry.jp,entry.kana,entry.meaning,entry.synonyms?.join(' '),entry.label,entry.kanji,entry.kanjiReading].filter(Boolean).map(dictionaryNormalize);fields.push(...dictionaryRomajiVariants(entry.romaji||''));
     const rank=fields.some(x=>qVariants.includes(x))?0:fields.some(x=>qVariants.some(qv=>x.startsWith(qv)))?1:fields.some(x=>qVariants.some(qv=>x.includes(qv)))?2:99;
     return{entry,rank}
@@ -2190,6 +2195,12 @@ function dictionaryLessonLabel(entry){
   if(!entry.lessonId)return entry.kind==='woord'?`Vooruitblik · Level ${entry.level}`:`Naslag · Level ${entry.level}`;
   return`${courseLevelLabel(entry.level)} · ${courseLessonLabel(entry.level,(entry.lessonIndex??(langLessons.findIndex(l=>l.id===entry.lessonId)))+1)}`
 }
+function grammarExampleHtml(entry,text){
+  if(entry.kind!=='grammatica')return escapeHtml(text);
+  const forms=new Set(entry.jp.replaceAll('〜','').split(/[\s/…]+/u).filter(form=>/[ぁ-ヶ]/u.test(form)));
+  if(entry.sourceGrammarId==='grammar-l11-home-1')forms.add('よんでください');
+  return text.split(/(\s+|[。、])/u).map(token=>forms.has(token)||(entry.jp.startsWith('〜')&&[...forms].some(form=>token.endsWith(form)))?`<mark>${escapeHtml(token)}</mark>`:escapeHtml(token)).join('');
+}
 function dictionaryArticleHtml(entry,context={}){
   const taught=entry.kind==='woord'&&knowledgeWordIsKnown(entry);
   const available=entry.kind==='woord'&&rankIntroducedWord(entry);
@@ -2199,12 +2210,12 @@ function dictionaryArticleHtml(entry,context={}){
   const kanaRole=entry.kind==='grammatica'?dictionaryById[`kana-hiragana-${entry.jp}`]:null;
   const kanaRoleHtml=kanaRole?`<div class="panel small" style="margin-top:10px"><strong>Als kana:</strong> ${escapeHtml(kanaRole.jp)} = klank ${escapeHtml(kanaRole.romaji)}. De grammaticale functie staat hierboven.</div>`:'';
   const senses=entry.senses?.length>1?`<section style="margin-top:12px"><strong>Betekenissen in de cursus</strong><div class="stack" style="margin-top:6px">${entry.senses.map(s=>`<div class="panel"><strong>${escapeHtml(s.meaning)}</strong><div class="small">${escapeHtml(s.description)}</div></div>`).join('')}</div><div class="small" style="margin-top:6px">Kies de betekenis die past bij de zin.</div></section>`:'';
-  const examples=entry.examples?.length?`<section style="margin-top:12px"><strong>Voorbeeld uit de cursus</strong><div class="stack" style="margin-top:6px">${entry.examples.map(([jp,nl,note])=>`<div class="panel"><div lang="ja" style="font-weight:700">${escapeHtml(jp)}</div><div>${escapeHtml(nl)}</div><div class="small">${escapeHtml(note)}</div></div>`).join('')}</div></section>`:'';
+  const examples=entry.examples?.length?`<section style="margin-top:12px"><strong>Voorbeeld uit de cursus</strong><div class="stack" style="margin-top:6px">${entry.examples.map(([jp,nl,note])=>`<div class="panel"><div lang="ja" style="font-weight:700">${grammarExampleHtml(entry,jp)}</div><div>${escapeHtml(nl)}</div><div class="small">${escapeHtml(note)}</div></div>`).join('')}</div></section>`:'';
   const kanji=entry.kanji?`<div class="small" style="margin-top:4px">Kanji: ${escapeHtml(entry.kanji)} · lezing: ${escapeHtml(entry.kanjiReading||entry.kana)}</div>`:'';
-  const kindLabel=entry.kind==='kana'?'Schriftteken / klank':entry.kind==='klankcombinatie'?'Klankcombinatie':entry.kind==='schrijfregel'?'Schrijfregel':entry.kind==='grammatica'?'Grammaticale functie':'Cursuswoord';
+  const kindLabel=entry.kind==='kana'?'Schriftteken / klank':entry.kind==='klankcombinatie'?'Klankcombinatie':entry.kind==='schrijfregel'?'Schrijfregel':entry.kind==='grammatica'?(entry.grammarKind||'Grammaticale functie'):'Cursuswoord';
   const readingLabel=entry.kind==='kana'||entry.kind==='klankcombinatie'?'Lezen':entry.kind==='grammatica'?'Uitspraak in deze grammaticale rol':'Kana-lezing / romaji';
   const readingText=entry.kind==='grammatica'?`${romaji}${entry.jp==='は'?' · los kana: ha':entry.jp==='へ'?' · los kana: he':''}`:entry.kind==='kana'||entry.kind==='klankcombinatie'?romaji:`${entry.kana}${entry.kana!==entry.jp?` · ${entry.kana}`:''} · ${romaji}`;
-  return`<article><div class="eyebrow">${escapeHtml(entry.label)}</div><h2 id="dictionaryModalTitle" class="dictionary-entry-title" lang="ja">${japaneseWordHtml(entry.jp)}</h2><div class="muted">${escapeHtml(kindLabel)}</div><div style="margin-top:9px"><strong>${escapeHtml(entry.meaning)}</strong></div>${romaji?`<div style="margin-top:5px"><span class="small">${readingLabel}:</span> <strong>${escapeHtml(readingText)}</strong></div>`:''}${kanaRoleHtml}${kanji}${contextHtml}${future?`<div class="notice" style="margin-top:10px">Vooruitblik · dit woord staat in een latere les en is nog niet als geleerd gemarkeerd.</div>`:''}${entry.kind==='woord'&&entry.lessonId?`<div class="small" style="margin-top:8px">${escapeHtml(dictionaryLessonLabel(entry))}${entry.lessonTitle?` · ${escapeHtml(displayedLessonTitle(entry.lessonId,entry.lessonTitle))}`:''}${entry.legacy?' · bewaarde woorden uit een oudere lesversie':''}</div>`:''}${senses}${entry.synonyms?.length?`<div class="small" style="margin-top:10px"><strong>Ook zoeken op:</strong> ${entry.synonyms.map(escapeHtml).join(' · ')}</div>`:''}${examples}</article>`
+return`<article><div class="eyebrow">${escapeHtml(entry.label)}</div><h2 id="dictionaryModalTitle" class="dictionary-entry-title" lang="ja">${japaneseWordHtml(entry.jp)}</h2><div class="muted">${escapeHtml(kindLabel)}</div><div style="margin-top:9px"><strong>${escapeHtml(entry.meaning)}</strong></div>${romaji?`<div style="margin-top:5px"><span class="small">${readingLabel}:</span> <strong>${escapeHtml(readingText)}</strong></div>`:''}${kanaRoleHtml}${kanji}${contextHtml}${future?`<div class="notice" style="margin-top:10px">Vooruitblik · dit woord staat in een latere les en is nog niet als geleerd gemarkeerd.</div>`:''}${entry.kind==='woord'&&entry.lessonId?`<div class="small" style="margin-top:8px">${escapeHtml(dictionaryLessonLabel(entry))}${entry.lessonTitle?` · ${escapeHtml(displayedLessonTitle(entry.lessonId,entry.lessonTitle))}`:''}${entry.legacy?' · bewaarde woorden uit een oudere lesversie':''}</div>`:''}${senses}${entry.kind==='grammatica'?`<section class="panel" style="margin-top:12px"><strong>${escapeHtml(dictionaryLessonLabel(entry))}</strong>${entry.exampleLimitNote?`<p class="small">${escapeHtml(entry.exampleLimitNote)}</p>`:''}</section>`:''}${entry.synonyms?.length?`<div class="small" style="margin-top:10px"><strong>Ook zoeken op:</strong> ${entry.synonyms.map(escapeHtml).join(' · ')}</div>`:''}${examples}</article>`
 }
 function dictionaryPracticeAvailable(entry){return knowledgeWordIsKnown(entry)||knowledgeGrammarIsKnown(entry)}
 function dictionaryPracticeQuestions(entry){
@@ -2294,7 +2305,8 @@ function renderDictionaryTab(box){
 }
 let dictionaryReturnFocus=null,dictionaryReturnScroll=null,dictionaryRecallOpen=false,dictionaryStudyPausedId=null;
 function openDictionaryModal(id,lessonId='',sentence='',meaning=''){hideAvatarAudioOverlay(false);
-  const entry=dictionaryById[id],modal=$('dictionaryModal');if(!entry||!modal)return;
+  const alias=window.LanguageJourneyContent.manifest.grammar.find(g=>g.id===id)?.referenceAliasOf;
+  const entry=dictionaryById[id]||dictionaryById[grammarDictionaryIds[alias]||alias],modal=$('dictionaryModal');if(!entry||!modal)return;
   if(state.studyTracker.active?.runningSince){dictionaryStudyPausedId=state.studyTracker.active.id;pauseActiveStudySession()}
   dictionaryRecallOpen=state.screen==='flashcards'&&!!state.flashcardSession?.feedback;
   if(dictionaryRecallOpen)cancelRecallFeedbackAdvance();
@@ -5035,7 +5047,26 @@ function renderAdvancedCheck(c,l,level,index){const qs=advancedQuestions(c,l,ind
 function renderAdvancedQuick(c,level){const bankCount=(state.errorBank.advanced||[]).reduce((n,e)=>n+(e.count||1),0);$('advancedBody').innerHTML=`<section class="card"><div class="h2">Snelle checks</div><div class="muted">Herhaal één les in enkele minuten, zonder uitlegschermen.</div></section><div id="advancedQuickList" class="stack"></div><section class="card"><button id="advancedErrors" class="btn" style="width:100%" ${bankCount?'':'disabled'}>Oefen moeilijke punten · ${bankCount}</button></section>`;c.lessons.forEach((l,i)=>{const d=document.createElement('section');d.className=`card ${rankClass(rankState[l.id].rank)}`;const count=advancedQuestions(c,l,i).length;d.innerHTML=`<div class="between"><strong>Les ${i+1} · ${l.title}</strong><span class="rank ${rankClass(rankState[l.id].rank)}">${rankText(rankState[l.id].rank)}</span></div><button class="btn advancedQuick" data-i="${i}" style="width:100%;margin-top:9px">Snelle check · ${count} vragen</button>`;$('advancedQuickList').appendChild(d)});root.querySelectorAll('.advancedQuick').forEach(b=>b.onclick=()=>{const i=Number(b.dataset.i),l=c.lessons[i];startQuiz({source:'advanced',title:`Snelle check · ${l.title}`,official:false,pool:[],questions:advancedQuestions(c,l,i),choices:3})});$('advancedErrors').onclick=()=>practiceErrorBank('advanced')}
 function advancedExamQuestionCounts(c,total=25){if(c.number<=10){const questions=buildAdvancedExamQuestions(c);return c.lessons.map(l=>questions.filter(q=>q.lessonId===l.id).length)}const minimum=Math.ceil(total/c.lessons.length);return c.lessons.map(lesson=>Math.max(minimum,lessonCanonicalGoals(lesson).length))}
 function advancedExamQuestions(c,l,index,count=5){const pool=l.examQuestions?l.examQuestions.map(raw=>lessonQuestion(raw,l)):advancedQuestionPool(c,l,index).current;return c.number<=10?buildWordCoveredExam([l],()=>pool,Math.max(count,10),`Level ${c.number}-examen`):selectQuestionsWithCoverage(l,pool,count,`Level ${c.number}-examen`)}
-function buildAdvancedExamQuestions(c){if(c.number>10){const counts=advancedExamQuestionCounts(c),questions=c.lessons.flatMap((lesson,index)=>advancedExamQuestions(c,lesson,index,counts[index]));assertLevelCoverage(c.lessons,questions,`Level ${c.number}-examen`);return shuffle(questions)}return buildWordCoveredExam(c.lessons,(lesson,index)=>lesson.examQuestions?lesson.examQuestions.map(raw=>lessonQuestion(raw,lesson)):advancedQuestionPool(c,lesson,index).current,examQuestionBudget(c.number),`Level ${c.number}-examen`)}
+function buildAdvancedExamQuestions(c){if(c.number===9)return buildLevel9ExamQuestions(c);if(c.number>10){const counts=advancedExamQuestionCounts(c),questions=c.lessons.flatMap((lesson,index)=>advancedExamQuestions(c,lesson,index,counts[index]));assertLevelCoverage(c.lessons,questions,`Level ${c.number}-examen`);return shuffle(questions)}return buildWordCoveredExam(c.lessons,(lesson,index)=>lesson.examQuestions?lesson.examQuestions.map(raw=>lessonQuestion(raw,lesson)):advancedQuestionPool(c,lesson,index).current,examQuestionBudget(c.number),`Level ${c.number}-examen`)}
+function buildLevel9ExamQuestions(course){
+  const pools=new Map(course.lessons.map(lesson=>{
+    const rows=window.LanguageJourneyContent.manifest.level9ExamBank.filter(q=>q.lessonId===lesson.id),frames=[...new Set(rows.map(q=>q.examFrame))];
+    return[lesson.id,frames.flatMap(frame=>shuffle(rows.filter(q=>q.examFrame===frame)).slice(0,2)).map(raw=>({...lessonQuestion(raw,lesson),examFrame:raw.examFrame,translation:raw.translation,usedVocabIds:raw.usedVocabIds}))];
+  }));
+  const questions=buildWordCoveredExam(course.lessons,lesson=>pools.get(lesson.id),examQuestionBudget(9),'Level 9-examen');
+  // Six per lesson, retaining the shared lexical quota and both grammar goals.
+  for(const lesson of course.lessons)while(questions.filter(q=>q.lessonId===lesson.id).length<6){
+    const candidate=pools.get(lesson.id).find(q=>!questions.some(selected=>selected.sourceId===q.sourceId));
+    const donor=questions.findIndex(q=>!q.targetWordId&&questions.filter(item=>item.lessonId===q.lessonId).length>6);
+    if(!candidate||donor<0)throw Error('Level 9: de lesverdeling past niet in het budget');
+    questions.splice(donor,1,{...candidate,examPart:'context'});
+  }
+  for(const q of questions.filter(q=>q.targetWordId)){
+    const words=lessonNewWords(course.lessons.find(l=>l.id===q.lessonId)),alternatives=shuffle(words.filter(w=>w.id!==q.targetWordId)).slice(0,2).map(w=>q.targetDirection==='jp-nl'?w.meaning:w.jp);
+    q.choices=shuffle([q.correct,...alternatives]);
+  }
+  assertCompactExam(course.lessons,questions,30,'Level 9-examen');return shuffle(questions);
+}
 function renderAdvancedExam(c,level){const id=`l${c.number}-exam`,m=rankState[id],questions=buildAdvancedExamQuestions(c),count=questions.length;$('advancedBody').innerHTML=`<section class="card ${rankClass(m.rank)}"><div class="between"><div><div class="h2">Level ${c.number} examen</div><div class="muted">${count} ${c.number<=10?'vragen verspreid over de lessen: woorden, grammatica en situaties.':'vragen met volledige dekking van alle nieuwe woorden en lesdoelen uit dit level.'}</div></div><span class="rank ${rankClass(m.rank)}">${rankText(m.rank)}</span></div>${lessonRevisionNotice(id)}<button id="advancedExamStart" class="btn primary" style="width:100%;margin-top:10px">Start level-examen · ${count} vragen</button></section>`;$('advancedExamStart').onclick=()=>startQuiz({source:'advanced',title:`Level ${c.number} examen`,rankId:id,official:true,pool:[],questions,choices:3})}
 
 function kanaQuestion(item,mode){return{type:'kana',item,mode}}function randomKanaQuestions(pool,count,mode='mixed'){const out=[];let last='';for(let i=0;i<count;i++){let q;for(let t=0;t<60;t++){const item=pool[Math.floor(Math.random()*pool.length)],dir=mode==='mixed'?(Math.random()<.5?'forward':'reverse'):mode,key=item.id+'|'+dir;if(key!==last){q=kanaQuestion(item,dir);last=key;break}}out.push(q||kanaQuestion(pool[i%pool.length],'forward'))}return out}function exactKanaQuestions(pool,mode){return shuffle(pool).map(item=>kanaQuestion(item,mode==='mixed'?(Math.random()<.5?'forward':'reverse'):mode))}function pairedKanaQuestions(pool){return shuffle(pool.flatMap(item=>[kanaQuestion(item,'forward'),kanaQuestion(item,'reverse')]))}
@@ -5276,7 +5307,7 @@ function quizAnswerAudioHtml(q,correct){
   }
   return speakerButtonHtml(correct,quizAudioKey(q,correct,'answer'),'Luister naar het juiste antwoord');
 }
-function quizMetaText(c=state.quiz){if(c?.rankId&&levelRankIds(state.level).includes(c.rankId))return'';return c?.official?'Deze toets kan de sessierank maximaal één stap verhogen.':'Vrij oefenen / snelle check · geen rankstap.'}
+function quizMetaText(c=state.quiz){return c?.official?'':'Vrij oefenen / snelle check · geen rankstap.'}
 function renderQuestion(){if(quizFeedbackTimer)clearTimeout(quizFeedbackTimer);quizFeedbackTimer=null;quizAnswerToken++;hideAvatarAudioOverlay(false);const c=state.quiz,q=currentQ();(q.vocabIds||[]).forEach(recordVocabEncounter);$('quizTitle').textContent=c.title;$('quizMeta').textContent=quizMetaText(c);$('qNow').textContent=c.index+1;$('qTotal').textContent=c.questions.length;$('qBar').style.width=(c.index/c.questions.length*100)+'%';$('qScore').textContent='Goed: '+c.score;$('qFeedback').textContent='';$('qHint').textContent='';$('qContext').textContent=q.context||'';$('qContext').classList.toggle('hidden',!q.context);$('qContext').classList.toggle('question-context--jp',q.contextLanguage==='ja');$('qContext').classList.toggle('question-context--schedule',q.contextPresentation==='schedule');$('qPrompt').className='prompt';$('qPrompt').classList.toggle('prompt--schedule',q.contextPresentation==='schedule');$('qPrompt').removeAttribute('style');$('qPromptAudio').innerHTML='';$('qCorrectAudio').innerHTML='';$('qCorrectAudio').dataset.autoNext='false';const box=$('qChoices');box.className='choices';box.removeAttribute('style');box.innerHTML='';if(q.type==='kana')renderKanaQ(c,q,box);else if(q.type==='scriptReverse')renderScriptReverseQ(c,q,box);else if(q.type==='number')renderNumberQ(c,q,box);else if(q.type==='math')renderMathQ(c,q,box);else renderLessonQ(c,q,box);applyQuizQuestionDisplay(q);hideQuizOptions(box);const prompt=$('qPrompt').textContent.trim(),context=$('qContext').textContent.trim();const contextAudio=quizTextIsJapanese(context)&&speakerButtonHtml(context,quizAudioKey(q,context,'context'));$('qPromptAudio').innerHTML=q.kind==='build'?'':contextAudio||(q.promptAudio===false&&!quizTextIsJapanese(prompt)?'':speakerButtonHtml(prompt,quizAudioKey(q,prompt)));updateQuizAvatar()}
 function quizTextIsJapanese(text){return /[\u3040-\u30ff\u3400-\u9fff]/u.test(text)&&!/[a-z\u00c0-\u024f]{2,}/iu.test(text)}
 function quizQuestionDisplay(q,hint,prompt,lesson=null){
@@ -5795,7 +5826,7 @@ let flashcardDueRefreshTimer=null,flashcardDueRefreshListenersBound=false;
 function refreshFlashcardDueDashboard(){
   // Do not replace a focused info panel or manual selector during keyboard/touch use.
   if(document.activeElement?.closest?.('#recallCustom[open], #recallInfo[open]'))return;
-  if(state.screen==='flashcards'&&!state.flashcardSession)renderFlashcardsScreen();
+  if(state.screen==='flashcards'&&document.body.dataset.view==='flashcards'&&!state.flashcardSession)renderFlashcardsScreen();
 }
 function ensureFlashcardDueRefresh(){
   if(!flashcardDueRefreshListenersBound){
@@ -6154,13 +6185,13 @@ function renderKnowledgeDashboard(box){
   box.innerHTML=`<section class="card"><div class="h2">Kennis</div><div class="muted">Tegengekomen is niet hetzelfde als beheerst. Mastery en ranks blijven apart.</div><div class="study-form-grid" style="margin-top:10px"><label>Categorie<select id="knowledgeCategory">${groups.map(([id,label])=>`<option value="${id}">${label}</option>`).join('')}<option value="bank">Woordbank · vooruit bekijken</option></select></label><label>Zoeken<input id="knowledgeSearch" type="search" placeholder="Zoek Japans, romaji of betekenis"></label></div><div class="small" id="knowledgeCount" style="margin-top:8px"></div><div id="knowledgeItems" class="stack" style="margin-top:8px"></div><div class="small" style="margin-top:8px">Kanji: 0 · de cursus introduceert momenteel nog geen losse kanji.</div></section>`;
   const draw=()=>{const category=$('knowledgeCategory').value,query=$('knowledgeSearch').value.trim().toLowerCase(),host=$('knowledgeItems');host.innerHTML='';let rows=[];
     if(category==='words'||category==='bank')rows=vocabCatalog.filter(v=>(category==='bank'||seenWords.has(v.id))&&(!query||`${v.jp} ${v.romaji||''} ${v.meaning}`.toLowerCase().includes(query))).map(v=>({id:v.id,jp:v.jp,reading:v.romaji||'Leeswijze niet beschikbaar',meaning:v.meaning,word:v,seen:seenWords.has(v.id),entry:dictionaryById[v.id]}));
-    else if(category==='grammar')rows=dictionaryGrammar.filter(knowledgeGrammarIsKnown).filter(entry=>!query||`${entry.jp} ${entry.romaji} ${entry.meaning}`.toLowerCase().includes(query)).map(entry=>({id:entry.id,jp:entry.jp,reading:entry.romaji,meaning:entry.meaning,entry}));
+    else if(category==='grammar')rows=(query?dictionarySearch(query).filter(entry=>entry.kind==='grammatica'):dictionaryGrammar).filter(knowledgeGrammarIsKnown).map(entry=>({id:entry.id,jp:entry.jp,reading:entry.romaji,meaning:entry.meaning,entry}));
     else if(['small-y','small-tsu','long-vowel'].includes(category))rows=[...new Map(smallLessons.flatMap(lesson=>lesson.newItems.map(([jp,reading,meaning])=>({id:`${category}:${jp}`,jp,reading,meaning}))).map(item=>[item.id,item])).values()].filter(item=>state.kanaFirstSeen[item.id]&&(!query||`${item.jp} ${item.reading} ${item.meaning}`.toLowerCase().includes(query))).map(item=>({...item,entry:item.jp==='ー'?dictionaryById['writing-long-vowel-mark']:dictionaryById[`kana-combo-${item.jp}`]||dictionaryById[`kana-small-${item.jp}`]||null}));
     else{const source=category==='dakuten'?'dakuten':category;rows=ensureGroupMastery(source).filter(item=>{const rec=ensureKanaMastery(item);return rec.seen>0&&(!query||`${item.front} ${item.back}`.toLowerCase().includes(query))}).map(item=>{const script=baseScriptForItem(item)||(/[ァ-ヶ]/.test(item.front)?'katakana':'hiragana'),entry=dictionaryById[`kana-${script}-${item.front}`]||null;return{id:item.id,jp:item.front,reading:item.back,meaning:'',entry}});}
     $('knowledgeCount').textContent=`${rows.length} ${category==='words'||category==='bank'?'woorden':category==='grammar'?'bouwstenen':'kana-items'}${category==='bank'?' in de woordbank':category==='words'?' tegengekomen':''}.`;
     if(!rows.length){host.innerHTML=`<div class="panel">${category==='words'?'Nog geen woorden tegengekomen. Open het woordendeel van een les.':'Geen bekende items gevonden in deze categorie.'}</div>`;return}
     rows.forEach(row=>{
-      const wrapper=document.createElement('div'),b=document.createElement(row.entry?'button':'div'),first=row.word?state.vocabFirstSeen[row.id]:state.kanaFirstSeen[row.id],shown=!row.word||row.seen,summary=row.entry?.kind==='grammatica'?row.entry.label.split(' · ')[0]:row.meaning;
+      const wrapper=document.createElement('div'),b=document.createElement(row.entry?'button':'div'),first=row.word?state.vocabFirstSeen[row.id]:state.kanaFirstSeen[row.id],shown=!row.word||row.seen,summary=row.entry?.kind==='grammatica'?`${row.entry.meaning} · ${dictionaryLessonLabel(row.entry)}`:row.meaning;
       wrapper.className=`knowledge-item${row.entry?'':' knowledge-item--plain'}`;if(row.entry)b.type='button';b.className='vocab-progress-row';
       b.innerHTML=`<div><div class="word">${shown?japaneseWordHtml(row.jp):'••••'}</div><div class="small">${shown?`${escapeHtml(row.reading||'')}${summary?` · ${escapeHtml(summary)}`:''}`:'Tik om dictionary-detail te bekijken'}</div>${row.word?`<div class="small">${row.seen?`Tegengekomen${first?` · ${first}`:' · datum onbekend'}`:'Vooruitblik · nog niet tegengekomen'}</div>`:first?`<div class="small">Tegengekomen · ${first}</div>`:''}</div>${row.entry?'<span class="small" aria-hidden="true">›</span>':''}`;
       if(row.entry){b.setAttribute('aria-label',`Bekijk dictionary-detail van ${row.jp}`);b.onclick=()=>openDictionaryModal(row.entry.id)};
@@ -6365,8 +6396,8 @@ function renderSession(){
 }
 
 function toggleProgress(){
-  if(!$('sessionView').classList.contains('hidden'))navigateBack();
-  else renderSession();
+  // A primary-tab tap is an idempotent destination, not a back action.
+  if($('sessionView').classList.contains('hidden'))renderSession();
 }
 function goToLearningHome(){
   if(state.studyTracker.active)completeStudySession({status:'verlaten'});
