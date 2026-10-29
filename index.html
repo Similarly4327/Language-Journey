@@ -11,6 +11,15 @@
 <title>Language Journey — Japans</title>
 <style>
 
+.jlpt-guideline h2{margin:0}
+.jlpt-levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.jlpt-levels .panel{display:flex;flex-direction:column;gap:4px;padding:10px}
+.jlpt-info{position:relative;flex:none}
+.jlpt-info summary{cursor:pointer;min-width:44px;min-height:44px;display:grid;place-items:center;font-size:23px}
+.jlpt-info p{position:absolute;right:0;top:36px;width:min(72vw,320px);padding:14px;background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 24px #0002;z-index:5}
+.jlpt-word-detail{margin-top:10px}
+.jlpt-word-detail summary{cursor:pointer;padding:6px 0}
+.jlpt-guideline summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 :root{
   color-scheme:light dark;
   --bg:#f4f5f7;
@@ -1728,7 +1737,7 @@ body[data-scene="journey"][data-view="main"] #mainView{
 .knowledge-item>.audio-speaker{margin-right:5px}
 .progress-time-values{text-align:right;min-width:0}.progress-time-values span{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}
 </style>
-<link rel="stylesheet" href="./scenes.css?v=recall-recovery-07db00317b11a996">
+<link rel="stylesheet" href="./scenes.css?v=recall-recovery-37851e218b1e526c">
 </head>
 <body data-scene="journey" data-view="main">
 <div id="app" class="app stack">
@@ -1795,24 +1804,26 @@ body[data-scene="journey"][data-view="main"] #mainView{
     <g class="flight-plane" fill="#bf4949"><path d="m0 0 33-7-12 11 3 11-8 2-8-11-14 4-5-5 17-9Z"/></g>
   </svg><strong>Op weg naar Japan</strong></div>
 </div>
-<script src="./locales/nl.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./locales/en.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./locales/de.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./locales/legacy-translations.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./locales/i18n.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./locales/legacy-ui.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./platform.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./navigation.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./scenes.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./language-journey-content/audio-course-readings.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./language-journey-content/audio-foundation.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./assets/audio/ja/manifest.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./audio/playback.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./language-journey-content/thematic-didactics.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./language-journey-content/level11-integration.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./language-journey-content/level9-exam.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./language-journey-content/grammar-reference.js?v=recall-recovery-07db00317b11a996"></script>
-<script src="./language-journey-content/content.js?v=recall-recovery-07db00317b11a996"></script>
+<script src="./locales/nl.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./locales/en.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./locales/de.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./locales/legacy-translations.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./locales/i18n.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./locales/legacy-ui.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./platform.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./navigation.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./scenes.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./language-journey-content/audio-course-readings.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./language-journey-content/audio-foundation.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./assets/audio/ja/manifest.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./audio/playback.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./language-journey-content/thematic-didactics.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./language-journey-content/level11-integration.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./language-journey-content/level9-exam.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./language-journey-content/grammar-reference.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./language-journey-content/content.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./language-journey-content/jlpt-benchmark.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./language-journey-content/jlpt-guideline.js?v=recall-recovery-37851e218b1e526c"></script>
 <script>
 (() => {
 const platform=window.LanguageJourneyPlatform,preferences=platform.preferences(),i18n=window.LanguageJourneyI18n,scenes=window.LanguageJourneyScenes,navigation=window.LanguageJourneyNavigation;
@@ -6369,10 +6380,24 @@ function renderProgressSummary(host){
   if(!progressSummaryRefreshTimer&&window.setInterval)progressSummaryRefreshTimer=window.setInterval(()=>progressSummaryRefresh?.(),30000);
   draw();
 }
+function jlptProgressSummary(){
+  const service=window.LanguageJourneyJlpt,benchmark=window.LanguageJourneyJlptBenchmark;
+  if(!service||!benchmark)return [];
+  return service.select(benchmark,{
+    isIntroduced:id=>!!dictionaryById[id]&&knowledgeWordIsKnown(dictionaryById[id]),
+    srsRecord:(id,direction)=>flashcardRecord(id,direction)
+  });
+}
+function jlptProgressHtml(){
+  const summary=jlptProgressSummary();if(!summary.length)return '';
+  const vocab=summary[0].domains.vocabulary;
+  return `<section class="card jlpt-guideline" aria-labelledby="jlptTitle"><div class="between"><h2 id="jlptTitle" class="h2">Indicatief JLPT-niveau</h2><details class="jlpt-info"><summary aria-label="Uitleg over het indicatieve JLPT-niveau">ⓘ</summary><p class="small">Gebaseerd op je beheersing van de Language Journey-richtlijn voor ieder JLPT-niveau. Dit is een indicatie en geen officiële JLPT-score.</p></details></div><div class="jlpt-levels">${summary.slice(0,3).map(tier=>`<div class="panel"><strong>${tier.level}</strong><span class="small">${tier.masteryPercent===null?(tier.status==='unbuilt'?'Nog niet in kaart':'In opbouw'):`${tier.masteryPercent}%`}</span></div>`).join('')}</div><p class="small" style="margin-bottom:0">Je woordkennis is gekoppeld. Een totaalindicatie volgt zodra ook kanji, grammatica, lezen en luisteren betrouwbaar kunnen worden meegewogen.</p><details class="jlpt-word-detail"><summary class="small">Gekoppelde N5-woordkennis</summary><p class="small">${vocab.introduced} behandeld · ${vocab.stable} herhaald in beide richtingen en nu niet aan de beurt · ${vocab.needsReview} opnieuw aan de beurt. Dit betreft ${vocab.mapped} gekoppelde woorden in de voorlopige richtlijn, niet de volledige N5-dekking.</p></details></section>`;
+}
 function renderProgressDashboard(box){
   const sessions=studySessions(),recent=[...sessions].sort((a,b)=>new Date(b.startedAt)-new Date(a.startedAt));
   box.innerHTML=`<section id="progressSummary" class="card"></section>${legacyStudyNotice()}<section class="card study-disclosure-card"><button id="recentActivitiesToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="recentActivitiesPanel"><span class="h2">Recente activiteiten (${sessions.length})</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="recentActivitiesPanel" class="study-disclosure-panel" hidden><div class="small">Nieuwste eerst · ${Math.min(state.progressActivityLimit,recent.length)} van ${recent.length}</div><div id="recentActivities" class="stack" style="margin-top:8px"></div><button id="moreActivities" class="btn tiny" style="width:100%;margin-top:8px" ${recent.length>state.progressActivityLimit?'':'hidden'}>Meer tonen</button><button id="activityManagerToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="activityManagerPanel" style="margin-top:14px"><span class="small">Activiteiten beheren en geschiedenis filteren</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="activityManagerPanel" class="study-disclosure-panel" hidden><div id="activityManager"></div></div></div></section><section class="card study-disclosure-card"><button id="studyAnalysisToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="studyAnalysisPanel"><span class="h2">Urenanalyse</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="studyAnalysisPanel" class="study-disclosure-panel" hidden><div id="studyAnalysisBody"></div></div></section><section class="card study-disclosure-card"><button id="studyTimelineToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="studyTimelinePanel"><span class="h2">Tijdlijn</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="studyTimelinePanel" class="study-disclosure-panel" hidden><div id="studyTimelineBody"></div></div></section>`;
   renderProgressSummary($('progressSummary'));
+  $('progressSummary').insertAdjacentHTML('afterend',jlptProgressHtml());
   bindStudyDisclosure('recentActivitiesToggle','recentActivitiesPanel');bindStudyDisclosure('activityManagerToggle','activityManagerPanel');bindStudyDisclosure('studyAnalysisToggle','studyAnalysisPanel');bindStudyDisclosure('studyTimelineToggle','studyTimelinePanel');
   renderProgressSectionSafely('activityManager','Activiteiten beheren',()=>renderStudyActivities($('activityManager')));
   renderProgressSectionSafely('studyAnalysisBody','De urenanalyse',()=>renderStudyAnalysis($('studyAnalysisBody')));

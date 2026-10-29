@@ -1,0 +1,141 @@
+
+> language-journey@1.0.0 jlpt:audit
+> node scripts/jlpt-audit.cjs
+
+{
+  "summary": {
+    "levelsImplemented": 15,
+    "lessons": 67,
+    "canonicalWords": 344,
+    "currentWords": 326,
+    "legacyWords": 15,
+    "previewWords": 3,
+    "grammar": 41,
+    "kanji": 15,
+    "readings": 57,
+    "recallAfterIntroduction": 0,
+    "recallAfterPass": 326,
+    "requestChunks": [
+      "vocab-よんでください",
+      "vocab-きいてください",
+      "vocab-うめてください",
+      "vocab-かいてください"
+    ]
+  },
+  "milestones": [
+    {
+      "level": 10,
+      "status": "implemented",
+      "overallN5Percent": null,
+      "counts": {
+        "vocabulary": {
+          "provisionalDenominator": 660,
+          "exactMappedByMilestone": 87,
+          "partialMappedByMilestone": 0,
+          "provisionalContentPercent": 13
+        },
+        "kanji": {
+          "provisionalDenominator": 80,
+          "exactMappedByMilestone": 0,
+          "partialMappedByMilestone": 13,
+          "provisionalContentPercent": null
+        },
+        "grammar": {
+          "provisionalDenominator": 80,
+          "exactMappedByMilestone": 5,
+          "partialMappedByMilestone": 4,
+          "provisionalContentPercent": null
+        },
+        "reading": {
+          "provisionalDenominator": 3,
+          "exactMappedByMilestone": 0,
+          "partialMappedByMilestone": 0,
+          "provisionalContentPercent": null
+        },
+        "listening": {
+          "provisionalDenominator": 4,
+          "exactMappedByMilestone": 0,
+          "partialMappedByMilestone": 0,
+          "provisionalContentPercent": null
+        }
+      }
+    },
+    {
+      "level": 15,
+      "status": "implemented",
+      "overallN5Percent": null,
+      "counts": {
+        "vocabulary": {
+          "provisionalDenominator": 660,
+          "exactMappedByMilestone": 125,
+          "partialMappedByMilestone": 0,
+          "provisionalContentPercent": 19
+        },
+        "kanji": {
+          "provisionalDenominator": 80,
+          "exactMappedByMilestone": 0,
+          "partialMappedByMilestone": 13,
+          "provisionalContentPercent": null
+        },
+        "grammar": {
+          "provisionalDenominator": 80,
+          "exactMappedByMilestone": 5,
+          "partialMappedByMilestone": 9,
+          "provisionalContentPercent": null
+        },
+        "reading": {
+          "provisionalDenominator": 3,
+          "exactMappedByMilestone": 0,
+          "partialMappedByMilestone": 0,
+          "provisionalContentPercent": null
+        },
+        "listening": {
+          "provisionalDenominator": 4,
+          "exactMappedByMilestone": 0,
+          "partialMappedByMilestone": 0,
+          "provisionalContentPercent": null
+        }
+      }
+    },
+    {
+      "level": 20,
+      "status": "incomplete-curriculum-no-L16-20-content",
+      "overallN5Percent": null,
+      "counts": {
+        "vocabulary": {
+          "provisionalDenominator": 660,
+          "exactMappedByMilestone": 125,
+          "partialMappedByMilestone": 0,
+          "provisionalContentPercent": 19
+        },
+        "kanji": {
+          "provisionalDenominator": 80,
+          "exactMappedByMilestone": 0,
+          "partialMappedByMilestone": 13,
+          "provisionalContentPercent": null
+        },
+        "grammar": {
+          "provisionalDenominator": 80,
+          "exactMappedByMilestone": 5,
+          "partialMappedByMilestone": 9,
+          "provisionalContentPercent": null
+        },
+        "reading": {
+          "provisionalDenominator": 3,
+          "exactMappedByMilestone": 0,
+          "partialMappedByMilestone": 0,
+          "provisionalContentPercent": null
+        },
+        "listening": {
+          "provisionalDenominator": 4,
+          "exactMappedByMilestone": 0,
+          "partialMappedByMilestone": 0,
+          "provisionalContentPercent": null
+        }
+      }
+    }
+  ],
+  "optionFlags": 70,
+  "leaks": 0,
+  "benchmarkErrors": []
+}

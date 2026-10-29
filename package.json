@@ -3,6 +3,8 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
+    "jlpt:audit": "node scripts/jlpt-audit.cjs",
+    "jlpt:benchmark": "node scripts/build-jlpt-benchmark.cjs",
     "validate-content": "node language-journey-content/validate.cjs",
     "curriculum:report": "node language-journey-content/report.cjs",
     "test": "node --test",

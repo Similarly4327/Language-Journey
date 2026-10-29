@@ -1,0 +1,32 @@
+[
+  {
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "errors": [],
+    "overflow": false,
+    "keyboardInfo": true,
+    "bothDirections": true
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "errors": [],
+    "overflow": false,
+    "keyboardInfo": true,
+    "bothDirections": true
+  },
+  {
+    "viewport": {
+      "width": 320,
+      "height": 740
+    },
+    "errors": [],
+    "overflow": false,
+    "keyboardInfo": true,
+    "bothDirections": true
+  }
+]
