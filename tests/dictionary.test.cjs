@@ -96,7 +96,7 @@ assert.ok(practice.every(question => !question.choices.includes(future.meaning) 
 const knowledgeView = html.slice(html.indexOf('function renderKnowledgeDashboard('), html.indexOf('function knowledgeGrowthSeries('));
 assert.match(knowledgeView, /openDictionaryModal\(row\.entry\.id\)/, 'Knowledge tiles open the existing dictionary detail');
 assert.doesNotMatch(knowledgeView, /startSingleVocabPractice|recordVocabEncounter\(/, 'opening Knowledge does not begin practice or mark words encountered');
-assert.match(knowledgeView, /speakerButtonHtml\(row\.jp/, 'Knowledge tiles use the registered speaker component');
+assert.doesNotMatch(knowledgeView, /speakerButtonHtml|playKnowledgeTileAudio/, 'compact Knowledge tiles do not show or play speakers');
 const extraPractice = html.slice(html.indexOf('function renderDictionaryPractice('), html.indexOf('function showDictionaryArticle('));
 assert.doesNotMatch(extraPractice, /startQuiz|recordQuestionMastery|flashcardRate|applyRank/, 'dictionary mini practice does not alter mastery, rank, or Recall');
 // Japanese playback is shared; Knowledge delegates rather than constructing Audio here.

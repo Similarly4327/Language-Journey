@@ -13879,12 +13879,25 @@
   manifest.contentVersion='1.5.0';
   const thematicDidactics=typeof module!=='undefined'&&module.exports?require('./thematic-didactics.js'):root.LanguageJourneyThematicDidactics;
   thematicDidactics.apply(manifest);
+  // Level 8's authored question and answer form an in-world exchange.
+  manifest.didacticDialogues.push({id:'dialogue-l8-minutes-example',lessonId:'l8-minutes',level:8,part:'example',speakerPolicy:'avatars',lines:[
+    {sentenceId:'sentence-dialogue-l8-minutes-1',text:'いま なんじ です か',audioTextKana:'いま なんじ です か',meaning:'Hoe laat is het nu?',speakerRole:'A'},
+    {sentenceId:'sentence-dialogue-l8-minutes-2',text:'じゅうにじはん です',audioTextKana:'じゅうにじはん です',meaning:'Het is half één.',speakerRole:'B'}
+  ]});
+  minutes.models[0].dialogueId='dialogue-l8-minutes-example';
   const level11Integration=typeof module!=='undefined'&&module.exports?require('./level11-integration.js'):root.LanguageJourneyLevel11Integration;
   level11Integration.apply(manifest);
   const level9Exam=typeof module!=='undefined'&&module.exports?require('./level9-exam.js'):root.LanguageJourneyLevel9Exam;
   level9Exam.apply(manifest);
   const grammarReference=typeof module!=='undefined'&&module.exports?require('./grammar-reference.js'):root.LanguageJourneyGrammarReference;
   grammarReference.apply(manifest);
+  // Orthography belongs to the existing lexeme; it is not a new mastery item.
+  // Japan is first introduced as vocabulary in 12-1-A; its spelling follows in 12-5-A.
+  for(const [id,form,point] of [
+    ['vocab-わたし','私','11-1-A'],['vocab-ひと','人','12-1-A'],
+    ['vocab-でんしゃ','電車','13-1-A'],['vocab-えき','駅','13-1-A'],
+    ['vocab-みず','水','14-1-A'],['vocab-country-japan','日本','12-5-A']
+  ]){const word=manifest.vocabulary.find(item=>item.id===id);if(word)Object.assign(word,{kanjiForm:form,kanjiIntroducedAt:point})}
   const byId=Object.fromEntries(manifest.vocabulary.map(v=>[v.id,v]));
   const lessonById=Object.fromEntries(manifest.lessons.map(l=>[l.id,l]));
   const readingById=Object.fromEntries(manifest.readings.map(r=>[r.id,r]));
@@ -13900,7 +13913,7 @@
     const match=v.introducedAt?.match(/^(\d+)-(\d+)/),level=match?Number(match[1]):4,order=match?Number(match[2]):null;
     const source=manifest.lessons.find(l=>l.level===level&&l.order===order&&[...(l.wordIds||[]),...(l.exampleIds||[])].includes(v.id));
     const lessonId=v.legacyLessonId||source?.id||v.lessonId||(match?`l${match[1]}-${match[2]}`:null);
-    return{id:v.id,jp:v.japanese,kana:v.reading,romaji:v.romaji,meaning:v.meaning,meanings:v.meanings,lessonId,lessonIndex:order?order-1:Number(v.legacyLessonId?.split('-')[1]||1)-1,lessonTitle:v.coreOrContext==='legacy'?legacyLessonTitles[v.legacyLessonId]||'Historische woorden':lessonById[lessonId]?.title||'',level,kanji:v.kanjiForm,kanjiReading:null,legacy:v.coreOrContext==='legacy',introducedAt:v.introducedAt,sourceModuleId:v.introducedAt?.match(/-([AB])$/)?.[1]||source?.module||null,coreOrContext:v.coreOrContext,recallCore:v.coreOrContext==='core'||v.recallCore===true,sourceFound:!!source};
+    return{id:v.id,jp:v.japanese,kana:v.reading,romaji:v.romaji,meaning:v.meaning,meanings:v.meanings,lessonId,lessonIndex:order?order-1:Number(v.legacyLessonId?.split('-')[1]||1)-1,lessonTitle:v.coreOrContext==='legacy'?legacyLessonTitles[v.legacyLessonId]||'Historische woorden':lessonById[lessonId]?.title||'',level,kanji:v.kanjiForm,kanjiReading:v.kanjiForm?v.reading:null,kanjiIntroducedAt:v.kanjiIntroducedAt,legacy:v.coreOrContext==='legacy',introducedAt:v.introducedAt,sourceModuleId:v.introducedAt?.match(/-([AB])$/)?.[1]||source?.module||null,coreOrContext:v.coreOrContext,recallCore:v.coreOrContext==='core'||v.recallCore===true,sourceFound:!!source};
   });
   function pointOrder(point){
     if(point==='foundation-complete'||point==='10-complete')return 10*10000+9999;

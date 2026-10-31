@@ -1736,8 +1736,9 @@ body[data-scene="journey"][data-view="main"] #mainView{
 .kana-card>.audio-speaker{margin-top:6px}
 .knowledge-item>.audio-speaker{margin-right:5px}
 .progress-time-values{text-align:right;min-width:0}.progress-time-values span{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}
+.reading-support{display:inline-block;position:relative;vertical-align:baseline}.reading-support>summary{cursor:pointer;list-style:none;border-bottom:1px dotted currentColor}.reading-support>summary::-webkit-details-marker{display:none}.reading-support>span{display:block;font-size:.72em;line-height:1.25;text-align:center;color:var(--muted)}
 </style>
-<link rel="stylesheet" href="./scenes.css?v=recall-recovery-37851e218b1e526c">
+<link rel="stylesheet" href="./scenes.css?v=recall-recovery-cb1751d6088b036c">
 </head>
 <body data-scene="journey" data-view="main">
 <div id="app" class="app stack">
@@ -1804,26 +1805,26 @@ body[data-scene="journey"][data-view="main"] #mainView{
     <g class="flight-plane" fill="#bf4949"><path d="m0 0 33-7-12 11 3 11-8 2-8-11-14 4-5-5 17-9Z"/></g>
   </svg><strong>Op weg naar Japan</strong></div>
 </div>
-<script src="./locales/nl.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./locales/en.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./locales/de.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./locales/legacy-translations.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./locales/i18n.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./locales/legacy-ui.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./platform.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./navigation.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./scenes.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./language-journey-content/audio-course-readings.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./language-journey-content/audio-foundation.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./assets/audio/ja/manifest.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./audio/playback.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./language-journey-content/thematic-didactics.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./language-journey-content/level11-integration.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./language-journey-content/level9-exam.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./language-journey-content/grammar-reference.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./language-journey-content/content.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./language-journey-content/jlpt-benchmark.js?v=recall-recovery-37851e218b1e526c"></script>
-<script src="./language-journey-content/jlpt-guideline.js?v=recall-recovery-37851e218b1e526c"></script>
+<script src="./locales/nl.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./locales/en.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./locales/de.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./locales/legacy-translations.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./locales/i18n.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./locales/legacy-ui.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./platform.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./navigation.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./scenes.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./language-journey-content/audio-course-readings.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./language-journey-content/audio-foundation.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./assets/audio/ja/manifest.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./audio/playback.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./language-journey-content/thematic-didactics.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./language-journey-content/level11-integration.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./language-journey-content/level9-exam.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./language-journey-content/grammar-reference.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./language-journey-content/content.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./language-journey-content/jlpt-benchmark.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./language-journey-content/jlpt-guideline.js?v=recall-recovery-cb1751d6088b036c"></script>
 <script>
 (() => {
 const platform=window.LanguageJourneyPlatform,preferences=platform.preferences(),i18n=window.LanguageJourneyI18n,scenes=window.LanguageJourneyScenes,navigation=window.LanguageJourneyNavigation;
@@ -2202,6 +2203,30 @@ function japaneseWordHtml(text){
   const value=String(text||''),word=vocabCatalog.find(entry=>!entry.legacy&&entry.jp===value);
   return word&&/[\u3040-\u30ff\u3400-\u9fff]/u.test(value)&&!/[\s。、！？!?]/u.test(value)?`<span class="jp-word" lang="ja">${escapeHtml(value)}</span>`:escapeHtml(value);
 }
+// Explicit exposure only: historical lesson ranks do not unlock a new spelling.
+const sessionKanjiIntroductions={has:id=>(state.kanjiExposureIds||[]).includes(id),add:id=>{if(!state.kanjiExposureIds.includes(id))state.kanjiExposureIds.push(id)}};
+function kanjiReadingHtml(word){return `<details class="reading-support" lang="ja"><summary aria-label="${escapeHtml(word.kanji)} · toon kana">${escapeHtml(word.kanji)}</summary><span>${escapeHtml(word.kana)}</span></details>`}
+function kanjiIntroductionsFor(lesson,part){
+  if(!lesson||part!=='A')return[];
+  const point=`${lesson.level}-${lesson.order}-A`;
+  return vocabCatalog.filter(word=>word.kanjiIntroducedAt===point&&knowledgeWordIsKnown(dictionaryById[word.id]));
+}
+function kanjiWordForToken(token,point=null,contextIds=[]){
+  const matches=vocabCatalog.filter(item=>!item.legacy&&item.jp===token);
+  const word=matches.length===1?matches[0]:matches.find(item=>contextIds.includes(item.id));
+  return word&&sessionKanjiIntroductions.has(word.id)&&word.kanjiIntroducedAt&&(!point||window.LanguageJourneyContent.pointOrder(word.kanjiIntroducedAt)<=window.LanguageJourneyContent.pointOrder(point))?word:null;
+}
+function kanjiTextHtml(text,point=null,interactive=true,contextIds=[]){
+  return String(text||'').split(/(\s+|[。、：！？!?])/u).map(token=>{
+    if(/^\s+$/u.test(token))return token.includes('\n')?token.replace(/\n/g,'<br>'):' ';
+    const word=kanjiWordForToken(token,point,contextIds);
+    return word?(interactive?kanjiReadingHtml(word):escapeHtml(word.kanji)):escapeHtml(token);
+  }).join('');
+}
+function kanjiOptionHelpHtml(text,point=null,contextIds=[]){
+  const words=String(text||'').split(/(\s+|[。、：！？!?])/u).map(token=>kanjiWordForToken(token,point,contextIds)).filter(Boolean);
+  return [...new Map(words.map(word=>[word.id,word])).values()].map(kanjiReadingHtml).join('');
+}
 function dictionaryLessonLabel(entry){
   if(!entry.lessonId)return entry.kind==='woord'?`Vooruitblik · Level ${entry.level}`:`Naslag · Level ${entry.level}`;
   return`${courseLevelLabel(entry.level)} · ${courseLessonLabel(entry.level,(entry.lessonIndex??(langLessons.findIndex(l=>l.id===entry.lessonId)))+1)}`
@@ -2222,7 +2247,7 @@ function dictionaryArticleHtml(entry,context={}){
   const kanaRoleHtml=kanaRole?`<div class="panel small" style="margin-top:10px"><strong>Als kana:</strong> ${escapeHtml(kanaRole.jp)} = klank ${escapeHtml(kanaRole.romaji)}. De grammaticale functie staat hierboven.</div>`:'';
   const senses=entry.senses?.length>1?`<section style="margin-top:12px"><strong>Betekenissen in de cursus</strong><div class="stack" style="margin-top:6px">${entry.senses.map(s=>`<div class="panel"><strong>${escapeHtml(s.meaning)}</strong><div class="small">${escapeHtml(s.description)}</div></div>`).join('')}</div><div class="small" style="margin-top:6px">Kies de betekenis die past bij de zin.</div></section>`:'';
   const examples=entry.examples?.length?`<section style="margin-top:12px"><strong>Voorbeeld uit de cursus</strong><div class="stack" style="margin-top:6px">${entry.examples.map(([jp,nl,note])=>`<div class="panel"><div lang="ja" style="font-weight:700">${grammarExampleHtml(entry,jp)}</div><div>${escapeHtml(nl)}</div><div class="small">${escapeHtml(note)}</div></div>`).join('')}</div></section>`:'';
-  const kanji=entry.kanji?`<div class="small" style="margin-top:4px">Kanji: ${escapeHtml(entry.kanji)} · lezing: ${escapeHtml(entry.kanjiReading||entry.kana)}</div>`:'';
+  const kanji=entry.kanji&&sessionKanjiIntroductions.has(entry.id)?`<div class="small" style="margin-top:4px">Kanji: ${escapeHtml(entry.kanji)} · lezing: ${escapeHtml(entry.kanjiReading||entry.kana)}</div>`:'';
   const kindLabel=entry.kind==='kana'?'Schriftteken / klank':entry.kind==='klankcombinatie'?'Klankcombinatie':entry.kind==='schrijfregel'?'Schrijfregel':entry.kind==='grammatica'?(entry.grammarKind||'Grammaticale functie'):'Cursuswoord';
   const readingLabel=entry.kind==='kana'||entry.kind==='klankcombinatie'?'Lezen':entry.kind==='grammatica'?'Uitspraak in deze grammaticale rol':'Kana-lezing / romaji';
   const readingText=entry.kind==='grammatica'?`${romaji}${entry.jp==='は'?' · los kana: ha':entry.jp==='へ'?' · los kana: he':''}`:entry.kind==='kana'||entry.kind==='klankcombinatie'?romaji:`${entry.kana}${entry.kana!==entry.jp?` · ${entry.kana}`:''} · ${romaji}`;
@@ -2780,6 +2805,7 @@ state.monthLearning={block:0,completed:[],practice:{}};
 state.curriculumHistory={};
 state.thematic={level:11,lessonIndex:0,part:'A',step:'list',questionIndex:0,correct:0,answered:false,selected:null};
 state.thematicCompleted={};
+state.kanjiExposureIds=[];
 state.thematicRevision=1;
 state.historicalIntroducedVocabIds=[];
 state.deferredVocabIntroductions=[];
@@ -3058,6 +3084,7 @@ function storageStateSnapshot(){
     langStep:state.langStep,
     langStepProgress:state.langStepProgress,
     introducedVocabIds:state.introducedVocabIds,
+    kanjiExposureIds:state.kanjiExposureIds,
     instructionKnowledge:state.instructionKnowledge,
     flashcardProgress:state.flashcardProgress,
     flashcardSelection:state.flashcardSelection,
@@ -3201,6 +3228,7 @@ function loadProgress(){
     if(['overview','words','model','understand','build','check'].includes(s.langStep))state.langStep=s.langStep;
     if(s.langStepProgress&&typeof s.langStepProgress==='object')state.langStepProgress=s.langStepProgress;
     if(Array.isArray(s.introducedVocabIds))state.introducedVocabIds=s.introducedVocabIds.filter(id=>!!vocabById[id]);
+    if(Array.isArray(s.kanjiExposureIds))state.kanjiExposureIds=[...new Set(s.kanjiExposureIds.filter(id=>!!vocabById[id]?.kanjiIntroducedAt))];
     if(s.flashcardProgress&&typeof s.flashcardProgress==='object'&&s.flashcardProgress.cards&&typeof s.flashcardProgress.cards==='object'){
       const migrated={};
       Object.entries(s.flashcardProgress.cards).forEach(([key,value])=>{
@@ -4004,9 +4032,10 @@ function renderDidacticLesson(host,lesson,part,reading,done){
   if(step==='words'){
     const blockSize=split?5:3,blocks=Math.max(1,Math.ceil(newWords.length/blockSize));session.wordBlockIndex=Math.min(session.wordBlockIndex||0,blocks-1);
     const words=newWords.slice(session.wordBlockIndex*blockSize,session.wordBlockIndex*blockSize+blockSize);
+    const kanjiIntro=session.wordBlockIndex===0?kanjiIntroductionsFor(lesson,part.part):[];
     for(const v of words){state.deferredVocabIntroductions=state.deferredVocabIntroductions.filter(id=>id!==v.id);if(!state.introducedVocabIds.includes(v.id))state.introducedVocabIds.push(v.id);recordVocabEncounter(v.id)}
-host.innerHTML=`<section class="card"><div class="eyebrow">Woorden · ${session.wordBlockIndex+1}/${blocks}</div><div class="thematic-words${split?' thematic-words-five':''}">${words.map(v=>`<div class="panel audio-content-block"><strong lang="ja">${japaneseWordHtml(v.kana)}</strong>${speakerButtonHtml(v.kana,v.id)}<div class="small">${escapeHtml(v.romaji)} · ${escapeHtml(v.meaning)}</div></div>`).join('')||'<p>Geen nieuwe woorden: je combineert de bekende bouwstenen.</p>'}</div>${nextButton('thematicWordsNext',session.wordBlockIndex+1<blocks?thematicUiLabel('つぎ','Volgende woorden'):thematicUiLabel('れんしゅう','Oefenen'))}</section>`;
-    $('thematicWordsNext').onclick=()=>{if(++session.wordBlockIndex<blocks){scheduleSave();renderMain()}else thematicAdvance(newWords.length?'practice':'sentences')};scheduleSave();return;
+host.innerHTML=`<section class="card"><div class="eyebrow">Woorden · ${session.wordBlockIndex+1}/${blocks}</div>${kanjiIntro.length?`<div class="notice"><strong>Een bekende schrijfwijze</strong><p>Je kent deze woorden al. Je kunt ze ook zo tegenkomen:</p>${kanjiIntro.map(v=>`<div lang="ja">${escapeHtml(v.kana)} → ${escapeHtml(v.kanji)}（${escapeHtml(v.kana)}）</div>`).join('')}<p>Tik later op het woord voor de kana-lezing.</p></div>`:''}<div class="thematic-words${split?' thematic-words-five':''}">${words.map(v=>`<div class="panel audio-content-block"><strong lang="ja">${japaneseWordHtml(v.kana)}</strong>${speakerButtonHtml(v.kana,v.id)}<div class="small">${escapeHtml(v.romaji)} · ${escapeHtml(v.meaning)}</div></div>`).join('')||'<p>Geen nieuwe woorden: je combineert de bekende bouwstenen.</p>'}</div>${nextButton('thematicWordsNext',session.wordBlockIndex+1<blocks?thematicUiLabel('つぎ','Volgende woorden'):thematicUiLabel('れんしゅう','Oefenen'))}</section>`;
+    $('thematicWordsNext').onclick=()=>{kanjiIntro.forEach(word=>sessionKanjiIntroductions.add(word.id));if(++session.wordBlockIndex<blocks){scheduleSave();renderMain()}else thematicAdvance(newWords.length?'practice':'sentences')};scheduleSave();return;
   }
   if(step==='practice'){
     beginWordCrashCourse({hostId:'thematicBody',lesson,words:newWords,returnToLesson:()=>thematicAdvance('lesson'),onComplete:()=>{session.sentenceIndex=0;thematicAdvance('sentences')}});return;
@@ -4064,12 +4093,16 @@ function thematicInstructionHtml(id){
 }
 function thematicChoiceHtml(question,kind,instructionId=null){
   const answered=state.thematic.answered,chosen=state.thematic.selected,answerAudio=answered&&quizTextIsJapanese(question.answer)?speakerButtonHtml(question.answer,question.wordId||question.answerAudioKey,'Luister naar het juiste antwoord'):'',promptAudio=answerAudio?'':quizTextIsJapanese(question.prompt)?speakerButtonHtml(question.prompt,question.wordId||question.promptAudioKey):'';
-  return`<section class="card"><div class="eyebrow">${kind}</div>${thematicInstructionHtml(instructionId)}<div class="audio-content-block h2${hasJapaneseText(question.prompt)?' jp-question-copy':''}">${japaneseWordHtml(question.prompt)}${promptAudio}</div><div class="thematic-choices">${question.choices.map((choice,index)=>`<div class="answer-option-row"><button class="btn thematic-choice${hasJapaneseText(choice)?' thematic-choice-jp':''} ${answered&&choice===question.answer?'is-correct':answered&&choice===chosen?'is-incorrect':''}" data-thematic-choice="${index}" ${answered?'disabled':''}>${japaneseWordHtml(choice)}</button>${answerOptionAudioHtml(choice,question.wordId||question.choiceAudioKeys?.[choice]||[])}</div>`).join('')}</div>${answered?`<div class="notice audio-content-block" role="status">${chosen===question.answer?thematicUiLabel('ただしい','Goed!'):`${thematicUiLabel('まちがい','Niet goed')} · ${thematicUiLabel('こたえ','Juiste antwoord')}: ${japaneseWordHtml(question.answer)}.`}${answerAudio}</div><button class="btn primary" id="thematicNext" style="width:100%;margin-top:10px">${thematicUiLabel('つぎ','Volgende')} →</button>`:''}</section>`;
+  const lesson=thematicLesson(),point=lesson?`${lesson.level}-${lesson.order}-${state.thematic.part}`:null;
+  return`<section class="card"><div class="eyebrow">${kind}</div>${thematicInstructionHtml(instructionId)}<div class="audio-content-block h2${hasJapaneseText(question.prompt)?' jp-question-copy':''}">${kanjiTextHtml(question.prompt,point)}${promptAudio}</div><div class="thematic-choices">${question.choices.map((choice,index)=>`<div class="answer-option-row"><button class="btn thematic-choice${hasJapaneseText(choice)?' thematic-choice-jp':''} ${answered&&choice===question.answer?'is-correct':answered&&choice===chosen?'is-incorrect':''}" data-thematic-choice="${index}" ${answered?'disabled':''}>${kanjiTextHtml(choice,point,false)}</button>${kanjiOptionHelpHtml(choice,point)}${answerOptionAudioHtml(choice,question.wordId||question.choiceAudioKeys?.[choice]||[])}</div>`).join('')}</div>${answered?`<div class="notice audio-content-block" role="status">${chosen===question.answer?thematicUiLabel('ただしい','Goed!'):`${thematicUiLabel('まちがい','Niet goed')} · ${thematicUiLabel('こたえ','Juiste antwoord')}: ${kanjiTextHtml(question.answer,point)}.`}${answerAudio}</div><button class="btn primary" id="thematicNext" style="width:100%;margin-top:10px">${thematicUiLabel('つぎ','Volgende')} →</button>`:''}</section>`;
 }
 function thematicReadingHtml(text){
+  const lesson=thematicLesson(),point=lesson?`${lesson.level}-${lesson.order}-${state.thematic.part}`:null;
+  const contextIds=lesson?.id==='l12-5'&&state.thematic.part==='A'?['vocab-country-japan']:[];
   return text.split(/(\s+|[。、：])/u).map(token=>{
     if(!token.trim())return token.includes('\n')?token.replace(/\n/g,'<br>'):' ';
     const matches=vocabCatalog.filter(item=>!item.legacy&&item.jp===token),word=matches.findLast(item=>state.introducedVocabIds.includes(item.id))||matches[0];
+    const kanji=point&&kanjiWordForToken(token,point,contextIds);if(kanji)return kanjiReadingHtml(kanji);
     return word?`<button type="button" class="thematic-token" data-dictionary-open="${escapeHtml(word.id)}">${escapeHtml(token)}</button>`:escapeHtml(token);
   }).join('');
 }
@@ -4803,7 +4836,7 @@ function advanceWordCrashCourse(){
   if(course.index<course.queue.length-1){course.index++;return renderWordCrashCourse()}
   course.phase='summary';renderWordCrashCourse();return true;
 }
-function modelAnalysisHtml(model,lessonId=''){return`<div class="model-sentence audio-content-block">${escapeHtml(model.sentence)} ${speakerButtonHtml(model.sentence,model.sentenceId,'Luister naar de voorbeeldzin')}</div><div class="sentence-analysis">${model.parts.map(([token,role,gloss])=>{const entry=dictionaryEntryForToken(token,lessonId);return`<div class="sentence-part"><div class="token">${entry?dictionaryButton(entry.id,lessonId,model.sentence,model.meaning):escapeHtml(token)}</div><div class="role">${escapeHtml(role)}</div><div class="gloss">${escapeHtml(gloss)}</div></div>`}).join('')}</div><div class="small" style="text-align:center;margin-top:9px">${escapeHtml(model.meaning)}</div>${model.dialogueId?dialogueHtml(model.dialogueId):''}`}
+function modelAnalysisHtml(model,lessonId=''){const lesson=state.screen==='module'?thematicLesson():null,point=lesson?.id===lessonId?`${lesson.level}-${lesson.order}-${state.thematic.part}`:null;return`<div class="model-sentence audio-content-block">${point?kanjiTextHtml(model.sentence,point):escapeHtml(model.sentence)} ${speakerButtonHtml(model.sentence,model.sentenceId,'Luister naar de voorbeeldzin')}</div><div class="sentence-analysis">${model.parts.map(([token,role,gloss])=>{const entry=dictionaryEntryForToken(token,lessonId);return`<div class="sentence-part"><div class="token">${entry?dictionaryButton(entry.id,lessonId,model.sentence,model.meaning):escapeHtml(token)}</div><div class="role">${escapeHtml(role)}</div><div class="gloss">${escapeHtml(gloss)}</div></div>`}).join('')}</div><div class="small" style="text-align:center;margin-top:9px">${escapeHtml(model.meaning)}</div>${model.dialogueId?dialogueHtml(model.dialogueId):''}`}
 function renderLanguageModel(l,index){const didactic=level4Didactics[index],words=lessonNewWords(l),count=wordCrashCourseDeck(words).length;$('langStepBody').innerHTML=`<section class="card"><div class="eyebrow">Stap 2 · uitleg + oefenen</div><div class="h2">${l.pattern}</div><div class="notice" style="margin-top:9px">${l.grammar}</div><div class="small" style="margin-top:8px"><strong>Let op:</strong> ${didactic.watch}</div>${l.spaceNote?'<div class="small" style="margin-top:5px">De spaties zijn een leerhulpmiddel; gewone Japanse tekst gebruikt ze meestal niet.</div>':''}<div id="modelList" class="stack" style="margin-top:10px"></div><button id="modelNext" class="btn primary" style="width:100%;margin-top:12px">${words.length?`Start Oefenen · ${count} woordvragen`:'Naar Lestoets →'}</button></section>`;const host=$('modelList');l.models.slice(0,MAX_LEVEL4_MODEL_SENTENCES).forEach(model=>{const d=document.createElement('div');d.className='panel';d.innerHTML=modelAnalysisHtml(model,l.id);host.appendChild(d)});$('modelNext').onclick=()=>{const complete=()=>{markLanguageStep(l.id,'practice');state.langStep='check';scheduleSave();renderMain()};if(!words.length)return complete();beginWordCrashCourse({hostId:'langStepBody',lesson:l,words,returnToLesson:()=>renderMain(),onComplete:complete})}}
 function understandingQuestions(l,index=langLessons.indexOf(l)){return selectQuestionsWithCoverage(l,level4QuestionBank(index).filter(q=>q.kind!=='build'),10,'Level 4-begripsoefening')}
 function languagePracticeQuestions(l,index){
@@ -4853,7 +4886,13 @@ function smallExamSoundChoices(lesson,form,reading){
 function smallExamQuestionPool(lesson){
   const questions=smallQuestionPool(lesson);
   return questions.map(question=>{
-    const generated=question.sourceId?.startsWith(`generated-${lesson.id}-kana-`),goal=question.targetGoalIds?.find(id=>id.startsWith('kana:')),item=generated&&lesson.newItems.find(([form])=>`kana:${form}`===goal);
+    const goal=question.targetGoalIds?.find(id=>id.startsWith('kana:'));
+    if(!goal)return question;
+    const item=smallLessons.flatMap(itemLesson=>itemLesson.newItems||[]).find(([form])=>`kana:${form}`===goal)
+      ||smallLessons.flatMap(itemLesson=>itemLesson.newItems||[]).find(([form,reading])=>{
+        const evidence=[question.prompt,question.correct,question.context,...(question.choices||[])].join(' ');
+        return evidence.includes(form)||evidence.includes(reading);
+      });
     if(!item)return question;
     const[form,reading]=item,smallStop=/^[っッ]$/.test(form),longVowel=form==='ー';
     return{...question,kind:'mc',prompt:form,correct:reading,choices:smallExamSoundChoices(lesson,form,reading),instruction:smallStop?'Wat doet dit teken in de uitspraak?':longVowel?'Hoe verandert dit teken de uitspraak?':'Hoe spreek je dit uit?',category:'kana',promptAudio:false,sourceId:`exam-${lesson.id}-kana-sound-${form}`};
@@ -5060,21 +5099,21 @@ function advancedExamQuestionCounts(c,total=25){if(c.number<=10){const questions
 function advancedExamQuestions(c,l,index,count=5){const pool=l.examQuestions?l.examQuestions.map(raw=>lessonQuestion(raw,l)):advancedQuestionPool(c,l,index).current;return c.number<=10?buildWordCoveredExam([l],()=>pool,Math.max(count,10),`Level ${c.number}-examen`):selectQuestionsWithCoverage(l,pool,count,`Level ${c.number}-examen`)}
 function buildAdvancedExamQuestions(c){if(c.number===9)return buildLevel9ExamQuestions(c);if(c.number>10){const counts=advancedExamQuestionCounts(c),questions=c.lessons.flatMap((lesson,index)=>advancedExamQuestions(c,lesson,index,counts[index]));assertLevelCoverage(c.lessons,questions,`Level ${c.number}-examen`);return shuffle(questions)}return buildWordCoveredExam(c.lessons,(lesson,index)=>lesson.examQuestions?lesson.examQuestions.map(raw=>lessonQuestion(raw,lesson)):advancedQuestionPool(c,lesson,index).current,examQuestionBudget(c.number),`Level ${c.number}-examen`)}
 function buildLevel9ExamQuestions(course){
-  const pools=new Map(course.lessons.map(lesson=>{
-    const rows=window.LanguageJourneyContent.manifest.level9ExamBank.filter(q=>q.lessonId===lesson.id),frames=[...new Set(rows.map(q=>q.examFrame))];
-    return[lesson.id,frames.flatMap(frame=>shuffle(rows.filter(q=>q.examFrame===frame)).slice(0,2)).map(raw=>({...lessonQuestion(raw,lesson),examFrame:raw.examFrame,translation:raw.translation,usedVocabIds:raw.usedVocabIds}))];
-  }));
-  const questions=buildWordCoveredExam(course.lessons,lesson=>pools.get(lesson.id),examQuestionBudget(9),'Level 9-examen');
-  // Six per lesson, retaining the shared lexical quota and both grammar goals.
-  for(const lesson of course.lessons)while(questions.filter(q=>q.lessonId===lesson.id).length<6){
-    const candidate=pools.get(lesson.id).find(q=>!questions.some(selected=>selected.sourceId===q.sourceId));
-    const donor=questions.findIndex(q=>!q.targetWordId&&questions.filter(item=>item.lessonId===q.lessonId).length>6);
-    if(!candidate||donor<0)throw Error('Level 9: de lesverdeling past niet in het budget');
-    questions.splice(donor,1,{...candidate,examPart:'context'});
-  }
-  for(const q of questions.filter(q=>q.targetWordId)){
-    const words=lessonNewWords(course.lessons.find(l=>l.id===q.lessonId)),alternatives=shuffle(words.filter(w=>w.id!==q.targetWordId)).slice(0,2).map(w=>q.targetDirection==='jp-nl'?w.meaning:w.jp);
-    q.choices=shuffle([q.correct,...alternatives]);
+  const manifest=window.LanguageJourneyContent.manifest,exam=globalThis.LanguageJourneyLevel9Exam;
+  const questions=exam.selectContexts(manifest,shuffle).map(raw=>{
+    const lesson=course.lessons.find(l=>l.id===raw.lessonId);
+    return{...lessonQuestion(raw,lesson),examPart:'context',examFrame:raw.examFrame,examSituationIds:[...raw.examSituationIds],targetVocabIds:[...raw.targetVocabIds],translation:raw.translation,usedVocabIds:[...raw.usedVocabIds]};
+  });
+  // Reserve context contrasts first; sample each remaining word slot once.
+  let direction=Math.random()<.5?'jp-nl':'nl-jp';
+  for(const lesson of shuffle(course.lessons)){
+    const words=lessonNewWords(lesson),count=6-questions.filter(q=>q.lessonId===lesson.id).length;
+    for(const word of shuffle(words).slice(0,count)){
+      const selected=[word,...shuffle(words.filter(w=>w.id!==word.id)).slice(0,2)],correct=direction==='jp-nl'?word.meaning:word.jp;
+      const raw={kind:'mc',prompt:direction==='jp-nl'?word.jp:word.meaning,correct,choices:selected.map(w=>direction==='jp-nl'?w.meaning:w.jp),category:'vocab',instruction:direction==='jp-nl'?'Japans → Nederlands':'Nederlands → Japans',sourceId:`exam-${word.id}-${direction}`,targetLemmaIds:[word.id],targetGoalIds:[`vocab:${word.id}`]};
+      questions.push({...lessonQuestion(raw,lesson),targetWordId:word.id,targetDirection:direction,targetVocabIds:[word.id],usedVocabIds:selected.map(w=>w.id),examPart:'vocab'});
+      direction=direction==='jp-nl'?'nl-jp':'jp-nl';
+    }
   }
   assertCompactExam(course.lessons,questions,30,'Level 9-examen');return shuffle(questions);
 }
@@ -5296,6 +5335,7 @@ function startQuiz(cfg){beginStudySession(quizStudyMeta(cfg));state.lastConfig=c
 function currentQ(){return state.quiz.questions[state.quiz.index]}
 function revealQuizOptions(){const c=state.quiz;if(!c||c.optionsRevealed)return false;c.optionsRevealed=true;c.answerUnlockAt=Date.now()+180;const box=$('qChoices');box.classList.remove('quiz-options-hidden');box.querySelector('.quiz-options-reveal')?.remove();return true}
 function hideQuizOptions(box){const c=state.quiz;if(!c||!box.querySelector('button'))return;c.optionsRevealed=false;c.answerUnlockAt=0;box.classList.add('quiz-options-hidden');const reveal=document.createElement('button');reveal.type='button';reveal.className='quiz-options-reveal';reveal.textContent='Toon antwoorden';reveal.setAttribute('aria-label','Toon antwoorden');reveal.onclick=event=>{event.preventDefault();event.stopPropagation();revealQuizOptions()};box.appendChild(reveal)}
+function quizKanjiPoint(q){const lesson=window.LanguageJourneyContent.manifest.lessons.find(item=>item.id===q?.lessonId);return lesson?.level>=11?`${lesson.level}-${lesson.order}-B`:null}
 function quizAudioKey(q,text,position='prompt'){
   if(position==='choice')return q.choiceAudioKeys?.[text]||q.optionAudioKeys?.[text]||answerOptionAudioKey(text,[q.wordId,q.vocabId,...(q.vocabIds||[])].filter(Boolean));
   const explicit=position==='context'?q.contextAudioKey||q.readingId:position==='answer'?q.correctAudioKey||q.answerAudioKey:q.promptAudioKey||q.audioKey;
@@ -5319,7 +5359,7 @@ function quizAnswerAudioHtml(q,correct){
   return speakerButtonHtml(correct,quizAudioKey(q,correct,'answer'),'Luister naar het juiste antwoord');
 }
 function quizMetaText(c=state.quiz){return c?.official?'':'Vrij oefenen / snelle check · geen rankstap.'}
-function renderQuestion(){if(quizFeedbackTimer)clearTimeout(quizFeedbackTimer);quizFeedbackTimer=null;quizAnswerToken++;hideAvatarAudioOverlay(false);const c=state.quiz,q=currentQ();(q.vocabIds||[]).forEach(recordVocabEncounter);$('quizTitle').textContent=c.title;$('quizMeta').textContent=quizMetaText(c);$('qNow').textContent=c.index+1;$('qTotal').textContent=c.questions.length;$('qBar').style.width=(c.index/c.questions.length*100)+'%';$('qScore').textContent='Goed: '+c.score;$('qFeedback').textContent='';$('qHint').textContent='';$('qContext').textContent=q.context||'';$('qContext').classList.toggle('hidden',!q.context);$('qContext').classList.toggle('question-context--jp',q.contextLanguage==='ja');$('qContext').classList.toggle('question-context--schedule',q.contextPresentation==='schedule');$('qPrompt').className='prompt';$('qPrompt').classList.toggle('prompt--schedule',q.contextPresentation==='schedule');$('qPrompt').removeAttribute('style');$('qPromptAudio').innerHTML='';$('qCorrectAudio').innerHTML='';$('qCorrectAudio').dataset.autoNext='false';const box=$('qChoices');box.className='choices';box.removeAttribute('style');box.innerHTML='';if(q.type==='kana')renderKanaQ(c,q,box);else if(q.type==='scriptReverse')renderScriptReverseQ(c,q,box);else if(q.type==='number')renderNumberQ(c,q,box);else if(q.type==='math')renderMathQ(c,q,box);else renderLessonQ(c,q,box);applyQuizQuestionDisplay(q);hideQuizOptions(box);const prompt=$('qPrompt').textContent.trim(),context=$('qContext').textContent.trim();const contextAudio=quizTextIsJapanese(context)&&speakerButtonHtml(context,quizAudioKey(q,context,'context'));$('qPromptAudio').innerHTML=q.kind==='build'?'':contextAudio||(q.promptAudio===false&&!quizTextIsJapanese(prompt)?'':speakerButtonHtml(prompt,quizAudioKey(q,prompt)));updateQuizAvatar()}
+function renderQuestion(){if(quizFeedbackTimer)clearTimeout(quizFeedbackTimer);quizFeedbackTimer=null;quizAnswerToken++;hideAvatarAudioOverlay(false);const c=state.quiz,q=currentQ();(q.vocabIds||[]).forEach(recordVocabEncounter);$('quizTitle').textContent=c.title;$('quizMeta').textContent=quizMetaText(c);$('qNow').textContent=c.index+1;$('qTotal').textContent=c.questions.length;$('qBar').style.width=(c.index/c.questions.length*100)+'%';$('qScore').textContent='Goed: '+c.score;$('qFeedback').textContent='';$('qHint').textContent='';$('qContext').textContent=q.context||'';$('qContext').classList.toggle('hidden',!q.context);$('qContext').classList.toggle('question-context--jp',q.contextLanguage==='ja');$('qContext').classList.toggle('question-context--schedule',q.contextPresentation==='schedule');$('qPrompt').className='prompt';$('qPrompt').classList.toggle('prompt--schedule',q.contextPresentation==='schedule');$('qPrompt').removeAttribute('style');$('qPromptAudio').innerHTML='';$('qCorrectAudio').innerHTML='';$('qCorrectAudio').dataset.autoNext='false';const box=$('qChoices');box.className='choices';box.removeAttribute('style');box.innerHTML='';if(q.type==='kana')renderKanaQ(c,q,box);else if(q.type==='scriptReverse')renderScriptReverseQ(c,q,box);else if(q.type==='number')renderNumberQ(c,q,box);else if(q.type==='math')renderMathQ(c,q,box);else renderLessonQ(c,q,box);applyQuizQuestionDisplay(q);hideQuizOptions(box);const prompt=$('qPrompt').textContent.trim(),context=$('qContext').textContent.trim();const contextAudio=quizTextIsJapanese(context)&&speakerButtonHtml(context,quizAudioKey(q,context,'context'));$('qPromptAudio').innerHTML=q.kind==='build'?'':contextAudio||(q.promptAudio===false&&!quizTextIsJapanese(prompt)?'':speakerButtonHtml(prompt,quizAudioKey(q,prompt)));const point=quizKanjiPoint(q);if(point){$('qPrompt').innerHTML=kanjiTextHtml(prompt,point);$('qContext').innerHTML=kanjiTextHtml(context,point,true,q.lessonId==='l12-5'?['vocab-country-japan']:[])}updateQuizAvatar()}
 function quizTextIsJapanese(text){return /[\u3040-\u30ff\u3400-\u9fff]/u.test(text)&&!/[a-z\u00c0-\u024f]{2,}/iu.test(text)}
 function quizQuestionDisplay(q,hint,prompt,lesson=null){
   const normalize=text=>String(text||'').trim().replace(/\s+/g,' ');
@@ -5424,9 +5464,9 @@ function lessonQuestionInstruction(q){
 }
 function renderLessonQ(c,q,box){if(q.kind==='build')return renderBuilderQuizQ(c,q,box);box.classList.add('choices-text');$('qHint').textContent=c.source==='small'?`Level 5 · ${lessonQuestionInstruction(q)}`:lessonQuestionInstruction(q);$('qPrompt').classList.toggle('prompt--example',q.kind!=='mc');$('qPrompt').textContent=q.prompt;const accepted=q.accepted?.length?q.accepted:[q.correct];q.choices.forEach(ch=>addChoice(box,ch,accepted.includes(ch)))}
 function renderBuilderQuizQ(c,q,box){let selected=[];$('qHint').textContent=c.source==='small'?`Level 5 · ${lessonQuestionInstruction(q)}`:lessonQuestionInstruction(q);$('qPrompt').classList.add('prompt--example');$('qPrompt').textContent=q.prompt;box.className='';const draw=()=>{box.innerHTML='<div id="quizBuilderAnswer" class="builder-answer"></div><div id="quizBuilderBank" class="builder-bank"></div><button id="quizBuilderCheck" class="btn primary" style="width:100%;margin-top:10px">Controleer</button>';const answerBox=$('quizBuilderAnswer'),bank=$('quizBuilderBank');if(!selected.length)answerBox.innerHTML='<span class="builder-placeholder">Je zin verschijnt hier…</span>';selected.forEach((entry,i)=>{const b=document.createElement('button');b.className='sentence-chip placed';b.textContent=entry.text;b.onclick=()=>{selected.splice(i,1);draw()};answerBox.appendChild(b)});q.choices.forEach((text,pos)=>{if(selected.some(x=>x.pos===pos))return;const b=document.createElement('button');b.className='sentence-chip';b.textContent=text;b.onclick=()=>{selected.push({text,pos});draw()};bank.appendChild(b)});$('quizBuilderCheck').disabled=!selected.length;$('quizBuilderCheck').onclick=()=>{const made=selected.map(x=>x.text).join(' '),accepted=q.accepted?.length?q.accepted:[q.correct];answer(accepted.includes(made),$('quizBuilderCheck'),made||'geen antwoord')}};draw()}
-function addChoice(box,text,ok){const row=document.createElement('div');row.className='answer-option-row';const b=document.createElement('button');b.className='choice';if(/[\u3040-\u30ff\u3400-\u9fff]/u.test(String(text)))b.classList.add('choice-jp');b.dataset.correct=ok?'1':'0';b.innerHTML=japaneseWordHtml(text);b.onclick=()=>answer(ok,b,text);row.appendChild(b);const audio=document.createElement('span');audio.innerHTML=answerOptionAudioHtml(text,quizAudioKey(currentQ(),text,'choice'));if(audio.firstElementChild)row.appendChild(audio.firstElementChild);box.appendChild(row)}
+function addChoice(box,text,ok){const row=document.createElement('div');row.className='answer-option-row';const b=document.createElement('button');b.className='choice';if(/[\u3040-\u30ff\u3400-\u9fff]/u.test(String(text)))b.classList.add('choice-jp');b.dataset.correct=ok?'1':'0';const point=quizKanjiPoint(currentQ());b.innerHTML=point?kanjiTextHtml(text,point,false):japaneseWordHtml(text);b.onclick=()=>answer(ok,b,text);row.appendChild(b);if(point)row.insertAdjacentHTML('beforeend',kanjiOptionHelpHtml(text,point));const audio=document.createElement('span');audio.innerHTML=answerOptionAudioHtml(text,quizAudioKey(currentQ(),text,'choice'));if(audio.firstElementChild)row.appendChild(audio.firstElementChild);box.appendChild(row)}
 function qData(q){if(q.type==='kana')return{asked:q.mode==='forward'?q.item.front:hasDakutenSourceContext(q)?dakutenReversePrompt(q.item):q.item.back,correct:q.mode==='forward'?q.item.back:q.item.front,detail:`${q.item.base?`${q.item.base} → `:''}${q.item.front} ↔ ${q.item.back}`};if(q.type==='scriptReverse')return{asked:hasDakutenSourceContext(q)?dakutenReversePrompt(q.item):`${q.item.back} · ${q.script}`,correct:q.item.front,detail:`${q.item.base?`${q.item.base} → `:''}${q.item.front} ↔ ${q.item.back}`};if(q.type==='number')return{asked:fieldText(q.item,q.from),correct:fieldText(q.item,q.to),detail:`${q.item.symbol} ↔ ${q.item.valueText} ↔ ${q.item.reading}`};if(q.type==='math')return{asked:`${numberSymbol(q.a)} ${q.op} ${numberSymbol(q.b)}`,correct:numberSymbol(q.answer),detail:`${numberSymbol(q.answer)} ↔ ${q.answer} ↔ ${numberReading(q.answer)}`};return{asked:[q.context,q.prompt].filter(Boolean).join('\n'),correct:q.correct,detail:q.correct}}
-function answer(ok,b,chosen){const c=state.quiz;if(!c?.optionsRevealed||Date.now()<(c.answerUnlockAt||0))return false;const q=currentQ(),answerToken=++quizAnswerToken;hideAvatarAudioOverlay(false);c.optionsRevealed=false;[...$('qChoices').querySelectorAll('button')].forEach(x=>x.disabled=true);recordQuestionMastery(q,ok,c);if(ok){c.score++;if(c.errorBankPractice)resolveErrorBank(c.source,q);b.classList.add('correct');$('qFeedback').innerHTML='<div class="feedback-message">✓ Goed</div>';playCorrectAnswerSound();const correct=qData(q).correct;$('qCorrectAudio').dataset.autoNext='true';$('qCorrectAudio').innerHTML=speakerButtonHtml(correct,quizAudioKey(q,correct,'answer'),'Luister naar het juiste antwoord');if($('qCorrectAudio').innerHTML)$('qPromptAudio').innerHTML='';c.index++;scheduleQuestionAdvance(nextQuestion,()=>state.quiz===c)}else{const d=qData(q);c.mistakes.push({number:c.index+1,chosen,...d,source:c.source,question:q});b.classList.add('incorrect');[...$('qChoices').querySelectorAll('button')].forEach(x=>{if(x.dataset.correct==='1')x.classList.add('correct')});$('qFeedback').innerHTML=`<div class="feedback-message">Niet goed · juist is <strong>${escapeHtml(d.correct)}</strong></div>`;$('qCorrectAudio').dataset.autoNext='false';$('qCorrectAudio').innerHTML=quizAnswerAudioHtml(q,d.correct);if($('qCorrectAudio').innerHTML)$('qPromptAudio').innerHTML='';c.index++;const next=document.createElement('button');next.type='button';next.className='btn primary feedback-next';next.textContent='Volgende vraag →';next.onclick=()=>{if(answerToken!==quizAnswerToken)return;cancelQuestionAdvance();nextQuestion()};$('qFeedback').appendChild(next)}updateQuizAvatar(ok);$('qBar').style.width=(c.index/c.questions.length*100)+'%';scheduleSave();return true}
+function answer(ok,b,chosen){const c=state.quiz;if(!c?.optionsRevealed||Date.now()<(c.answerUnlockAt||0))return false;const q=currentQ(),answerToken=++quizAnswerToken;hideAvatarAudioOverlay(false);c.optionsRevealed=false;[...$('qChoices').querySelectorAll('button')].forEach(x=>x.disabled=true);recordQuestionMastery(q,ok,c);if(ok){c.score++;if(c.errorBankPractice)resolveErrorBank(c.source,q);b.classList.add('correct');$('qFeedback').innerHTML='<div class="feedback-message">✓ Goed</div>';playCorrectAnswerSound();const correct=qData(q).correct;$('qCorrectAudio').dataset.autoNext='true';$('qCorrectAudio').innerHTML=speakerButtonHtml(correct,quizAudioKey(q,correct,'answer'),'Luister naar het juiste antwoord');if($('qCorrectAudio').innerHTML)$('qPromptAudio').innerHTML='';c.index++;scheduleQuestionAdvance(nextQuestion,()=>state.quiz===c)}else{const d=qData(q);c.mistakes.push({number:c.index+1,chosen,...d,source:c.source,question:q});b.classList.add('incorrect');[...$('qChoices').querySelectorAll('button')].forEach(x=>{if(x.dataset.correct==='1')x.classList.add('correct')});$('qFeedback').innerHTML=`<div class="feedback-message">Niet goed · juist is <strong>${quizKanjiPoint(q)?kanjiTextHtml(d.correct,quizKanjiPoint(q)):escapeHtml(d.correct)}</strong></div>`;$('qCorrectAudio').dataset.autoNext='false';$('qCorrectAudio').innerHTML=quizAnswerAudioHtml(q,d.correct);if($('qCorrectAudio').innerHTML)$('qPromptAudio').innerHTML='';c.index++;const next=document.createElement('button');next.type='button';next.className='btn primary feedback-next';next.textContent='Volgende vraag →';next.onclick=()=>{if(answerToken!==quizAnswerToken)return;cancelQuestionAdvance();nextQuestion()};$('qFeedback').appendChild(next)}updateQuizAvatar(ok);$('qBar').style.width=(c.index/c.questions.length*100)+'%';scheduleSave();return true}
 function nextQuestion(){if(state.quiz.index>=state.quiz.questions.length)finishQuiz();else renderQuestion()}
 function finishQuiz(){const c=state.quiz,acc=c.score/c.questions.length;c.passed=acc>=(c.rankThreshold??.9);c.newWordCount=registerPassedLevelExamWords(c);let rr=null;if(c.official&&c.rankId)rr=applyRank(c.rankId,acc,c.rankThreshold??.9);if(state.lastErrors[c.source])state.lastErrors[c.source]=[...c.mistakes];mergeErrorBank(c.source,c.mistakes);const study=completeStudySession({status:'afgerond',result:{score:c.score,total:c.questions.length,accuracy:acc,passed:c.passed}});show('result');$('resultTitle').textContent=c.title;$('resultScore').textContent=`${c.score} / ${c.questions.length}`;$('resultStats').textContent=`Goed: ${c.score} · Fout: ${c.questions.length-c.score} · Nauwkeurigheid: ${pct(acc)}`;if(rr){$('resultRank').classList.remove('hidden');$('resultRank').innerHTML=`${c.rankId&&/-row-/.test(c.rankId)?'Rijrank':'Sessierank'}: <strong>${rankText(rr.next)}</strong>${rr.prev!==rr.next?` · vorige: ${rankText(rr.prev)}`:''}. Een succesvolle volledige toets stijgt maximaal één stap.`}else $('resultRank').classList.add('hidden');$('resultAvatarAssist').innerHTML=avatarAssistHtml({pose:c.passed?'celebrate':'encourage',size:'medium',message:c.passed?'Mooi gedaan!':'Je bent aan het leren.',detail:c.passed?'Neem je resultaat even in je op.':'Bekijk je fouten en probeer het opnieuw.',celebrationTap:c.passed});renderErrors(c.mistakes);$('practiceErrors').disabled=!c.mistakes.length;configureNext(c);recordLevel11IntegrationPass(c);if(study)renderStudyAdjustment(study.id);saveProgress()}
 function renderErrors(errors){const box=$('errorList');box.innerHTML='';$('errorIntro').textContent=errors.length?'Score blijft staan. Bekijk kort wat misging.':'Geen fouten.';if(!errors.length){box.innerHTML='<div class="panel">Alles correct.</div>';return}errors.forEach(e=>{const d=document.createElement('div');d.className='error';const asked=escapeHtml(e.asked||'').replace(/\n/g,'<br>');d.innerHTML=`<div class="small">Vraag ${e.number}</div><div style="font-weight:750;margin-top:4px">${asked}</div><div style="margin-top:5px">Jouw antwoord: ${escapeHtml(e.chosen||'')}</div><div>Correct: <strong>${escapeHtml(e.correct||'')}</strong></div><div class="small" style="margin-top:4px">${escapeHtml(e.detail||'')}</div>`;box.appendChild(d)})}
@@ -5993,7 +6033,7 @@ const item=s.queue[s.position],card=vocabById[item.cardId],direction=item.direct
   item.answerChoices=choices;
   const scheduled=s.mode!=='free',done=scheduled?s.knew+s.again:s.position-(s.skipped||0),feedback=s.feedback,correctAnswers=flashcardCorrectAnswers(card,direction),answerFeedback=flashcardAnswerFeedback(choices,correctAnswers,feedback),correctChoice=answerFeedback.correctAnswer;
   if(direction==='jp-nl'||s.revealed)recordVocabEncounter(card.id);
-  $('flashcardView').innerHTML=`<section class="card"><div class="between"><div><div class="eyebrow">${t(direction==='jp-nl'?'flashcards.direction.jpNl':'flashcards.direction.nlJp')} · ${scheduled?'geplande herhaling':'Vrij oefenen'} · ${courseLevelLabel(card.level)} · ${courseLessonLabel(card.level,card.lessonIndex+1)} · ${displayedLessonTitle(card.lessonId,card.lessonTitle)}</div><div class="small">Kaart ${Math.min(s.position+1,s.queue.length)} van ${s.queue.length} · ${done} ${scheduled?'beoordeeld':'bekeken'}</div></div>${preview?'<span class="rank">Voorproefje</span>':''}</div><div class="progress" style="margin-top:9px"><div style="width:${Math.min(100,done/Math.max(1,s.queue.length)*100)}%"></div></div></section><section class="card"><div class="flashcard-avatar">${avatarAssistHtml({pose:feedback?(answerFeedback.selectedAnswer===correctChoice?'celebrate':'encourage'):nextAvatarMood(),message:feedback?(feedback.ungraded?'Vrij oefenen — je herhaalplanning is niet gewijzigd.':answerFeedback.selectedAnswer===correctChoice?'Goed!':'Niet goed'):'Denk rustig na over dit woord.'})}</div><div class="flashcard-front"><div><div class="flashcard-face-main">${japaneseWordHtml(front)}</div><div class="flashcard-face-sub">${direction==='jp-nl'?'Kies de Nederlandse betekenis':'Kies het Japanse woord in kana'}</div></div></div><div class="flashcard-answer-options"><div class="small">${feedback?(feedback.ungraded?'Vrij geoefend — geen wijziging aan de herhaalplanning.':'Antwoord nagekeken:'):'Kies je antwoord:'}</div>${choices.map((answer,index)=>{const answerState=flashcardAnswerState(answer,answerFeedback),selected=answer===answerFeedback.selectedAnswer;return`<div class="answer-option-row"><button class="btn flashcard-answer-choice${answerState==='correct'?' is-correct':answerState==='incorrect'?' is-incorrect':''}" data-fc-answer="${index}" ${feedback?'disabled':''} ${selected?'aria-pressed="true"':''}>${japaneseWordHtml(answer)}</button>${!feedback&&s.optionsRevealed?answerOptionAudioHtml(answer,eligiblePool.filter(option=>option.kana===answer).map(option=>option.id)):''}</div>`}).join('')}</div><div class="flashcard-feedback-status" role="status" aria-live="polite">${escapeHtml(flashcardAnswerFeedbackText(answerFeedback).split("\n")[0])}${feedback?`<div class="recall-source">Juiste antwoord: ${dictionaryButton(card.id,card.lessonId,card.kana,card.meaning)} · ${escapeHtml(card.meaning)}<div class="small">Geïntroduceerd in ${courseLevelLabel(card.level)} · ${courseLessonLabel(card.level,card.lessonIndex+1)} · ${escapeHtml(displayedLessonTitle(card.lessonId,card.lessonTitle))}</div></div>`:''}</div><div class="flashcard-actions" style="margin-top:12px"><button id="fcSkip" class="btn" ${feedback?'disabled':''}>Sla over</button><button id="fcPause" class="btn" style="grid-column:1/-1">Onderbreek sessie</button></div>${record?`<div class="small" style="text-align:center;margin-top:9px">Huidige planning: ${flashcardDueText(record.dueAt)}</div>`:''}</section>`;
+  $('flashcardView').innerHTML=`<section class="card"><div class="between"><div><div class="eyebrow">${t(direction==='jp-nl'?'flashcards.direction.jpNl':'flashcards.direction.nlJp')} · ${scheduled?'geplande herhaling':'Vrij oefenen'} · ${courseLevelLabel(card.level)} · ${courseLessonLabel(card.level,card.lessonIndex+1)} · ${displayedLessonTitle(card.lessonId,card.lessonTitle)}</div><div class="small">Kaart ${Math.min(s.position+1,s.queue.length)} van ${s.queue.length} · ${done} ${scheduled?'beoordeeld':'bekeken'}</div></div>${preview?'<span class="rank">Voorproefje</span>':''}</div><div class="progress" style="margin-top:9px"><div style="width:${Math.min(100,done/Math.max(1,s.queue.length)*100)}%"></div></div></section><section class="card"><div class="flashcard-avatar">${avatarAssistHtml({pose:feedback?(answerFeedback.selectedAnswer===correctChoice?'celebrate':'encourage'):nextAvatarMood(),message:feedback?(feedback.ungraded?'Vrij oefenen — je herhaalplanning is niet gewijzigd.':answerFeedback.selectedAnswer===correctChoice?'Goed!':'Niet goed'):'Denk rustig na over dit woord.'})}</div><div class="flashcard-front"><div><div class="flashcard-face-main">${direction==='jp-nl'&&sessionKanjiIntroductions.has(card.id)?kanjiReadingHtml(card):japaneseWordHtml(front)}</div><div class="flashcard-face-sub">${direction==='jp-nl'?'Kies de Nederlandse betekenis':'Kies het Japanse woord in kana'}</div></div></div><div class="flashcard-answer-options"><div class="small">${feedback?(feedback.ungraded?'Vrij geoefend — geen wijziging aan de herhaalplanning.':'Antwoord nagekeken:'):'Kies je antwoord:'}</div>${choices.map((answer,index)=>{const answerState=flashcardAnswerState(answer,answerFeedback),selected=answer===answerFeedback.selectedAnswer;return`<div class="answer-option-row"><button class="btn flashcard-answer-choice${answerState==='correct'?' is-correct':answerState==='incorrect'?' is-incorrect':''}" data-fc-answer="${index}" ${feedback?'disabled':''} ${selected?'aria-pressed="true"':''}>${kanjiTextHtml(answer,null,false,eligiblePool.filter(option=>option.kana===answer).map(option=>option.id))}</button>${s.optionsRevealed?kanjiOptionHelpHtml(answer,null,eligiblePool.filter(option=>option.kana===answer).map(option=>option.id)):''}${!feedback&&s.optionsRevealed?answerOptionAudioHtml(answer,eligiblePool.filter(option=>option.kana===answer).map(option=>option.id)):''}</div>`}).join('')}</div><div class="flashcard-feedback-status" role="status" aria-live="polite">${escapeHtml(flashcardAnswerFeedbackText(answerFeedback).split("\n")[0])}${feedback?`<div class="recall-source">Juiste antwoord: ${dictionaryButton(card.id,card.lessonId,card.kana,card.meaning)} · ${escapeHtml(card.meaning)}<div class="small">Geïntroduceerd in ${courseLevelLabel(card.level)} · ${courseLessonLabel(card.level,card.lessonIndex+1)} · ${escapeHtml(displayedLessonTitle(card.lessonId,card.lessonTitle))}</div></div>`:''}</div><div class="flashcard-actions" style="margin-top:12px"><button id="fcSkip" class="btn" ${feedback?'disabled':''}>Sla over</button><button id="fcPause" class="btn" style="grid-column:1/-1">Onderbreek sessie</button></div>${record?`<div class="small" style="text-align:center;margin-top:9px">Huidige planning: ${flashcardDueText(record.dueAt)}</div>`:''}</section>`;
   const flashcardView=$('flashcardView'),answerPanel=flashcardView.querySelector('.flashcard-answer-options');
   flashcardView.querySelector('.flashcard-avatar')?.remove();
   flashcardView.querySelector('.flashcard-face-sub')?.remove();
@@ -6207,8 +6247,6 @@ function renderKnowledgeDashboard(box){
       b.innerHTML=`<div><div class="word">${shown?japaneseWordHtml(row.jp):'••••'}</div><div class="small">${shown?`${escapeHtml(row.reading||'')}${summary?` · ${escapeHtml(summary)}`:''}`:'Tik om dictionary-detail te bekijken'}</div>${row.word?`<div class="small">${row.seen?`Tegengekomen${first?` · ${first}`:' · datum onbekend'}`:'Vooruitblik · nog niet tegengekomen'}</div>`:first?`<div class="small">Tegengekomen · ${first}</div>`:''}</div>${row.entry?'<span class="small" aria-hidden="true">›</span>':''}`;
       if(row.entry){b.setAttribute('aria-label',`Bekijk dictionary-detail van ${row.jp}`);b.onclick=()=>openDictionaryModal(row.entry.id)};
       wrapper.appendChild(b);
-      const audio=speakerButtonHtml(row.jp,['hiragana','katakana','dakuten'].includes(category)?`kana-${/[ァ-ヶ]/.test(row.jp)?'katakana':'hiragana'}-${row.jp}`:row.entry?.id,'Luister naar '+row.jp);
-      if(audio)wrapper.insertAdjacentHTML('beforeend',audio);
       host.appendChild(wrapper);
     });
   };
@@ -6471,6 +6509,7 @@ document.addEventListener('click',event=>{
 },true);
 document.addEventListener('click',event=>{const button=event.target.closest('[data-dictionary-open]');if(!button)return;event.preventDefault();event.stopPropagation();openDictionaryModal(button.dataset.dictionaryOpen,button.dataset.dictionaryLesson,button.dataset.dictionarySentence,button.dataset.dictionaryMeaning)},true);
 document.addEventListener('keydown',event=>{const modal=$('dictionaryModal');if(modal.classList.contains('hidden'))return;if(event.key==='Escape'){event.preventDefault();closeDictionaryModal();return}if(event.key==='Tab'){const focusable=[...modal.querySelectorAll('button:not(:disabled),input:not(:disabled),[href],[tabindex]:not([tabindex="-1"])')].filter(el=>el.getClientRects().length);if(!focusable.length)return;const first=focusable[0],last=focusable[focusable.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}}});
+document.addEventListener('click',event=>{const active=event.target.closest('.reading-support');document.querySelectorAll('.reading-support[open]').forEach(item=>{if(item!==active)item.open=false})});
 $('quitQuiz').onclick=()=>{completeStudySession({status:'afgebroken'});setMain()};
 $('backBtn').onclick=setMain;
 $('practiceErrors').onclick=practiceCurrentErrors;

@@ -31,110 +31,155 @@ Status: inhoud en appwijzigingen geïmplementeerd. **Sven: deze woorden, vragen 
 | vocab-レストラン | レストラン | レストラン / resutoran | restaurant | 9-5 · Handeling op een plek |
 | vocab-ちず | ちず | ちず / chizu | kaart | 9-5 · Handeling op een plek |
 
+### Eerder geleerde contextwoorden — aanvulling 31 oktober 2026
+
+Naast de twintig nieuwe Level 9-doelwoorden gebruikt de examenbank deze veertien bestaande woorden. Ze tellen niet opnieuw als nieuwe Level 9-woorden. Alle vormen, lezingen en IDs komen uit dezelfde centrale catalogus.
+
+| ID | Japans | Lezing / romaji | Nederlands | Introductie / les |
+| --- | --- | --- | --- | --- |
+| vocab-みせ | みせ | みせ / mise | winkel | 4-9 · Bestemming met に |
+| vocab-えき | えき | えき / eki | station | 4-9 · Bestemming met に |
+| vocab-うち | うち | うち / uchi | huis / thuis | 4-9 · Bestemming met に |
+| vocab-ねこ | ねこ | ねこ / neko | kat | 4-1 · Dit is X |
+| vocab-ベッド | ベッド | ベッド / beddo | bed | 5-4 · Kleine っ |
+| vocab-いぬ | いぬ | いぬ / inu | hond | 4-1 · Dit is X |
+| vocab-パン | パン | パン / pan | brood | 4-1 · Dit is X |
+| vocab-たべます | たべます | たべます / tabemasu | eten | 4-7 · Object + werkwoord |
+| vocab-みず | みず | みず / mizu | water | 4-1 · Dit is X |
+| vocab-のみます | のみます | のみます / nomimasu | drinken | 4-7 · Object + werkwoord |
+| vocab-ほん | ほん | ほん / hon | boek | 4-2 · Dit en dat |
+| vocab-よみます | よみます | よみます / yomimasu | lezen | 4-8 · Zinsvolgorde oefenen |
+| vocab-げつようび | げつようび | げつようび / getsuyoubi | maandag | 8-1 · Begin van de week |
+| vocab-きんようび | きんようび | きんようび / kinyoubi | vrijdag | 8-2 · Einde van de week |
+
 ## 2. Selectie en varianten
 
-Elke poging: 30 vragen, exact zes per les; 17 context-/toepassingsvragen en 13 woordvragen. De woordvragen wisselen evenwichtig tussen beide richtingen (7/6 of 6/7), zonder hetzelfde doelwoord dubbel als losse woordvraag. Het examen is geen verplichte volledige woordencheck: de woordles blijft ieder nieuw woord eenmaal per richting oefenen. Dezelfde contextfamilie verschijnt hoogstens tweemaal per les; de varianten en volgorde wisselen per poging. Tachtig gegenereerde pogingen zijn op balans, dekking en variatie gecontroleerd.
+Bijgewerkt 31 oktober 2026. Elke poging heeft 30 vragen, exact zes per les: 17 context-/toepassingsvragen en 13 unieke woordvragen. De woordvragen wisselen tussen beide richtingen (7/6 of 6/7); ieder geselecteerd woord wordt eenmaal als los doel getoetst. De volledige woordles blijft ieder nieuw woord eenmaal per richting oefenen.
 
-De 44 contextitems hieronder zijn de volledige mogelijke concrete varianten van de huidige sjablonen. Correcte optie en twee afleiders worden op het scherm geschud. Een Nederlandse context wordt als zodanig weergegeven, niet als Japans gemarkeerd. De contextvragen toetsen betekenis, handeling, broninformatie of relatie; antwoordopties bij een Japanse vraagzin zijn allemaal vraagzinnen, zodat alleen de vorm geen antwoord verraadt.
+De contextselectie reserveert per les 3 / 3 / 4 / 4 / 3 vragen. Zo komen hier/daar/waar, links/rechts/rechtdoor, voor/achter/naast/binnen en op/onder/buiten/dichtbij in iedere zitting als doel aan bod. Les 9-5 gebruikt minstens drie verschillende handelingsplaatsen. De overige woordslots per les zijn 3 / 3 / 2 / 2 / 3.
+
+Een concrete situatie heeft een sleutel voor onderwerp + relatie/handeling + referentie/plaats. Lees- en productievraag delen die sleutel; aanvullende feiten in een stimulus krijgen eveneens een sleutel. De selector kiest nooit twee items met dezelfde situatie, ook niet wanneer die onder verschillende vraagfamilies vallen. Per familie blijven hoogstens twee vragen mogelijk. Varianten en volgorde worden geschud zonder rank, opslag of woord-ID’s te wijzigen. Driehonderd seeds zijn gecontroleerd; alle 44 contextitems komen daarin voor.
+
+`targetVocabIds` bevat uitsluitend de getoetste begrippen. `usedVocabIds` bevat alle gebruikte canonieke woorden, inclusief woorden uit Japanse én Nederlandse afleiders; dit is geen extra leerdoel of nieuwe woordenregistratie. De bestaande grammatica-/patroondoelen blijven afzonderlijk in `targetGoalIds`.
+
+De 44 contextitems hieronder zijn alle concrete varianten van de huidige sjablonen. Correct antwoord en twee afleiders worden op het scherm geschud. Een Nederlandse context blijft Nederlands gemarkeerd. Er zijn geen Japanse teksten of audio-assets toegevoegd of gewijzigd.
 
 ### 2.1. exam-l9-1-where-question-0
 
 - Bron/les: l9-1; familie: where-question.
 - Vraag: Hoe vraag je waar de winkel is?
 - Stimulus: Geen afzonderlijke stimulus; de vraag geeft de betekenis.
-- Japanse tekst / Nederlandse betekenis: Waar is de winkel?
+- Nederlandse betekenis: Waar is de winkel?
 - Correct: **みせ は どこ です か**
 - Afleiders: みせ は ここ です か / みせ は あそこ です か
 - Leerdoelen: grammar:grammar-l9-1, pattern:pattern-l9-1.
-- Gebruikte woord-ID’s: vocab-みせ, vocab-どこ.
+- Getoetste begrippen: vocab-どこ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-みせ, vocab-どこ, vocab-ここ, vocab-あそこ.
+- Situatiesleutels: `みせ|where|`.
 
 ### 2.2. exam-l9-1-speaker-distance-0
 
 - Bron/les: l9-1; familie: speaker-distance.
 - Vraag: Welke plaats is volgens de spreker hier?
 - Stimulus: みせ は ここ です。えき は あそこ です。
-- Japanse tekst / Nederlandse betekenis: みせ: hier; えき: daar verderop.
+- Nederlandse betekenis: みせ: hier; えき: daar verderop.
 - Correct: **De winkel is bij de spreker.**
 - Afleiders: Het station is bij de spreker. / Beide plaatsen zijn verder weg.
 - Leerdoelen: grammar:grammar-l9-1, pattern:pattern-l9-1.
-- Gebruikte woord-ID’s: vocab-みせ, vocab-えき, vocab-ここ, vocab-あそこ.
+- Getoetste begrippen: vocab-ここ, vocab-あそこ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-みせ, vocab-えき, vocab-ここ, vocab-あそこ.
+- Situatiesleutels: `みせ|ここ|`, `えき|あそこ|`.
 
 ### 2.3. exam-l9-1-listener-distance-0
 
 - Bron/les: l9-1; familie: listener-distance.
 - Vraag: Waar is de genoemde plaats volgens de spreker?
 - Stimulus: みせ は そこ です。
-- Japanse tekst / Nederlandse betekenis: winkel: daar bij jou.
+- Nederlandse betekenis: winkel: daar bij jou.
 - Correct: **De winkel is bij de luisteraar.**
 - Afleiders: De winkel is bij de spreker. / De winkel is ver van beiden.
 - Leerdoelen: grammar:grammar-l9-1, pattern:pattern-l9-1.
-- Gebruikte woord-ID’s: vocab-みせ, vocab-そこ.
+- Getoetste begrippen: vocab-そこ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-みせ, vocab-そこ.
+- Situatiesleutels: `みせ|そこ|`.
 
 ### 2.4. exam-l9-1-where-question-1
 
 - Bron/les: l9-1; familie: where-question.
 - Vraag: Hoe vraag je waar het station is?
 - Stimulus: Geen afzonderlijke stimulus; de vraag geeft de betekenis.
-- Japanse tekst / Nederlandse betekenis: Waar is het station?
+- Nederlandse betekenis: Waar is het station?
 - Correct: **えき は どこ です か**
 - Afleiders: えき は ここ です か / えき は あそこ です か
 - Leerdoelen: grammar:grammar-l9-1, pattern:pattern-l9-1.
-- Gebruikte woord-ID’s: vocab-えき, vocab-どこ.
+- Getoetste begrippen: vocab-どこ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-えき, vocab-どこ, vocab-ここ, vocab-あそこ.
+- Situatiesleutels: `えき|where|`.
 
 ### 2.5. exam-l9-1-speaker-distance-1
 
 - Bron/les: l9-1; familie: speaker-distance.
 - Vraag: Welke plaats is volgens de spreker hier?
 - Stimulus: えき は ここ です。みせ は あそこ です。
-- Japanse tekst / Nederlandse betekenis: えき: hier; みせ: daar verderop.
+- Nederlandse betekenis: えき: hier; みせ: daar verderop.
 - Correct: **Het station is bij de spreker.**
 - Afleiders: De winkel is bij de spreker. / Beide plaatsen zijn verder weg.
 - Leerdoelen: grammar:grammar-l9-1, pattern:pattern-l9-1.
-- Gebruikte woord-ID’s: vocab-えき, vocab-みせ, vocab-ここ, vocab-あそこ.
+- Getoetste begrippen: vocab-ここ, vocab-あそこ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-えき, vocab-みせ, vocab-ここ, vocab-あそこ.
+- Situatiesleutels: `えき|ここ|`, `みせ|あそこ|`.
 
 ### 2.6. exam-l9-1-listener-distance-1
 
 - Bron/les: l9-1; familie: listener-distance.
 - Vraag: Waar is de genoemde plaats volgens de spreker?
 - Stimulus: えき は そこ です。
-- Japanse tekst / Nederlandse betekenis: station: daar bij jou.
+- Nederlandse betekenis: station: daar bij jou.
 - Correct: **Het station is bij de luisteraar.**
 - Afleiders: Het station is bij de spreker. / Het station is ver van beiden.
 - Leerdoelen: grammar:grammar-l9-1, pattern:pattern-l9-1.
-- Gebruikte woord-ID’s: vocab-えき, vocab-そこ.
+- Getoetste begrippen: vocab-そこ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-えき, vocab-そこ.
+- Situatiesleutels: `えき|そこ|`.
 
 ### 2.7. exam-l9-1-where-question-2
 
 - Bron/les: l9-1; familie: where-question.
 - Vraag: Hoe vraag je waar het huis is?
 - Stimulus: Geen afzonderlijke stimulus; de vraag geeft de betekenis.
-- Japanse tekst / Nederlandse betekenis: Waar is het huis?
+- Nederlandse betekenis: Waar is het huis?
 - Correct: **うち は どこ です か**
 - Afleiders: うち は ここ です か / うち は あそこ です か
 - Leerdoelen: grammar:grammar-l9-1, pattern:pattern-l9-1.
-- Gebruikte woord-ID’s: vocab-うち, vocab-どこ.
+- Getoetste begrippen: vocab-どこ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-うち, vocab-どこ, vocab-ここ, vocab-あそこ.
+- Situatiesleutels: `うち|where|`.
 
 ### 2.8. exam-l9-1-speaker-distance-2
 
 - Bron/les: l9-1; familie: speaker-distance.
 - Vraag: Welke plaats is volgens de spreker hier?
 - Stimulus: うち は ここ です。みせ は あそこ です。
-- Japanse tekst / Nederlandse betekenis: うち: hier; みせ: daar verderop.
+- Nederlandse betekenis: うち: hier; みせ: daar verderop.
 - Correct: **Het huis is bij de spreker.**
 - Afleiders: De winkel is bij de spreker. / Beide plaatsen zijn verder weg.
 - Leerdoelen: grammar:grammar-l9-1, pattern:pattern-l9-1.
-- Gebruikte woord-ID’s: vocab-うち, vocab-みせ, vocab-ここ, vocab-あそこ.
+- Getoetste begrippen: vocab-ここ, vocab-あそこ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-うち, vocab-みせ, vocab-ここ, vocab-あそこ.
+- Situatiesleutels: `うち|ここ|`, `みせ|あそこ|`.
 
 ### 2.9. exam-l9-1-listener-distance-2
 
 - Bron/les: l9-1; familie: listener-distance.
 - Vraag: Waar is de genoemde plaats volgens de spreker?
 - Stimulus: うち は そこ です。
-- Japanse tekst / Nederlandse betekenis: huis: daar bij jou.
+- Nederlandse betekenis: huis: daar bij jou.
 - Correct: **Het huis is bij de luisteraar.**
 - Afleiders: Het huis is bij de spreker. / Het huis is ver van beiden.
 - Leerdoelen: grammar:grammar-l9-1, pattern:pattern-l9-1.
-- Gebruikte woord-ID’s: vocab-うち, vocab-そこ.
+- Getoetste begrippen: vocab-そこ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-うち, vocab-そこ.
+- Situatiesleutels: `うち|そこ|`.
 
 ### 2.10. exam-l9-2-direction-map-0
 
@@ -142,33 +187,39 @@ De 44 contextitems hieronder zijn de volledige mogelijke concrete varianten van 
 - Vraag: Welke Japanse aanwijzing hoort bij de winkel?
 - Stimulus: De winkel is links.
 Het station is rechts.
-- Japanse tekst / Nederlandse betekenis: winkel: links.
+- Nederlandse betekenis: winkel: links.
 - Correct: **みせ は ひだり です**
 - Afleiders: みせ は みぎ です / みせ は まっすぐ です
 - Leerdoelen: grammar:grammar-l9-2, pattern:pattern-l9-2.
-- Gebruikte woord-ID’s: vocab-みせ, vocab-ひだり, vocab-えき, vocab-みぎ.
+- Getoetste begrippen: vocab-ひだり.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-みせ, vocab-ひだり, vocab-えき, vocab-みぎ, vocab-まっすぐ.
+- Situatiesleutels: `みせ|ひだり|`, `えき|みぎ|`.
 
 ### 2.11. exam-l9-2-direction-meaning-0
 
 - Bron/les: l9-2; familie: direction-meaning.
 - Vraag: Welke routeaanwijzing klopt met de tekst?
 - Stimulus: みせ は ひだり です。
-- Japanse tekst / Nederlandse betekenis: winkel: links.
+- Nederlandse betekenis: winkel: links.
 - Correct: **Ga links voor de winkel.**
 - Afleiders: Ga rechts voor de winkel. / Ga rechtdoor voor de winkel.
 - Leerdoelen: grammar:grammar-l9-2, pattern:pattern-l9-2.
-- Gebruikte woord-ID’s: vocab-みせ, vocab-ひだり.
+- Getoetste begrippen: vocab-ひだり.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-みせ, vocab-ひだり, vocab-みぎ, vocab-まっすぐ.
+- Situatiesleutels: `みせ|ひだり|`.
 
 ### 2.12. exam-l9-2-road-context-0
 
 - Bron/les: l9-2; familie: road-context.
 - Vraag: Welke zin past bij de aanwijzing over de weg?
 - Stimulus: De weg ligt links.
-- Japanse tekst / Nederlandse betekenis: De weg ligt links.
+- Nederlandse betekenis: De weg ligt links.
 - Correct: **みち は ひだり です**
 - Afleiders: みち は みぎ です / みち は まっすぐ です
 - Leerdoelen: grammar:grammar-l9-2, pattern:pattern-l9-2.
-- Gebruikte woord-ID’s: vocab-みち, vocab-ひだり.
+- Getoetste begrippen: vocab-ひだり.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-みち, vocab-ひだり, vocab-みぎ, vocab-まっすぐ.
+- Situatiesleutels: `みち|ひだり|`.
 
 ### 2.13. exam-l9-2-direction-map-1
 
@@ -176,33 +227,39 @@ Het station is rechts.
 - Vraag: Welke Japanse aanwijzing hoort bij het station?
 - Stimulus: Het station is rechts.
 Het huis is links.
-- Japanse tekst / Nederlandse betekenis: station: rechts.
+- Nederlandse betekenis: station: rechts.
 - Correct: **えき は みぎ です**
 - Afleiders: えき は ひだり です / えき は まっすぐ です
 - Leerdoelen: grammar:grammar-l9-2, pattern:pattern-l9-2.
-- Gebruikte woord-ID’s: vocab-えき, vocab-みぎ, vocab-うち, vocab-ひだり.
+- Getoetste begrippen: vocab-みぎ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-えき, vocab-みぎ, vocab-うち, vocab-ひだり, vocab-まっすぐ.
+- Situatiesleutels: `えき|みぎ|`, `うち|ひだり|`.
 
 ### 2.14. exam-l9-2-direction-meaning-1
 
 - Bron/les: l9-2; familie: direction-meaning.
 - Vraag: Welke routeaanwijzing klopt met de tekst?
 - Stimulus: えき は みぎ です。
-- Japanse tekst / Nederlandse betekenis: station: rechts.
+- Nederlandse betekenis: station: rechts.
 - Correct: **Ga rechts voor het station.**
 - Afleiders: Ga links voor het station. / Ga rechtdoor voor het station.
 - Leerdoelen: grammar:grammar-l9-2, pattern:pattern-l9-2.
-- Gebruikte woord-ID’s: vocab-えき, vocab-みぎ.
+- Getoetste begrippen: vocab-みぎ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-えき, vocab-ひだり, vocab-みぎ, vocab-まっすぐ.
+- Situatiesleutels: `えき|みぎ|`.
 
 ### 2.15. exam-l9-2-road-context-1
 
 - Bron/les: l9-2; familie: road-context.
 - Vraag: Welke zin past bij de aanwijzing over de weg?
 - Stimulus: De weg ligt rechts.
-- Japanse tekst / Nederlandse betekenis: De weg ligt rechts.
+- Nederlandse betekenis: De weg ligt rechts.
 - Correct: **みち は みぎ です**
 - Afleiders: みち は ひだり です / みち は まっすぐ です
 - Leerdoelen: grammar:grammar-l9-2, pattern:pattern-l9-2.
-- Gebruikte woord-ID’s: vocab-みち, vocab-みぎ.
+- Getoetste begrippen: vocab-みぎ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-みち, vocab-みぎ, vocab-ひだり, vocab-まっすぐ.
+- Situatiesleutels: `みち|みぎ|`.
 
 ### 2.16. exam-l9-2-direction-map-2
 
@@ -210,308 +267,364 @@ Het huis is links.
 - Vraag: Welke Japanse aanwijzing hoort bij het huis?
 - Stimulus: Het huis is rechtdoor.
 De winkel is links.
-- Japanse tekst / Nederlandse betekenis: huis: rechtdoor.
+- Nederlandse betekenis: huis: rechtdoor.
 - Correct: **うち は まっすぐ です**
 - Afleiders: うち は ひだり です / うち は みぎ です
 - Leerdoelen: grammar:grammar-l9-2, pattern:pattern-l9-2.
-- Gebruikte woord-ID’s: vocab-うち, vocab-まっすぐ, vocab-みせ, vocab-ひだり.
+- Getoetste begrippen: vocab-まっすぐ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-うち, vocab-まっすぐ, vocab-みせ, vocab-ひだり, vocab-みぎ.
+- Situatiesleutels: `うち|まっすぐ|`, `みせ|ひだり|`.
 
 ### 2.17. exam-l9-2-direction-meaning-2
 
 - Bron/les: l9-2; familie: direction-meaning.
 - Vraag: Welke routeaanwijzing klopt met de tekst?
 - Stimulus: うち は まっすぐ です。
-- Japanse tekst / Nederlandse betekenis: huis: rechtdoor.
+- Nederlandse betekenis: huis: rechtdoor.
 - Correct: **Ga rechtdoor voor het huis.**
 - Afleiders: Ga links voor het huis. / Ga rechts voor het huis.
 - Leerdoelen: grammar:grammar-l9-2, pattern:pattern-l9-2.
-- Gebruikte woord-ID’s: vocab-うち, vocab-まっすぐ.
+- Getoetste begrippen: vocab-まっすぐ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-うち, vocab-ひだり, vocab-みぎ, vocab-まっすぐ.
+- Situatiesleutels: `うち|まっすぐ|`.
 
 ### 2.18. exam-l9-2-road-context-2
 
 - Bron/les: l9-2; familie: road-context.
 - Vraag: Welke zin past bij de aanwijzing over de weg?
 - Stimulus: De weg loopt rechtdoor.
-- Japanse tekst / Nederlandse betekenis: De weg loopt rechtdoor.
+- Nederlandse betekenis: De weg loopt rechtdoor.
 - Correct: **みち は まっすぐ です**
 - Afleiders: みち は ひだり です / みち は みぎ です
 - Leerdoelen: grammar:grammar-l9-2, pattern:pattern-l9-2.
-- Gebruikte woord-ID’s: vocab-みち, vocab-まっすぐ.
+- Getoetste begrippen: vocab-まっすぐ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-みち, vocab-まっすぐ, vocab-ひだり, vocab-みぎ.
+- Situatiesleutels: `みち|まっすぐ|`.
 
 ### 2.19. exam-l9-3-relative-reading-0
 
 - Bron/les: l9-3; familie: relative-reading.
 - Vraag: Welke beschrijving klopt?
 - Stimulus: みせ は えき の まえ です。
-- Japanse tekst / Nederlandse betekenis: De winkel is voor het station.
+- Nederlandse betekenis: De winkel is voor het station.
 - Correct: **De winkel is voor het station.**
 - Afleiders: De winkel is achter het station. / De winkel is naast het station.
 - Leerdoelen: grammar:grammar-l9-3, pattern:pattern-l9-3.
-- Gebruikte woord-ID’s: vocab-みせ, vocab-えき, vocab-まえ.
+- Getoetste begrippen: vocab-まえ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-みせ, vocab-えき, vocab-まえ, vocab-うしろ, vocab-となり.
+- Situatiesleutels: `みせ|まえ|えき`.
 
 ### 2.20. exam-l9-3-relative-production-0
 
 - Bron/les: l9-3; familie: relative-production.
 - Vraag: Welke Japanse zin past bij deze ligging?
 - Stimulus: De winkel is voor het station.
-- Japanse tekst / Nederlandse betekenis: De winkel is voor het station.
+- Nederlandse betekenis: De winkel is voor het station.
 - Correct: **みせ は えき の まえ です**
 - Afleiders: みせ は えき の うしろ です / みせ は えき の となり です
 - Leerdoelen: grammar:grammar-l9-3, pattern:pattern-l9-3.
-- Gebruikte woord-ID’s: vocab-みせ, vocab-えき, vocab-まえ.
+- Getoetste begrippen: vocab-まえ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-みせ, vocab-えき, vocab-まえ, vocab-うしろ, vocab-となり.
+- Situatiesleutels: `みせ|まえ|えき`.
 
 ### 2.21. exam-l9-3-relative-reading-1
 
 - Bron/les: l9-3; familie: relative-reading.
 - Vraag: Welke beschrijving klopt?
 - Stimulus: えき は うち の うしろ です。
-- Japanse tekst / Nederlandse betekenis: Het station is achter het huis.
+- Nederlandse betekenis: Het station is achter het huis.
 - Correct: **Het station is achter het huis.**
 - Afleiders: Het station is voor het huis. / Het station is naast het huis.
 - Leerdoelen: grammar:grammar-l9-3, pattern:pattern-l9-3.
-- Gebruikte woord-ID’s: vocab-えき, vocab-うち, vocab-うしろ.
+- Getoetste begrippen: vocab-うしろ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-えき, vocab-うち, vocab-うしろ, vocab-まえ, vocab-となり.
+- Situatiesleutels: `えき|うしろ|うち`.
 
 ### 2.22. exam-l9-3-relative-production-1
 
 - Bron/les: l9-3; familie: relative-production.
 - Vraag: Welke Japanse zin past bij deze ligging?
 - Stimulus: Het station is achter het huis.
-- Japanse tekst / Nederlandse betekenis: Het station is achter het huis.
+- Nederlandse betekenis: Het station is achter het huis.
 - Correct: **えき は うち の うしろ です**
 - Afleiders: えき は うち の まえ です / えき は うち の となり です
 - Leerdoelen: grammar:grammar-l9-3, pattern:pattern-l9-3.
-- Gebruikte woord-ID’s: vocab-えき, vocab-うち, vocab-うしろ.
+- Getoetste begrippen: vocab-うしろ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-えき, vocab-うち, vocab-うしろ, vocab-まえ, vocab-となり.
+- Situatiesleutels: `えき|うしろ|うち`.
 
 ### 2.23. exam-l9-3-relative-reading-2
 
 - Bron/les: l9-3; familie: relative-reading.
 - Vraag: Welke beschrijving klopt?
 - Stimulus: うち は みせ の となり です。
-- Japanse tekst / Nederlandse betekenis: Het huis is naast de winkel.
+- Nederlandse betekenis: Het huis is naast de winkel.
 - Correct: **Het huis is naast de winkel.**
 - Afleiders: Het huis is voor de winkel. / Het huis is achter de winkel.
 - Leerdoelen: grammar:grammar-l9-3, pattern:pattern-l9-3.
-- Gebruikte woord-ID’s: vocab-うち, vocab-みせ, vocab-となり.
+- Getoetste begrippen: vocab-となり.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-うち, vocab-みせ, vocab-となり, vocab-まえ, vocab-うしろ.
+- Situatiesleutels: `うち|となり|みせ`.
 
 ### 2.24. exam-l9-3-relative-production-2
 
 - Bron/les: l9-3; familie: relative-production.
 - Vraag: Welke Japanse zin past bij deze ligging?
 - Stimulus: Het huis is naast de winkel.
-- Japanse tekst / Nederlandse betekenis: Het huis is naast de winkel.
+- Nederlandse betekenis: Het huis is naast de winkel.
 - Correct: **うち は みせ の となり です**
 - Afleiders: うち は みせ の まえ です / うち は みせ の うしろ です
 - Leerdoelen: grammar:grammar-l9-3, pattern:pattern-l9-3.
-- Gebruikte woord-ID’s: vocab-うち, vocab-みせ, vocab-となり.
+- Getoetste begrippen: vocab-となり.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-うち, vocab-みせ, vocab-となり, vocab-まえ, vocab-うしろ.
+- Situatiesleutels: `うち|となり|みせ`.
 
 ### 2.25. exam-l9-3-relative-reading-3
 
 - Bron/les: l9-3; familie: relative-reading.
 - Vraag: Welke beschrijving klopt?
 - Stimulus: ねこ は うち の なか です。
-- Japanse tekst / Nederlandse betekenis: De kat is in het huis.
+- Nederlandse betekenis: De kat is in het huis.
 - Correct: **De kat is in het huis.**
 - Afleiders: De kat is voor het huis. / De kat is achter het huis.
 - Leerdoelen: grammar:grammar-l9-3, pattern:pattern-l9-3.
-- Gebruikte woord-ID’s: vocab-ねこ, vocab-うち, vocab-なか.
+- Getoetste begrippen: vocab-なか.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-ねこ, vocab-うち, vocab-なか, vocab-まえ, vocab-うしろ.
+- Situatiesleutels: `ねこ|なか|うち`.
 
 ### 2.26. exam-l9-3-relative-production-3
 
 - Bron/les: l9-3; familie: relative-production.
 - Vraag: Welke Japanse zin past bij deze ligging?
 - Stimulus: De kat is in het huis.
-- Japanse tekst / Nederlandse betekenis: De kat is in het huis.
+- Nederlandse betekenis: De kat is in het huis.
 - Correct: **ねこ は うち の なか です**
 - Afleiders: ねこ は うち の まえ です / ねこ は うち の うしろ です
 - Leerdoelen: grammar:grammar-l9-3, pattern:pattern-l9-3.
-- Gebruikte woord-ID’s: vocab-ねこ, vocab-うち, vocab-なか.
+- Getoetste begrippen: vocab-なか.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-ねこ, vocab-うち, vocab-なか, vocab-まえ, vocab-うしろ.
+- Situatiesleutels: `ねこ|なか|うち`.
 
 ### 2.27. exam-l9-4-position-reading-0
 
 - Bron/les: l9-4; familie: position-reading.
 - Vraag: Welke locatie volgt uit de tekst?
 - Stimulus: ねこ は ベッド の うえ です。
-- Japanse tekst / Nederlandse betekenis: De kat is op het bed.
+- Nederlandse betekenis: De kat is op het bed.
 - Correct: **De kat is op het bed.**
 - Afleiders: De kat is onder het bed. / De kat is buiten het bed.
 - Leerdoelen: grammar:grammar-l9-4, pattern:pattern-l9-4.
-- Gebruikte woord-ID’s: vocab-ねこ, vocab-ベッド, vocab-うえ.
+- Getoetste begrippen: vocab-うえ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-ねこ, vocab-ベッド, vocab-うえ, vocab-した, vocab-そと.
+- Situatiesleutels: `ねこ|うえ|ベッド`.
 
 ### 2.28. exam-l9-4-position-production-0
 
 - Bron/les: l9-4; familie: position-production.
 - Vraag: Welke zin past bij de beschrijving?
 - Stimulus: De kat is op het bed.
-- Japanse tekst / Nederlandse betekenis: De kat is op het bed.
+- Nederlandse betekenis: De kat is op het bed.
 - Correct: **ねこ は ベッド の うえ です**
 - Afleiders: ねこ は ベッド の した です / ねこ は ベッド の そと です
 - Leerdoelen: grammar:grammar-l9-4, pattern:pattern-l9-4.
-- Gebruikte woord-ID’s: vocab-ねこ, vocab-ベッド, vocab-うえ.
+- Getoetste begrippen: vocab-うえ.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-ねこ, vocab-ベッド, vocab-うえ, vocab-した, vocab-そと.
+- Situatiesleutels: `ねこ|うえ|ベッド`.
 
 ### 2.29. exam-l9-4-position-reading-1
 
 - Bron/les: l9-4; familie: position-reading.
 - Vraag: Welke locatie volgt uit de tekst?
 - Stimulus: いぬ は ベッド の した です。
-- Japanse tekst / Nederlandse betekenis: De hond is onder het bed.
+- Nederlandse betekenis: De hond is onder het bed.
 - Correct: **De hond is onder het bed.**
 - Afleiders: De hond is op het bed. / De hond is buiten het bed.
 - Leerdoelen: grammar:grammar-l9-4, pattern:pattern-l9-4.
-- Gebruikte woord-ID’s: vocab-いぬ, vocab-ベッド, vocab-した.
+- Getoetste begrippen: vocab-した.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-いぬ, vocab-ベッド, vocab-した, vocab-うえ, vocab-そと.
+- Situatiesleutels: `いぬ|した|ベッド`.
 
 ### 2.30. exam-l9-4-position-production-1
 
 - Bron/les: l9-4; familie: position-production.
 - Vraag: Welke zin past bij de beschrijving?
 - Stimulus: De hond is onder het bed.
-- Japanse tekst / Nederlandse betekenis: De hond is onder het bed.
+- Nederlandse betekenis: De hond is onder het bed.
 - Correct: **いぬ は ベッド の した です**
 - Afleiders: いぬ は ベッド の うえ です / いぬ は ベッド の そと です
 - Leerdoelen: grammar:grammar-l9-4, pattern:pattern-l9-4.
-- Gebruikte woord-ID’s: vocab-いぬ, vocab-ベッド, vocab-した.
+- Getoetste begrippen: vocab-した.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-いぬ, vocab-ベッド, vocab-した, vocab-うえ, vocab-そと.
+- Situatiesleutels: `いぬ|した|ベッド`.
 
 ### 2.31. exam-l9-4-position-reading-2
 
 - Bron/les: l9-4; familie: position-reading.
 - Vraag: Welke locatie volgt uit de tekst?
 - Stimulus: ねこ は うち の そと です。
-- Japanse tekst / Nederlandse betekenis: De kat is buiten het huis.
+- Nederlandse betekenis: De kat is buiten het huis.
 - Correct: **De kat is buiten het huis.**
 - Afleiders: De kat is op het huis. / De kat is onder het huis.
 - Leerdoelen: grammar:grammar-l9-4, pattern:pattern-l9-4.
-- Gebruikte woord-ID’s: vocab-ねこ, vocab-うち, vocab-そと.
+- Getoetste begrippen: vocab-そと.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-ねこ, vocab-うち, vocab-そと, vocab-うえ, vocab-した.
+- Situatiesleutels: `ねこ|そと|うち`.
 
 ### 2.32. exam-l9-4-position-production-2
 
 - Bron/les: l9-4; familie: position-production.
 - Vraag: Welke zin past bij de beschrijving?
 - Stimulus: De kat is buiten het huis.
-- Japanse tekst / Nederlandse betekenis: De kat is buiten het huis.
+- Nederlandse betekenis: De kat is buiten het huis.
 - Correct: **ねこ は うち の そと です**
 - Afleiders: ねこ は うち の うえ です / ねこ は うち の した です
 - Leerdoelen: grammar:grammar-l9-4, pattern:pattern-l9-4.
-- Gebruikte woord-ID’s: vocab-ねこ, vocab-うち, vocab-そと.
+- Getoetste begrippen: vocab-そと.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-ねこ, vocab-うち, vocab-そと, vocab-うえ, vocab-した.
+- Situatiesleutels: `ねこ|そと|うち`.
 
 ### 2.33. exam-l9-4-position-reading-3
 
 - Bron/les: l9-4; familie: position-reading.
 - Vraag: Welke locatie volgt uit de tekst?
 - Stimulus: うち は みせ の ちかく です。
-- Japanse tekst / Nederlandse betekenis: Het huis is dicht bij de winkel.
+- Nederlandse betekenis: Het huis is dicht bij de winkel.
 - Correct: **Het huis is dicht bij de winkel.**
 - Afleiders: Het huis is op de winkel. / Het huis is onder de winkel.
 - Leerdoelen: grammar:grammar-l9-4, pattern:pattern-l9-4.
-- Gebruikte woord-ID’s: vocab-うち, vocab-みせ, vocab-ちかく.
+- Getoetste begrippen: vocab-ちかく.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-うち, vocab-みせ, vocab-ちかく, vocab-うえ, vocab-した.
+- Situatiesleutels: `うち|ちかく|みせ`.
 
 ### 2.34. exam-l9-4-position-production-3
 
 - Bron/les: l9-4; familie: position-production.
 - Vraag: Welke zin past bij de beschrijving?
 - Stimulus: Het huis is dicht bij de winkel.
-- Japanse tekst / Nederlandse betekenis: Het huis is dicht bij de winkel.
+- Nederlandse betekenis: Het huis is dicht bij de winkel.
 - Correct: **うち は みせ の ちかく です**
 - Afleiders: うち は みせ の うえ です / うち は みせ の した です
 - Leerdoelen: grammar:grammar-l9-4, pattern:pattern-l9-4.
-- Gebruikte woord-ID’s: vocab-うち, vocab-みせ, vocab-ちかく.
+- Getoetste begrippen: vocab-ちかく.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-うち, vocab-みせ, vocab-ちかく, vocab-うえ, vocab-した.
+- Situatiesleutels: `うち|ちかく|みせ`.
 
 ### 2.35. exam-l9-4-two-facts-0
 
 - Bron/les: l9-4; familie: two-facts.
 - Vraag: Welke combinatie klopt?
 - Stimulus: ねこ は ベッド の した です。いぬ は うち の そと です。
-- Japanse tekst / Nederlandse betekenis: De kat is onder het bed. De hond is buiten het huis.
+- Nederlandse betekenis: De kat is onder het bed. De hond is buiten het huis.
 - Correct: **De kat is onder het bed; de hond is buiten het huis.**
 - Afleiders: De kat is op het bed; de hond is buiten het huis. / De kat is onder het bed; de hond is in het huis.
 - Leerdoelen: grammar:grammar-l9-4, pattern:pattern-l9-4.
-- Gebruikte woord-ID’s: vocab-ねこ, vocab-ベッド, vocab-した, vocab-いぬ, vocab-うち, vocab-そと.
+- Getoetste begrippen: vocab-した, vocab-そと.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-ねこ, vocab-ベッド, vocab-した, vocab-いぬ, vocab-うち, vocab-そと, vocab-うえ, vocab-なか.
+- Situatiesleutels: `ねこ|した|ベッド`, `いぬ|そと|うち`.
 
 ### 2.36. exam-l9-5-action-reading-0
 
 - Bron/les: l9-5; familie: action-reading.
 - Vraag: Waar gebeurt de handeling?
 - Stimulus: こうえん で パン を たべます。
-- Japanse tekst / Nederlandse betekenis: Ik eet brood in het park.
+- Nederlandse betekenis: Ik eet brood in het park.
 - Correct: **In het park.**
 - Afleiders: Thuis. / Op school.
 - Leerdoelen: grammar:grammar-l9-5, pattern:pattern-l9-5.
-- Gebruikte woord-ID’s: vocab-こうえん, vocab-パン, vocab-たべます.
+- Getoetste begrippen: vocab-こうえん.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-こうえん, vocab-パン, vocab-たべます, vocab-うち, vocab-がっこう.
+- Situatiesleutels: `パン|たべます|こうえん`.
 
 ### 2.37. exam-l9-5-de-action-0
 
 - Bron/les: l9-5; familie: de-action.
 - Vraag: Welke zin markeert de plaats van de handeling?
 - Stimulus: Ik eet brood in het park.
-- Japanse tekst / Nederlandse betekenis: Ik eet brood in het park.
+- Nederlandse betekenis: Ik eet brood in het park.
 - Correct: **こうえん で パン を たべます**
 - Afleiders: こうえん に パン を たべます / こうえん の パン を たべます
 - Leerdoelen: grammar:grammar-l9-5, pattern:pattern-l9-5.
-- Gebruikte woord-ID’s: vocab-こうえん, vocab-パン, vocab-たべます.
+- Getoetste begrippen: vocab-こうえん.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-こうえん, vocab-パン, vocab-たべます.
+- Situatiesleutels: `パン|たべます|こうえん`.
 
 ### 2.38. exam-l9-5-action-reading-1
 
 - Bron/les: l9-5; familie: action-reading.
 - Vraag: Waar gebeurt de handeling?
 - Stimulus: うち で みず を のみます。
-- Japanse tekst / Nederlandse betekenis: Ik drink water thuis.
+- Nederlandse betekenis: Ik drink water thuis.
 - Correct: **Thuis.**
 - Afleiders: In het park. / Op school.
 - Leerdoelen: grammar:grammar-l9-5, pattern:pattern-l9-5.
-- Gebruikte woord-ID’s: vocab-うち, vocab-みず, vocab-のみます.
+- Getoetste begrippen: vocab-うち.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-うち, vocab-みず, vocab-のみます, vocab-こうえん, vocab-がっこう.
+- Situatiesleutels: `みず|のみます|うち`.
 
 ### 2.39. exam-l9-5-de-action-1
 
 - Bron/les: l9-5; familie: de-action.
 - Vraag: Welke zin markeert de plaats van de handeling?
 - Stimulus: Ik drink water thuis.
-- Japanse tekst / Nederlandse betekenis: Ik drink water thuis.
+- Nederlandse betekenis: Ik drink water thuis.
 - Correct: **うち で みず を のみます**
 - Afleiders: うち に みず を のみます / うち の みず を のみます
 - Leerdoelen: grammar:grammar-l9-5, pattern:pattern-l9-5.
-- Gebruikte woord-ID’s: vocab-うち, vocab-みず, vocab-のみます.
+- Getoetste begrippen: vocab-うち.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-うち, vocab-みず, vocab-のみます.
+- Situatiesleutels: `みず|のみます|うち`.
 
 ### 2.40. exam-l9-5-action-reading-2
 
 - Bron/les: l9-5; familie: action-reading.
 - Vraag: Waar gebeurt de handeling?
 - Stimulus: がっこう で ほん を よみます。
-- Japanse tekst / Nederlandse betekenis: Ik lees een boek op school.
+- Nederlandse betekenis: Ik lees een boek op school.
 - Correct: **Op school.**
 - Afleiders: In het park. / Thuis.
 - Leerdoelen: grammar:grammar-l9-5, pattern:pattern-l9-5.
-- Gebruikte woord-ID’s: vocab-がっこう, vocab-ほん, vocab-よみます.
+- Getoetste begrippen: vocab-がっこう.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-がっこう, vocab-ほん, vocab-よみます, vocab-こうえん, vocab-うち.
+- Situatiesleutels: `ほん|よみます|がっこう`.
 
 ### 2.41. exam-l9-5-de-action-2
 
 - Bron/les: l9-5; familie: de-action.
 - Vraag: Welke zin markeert de plaats van de handeling?
 - Stimulus: Ik lees een boek op school.
-- Japanse tekst / Nederlandse betekenis: Ik lees een boek op school.
+- Nederlandse betekenis: Ik lees een boek op school.
 - Correct: **がっこう で ほん を よみます**
 - Afleiders: がっこう に ほん を よみます / がっこう の ほん を よみます
 - Leerdoelen: grammar:grammar-l9-5, pattern:pattern-l9-5.
-- Gebruikte woord-ID’s: vocab-がっこう, vocab-ほん, vocab-よみます.
+- Getoetste begrippen: vocab-がっこう.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-がっこう, vocab-ほん, vocab-よみます.
+- Situatiesleutels: `ほん|よみます|がっこう`.
 
 ### 2.42. exam-l9-5-action-reading-3
 
 - Bron/les: l9-5; familie: action-reading.
 - Vraag: Waar gebeurt de handeling?
 - Stimulus: レストラン で パン を たべます。
-- Japanse tekst / Nederlandse betekenis: Ik eet brood in het restaurant.
+- Nederlandse betekenis: Ik eet brood in het restaurant.
 - Correct: **In het restaurant.**
 - Afleiders: In het park. / Thuis.
 - Leerdoelen: grammar:grammar-l9-5, pattern:pattern-l9-5.
-- Gebruikte woord-ID’s: vocab-レストラン, vocab-パン, vocab-たべます.
+- Getoetste begrippen: vocab-レストラン.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-レストラン, vocab-パン, vocab-たべます, vocab-こうえん, vocab-うち.
+- Situatiesleutels: `パン|たべます|レストラン`.
 
 ### 2.43. exam-l9-5-de-action-3
 
 - Bron/les: l9-5; familie: de-action.
 - Vraag: Welke zin markeert de plaats van de handeling?
 - Stimulus: Ik eet brood in het restaurant.
-- Japanse tekst / Nederlandse betekenis: Ik eet brood in het restaurant.
+- Nederlandse betekenis: Ik eet brood in het restaurant.
 - Correct: **レストラン で パン を たべます**
 - Afleiders: レストラン に パン を たべます / レストラン の パン を たべます
 - Leerdoelen: grammar:grammar-l9-5, pattern:pattern-l9-5.
-- Gebruikte woord-ID’s: vocab-レストラン, vocab-パン, vocab-たべます.
+- Getoetste begrippen: vocab-レストラン.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-レストラン, vocab-パン, vocab-たべます.
+- Situatiesleutels: `パン|たべます|レストラン`.
 
 ### 2.44. exam-l9-5-week-plan-0
 
@@ -519,11 +632,13 @@ De winkel is links.
 - Vraag: Welke afspraak hoort bij maandag?
 - Stimulus: げつようび：こうえん で パン を たべます。
 きんようび：うち で ほん を よみます。
-- Japanse tekst / Nederlandse betekenis: Maandag: brood eten in het park. Vrijdag: thuis een boek lezen.
+- Nederlandse betekenis: Maandag: brood eten in het park. Vrijdag: thuis een boek lezen.
 - Correct: **Op maandag eet ik brood in het park.**
 - Afleiders: Op maandag lees ik thuis een boek. / Op maandag lees ik in het park een boek.
 - Leerdoelen: grammar:grammar-l9-5, pattern:pattern-l9-5.
-- Gebruikte woord-ID’s: vocab-げつようび, vocab-きんようび, vocab-こうえん, vocab-パン, vocab-たべます, vocab-うち, vocab-ほん, vocab-よみます.
+- Getoetste begrippen: vocab-こうえん, vocab-うち.
+- Gebruikte woord-ID’s, inclusief afleiders: vocab-げつようび, vocab-きんようび, vocab-こうえん, vocab-パン, vocab-たべます, vocab-うち, vocab-ほん, vocab-よみます.
+- Situatiesleutels: `パン|たべます|こうえん`, `ほん|よみます|うち`.
 
 ### 2.45. Volledige familie van losse woordvragen (40 richtingsvarianten)
 
@@ -554,354 +669,401 @@ Voor elk van de twintig woorden bestaan precies deze twee varianten. Per variant
 
 ## 3. Eén volledige representatieve zitting (seed 28)
 
-De onderstaande volgorde is één concrete generatie, niet een vaste live toetsvolgorde. In het scherm worden de opties geschud. Vragen zonder een los doelwoord toetsen het vermelde grammaticale/ruimtelijke patroon; alleen woordvragen krijgen een los vocab-doel-ID.
+Opnieuw gegenereerd op 31 oktober 2026 met de aangepaste selector. De onderstaande volgorde is één concrete zitting, geen vaste live toetsvolgorde. De lijst toont alle dertig vragen, inclusief de volledige antwoordopties. Alleen de genoemde doel-ID’s worden getoetst; afleiderwoorden tellen niet als dekking.
 
 ### Vraag 1 — l9-4
 
-Bron: De kat is op het bed.
-
-Welke zin past bij de beschrijving?
-
+- Bron: exam-l9-4-position-production-0; onderdeel: context.
+- Vraag: Welke zin past bij de beschrijving?
+- Stimulus: De kat is op het bed.
+- Nederlandse betekenis: De kat is op het bed.
 - Correct: **ねこ は ベッド の うえ です**
 - Afleiders: ねこ は ベッド の した です / ねこ は ベッド の そと です
-- Nederlandse betekenis/toetsdoel: De kat is op het bed..
-- Doel: grammar:grammar-l9-4, pattern:pattern-l9-4.
-- Bron-ID: exam-l9-4-position-production-0.
+- Leerdoelen: grammar:grammar-l9-4, pattern:pattern-l9-4.
+- Getoetste begrippen: vocab-うえ.
+- Gebruikte woord-ID’s: vocab-ねこ, vocab-ベッド, vocab-うえ, vocab-した, vocab-そと.
+- Situatiesleutels: `ねこ|うえ|ベッド`.
 
-### Vraag 2 — l9-2
+### Vraag 2 — l9-3
 
-Bron: De weg ligt rechts.
-
-Welke zin past bij de aanwijzing over de weg?
-
-- Correct: **みち は みぎ です**
-- Afleiders: みち は ひだり です / みち は まっすぐ です
-- Nederlandse betekenis/toetsdoel: De weg ligt rechts..
-- Doel: grammar:grammar-l9-2, pattern:pattern-l9-2.
-- Bron-ID: exam-l9-2-road-context-1.
+- Bron: exam-l9-3-relative-production-3; onderdeel: context.
+- Vraag: Welke Japanse zin past bij deze ligging?
+- Stimulus: De kat is in het huis.
+- Nederlandse betekenis: De kat is in het huis.
+- Correct: **ねこ は うち の なか です**
+- Afleiders: ねこ は うち の うしろ です / ねこ は うち の まえ です
+- Leerdoelen: grammar:grammar-l9-3, pattern:pattern-l9-3.
+- Getoetste begrippen: vocab-なか.
+- Gebruikte woord-ID’s: vocab-ねこ, vocab-うち, vocab-なか, vocab-まえ, vocab-うしろ.
+- Situatiesleutels: `ねこ|なか|うち`.
 
 ### Vraag 3 — l9-2
 
-rechtdoor
+- Bron: exam-l9-2-road-context-0; onderdeel: context.
+- Vraag: Welke zin past bij de aanwijzing over de weg?
+- Stimulus: De weg ligt links.
+- Nederlandse betekenis: De weg ligt links.
+- Correct: **みち は ひだり です**
+- Afleiders: みち は みぎ です / みち は まっすぐ です
+- Leerdoelen: grammar:grammar-l9-2, pattern:pattern-l9-2.
+- Getoetste begrippen: vocab-ひだり.
+- Gebruikte woord-ID’s: vocab-みち, vocab-ひだり, vocab-みぎ, vocab-まっすぐ.
+- Situatiesleutels: `みち|ひだり|`.
 
-- Correct: **まっすぐ**
-- Afleiders: ひだり / みち
-- Nederlandse betekenis/toetsdoel: まっすぐ: rechtdoor.
-- Doel: vocab:vocab-まっすぐ; nl-jp.
-- Bron-ID: exam-vocab-まっすぐ-nl-jp.
+### Vraag 4 — l9-5
 
-### Vraag 4 — l9-4
+- Bron: exam-l9-5-week-plan-0; onderdeel: context.
+- Vraag: Welke afspraak hoort bij maandag?
+- Stimulus: げつようび：こうえん で パン を たべます。
+きんようび：うち で ほん を よみます。
+- Nederlandse betekenis: Maandag: brood eten in het park. Vrijdag: thuis een boek lezen.
+- Correct: **Op maandag eet ik brood in het park.**
+- Afleiders: Op maandag lees ik thuis een boek. / Op maandag lees ik in het park een boek.
+- Leerdoelen: grammar:grammar-l9-5, pattern:pattern-l9-5.
+- Getoetste begrippen: vocab-こうえん, vocab-うち.
+- Gebruikte woord-ID’s: vocab-げつようび, vocab-きんようび, vocab-こうえん, vocab-パン, vocab-たべます, vocab-うち, vocab-ほん, vocab-よみます.
+- Situatiesleutels: `パン|たべます|こうえん`, `ほん|よみます|うち`.
 
-boven / op
+### Vraag 5 — l9-5
 
-- Correct: **うえ**
-- Afleiders: ちかく / そと
-- Nederlandse betekenis/toetsdoel: うえ: boven / op.
-- Doel: vocab:vocab-うえ; nl-jp.
-- Bron-ID: exam-vocab-うえ-nl-jp.
+- Bron: exam-vocab-こうえん-jp-nl; onderdeel: vocab; richting: jp-nl.
+- Vraag: こうえん
+- Stimulus: Geen afzonderlijke stimulus.
+- Nederlandse betekenis: park
+- Correct: **park**
+- Afleiders: school / restaurant
+- Leerdoelen: vocab:vocab-こうえん.
+- Getoetste begrippen: vocab-こうえん.
+- Gebruikte woord-ID’s: vocab-こうえん, vocab-がっこう, vocab-レストラン.
 
-### Vraag 5 — l9-1
+### Vraag 6 — l9-1
 
-Bron: うち は そこ です。
-
-Waar is de genoemde plaats volgens de spreker?
-
-- Correct: **Het huis is bij de luisteraar.**
-- Afleiders: Het huis is bij de spreker. / Het huis is ver van beiden.
-- Nederlandse betekenis/toetsdoel: huis: daar bij jou..
-- Doel: grammar:grammar-l9-1, pattern:pattern-l9-1.
-- Bron-ID: exam-l9-1-listener-distance-2.
-
-### Vraag 6 — l9-5
-
-Bron: Ik lees een boek op school.
-
-Welke zin markeert de plaats van de handeling?
-
-- Correct: **がっこう で ほん を よみます**
-- Afleiders: がっこう の ほん を よみます / がっこう に ほん を よみます
-- Nederlandse betekenis/toetsdoel: Ik lees een boek op school..
-- Doel: grammar:grammar-l9-5, pattern:pattern-l9-5.
-- Bron-ID: exam-l9-5-de-action-2.
+- Bron: exam-vocab-どこ-nl-jp; onderdeel: vocab; richting: nl-jp.
+- Vraag: waar
+- Stimulus: Geen afzonderlijke stimulus.
+- Nederlandse betekenis: waar
+- Correct: **どこ**
+- Afleiders: そこ / ここ
+- Leerdoelen: vocab:vocab-どこ.
+- Getoetste begrippen: vocab-どこ.
+- Gebruikte woord-ID’s: vocab-どこ, vocab-そこ, vocab-ここ.
 
 ### Vraag 7 — l9-2
 
-Bron: Het station is rechts.
-Het huis is links.
+- Bron: exam-l9-2-road-context-2; onderdeel: context.
+- Vraag: Welke zin past bij de aanwijzing over de weg?
+- Stimulus: De weg loopt rechtdoor.
+- Nederlandse betekenis: De weg loopt rechtdoor.
+- Correct: **みち は まっすぐ です**
+- Afleiders: みち は ひだり です / みち は みぎ です
+- Leerdoelen: grammar:grammar-l9-2, pattern:pattern-l9-2.
+- Getoetste begrippen: vocab-まっすぐ.
+- Gebruikte woord-ID’s: vocab-みち, vocab-まっすぐ, vocab-ひだり, vocab-みぎ.
+- Situatiesleutels: `みち|まっすぐ|`.
 
-Welke Japanse aanwijzing hoort bij het station?
+### Vraag 8 — l9-4
 
-- Correct: **えき は みぎ です**
-- Afleiders: えき は ひだり です / えき は まっすぐ です
-- Nederlandse betekenis/toetsdoel: station: rechts..
-- Doel: grammar:grammar-l9-2, pattern:pattern-l9-2.
-- Bron-ID: exam-l9-2-direction-map-1.
-
-### Vraag 8 — l9-5
-
-がっこう
-
-- Correct: **school**
-- Afleiders: restaurant / kaart
-- Nederlandse betekenis/toetsdoel: がっこう: school.
-- Doel: vocab:vocab-がっこう; jp-nl.
-- Bron-ID: exam-vocab-がっこう-jp-nl.
+- Bron: exam-l9-4-position-production-2; onderdeel: context.
+- Vraag: Welke zin past bij de beschrijving?
+- Stimulus: De kat is buiten het huis.
+- Nederlandse betekenis: De kat is buiten het huis.
+- Correct: **ねこ は うち の そと です**
+- Afleiders: ねこ は うち の うえ です / ねこ は うち の した です
+- Leerdoelen: grammar:grammar-l9-4, pattern:pattern-l9-4.
+- Getoetste begrippen: vocab-そと.
+- Gebruikte woord-ID’s: vocab-ねこ, vocab-うち, vocab-そと, vocab-うえ, vocab-した.
+- Situatiesleutels: `ねこ|そと|うち`.
 
 ### Vraag 9 — l9-1
 
-daar verderop
-
-- Correct: **あそこ**
-- Afleiders: そこ / どこ
-- Nederlandse betekenis/toetsdoel: あそこ: daar verderop.
-- Doel: vocab:vocab-あそこ; nl-jp.
-- Bron-ID: exam-vocab-あそこ-nl-jp.
+- Bron: exam-vocab-そこ-jp-nl; onderdeel: vocab; richting: jp-nl.
+- Vraag: そこ
+- Stimulus: Geen afzonderlijke stimulus.
+- Nederlandse betekenis: daar bij jou
+- Correct: **daar bij jou**
+- Afleiders: hier / daar verderop
+- Leerdoelen: vocab:vocab-そこ.
+- Getoetste begrippen: vocab-そこ.
+- Gebruikte woord-ID’s: vocab-そこ, vocab-ここ, vocab-あそこ.
 
 ### Vraag 10 — l9-4
 
-Bron: Het huis is dicht bij de winkel.
+- Bron: exam-l9-4-position-reading-1; onderdeel: context.
+- Vraag: Welke locatie volgt uit de tekst?
+- Stimulus: いぬ は ベッド の した です。
+- Nederlandse betekenis: De hond is onder het bed.
+- Correct: **De hond is onder het bed.**
+- Afleiders: De hond is buiten het bed. / De hond is op het bed.
+- Leerdoelen: grammar:grammar-l9-4, pattern:pattern-l9-4.
+- Getoetste begrippen: vocab-した.
+- Gebruikte woord-ID’s: vocab-いぬ, vocab-ベッド, vocab-した, vocab-うえ, vocab-そと.
+- Situatiesleutels: `いぬ|した|ベッド`.
 
-Welke zin past bij de beschrijving?
+### Vraag 11 — l9-3
 
-- Correct: **うち は みせ の ちかく です**
-- Afleiders: うち は みせ の した です / うち は みせ の うえ です
-- Nederlandse betekenis/toetsdoel: Het huis is dicht bij de winkel..
-- Doel: grammar:grammar-l9-4, pattern:pattern-l9-4.
-- Bron-ID: exam-l9-4-position-production-3.
+- Bron: exam-vocab-なか-jp-nl; onderdeel: vocab; richting: jp-nl.
+- Vraag: なか
+- Stimulus: Geen afzonderlijke stimulus.
+- Nederlandse betekenis: binnen
+- Correct: **binnen**
+- Afleiders: achter / naast
+- Leerdoelen: vocab:vocab-なか.
+- Getoetste begrippen: vocab-なか.
+- Gebruikte woord-ID’s: vocab-なか, vocab-うしろ, vocab-となり.
 
-### Vraag 11 — l9-5
+### Vraag 12 — l9-3
 
-Bron: Ik eet brood in het park.
+- Bron: exam-l9-3-relative-reading-0; onderdeel: context.
+- Vraag: Welke beschrijving klopt?
+- Stimulus: みせ は えき の まえ です。
+- Nederlandse betekenis: De winkel is voor het station.
+- Correct: **De winkel is voor het station.**
+- Afleiders: De winkel is naast het station. / De winkel is achter het station.
+- Leerdoelen: grammar:grammar-l9-3, pattern:pattern-l9-3.
+- Getoetste begrippen: vocab-まえ.
+- Gebruikte woord-ID’s: vocab-みせ, vocab-えき, vocab-まえ, vocab-うしろ, vocab-となり.
+- Situatiesleutels: `みせ|まえ|えき`.
 
-Welke zin markeert de plaats van de handeling?
+### Vraag 13 — l9-3
 
-- Correct: **こうえん で パン を たべます**
-- Afleiders: こうえん の パン を たべます / こうえん に パン を たべます
-- Nederlandse betekenis/toetsdoel: Ik eet brood in het park..
-- Doel: grammar:grammar-l9-5, pattern:pattern-l9-5.
-- Bron-ID: exam-l9-5-de-action-0.
+- Bron: exam-l9-3-relative-production-2; onderdeel: context.
+- Vraag: Welke Japanse zin past bij deze ligging?
+- Stimulus: Het huis is naast de winkel.
+- Nederlandse betekenis: Het huis is naast de winkel.
+- Correct: **うち は みせ の となり です**
+- Afleiders: うち は みせ の うしろ です / うち は みせ の まえ です
+- Leerdoelen: grammar:grammar-l9-3, pattern:pattern-l9-3.
+- Getoetste begrippen: vocab-となり.
+- Gebruikte woord-ID’s: vocab-うち, vocab-みせ, vocab-となり, vocab-まえ, vocab-うしろ.
+- Situatiesleutels: `うち|となり|みせ`.
 
-### Vraag 12 — l9-2
+### Vraag 14 — l9-4
 
-weg
+- Bron: exam-vocab-ちかく-nl-jp; onderdeel: vocab; richting: nl-jp.
+- Vraag: dichtbij
+- Stimulus: Geen afzonderlijke stimulus.
+- Nederlandse betekenis: dichtbij
+- Correct: **ちかく**
+- Afleiders: した / そと
+- Leerdoelen: vocab:vocab-ちかく.
+- Getoetste begrippen: vocab-ちかく.
+- Gebruikte woord-ID’s: vocab-ちかく, vocab-そと, vocab-した.
 
-- Correct: **みち**
-- Afleiders: ひだり / みぎ
-- Nederlandse betekenis/toetsdoel: みち: weg.
-- Doel: vocab:vocab-みち; nl-jp.
-- Bron-ID: exam-vocab-みち-nl-jp.
+### Vraag 15 — l9-5
 
-### Vraag 13 — l9-4
+- Bron: exam-vocab-ちず-jp-nl; onderdeel: vocab; richting: jp-nl.
+- Vraag: ちず
+- Stimulus: Geen afzonderlijke stimulus.
+- Nederlandse betekenis: kaart
+- Correct: **kaart**
+- Afleiders: park / restaurant
+- Leerdoelen: vocab:vocab-ちず.
+- Getoetste begrippen: vocab-ちず.
+- Gebruikte woord-ID’s: vocab-ちず, vocab-レストラン, vocab-こうえん.
 
-Bron: うち は みせ の ちかく です。
+### Vraag 16 — l9-3
 
-Welke locatie volgt uit de tekst?
-
-- Correct: **Het huis is dicht bij de winkel.**
-- Afleiders: Het huis is onder de winkel. / Het huis is op de winkel.
-- Nederlandse betekenis/toetsdoel: Het huis is dicht bij de winkel..
-- Doel: grammar:grammar-l9-4, pattern:pattern-l9-4.
-- Bron-ID: exam-l9-4-position-reading-3.
-
-### Vraag 14 — l9-1
-
-Hoe vraag je waar de winkel is?
-
-- Correct: **みせ は どこ です か**
-- Afleiders: みせ は あそこ です か / みせ は ここ です か
-- Nederlandse betekenis/toetsdoel: Waar is de winkel?.
-- Doel: grammar:grammar-l9-1, pattern:pattern-l9-1.
-- Bron-ID: exam-l9-1-where-question-0.
-
-### Vraag 15 — l9-3
-
-Bron: えき は うち の うしろ です。
-
-Welke beschrijving klopt?
-
+- Bron: exam-l9-3-relative-reading-1; onderdeel: context.
+- Vraag: Welke beschrijving klopt?
+- Stimulus: えき は うち の うしろ です。
+- Nederlandse betekenis: Het station is achter het huis.
 - Correct: **Het station is achter het huis.**
 - Afleiders: Het station is voor het huis. / Het station is naast het huis.
-- Nederlandse betekenis/toetsdoel: Het station is achter het huis..
-- Doel: grammar:grammar-l9-3, pattern:pattern-l9-3.
-- Bron-ID: exam-l9-3-relative-reading-1.
+- Leerdoelen: grammar:grammar-l9-3, pattern:pattern-l9-3.
+- Getoetste begrippen: vocab-うしろ.
+- Gebruikte woord-ID’s: vocab-えき, vocab-うち, vocab-うしろ, vocab-まえ, vocab-となり.
+- Situatiesleutels: `えき|うしろ|うち`.
 
-### Vraag 16 — l9-4
+### Vraag 17 — l9-4
 
-ちかく
+- Bron: exam-vocab-うえ-jp-nl; onderdeel: vocab; richting: jp-nl.
+- Vraag: うえ
+- Stimulus: Geen afzonderlijke stimulus.
+- Nederlandse betekenis: boven / op
+- Correct: **boven / op**
+- Afleiders: buiten / dichtbij
+- Leerdoelen: vocab:vocab-うえ.
+- Getoetste begrippen: vocab-うえ.
+- Gebruikte woord-ID’s: vocab-うえ, vocab-そと, vocab-ちかく.
 
-- Correct: **dichtbij**
-- Afleiders: buiten / onder
-- Nederlandse betekenis/toetsdoel: ちかく: dichtbij.
-- Doel: vocab:vocab-ちかく; jp-nl.
-- Bron-ID: exam-vocab-ちかく-jp-nl.
+### Vraag 18 — l9-2
 
-### Vraag 17 — l9-2
-
-Bron: えき は みぎ です。
-
-Welke routeaanwijzing klopt met de tekst?
-
-- Correct: **Ga rechts voor het station.**
-- Afleiders: Ga links voor het station. / Ga rechtdoor voor het station.
-- Nederlandse betekenis/toetsdoel: station: rechts..
-- Doel: grammar:grammar-l9-2, pattern:pattern-l9-2.
-- Bron-ID: exam-l9-2-direction-meaning-1.
-
-### Vraag 18 — l9-3
-
-Bron: De kat is in het huis.
-
-Welke Japanse zin past bij deze ligging?
-
-- Correct: **ねこ は うち の なか です**
-- Afleiders: ねこ は うち の まえ です / ねこ は うち の うしろ です
-- Nederlandse betekenis/toetsdoel: De kat is in het huis..
-- Doel: grammar:grammar-l9-3, pattern:pattern-l9-3.
-- Bron-ID: exam-l9-3-relative-production-3.
+- Bron: exam-vocab-みぎ-nl-jp; onderdeel: vocab; richting: nl-jp.
+- Vraag: rechts
+- Stimulus: Geen afzonderlijke stimulus.
+- Nederlandse betekenis: rechts
+- Correct: **みぎ**
+- Afleiders: ひだり / みち
+- Leerdoelen: vocab:vocab-みぎ.
+- Getoetste begrippen: vocab-みぎ.
+- Gebruikte woord-ID’s: vocab-みぎ, vocab-みち, vocab-ひだり.
 
 ### Vraag 19 — l9-4
 
-Bron: ねこ は ベッド の した です。いぬ は うち の そと です。
+- Bron: exam-l9-4-position-reading-3; onderdeel: context.
+- Vraag: Welke locatie volgt uit de tekst?
+- Stimulus: うち は みせ の ちかく です。
+- Nederlandse betekenis: Het huis is dicht bij de winkel.
+- Correct: **Het huis is dicht bij de winkel.**
+- Afleiders: Het huis is op de winkel. / Het huis is onder de winkel.
+- Leerdoelen: grammar:grammar-l9-4, pattern:pattern-l9-4.
+- Getoetste begrippen: vocab-ちかく.
+- Gebruikte woord-ID’s: vocab-うち, vocab-みせ, vocab-ちかく, vocab-うえ, vocab-した.
+- Situatiesleutels: `うち|ちかく|みせ`.
 
-Welke combinatie klopt?
+### Vraag 20 — l9-5
 
-- Correct: **De kat is onder het bed; de hond is buiten het huis.**
-- Afleiders: De kat is op het bed; de hond is buiten het huis. / De kat is onder het bed; de hond is in het huis.
-- Nederlandse betekenis/toetsdoel: De kat is onder het bed. De hond is buiten het huis..
-- Doel: grammar:grammar-l9-4, pattern:pattern-l9-4.
-- Bron-ID: exam-l9-4-two-facts-0.
-
-### Vraag 20 — l9-1
-
-waar
-
-- Correct: **どこ**
-- Afleiders: そこ / ここ
-- Nederlandse betekenis/toetsdoel: どこ: waar.
-- Doel: vocab:vocab-どこ; nl-jp.
-- Bron-ID: exam-vocab-どこ-nl-jp.
+- Bron: exam-l9-5-action-reading-3; onderdeel: context.
+- Vraag: Waar gebeurt de handeling?
+- Stimulus: レストラン で パン を たべます。
+- Nederlandse betekenis: Ik eet brood in het restaurant.
+- Correct: **In het restaurant.**
+- Afleiders: Thuis. / In het park.
+- Leerdoelen: grammar:grammar-l9-5, pattern:pattern-l9-5.
+- Getoetste begrippen: vocab-レストラン.
+- Gebruikte woord-ID’s: vocab-レストラン, vocab-パン, vocab-たべます, vocab-こうえん, vocab-うち.
+- Situatiesleutels: `パン|たべます|レストラン`.
 
 ### Vraag 21 — l9-1
 
-Bron: えき は そこ です。
+- Bron: exam-l9-1-where-question-0; onderdeel: context.
+- Vraag: Hoe vraag je waar de winkel is?
+- Stimulus: Geen afzonderlijke stimulus.
+- Nederlandse betekenis: Waar is de winkel?
+- Correct: **みせ は どこ です か**
+- Afleiders: みせ は あそこ です か / みせ は ここ です か
+- Leerdoelen: grammar:grammar-l9-1, pattern:pattern-l9-1.
+- Getoetste begrippen: vocab-どこ.
+- Gebruikte woord-ID’s: vocab-みせ, vocab-どこ, vocab-ここ, vocab-あそこ.
+- Situatiesleutels: `みせ|where|`.
 
-Waar is de genoemde plaats volgens de spreker?
+### Vraag 22 — l9-1
 
-- Correct: **Het station is bij de luisteraar.**
-- Afleiders: Het station is ver van beiden. / Het station is bij de spreker.
-- Nederlandse betekenis/toetsdoel: station: daar bij jou..
-- Doel: grammar:grammar-l9-1, pattern:pattern-l9-1.
-- Bron-ID: exam-l9-1-listener-distance-1.
+- Bron: exam-l9-1-speaker-distance-1; onderdeel: context.
+- Vraag: Welke plaats is volgens de spreker hier?
+- Stimulus: えき は ここ です。みせ は あそこ です。
+- Nederlandse betekenis: えき: hier; みせ: daar verderop.
+- Correct: **Het station is bij de spreker.**
+- Afleiders: De winkel is bij de spreker. / Beide plaatsen zijn verder weg.
+- Leerdoelen: grammar:grammar-l9-1, pattern:pattern-l9-1.
+- Getoetste begrippen: vocab-ここ, vocab-あそこ.
+- Gebruikte woord-ID’s: vocab-えき, vocab-みせ, vocab-ここ, vocab-あそこ.
+- Situatiesleutels: `えき|ここ|`, `みせ|あそこ|`.
 
-### Vraag 22 — l9-3
+### Vraag 23 — l9-2
 
-Bron: Het huis is naast de winkel.
+- Bron: exam-vocab-まっすぐ-jp-nl; onderdeel: vocab; richting: jp-nl.
+- Vraag: まっすぐ
+- Stimulus: Geen afzonderlijke stimulus.
+- Nederlandse betekenis: rechtdoor
+- Correct: **rechtdoor**
+- Afleiders: rechts / weg
+- Leerdoelen: vocab:vocab-まっすぐ.
+- Getoetste begrippen: vocab-まっすぐ.
+- Gebruikte woord-ID’s: vocab-まっすぐ, vocab-みち, vocab-みぎ.
 
-Welke Japanse zin past bij deze ligging?
+### Vraag 24 — l9-5
 
-- Correct: **うち は みせ の となり です**
-- Afleiders: うち は みせ の まえ です / うち は みせ の うしろ です
-- Nederlandse betekenis/toetsdoel: Het huis is naast de winkel..
-- Doel: grammar:grammar-l9-3, pattern:pattern-l9-3.
-- Bron-ID: exam-l9-3-relative-production-2.
-
-### Vraag 23 — l9-5
-
-restaurant
-
+- Bron: exam-vocab-レストラン-nl-jp; onderdeel: vocab; richting: nl-jp.
+- Vraag: restaurant
+- Stimulus: Geen afzonderlijke stimulus.
+- Nederlandse betekenis: restaurant
 - Correct: **レストラン**
-- Afleiders: こうえん / ちず
-- Nederlandse betekenis/toetsdoel: レストラン: restaurant.
-- Doel: vocab:vocab-レストラン; nl-jp.
-- Bron-ID: exam-vocab-レストラン-nl-jp.
+- Afleiders: がっこう / こうえん
+- Leerdoelen: vocab:vocab-レストラン.
+- Getoetste begrippen: vocab-レストラン.
+- Gebruikte woord-ID’s: vocab-レストラン, vocab-がっこう, vocab-こうえん.
 
-### Vraag 24 — l9-2
+### Vraag 25 — l9-1
 
-ひだり
+- Bron: exam-vocab-あそこ-nl-jp; onderdeel: vocab; richting: nl-jp.
+- Vraag: daar verderop
+- Stimulus: Geen afzonderlijke stimulus.
+- Nederlandse betekenis: daar verderop
+- Correct: **あそこ**
+- Afleiders: そこ / どこ
+- Leerdoelen: vocab:vocab-あそこ.
+- Getoetste begrippen: vocab-あそこ.
+- Gebruikte woord-ID’s: vocab-あそこ, vocab-どこ, vocab-そこ.
 
-- Correct: **links**
-- Afleiders: weg / rechtdoor
-- Nederlandse betekenis/toetsdoel: ひだり: links.
-- Doel: vocab:vocab-ひだり; jp-nl.
-- Bron-ID: exam-vocab-ひだり-jp-nl.
+### Vraag 26 — l9-2
 
-### Vraag 25 — l9-5
-
-Bron: がっこう で ほん を よみます。
-
-Waar gebeurt de handeling?
-
-- Correct: **Op school.**
-- Afleiders: In het park. / Thuis.
-- Nederlandse betekenis/toetsdoel: Ik lees een boek op school..
-- Doel: grammar:grammar-l9-5, pattern:pattern-l9-5.
-- Bron-ID: exam-l9-5-action-reading-2.
-
-### Vraag 26 — l9-1
-
-daar bij jou
-
-- Correct: **そこ**
-- Afleiders: どこ / あそこ
-- Nederlandse betekenis/toetsdoel: そこ: daar bij jou.
-- Doel: vocab:vocab-そこ; nl-jp.
-- Bron-ID: exam-vocab-そこ-nl-jp.
+- Bron: exam-l9-2-direction-meaning-1; onderdeel: context.
+- Vraag: Welke routeaanwijzing klopt met de tekst?
+- Stimulus: えき は みぎ です。
+- Nederlandse betekenis: station: rechts.
+- Correct: **Ga rechts voor het station.**
+- Afleiders: Ga rechtdoor voor het station. / Ga links voor het station.
+- Leerdoelen: grammar:grammar-l9-2, pattern:pattern-l9-2.
+- Getoetste begrippen: vocab-みぎ.
+- Gebruikte woord-ID’s: vocab-えき, vocab-ひだり, vocab-みぎ, vocab-まっすぐ.
+- Situatiesleutels: `えき|みぎ|`.
 
 ### Vraag 27 — l9-5
 
-こうえん
+- Bron: exam-l9-5-action-reading-1; onderdeel: context.
+- Vraag: Waar gebeurt de handeling?
+- Stimulus: うち で みず を のみます。
+- Nederlandse betekenis: Ik drink water thuis.
+- Correct: **Thuis.**
+- Afleiders: Op school. / In het park.
+- Leerdoelen: grammar:grammar-l9-5, pattern:pattern-l9-5.
+- Getoetste begrippen: vocab-うち.
+- Gebruikte woord-ID’s: vocab-うち, vocab-みず, vocab-のみます, vocab-こうえん, vocab-がっこう.
+- Situatiesleutels: `みず|のみます|うち`.
 
-- Correct: **park**
-- Afleiders: school / restaurant
-- Nederlandse betekenis/toetsdoel: こうえん: park.
-- Doel: vocab:vocab-こうえん; jp-nl.
-- Bron-ID: exam-vocab-こうえん-jp-nl.
+### Vraag 28 — l9-2
 
-### Vraag 28 — l9-3
-
-なか
-
-- Correct: **binnen**
-- Afleiders: naast / achter
-- Nederlandse betekenis/toetsdoel: なか: binnen.
-- Doel: vocab:vocab-なか; jp-nl.
-- Bron-ID: exam-vocab-なか-jp-nl.
+- Bron: exam-vocab-ひだり-nl-jp; onderdeel: vocab; richting: nl-jp.
+- Vraag: links
+- Stimulus: Geen afzonderlijke stimulus.
+- Nederlandse betekenis: links
+- Correct: **ひだり**
+- Afleiders: みぎ / まっすぐ
+- Leerdoelen: vocab:vocab-ひだり.
+- Getoetste begrippen: vocab-ひだり.
+- Gebruikte woord-ID’s: vocab-ひだり, vocab-まっすぐ, vocab-みぎ.
 
 ### Vraag 29 — l9-3
 
-Bron: みせ は えき の まえ です。
+- Bron: exam-vocab-まえ-nl-jp; onderdeel: vocab; richting: nl-jp.
+- Vraag: voor
+- Stimulus: Geen afzonderlijke stimulus.
+- Nederlandse betekenis: voor
+- Correct: **まえ**
+- Afleiders: となり / なか
+- Leerdoelen: vocab:vocab-まえ.
+- Getoetste begrippen: vocab-まえ.
+- Gebruikte woord-ID’s: vocab-まえ, vocab-となり, vocab-なか.
 
-Welke beschrijving klopt?
+### Vraag 30 — l9-1
 
-- Correct: **De winkel is voor het station.**
-- Afleiders: De winkel is achter het station. / De winkel is naast het station.
-- Nederlandse betekenis/toetsdoel: De winkel is voor het station..
-- Doel: grammar:grammar-l9-3, pattern:pattern-l9-3.
-- Bron-ID: exam-l9-3-relative-reading-0.
+- Bron: exam-l9-1-listener-distance-1; onderdeel: context.
+- Vraag: Waar is de genoemde plaats volgens de spreker?
+- Stimulus: えき は そこ です。
+- Nederlandse betekenis: station: daar bij jou.
+- Correct: **Het station is bij de luisteraar.**
+- Afleiders: Het station is bij de spreker. / Het station is ver van beiden.
+- Leerdoelen: grammar:grammar-l9-1, pattern:pattern-l9-1.
+- Getoetste begrippen: vocab-そこ.
+- Gebruikte woord-ID’s: vocab-えき, vocab-そこ.
+- Situatiesleutels: `えき|そこ|`.
 
-### Vraag 30 — l9-3
+### Verdeling en vergelijking
 
-うしろ
+| Les | Leerdoelgroep | Contextvragen | Woordvragen | Totaal |
+| --- | --- | --- | --- | --- |
+| 9-1 | hier/daar/waar | 3 | 3 | 6 |
+| 9-2 | links/rechts/rechtdoor | 3 | 3 | 6 |
+| 9-3 | voor/achter/naast/binnen | 4 | 2 | 6 |
+| 9-4 | op/onder/buiten/dichtbij | 4 | 2 | 6 |
+| 9-5 | plaats van handeling | 3 | 3 | 6 |
 
-- Correct: **achter**
-- Afleiders: binnen / voor
-- Nederlandse betekenis/toetsdoel: うしろ: achter.
-- Doel: vocab:vocab-うしろ; jp-nl.
-- Bron-ID: exam-vocab-うしろ-jp-nl.
+Deze zitting bevat 6 woordvragen Japans → Nederlands en 7 Nederlands → Japans, dertien verschillende losse woorddoelen en geen dubbele situaties.
 
-### Verdeling en vergelijking met de oude generator
+Bij de audit vóór deze vervolgaanpassing bevatten 220 van 300 zittingen dezelfde situatie uit les 9-3 of 9-4 zowel als leesvraag als in omgekeerde richting. In die steekproef ontbrak op/boven in 43 zittingen, binnen in 42 en dichtbij in 37 als doel of gebruikte contextrelatie (afleiders niet meegeteld). Na deze aanpassing bevatten alle 300 gecontroleerde zittingen alle ruimtelijke doelcontrasten en nul dubbele situaties, ook bij meerzinnige stimuli.
 
-| Les | Leerdoelgroep | Aantal |
-| --- | --- | --- |
-| 9-1 | hier/daar/waar | 6 |
-| 9-2 | links/rechts/rechtdoor en weg | 6 |
-| 9-3 | voor/achter/naast/binnen | 6 |
-| 9-4 | op/onder/buiten/dichtbij | 6 |
-| 9-5 | plaats van handeling en kaart/plaatsen | 6 |
-
-De oude generator hergebruikte hetzelfde ene lesmodel als vertaling, herkenning én zinsbouwer; daarnaast kozen focusvragen dezelfde rechts-/op-zinnen. De correctie zit in de Level 9-bronpool/selectie, niet in een cosmetische shuffle. De gedeelde budgetbewaking, woordles en andere levels blijven behouden.
-
-Een vergelijking van twintig seeds met de generator uit Git HEAD vóór de wijziging (vraag, stimulus en correct antwoord samen, afleiders niet meegeteld) gaf gemiddeld: station 9 → 4,2 vragen; rechts 3,5 → 1,9; boven/op 6,2 → 3,05. Het maximale aantal identieke correcte antwoorden per zitting daalde 2 → 1 in deze steekproef. Dit zijn steekproefcijfers, geen verplicht quotum; de inhoud varieert per poging.
+De eerdere herziening verving het standaardmodel rond station/rechts/op al door de 44 contextitems. Deze vervolgaanpassing wijzigt geen zinnen, maar spreidt de concrete doelen binnen die bank en voorkomt vertaalherhaling. Station blijft een bekende plaats tussen winkel, huis, dieren, park, school en restaurant; het bepaalt de selectie niet.
 
 ## 4. Grammatica — dezelfde centrale entries, primair in Kennis → Grammatica
 
@@ -1207,7 +1369,17 @@ Controles: snelle en normale Leren/Recall/Voortgang-wissels, focus/zichtbaarheid
 
 **Nog ter goedkeuring:** de 44 contextitems, de woordvraagfamilies en de grammaticale uitleg/voorbeelden hierboven. Nieuwe of gewijzigde Japanse teksten krijgen pas na uitdrukkelijke inhoudelijke goedkeuring eventuele ElevenLabs-opnamen. Er zijn geen audiojobs gestart en geen bestaande opnamen vervangen. Bestaande exacte opnamen blijven via de huidige veilige resolver beschikbaar; ontbrekende passende opnamen blijven stil.
 
-Contentvalidatie en curriculumrapport: nul fouten; vier bestaande waarschuwingen (optionele audio en drie ongebruikte datumwoorden). De volledige testsuite slaagt: 194/194. De regressies controleren onder meer tachtig examengeneraties, volledige grammaticale bron-/woordgrenzen, geen opslagmutatie door naslag, scoring/rank en de gereproduceerde focusrace. Zie ook `tests/oct28-revision.test.cjs` en de volledige testsuite.
+Contentvalidatie en curriculumrapport: nul fouten; vier bestaande waarschuwingen (optionele audio en drie ongebruikte datumwoorden). De eerdere oplevering rapporteerde 194/194 tests. De vervolgregressies controleren onder meer driehonderd examengeneraties, volledige grammaticale bron-/woordgrenzen, geen opslagmutatie door naslag, scoring/rank en de gereproduceerde focusrace. Zie ook `tests/oct28-revision.test.cjs` en de volledige testsuite.
 
 Aangepast: `index.html`, `language-journey-content/content.js`, nieuwe modules `level9-exam.js` en `grammar-reference.js`, plus gerichte tests/probe en de twee oude testverwachtingen voor de grotere naslagcatalogus en compactere toetskop. Browser-QA: `scripts/oct28-ui-qa.js`; screenshots in `output/playwright/oct28/`. Geen wijzigingen aan ElevenLabs-configuratie, audiopipeline of audio-assets. Niet gecommit of gepusht.
 
+
+### Vervolgcontrole 31 oktober 2026
+
+De contextselectie, de volledige gebruikte-woordmetadata en deze goedkeuringsinventaris zijn bijgewerkt. Alle bestaande vraag- en woord-ID’s, rangregels, opslag en het budget van dertig vragen blijven behouden. **De inhoud is nog niet uitdrukkelijk goedgekeurd voor ElevenLabs-audio; er zijn geen audiojobs of API-aanroepen gestart en geen audio-assets of audiopipeline gewijzigd.**
+
+Resterend QA-bewijs: een fysieke iPhone/Safari-test. De eerdere WebKit/iPhone-touch-emulatie vervangt die niet.
+
+Uitgevoerde vervolgcontroles: contentvalidatie en curriculumrapport geven nul fouten en de vier bestaande waarschuwingen (optionele audio; drie ongebruikte datumwoorden). De gerichte combinatie van Level 9, examenwoordregistratie, compacte weergave en kanji-regressies slaagt met 19/19 tests; de Level 3–10-woorddekkingscontroles zijn eveneens geslaagd. De volledige suite gaf 204/205: uitsluitend de afgeleide assetversie was nog verouderd. Na `node scripts/version-client-assets.cjs` slaagt ook die opnieuw uitgevoerde versiecontrole. `git diff --check` geeft geen fouten.
+
+De bestaande `scripts/oct28-ui-qa.js`-flow is opnieuw uitgevoerd in een geïsoleerd mobiel Edge/Chromium-profiel met touch (Pixel 10-emulatie): 12 snelle/normale tabwisselrondes, focus/zichtbaarheid en gesimuleerde minuutverversing; behoud van Recall-queue en SRS; Grammatica zoeken/openen/sluiten; daarna het volledige examen met 30/30 en Copper. Geen browser-scriptfouten of horizontale overflow. De screenshot van de compacte vraag is visueel gecontroleerd. Nieuwe screenshots: `output/playwright/level9-fix-20261031/edge-exam.png` en `edge-grammar.png`. Deze run is geen fysieke iPhone- of nieuwe WebKit-controle.
