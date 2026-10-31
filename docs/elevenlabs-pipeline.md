@@ -2,6 +2,8 @@
 
 De pipeline gebruikt het bestaande audiofundament en de stabiele catalogus-ID's. De browser speelt gegenereerde MP3's af; de ElevenLabs-sleutel blijft lokaal. Node.js 22 of hoger is nodig. Er zijn geen extra npm-pakketten nodig.
 
+Voor de spreadsheetbacklog van 31 oktober 2026 is er een afzonderlijke [lokale import- en reviewlaag](audio-backlog-20261031.md): `npm run audio:backlog -- inspect|plan|import`. Deze doet geen netwerkverzoeken of synthese en importeert uitsluitend exact gekoppelde bestaande canonieke audio-entry's. Kandidaatcontent wordt nooit automatisch lesstof.
+
 In **Opties → Audio en geluid → Spreeksnelheid** kiest de gebruiker normaal (1×) of langzamer (0,75×). Dezelfde keuze staat bij de audio-instellingen in het profiel. De app bewaart deze keuze lokaal, gebruikt standaard 1× voor bestaande gebruikers en behoudt de toonhoogte. De snelheid geldt voor alle Japanse opnamen, inclusief dialoogregels; het antwoordgeluid blijft op normale snelheid. Er worden hiervoor geen nieuwe MP3's gegenereerd.
 
 Op Windows kan Node bij een bedrijfsproxy `SELF_SIGNED_CERT_IN_CHAIN` melden. Gebruik dan `node --use-system-ca scripts/audio-pipeline.cjs generate --all` (Node 24), zodat Windows' vertrouwde certificaten worden gebruikt. Schakel certificaatcontrole niet uit.

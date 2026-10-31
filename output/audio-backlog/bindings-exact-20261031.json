@@ -1,0 +1,504 @@
+{
+  "bindings": [
+    {
+      "audioId": "w-0001",
+      "entryId": "vocab-パン"
+    },
+    {
+      "audioId": "w-0002",
+      "entryId": "vocab-みず"
+    },
+    {
+      "audioId": "w-0003",
+      "entryId": "vocab-ほん"
+    },
+    {
+      "audioId": "w-0004",
+      "entryId": "vocab-えき"
+    },
+    {
+      "audioId": "w-0005",
+      "entryId": "vocab-こうえん"
+    },
+    {
+      "audioId": "w-0006",
+      "entryId": "vocab-がっこう"
+    },
+    {
+      "audioId": "w-0007",
+      "entryId": "vocab-レストラン"
+    },
+    {
+      "audioId": "w-0008",
+      "entryId": "vocab-みせ"
+    },
+    {
+      "audioId": "w-0009",
+      "entryId": "vocab-うち"
+    },
+    {
+      "audioId": "w-0010",
+      "entryId": "vocab-ひだり"
+    },
+    {
+      "audioId": "w-0011",
+      "entryId": "vocab-みぎ"
+    },
+    {
+      "audioId": "w-0012",
+      "entryId": "vocab-まっすぐ"
+    },
+    {
+      "audioId": "w-0013",
+      "entryId": "vocab-まえ"
+    },
+    {
+      "audioId": "w-0014",
+      "entryId": "vocab-うしろ"
+    },
+    {
+      "audioId": "w-0015",
+      "entryId": "vocab-となり"
+    },
+    {
+      "audioId": "w-0016",
+      "entryId": "vocab-なか"
+    },
+    {
+      "audioId": "w-0017",
+      "entryId": "vocab-そと"
+    },
+    {
+      "audioId": "w-0018",
+      "entryId": "vocab-ちかく"
+    },
+    {
+      "audioId": "w-0019",
+      "entryId": "vocab-たべます"
+    },
+    {
+      "audioId": "w-0020",
+      "entryId": "vocab-のみます"
+    },
+    {
+      "audioId": "w-0021",
+      "entryId": "vocab-よみます"
+    },
+    {
+      "audioId": "w-0022",
+      "entryId": "vocab-かいます"
+    },
+    {
+      "audioId": "w-0023",
+      "entryId": "vocab-いきます"
+    },
+    {
+      "audioId": "w-0024",
+      "entryId": "vocab-あいます"
+    },
+    {
+      "audioId": "w-0025",
+      "entryId": "vocab-ください"
+    },
+    {
+      "audioId": "w-0026",
+      "entryId": "vocab-なんじ"
+    },
+    {
+      "audioId": "w-0027",
+      "entryId": "vocab-しつもん"
+    },
+    {
+      "audioId": "w-0028",
+      "entryId": "vocab-こたえ"
+    },
+    {
+      "audioId": "w-0029",
+      "entryId": "vocab-ただしい"
+    },
+    {
+      "audioId": "w-0030",
+      "entryId": "vocab-まちがい"
+    },
+    {
+      "audioId": "w-0031",
+      "entryId": "vocab-いみ"
+    },
+    {
+      "audioId": "w-0032",
+      "entryId": "vocab-せつめい"
+    },
+    {
+      "audioId": "w-0033",
+      "entryId": "vocab-おんせい"
+    },
+    {
+      "audioId": "w-0034",
+      "entryId": "vocab-じゅんばん"
+    },
+    {
+      "audioId": "w-0036",
+      "entryId": "vocab-くうこう"
+    },
+    {
+      "audioId": "w-0037",
+      "entryId": "vocab-とうちゃく"
+    },
+    {
+      "audioId": "w-0038",
+      "entryId": "vocab-ターミナル"
+    },
+    {
+      "audioId": "w-0039",
+      "entryId": "vocab-でぐち"
+    },
+    {
+      "audioId": "w-0040",
+      "entryId": "vocab-あんないじょ"
+    },
+    {
+      "audioId": "w-0041",
+      "entryId": "vocab-パスポート"
+    },
+    {
+      "audioId": "w-0042",
+      "entryId": "vocab-にもつ"
+    },
+    {
+      "audioId": "w-0043",
+      "entryId": "vocab-ベルト"
+    },
+    {
+      "audioId": "w-0044",
+      "entryId": "vocab-でむかえ"
+    },
+    {
+      "audioId": "w-0045",
+      "entryId": "vocab-でんしゃ"
+    },
+    {
+      "audioId": "w-0046",
+      "entryId": "vocab-バス"
+    },
+    {
+      "audioId": "w-0047",
+      "entryId": "vocab-タクシー"
+    },
+    {
+      "audioId": "w-0048",
+      "entryId": "vocab-きっぷ"
+    },
+    {
+      "audioId": "w-0049",
+      "entryId": "vocab-のりば"
+    },
+    {
+      "audioId": "w-0050",
+      "entryId": "vocab-ばんせん"
+    },
+    {
+      "audioId": "w-0051",
+      "entryId": "vocab-のりかえ"
+    },
+    {
+      "audioId": "w-0052",
+      "entryId": "vocab-しゅっぱつ"
+    },
+    {
+      "audioId": "w-0053",
+      "entryId": "vocab-おります"
+    },
+    {
+      "audioId": "w-0054",
+      "entryId": "vocab-のります"
+    },
+    {
+      "audioId": "w-0055",
+      "entryId": "vocab-ホテル"
+    },
+    {
+      "audioId": "w-0056",
+      "entryId": "vocab-フロント"
+    },
+    {
+      "audioId": "w-0057",
+      "entryId": "vocab-よやく"
+    },
+    {
+      "audioId": "w-0058",
+      "entryId": "vocab-へや"
+    },
+    {
+      "audioId": "w-0059",
+      "entryId": "vocab-かぎ"
+    },
+    {
+      "audioId": "w-0060",
+      "entryId": "vocab-カード"
+    },
+    {
+      "audioId": "w-0061",
+      "entryId": "vocab-タオル"
+    },
+    {
+      "audioId": "w-0062",
+      "entryId": "vocab-あさごはん"
+    },
+    {
+      "audioId": "w-0063",
+      "entryId": "vocab-あずけます"
+    },
+    {
+      "audioId": "w-0064",
+      "entryId": "vocab-あずかります"
+    },
+    {
+      "audioId": "w-0065",
+      "entryId": "vocab-できます"
+    },
+    {
+      "audioId": "w-0066",
+      "entryId": "vocab-おねがいします"
+    },
+    {
+      "audioId": "w-0067",
+      "entryId": "vocab-スーパー"
+    },
+    {
+      "audioId": "w-0068",
+      "entryId": "vocab-やさい"
+    },
+    {
+      "audioId": "w-0069",
+      "entryId": "vocab-くだもの"
+    },
+    {
+      "audioId": "w-0070",
+      "entryId": "vocab-ぎゅうにゅう"
+    },
+    {
+      "audioId": "w-0071",
+      "entryId": "vocab-たまご"
+    },
+    {
+      "audioId": "w-0072",
+      "entryId": "vocab-にく"
+    },
+    {
+      "audioId": "w-0073",
+      "entryId": "vocab-さかな"
+    },
+    {
+      "audioId": "w-0074",
+      "entryId": "vocab-ふくろ"
+    },
+    {
+      "audioId": "w-0075",
+      "entryId": "vocab-レジ"
+    },
+    {
+      "audioId": "w-0076",
+      "entryId": "vocab-ねだん"
+    },
+    {
+      "audioId": "w-0077",
+      "entryId": "vocab-やすい"
+    },
+    {
+      "audioId": "w-0079",
+      "entryId": "vocab-メニュー"
+    },
+    {
+      "audioId": "w-0084",
+      "entryId": "vocab-コーヒー"
+    },
+    {
+      "audioId": "w-0085",
+      "entryId": "vocab-おちゃ"
+    },
+    {
+      "audioId": "w-0087",
+      "entryId": "vocab-おいしい"
+    },
+    {
+      "audioId": "w-0091",
+      "entryId": "vocab-ちず"
+    },
+    {
+      "audioId": "w-0095",
+      "entryId": "vocab-みち"
+    },
+    {
+      "audioId": "w-0096",
+      "entryId": "vocab-ちかてつ"
+    },
+    {
+      "audioId": "w-0097",
+      "entryId": "vocab-いりぐち"
+    },
+    {
+      "audioId": "w-0101",
+      "entryId": "vocab-こうえん"
+    },
+    {
+      "audioId": "w-0102",
+      "entryId": "vocab-しゃしん"
+    },
+    {
+      "audioId": "w-0106",
+      "entryId": "vocab-ともだち"
+    },
+    {
+      "audioId": "w-0107",
+      "entryId": "vocab-いっしょに"
+    },
+    {
+      "audioId": "w-0108",
+      "entryId": "vocab-きょう"
+    },
+    {
+      "audioId": "w-0109",
+      "entryId": "vocab-あした"
+    },
+    {
+      "audioId": "w-0110",
+      "entryId": "vocab-こんしゅう"
+    },
+    {
+      "audioId": "w-0114",
+      "entryId": "vocab-だいじょうぶ"
+    },
+    {
+      "audioId": "w-0117",
+      "entryId": "vocab-もういちど"
+    },
+    {
+      "audioId": "w-0118",
+      "entryId": "vocab-ゆっくり"
+    },
+    {
+      "audioId": "s-0013",
+      "entryId": "sentence-prepare-vocab-つきました"
+    },
+    {
+      "audioId": "s-0015",
+      "entryId": "sentence-prepare-vocab-のりかえ"
+    },
+    {
+      "audioId": "s-0017",
+      "entryId": "sentence-prepare-vocab-とまります"
+    },
+    {
+      "audioId": "s-0019",
+      "entryId": "sentence-prepare-vocab-ひつよう"
+    },
+    {
+      "audioId": "dlg-0046-02",
+      "entryId": "sentence-dialogue-l14-5-B-2"
+    },
+    {
+      "audioId": "dlg-0051-02",
+      "entryId": "sentence-dialogue-l14-5-B-2"
+    },
+    {
+      "audioId": "dlg-0056-02",
+      "entryId": "sentence-dialogue-l14-5-B-2"
+    },
+    {
+      "audioId": "dlg-0061-02",
+      "entryId": "sentence-dialogue-l14-5-B-2"
+    },
+    {
+      "audioId": "dlg-0066-02",
+      "entryId": "sentence-dialogue-l14-5-B-2"
+    },
+    {
+      "audioId": "dlg-0071-02",
+      "entryId": "sentence-dialogue-l14-5-B-2"
+    },
+    {
+      "audioId": "dlg-0076-02",
+      "entryId": "sentence-dialogue-l14-5-B-2"
+    },
+    {
+      "audioId": "dlg-0186-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0187-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0188-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0189-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0190-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0191-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0192-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0193-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0194-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0195-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0196-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0197-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0198-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0199-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0200-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0201-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0202-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0203-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0204-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    },
+    {
+      "audioId": "dlg-0205-05",
+      "entryId": "sentence-dialogue-l14-1-B-3"
+    }
+  ]
+}
