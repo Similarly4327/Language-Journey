@@ -46,7 +46,7 @@ test('Recall presents the exposed spelling in both directions using the same car
   for(const direction of ['jp-nl','nl-jp']){
     app.createFlashcardSession([{cardId:id,direction}], 'scheduled');app.state.flashcardSession.optionsRevealed=true;app.renderFlashcardsScreen();
     const html=app.element('flashcardView').innerHTML;
-    assert.match(html,/電車<\/summary><span>でんしゃ<\/span>/);
+    assert.match(html,/電車/);
     assert.deepEqual(plain(app.state.flashcardProgress.cards),{});
     app.state.flashcardSession.revealed=true;app.flashcardRate('knew',direction==='jp-nl'?'trein':'でんしゃ');
     assert.equal(app.state.flashcardProgress.cards[`${id}::${direction}`].repetitions,1);
@@ -54,11 +54,11 @@ test('Recall presents the exposed spelling in both directions using the same car
     if(direction==='jp-nl')app.state.flashcardProgress.cards={};
   }
 });
-test('whole-word support stays separate from answer buttons and respects lesson boundaries',()=>{
+test('active answer options suppress reading support and still respect lesson boundaries',()=>{
  const app=createCrashCourseProbe({savedState:{thematicRevision:1,introducedVocabIds:['vocab-えき'],kanjiExposureIds:['vocab-えき']}});
  app.state.level=11;app.state.screen='module';app.openThematicLesson(0);app.state.thematic={level:12,lessonIndex:0,part:'A',step:'questions',questionIndex:0,correct:0,answered:false,optionsRevealed:true,flowRevision:1};app.renderMain();
  assert.doesNotMatch(app.element('thematicBody').innerHTML,/reading-support[^>]*[^]*?駅/);
  app.state.level=12;app.openThematicLesson(2);const lesson=content.thematicCourses[12].lessons[2],part=lesson.applications.find(p=>p.part==='B'),index=part.questions.findIndex(q=>q.choices.includes('えき'));assert.ok(index>=0);
  app.state.thematic={level:13,lessonIndex:2,part:'B',step:'questions',questionIndex:index,correct:0,answered:false,optionsRevealed:true,flowRevision:1};app.renderMain();const html=app.element('thematicBody').innerHTML;
- assert.match(html,/>駅<\/button><details class="reading-support"/);assert.match(html,/>駅<\/summary><span>えき<\/span><\/details>/);assert.doesNotMatch(html,/<details class="reading-support"[^]*?<span>station<\/span>/);
+ assert.match(html,/>駅<\/button>/);assert.doesNotMatch(html,/<details class="reading-support"/);
 });

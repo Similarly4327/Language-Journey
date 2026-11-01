@@ -2,6 +2,8 @@
 
 Audit date: 2026-11-01. This is an additive correction to the existing implementation. Vocabulary remains canonical in `content.js`; orthography never adds a second Recall card, mastery item or reading.
 
+Follow-up: the internal N5–N3 guideline document supersedes unrestricted reading help during questions. Active targets and every answer option now suppress kana/Dictionary helpers; feedback and ordinary reading retain the appropriate support. The new internal evidence contract and its explicit limits are documented in `docs/jlpt/internal-guideline.md`.
+
 ## Orthography route
 
 | Existing word ID | Kana | Form | Explicit teaching point |
