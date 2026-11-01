@@ -298,6 +298,10 @@
       dialogue('l9-1','example',[['えき は どこ です か。','えき わ どこ です か。','Waar is het station?'],['えき は あそこ です。','えき わ あそこ です。','Het station is daar.']]),
       dialogue('l9-5','example',[['どこ で たべます か。','どこ で たべます か。','Waar eet je?'],['こうえん で パン を たべます。','こうえん で パン お たべます。','Ik eet brood in het park.']]),
       dialogue('l10-5','example',[['どこ に いきます か。','どこ に いきます か。','Waar ga je heen?'],['えき に いきます。','えき に いきます。','Ik ga naar het station.']]),
+      // The original Level 15 checkout source already contains three speaker
+      // turns. Preserve its wording and reading ID, and route the actual exchange
+      // through the same avatar/voice policy as the other conversations.
+      {...dialogue('l11-4','B',[['カード です か。','カード です か。','Met kaart?'],['はい。カード で はらいます。','はい。カード で はらいます。','Ja. Ik betaal met kaart.'],['はい。','はい。','Ja.']]),roleLabels:{A:'Winkelmedewerker',B:'Klant'}},
       dialogue('l12-4','B',[['のりば は どこ です か。','のりば わ どこ です か。','Waar is de halte?'],['のりば は みぎ です。','のりば わ みぎ です。','De halte is rechts.']]),
       dialogue('l13-2','B',[['きっぷ を ひとつ ください。','きっぷ お ひとつ ください。','Eén kaartje graag.'],['500えん です。','ごひゃくえん です。','Dat is 500 yen.']]),
       dialogue('l13-5','B',[['ホテルまえ は つぎ です か。','ホテルまえ わ つぎ です か。','Is Hotelmae de volgende halte?'],['つぎ は ホテルまえ です。','つぎ わ ホテルまえ です。','De volgende halte is Hotelmae.']]),

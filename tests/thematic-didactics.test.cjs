@@ -61,3 +61,24 @@ test('an old airport rank cannot silently introduce the newly added Japan sense'
   app.state.level=11;app.state.screen='module';app.state.thematic={level:12,lessonIndex:0,part:'A',step:'words',wordBlockIndex:3,questionIndex:0,correct:0,flowRevision:1};app.renderMain();
   assert.ok(!app.state.deferredVocabIntroductions.includes('vocab-country-japan'));assert.ok(app.flashcardEligibleCards().some(w=>w.id==='vocab-country-japan'));assert.equal(app.rankState['l12-1'].rank,'Gold');
 });
+test('the existing Level 15 checkout exchange renders actual labeled turns with both voice roles',()=>{
+  const lesson=content.thematicCourses[14].lessons[3],part=lesson.applications[1],id=part.dialogueId;
+  assert.equal(lesson.id,'l11-4');assert.equal(id,'dialogue-l11-4-B');
+  const block=content.audioEntryById[id].entry;
+  assert.deepEqual(block.lines.map(line=>content.audioEntryById[line.sentenceId].displayText),['カード です か。','はい。カード で はらいます。','はい。']);
+  assert.deepEqual(block.lines.map(line=>line.speakerRole),['A','B','A']);
+  const jobs=require('../scripts/audio-batch.cjs').selectJobs({ids:id});
+  for(const line of block.lines)assert.deepEqual(jobs.filter(job=>job.ref.id===line.sentenceId).map(job=>job.role),['A','B']);
+  const app=createCrashCourseProbe();app.state.level=14;app.state.screen='module';app.state.avatarGender='male';app.state.avatarName='Kai';
+  for(const step of ['reading','questions']){
+    app.state.thematic={level:15,lessonIndex:3,part:'B',step,questionIndex:0,correct:0,answered:false,selected:null,optionsRevealed:true};app.renderMain();
+    const html=app.element('thematicBody').innerHTML;
+    assert.equal((html.match(/class="dialogue-turn"/g)||[]).length,3);assert.match(html,/Kai · Winkelmedewerker/);assert.match(html,/Miku · Klant/);assert.doesNotMatch(html,/みせ：/);
+  }
+  assert.ok(!content.manifest.didacticDialogues.some(d=>d.level===7),'isolated counter examples are not conversations');
+  assert.ok(!content.manifest.didacticDialogues.some(d=>d.level===11),'UI questions are not in-world conversations');
+});
+test('dialogue kanji obeys the original lesson boundary, even when replayed after later exposure',()=>{
+  const app=createCrashCourseProbe({savedState:{thematicRevision:1,introducedVocabIds:['vocab-えき'],kanjiExposureIds:['vocab-えき']}});
+  assert.doesNotMatch(app.dialogueHtml('dialogue-l9-1-example'),/reading-support|駅/);
+});

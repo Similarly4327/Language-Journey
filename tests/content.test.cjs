@@ -73,6 +73,8 @@ test('kanji can follow a known word but not precede it',()=>{
   assert.ok(!codes(validate(m,{checkFiles:false})).includes('KANJI_BEFORE_WORD'));
   word.kanjiIntroducedAt='3-1';
   assert.ok(codes(validate(m,{checkFiles:false})).includes('KANJI_BEFORE_WORD'));
+  word.kanjiIntroducedAt=word.introducedAt;
+  assert.ok(codes(validate(m,{checkFiles:false})).includes('KANJI_BEFORE_WORD'),'a new lexeme and its kanji must not be introduced together');
 });
 test('optional bonus is linked without changing core lesson IDs',()=>{
   const m=copy();

@@ -1737,8 +1737,9 @@ body[data-scene="journey"][data-view="main"] #mainView{
 .knowledge-item>.audio-speaker{margin-right:5px}
 .progress-time-values{text-align:right;min-width:0}.progress-time-values span{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}
 .reading-support{display:inline-block;position:relative;vertical-align:baseline}.reading-support>summary{cursor:pointer;list-style:none;border-bottom:1px dotted currentColor}.reading-support>summary::-webkit-details-marker{display:none}.reading-support>span{display:block;font-size:.72em;line-height:1.25;text-align:center;color:var(--muted)}
+.answer-option-row:has(>.reading-support){display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center}.answer-option-row:has(>.reading-support):has(>.audio-speaker){grid-template-columns:minmax(0,1fr) auto 44px}.answer-option-row>.reading-support>summary{min-width:44px;min-height:44px;padding:10px 6px;box-sizing:border-box;text-align:center}
 </style>
-<link rel="stylesheet" href="./scenes.css?v=recall-recovery-cb1751d6088b036c">
+<link rel="stylesheet" href="./scenes.css?v=recall-recovery-962352fdba27cff4">
 </head>
 <body data-scene="journey" data-view="main">
 <div id="app" class="app stack">
@@ -1805,26 +1806,26 @@ body[data-scene="journey"][data-view="main"] #mainView{
     <g class="flight-plane" fill="#bf4949"><path d="m0 0 33-7-12 11 3 11-8 2-8-11-14 4-5-5 17-9Z"/></g>
   </svg><strong>Op weg naar Japan</strong></div>
 </div>
-<script src="./locales/nl.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./locales/en.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./locales/de.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./locales/legacy-translations.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./locales/i18n.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./locales/legacy-ui.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./platform.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./navigation.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./scenes.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./language-journey-content/audio-course-readings.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./language-journey-content/audio-foundation.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./assets/audio/ja/manifest.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./audio/playback.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./language-journey-content/thematic-didactics.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./language-journey-content/level11-integration.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./language-journey-content/level9-exam.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./language-journey-content/grammar-reference.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./language-journey-content/content.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./language-journey-content/jlpt-benchmark.js?v=recall-recovery-cb1751d6088b036c"></script>
-<script src="./language-journey-content/jlpt-guideline.js?v=recall-recovery-cb1751d6088b036c"></script>
+<script src="./locales/nl.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./locales/en.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./locales/de.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./locales/legacy-translations.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./locales/i18n.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./locales/legacy-ui.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./platform.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./navigation.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./scenes.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./language-journey-content/audio-course-readings.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./language-journey-content/audio-foundation.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./assets/audio/ja/manifest.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./audio/playback.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./language-journey-content/thematic-didactics.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./language-journey-content/level11-integration.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./language-journey-content/level9-exam.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./language-journey-content/grammar-reference.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./language-journey-content/content.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./language-journey-content/jlpt-benchmark.js?v=recall-recovery-962352fdba27cff4"></script>
+<script src="./language-journey-content/jlpt-guideline.js?v=recall-recovery-962352fdba27cff4"></script>
 <script>
 (() => {
 const platform=window.LanguageJourneyPlatform,preferences=platform.preferences(),i18n=window.LanguageJourneyI18n,scenes=window.LanguageJourneyScenes,navigation=window.LanguageJourneyNavigation;
@@ -2204,8 +2205,11 @@ function japaneseWordHtml(text){
   return word&&/[\u3040-\u30ff\u3400-\u9fff]/u.test(value)&&!/[\s。、！？!?]/u.test(value)?`<span class="jp-word" lang="ja">${escapeHtml(value)}</span>`:escapeHtml(value);
 }
 // Explicit exposure only: historical lesson ranks do not unlock a new spelling.
-const sessionKanjiIntroductions={has:id=>(state.kanjiExposureIds||[]).includes(id),add:id=>{if(!state.kanjiExposureIds.includes(id))state.kanjiExposureIds.push(id)}};
+const sessionKanjiIntroductions={has:id=>!!vocabById[id]?.kanjiIntroducedAt&&!!dictionaryById[id]&&knowledgeWordIsKnown(dictionaryById[id])&&(state.kanjiExposureIds||[]).includes(id),add:id=>{if(knowledgeWordIsKnown(dictionaryById[id])&&!state.kanjiExposureIds.includes(id))state.kanjiExposureIds.push(id)}};
 function kanjiReadingHtml(word){return `<details class="reading-support" lang="ja"><summary aria-label="${escapeHtml(word.kanji)} · toon kana">${escapeHtml(word.kanji)}</summary><span>${escapeHtml(word.kana)}</span></details>`}
+// Course Japanese uses spaced lexical tokens. Keep punctuation outside the token;
+// never replace a known spelling inside a longer word such as えきまえ.
+function japaneseLexicalTokens(text){return String(text||'').split(/(\s+|[。、：！？!?「」『』（）()：:])/u)}
 function kanjiIntroductionsFor(lesson,part){
   if(!lesson||part!=='A')return[];
   const point=`${lesson.level}-${lesson.order}-A`;
@@ -2217,14 +2221,14 @@ function kanjiWordForToken(token,point=null,contextIds=[]){
   return word&&sessionKanjiIntroductions.has(word.id)&&word.kanjiIntroducedAt&&(!point||window.LanguageJourneyContent.pointOrder(word.kanjiIntroducedAt)<=window.LanguageJourneyContent.pointOrder(point))?word:null;
 }
 function kanjiTextHtml(text,point=null,interactive=true,contextIds=[]){
-  return String(text||'').split(/(\s+|[。、：！？!?])/u).map(token=>{
+  return japaneseLexicalTokens(text).map(token=>{
     if(/^\s+$/u.test(token))return token.includes('\n')?token.replace(/\n/g,'<br>'):' ';
     const word=kanjiWordForToken(token,point,contextIds);
     return word?(interactive?kanjiReadingHtml(word):escapeHtml(word.kanji)):escapeHtml(token);
   }).join('');
 }
 function kanjiOptionHelpHtml(text,point=null,contextIds=[]){
-  const words=String(text||'').split(/(\s+|[。、：！？!?])/u).map(token=>kanjiWordForToken(token,point,contextIds)).filter(Boolean);
+  const words=japaneseLexicalTokens(text).map(token=>kanjiWordForToken(token,point,contextIds)).filter(Boolean);
   return [...new Map(words.map(word=>[word.id,word])).values()].map(kanjiReadingHtml).join('');
 }
 function dictionaryLessonLabel(entry){
@@ -3228,7 +3232,7 @@ function loadProgress(){
     if(['overview','words','model','understand','build','check'].includes(s.langStep))state.langStep=s.langStep;
     if(s.langStepProgress&&typeof s.langStepProgress==='object')state.langStepProgress=s.langStepProgress;
     if(Array.isArray(s.introducedVocabIds))state.introducedVocabIds=s.introducedVocabIds.filter(id=>!!vocabById[id]);
-    if(Array.isArray(s.kanjiExposureIds))state.kanjiExposureIds=[...new Set(s.kanjiExposureIds.filter(id=>!!vocabById[id]?.kanjiIntroducedAt))];
+    if(Array.isArray(s.kanjiExposureIds))state.kanjiExposureIds=[...new Set(s.kanjiExposureIds.filter(id=>!!vocabById[id]?.kanji))];
     if(s.flashcardProgress&&typeof s.flashcardProgress==='object'&&s.flashcardProgress.cards&&typeof s.flashcardProgress.cards==='object'){
       const migrated={};
       Object.entries(s.flashcardProgress.cards).forEach(([key,value])=>{
@@ -4007,14 +4011,17 @@ function scheduleQuestionAdvance(callback,valid=()=>true){
 }
 function dialogueHtml(id){
   const content=window.LanguageJourneyContent,block=content.audioEntryById[id]?.entry;if(!block?.lines)return'';
+  const lesson=content.manifest.lessons.find(item=>item.id===block.lessonId),point=lesson?`${lesson.level}-${lesson.order}-${block.part==='A'?'A':'B'}`:null;
   const names={A:resolveProfileText('{{avatarName}}'),B:avatarDefaults(state.avatarGender==='male'?'female':'male').name};
+  for(const role of ['A','B'])if(block.roleLabels?.[role])names[role]+=` · ${block.roleLabels[role]}`;
   const audio=speakerButtonHtml('',id,'Luister naar het gesprek');
-  return`<section class="panel dialogue-block"><div class="between"><strong>Kort gesprek</strong>${audio||'<span class="small">Audio wordt voorbereid</span>'}</div>${block.lines.map(line=>{const sentence=content.audioEntryById[line.sentenceId]?.entry,gender=line.speakerRole==='A'?state.avatarGender:state.avatarGender==='male'?'female':'male',portrait=avatarAssetFor(activeAvatarOutfit(),'neutral',gender,state.avatarHairstyle);return`<div class="dialogue-turn" data-dialogue-role="${line.speakerRole}"><div class="dialogue-identity">${portrait?`<img src="assets/${escapeHtml(portrait)}" alt="" loading="lazy">`:''}<strong class="small">${escapeHtml(names[line.speakerRole])}</strong></div><div lang="ja" class="jp-question-copy">${escapeHtml(sentence.displayText)}</div><div class="small">${escapeHtml(sentence.meaning)}</div></div>`}).join('')}</section>`;
+  return`<section class="panel dialogue-block"><div class="between"><strong>Kort gesprek</strong>${audio||'<span class="small">Audio wordt voorbereid</span>'}</div>${block.lines.map(line=>{const sentence=content.audioEntryById[line.sentenceId]?.entry,gender=line.speakerRole==='A'?state.avatarGender:state.avatarGender==='male'?'female':'male',portrait=avatarAssetFor(activeAvatarOutfit(),'neutral',gender,state.avatarHairstyle);return`<div class="dialogue-turn" data-dialogue-role="${line.speakerRole}"><div class="dialogue-identity">${portrait?`<img src="assets/${escapeHtml(portrait)}" alt="" loading="lazy">`:''}<strong class="small">${escapeHtml(names[line.speakerRole])}</strong></div><div lang="ja" class="jp-question-copy">${kanjiTextHtml(sentence.displayText,point)}</div><div class="small">${escapeHtml(sentence.meaning)}</div></div>`}).join('')}</section>`;
 }
 function thematicResourceHtml(part,reading){
   if(part.part==='A')return`<div class="thematic-reading" lang="ja">${thematicReadingHtml(reading.text)}</div>`;
   return`<div class="thematic-resource" data-resource-kind="${escapeHtml(part.resourceKind||'notice')}" lang="ja">${reading.text.split('\n').map(line=>`<div class="thematic-resource-row">${thematicReadingHtml(line)}</div>`).join('')}</div>`;
 }
+function thematicSourceHtml(part,reading){return part.dialogueId?dialogueHtml(part.dialogueId):`<div class="thematic-reading audio-content-block" lang="ja">${thematicReadingHtml(reading.text)}${speakerButtonHtml(reading.text,reading.id,'Luister naar de hele tekst')}</div>`}
 function renderDidacticLesson(host,lesson,part,reading,done){
   const session=state.thematic,step=session.step,split=lesson.didactics.splitParts,newWords=(split?part.newWordIds:lesson.didactics.newWordIds).map(id=>vocabById[id]);
   if(split&&part.part==='A')lesson={...lesson,wordIds:part.wordIds};
@@ -4099,7 +4106,7 @@ function thematicChoiceHtml(question,kind,instructionId=null){
 function thematicReadingHtml(text){
   const lesson=thematicLesson(),point=lesson?`${lesson.level}-${lesson.order}-${state.thematic.part}`:null;
   const contextIds=lesson?.id==='l12-5'&&state.thematic.part==='A'?['vocab-country-japan']:[];
-  return text.split(/(\s+|[。、：])/u).map(token=>{
+  return japaneseLexicalTokens(text).map(token=>{
     if(!token.trim())return token.includes('\n')?token.replace(/\n/g,'<br>'):' ';
     const matches=vocabCatalog.filter(item=>!item.legacy&&item.jp===token),word=matches.findLast(item=>state.introducedVocabIds.includes(item.id))||matches[0];
     const kanji=point&&kanjiWordForToken(token,point,contextIds);if(kanji)return kanjiReadingHtml(kanji);
@@ -4146,11 +4153,11 @@ function renderThematicLesson(box,course){
     if(state.thematic.answered)$('thematicNext').onclick=()=>thematicNextQuestion(part.wordIds.length,'reading');return;
   }
   if(step==='reading'){
-    host.innerHTML=`<section class="card"><div class="eyebrow">${part.part} · ${part.kind==='story'?'kort chronologisch verhaal':escapeHtml(part.label)}</div><div class="thematic-reading audio-content-block" lang="ja">${thematicReadingHtml(reading.text)}${speakerButtonHtml(reading.text,reading.id,'Luister naar de hele tekst')}</div><div class="small" style="margin-top:9px">Tik op een bekend woord voor naslag. Hulp gebruiken kost geen punten.</div><details class="thematic-hint"><summary>Woordhulp</summary>${part.wordIds.map(id=>`<div>${escapeHtml(vocabById[id].kana)} · ${escapeHtml(vocabById[id].meaning)}</div>`).join('')}</details><details class="thematic-hint"><summary>Grammatica-hint</summary><div>${escapeHtml(part.grammarHint)}</div></details><details class="thematic-hint"><summary>Volledige vertaling</summary><div>${escapeHtml(reading.translation)}</div></details><button id="thematicQuestionsStart" class="btn primary" style="width:100%;margin-top:12px">${thematicUiLabel('しつもん','Begripsvragen')} →</button></section>`;
+    host.innerHTML=`<section class="card"><div class="eyebrow">${part.part} · ${part.kind==='story'?'kort chronologisch verhaal':escapeHtml(part.label)}</div>${thematicSourceHtml(part,reading)}<div class="small" style="margin-top:9px">Tik op een bekend woord voor naslag. Hulp gebruiken kost geen punten.</div><details class="thematic-hint"><summary>Woordhulp</summary>${part.wordIds.map(id=>`<div>${escapeHtml(vocabById[id].kana)} · ${escapeHtml(vocabById[id].meaning)}</div>`).join('')}</details><details class="thematic-hint"><summary>Grammatica-hint</summary><div>${escapeHtml(part.grammarHint)}</div></details><details class="thematic-hint"><summary>Volledige vertaling</summary><div>${escapeHtml(reading.translation)}</div></details><button id="thematicQuestionsStart" class="btn primary" style="width:100%;margin-top:12px">${thematicUiLabel('しつもん','Begripsvragen')} →</button></section>`;
     $('thematicQuestionsStart').onclick=()=>thematicAdvance('questions');return;
   }
   if(step==='questions'){
-    const base=part.questions[state.thematic.questionIndex],question={...base,choices:thematicOrderedChoices(base.choices)};host.innerHTML=`<section class="card"><div class="small">${thematicUiLabel('しつもん','Vraag')} ${state.thematic.questionIndex+1}/${part.questions.length} · Je mag de tekst opnieuw bekijken</div><details class="thematic-hint"><summary>Tekst opnieuw bekijken</summary><div class="thematic-reading audio-content-block" lang="ja">${thematicReadingHtml(reading.text)}${speakerButtonHtml(reading.text,reading.id,'Luister naar de hele tekst')}</div></details></section>${thematicChoiceHtml(question,'Begrijpend lezen',part.instructionId)}`;
+    const base=part.questions[state.thematic.questionIndex],question={...base,choices:thematicOrderedChoices(base.choices)};host.innerHTML=`<section class="card"><div class="small">${thematicUiLabel('しつもん','Vraag')} ${state.thematic.questionIndex+1}/${part.questions.length} · Je mag de tekst opnieuw bekijken</div><details class="thematic-hint"><summary>Tekst opnieuw bekijken</summary>${thematicSourceHtml(part,reading)}</details></section>${thematicChoiceHtml(question,'Begrijpend lezen',part.instructionId)}`;
     host.querySelectorAll('[data-thematic-choice]').forEach(button=>button.onclick=()=>thematicAnswer(question.choices[Number(button.dataset.thematicChoice)],question.answer));
     if(state.thematic.answered)$('thematicNext').onclick=()=>thematicNextQuestion(part.questions.length,'done');return;
   }

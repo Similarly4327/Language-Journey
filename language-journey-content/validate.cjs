@@ -123,7 +123,7 @@ function validate(manifest = content.manifest, options = {}) {
   for(const pattern of manifest.patterns||[])for(const id of pattern.dependencies||[])known('grammar',id,pattern.introducedAt,pattern.id);
   for(const word of manifest.vocabulary||[]) {
     if(!word.japanese||!word.reading||!word.meanings?.length)add('ERROR','VOCAB_FIELDS',`${word.id} lacks form, reading or meaning`,word.id);
-    if(word.kanjiForm&&word.kanjiIntroducedAt&&word.introducedAt&&order(word.kanjiIntroducedAt)<order(word.introducedAt))add('ERROR','KANJI_BEFORE_WORD',`${word.id} kanji predates the word`,word.id);
+    if(word.kanjiForm&&word.kanjiIntroducedAt&&word.introducedAt&&order(word.kanjiIntroducedAt)<=order(word.introducedAt))add('ERROR','KANJI_BEFORE_WORD',`${word.id} kanji must follow the known word`,word.id);
     if(word.kanjiForm&&!word.kanjiIntroducedAt)add('WARNING','KANJI_UNSCHEDULED',`${word.id} has a kanji form but no teaching point`,word.id);
   }
   const registeredAudioIds=new Set();

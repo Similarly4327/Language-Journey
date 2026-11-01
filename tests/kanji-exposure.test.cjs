@@ -12,8 +12,47 @@ test('kanji exposure is explicit and persists without changing existing vocabula
   assert.match(reload.dictionaryArticleHtml(reload.dictionaryById['vocab-わたし']),/私/);
 });
 test('kanji points follow known lexemes and Japan is distinct from the counter',()=>{
-  for(const id of ['vocab-わたし','vocab-ひと','vocab-えき','vocab-でんしゃ','vocab-みず','vocab-country-japan']){const w=content.vocabById[id];assert.ok(content.pointOrder(w.introducedAt)<content.pointOrder(w.kanjiIntroducedAt),id)}
-  assert.equal(content.vocabById['vocab-country-japan'].kanjiIntroducedAt,'12-5-A');assert.equal(content.vocabById['vocab-にほん'].kanji,null);
+  for(const [id,point] of [['vocab-わたし','11-1-A'],['vocab-ひと','12-1-A'],['vocab-えき','13-1-A'],['vocab-でんしゃ','13-1-A'],['vocab-みず','14-1-A']]){const w=content.vocabById[id];assert.ok(content.pointOrder(w.introducedAt)<content.pointOrder(w.kanjiIntroducedAt),id);assert.equal(w.kanjiIntroducedAt,point)}
+  assert.equal(content.vocabById['vocab-country-japan'].kanji,'日本');assert.equal(content.vocabById['vocab-country-japan'].kanjiIntroducedAt,null);assert.equal(content.vocabById['vocab-にほん'].kanji,null);
+});
+test('known vocabulary and acknowledged orthography are independent gates, including old saved exposures',()=>{
+  const ids=['vocab-わたし','vocab-ひと','vocab-えき','vocab-でんしゃ','vocab-みず'];
+  const app=createCrashCourseProbe({savedState:{thematicRevision:1,kanjiExposureIds:ids}});
+  for(const id of ids)assert.equal(app.kanjiTextHtml(content.vocabById[id].kana,'15-5-B'),content.vocabById[id].kana);
+  app.state.introducedVocabIds.push(...ids);
+  for(const id of ids){const w=content.vocabById[id];assert.match(app.kanjiTextHtml(w.kana,w.kanjiIntroducedAt),new RegExp(`<summary[^>]*>${w.kanji}</summary><span>${w.kana}</span>`));assert.equal(app.kanjiTextHtml(w.kana,'10-5-B'),w.kana)}
+  app.state.kanjiExposureIds=[];
+  for(const id of ids)assert.equal(app.kanjiTextHtml(content.vocabById[id].kana,'15-5-B'),content.vocabById[id].kana);
+});
+test('Japan stays kana throughout Level 12 and later previews without losing a historical exposure or either sense',()=>{
+  const id='vocab-country-japan',app=createCrashCourseProbe({savedState:{thematicRevision:1,introducedVocabIds:[id,'vocab-にほん'],kanjiExposureIds:[id]}});
+  for(const point of ['12-1-A','12-5-A','13-1-A','15-5-B'])assert.equal(app.kanjiTextHtml('にほん',point,true,[id]),'にほん');
+  assert.deepEqual(plain(app.kanjiIntroductionsFor(content.thematicCourses[11].lessons[4],'A')),[]);
+  assert.equal(app.kanjiTextHtml('にほん',null,true,['vocab-にほん']),'にほん');
+  assert.deepEqual(plain(app.saved().state.kanjiExposureIds),[id],'a corrected schedule does not erase historical exposure');
+  assert.doesNotMatch(app.dictionaryArticleHtml(app.dictionaryById[id]),/Kanji: 日本/);
+});
+test('reading help uses the whole word, handles punctuation, and never reveals a gloss or grades an answer',()=>{
+  const id='vocab-でんしゃ',app=createCrashCourseProbe({now:Date.parse('2026-11-01T10:00:00Z'),savedState:{thematicRevision:1,introducedVocabIds:[id],kanjiExposureIds:[id]},savedRanks:{'l13-1':{rank:'Gold',attempts:2,last:1}}});
+  const html=app.kanjiTextHtml('「でんしゃ」 （でんしゃ） でんしゃまえ','13-1-A');
+  assert.equal((html.match(/<summary/g)||[]).length,2);assert.match(html,/電車<\/summary><span>でんしゃ<\/span>/);assert.match(html,/でんしゃまえ$/);assert.doesNotMatch(html,/trein|romaji|data-dictionary|onclick|data-thematic-choice/);
+  const before=plain(app.saved()),active={open:true},other={open:true};app.document.querySelectorAll=selector=>selector==='.reading-support[open]'?[active,other]:[];
+  app.fireDocumentEvent('click',{target:{closest:selector=>selector==='.reading-support'?active:null}});
+  assert.equal(active.open,true);assert.equal(other.open,false);assert.deepEqual(plain(app.saved()),before);
+});
+test('Recall presents the exposed spelling in both directions using the same card IDs and scheduling',()=>{
+  const id='vocab-でんしゃ',other='vocab-えき',savedState={thematicRevision:1,introducedVocabIds:[id,other],kanjiExposureIds:[id],flashcardDirections:['jp-nl','nl-jp']};
+  const app=createCrashCourseProbe({savedState,savedRanks:{'l10-4':{rank:'Copper',attempts:1,last:.8},'l4-9':{rank:'Copper',attempts:1,last:.8}},now:Date.parse('2026-11-01T10:00:00Z')});
+  for(const direction of ['jp-nl','nl-jp']){
+    app.createFlashcardSession([{cardId:id,direction}], 'scheduled');app.state.flashcardSession.optionsRevealed=true;app.renderFlashcardsScreen();
+    const html=app.element('flashcardView').innerHTML;
+    assert.match(html,/電車<\/summary><span>でんしゃ<\/span>/);
+    assert.deepEqual(plain(app.state.flashcardProgress.cards),{});
+    app.state.flashcardSession.revealed=true;app.flashcardRate('knew',direction==='jp-nl'?'trein':'でんしゃ');
+    assert.equal(app.state.flashcardProgress.cards[`${id}::${direction}`].repetitions,1);
+    assert.ok(Object.keys(app.state.flashcardProgress.cards).every(key=>key.startsWith(`${id}::`)));
+    if(direction==='jp-nl')app.state.flashcardProgress.cards={};
+  }
 });
 test('whole-word support stays separate from answer buttons and respects lesson boundaries',()=>{
  const app=createCrashCourseProbe({savedState:{thematicRevision:1,introducedVocabIds:['vocab-えき'],kanjiExposureIds:['vocab-えき']}});
