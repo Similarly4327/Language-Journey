@@ -105,7 +105,8 @@ function validate(manifest = content.manifest, options = {}) {
     if(!lesson){add('ERROR','UNKNOWN_REFERENCE',`Reading ${reading.id} has unknown lesson ${reading.lessonId}`,reading.id);continue}
     if(!['story','micro-story','dialogue','shopping-list','menu','sign','notice'].includes(reading.type))add('ERROR','READING_TYPE',`${reading.type} is unsupported`,reading.id);
     const preparationPoint=`${lesson.level}-${lesson.order}-B`;
-    const prepared=lesson.didactics?.flow?.indexOf('sentences')<lesson.didactics?.flow?.indexOf('story-A')&&reading.preparedAt===preparationPoint;
+    const microblockPreparation=lesson.didactics?.preparationMicroblocks===true&&lesson.didactics.microblocks?.length===4&&lesson.didactics.flow.indexOf('D')<lesson.didactics.flow.indexOf('source-A');
+    const prepared=(microblockPreparation||lesson.didactics?.flow?.indexOf('sentences')<lesson.didactics?.flow?.indexOf('story-A'))&&reading.preparedAt===preparationPoint;
     const at=prepared?preparationPoint:reading.introducedAt||`${lesson.level}-${lesson.order}`;
     for(const id of reading.requiredVocabIds||[])known('vocabulary',id,at,reading.id);
     for(const id of reading.contextVocabIds||[]){
@@ -125,6 +126,17 @@ function validate(manifest = content.manifest, options = {}) {
     if(!word.japanese||!word.reading||!word.meanings?.length)add('ERROR','VOCAB_FIELDS',`${word.id} lacks form, reading or meaning`,word.id);
     if(word.kanjiForm&&word.kanjiIntroducedAt&&word.introducedAt&&order(word.kanjiIntroducedAt)<=order(word.introducedAt))add('ERROR','KANJI_BEFORE_WORD',`${word.id} kanji must follow the known word`,word.id);
     if(word.kanjiForm&&!word.kanjiIntroducedAt)add('WARNING','KANJI_UNSCHEDULED',`${word.id} has a kanji form but no teaching point`,word.id);
+  }
+  for(const lesson of manifest.lessons||[])if(lesson.didactics?.microblocks){
+    const blocks=lesson.didactics.microblocks;
+    if(blocks.map(block=>block.key).join('')!=='ABCD')add('ERROR','MICROBLOCK_ORDER',`${lesson.id} needs A, B, C, D in order`,lesson.id);
+    const ids=blocks.flatMap(block=>block.wordIds||[]);
+    if(new Set(ids).size!==ids.length||ids.length!==lesson.didactics.newWordIds.length||lesson.didactics.newWordIds.some(id=>!ids.includes(id)))add('ERROR','MICROBLOCK_WORDS',`${lesson.id} microblocks must cover each new word once`,lesson.id);
+    for(const block of blocks){
+      if((block.wordIds?.length||0)+(block.grammarIds?.length||0)+(block.kanjiWordIds?.length||0)>3)add('ERROR','MICROBLOCK_OVERLOAD',`${lesson.id} block ${block.key} exceeds three new targets`,lesson.id);
+      for(const id of block.wordIds||[])known('vocabulary',id,`${lesson.level}-${lesson.order}-${lesson.didactics.preparationMicroblocks?'B':block.sourcePart}`,lesson.id);
+      for(const id of block.grammarIds||[])known('grammar',id,`${lesson.level}-${lesson.order}-${block.sourcePart}`,lesson.id);
+    }
   }
   const registeredAudioIds=new Set();
   for(const asset of manifest.audio?.assets||[]) {

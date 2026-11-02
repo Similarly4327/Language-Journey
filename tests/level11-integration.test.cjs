@@ -4,24 +4,24 @@ const {createCrashCourseProbe}=require('./app-probe.cjs');
 const lessons=content.thematicCourses[10].lessons,day=86400000,now=Date.UTC(2026,9,15,9);
 const plain=value=>JSON.parse(JSON.stringify(value));
 function appAt(index=0,options={}){const app=createCrashCourseProbe(options);app.state.level=10;app.state.screen='module';app.openThematicLesson(index);return app}
-test('each Level 11 part introduces five together and trains only those five, once per direction',()=>{
+test('Level 11 introduces A–D as 3/2/3/2, training only the current block in both directions',()=>{
   for(let index=0;index<4;index++){
     const app=appAt(index),lesson=lessons[index];
+    assert.deepEqual(lesson.didactics.microblocks.map(block=>block.wordIds.length),[3,2,3,2]);
     for(const part of lesson.applications){
       app.startThematicPart(part.part);
-      assert.equal(part.newWordIds.length,5);assert.equal(app.state.thematic.step,'words');
-      assert.equal((app.element('thematicBody').innerHTML.match(/class="panel audio-content-block"/g)||[]).length,5);
-      if(part.part==='A')for(const id of lesson.applications[1].newWordIds)assert.ok(!app.state.introducedVocabIds.includes(id),id);
-      app.element('thematicWordsNext').onclick();
-      const deck=app.activeWordCrashCourse.deck;assert.equal(deck.length,10);
-      for(const id of part.newWordIds)for(const direction of ['jp-nl','nl-jp'])assert.equal(deck.filter(q=>q.word.id===id&&q.direction===direction).length,1);
-      app.completeWordCrashCourse();assert.equal(app.state.thematic.step,'sentences');
-      for(const model of part.models){
-        for(const id of model.linkedWordIds)assert.ok(content.pointOrder(content.vocabById[id].introducedAt)<=content.pointOrder(`11-${index+1}-${part.part}`));
+      for(const block of lesson.didactics.microblocks.filter(block=>block.sourcePart===part.part)){
+        assert.equal(app.state.thematic.step,'words');assert.match(app.element('thematicBody').innerHTML,new RegExp('Blok '+block.key));
+        assert.equal((app.element('thematicBody').innerHTML.match(/class="panel audio-content-block"/g)||[]).length,block.wordIds.length);
+        assert.ok(block.wordIds.length+block.grammarIds.length<=3);
+        const next=lesson.didactics.microblocks.find(next=>next.sourcePart===part.part&&next.index>block.index);
+        if(next)for(const id of next.wordIds)assert.ok(!app.state.introducedVocabIds.includes(id),id);
+        app.element('thematicWordsNext').onclick();const deck=app.activeWordCrashCourse.deck;assert.equal(deck.length,block.wordIds.length*2);
+        for(const id of block.wordIds)for(const direction of ['jp-nl','nl-jp'])assert.equal(deck.filter(q=>q.word.id===id&&q.direction===direction).length,1);
+        app.completeWordCrashCourse();assert.equal(app.state.thematic.step,'sentences');
+        let count=0;while(app.state.thematic.step==='sentences'&&count++<12)app.element('thematicSentenceNext').onclick();
+        assert.equal(app.state.thematic.step,next?'words':'questions');
       }
-      let count=0;while(app.state.thematic.step==='sentences'&&count++<12)app.element('thematicSentenceNext').onclick();
-      assert.equal(app.state.thematic.step,'questions','no separate long story/practical-source screen before application');
-      if(part.part==='A')for(const id of lesson.applications[1].newWordIds)assert.ok(!app.element('thematicBody').innerHTML.includes(content.vocabById[id].kana),id);
     }
   }
 });

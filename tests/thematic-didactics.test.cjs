@@ -58,7 +58,7 @@ test('two avatars use selected lead A/B consistently, including Phase 1; missing
 test('an old airport rank cannot silently introduce the newly added Japan sense',()=>{
   const app=createCrashCourseProbe({savedRanks:{'l12-1':{rank:'Gold',attempts:3,last:1}}});
   assert.ok(app.state.deferredVocabIntroductions.includes('vocab-country-japan'));assert.ok(!app.flashcardEligibleCards().some(w=>w.id==='vocab-country-japan'));
-  app.state.level=11;app.state.screen='module';app.state.thematic={level:12,lessonIndex:0,part:'A',step:'words',wordBlockIndex:3,questionIndex:0,correct:0,flowRevision:1};app.renderMain();
+  app.state.level=11;app.state.screen='module';app.state.thematic={level:12,lessonIndex:0,part:'A',step:'words',microblockIndex:3,wordBlockIndex:0,questionIndex:0,correct:0,flowRevision:3};app.renderMain();
   assert.ok(!app.state.deferredVocabIntroductions.includes('vocab-country-japan'));assert.ok(app.flashcardEligibleCards().some(w=>w.id==='vocab-country-japan'));assert.equal(app.rankState['l12-1'].rank,'Gold');
 });
 test('the existing Level 15 checkout exchange renders actual labeled turns with both voice roles',()=>{

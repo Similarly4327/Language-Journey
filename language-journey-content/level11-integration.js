@@ -169,5 +169,43 @@ const order=exam.sources[2];Object.assign(order,{label:'Reisvoorbereiding in de 
     for(const [index,text] of ['ちず → でんしゃ → ひこうき','ひこうき → でんしゃ → ちず','でんしゃ → ちず → ひこうき'].entries())m.didacticUtterances.push({id:`sentence-l11-trip-order-${index+1}`,text,audioTextKana:text.replaceAll(' → ','、'),level:11,lessonId:fifth.id});
     m.contentVersion='1.7.1';
   }
-  const api={apply};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.LanguageJourneyLevel11Integration=api;
+  function applyMicroblocks(m){
+    for(const lesson of m.lessons.filter(item=>item.level===11&&item.order<=4)){
+      const available=new Set(m.vocabulary.filter(word=>compare(word.introducedAt,`11-${lesson.order}-A`)<0).map(word=>word.id));
+      const blocks=[];
+      for(const part of lesson.applications)for(const [index,wordIds] of [part.newWordIds.slice(0,3),part.newWordIds.slice(3)].entries()){
+        wordIds.forEach(id=>available.add(id));
+        const key='ABCD'[blocks.length],grammarIds=lesson.order===2?(key==='B'?['grammar-noun-to']:key==='D'?['grammar-l11-home-1']:[]):[];
+        blocks.push({key,sourcePart:part.part,index,wordIds,grammarIds,models:part.models.filter(model=>model.linkedWordIds.every(id=>available.has(id))&&model.linkedWordIds.some(id=>wordIds.includes(id)))});
+      }
+      lesson.didactics={...lesson.didactics,revision:4,microblocks:blocks,flow:['A-3','B-2','application-A','C-3','D-2','application-B','Lestoets']};
+    }
+    // The new conjunction fits beside B's two words. Stable grammar/word/source
+    // IDs stay intact; the complete A source is shown only after block B.
+    const conjunction=m.grammar.find(item=>item.id==='grammar-noun-to');
+    if(conjunction){conjunction.laterExamples=conjunction.examples.slice(0,-1).map((text,index)=>({text,introducedAt:'11-2-B',translation:conjunction.exampleTranslations[index]?.translation}));Object.assign(conjunction,{introducedAt:'11-2-A',availableFrom:'11-2-A',examples:conjunction.examples.slice(-1),exampleTranslations:conjunction.exampleTranslations.slice(-1),exampleLimitNote:'Eén voorbeeld met al geïntroduceerde woorden; de andere voorbeelden blijven bewaard bij het latere lesonderdeel.'})}
+    for(const lesson of m.lessons.filter(item=>item.level>=12&&item.level<=14)){
+      const available=new Set(m.vocabulary.filter(word=>compare(word.introducedAt,`${lesson.level}-${lesson.order}-A`)<0).map(word=>word.id)),words=lesson.didactics.newWordIds;
+      const grammarIds=lesson.grammarIds.filter(id=>{const item=m.grammar.find(item=>item.id===id);return item&&!item.referenceAliasOf&&item.introducedAt?.startsWith(`${lesson.level}-${lesson.order}-`)});
+      const sizes=[3,2,3,2],blocks=[];let offset=0;
+      for(let index=0;index<4;index++){
+        const grammar=index===1&&grammarIds.length>1?[grammarIds[0]]:index===3?grammarIds.slice(grammarIds.length>1?1:0):[],wordIds=words.slice(offset,offset+Math.min(sizes[index],3-grammar.length));offset+=wordIds.length;wordIds.forEach(id=>available.add(id));
+        blocks.push({key:'ABCD'[index],sourcePart:'A',index,wordIds,grammarIds:grammar,models:lesson.models.filter(model=>model.linkedWordIds.every(id=>available.has(id))&&model.linkedWordIds.some(id=>wordIds.includes(id)))});
+      }
+      lesson.didactics={...lesson.didactics,revision:4,microblocks:blocks,preparationMicroblocks:true,flow:['A','B','C','D','source-A','source-B','Lestoets']};
+      const first=words.filter(id=>wordPoint(id).endsWith('-A')),second=words.filter(id=>!first.includes(id)),source=m.readings.find(reading=>reading.id===lesson.applications[0].readingId);
+      const text=[source.text,...lesson.applications[0].questions.flatMap(q=>[q.prompt,q.answer,...q.choices])].join(' ').split(/[\s。、！？!?：]+/u);
+      const laterUsed=second.filter(id=>{const word=m.vocabulary.find(word=>word.id===id);return text.includes(word.japanese)||(m.didacticSurfaceForms||[]).some(form=>form.wordId===id&&text.includes(form.form))});
+      if(first.length<=6&&second.length<=6&&Math.max(0,first.length-3)+grammarIds.length<=3&&!laterUsed.length){
+        const known=new Set(m.vocabulary.filter(word=>compare(word.introducedAt,`${lesson.level}-${lesson.order}-A`)<0).map(word=>word.id));
+        const paired=[first.slice(0,3),first.slice(3),second.slice(0,3),second.slice(3)].map((wordIds,index)=>{wordIds.forEach(id=>known.add(id));return{key:'ABCD'[index],sourcePart:index<2?'A':'B',index:index%2,wordIds,grammarIds:index===1?grammarIds:[],models:lesson.models.filter(model=>model.linkedWordIds.every(id=>known.has(id))&&model.linkedWordIds.some(id=>wordIds.includes(id)))}});
+        Object.assign(lesson.didactics,{microblocks:paired,splitParts:true,preparationMicroblocks:false,flow:['A','B','source-A','C','D','source-B','Lestoets']});
+        lesson.applications[0].newWordIds=first;lesson.applications[1].newWordIds=second;
+        source.requiredVocabIds=source.requiredVocabIds.filter(id=>compare(wordPoint(id),`${lesson.level}-${lesson.order}-A`)<=0);
+      }else lesson.didactics.sourceTimingException={laterWordIds:laterUsed,firstPartWordCount:first.length,newGrammarCount:grammarIds.length};
+      function wordPoint(id){return m.vocabulary.find(word=>word.id===id).introducedAt}
+    }
+    m.contentVersion='1.8.1';
+  }
+  const api={apply,applyMicroblocks};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.LanguageJourneyLevel11Integration=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

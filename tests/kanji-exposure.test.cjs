@@ -2,14 +2,14 @@ const test=require('node:test'),assert=require('node:assert/strict');
 const {createCrashCourseProbe}=require('./app-probe.cjs');
 const content=require('../language-journey-content/content.js');
 const plain=x=>JSON.parse(JSON.stringify(x));
-test('kanji exposure is explicit and persists without changing existing vocabulary or Recall',()=>{
+test('mandatory kana blocks never grant kanji exposure and preserve existing Recall',()=>{
   const savedState={introducedVocabIds:['vocab-わたし'],thematicCompleted:{'l11-home-1':{A:true,B:true}},flashcardProgress:{version:1,cards:{'vocab-わたし::jp-nl':{dueAt:9000,intervalDays:4,repetitions:3,lapses:0,lastReviewedAt:100,lastGrade:'knew'}}}};
   const app=createCrashCourseProbe({savedState});assert.deepEqual(plain(app.state.kanjiExposureIds),[]);
   const before=plain(app.state.flashcardProgress);app.state.level=10;app.state.screen='module';app.openThematicLesson(0);app.startThematicPart('A');
-  assert.match(app.element('thematicBody').innerHTML,/わたし → 私（わたし）/);assert.deepEqual(plain(app.state.kanjiExposureIds),[]);
-  app.element('thematicWordsNext').onclick();assert.deepEqual(plain(app.state.kanjiExposureIds),['vocab-わたし']);
-  const saved=app.saved(),reload=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.deepEqual(plain(reload.state.kanjiExposureIds),['vocab-わたし']);assert.deepEqual(plain(reload.state.flashcardProgress),before);
-  assert.match(reload.dictionaryArticleHtml(reload.dictionaryById['vocab-わたし']),/私/);
+  assert.doesNotMatch(app.element('thematicBody').innerHTML,/私/);assert.deepEqual(plain(app.state.kanjiExposureIds),[]);
+  app.element('thematicWordsNext').onclick();assert.deepEqual(plain(app.state.kanjiExposureIds),[]);
+  const saved=app.saved(),reload=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.deepEqual(plain(reload.state.kanjiExposureIds),[]);assert.deepEqual(plain(reload.state.flashcardProgress),before);
+  assert.doesNotMatch(reload.dictionaryArticleHtml(reload.dictionaryById['vocab-わたし']),/Kanji: 私/);
 });
 test('kanji points follow known lexemes and Japan is distinct from the counter',()=>{
   for(const [id,point] of [['vocab-わたし','11-1-A'],['vocab-ひと','12-1-A'],['vocab-えき','13-1-A'],['vocab-でんしゃ','13-1-A'],['vocab-みず','14-1-A']]){const w=content.vocabById[id];assert.ok(content.pointOrder(w.introducedAt)<content.pointOrder(w.kanjiIntroducedAt),id);assert.equal(w.kanjiIntroducedAt,point)}

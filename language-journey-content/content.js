@@ -13891,6 +13891,7 @@
   level9Exam.apply(manifest);
   const grammarReference=typeof module!=='undefined'&&module.exports?require('./grammar-reference.js'):root.LanguageJourneyGrammarReference;
   grammarReference.apply(manifest);
+  level11Integration.applyMicroblocks(manifest);
   // Orthography belongs to the existing lexeme; it is not a new mastery item.
   // Japan is first introduced as vocabulary in 12-1-A. Its kanji is deferred
   // until a natural later reuse; repeating the first airport scene is not enough.
