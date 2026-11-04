@@ -29,10 +29,17 @@ Each cell lists canonical vocabulary IDs (the `vocab-` prefix is omitted below f
 
 ## Decisions
 
+### Correction — 2026-11-04
+
+- Add known-word kanji from Level 11 onward. Kanji is an optional spelling layer, not a required answer or completion target; it may replace kana in ordinary exercises after its introduction.
+- Show the already-known forms `私` (Level 11), `人` (Level 12), `電車` and `駅` (Level 13), and `水` (Level 14) in a short, non-graded introduction when the learner already knows the canonical word. Preserve the kana reading and the existing canonical vocabulary ID. Recall may use the kanji representation on that same card and SRS record.
+- Japan (`日本`) remains deferred until a natural later use. Levels 16–20 do not yet have authored lessons or candidate kanji; the shared renderer accepts future known-word mappings without adding speculative words or spellings.
+- This correction supersedes the November 2 kanji deferral in the source prompt. It does not change Level 4/5 writing restrictions or introduce kanji in new vocabulary at the same time as its meaning.
+
 - Level 11 keeps the stable source/application A/B IDs: displayed blocks A+B prepare source A, C+D prepare source B. Existing source completion maps to the corresponding completed blocks. Level 11 lesson 5 remains the 12-question integration exam with no new learning targets.
 - Levels 12–14 use A+B → original source A, then C+D → original source B wherever the source is already integrable. Exactly three exceptions defer source A until D: `l12-1` uses the later `vocab-でぐち` and has 5 first-part words + 2 new grammar targets; `l12-2` uses later `vocab-あと`; `l14-1` has 6 first-part words + 1 grammar target, exceeding the six-item A+B capacity. All original reading/question/audio IDs remain. Some smaller lessons use 3+3 blocks under the same maximum of three; there is no quota.
 - The two Level 11 lesson-2 grammar targets occupy B and D alongside two words each. The noun-と introduction uses the already-known ことば と いみ example; the original later examples remain stored with their later introduction point.
-- Mandatory blocks introduce no kanji and never write spelling-exposure IDs. Unexposed words stay in kana. Previously acknowledged spellings may still render under the existing lesson/context gate. New spellings can be deferred; no optional spelling page was added.
+- Kanji exposure is gated by an authored `kanjiIntroducedAt` point and actual known-word state. The optional intro is informational and does not add a tested target or alter vocabulary progress. The same canonical lexeme can render in kanji in later lesson context and Recall; the kana reading remains available under the existing question-help rules.
 - No library extras, bonus vocabulary, new Recall IDs or ElevenLabs candidates were added. No recordings were regenerated or approved. Existing optional material remains optional.
 - New block completion is additive; old A/B completion and lesson ranks remain valid. Per-direction Recall records, error history, mastery, profile data and existing introduced words are retained.
 - Source and explicit stem remain outside the hidden/inert answer region. The reveal control is static within the answer region. Tests inspect the emitted DOM at a 375px VM viewport; this is not a real-browser screenshot claim.
