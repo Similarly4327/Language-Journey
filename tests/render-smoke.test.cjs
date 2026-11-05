@@ -164,7 +164,7 @@ test('all level screens render through the imported content adapter',()=>{
   const wordLessons=[...probe.langLessons,...Object.values(probe.advancedCourses).flatMap(course=>course.lessons)];
   for(const lesson of wordLessons){
     const point=`${lesson.level}-${lesson.order}`,metadata=probe.manifest.vocabulary;
-    let expected=metadata.filter(word=>word.introducedAt===point);
+    let expected=metadata.filter(word=>word.introducedAt===point&&(word.routeId||null)===(lesson.routeId||null));
     if(!expected.length&&(lesson.level<3||lesson.level>10))expected=metadata.filter(word=>word.coreOrContext==='legacy'&&word.legacyLessonId===lesson.id);
     assert.equal(JSON.stringify(lessonNewWords(lesson).map(word=>word.id)),JSON.stringify([...new Set(expected.map(word=>word.id))]),`${lesson.id} follows canonical first-introduction metadata`);
     const words=lessonNewWords(lesson),deck=wordCrashCourseDeck(words);
@@ -348,7 +348,7 @@ test('Level 8 checks and exams target every month, clock concept and agenda dime
     assert.ok(minCheck.some(q=>q.sourceId==='level8-clock-12:30'&&q.correct==='12:30'));
     assert.ok(minCheck.some(q=>q.sourceId==='level8-dialogue'&&q.correct==='じゅうにじはん です'));
     assert.equal(probe.lessonNewWords(agenda).length,0);
-    const agendaCheck=probe.advancedQuestions(course,agenda,6);assert.ok(agendaCheck.every(q=>q.context===agenda.agendaText));
+    const agendaCheck=probe.advancedQuestions(course,agenda,6);assert.ok(agendaCheck.every(q=>q.context===(q.targetGoalIds.includes('agenda:time')&&/^\d{1,2}:\d{2}$/.test(q.correct)?agenda.japaneseTimeText:agenda.agendaText)));
     assert.ok([...check,...hourPool,...minCheck,...agendaCheck].every(q=>q.contextPresentation==='schedule'),'clock and agenda context retains its compact reading presentation');
     for(const goal of agenda.learningGoals)assert.ok(agendaCheck.some(q=>q.targetGoalIds.includes(goal.id)));
     const exam=probe.buildAdvancedExamQuestions(course);assert.equal(exam.length,40);assert.equal(probe.levelCoverageReport(course.lessons,exam).missing.filter(g=>g.kind!=='vocab').length,0);

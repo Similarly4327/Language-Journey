@@ -1,0 +1,147 @@
+{
+  "assetsInManifest": 1037,
+  "reviewed": 1037,
+  "storytime": [
+    {
+      "text": "ただいま。",
+      "entryId": null,
+      "recordings": [],
+      "speaker": "ren"
+    },
+    {
+      "text": "おかえりなさい。",
+      "entryId": null,
+      "recordings": [],
+      "speaker": "miku"
+    },
+    {
+      "text": "みず を どうぞ。",
+      "entryId": null,
+      "recordings": [],
+      "speaker": "miku"
+    },
+    {
+      "text": "ありがとう。",
+      "entryId": "sentence-intro-thanks-2",
+      "recordings": [],
+      "speaker": "ren"
+    }
+  ],
+  "intro": [
+    {
+      "lessonId": "intro-greetings",
+      "words": [
+        {
+          "text": "おはようございます",
+          "entryId": "vocab-intro-morning",
+          "recordings": []
+        },
+        {
+          "text": "こんにちは",
+          "entryId": "vocab-intro-day",
+          "recordings": []
+        },
+        {
+          "text": "こんばんは",
+          "entryId": "vocab-intro-evening",
+          "recordings": []
+        }
+      ],
+      "modelAudio": [
+        {
+          "text": "こんにちは。",
+          "entryId": "sentence-introduction-greeting",
+          "recordings": [
+            {
+              "path": "assets/audio/ja/sentences/dbcdbcbc909893d5-A-5d783339d86cbc2f.mp3",
+              "voiceRole": "A",
+              "exists": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "lessonId": "intro-goodbyes",
+      "words": [
+        {
+          "text": "おやすみなさい",
+          "entryId": "vocab-intro-goodnight",
+          "recordings": []
+        },
+        {
+          "text": "またね",
+          "entryId": "vocab-intro-see-you",
+          "recordings": []
+        },
+        {
+          "text": "さようなら",
+          "entryId": "vocab-intro-goodbye",
+          "recordings": []
+        }
+      ],
+      "modelAudio": [
+        {
+          "text": "おやすみなさい。",
+          "entryId": "sentence-intro-goodbyes-1",
+          "recordings": []
+        }
+      ]
+    },
+    {
+      "lessonId": "intro-meeting",
+      "words": [
+        {
+          "text": "はじめまして",
+          "entryId": "vocab-intro-first-meeting",
+          "recordings": []
+        },
+        {
+          "text": "おなまえ は なん です か",
+          "entryId": "vocab-intro-your-name",
+          "recordings": []
+        },
+        {
+          "text": "よろしくおねがいします",
+          "entryId": "vocab-intro-nice-to-meet",
+          "recordings": []
+        }
+      ],
+      "modelAudio": [
+        {
+          "text": "わたし は {{avatarNameJapanese}} です。",
+          "entryId": null,
+          "recordings": []
+        }
+      ]
+    },
+    {
+      "lessonId": "intro-thanks",
+      "words": [
+        {
+          "text": "どうぞ",
+          "entryId": "vocab-intro-offer",
+          "recordings": []
+        },
+        {
+          "text": "ありがとう",
+          "entryId": "vocab-intro-thanks",
+          "recordings": []
+        }
+      ],
+      "modelAudio": [
+        {
+          "text": "どうぞ。",
+          "entryId": "sentence-intro-thanks-1",
+          "recordings": []
+        },
+        {
+          "text": "ありがとう。",
+          "entryId": "sentence-intro-thanks-2",
+          "recordings": []
+        }
+      ]
+    }
+  ],
+  "generationRequested": false
+}

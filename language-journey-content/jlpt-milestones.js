@@ -1,0 +1,69 @@
+/* LJ-JLPT-v1: permanent learning milestones. This module never schedules reviews. */
+(function(root){
+  'use strict';
+  const contract=Object.freeze({schemaVersion:1,version:'LJ-JLPT-v1',requiredConsecutiveCorrect:3,
+    anchors:{N5:{vocabulary:1000,kanji:100},N4:{vocabulary:2000,kanji:300},N3:{vocabulary:4000,kanji:650},N2:{vocabulary:7000,kanji:1000},N1:{vocabulary:11000,kanji:2000}},
+    weights:{vocabulary:.7,kanji:.3}});
+  const safeId=value=>typeof value==='string'&&value.length>0&&value.length<=200&&!['__proto__','prototype','constructor'].includes(value);
+  const wordId=value=>safeId(value)&&value.startsWith('vocab-');
+  const character=value=>typeof value==='string'&&[...value].length===1&&/\p{Script=Han}/u.test(value);
+  const time=value=>Number.isFinite(value)&&value>0;
+  const clone=value=>JSON.parse(JSON.stringify(value));
+  function empty(){return{version:1,scale:contract.version,attemptSequence:0,lexemes:{},kanji:{},attempts:{},migration:{policy:'no-inferred-milestones',legacyEvidencePreserved:true}}}
+  function supported(store){return store?.version===1&&store.scale===contract.version}
+  function normalize(saved){
+    if(!saved)return empty();
+    // A future schema is preserved verbatim and is read-only to this client.
+    if(!supported(saved))return clone(saved);
+    const out=empty();
+    out.attemptSequence=Math.max(0,Math.floor(Number(saved.attemptSequence)||0));
+    for(const [kind,valid] of [['lexemes',wordId],['kanji',character]])for(const [id,row] of Object.entries(saved[kind]||{})){
+      if(!valid(id)||!row||typeof row!=='object')continue;
+      out[kind][id]={streak:Math.min(3,Math.max(0,Math.floor(Number(row.streak)||0))),everMastered:row.everMastered===true,
+        masteredAt:time(row.masteredAt)?row.masteredAt:null,lastEventId:safeId(row.lastEventId)?row.lastEventId:null};
+    }
+    for(const [id,event] of Object.entries(saved.attempts||{}))if(safeId(id)&&event&&typeof event==='object')out.attempts[id]=clone(event);
+    return out;
+  }
+  function allocateAttempt(store){
+    if(!supported(store))return null;
+    store.attemptSequence++;
+    return `review:${store.attemptSequence}:${Date.now().toString(36)}:${Math.random().toString(36).slice(2,12)}`;
+  }
+  function advance(rows,id,event){
+    const row=rows[id]||(rows[id]={streak:0,everMastered:false,masteredAt:null,lastEventId:null});
+    row.streak=event.correct?Math.min(3,row.streak+1):0;
+    row.lastEventId=event.attemptId;
+    if(row.streak===3&&!row.everMastered){row.everMastered=true;row.masteredAt=event.at}
+  }
+  function record(store,event,content){
+    if(!supported(store)||!event||!safeId(event.attemptId)||Object.hasOwn(store.attempts,event.attemptId)||!safeId(event.sourceId)||!time(event.at)||
+      event.submitted!==true||event.valid!==true||typeof event.correct!=='boolean'||event.assisted===true)return false;
+    const known=new Set(event.knownWordIds||[]),words=[],targets=[];
+    const available=id=>wordId(id)&&known.has(id)&&content.vocabById[id]&&!content.vocabById[id].legacy;
+    if(event.kind==='word-review')for(const id of new Set(event.targetWordIds||[]))if(available(id))words.push(id);
+    if(event.kind==='contextual-kanji-review'&&event.recognition===true&&event.readingRevealed===false&&event.audioAssisted===false){
+      const introduced=new Set(event.introducedKanjiWordIds||[]),seen=new Set();
+      for(const target of event.kanjiTargets||[]){
+        const word=content.vocabById[target?.wordId];
+        if(!word||!available(word.id)||!introduced.has(word.id)||!word.kanjiIntroducedAt||!character(target.character)||seen.has(target.character)||
+          target.form!==word.kanji||target.reading!==word.kana||!word.kanji?.includes(target.character)||typeof target.context!=='string'||!target.context.includes(word.kanji))continue;
+        seen.add(target.character);targets.push({character:target.character,wordId:word.id,reading:word.kana,form:word.kanji});
+      }
+    }
+    if(!words.length&&!targets.length)return false;
+    store.attempts[event.attemptId]={at:event.at,sourceId:event.sourceId,kind:event.kind,correct:event.correct,wordIds:words,kanjiTargets:targets};
+    for(const id of words)advance(store.lexemes,id,event);
+    for(const target of targets)advance(store.kanji,target.character,event);
+    return true;
+  }
+  function percentage(words,kanji,anchor){return 100*(.7*Math.min(Math.max(0,words)/anchor.vocabulary,1)+.3*Math.min(Math.max(0,kanji)/anchor.kanji,1))}
+  function select(saved){
+    const store=normalize(saved),available=supported(store);
+    const wordIds=available?Object.keys(store.lexemes).filter(id=>store.lexemes[id].everMastered):[],characters=available?Object.keys(store.kanji).filter(id=>store.kanji[id].everMastered):[];
+    const words=wordIds.length,kanji=characters.length;
+    return{version:contract.version,available,words,kanji,wordIds,characters,tiers:Object.entries(contract.anchors).map(([level,anchors])=>({level,anchors,words,kanji,masteryPercent:percentage(words,kanji,anchors)})),migration:available?store.migration:null};
+  }
+  const api={contract,empty,normalize,record,select,percentage,supported,allocateAttempt};
+  if(typeof module!=='undefined'&&module.exports)module.exports=api;else(root.window||root).LanguageJourneyJlptMilestones=api;
+})(typeof globalThis!=='undefined'?globalThis:this);

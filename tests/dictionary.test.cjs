@@ -38,7 +38,7 @@ for (const word of vocabCatalog) {
   if (word.romaji) assert.equal(entry.romaji, word.romaji, `word keeps its course romaji: ${word.id}`);
 }
 const ambiguousWords = vocabCatalog.filter(word => word.meanings.length > 1);
-assert.equal(ambiguousWords.length, 9, 'all current multi-meaning course words are accounted for');
+assert.equal(ambiguousWords.length, 10, 'all current multi-meaning course words and the verified music-context sense are accounted for');
 for (const word of ambiguousWords) {
   const senses = dictionaryById[word.id].senses;
   assert.equal(senses.length, word.meanings.length, `separate senses for ${word.jp}`);

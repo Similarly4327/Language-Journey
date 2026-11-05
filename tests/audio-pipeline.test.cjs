@@ -78,7 +78,7 @@ test('coffee enforces Japanese without invalidating unrelated recordings', async
 test('word report counts stable catalog IDs, excluding kana and grammar', () => {
   const counts = pipeline.wordCounts();
   assert.equal(counts.total, content.vocabCatalog.length);
-  assert.equal(counts.total, counts.course + counts.preview + counts.legacy);
+  assert.equal(counts.total, counts.course + counts.context + counts.preview + counts.legacy);
   assert.equal(new Set(content.vocabCatalog.map(w => w.id)).size, counts.total);
 });
 test('environment loads only ElevenLabs keys and process values take precedence', () => {

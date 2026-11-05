@@ -150,6 +150,8 @@ function validate(manifest = content.manifest, options = {}) {
   const noAudio=(manifest.vocabulary||[]).filter(v=>v.coreOrContext==='core'&&!v.audioId).length;
   if(noAudio)add('WARNING','AUDIO_COVERAGE',`${noAudio} core vocabulary items have no optional recorded audio`,'audio');
   const usedVocab=new Set((manifest.lessons||[]).flatMap(l=>[...(l.wordIds||[]),...(l.exampleIds||[])]));
+  const musicIds=(manifest.music?.groups||[]).flat();
+  for(const id of musicIds){if(!(manifest.vocabulary||[]).some(word=>word.id===id))add('ERROR','UNKNOWN_MUSIC_VOCAB',`${id} is not in the vocabulary catalog`,id);else usedVocab.add(id)}
   for(const word of manifest.vocabulary||[])if(word.coreOrContext!=='legacy'&&!usedVocab.has(word.id))add('WARNING','ORPHAN_VOCAB',`${word.id} is not used by a lesson`,word.id);
   const usedGrammar=new Set((manifest.lessons||[]).flatMap(l=>l.grammarIds||[]));
   for(const grammar of manifest.grammar||[])if(!usedGrammar.has(grammar.id))add('WARNING','ORPHAN_GRAMMAR',`${grammar.id} is not referenced by a lesson`,grammar.id);

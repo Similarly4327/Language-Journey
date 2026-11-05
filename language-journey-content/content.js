@@ -13872,6 +13872,11 @@
   agenda.learningGoals=['month','day','time','appointment'].map(kind=>({id:`agenda:${kind}`,label:`Agenda: ${kind}`}));
   agenda.targetQuestions=[question(agenda,'agenda-month','In welke maand ga je naar het station?','にがつ',['しがつ','しちがつ'],agenda.agendaText,[...structural(agenda),'agenda:month']),question(agenda,'agenda-day','Op welke dag ga je naar de winkel?','もくようび',['げつようび','きんようび'],agenda.agendaText,[...structural(agenda),'agenda:day']),question(agenda,'agenda-time','Hoe laat ga je naar het station?','13:30',['07:15','19:45'],agenda.agendaText,[...structural(agenda),'agenda:time']),question(agenda,'agenda-appointment','Welke afspraak is om 19:45?','een boek lezen',['naar het station','naar de winkel'],agenda.agendaText,[...structural(agenda),'agenda:appointment']),question(agenda,'agenda-spoken','Welke gesproken tijd hoort bij de winkelafspraak?','ごぜん しちじ じゅうごふん',['ごご しちじ じゅうごふん','ごぜん しちじはん'],agenda.agendaText,[...structural(agenda),'agenda:time'])];
   for(const item of agenda.appointments)for(const [kind,prompt] of [['month','In welke maand'],['day','Op welke dag'],['time','Hoe laat']])agenda.targetQuestions.push(question(agenda,`agenda-${item.id}-${kind}`,`${prompt} staat “${item.label}” gepland?`,item[kind],agenda.appointments.filter(other=>other!==item).map(other=>other[kind]),agenda.agendaText,[...structural(agenda),`agenda:${kind}`]));
+  // Reading a Japanese time is the goal of these questions. Keep digital
+  // schedules for calendar/search questions, but never print the answer beside
+  // the Japanese time in the stimulus used by a time-reading question.
+  agenda.japaneseTimeText=agenda.appointments.map(item=>`${item.month} · ${item.day}\n${item.spoken} に ${item.place} ${item.activity==='よみます'?'を':'に'} ${item.activity}`).join('\n\n');
+  for(const item of agenda.targetQuestions)if(item.targetGoalIds.includes('agenda:time')&&/^\d{1,2}:\d{2}$/.test(item.correct)){item.context=agenda.japaneseTimeText;item.timeReadingTarget=true}
   // Every weekday is a genuine exam target, not just an answer distractor.
   for(const lesson of lesson8Route.slice(0,2))lesson.examQuestions=lesson.wordIds.map(id=>{const word=manifest.vocabulary.find(item=>item.id===id);return question(lesson,`agenda-weekday-${id}`,id==='vocab-なんようび'?'Wat vraagt deze agendavraag?':'Op welke dag lees je het boek?',word.japanese,lesson.wordIds.filter(other=>other!==id).slice(0,2).map(other=>manifest.vocabulary.find(item=>item.id===other).japanese),id==='vocab-なんようび'?'Welke dag van de week?\n___ です か':`Weekplanning: op ${word.meaning} lees je een boek.\n___ は ほん を よみます`,[`vocab:${id}`,...structural(lesson)])});
   for(const lesson of [hours,minutes,agenda]){lesson.focus=null;lesson.builders=[]}
@@ -13892,6 +13897,10 @@
   const grammarReference=typeof module!=='undefined'&&module.exports?require('./grammar-reference.js'):root.LanguageJourneyGrammarReference;
   grammarReference.apply(manifest);
   level11Integration.applyMicroblocks(manifest);
+  const socialIntro=typeof module!=='undefined'&&module.exports?require('./social-intro.js'):root.LanguageJourneySocialIntro;
+  socialIntro.apply(manifest);
+  const music=typeof module!=='undefined'&&module.exports?require('./music.js'):root.LanguageJourneyMusic;
+  music.apply(manifest);
   // Orthography belongs to the existing lexeme; it is not a new mastery item.
   // Japan is first introduced as vocabulary in 12-1-A. Its kanji is deferred
   // until a natural later reuse; repeating the first airport scene is not enough.
@@ -13908,14 +13917,15 @@
   const langLessons=manifest.lessons.filter(l=>l.level===4).map(materializeLesson);
   const smallLessons=manifest.lessons.filter(l=>l.level===5).map(materializeLesson);
   const advancedCompetencies={6:'Ik kan eenvoudige personen en familierelaties benoemen.',7:'Ik kan enkele veelgebruikte dingen, mensen en dieren tellen.',8:'Ik kan eenvoudige dagen, maanden, tijden en plannen begrijpen.',9:'Ik kan eenvoudige plaats, positie en beweging begrijpen.',10:'Ik kan eenvoudige dagelijkse situaties combineren.'};
-  const advancedCourses={};for(let n=6;n<=10;n++){const level=manifest.levels[n-1];advancedCourses[n-1]={number:n,title:level.theme,competency:advancedCompetencies[n],lessons:manifest.lessons.filter(l=>l.level===n).map(materializeLesson)}}
+  const advancedCourses={};for(let n=6;n<=10;n++){const level=manifest.levels[n-1];advancedCourses[n-1]={number:n,title:level.theme,competency:advancedCompetencies[n],lessons:manifest.lessons.filter(l=>l.level===n&&l.kind!=='social-intro').map(materializeLesson)}}
+  const introLessons=manifest.lessons.filter(l=>l.kind==='social-intro').map(materializeLesson);
   const thematicCourses={};for(const plan of thematicPlans)thematicCourses[plan.number-1]={number:plan.number,title:plan.theme,competency:plan.competency,bonusId:manifest.levels.find(l=>l.number===plan.number)?.bonusId,lessons:manifest.lessons.filter(l=>l.level===plan.number).map(materializeLesson)};
   const legacyLessonTitles={'l4-2':'Dit, dat en meer','l4-3':'Van wie?','l4-4':'Niet X','l4-5':'Een vraag maken','l4-6':'Ook','l4-7':'Iets doen','l4-8':'Niet doen','l4-9':'Naar een plaats'};
   const vocabCatalog=manifest.vocabulary.map(v=>{
     const match=v.introducedAt?.match(/^(\d+)-(\d+)/),level=match?Number(match[1]):4,order=match?Number(match[2]):null;
     const source=manifest.lessons.find(l=>l.level===level&&l.order===order&&[...(l.wordIds||[]),...(l.exampleIds||[])].includes(v.id));
     const lessonId=v.legacyLessonId||source?.id||v.lessonId||(match?`l${match[1]}-${match[2]}`:null);
-    return{id:v.id,jp:v.japanese,kana:v.reading,romaji:v.romaji,meaning:v.meaning,meanings:v.meanings,lessonId,lessonIndex:order?order-1:Number(v.legacyLessonId?.split('-')[1]||1)-1,lessonTitle:v.coreOrContext==='legacy'?legacyLessonTitles[v.legacyLessonId]||'Historische woorden':lessonById[lessonId]?.title||'',level,kanji:v.kanjiForm,kanjiReading:v.kanjiForm?v.reading:null,kanjiIntroducedAt:v.kanjiIntroducedAt,legacy:v.coreOrContext==='legacy',introducedAt:v.introducedAt,sourceModuleId:v.introducedAt?.match(/-([AB])$/)?.[1]||source?.module||null,coreOrContext:v.coreOrContext,recallCore:v.coreOrContext==='core'||v.recallCore===true,sourceFound:!!source};
+    return{id:v.id,jp:v.japanese,kana:v.reading,romaji:v.romaji,meaning:v.meaning,meanings:v.meanings,lessonId,lessonIndex:order?order-1:Number(v.legacyLessonId?.split('-')[1]||1)-1,lessonTitle:v.coreOrContext==='legacy'?legacyLessonTitles[v.legacyLessonId]||'Historische woorden':lessonById[lessonId]?.title||'',level,routeId:v.routeId||null,kanji:v.kanjiForm,kanjiReading:v.kanjiForm?v.reading:null,kanjiIntroducedAt:v.kanjiIntroducedAt,legacy:v.coreOrContext==='legacy',introducedAt:v.introducedAt,sourceModuleId:v.introducedAt?.match(/-([AB])$/)?.[1]||source?.module||null,coreOrContext:v.coreOrContext,recallCore:v.coreOrContext==='core'||v.recallCore===true,sourceFound:!!source||v.routeId==='music'};
   });
   function pointOrder(point){
     if(point==='foundation-complete'||point==='10-complete')return 10*10000+9999;
@@ -13932,7 +13942,7 @@
     return {point,vocabulary:manifest.vocabulary.filter(v=>v.coreOrContext!=='legacy'&&available(v)),grammar:manifest.grammar.filter(available),kana:kana.filter(available),kanji:manifest.kanji.filter(available),patterns:manifest.patterns.filter(available)};
   }
   const foundationSnapshot=getKnowledgeState('10-complete');
-  const api={manifest,getKnowledgeState,foundationSnapshot,pointOrder,levels:manifest.levels.map(l=>[l.title,l.theme,l.subtitle]),rowNames:manifest.kana.rowNames,hira:manifest.kana.hiragana,kata:manifest.kana.katakana,kanaClusters:manifest.kana.clusters,digitData:manifest.numbers.digits,numberLessons:manifest.numbers.lessons,dakutenPatterns:manifest.kana.dakutenPatterns,dakutenClusters:manifest.kana.dakutenClusters,langLessons,smallLessons,advancedCourses,thematicCourses,level4LessonMetadata:manifest.level4Metadata,level4Didactics:manifest.level4Didactics,coursePhases:manifest.phases,journeyMilestones:manifest.milestones,languageSkills:manifest.skills,profileDialogueTemplates:manifest.dialogues,vocabCatalog,vocabById:Object.fromEntries(vocabCatalog.map(v=>[v.id,v]))};
+  const api={manifest,getKnowledgeState,foundationSnapshot,pointOrder,levels:manifest.levels.map(l=>[l.title,l.theme,l.subtitle]),rowNames:manifest.kana.rowNames,hira:manifest.kana.hiragana,kata:manifest.kana.katakana,kanaClusters:manifest.kana.clusters,digitData:manifest.numbers.digits,numberLessons:manifest.numbers.lessons,dakutenPatterns:manifest.kana.dakutenPatterns,dakutenClusters:manifest.kana.dakutenClusters,langLessons,smallLessons,advancedCourses,thematicCourses,introLessons,level4LessonMetadata:manifest.level4Metadata,level4Didactics:manifest.level4Didactics,coursePhases:manifest.phases,journeyMilestones:manifest.milestones,languageSkills:manifest.skills,profileDialogueTemplates:manifest.dialogues,vocabCatalog,vocabById:Object.fromEntries(vocabCatalog.map(v=>[v.id,v]))};
   const audioFoundation=typeof module!=='undefined'&&module.exports?require('./audio-foundation.js'):root.LanguageJourneyAudioFoundation;
   if(audioFoundation)audioFoundation.attach(api);
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.LanguageJourneyContent=api;

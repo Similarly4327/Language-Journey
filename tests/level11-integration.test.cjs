@@ -11,7 +11,7 @@ test('Level 11 introduces A–D as 3/2/3/2, training only the current block in b
     for(const part of lesson.applications){
       app.startThematicPart(part.part);
       for(const block of lesson.didactics.microblocks.filter(block=>block.sourcePart===part.part)){
-        assert.equal(app.state.thematic.step,'words');assert.match(app.element('thematicBody').innerHTML,new RegExp('Blok '+block.key));
+        assert.equal(app.state.thematic.step,'words');assert.match(app.element('thematicBody').innerHTML,new RegExp('(?:Oefening|れんしゅう) '+('AB'.includes(block.key)?1:2)+' · stap '+('AC'.includes(block.key)?1:2)+'/2'));
         assert.equal((app.element('thematicBody').innerHTML.match(/class="panel audio-content-block"/g)||[]).length,block.wordIds.length);
         assert.ok(block.wordIds.length+block.grammarIds.length<=3);
         const next=lesson.didactics.microblocks.find(next=>next.sourcePart===part.part&&next.index>block.index);

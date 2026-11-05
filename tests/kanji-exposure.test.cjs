@@ -42,7 +42,7 @@ test('reading help uses the whole word, handles punctuation, and never reveals a
   assert.equal(active.open,true);assert.equal(other.open,false);assert.deepEqual(plain(app.saved()),before);
 });
 test('Recall presents the exposed spelling in both directions using the same card IDs and scheduling',()=>{
-  const id='vocab-でんしゃ',other='vocab-えき',savedState={thematicRevision:1,introducedVocabIds:[id,other],kanjiExposureIds:[id],flashcardDirections:['jp-nl','nl-jp']};
+  const id='vocab-でんしゃ',other='vocab-えき',savedState={recallKanjiEnabled:true,thematicRevision:1,introducedVocabIds:[id,other],kanjiExposureIds:[id],flashcardDirections:['jp-nl','nl-jp']};
   const app=createCrashCourseProbe({savedState,savedRanks:{'l10-4':{rank:'Copper',attempts:1,last:.8},'l4-9':{rank:'Copper',attempts:1,last:.8}},now:Date.parse('2026-11-01T10:00:00Z')});
   for(const direction of ['jp-nl','nl-jp']){
     app.createFlashcardSession([{cardId:id,direction}], 'scheduled');app.state.flashcardSession.optionsRevealed=true;app.renderFlashcardsScreen();

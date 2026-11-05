@@ -7,7 +7,7 @@ const now=Date.UTC(2026,9,27,12),day=86400000;
 const plain=value=>JSON.parse(JSON.stringify(value));
 const ids=words=>Array.from(words,word=>word.id).sort();
 const currentState={thematicRevision:1,level11IntegrationRevision:2};
-const levelWords=level=>content.vocabCatalog.filter(word=>!word.legacy&&word.sourceFound&&word.level===level);
+const levelWords=level=>content.vocabCatalog.filter(word=>!word.legacy&&!word.routeId&&word.sourceFound&&word.level===level);
 function startExam(app,level,{official=true,rankId=`l${level}-exam`}={}){
   app.state.level=level-1;
   app.startQuiz({source:'advanced',title:`Level ${level} examen`,rankId,official,rankThreshold:level===11?.8:.9,

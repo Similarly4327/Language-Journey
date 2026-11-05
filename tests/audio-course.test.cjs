@@ -10,7 +10,7 @@ function recordings(){return {pipelineVersion:config.pipelineVersion,assets:cont
   voiceRole:'A',reviewed:true,pipelineVersion:config.pipelineVersion,path:'assets/audio/ja/sentences/test.mp3'}))};}
 test('actual Japanese question banks, examples, completed blanks and stories all have readings',()=>{
   const report=audit();assert.ok(report.japaneseTexts>550);assert.deepEqual(report.missing,[]);
-  assert.equal(content.manifest.vocabulary.length,344);
+  assert.equal(content.manifest.vocabulary.length,398,'the optional social-intro and music routes are part of the canonical catalog');
   assert.ok(content.audioEntries.filter(r=>r.kind==='sentence').every(r=>foundation.kanaOnly(r.pronunciation.audioTextKana)));
 });
 test('every story and bonus including Levels 11 and 12 retains its ID and has kana-only audio',()=>{

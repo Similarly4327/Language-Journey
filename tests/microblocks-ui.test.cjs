@@ -57,7 +57,7 @@ test('old A/B completion and ranks map to four completed blocks without rewritin
 test('new block progress resumes at B without opening later words; mandatory 11–14 screens never introduce kanji',()=>{
   const app=createCrashCourseProbe({now});app.state.level=10;app.state.screen='module';app.openThematicLesson(0);app.startThematicPart('A');app.element('thematicWordsNext').onclick();app.completeWordCrashCourse();
   while(app.state.thematic.step==='sentences')app.element('thematicSentenceNext').onclick();assert.equal(app.state.thematic.microblockIndex,1);
-  const saved=app.saved(),reload=createCrashCourseProbe({now,savedState:saved.state,savedRanks:saved.ranks});reload.state.level=10;reload.state.screen='module';reload.openThematicLesson(0);reload.startThematicPart('A');assert.equal(reload.state.thematic.microblockIndex,1);assert.match(reload.element('thematicBody').innerHTML,/Blok B/);
+  const saved=app.saved(),reload=createCrashCourseProbe({now,savedState:saved.state,savedRanks:saved.ranks});reload.state.level=10;reload.state.screen='module';reload.openThematicLesson(0);reload.startThematicPart('A');assert.equal(reload.state.thematic.microblockIndex,1);assert.match(reload.element('thematicBody').innerHTML,/Oefening 1 · stap 2\/2/);
   for(const level of [11,12,13,14]){reload.state.level=level-1;reload.openThematicLesson(0);reload.startThematicPart('A');assert.doesNotMatch(reload.element('thematicBody').innerHTML,/私|人|電車|駅|水|日本/);assert.deepEqual(plain(reload.state.kanjiExposureIds),[])}
 });
 test('validator counts grammar and kanji in the same three-target budget',()=>{
@@ -66,7 +66,7 @@ test('validator counts grammar and kanji in the same three-target budget',()=>{
 test('Levels 12–14 use A–D preparation without quotas or exposing a later block early',()=>{
   for(const level of [12,13,14])for(let lessonIndex=0;lessonIndex<5;lessonIndex++){
     const app=createCrashCourseProbe({now}),lesson=content.thematicCourses[level-1].lessons[lessonIndex];app.state.level=level-1;app.state.screen='module';app.openThematicLesson(lessonIndex);
-    assert.match(app.element('thematicBody').innerHTML,/A → B → C → D/);
+    assert.match(app.element('thematicBody').innerHTML,/Oefening 1/);assert.match(app.element('thematicBody').innerHTML,/Oefening 2/);assert.doesNotMatch(app.element('thematicBody').innerHTML,/A → B → C → D/);
     for(const part of lesson.didactics.preparationMicroblocks?['A']:['A','B']){app.startThematicPart(part);
     for(const block of lesson.didactics.microblocks.filter(block=>block.sourcePart===part)){
       assert.equal(app.state.thematic.microblockIndex,block.index);assert.equal(app.state.thematic.step,'words');assert.ok(block.wordIds.length+block.grammarIds.length<=3);

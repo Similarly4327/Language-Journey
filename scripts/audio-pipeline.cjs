@@ -18,6 +18,7 @@ function loadEnvironment(file = envFile, env = process.env) {
 function wordCounts(source = content) {
   const words = source.vocabCatalog;
   return {total: words.length, course: words.filter(w => w.coreOrContext === 'core').length,
+    context: words.filter(w => w.coreOrContext === 'context').length,
     preview: words.filter(w => w.coreOrContext === 'preview').length,
     legacy: words.filter(w => w.legacy || w.coreOrContext === 'legacy').length,
     uniqueWrittenForms: new Set(words.map(w => w.jp)).size};

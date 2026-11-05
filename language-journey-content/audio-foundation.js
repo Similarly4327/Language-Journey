@@ -48,7 +48,7 @@
       entries.push(ref);byId[ref.id]=ref;return ref;
     };
     for(const word of manifest.vocabulary){
-      add(word,'word',word.japanese,word.reading,{level:Number(word.introducedAt?.split('-')[0])||4,lessonId:api.vocabById[word.id]?.lessonId});
+      add(word,'word',word.japanese,word.audioTextKana||word.reading,{level:Number(word.introducedAt?.split('-')[0])||4,lessonId:api.vocabById[word.id]?.lessonId});
       if(api.vocabById[word.id])api.vocabById[word.id].pronunciation=word.pronunciation;
     }
     for(const grammar of manifest.grammar){
@@ -63,6 +63,8 @@
     for(const lesson of api.smallLessons)for(const [form] of lesson.newItems)addKana(['っ','ッ'].includes(form)?`kana-small-${form}`:form==='ー'?'writing-long-vowel-mark':`kana-combo-${form}`,form,5,lesson.id);
     manifest.sentences=[];const sentenceByText=new Map();
     for(const lesson of manifest.lessons)for(const [index,model] of (lesson.models||[]).entries()){
+      // Personalized names have no guessed recording or pronunciation.
+      if(model.sentence.includes('{{')||(lesson.kind==='social-intro'&&model.sentence==='こんにちは。'))continue;
       let entry=sentenceByText.get(model.sentence);
       if(!entry){const tokens=[...new Set((model.parts||[]).flatMap(part=>part[0].split(/\s+/)))],linkedWordIds=tokens.flatMap(token=>{const matches=manifest.vocabulary.filter(word=>word.coreOrContext!=='legacy'&&(word.japanese===token||word.kanjiForm===token));return matches.length===1?[matches[0].id]:[]});entry={id:model.id||`sentence-${lesson.id}-model-${index+1}`,displayText:model.sentence,meaning:model.meaning,sourceLessonIds:[],linkedWordIds:[...new Set([...(model.linkedWordIds||[]),...linkedWordIds])]};manifest.sentences.push(entry);sentenceByText.set(model.sentence,entry);add(entry,'sentence',entry.displayText,model.audioTextKana||readingsByText.get(model.sentence)||(lesson.level===4?modelReadings[model.sentence]:null),{level:lesson.level,lessonId:lesson.id})}
       entry.sourceLessonIds.push(lesson.id);model.sentenceId=entry.id;

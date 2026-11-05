@@ -70,11 +70,11 @@ test('ordinary correct target answers persist evidence without crediting example
   app.state.quiz.optionsRevealed=true;app.answer(true,fakeElement(),'station');
   assert.ok(app.state.guidelineEvidence.words['vocab-えき'].applied);assert.ok(app.state.guidelineEvidence.words['vocab-えき'].kanji);assert.equal(app.state.guidelineEvidence.words['vocab-でんしゃ'],undefined);assert.equal(app.state.guidelineEvidence.words['vocab-みず'],undefined);
   const saved=app.saved(),reload=createCrashCourseProbe({now,savedState:saved.state,savedRanks:saved.ranks});assert.deepEqual(plain(reload.state.guidelineEvidence),plain(app.state.guidelineEvidence));
-  const before=plain(reload.saved());reload.internalJlptProgressSummary();const html=reload.jlptProgressHtml();assert.match(html,/800 woorden/);assert.match(html,/maximaal 3/);assert.doesNotMatch(html,/\d+%|45.vragen|diagnose/i);assert.deepEqual(plain(reload.saved()),before);
+  const before=plain(reload.saved());reload.internalJlptProgressSummary();const html=reload.jlptProgressHtml();assert.match(html,/indicatieve JLPT-richtlijn/);assert.match(html,/N5/);assert.doesNotMatch(html,/800 woorden|maximaal 3|45.vragen|diagnose/i);assert.deepEqual(plain(reload.saved()),before);
 });
 test('Recall suppresses help for target and distractors before reveal and until grading; feedback restores it',()=>{
   for(const direction of ['jp-nl','nl-jp']){
-    const app=helpApp(),id='vocab-でんしゃ';app.state.screen='flashcards';app.createFlashcardSession([{cardId:id,direction}], 'scheduled');
+    const app=helpApp(),id='vocab-でんしゃ';app.state.recallKanjiEnabled=true;app.state.screen='flashcards';app.createFlashcardSession([{cardId:id,direction}], 'scheduled');
     for(const revealed of [false,true]){app.state.flashcardSession.optionsRevealed=revealed;app.renderFlashcardsScreen();assert.equal(app.questionHelpBlocked(id),true);assert.doesNotMatch(app.element('flashcardView').innerHTML,/reading-support|data-dictionary-open/)}
     app.state.flashcardSession.revealed=true;app.flashcardRate('knew',direction==='jp-nl'?'trein':'でんしゃ');assert.match(app.element('flashcardView').innerHTML,/reading-support/);assert.ok(app.state.guidelineEvidence.words[id].practiced);
     assert.equal(Object.keys(app.state.flashcardProgress.cards).length,1);assert.ok(app.state.flashcardProgress.cards[`${id}::${direction}`]);

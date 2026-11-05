@@ -3,6 +3,7 @@
   // Exact existing course text, explicit kana reading, level, source lesson, stable utterance ID.
   // No automatic conversion of unknown/edited Japanese. See docs/audio-v3/full-course.md.
   const readings=[
+    ["にがつ · げつようび\nごご いちじはん に えき に いきます\n\nしがつ · もくようび\nごぜん しちじ じゅうごふん に みせ に いきます\n\nしちがつ · きんようび\nごご しちじ よんじゅうごふん に ほん を よみます","にがつ、げつようび。ごご いちじはん に えき に いきます。しがつ、もくようび。ごぜん しちじ じゅうごふん に みせ に いきます。しちがつ、きんようび。ごご しちじ よんじゅうごふん に ほん お よみます。",8,"l8-6","sentence-agenda-japanese-time-source"],
     ["これ","これ",4,"l4-1","sentence-course-f0b5ecd06b9a3cd1"],
     ["これは ねこ です","これわ ねこ です",4,"l4-1","sentence-course-012af9257871b2df"],
     ["よみます","よみます",4,"l4-1","sentence-course-b4b8a8108efaa4e1"],
