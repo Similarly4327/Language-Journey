@@ -12,7 +12,12 @@
 <style>
 
 .jlpt-guideline h2{margin:0}
-.jlpt-levels{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:8px;margin-top:12px}
+.jlpt-levels{display:flex;gap:8px;margin-top:12px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;padding:2px 2px 10px;-webkit-overflow-scrolling:touch}
+.jlpt-level-choice{flex:0 0 clamp(112px,28vw,150px);min-height:112px;text-align:left;scroll-snap-align:start;border:1px solid var(--border);color:var(--text);cursor:pointer;font:inherit}
+.jlpt-level-choice[aria-pressed="true"]{border:2px solid var(--accent);padding:9px;background:var(--card)}
+.jlpt-selected-detail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:8px}
+.jlpt-selected-detail .panel{padding:10px}
+.jlpt-selected-detail strong{display:block;font-size:18px}
 .jlpt-level-head{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
 .jlpt-bar{width:100%;height:10px;border-radius:999px;overflow:hidden;background:var(--border)}
 .jlpt-bar-fill{height:100%;background:var(--accent);border-radius:inherit}
@@ -2855,6 +2860,7 @@ function moduleRank(key){
 
 const state={screen:'levels',courseId:preferences.courseId,targetLanguage:platform.course(preferences.courseId)?.targetLanguage||'ja',uiLanguage:preferences.uiLanguage,level:0,currentLevel:1,userName:'',userNameJapanese:'',avatarId:'avatar-female',avatarName:'Miku',avatarNameJapanese:'ミク',avatarNameCustom:false,avatarNameJapaneseCustom:false,avatarEnabled:true,avatarGender:'female',avatarMode:'auto',selectedAvatarSkin:null,unlockedAvatarSkins:['skin-1'],audioEnabled:true,correctSoundEnabled:true,audioCoachEnabled:true,audioVolume:.65,audioSpeed:1,basisModule:'hiragana',tabs:{hiragana:'learn',katakana:'learn',numbers:'learn',mix:'practice',dakuten:'learn',lang:'learn',small:'learn',advanced:'learn'},row:{hiragana:0,katakana:0},step:{hiragana:0,katakana:0},numberLesson:0,dakScript:'hiragana',dakPattern:0,dakStep:0,langLesson:0,langView:'list',langStep:'overview',langStepProgress:{},introducedVocabIds:[],instructionKnowledge:{},vocabFirstSeen:{},kanaFirstSeen:{},smallLesson:0,advancedLesson:{5:0,6:0,7:0,8:0,9:0},advancedView:{5:'list',6:'list',7:'list',8:'list',9:'list'},advancedStep:{5:'overview',6:'overview',7:'overview',8:'overview',9:'overview'},advancedStepProgress:{},progressTab:'progress',progressActivityLimit:10,progressKnowledgeTab:'levels',progressKanaGroup:'hiragana',progressDetailId:null,progressVocabDetailId:null,studyRange:{low:0,high:100},studyCalendar:{from:'',to:''},studyFilters:{category:'',skill:'',origin:'',level:'',tag:''},studyTracker:{version:1,courseStartedAt:null,trackingStartedAt:null,sessions:[],events:[],noticeDismissed:false,active:null},practiceSelections:{hiragana:[0,1,2],katakana:[0,1,2],hiraganaChars:[],katakanaChars:[],dakuten:['g','z'],dakScripts:['hiragana','katakana'],numbers:['0-10']},errorBank:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},lastErrors:{hiragana:[],katakana:[],numbers:[],mix:[],dakuten:[],lang:[],small:[],advanced:[]},quiz:null,lastConfig:null};
 state.screen='app-home';
+state.jlptSelectedLevel='N5';
 state.openPhaseId=coursePhases.find(phase=>phase.status==='active')?.id||coursePhases[0]?.id||null;
 state.currentCourse=null;
 state.primaryTab='learn';
@@ -2875,6 +2881,7 @@ state.kanjiExposureIds=[];
 state.recallKanjiEnabled=false;
 state.guidelineEvidence=window.LanguageJourneyInternalGuideline.empty();
 state.jlptMilestones=window.LanguageJourneyJlptMilestones.empty();
+state.jlptPracticeScores={version:1,words:{},kanji:{}};
 state.thematicRevision=1;
 state.historicalIntroducedVocabIds=[];
 state.deferredVocabIntroductions=[];
@@ -3159,6 +3166,7 @@ function storageStateSnapshot(){
     recallKanjiEnabled:state.recallKanjiEnabled,
     guidelineEvidence:state.guidelineEvidence,
     jlptMilestones:state.jlptMilestones,
+    jlptPracticeScores:state.jlptPracticeScores,
     instructionKnowledge:state.instructionKnowledge,
     flashcardProgress:state.flashcardProgress,
     flashcardSelection:state.flashcardSelection,
@@ -3192,6 +3200,7 @@ function storageStateSnapshot(){
     progressKanaGroup:state.progressKanaGroup,
     progressDetailId:state.progressDetailId,
     progressVocabDetailId:state.progressVocabDetailId,
+    jlptSelectedLevel:state.jlptSelectedLevel,
     studyRange:state.studyRange,
     studyCalendar:state.studyCalendar,
     studyFilters:state.studyFilters,
@@ -3310,6 +3319,7 @@ function loadProgress(){
     if(Array.isArray(s.kanjiExposureIds))state.kanjiExposureIds=[...new Set(s.kanjiExposureIds.filter(id=>!!vocabById[id]?.kanji))];
     state.guidelineEvidence=window.LanguageJourneyInternalGuideline.normalize(s.guidelineEvidence,window.LanguageJourneyContent);
     state.jlptMilestones=window.LanguageJourneyJlptMilestones.normalize(s.jlptMilestones);
+    if(s.jlptPracticeScores&&s.jlptPracticeScores.version===1){for(const kind of ['words','kanji'])if(s.jlptPracticeScores[kind]&&typeof s.jlptPracticeScores[kind]==='object')for(const [id,row] of Object.entries(s.jlptPracticeScores[kind])){const valid=kind==='words'?!!vocabById[id]&&!vocabById[id].legacy:[...id].length===1&&/\p{Script=Han}/u.test(id);if(valid&&row&&Number.isInteger(row.units)&&row.units>=0&&row.units<=3)state.jlptPracticeScores[kind][id]={units:row.units,peakUnits:Number.isInteger(row.peakUnits)?Math.min(3,Math.max(row.units,row.peakUnits)):row.units,updatedAt:Number.isFinite(row.updatedAt)?row.updatedAt:null}}}
     if(s.flashcardProgress&&typeof s.flashcardProgress==='object'&&s.flashcardProgress.cards&&typeof s.flashcardProgress.cards==='object'){
       const migrated={};
       Object.entries(s.flashcardProgress.cards).forEach(([key,value])=>{
@@ -3355,6 +3365,7 @@ function loadProgress(){
     if(['hiragana','katakana','dakuten'].includes(s.progressKanaGroup))state.progressKanaGroup=s.progressKanaGroup;
     state.progressDetailId=typeof s.progressDetailId==='string'?s.progressDetailId:null;
     state.progressVocabDetailId=typeof s.progressVocabDetailId==='string'?s.progressVocabDetailId:null;
+    if(['N5','N4','N3','N2','N1'].includes(s.jlptSelectedLevel))state.jlptSelectedLevel=s.jlptSelectedLevel;
     if(s.studyRange&&typeof s.studyRange==='object')state.studyRange={low:Number(s.studyRange.low)||0,high:Number(s.studyRange.high)||100};
     if(s.studyCalendar&&typeof s.studyCalendar==='object')state.studyCalendar={from:String(s.studyCalendar.from||''),to:String(s.studyCalendar.to||'')};
     if(s.studyFilters&&typeof s.studyFilters==='object')Object.assign(state.studyFilters,s.studyFilters);
@@ -6195,8 +6206,42 @@ function createFlashcardSession(queue,mode){
 function pauseFlashcardSession(){if(!state.flashcardSession||state.flashcardSession.status!=='active')return;cancelRecallFeedbackAdvance(true);finishRecallStudy('onderbroken');state.flashcardSession.status='paused';scheduleSave();renderFlashcardsScreen()}
 function resumeFlashcardSession(){if(!state.flashcardSession)return;state.flashcardSession.status='active';beginRecallStudy();scheduleSave();renderFlashcardsScreen()}
 function jlptMilestoneSummary(){return window.LanguageJourneyJlptMilestones.select(state.jlptMilestones)}
+function jlptPracticeUnits(kind,id){
+  const saved=state.jlptPracticeScores?.[kind]?.[id];if(Number.isInteger(saved?.units)&&saved.units>=0&&saved.units<=3)return saved.units;
+  const row=state.jlptMilestones?.[kind==='words'?'lexemes':'kanji']?.[id];if(row?.everMastered)return 3;
+  let observed=Math.max(0,Number(row?.streak)||0);
+  if(kind==='words')for(const direction of ['jp-nl','nl-jp']){const review=flashcardRecord(id,direction);if(review?.lastGrade==='knew')observed=Math.max(observed,Math.min(3,Math.max(0,Number(review.repetitions)||0)))}
+  return Math.min(3,observed);
+}
+function updateJlptPracticeScore(kind,id,correct,at=Date.now(),baseline=null){
+  const scores=state.jlptPracticeScores||(state.jlptPracticeScores={version:1,words:{},kanji:{}}),bucket=scores[kind]||(scores[kind]={});
+  const previous=bucket[id],current=baseline?.units??jlptPracticeUnits(kind,id),peakUnits=previous?.peakUnits??baseline?.peakUnits??current,units=correct?Math.min(3,current+1):Math.max(Math.max(0,peakUnits-2),current-1);
+  bucket[id]={units,peakUnits:Math.max(peakUnits,units),updatedAt:at};scheduleSave();return units;
+}
+function jlptFractionalMastery(){
+  const words={equivalent:0,full:0,partial:0,partialEquivalent:0},kanji={equivalent:0,full:0,partial:0,partialEquivalent:0};
+  for(const word of vocabCatalog){
+    const row=state.jlptMilestones?.lexemes?.[word.id];
+    const known=knowledgeWordIsKnown(dictionaryById[word.id]);if(word.legacy||(!known&&!row?.everMastered))continue;
+    const fraction=jlptPracticeUnits('words',word.id)/3;
+    words.equivalent+=fraction;if(fraction>=1)words.full++;else if(fraction>0){words.partial++;words.partialEquivalent+=fraction}
+  }
+  for(const [id,row] of Object.entries(state.jlptMilestones?.kanji||{})){
+    const fraction=jlptPracticeUnits('kanji',id)/3;
+    kanji.equivalent+=fraction;if(fraction>=1)kanji.full++;else if(fraction>0){kanji.partial++;kanji.partialEquivalent+=fraction}
+  }
+  return{words,kanji};
+}
+function jlptCountLabel(value){return new Intl.NumberFormat('nl-NL',{maximumFractionDigits:2}).format(value)}
+function jlptPercentLabel(value){return `${value.toFixed(value<.1?3:value<1?2:1).replace('.',',')}%`}
+function progressMasteryDetailHtml(metric){
+  const data=jlptFractionalMastery(),item=metric==='kanji'?data.kanji:data.words,label=metric==='kanji'?'kanji':'woorden',unit=metric==='kanji'?'kanjiteken':'woord-equivalenten';
+  return `<strong>Telt mee: ${jlptCountLabel(item.equivalent)} ${unit}</strong><div class="small">${item.full} volledig beheerst · ${item.partial} deels geoefend${item.partial?` (${jlptCountLabel(item.partialEquivalent)} ${label} in opbouw)`:''}. Goed: +⅓ · fout: −⅓ · maximaal ⅔ verlies per eerder opgebouwd item.</div>`;
+}
 function recordJlptReview(event){
+  const kanjiBefore=event?.kind==='contextual-kanji-review'?new Map((event.kanjiTargets||[]).filter(target=>target&&typeof target==='object').map(target=>{const units=jlptPracticeUnits('kanji',target.character),saved=state.jlptPracticeScores?.kanji?.[target.character];return[target.character,{units,peakUnits:saved?.peakUnits??units}]})):new Map();
   const changed=window.LanguageJourneyJlptMilestones.record(state.jlptMilestones,event,window.LanguageJourneyContent);
+  if(changed&&event.kind==='contextual-kanji-review')for(const target of event.kanjiTargets||[])if(target&&state.jlptMilestones.kanji[target.character])updateJlptPracticeScore('kanji',target.character,event.correct,event.at,kanjiBefore.get(target.character));
   if(changed)scheduleSave();return changed;
 }
 function recallJlptAttemptId(item){
@@ -6209,8 +6254,11 @@ function recordRecallJlptReview(session,item,card,grade,chosen,now){
   if(!session.optionsRevealed||typeof chosen!=='string'||!item.answerChoices?.includes(chosen))return false;
   const correct=flashcardCorrectAnswers(card,item.direction).includes(chosen);
   if(correct!==(grade==='knew'))return false;
-  return recordJlptReview({attemptId:recallJlptAttemptId(item),at:now,sourceId:`recall:${card.id}:${item.direction}`,
+  const units=jlptPracticeUnits('words',card.id),saved=state.jlptPracticeScores?.words?.[card.id],baseline={units,peakUnits:saved?.peakUnits??units};
+  const accepted=recordJlptReview({attemptId:recallJlptAttemptId(item),at:now,sourceId:`recall:${card.id}:${item.direction}`,
     kind:'word-review',submitted:true,valid:true,correct,assisted:false,targetWordIds:[card.id],knownWordIds:[card.id]});
+  if(accepted)updateJlptPracticeScore('words',card.id,correct,now,baseline);
+  return accepted;
 }
 /* SRS: Again returns after 6 elapsed hours. Successful intervals progress by
    local calendar days: 1, 3, 7, then doubling, capped at 180 days. Directions stay separate. */
@@ -6596,7 +6644,7 @@ function setStudyDisclosure(buttonId,panelId,open){const button=$(buttonId),pane
 function bindStudyDisclosure(buttonId,panelId){const button=$(buttonId);if(button)button.onclick=()=>setStudyDisclosure(buttonId,panelId,button.getAttribute('aria-expanded')!=='true')}
 function renderProgressSectionSafely(hostId,label,render){try{render()}catch(error){console.error(`Voortgangsonderdeel niet geladen: ${label}`,error);const host=$(hostId);if(host){host.dataset.renderError=String(error?.message||error);host.innerHTML=`<div class="panel" role="alert">${label} kon niet worden geladen. Je opgeslagen voortgang is behouden.</div>`}}}
 // Presentation-only selection: raw measurements and stored learning data stay intact.
-let progressSummarySelection={metric:'words',period:'all',fromDay:null,toDay:null,selectedAt:null,followLatest:true};
+let progressSummarySelection={metric:'words',period:'all',fromDay:null,toDay:null,selectedAt:null,followLatest:true};let progressMasteryDetailOpen=false;
 let progressSummaryRefresh=null;
 let progressSummaryRefreshTimer=null;
 function progressSummaryPoints(metric,sessions=studySessions()){
@@ -6630,25 +6678,26 @@ function progressSummaryWindow(selection,points,now=Date.now()){
 }
 function renderProgressSummary(host){
   const selection=progressSummarySelection;
-  host.innerHTML=`<div class="h2">Je voortgang</div><div class="progress-summary-controls"><label for="progressPeriod">Periode</label><select id="progressPeriod" class="select"><option value="all">Alles</option><option value="week">Laatste 7 dagen</option><option value="month">Laatste 30 dagen</option><option value="custom">Aangepast</option></select></div><div id="progressPeriodLabel" class="progress-period-label"></div><div id="progressPeriodRange" class="progress-period-range" role="group" aria-label="Grafiekperiode"><div class="progress-period-track"></div><div class="progress-period-fill"></div><input id="progressPeriodLow" type="range" step="1" aria-label="Begindatum van de grafiekperiode"><input id="progressPeriodHigh" type="range" step="1" aria-label="Einddatum van de grafiekperiode"></div><div id="progressSummaryChart"></div><div class="progress-metrics" aria-label="Kies een grafiek"><button type="button" class="progress-metric" data-progress-metric="words"><strong></strong><span class="progress-metric-label">Woorden</span><span class="progress-metric-state"></span></button><button type="button" class="progress-metric" data-progress-metric="kanji"><strong>—</strong><span class="progress-metric-label">Kanji</span><span class="progress-metric-state"></span></button><button type="button" class="progress-metric" data-progress-metric="time"><strong></strong><span class="progress-metric-label">Totale leertijd</span><span class="progress-metric-state"></span></button></div><div class="progress-chart-note">Kernwaarden tonen je huidige totaal. De grafiek toont alleen opgeslagen metingen binnen de gekozen periode.</div>`;
+  host.innerHTML=`<div class="h2">Je voortgang</div><div class="progress-summary-controls"><label for="progressPeriod">Periode</label><select id="progressPeriod" class="select"><option value="all">Alles</option><option value="week">Laatste 7 dagen</option><option value="month">Laatste 30 dagen</option><option value="custom">Aangepast</option></select></div><div id="progressPeriodLabel" class="progress-period-label"></div><div id="progressPeriodRange" class="progress-period-range" role="group" aria-label="Grafiekperiode"><div class="progress-period-track"></div><div class="progress-period-fill"></div><input id="progressPeriodLow" type="range" step="1" aria-label="Begindatum van de grafiekperiode"><input id="progressPeriodHigh" type="range" step="1" aria-label="Einddatum van de grafiekperiode"></div><div id="progressSummaryChart"></div><div class="progress-metrics" aria-label="Kies een grafiek of tik voor oefenstand"><button type="button" class="progress-metric" data-progress-metric="words" aria-controls="progressMasteryDetail"><strong></strong><span class="progress-metric-label">Woorden</span><span class="progress-metric-state"></span></button><button type="button" class="progress-metric" data-progress-metric="kanji" aria-controls="progressMasteryDetail"><strong></strong><span class="progress-metric-label">Kanji</span><span class="progress-metric-state"></span></button><button type="button" class="progress-metric" data-progress-metric="time"><strong></strong><span class="progress-metric-label">Totale leertijd</span><span class="progress-metric-state"></span></button></div><div id="progressMasteryDetail" class="panel" role="status" hidden style="margin-top:8px"></div><div class="progress-chart-note">Tik op Woorden of Kanji voor de oefenstand. De grafiek toont opgeslagen metingen binnen de gekozen periode.</div>`;
   const period=$('progressPeriod'),low=$('progressPeriodLow'),high=$('progressPeriodHigh'),range=$('progressPeriodRange'),chart=$('progressSummaryChart');
   let displayedPoints=[],windowRange=null,lastSignature='';
   const draw=()=>{
     const sessions=studySessions(),now=Date.now(),snap=knowledgeSnapshot(),total=totalStudySeconds(),all=[...progressSummaryPoints('words',sessions),...progressSummaryPoints('time',sessions)];
     windowRange=progressSummaryWindow(selection,all,now);const{minDay,maxDay,fromDay,toDay}=windowRange;
     selection.fromDay=fromDay;selection.toDay=toDay;period.value=selection.period;
-    host.querySelector('[data-progress-metric="words"] strong').textContent=snap.vocab;host.querySelector('[data-progress-metric="time"] strong').textContent=formatDuration(total,true);
+    host.querySelector('[data-progress-metric="words"] strong').textContent=snap.vocab;host.querySelector('[data-progress-metric="kanji"] strong').textContent=jlptCountLabel(jlptFractionalMastery().kanji.equivalent);host.querySelector('[data-progress-metric="time"] strong').textContent=formatDuration(total,true);
+    const masteryDetail=$('progressMasteryDetail');if(masteryDetail){masteryDetail.hidden=!progressMasteryDetailOpen||selection.metric==='time';if(!masteryDetail.hidden)masteryDetail.innerHTML=progressMasteryDetailHtml(selection.metric)}
     [low,high].forEach(input=>{input.min=minDay;input.max=maxDay;input.disabled=!windowRange.hasData||minDay===maxDay});low.value=fromDay;high.value=toDay;
     low.setAttribute('aria-valuetext',studyDateLabel(progressLocalDayDate(fromDay)));high.setAttribute('aria-valuetext',studyDateLabel(progressLocalDayDate(toDay)));
     const percent=day=>maxDay===minDay?50:(day-minDay)/(maxDay-minDay)*100;const thumbPosition=day=>22+Math.max(0,range.clientWidth-44)*percent(day)/100;range.style.setProperty('--low',`${thumbPosition(fromDay)}px`);range.style.setProperty('--high',`${thumbPosition(toDay)}px`);
     // When thumbs coincide, keep the inward-moving thumb available to touch.
     low.style.zIndex=fromDay===toDay&&toDay===maxDay?'2':'0';
     $('progressPeriodLabel').innerHTML=windowRange.hasData?`<span>Vanaf <strong>${studyDateLabel(progressLocalDayDate(fromDay))}</strong></span><span>Tot <strong>${studyDateLabel(progressLocalDayDate(toDay))}</strong></span>`:'<span>Nog geen gedateerde metingen</span>';
-    host.querySelectorAll('[data-progress-metric]').forEach(b=>{const active=b.dataset.progressMetric===selection.metric;b.setAttribute('aria-pressed',String(active));b.querySelector('.progress-metric-state').textContent=active?'✓ Geselecteerd':b.dataset.progressMetric==='kanji'?'Niet bijgehouden':'Toon grafiek'});
+    host.querySelectorAll('[data-progress-metric]').forEach(b=>{const active=b.dataset.progressMetric===selection.metric;b.setAttribute('aria-pressed',String(active));b.setAttribute('aria-expanded',String(active&&progressMasteryDetailOpen&&['words','kanji'].includes(selection.metric)));b.querySelector('.progress-metric-state').textContent=active?'✓ Geselecteerd':b.dataset.progressMetric==='kanji'?'Tik voor details':'Toon grafiek'});
     displayedPoints=progressDailyMeasurements(progressSummaryPoints(selection.metric,sessions),now).filter(p=>p.day>=fromDay&&p.day<=toDay);
     lastSignature=JSON.stringify([progressLocalDayNumber(now),sessions,snap.vocab,total,host.clientWidth]);
     const points=displayedPoints,isTime=selection.metric==='time',label=selection.metric==='words'?'Woorden':'Totale leertijd',valueLabel=v=>selection.metric==='time'?formatDuration(v,true):`${v} ${v===1?'woord':'woorden'}`;
-    if(!points.length){chart.innerHTML=`<div class="progress-chart-empty">${selection.metric==='kanji'?'Kanji wordt nog niet apart bijgehouden. Er is geen betrouwbare kanjigeschiedenis.':!windowRange.hasData?'Nog geen opgeslagen metingen. Je eerste echte sessiemeting verschijnt hier.':`Geen opgeslagen ${selection.metric==='words'?'woordmetingen':'leertijd'} in deze periode. Kies een ruimer bereik.`}</div>`;return}
+    if(!points.length){chart.innerHTML=`<div class="progress-chart-empty">${selection.metric==='kanji'?'Er is nog geen dagelijkse kanjigeschiedenis. Je huidige oefenstand staat hierboven.':!windowRange.hasData?'Nog geen opgeslagen metingen. Je eerste echte sessiemeting verschijnt hier.':`Geen opgeslagen ${selection.metric==='words'?'woordmetingen':'leertijd'} in deze periode. Kies een ruimer bereik.`}</div>`;return}
     const w=Math.max(240,host.clientWidth-32),h=260,L=50,R=24,T=22,B=38,highest=Math.max(1,...points.map(p=>p.value)),max=selection.metric==='time'?highest*1.15:Math.ceil(highest*1.15),from=progressLocalDayDate(fromDay).getTime(),until=progressLocalDayDate(toDay+1).getTime(),x=p=>points.length===1?(L+w-R)/2:L+(p.at-from)/(until-from)*(w-L-R),y=v=>h-B-v/max*(h-T-B),tick=v=>selection.metric==='time'?`${(v/3600).toFixed(v<36000?1:0)}u`:String(Math.round(v));
     const lineCoordinates=key=>points.map(p=>`${x(p)},${y(p[key])}`).join(' '),coordinates=lineCoordinates('value'),latest=points.at(-1),dateLabel=day=>i18n.date(progressLocalDayDate(day),state.uiLanguage,{day:'numeric',month:'short'});
     chart.innerHTML=`<svg class="progress-summary-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${label}: laatste dagmetingen en echte sessiemetingen van vandaag">${!isTime?`<polygon class="area" points="${x(points[0])},${h-B} ${coordinates} ${x(latest)},${h-B}"/>`:``}${[0,max/2,max].map(v=>`<line class="grid" x1="${L}" y1="${y(v)}" x2="${w-R}" y2="${y(v)}"/><text x="${L-9}" y="${y(v)+4}" text-anchor="end">${tick(v)}</text>`).join('')}<polyline class="line" data-time-series="${isTime?'total':'words'}" points="${coordinates}"/><line id="progressSelectedGuide" class="selected-guide" y1="${T}" y2="${h-B}"/><circle class="latest-marker" cx="${x(latest)}" cy="${y(latest.value)}" r="5"/><circle id="progressSelectedMarker" class="selected-marker" r="7"/><text x="${L}" y="${h-9}">${dateLabel(fromDay)}</text>${toDay!==fromDay?`<text x="${w-R}" y="${h-9}" text-anchor="end">${dateLabel(toDay)}</text>`:''}</svg><div id="progressChartDetail" class="progress-chart-detail" aria-live="polite"></div><label class="progress-point-picker"><span><span>Meting bekijken</span><span id="progressPointPosition"></span></span><input id="progressPointPicker" type="range" min="0" max="${points.length-1}" step="1" aria-label="Opgeslagen meting bekijken" ${points.length===1?'disabled':''}></label><div class="small">${selection.metric==='words'?'Per afgeronde dag de laatste meting · vandaag per sessie.':'Opgetelde effectieve sessietijd · historische basis alleen in het totaal.'}</div>`;
@@ -6666,7 +6715,7 @@ function renderProgressSummary(host){
   range.onpointerdown=e=>{if(e.target===low||e.target===high||low.disabled)return;const rect=range.getBoundingClientRect(),position=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width)),day=Math.round(windowRange.minDay+position*(windowRange.maxDay-windowRange.minDay)),which=windowRange.fromDay===windowRange.toDay?(day<windowRange.fromDay?'low':'high'):Math.abs(day-windowRange.fromDay)<Math.abs(day-windowRange.toDay)?'low':'high';range.dataset.dragHandle=which;range.setPointerCapture(e.pointerId);(which==='low'?low:high).focus();move(which,day)};
   range.onpointermove=e=>{if(!range.hasPointerCapture(e.pointerId)||!range.dataset.dragHandle)return;const rect=range.getBoundingClientRect(),day=Math.round(windowRange.minDay+Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width))*(windowRange.maxDay-windowRange.minDay));move(range.dataset.dragHandle,day)};
   range.onpointerup=()=>{delete range.dataset.dragHandle};range.onpointercancel=range.onpointerup;
-  host.querySelectorAll('[data-progress-metric]').forEach(b=>b.onclick=()=>{selection.metric=b.dataset.progressMetric;selection.selectedAt=null;selection.followLatest=true;draw()});
+  host.querySelectorAll('[data-progress-metric]').forEach(b=>b.onclick=()=>{selection.metric=b.dataset.progressMetric;progressMasteryDetailOpen=['words','kanji'].includes(selection.metric);selection.selectedAt=null;selection.followLatest=true;draw()});
   progressSummaryRefresh=()=>{if(!host.isConnected||$('sessionView').classList.contains('hidden')||state.progressTab!=='progress')return;const sessions=studySessions(),signature=JSON.stringify([progressLocalDayNumber(Date.now()),sessions,knowledgeSnapshot().vocab,totalStudySeconds(),host.clientWidth]);if(signature!==lastSignature)draw()};
   if(!progressSummaryRefreshTimer&&window.setInterval)progressSummaryRefreshTimer=window.setInterval(()=>progressSummaryRefresh?.(),30000);
   draw();
@@ -6681,9 +6730,15 @@ function jlptProgressSummary(){
 }
 function jlptProgressHtml(){
   const summary=jlptMilestoneSummary();
-  const disclaimer='Deze percentages zijn berekend op basis van unieke, ooit beheerste woorden en kanji volgens de eigen Language Journey-richtlijn (70% woorden / 30% kanji). Het is geen officiële JLPT-score, certificaat of garantie op examenresultaten. Andere vaardigheden, waaronder grammatica, lezen en luisteren, worden niet door dit percentage beoordeeld.';
+  const disclaimer='Dit is een eigen, indicatieve Language Journey-richtlijn (70% woorden / 30% kanji), geen officiële JLPT-score of certificaat. Elke goede herhaling bouwt een derde op; een fout antwoord haalt een derde af. Een eerder opgebouwd item behoudt minimaal een derde, dus kan hoogstens twee derde verliezen. Grammatica, lezen en luisteren zitten niet in dit percentage.';
   if(!summary.available)return `<section class="card jlpt-guideline" aria-labelledby="jlptTitle"><h2 id="jlptTitle" class="h2">Language Journey — indicatieve JLPT-richtlijn</h2><p role="status">Deze richtlijn kan met deze versie niet worden weergegeven. Je opgeslagen gegevens blijven behouden.</p><p class="small">${disclaimer}</p></section>`;
-  return `<section class="card jlpt-guideline" aria-labelledby="jlptTitle"><h2 id="jlptTitle" class="h2">Language Journey — indicatieve JLPT-richtlijn</h2><div class="jlpt-levels">${summary.tiers.map(tier=>{const value=tier.masteryPercent,display=value.toFixed(1).replace('.',','),complete=value>=100;return `<div class="panel ${complete?'jlpt-level-complete':''}"><div class="jlpt-level-head"><strong>${tier.level}</strong><strong>${display}%${complete?' · Richtdoel bereikt':''}</strong></div><div class="jlpt-bar" role="progressbar" aria-label="${tier.level} indicatieve richtlijn" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${value.toFixed(1)}" aria-valuetext="${display} procent"><div class="jlpt-bar-fill" style="width:${value}%"></div></div><div class="small">${tier.words} / ${tier.anchors.vocabulary} unieke ooit beheerste woorden</div><div class="small">${tier.kanji} / ${tier.anchors.kanji} unieke in context beheerste kanji</div></div>`}).join('')}</div><p class="small">${disclaimer}</p></section>`;
+  const mastery=jlptFractionalMastery(),selected=summary.tiers.find(tier=>tier.level===state.jlptSelectedLevel)||summary.tiers[0];
+  const detail=tier=>`<h3 class="h2" style="margin:0">${tier.level} · verzameld</h3><div class="jlpt-selected-detail"><div class="panel"><div class="small">Woorden</div><strong>${jlptCountLabel(mastery.words.equivalent)} / ${tier.anchors.vocabulary}</strong><div class="small">${mastery.words.full} volledig beheerst · ${mastery.words.partial} deels geoefend</div></div><div class="panel"><div class="small">Kanji</div><strong>${jlptCountLabel(mastery.kanji.equivalent)} / ${tier.anchors.kanji}</strong><div class="small">${mastery.kanji.full} volledig beheerst · ${mastery.kanji.partial} deels geoefend</div></div></div>`;
+  return `<section id="jlptProgress" class="card jlpt-guideline" aria-labelledby="jlptTitle"><h2 id="jlptTitle" class="h2">Language Journey — indicatieve JLPT-richtlijn</h2><p class="small">Schuif naar een niveau en tik erop voor de aantallen.</p><div class="jlpt-levels" role="group" aria-label="Kies een indicatief JLPT-niveau" tabindex="0">${summary.tiers.map(tier=>{const value=window.LanguageJourneyJlptMilestones.percentage(mastery.words.equivalent,mastery.kanji.equivalent,tier.anchors),display=jlptPercentLabel(value).slice(0,-1),complete=value>=100,isSelected=tier.level===selected.level;return `<button type="button" class="panel jlpt-level-choice ${complete?'jlpt-level-complete':''}" data-jlpt-level="${tier.level}" aria-pressed="${isSelected}"><span class="jlpt-level-head"><strong>${tier.level}</strong><strong>${jlptPercentLabel(value)}</strong></span><span class="jlpt-bar" role="progressbar" aria-label="${tier.level} indicatieve richtlijn" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${value.toFixed(3)}" aria-valuetext="${display} procent"><span class="jlpt-bar-fill" style="display:block;width:${Math.min(100,value)}%"></span></span><span class="small">Tik voor aantallen</span></button>`}).join('')}</div><div id="jlptLevelDetail" style="margin-top:10px" aria-live="polite">${detail(selected)}</div><p class="small">${disclaimer}</p></section>`;
+}
+function bindJlptLevelSlider(){
+  const host=$('jlptProgress');if(!host)return;const detailHost=$('jlptLevelDetail'),summary=jlptMilestoneSummary(),mastery=jlptFractionalMastery();
+  host.querySelectorAll('[data-jlpt-level]').forEach(button=>button.onclick=()=>{state.jlptSelectedLevel=button.dataset.jlptLevel;scheduleSave();host.querySelectorAll('[data-jlpt-level]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));const tier=summary.tiers.find(item=>item.level===state.jlptSelectedLevel);if(tier&&detailHost)detailHost.innerHTML=`<h3 class="h2" style="margin:0">${tier.level} · verzameld</h3><div class="jlpt-selected-detail"><div class="panel"><div class="small">Woorden</div><strong>${jlptCountLabel(mastery.words.equivalent)} / ${tier.anchors.vocabulary}</strong><div class="small">${mastery.words.full} volledig beheerst · ${mastery.words.partial} deels geoefend</div></div><div class="panel"><div class="small">Kanji</div><strong>${jlptCountLabel(mastery.kanji.equivalent)} / ${tier.anchors.kanji}</strong><div class="small">${mastery.kanji.full} volledig beheerst · ${mastery.kanji.partial} deels geoefend</div></div></div>`});
 }
 function internalJlptProgressSummary(){return window.LanguageJourneyInternalGuideline.select(window.LanguageJourneyContent,window.LanguageJourneyJlptBenchmark,{history:state.guidelineEvidence,isIntroduced:id=>!!dictionaryById[id]&&knowledgeWordIsKnown(dictionaryById[id]),isKanjiIntroduced:id=>sessionKanjiIntroductions.has(id),srsRecord:(id,direction)=>flashcardRecord(id,direction)})}
 function renderProgressDashboard(box){
@@ -6691,6 +6746,7 @@ function renderProgressDashboard(box){
   box.innerHTML=`<section id="progressSummary" class="card"></section>${legacyStudyNotice()}<section class="card study-disclosure-card"><button id="recentActivitiesToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="recentActivitiesPanel"><span class="h2">Recente activiteiten (${sessions.length})</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="recentActivitiesPanel" class="study-disclosure-panel" hidden><div class="small">Nieuwste eerst · ${Math.min(state.progressActivityLimit,recent.length)} van ${recent.length}</div><div id="recentActivities" class="stack" style="margin-top:8px"></div><button id="moreActivities" class="btn tiny" style="width:100%;margin-top:8px" ${recent.length>state.progressActivityLimit?'':'hidden'}>Meer tonen</button><button id="activityManagerToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="activityManagerPanel" style="margin-top:14px"><span class="small">Activiteiten beheren en geschiedenis filteren</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="activityManagerPanel" class="study-disclosure-panel" hidden><div id="activityManager"></div></div></div></section><section class="card study-disclosure-card"><button id="studyAnalysisToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="studyAnalysisPanel"><span class="h2">Urenanalyse</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="studyAnalysisPanel" class="study-disclosure-panel" hidden><div id="studyAnalysisBody"></div></div></section><section class="card study-disclosure-card"><button id="studyTimelineToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="studyTimelinePanel"><span class="h2">Tijdlijn</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="studyTimelinePanel" class="study-disclosure-panel" hidden><div id="studyTimelineBody"></div></div></section>`;
   renderProgressSummary($('progressSummary'));
   $('progressSummary').insertAdjacentHTML('afterend',jlptProgressHtml());
+  bindJlptLevelSlider();
   bindStudyDisclosure('recentActivitiesToggle','recentActivitiesPanel');bindStudyDisclosure('activityManagerToggle','activityManagerPanel');bindStudyDisclosure('studyAnalysisToggle','studyAnalysisPanel');bindStudyDisclosure('studyTimelineToggle','studyTimelinePanel');
   renderProgressSectionSafely('activityManager','Activiteiten beheren',()=>renderStudyActivities($('activityManager')));
   renderProgressSectionSafely('studyAnalysisBody','De urenanalyse',()=>renderStudyAnalysis($('studyAnalysisBody')));

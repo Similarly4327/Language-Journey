@@ -12,6 +12,8 @@ This product scale supersedes the earlier internal N5–N3 thresholds and calend
 
 Each tier uses exactly `100 * (0.7 * min(words / wordTarget, 1) + 0.3 * min(kanji / kanjiTarget, 1))`. Both counts are global cumulative unique permanent milestones; incomplete external benchmark mappings do not filter them. Domain contributions cap independently. The data layer retains the unrounded percentage; display may format it to one decimal.
 
+The progress screen adds a separate practice estimate to the permanent milestone history. Each item contributes up to three thirds: a correct Recall answer adds one third and an incorrect answer removes one third. The score for an item cannot fall more than two thirds below its highest earned score, so a fully built item retains at least one third. Word SRS repetitions provide a gradual starting estimate; contextual kanji answers use the same bounded scoring. This display estimate can go down, while the historical `everMastered` milestone remains latched and Recall scheduling/ranks are unchanged.
+
 ## Storage and event contract
 
 `language-journey-content/jlpt-milestones.js` owns `state.jlptMilestones`, schema version 1 and scale `LJ-JLPT-v1`, inside the existing progress save. It contains separate `lexemes` keyed by existing canonical `vocab-*` IDs and `kanji` keyed by Unicode Han character. Neither direction, synonym nor supporting whole-word reading creates another count. Existing distinct canonical lexical senses retain their own IDs. No parallel vocabulary catalog is introduced.
