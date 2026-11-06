@@ -70,7 +70,7 @@ test('ordinary correct target answers persist evidence without crediting example
   app.state.quiz.optionsRevealed=true;app.answer(true,fakeElement(),'station');
   assert.ok(app.state.guidelineEvidence.words['vocab-えき'].applied);assert.ok(app.state.guidelineEvidence.words['vocab-えき'].kanji);assert.equal(app.state.guidelineEvidence.words['vocab-でんしゃ'],undefined);assert.equal(app.state.guidelineEvidence.words['vocab-みず'],undefined);
   const saved=app.saved(),reload=createCrashCourseProbe({now,savedState:saved.state,savedRanks:saved.ranks});assert.deepEqual(plain(reload.state.guidelineEvidence),plain(app.state.guidelineEvidence));
-  const before=plain(reload.saved());reload.internalJlptProgressSummary();const html=reload.jlptProgressHtml();assert.match(html,/indicatieve JLPT-richtlijn/);assert.match(html,/N5/);assert.doesNotMatch(html,/800 woorden|maximaal 3|45.vragen|diagnose/i);assert.deepEqual(plain(reload.saved()),before);
+  const before=plain(reload.saved());reload.internalJlptProgressSummary();const html=reload.jlptProgressHtml();assert.match(html,/indicatieve richtlijn/);assert.match(html,/N5/);assert.match(html,/vijf afzonderlijke geslaagde Recall-herhalingen/);assert.doesNotMatch(html,/800 woorden|maximaal 3|45.vragen|diagnose/i);assert.deepEqual(plain(reload.saved()),before);
 });
 test('Recall suppresses help for target and distractors before reveal and until grading; feedback restores it',()=>{
   for(const direction of ['jp-nl','nl-jp']){

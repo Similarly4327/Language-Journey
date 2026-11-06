@@ -8,13 +8,13 @@ const review=(attemptId,extra={})=>({attemptId,sourceId:'recall:test',at:now,kin
 function record(store,attemptId,extra={}){return milestones.record(store,review(attemptId,extra),content)}
 function kanjiReview(attemptId,extra={}){return review(attemptId,{kind:'contextual-kanji-review',targetWordIds:['vocab-でんしゃ'],knownWordIds:['vocab-でんしゃ'],introducedKanjiWordIds:['vocab-でんしゃ'],recognition:true,readingRevealed:false,audioAssisted:false,kanjiTargets:[{character:'電',wordId:'vocab-でんしゃ',form:'電車',reading:'でんしゃ',context:'電車 で いきます。'}],...extra})}
 
-test('LJ-JLPT-v1 has five cumulative anchors and exact 70/30 percentages without intermediate rounding',()=>{
-  assert.equal(milestones.contract.version,'LJ-JLPT-v1');
+test('LJ-JLPT-v2 uses five distinct successful reviews and exact 70/30 percentages without intermediate rounding',()=>{
+  assert.equal(milestones.contract.version,'LJ-JLPT-v2');assert.equal(milestones.contract.requiredConsecutiveCorrect,5);
   assert.deepEqual(milestones.contract.anchors,{N5:{vocabulary:1000,kanji:100},N4:{vocabulary:2000,kanji:300},N3:{vocabulary:4000,kanji:650},N2:{vocabulary:7000,kanji:1000},N1:{vocabulary:11000,kanji:2000}});
   const store=milestones.empty();
-  for(let n=0;n<1000;n++)store.lexemes[`vocab-fixture-${n}`]={everMastered:true};
+  for(let n=0;n<1000;n++)store.lexemes[`vocab-fixture-${n}`]={everMastered:true,creditUnits:5};
   assert.equal(milestones.select(store).tiers[0].masteryPercent,70);
-  for(let n=0;n<100;n++)store.kanji[String.fromCodePoint(0x4e00+n)]={everMastered:true};
+  for(let n=0;n<100;n++)store.kanji[String.fromCodePoint(0x4e00+n)]={everMastered:true,creditUnits:5};
   const selected=milestones.select(store);
   assert.equal(selected.words,1000);assert.equal(selected.kanji,100);assert.equal(selected.tiers[0].masteryPercent,100);
   assert.equal(selected.tiers[1].masteryPercent,100*(.7*.5+.3*(100/300)));
@@ -25,13 +25,13 @@ test('LJ-JLPT-v1 has five cumulative anchors and exact 70/30 percentages without
   assert.equal(milestones.select(milestones.empty()).tiers.every(tier=>tier.masteryPercent===0),true);
 });
 
-test('wrong target answer resets consecutive success; three successes latch one canonical word across directions',()=>{
+test('wrong answer resets the active streak but preserves already earned fractional credit',()=>{
   const store=milestones.empty();record(store,'a');record(store,'b',{sourceId:'recall:reverse'});
-  assert.equal(store.lexemes[id].streak,2);assert.equal(milestones.select(store).words,0);
-  record(store,'c',{correct:false});assert.equal(store.lexemes[id].streak,0);
-  for(const key of ['d','e','f'])record(store,key);
+  assert.equal(store.lexemes[id].streak,2);assert.equal(milestones.select(store).words,0.4);
+  record(store,'c',{correct:false});assert.equal(store.lexemes[id].streak,0);assert.equal(store.lexemes[id].creditUnits,2);assert.equal(milestones.select(store).words,0.4);
+  for(const key of ['d','e','f','g','h'])record(store,key);
   assert.equal(milestones.select(store).words,1);assert.equal(store.lexemes[id].masteredAt,now);
-  record(store,'g',{correct:false,at:now+1000});
+  record(store,'i',{correct:false,at:now+1000});
   assert.equal(store.lexemes[id].streak,0);assert.equal(store.lexemes[id].everMastered,true);assert.equal(store.lexemes[id].masteredAt,now);
   assert.equal(milestones.select(store).words,1);assert.equal(milestones.select(store).kanji,0);
 });
@@ -39,7 +39,7 @@ test('wrong target answer resets consecutive success; three successes latch one 
 test('persisted attempt identities reject duplicate and out-of-order replays, including changed answers',()=>{
   let store=milestones.empty();record(store,'a');record(store,'b');store=milestones.normalize(plain(store));
   assert.equal(record(store,'a'),false);assert.equal(record(store,'b',{correct:false}),false);
-  assert.equal(store.lexemes[id].streak,2);record(store,'c');assert.equal(milestones.select(store).words,1);
+  assert.equal(store.lexemes[id].streak,2);record(store,'c');assert.equal(milestones.select(store).words,0.6);record(store,'d');record(store,'e');assert.equal(milestones.select(store).words,1);
   const before=plain(store);milestones.select(store);assert.deepEqual(plain(store),before,'selectors never mutate persistence');
 });
 
@@ -51,14 +51,14 @@ test('unsubmitted, assisted, invalid, unknown, context-only and kana events cann
 
 test('kanji is separate contextual recognition evidence, unique per character with supporting word reading',()=>{
   const store=milestones.empty();
-  for(const key of ['a','b','c'])assert.equal(milestones.record(store,kanjiReview(key),content),true);
+  for(const key of ['a','b','c','d','e'])assert.equal(milestones.record(store,kanjiReview(key),content),true);
   assert.equal(milestones.select(store).kanji,1);assert.equal(milestones.select(store).words,0);
   assert.deepEqual(store.attempts.c.kanjiTargets,[{character:'電',wordId:'vocab-でんしゃ',reading:'でんしゃ',form:'電車'}]);
   milestones.record(store,kanjiReview('wrong',{correct:false}),content);
   assert.equal(store.kanji['電'].streak,0);assert.equal(store.kanji['電'].everMastered,true);
   const target=kanjiReview('two').kanjiTargets[0];
   milestones.record(store,kanjiReview('two',{kanjiTargets:[target,target,{...target,character:'車'}]}),content);
-  assert.equal(store.kanji['電'].streak,1);assert.equal(store.kanji['車'].streak,1);assert.equal(milestones.select(store).kanji,1);
+  assert.equal(store.kanji['電'].streak,1);assert.equal(store.kanji['車'].streak,1);assert.equal(milestones.select(store).kanji,1.2);
 });
 
 test('kanji recognition rejects exposure alone, audio/kana help, absent context and untested characters',()=>{
@@ -76,6 +76,15 @@ test('old evidence and SRS grades never manufacture milestones; unknown future m
   assert.deepEqual(milestones.normalize(future),future);assert.equal(milestones.select(future).available,false);assert.equal(record(future,'a'),false);
 });
 
+test('v1 migration preserves earned full milestones and incomplete earned partial credit without inferring new proof',()=>{
+  const legacy={version:1,scale:'LJ-JLPT-v1',lexemes:{[id]:{streak:2,everMastered:false,masteredAt:null,lastEventId:'old-2'},'vocab-old-full':{streak:0,everMastered:true,masteredAt:now,lastEventId:'old-3'}},kanji:{'電':{streak:1,everMastered:false}},attempts:{'old-event':{correct:true}}};
+  const migrated=milestones.normalize(legacy);
+  assert.equal(migrated.version,2);assert.equal(migrated.lexemes[id].creditUnits,2);assert.equal(migrated.lexemes[id].everMastered,false);
+  assert.equal(migrated.lexemes['vocab-old-full'].creditUnits,5);assert.equal(migrated.lexemes['vocab-old-full'].everMastered,true);
+  assert.equal(migrated.kanji['電'].creditUnits,1);assert.ok(migrated.attempts['old-event']);
+  assert.equal(milestones.select(migrated).words,1.4);assert.equal(milestones.select(migrated).kanji,0.2);
+});
+
 function app(savedState={}){return createCrashCourseProbe({now,savedState:{thematicRevision:1,...savedState},savedRanks:{'l4-1':{rank:'Copper',attempts:1,last:1}}})}
 function submitted(p,correct=true,direction='jp-nl'){
   p.createFlashcardSession([{cardId:id,direction}],'scheduled');
@@ -90,7 +99,7 @@ test('actual scheduled Recall submissions persist canonical streaks, failure res
   assert.equal(p.state.jlptMilestones.lexemes[id].streak,0);
   assert.equal(p.state.flashcardProgress.cards[`${id}::jp-nl`].repetitions,0);
   assert.equal(p.state.flashcardProgress.cards[`${id}::nl-jp`].repetitions,1);
-  for(let n=0;n<3;n++)submitted(p);
+  for(let n=0;n<5;n++)submitted(p);
   assert.equal(milestones.select(p.state.jlptMilestones).words,1);assert.equal(milestones.select(p.state.jlptMilestones).kanji,0);
   const saved=p.saved();p=createCrashCourseProbe({now:now+86400000,savedState:saved.state,savedRanks:saved.ranks});
   assert.deepEqual(plain(p.state.jlptMilestones),saved.state.jlptMilestones);assert.deepEqual(plain(p.state.flashcardProgress),saved.state.flashcardProgress);

@@ -49,6 +49,7 @@ window.LanguageJourneyLocales.de={
   'errors.generic':'Etwas ist schiefgegangen. Bitte versuche es erneut.',
   'flashcards.mixedHelp':"Recall wiederholt automatisch, was jetzt sinnvoll ist.",
   'flashcards.poolWords':"{count} Wörter im Recall-Pool",
+  'flashcards.poolCards':"{count} Karten",
   'flashcards.directionStats':"Karten zählen beide Übersetzungsrichtungen.",
   'flashcards.startMixed':"Recall starten",
   'flashcards.startMixedCount':"Recall starten · {count} Karten",

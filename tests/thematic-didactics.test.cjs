@@ -76,7 +76,7 @@ test('the existing Level 15 checkout exchange renders actual labeled turns with 
     assert.equal((html.match(/class="dialogue-turn"/g)||[]).length,3);assert.match(html,/Kai · Winkelmedewerker/);assert.match(html,/Miku · Klant/);assert.doesNotMatch(html,/みせ：/);
   }
   assert.ok(!content.manifest.didacticDialogues.some(d=>d.level===7),'isolated counter examples are not conversations');
-  assert.ok(!content.manifest.didacticDialogues.some(d=>d.level===11),'UI questions are not in-world conversations');
+  assert.ok(!content.manifest.didacticDialogues.some(d=>d.level===11&&d.part!=='storytime'),'UI questions are not in-world conversations; optional Storytime is a real exchange');
 });
 test('dialogue kanji obeys the original lesson boundary, even when replayed after later exposure',()=>{
   const app=createCrashCourseProbe({savedState:{thematicRevision:1,introducedVocabIds:['vocab-えき'],kanjiExposureIds:['vocab-えき']}});

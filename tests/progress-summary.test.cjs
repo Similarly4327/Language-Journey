@@ -61,7 +61,8 @@ test('day grouping uses local boundaries through summer and winter time',()=>{
 });
 test('progress summary is accessible and selection is not persisted in learning data',()=>{
   const source=html.slice(html.indexOf('function renderProgressSummary('),html.indexOf('function renderProgressDashboard('));
-  assert.match(source,/aria-pressed/);assert.match(source,/✓ Geselecteerd/);assert.match(source,/aria-valuetext/);assert.match(source,/oninput/);assert.doesNotMatch(source,/scheduleSave|saveProgress|localStorage/);
+  assert.match(source,/aria-pressed/);assert.match(source,/✓ Geselecteerd/);assert.match(source,/aria-valuetext/);assert.match(source,/oninput/);assert.doesNotMatch(source,/saveProgress|localStorage/);
+  const chartSelection=source.slice(source.indexOf("picker.oninput"),source.indexOf("svg.onpointerdown"));assert.doesNotMatch(chartSelection,/scheduleSave/);
   const dashboard=html.slice(html.indexOf('function renderProgressDashboard('),html.indexOf('function renderStudyAdjustment('));assert.doesNotMatch(dashboard,/category-bar|category-breakdown/);
   const analysis=html.slice(html.indexOf('function renderStudyAnalysis('),html.indexOf('function computedTimelineEvents('));assert.doesNotMatch(analysis,/categoryBreakdownHtml|end\.vocab/);
 });

@@ -49,6 +49,7 @@ window.LanguageJourneyLocales.nl={
   'errors.generic':'Er ging iets mis. Probeer het opnieuw.',
   'flashcards.mixedHelp':"Recall herhaalt automatisch wat nu nuttig is.",
   'flashcards.poolWords':"{count} woorden in Recall-pool",
+  'flashcards.poolCards':"{count} kaarten",
   'flashcards.directionStats':"Kaarten tellen beide vertaalrichtingen.",
   'flashcards.startMixed':"Start Recall",
   'flashcards.startMixedCount':"Start Recall · {count} kaarten",

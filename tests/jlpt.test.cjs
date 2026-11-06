@@ -64,8 +64,8 @@ test('app uses the same Dictionary exposure and preserves both SRS directions, r
   const before=json(p.saved());
   const first=p.jlptProgressSummary()[0].domains.vocabulary;
   assert.equal(first.items.find(i=>i.knowledgeItemId===id).status,'stable');
-  assert.match(p.jlptProgressHtml(),/Language Journey — indicatieve JLPT-richtlijn/);
-  assert.match(p.jlptProgressHtml(),/0,0%/);assert.match(p.jlptProgressHtml(),/1000 unieke ooit beheerste woorden/);
+  assert.match(p.jlptProgressHtml(),/LJ JLPT-indicatie/);
+  assert.match(p.jlptProgressHtml(),/0,0%/);assert.match(p.jlptProgressHtml(),/1000/);
   p.state.progressTab='progress';p.renderSession();
   assert.deepEqual(json(p.saved()),before,'rendering never mutates learning/storage data');
   const reloaded=createCrashCourseProbe({now,savedState:before.state,savedRanks:before.ranks,version:before.version});

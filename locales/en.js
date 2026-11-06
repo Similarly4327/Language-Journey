@@ -49,6 +49,7 @@ window.LanguageJourneyLocales.en={
   'errors.generic':'Something went wrong. Please try again.',
   'flashcards.mixedHelp':"Recall automatically reviews what is useful now.",
   'flashcards.poolWords':"{count} words in your Recall pool",
+  'flashcards.poolCards':"{count} cards",
   'flashcards.directionStats':"Cards count both translation directions.",
   'flashcards.startMixed':"Start Recall",
   'flashcards.startMixedCount':"Start Recall · {count} cards",

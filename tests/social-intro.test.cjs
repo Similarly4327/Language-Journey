@@ -46,5 +46,5 @@ test('old level/exam progress cannot introduce or unlock new intro Recall cards;
   app.openSocialIntro();app.openIntroLesson(content.introLessons[0].id);assert.ok(!app.flashcardEligibleCards().some(w=>ids.includes(w.id)),'viewing is not Copper');
   assert.deepEqual(protectedProgress(app),before);const saved=app.saved();
   const again=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.equal(again.state.intro.lessonId,'intro-greetings');assert.equal(again.state.intro.step,'words');assert.equal(again.state.recallKanjiEnabled,true);assert.deepEqual(protectedProgress(again),before);
-  again.startIntroCheck(content.introLessons[0]);again.state.quiz.score=again.state.quiz.questions.length;again.finishQuiz();assert.deepEqual(again.flashcardEligibleCards().filter(w=>ids.includes(w.id)).map(w=>w.id).sort(),content.introLessons[0].wordIds.slice().sort());
+  again.startIntroCheck(content.introLessons[0]);again.state.quiz.score=again.state.quiz.questions.length;again.finishQuiz();assert.deepEqual(plain(again.flashcardEligibleCards().filter(w=>ids.includes(w.id)).map(w=>w.id).sort()),content.introLessons[0].wordIds.slice().sort());
 });

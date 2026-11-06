@@ -10,23 +10,26 @@ test('optional Storytime has two read-only rounds, persists its place and is ope
   app.state.level=10;app.state.screen='level';app.renderMain();const before=learning(app);
   assert.equal(storytime.stories.length,1);assert.equal(app.rankState['l11-exam'].rank,null);
   app.openStorytime('storytime-home-1');let html=app.element('mainView').innerHTML;
-  assert.match(html,/ronde 1\/2/);assert.match(html,/ただいま。/);assert.match(html,/ハル/);assert.match(html,/ミク/);assert.doesNotMatch(html,/Ik ben thuis\.|data-fc-answer|data-thematic-choice/);
+  assert.match(html,/ronde 1\/2/);assert.match(html,/ただいま。/);assert.match(html,/ハル/);assert.match(html,/Miku · ミク/);assert.match(html,/data-audio-key="dialogue-storytime-home-1"/);assert.doesNotMatch(html,/Ik ben thuis\.|data-fc-answer|data-thematic-choice/);
   app.element('storytimeNext').onclick();html=app.element('mainView').innerHTML;assert.match(html,/ronde 2\/2/);assert.match(html,/Ik ben thuis\./);
   const saved=app.saved(),reload=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});reload.state.level=10;reload.state.screen='module';reload.renderMain();assert.match(reload.element('mainView').innerHTML,/ronde 2\/2/);
   app.element('storytimeRestart').onclick();assert.match(app.element('mainView').innerHTML,/ronde 1\/2/);app.element('storytimeNext').onclick();app.element('storytimeNext').onclick();assert.equal(app.state.screen,'level');assert.equal(app.state.thematic.step,'list');
   assert.deepEqual(learning(app),before);assert.ok(storytime.stories.every(story=>!content.vocabById[story.id]));
 });
 
-test('Recall kanji is an optional persistent presentation choice on the same active card',()=>{
+test('Storytime switches the second named companion and reads the spoken lines in character voices',()=>{
+  const story=storytime.stories[0],app=createCrashCourseProbe({savedState:{avatarGender:'female',avatarName:'Miku',avatarNameJapanese:'ミク'}});app.state.level=10;app.openStorytime(story.id);const html=app.element('mainView').innerHTML;
+  assert.match(html,/Miku · ミク/);assert.match(html,/Ren · レン/);assert.match(html,/data-audio-key="dialogue-storytime-home-1"/);
+  const dialogue=content.audioEntryById[story.dialogueId].entry;assert.equal(dialogue.lines.find(line=>line.sentenceId===story.lines.find(item=>item.speaker==='ren').audioId).speakerRole,'B');assert.equal(dialogue.lines.find(line=>line.sentenceId===story.lines.find(item=>item.speaker==='miku').audioId).speakerRole,'A');
+});
+
+test('Recall shows explicitly introduced kanji in the mixed pool without an optional deck switch',()=>{
   const id='vocab-でんしゃ',app=createCrashCourseProbe({savedState:{thematicRevision:1,introducedVocabIds:[id],kanjiExposureIds:[id]},savedRanks:{'l10-4':{rank:'Copper',attempts:1,last:1}}});
-  assert.equal(app.state.recallKanjiEnabled,false);
   app.state.screen='flashcards';app.createFlashcardSession([{cardId:id,direction:'jp-nl'}],'scheduled');app.state.flashcardSession.optionsRevealed=true;app.renderFlashcardsScreen();
   const before=plain({progress:app.state.flashcardProgress,queue:app.state.flashcardSession.queue,position:app.state.flashcardSession.position});
-  assert.doesNotMatch(app.element('flashcardView').innerHTML,/電車/);
-  const checkbox=app.element('fcKanjiEnabled');checkbox.checked=true;checkbox.onchange();assert.match(app.element('flashcardView').innerHTML,/電車/);assert.doesNotMatch(app.element('flashcardView').innerHTML,/reading-support/,'the active target has no reading clue');
+  assert.match(app.element('flashcardView').innerHTML,/電車/);assert.doesNotMatch(app.element('flashcardView').innerHTML,/fcKanjiEnabled|Bekende woorden ook in kanji tonen/);assert.doesNotMatch(app.element('flashcardView').innerHTML,/reading-support/,'the active target has no reading clue');
   assert.deepEqual(plain({progress:app.state.flashcardProgress,queue:app.state.flashcardSession.queue,position:app.state.flashcardSession.position}),before);
-  const saved=app.saved(),reload=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.equal(reload.state.recallKanjiEnabled,true);
-  checkbox.checked=false;checkbox.onchange();assert.doesNotMatch(app.element('flashcardView').innerHTML,/電車/);
+  const saved=app.saved(),reload=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.equal(reload.state.recallKanjiEnabled,false);assert.match(reload.jlptProgressHtml(),/vijf afzonderlijke geslaagde Recall-herhalingen/);
 });
 
 test('only Japanese-time reading questions lose digital labels in every generated agenda source',()=>{

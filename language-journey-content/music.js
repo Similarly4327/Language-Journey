@@ -48,9 +48,33 @@
   ];
   const ids=[...entries.map(entry=>entry[0]),'vocab-あなた','vocab-まっすぐ','vocab-いみ','vocab-ことば','vocab-ひとつ','vocab-ふたつ','vocab-みっつ','vocab-よっつ'];
   const groups=Array.from({length:Math.ceil(ids.length/3)},(_,i)=>ids.slice(i*3,i*3+3));
+  // Character senses: Japan Kanji Aptitude Testing Foundation, KanjiPedia.
+  // Whole-word readings checked against the existing inventory and dictionary entries.
+  // These are teaching notes for existing word IDs, never extra vocabulary entries.
+  const componentSources={'気':'0001184900','持':'0002874500','運':'0000366800','命':'0006674800','大':'0004474400','好':'0002163400','分':'0006175200','合':'0002341000','苛':'0000664400','立':'0007104000','関':'0001108800','係':'0001761200','出':'0003214000','会':'0000756800','偶':'0001690000','然':'0004145300','奇':'0001201600','跡':'0003972400','作':'0002561800','笑':'search?k=%E7%AC%91&kt=1&sk=leftHand','見':'0001896200','抜':'0005698600','複':'0006120000','雑':'0002605500','思':'0002765700','鼓':'0002072700','動':'0005267200','高':'0002250300','鳴':'0006693400','自':'0002850500','信':'0003599100','勉':'0006289600','強':'0001515000'};
+  const componentRows={
+    'vocab-music-kimochi':[['気','き','gevoel of stemming'],['持','も','houden of dragen']],
+    'vocab-music-unmei':[['運','うん','samenloop of geluk'],['命','めい','lotsbestemming']],
+    'vocab-music-daisuki':[['大','だい','heel erg'],['好','す','leuk vinden']],
+    'vocab-music-wakariau':[['分','わ','begrijpen'],['合','あ','samen of wederzijds']],
+    'vocab-music-iradachi':[['苛','いら','ergernis'],['立','だ','opkomen of ontstaan']],
+    'vocab-music-kankei':[['関','かん','betrokkenheid'],['係','けい','verbinding']],
+    'vocab-music-deau':[['出','で','naar buiten komen'],['会','あ','ontmoeten']],
+    'vocab-music-guuzen':[['偶','ぐう','toevallig'],['然','ぜん','zo of op die manier']],
+    'vocab-music-kiseki':[['奇','き','wonderlijk'],['跡','せき','spoor']],
+    'vocab-music-tsukuriwarai':[['作','つく','maken'],['笑','わら','lachen']],
+    'vocab-music-minuku':[['見','み','zien'],['抜','ぬ','doordringen']],
+    'vocab-music-fukuzatsu':[['複','ふく','meerdere lagen'],['雑','ざつ','door elkaar']],
+    'vocab-music-omoide':[['思','おも','denken'],['出','で','naar buiten komen']],
+    'vocab-music-kodou':[['鼓','こ','slaan of kloppen'],['動','どう','beweging']],
+    'vocab-music-takanaru':[['高','たか','hoog of sterk'],['鳴','な','klinken']],
+    'vocab-music-jishin':[['自','じ','zichzelf'],['信','しん','vertrouwen']],
+    'vocab-music-benkyou':[['勉','べん','zich inspannen'],['強','きょう','sterk of krachtig']]
+  };
+  const components=Object.fromEntries(Object.entries(componentRows).map(([id,rows])=>[id,rows.map(([character,reading,meaning])=>({character,reading,meaning,source:componentSources[character].startsWith('search?')?'https://www.kanjipedia.jp/'+componentSources[character]:'https://www.kanjipedia.jp/kanji/'+componentSources[character]}))]));
   function apply(m){for(const [id,japanese,romaji,meaning,partOfSpeech,kanjiForm] of entries){const existing=m.vocabulary.find(w=>w.japanese===japanese&&w.coreOrContext!=='legacy'&&(w.kanjiForm===kanjiForm||w.meaning===meaning));if(existing){for(const group of groups){const index=group.indexOf(id);if(index>=0)group[index]=existing.id}continue}if(m.vocabulary.some(w=>w.id===id))continue;m.vocabulary.push({id,japanese,reading:japanese,romaji,meaning,meanings:[meaning],partOfSpeech,kanjiForm,kanjiIntroducedAt:'20-6',introducedAt:'20-5',availableFrom:'20-5',lessonId:'music-quintuplets',routeId:'music',themes:['music','feelings'],coreOrContext:'context',recallCore:true,audioId:null,source:'五等分の気持ち · vocabulary inventory',notes:'Vrijwillige muziekpilot; woordenboekvorm, geen liedtekst.'})}
     const massugu=m.vocabulary.find(w=>w.id==='vocab-まっすぐ');if(massugu)massugu.meanings=[...new Set([...(massugu.meanings||[massugu.meaning]),'oprecht'])];
     m.music={id:'music-quintuplets',title:'五等分の気持ち',groups:groups.map(group=>group.slice())}}
-  const api={entries,groups,apply};if(typeof module!=='undefined'&&module.exports)module.exports=api;else(root.window||root).LanguageJourneyMusic=api;
+  const api={entries,groups,components,apply};if(typeof module!=='undefined'&&module.exports)module.exports=api;else(root.window||root).LanguageJourneyMusic=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
 

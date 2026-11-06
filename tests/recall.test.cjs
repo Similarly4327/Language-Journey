@@ -107,7 +107,7 @@ test('140-word Recall pool stays bounded, prioritizes due cards and never schedu
 
 test('free practice retains manual filters independently of automatic Recall and never reschedules',()=>{
   const now=new Date(2026,9,7,12).getTime(),cards={'vocab-ねこ::jp-nl':{dueAt:now+3600000,repetitions:4,intervalDays:14,lapses:0,lastReviewedAt:now-86400000,lastGrade:'knew'}},app=createSrsFixture({now,savedState:{introducedVocabIds:['vocab-ねこ','vocab-にがつ'],flashcardSelection:{auto:true,lessonIds:['l4-1'],direction:'nl-jp'},flashcardProgress:{cards}}});
-  assert.deepEqual(app.freePracticeCards().map(word=>word.id),['vocab-ねこ']);assert.equal(app.getRecallSession().counts.pool,2);
+  assert.deepEqual(JSON.parse(JSON.stringify(app.freePracticeCards().map(word=>word.id))),['vocab-ねこ']);assert.equal(app.getRecallSession().counts.pool,2);
   app.renderFlashcardsScreen();assert.match(app.scopeMarkup(),/data-fc-lesson="l4-1" checked/);assert.match(app.scopeMarkup(),/value="nl-jp" selected/);
   app.startFlashcardSession(app.freePracticeCards(),['nl-jp'],'free');app.state.flashcardSession.feedback={grade:'viewed',chosen:'ねこ',ungraded:true};app.flashcardNextCard();
   assert.deepEqual(JSON.parse(JSON.stringify(app.state.flashcardProgress.cards)),cards);
@@ -452,7 +452,7 @@ test('Recall rebuilds new cards from ranked Level 7, partial Level 8, and later 
     reviewedId='vocab-ひとつ',dueAt=new Date(2026,2,23,12).getTime(),savedState={flashcardProgress:{version:1,cards:{[`${reviewedId}::jp-nl`]:{dueAt,intervalDays:3,repetitions:2,lapses:0,lastReviewedAt:new Date(2026,2,20,12).getTime(),lastGrade:'knew'}}}},
     app=createSrsFixture({savedState,savedRanks:ranks}),expected=app.vocabCatalog.filter(word=>!app.state.deferredVocabIntroductions.includes(word.id)&&(ranks[word.lessonId]?.rank||app.state.historicalIntroducedVocabIds.includes(word.id)));
   const actual=app.flashcardSelectedCards();
-  assert.deepEqual(actual.map(word=>word.id).sort(),expected.map(word=>word.id).sort(),'all and only words from ranked introduction lessons are eligible');
+  assert.deepEqual(JSON.parse(JSON.stringify(actual.map(word=>word.id).sort())),expected.map(word=>word.id).sort(),'all and only words from ranked introduction lessons are eligible');
   assert.equal(new Set(actual.map(word=>word.id)).size,actual.length,'each canonical vocabulary ID appears once');
   assert.ok(expected.some(word=>word.level===7),'Level 7 core vocabulary is reconstructed');
   assert.ok(expected.some(word=>word.level===8&&word.lessonId==='l8-2'),'the completed Level 8 lesson is reconstructed');
@@ -469,9 +469,9 @@ test('Recall rebuilds new cards from ranked Level 7, partial Level 8, and later 
   assert.ok(!app.state.flashcardSession.queue.some(item=>item.cardId===reviewedId),'later-due history is not reset or forced due');
   app.state.flashcardSelection.lessonIds=['l8-2'];
   app.state.flashcardSelection.auto=false;
-  assert.deepEqual(app.flashcardSelectedCards().map(word=>word.lessonId),actual.filter(word=>word.lessonId==='l8-2').map(word=>word.lessonId),'lesson filters scope the same eligible pool');
+  assert.deepEqual(JSON.parse(JSON.stringify(app.flashcardSelectedCards().map(word=>word.lessonId))),JSON.parse(JSON.stringify(actual.filter(word=>word.lessonId==='l8-2').map(word=>word.lessonId))),'lesson filters scope the same eligible pool');
   const reloaded=createSrsFixture({savedState:{introducedVocabIds:app.state.introducedVocabIds,flashcardProgress:savedState.flashcardProgress},savedRanks:ranks});
-  assert.deepEqual(reloaded.flashcardSelectedCards().map(word=>word.id).sort(),expected.map(word=>word.id).sort(),'offline reload preserves the same unique eligible pool');
+  assert.deepEqual(JSON.parse(JSON.stringify(reloaded.flashcardSelectedCards().map(word=>word.id).sort())),expected.map(word=>word.id).sort(),'offline reload preserves the same unique eligible pool');
   assert.equal(reloaded.state.flashcardProgress.cards[`${reviewedId}::jp-nl`].dueAt,dueAt,'reload preserves the existing review due time');
 });
 

@@ -1566,8 +1566,8 @@
       "availableFrom": "4-3",
       "themes": [],
       "coreOrContext": "core",
-      "kanjiForm": null,
-      "kanjiIntroducedAt": null,
+      "kanjiForm": "私",
+      "kanjiIntroducedAt": "11-1-A",
       "audioId": null,
       "notes": "",
       "legacyLessonId": null
@@ -13890,6 +13890,10 @@
     {sentenceId:'sentence-dialogue-l8-minutes-2',text:'じゅうにじはん です',audioTextKana:'じゅうにじはん です',meaning:'Het is half één.',speakerRole:'B'}
   ]});
   minutes.models[0].dialogueId='dialogue-l8-minutes-example';
+  const storytimeCatalog=typeof module!=='undefined'&&module.exports?require('./storytime.js'):root.LanguageJourneyStorytime;
+  manifest.didacticUtterances=manifest.didacticUtterances||[];
+  for(const story of storytimeCatalog?.stories||[])for(const line of story.lines||[])if(line.audioId&&line.audioTextKana&&!manifest.didacticUtterances.some(item=>item.id===line.audioId))manifest.didacticUtterances.push({id:line.audioId,text:line.japanese,audioTextKana:line.audioTextKana,meaning:line.dutch,level:story.level,lessonId:story.lessonId});
+  for(const story of storytimeCatalog?.stories||[])if(story.dialogueId&&!manifest.didacticDialogues.some(dialogue=>dialogue.id===story.dialogueId))manifest.didacticDialogues.push({id:story.dialogueId,lessonId:story.lessonId,level:story.level,part:'storytime',lines:story.lines.map(line=>({sentenceId:line.audioId,text:line.japanese,audioTextKana:line.audioTextKana,meaning:line.dutch,speakerRole:story.roles[line.speaker]?.gender==='male'?'B':'A'}))});
   const level11Integration=typeof module!=='undefined'&&module.exports?require('./level11-integration.js'):root.LanguageJourneyLevel11Integration;
   level11Integration.apply(manifest);
   const level9Exam=typeof module!=='undefined'&&module.exports?require('./level9-exam.js'):root.LanguageJourneyLevel9Exam;

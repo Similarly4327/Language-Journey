@@ -55,6 +55,26 @@ test('Recall presents the exposed spelling in both directions using the same car
     if(direction==='jp-nl')app.state.flashcardProgress.cards={};
   }
 });
+test('separately taught kanji joins the normal Recall planner as one character card without creating a second word',()=>{
+  const word='vocab-でんしゃ',character='電',cardId='kanji-card:電',app=createCrashCourseProbe({savedState:{thematicRevision:1,introducedVocabIds:[word],kanjiExposureIds:[word],music:{componentEvidence:{[word]:['電','車']}}},savedRanks:{'l10-4':{rank:'Copper',attempts:1,last:1}}});
+  const pool=app.flashcardEligibleCards();assert.ok(pool.some(card=>card.id===word));assert.equal(pool.filter(card=>card.orthographyCard&&card.kanjiCharacter===character).length,1);assert.ok(pool.some(card=>card.id===cardId));
+  app.createFlashcardSession([{cardId,direction:'jp-nl',answerChoices:['trein','bus']}],'scheduled');app.state.flashcardSession.optionsRevealed=true;app.state.flashcardSession.revealed=true;app.renderFlashcardsScreen();
+  assert.match(app.element('flashcardView').innerHTML,/<mark>電<\/mark>車/);assert.doesNotMatch(app.element('flashcardView').innerHTML,/でんしゃ|reading-support/);
+  app.flashcardRate('knew','trein');assert.equal(app.state.flashcardProgress.cards[`${cardId}::jp-nl`].repetitions,1);assert.equal(app.state.jlptMilestones.kanji[character].creditUnits,1);assert.equal(app.state.jlptMilestones.lexemes[word],undefined);
+  const saved=app.saved(),reload=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.equal(reload.state.flashcardProgress.cards[`${cardId}::jp-nl`].repetitions,1);assert.equal(reload.state.jlptMilestones.kanji[character].creditUnits,1);
+});
+test('compound spelling gets its own mixed Recall card and independent persisted SRS without extra word or character credit',()=>{
+  const word='vocab-でんしゃ',cardId=`kanji-word:${word}`,ranks={'l10-4':{rank:'Copper',attempts:1,last:1}},initial={introducedVocabIds:[word],kanjiExposureIds:[word]},app=createCrashCourseProbe({savedState:initial,savedRanks:ranks});
+  const pool=app.flashcardEligibleCards();assert.ok(pool.some(card=>card.id===word));assert.ok(pool.some(card=>card.id===cardId));assert.ok(!pool.some(card=>card.id==='kanji-card:電'||card.id==='kanji-card:車'),'word exposure alone does not prove its components');
+  assert.equal(app.getRecallSession().counts.words,pool.filter(card=>!card.orthographyCard).length);
+  for(const [direction,answer] of [['jp-nl','でんしゃ'],['nl-jp','電車']]){
+    app.createFlashcardSession([{cardId,direction,answerChoices:[answer]}],'scheduled');app.state.flashcardSession.optionsRevealed=true;app.state.flashcardSession.revealed=true;app.renderFlashcardsScreen();assert.match(app.element('flashcardView').innerHTML,/電車/);assert.ok(app.element('flashcardView').innerHTML.includes(answer));app.flashcardRate('knew',answer);assert.equal(app.state.flashcardProgress.cards[`${cardId}::${direction}`].repetitions,1);
+  }
+  assert.equal(app.state.jlptMilestones.lexemes[word],undefined);assert.equal(app.state.jlptMilestones.kanji['電'],undefined);
+  const saved=app.saved(),again=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.equal(again.state.flashcardProgress.cards[`${cardId}::jp-nl`].repetitions,1);assert.equal(again.state.flashcardProgress.cards[`${cardId}::nl-jp`].repetitions,1);assert.ok(again.flashcardEligibleCards().some(card=>card.id===cardId));
+  const locked=createCrashCourseProbe({savedState:{introducedVocabIds:[word],kanjiExposureIds:[word]}});assert.ok(!locked.flashcardEligibleCards().some(card=>card.id===cardId),'orthography needs Copper as well as exposure');
+  const single=createCrashCourseProbe({savedState:{introducedVocabIds:['vocab-わたし'],kanjiExposureIds:['vocab-わたし'],music:{introduced:['vocab-わたし']}}});assert.ok(!single.flashcardEligibleCards().some(card=>card.id==='kanji-word:vocab-わたし'));
+});
 test('active answer options suppress reading support and still respect lesson boundaries',()=>{
  const app=createCrashCourseProbe({savedState:{thematicRevision:1,introducedVocabIds:['vocab-えき'],kanjiExposureIds:['vocab-えき']}});
  app.state.level=11;app.state.screen='module';app.openThematicLesson(0);app.state.thematic={level:12,lessonIndex:0,part:'A',step:'questions',questionIndex:0,correct:0,answered:false,optionsRevealed:true,flowRevision:1};app.renderMain();

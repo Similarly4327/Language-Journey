@@ -144,7 +144,7 @@ test('all UI routes reuse shared service and Recall reveal never offers Japanese
  assert.equal(sandbox.key({vocabIds:['vocab-ねこ','vocab-いぬ']},'ねこ','answer'),'vocab-ねこ');
  assert.equal(sandbox.key({lessonId:'l4-1'},'これは ねこ です'),'sentence-l4-1-model-1');
  assert.equal(sandbox.key({vocabIds:['vocab-ねこ']},'kat'),undefined,'Dutch prompts never acquire the answer ID through vocabulary metadata');
- assert.match(html,/if\(direction==='jp-nl'&&!feedback\)/);assert.match(html,/speakerButtonHtml\(spokenAnswer,card.id/);assert.match(html,/model.sentenceId/);
+ assert.match(html,/if\(direction==='jp-nl'&&!feedback&&!card\.wholeWordCard\)/);assert.match(html,/speakerButtonHtml\(spokenAnswer,card.id/);assert.match(html,/model.sentenceId/);
  assert.match(html,/contextAudio=quizTextIsJapanese\(context\)&&speakerButtonHtml/);assert.match(html,/japanesePlayback.play\(asset.assets/);assert.doesNotMatch(html,/knowledgeTilePlayback|audioCoachPlayback|speechSynthesis/);
  assert.match(html,/function answerOptionAudioHtml\(text,preferredIds=\[\]\)/);assert.match(html,/answerOptionAudioHtml\(text,quizAudioKey\(currentQ\(\),text,'choice'\)\)/);
  assert.match(html,/event\.preventDefault\(\);event\.stopPropagation\(\)/,'speaker taps are intercepted before the answer option receives them');
