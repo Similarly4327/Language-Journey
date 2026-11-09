@@ -16,6 +16,7 @@ const sandbox = {
   state: {currentLevel: 30, introducedVocabIds: [], vocabFirstSeen: {}, langStepProgress: {}, advancedStepProgress: {}, thematicCompleted: {}, thematic: {level: 11, lessonIndex: 0, step: 'list'}},
   window: {
     LanguageJourneyContent: content,
+    LanguageJourneyLevelContract: require('../language-journey-content/level-contract.js'),
     LanguageJourneyPlatform: {preferences: () => ({courseId: 'japanese'}), course: () => ({targetLanguage: 'ja'}), content: () => content},
     LanguageJourneyI18n: {}, LanguageJourneyScenes: {}, LanguageJourneyNavigation: {}
   },
@@ -30,7 +31,9 @@ assert.match(html, /data-knowledge="dictionary"/, 'Dictionary is available from 
 assert.match(html, /id="dictionaryModal"/, 'lesson-linked articles have a dedicated modal');
 assert.match(html, /function renderDictionaryTab\(/, 'the searchable Dictionary view is rendered');
 assert.match(html, /function openDictionaryModal\(/, 'lesson links open articles without replacing the lesson');
-assert.equal(Object.keys(dictionaryById).length, vocabCatalog.length + 163 + content.manifest.grammar.filter(g=>g.symbol&&!g.referenceAliasOf).length, 'all word, kana, combination, writing-rule and canonical grammar IDs stay unique');
+assert.equal(Object.keys(dictionaryById).length, vocabCatalog.length + 163 + content.manifest.audioNumbers.length + content.manifest.grammar.filter(g=>g.symbol&&!g.referenceAliasOf).length, 'all word, kana, number, writing-rule and canonical grammar IDs stay unique');
+for(const number of content.manifest.audioNumbers){const entry=dictionaryById[number.id],audio=content.audioEntryById[number.id];assert.equal(entry.kind,'getal');assert.equal(entry.jp,audio.displayText);assert.equal(entry.kana,audio.pronunciation.audioTextKana);assert.equal(entry.meaning,String(number.value));assert.equal(entry.romaji,'')}
+assert.ok(dictionarySearch('さんびゃく').some(entry=>entry.id==='number-300'));
 for (const word of vocabCatalog) {
   const entry = dictionaryById[word.id];
   assert.ok(entry, `word keeps its stable ID: ${word.id}`);

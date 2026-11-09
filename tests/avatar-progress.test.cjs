@@ -43,15 +43,15 @@ test('avatar progress level follows highest current Copper rank, not navigation'
   const app=createAvatarApp();
   assert.equal(app.getAvatarProgressLevel(),1,'new users keep the Level 1 fallback');
   giveLevelRank(app,3);
-  assert.equal(app.getAvatarProgressLevel(),3);
+  assert.equal(app.getAvatarProgressLevel(),2);
   giveLevelRank(app,7);
   app.state.level=1;
   app.syncAvatarState();
   assert.equal(app.activeLearningLevel(),2);
-  assert.equal(app.getAvatarProgressLevel(),7);
+  assert.equal(app.getAvatarProgressLevel(),6);
   app.state.level=7;
   app.syncAvatarState();
-  assert.equal(app.getAvatarProgressLevel(),7,'opening Level 8 is not a rank achievement');
+  assert.equal(app.getAvatarProgressLevel(),6,'opening Level 8 is not a rank achievement');
   giveLevelRank(app,8);
   assert.equal(app.getAvatarProgressLevel(),8);
 });
@@ -62,7 +62,7 @@ test('avatar level is derived again from saved ranks after reload',()=>{
   const ranks=JSON.parse(JSON.stringify(first.rankState));
   const reloaded=createAvatarApp({savedState:{level:1},ranks});
   assert.equal(reloaded.activeLearningLevel(),2);
-  assert.equal(reloaded.getAvatarProgressLevel(),7);
+  assert.equal(reloaded.getAvatarProgressLevel(),6);
 });
 
 test('Level 11 supermarket progress migrates to Level 15 without resetting lesson history',()=>{
@@ -82,11 +82,11 @@ test('automatic outfit follows active level while manual selection remains fixed
   giveLevelRank(app,7);
   app.state.level=6;
   app.syncAvatarState();
-  assert.equal(app.getAvatarProgressLevel(),7);
+  assert.equal(app.getAvatarProgressLevel(),6);
   assert.equal(app.activeAvatarOutfit().id,'school');
   app.state.level=1;
   app.syncAvatarState();
-  assert.equal(app.getAvatarProgressLevel(),7);
+  assert.equal(app.getAvatarProgressLevel(),6);
   assert.equal(app.activeAvatarOutfit().id,'starter','automatic outfit follows the active Level 2 context');
   app.state.avatarMode='manual';
   app.state.selectedAvatarOutfit='school';
@@ -96,8 +96,21 @@ test('automatic outfit follows active level while manual selection remains fixed
   app.syncAvatarState();
   assert.equal(app.activeAvatarOutfit().id,'school');
   assert.equal(app.activeAvatarSkin().id,'skin-2');
-  assert.equal(app.getAvatarProgressLevel(),7);
+  assert.equal(app.getAvatarProgressLevel(),6);
 });
+
+test('avatar follows visible levels including introduction and retains manual skins',()=>{
+  const app=createAvatarApp({savedState:{unlockedAvatarSkins:['skin-1','skin-9'],selectedAvatarSkin:'skin-9',avatarMode:'manual'}});
+  app.state.level=3;app.state.screen='module';app.syncAvatarState();assert.equal(app.state.currentLevel,3);
+  assert.equal(app.activeAvatarSkin().id,'skin-9');
+  app.state.avatarMode='auto';app.state.level=6;app.state.screen='level';app.syncAvatarState();
+  assert.equal(app.state.currentLevel,6);assert.equal(app.activeAvatarSkin().id,'skin-6');
+  app.state.screen='intro';app.syncAvatarState();assert.equal(app.state.currentLevel,7);assert.equal(app.activeAvatarSkin().id,'skin-7');
+  app.state.screen='levels';app.syncAvatarState();assert.equal(app.state.currentLevel,7);assert.equal(app.state.lastLevelContractId,'social-intro');
+  const reload=createAvatarApp({savedState:{level:6,screen:'levels',lastLevelContractId:app.state.lastLevelContractId,unlockedAvatarSkins:app.state.unlockedAvatarSkins,selectedAvatarSkin:'skin-9',avatarMode:'manual'}});
+  assert.equal(reload.state.currentLevel,7);assert.equal(reload.activeAvatarSkin().id,'skin-9');
+});
+
 
 test('avatar learning advice moves from the highest completed lesson to the exam and next level',()=>{
   const app=createAvatarApp();

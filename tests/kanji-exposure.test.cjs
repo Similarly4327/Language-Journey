@@ -2,18 +2,26 @@ const test=require('node:test'),assert=require('node:assert/strict');
 const {createCrashCourseProbe}=require('./app-probe.cjs');
 const content=require('../language-journey-content/content.js');
 const plain=x=>JSON.parse(JSON.stringify(x));
-test('known kanji appear as an optional introduction and keep the existing Recall card',()=>{
+test('assessed 私 requires exposure, recognition and the Level 11 lesson rank; old reviews are quarantined without touching word SRS',()=>{
+  const id='vocab-わたし',wordKey=`${id}::jp-nl`,kanjiKey='kanji-card:私::jp-nl',record={dueAt:9000,intervalDays:4,repetitions:3,lapses:0,lastReviewedAt:100,lastGrade:'knew'},rank={'l4-3':{rank:'Copper',attempts:1,last:1}},base={thematicRevision:1,introducedVocabIds:[id],kanjiExposureIds:[id],flashcardProgress:{version:1,cards:{[wordKey]:record,[kanjiKey]:record}},guidelineEvidence:{version:1,words:{[id]:{kanji:{at:100,sourceId:'old-recall'}}},domains:{}}};
+  const old=createCrashCourseProbe({savedState:base,savedRanks:rank});assert.ok(!old.flashcardEligibleCards().some(c=>c.id==='kanji-card:私'));assert.deepEqual(plain(old.state.flashcardProgress.cards[wordKey]),record);assert.equal(old.state.flashcardProgress.cards[kanjiKey],undefined);assert.deepEqual(plain(old.state.curriculumHistory.watashiKanjiQuarantine.cards[kanjiKey]),record);assert.equal(old.state.guidelineEvidence.words[id].kanji,undefined);
+  const saved=old.saved(),again=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.deepEqual(plain(again.state.curriculumHistory.watashiKanjiQuarantine),plain(old.state.curriculumHistory.watashiKanjiQuarantine));assert.deepEqual(plain(again.state.flashcardProgress.cards[wordKey]),record);
+  const evidence={[id]:{sourceId:'exercise-l11-home-1-watashi-kanji',at:200}},proven=createCrashCourseProbe({savedState:{...base,kanjiRecognitionEvidence:evidence},savedRanks:rank});assert.ok(!proven.flashcardEligibleCards().some(c=>c.id==='kanji-card:私'));assert.deepEqual(plain(proven.state.flashcardProgress.cards[kanjiKey]),record);
+  proven.rankState['l11-home-1'].rank='Copper';const cards=proven.flashcardEligibleCards(),kanji=cards.find(c=>c.id==='kanji-card:私');assert.ok(kanji);assert.equal(kanji.lessonId,'l11-home-1');assert.equal(kanji.level,11);assert.equal(cards.filter(c=>c.id===id).length,1);
+  proven.createFlashcardSession([{cardId:id,direction:'jp-nl'}],'scheduled');proven.renderFlashcardsScreen();assert.match(proven.element('flashcardView').innerHTML,/わたし/);assert.doesNotMatch(proven.element('flashcardView').innerHTML,/私/);
+});
+test('known kanji appear in block B and keep the existing Recall word card',()=>{
   const savedState={introducedVocabIds:['vocab-わたし'],thematicCompleted:{'l11-home-1':{A:true,B:true}},flashcardProgress:{version:1,cards:{'vocab-わたし::jp-nl':{dueAt:9000,intervalDays:4,repetitions:3,lapses:0,lastReviewedAt:100,lastGrade:'knew'}}}};
   const app=createCrashCourseProbe({savedState,savedRanks:{'l4-3':{rank:'Copper',attempts:1,last:1}}});assert.deepEqual(plain(app.state.kanjiExposureIds),[]);
   const before=plain(app.state.flashcardProgress);app.state.level=10;app.state.screen='module';app.openThematicLesson(0);app.startThematicPart('A');
-  assert.match(app.element('thematicBody').innerHTML,/私[\s\S]*わたし/);assert.deepEqual(plain(app.state.kanjiExposureIds),[]);
+  assert.doesNotMatch(app.element('thematicBody').innerHTML,/私/);app.state.thematic.microblockIndex=1;app.renderMain();assert.match(app.element('thematicBody').innerHTML,/私[\s\S]*わたし/);assert.deepEqual(plain(app.state.kanjiExposureIds),[]);
   app.element('thematicWordsNext').onclick();assert.deepEqual(plain(app.state.kanjiExposureIds),['vocab-わたし']);
   const saved=app.saved(),reload=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.deepEqual(plain(reload.state.kanjiExposureIds),['vocab-わたし']);assert.deepEqual(plain(reload.state.flashcardProgress),before);
   assert.match(reload.dictionaryArticleHtml(reload.dictionaryById['vocab-わたし']),/Kanji: 私/);
   assert.ok(reload.flashcardEligibleCards().some(card=>card.id==='vocab-わたし'),'Recall reuses the same canonical word card');
 });
 test('kanji points follow known lexemes and Japan is distinct from the counter',()=>{
-  for(const [id,point] of [['vocab-わたし','11-1-A'],['vocab-ひと','12-1-A'],['vocab-えき','13-1-A'],['vocab-でんしゃ','13-1-A'],['vocab-みず','14-1-A']]){const w=content.vocabById[id];assert.ok(content.pointOrder(w.introducedAt)<content.pointOrder(w.kanjiIntroducedAt),id);assert.equal(w.kanjiIntroducedAt,point)}
+  for(const [id,point] of [['vocab-わたし','11-1-B'],['vocab-ひと','12-1-A'],['vocab-えき','13-1-A'],['vocab-でんしゃ','13-1-A'],['vocab-みず','14-1-A']]){const w=content.vocabById[id];assert.ok(content.pointOrder(w.introducedAt)<content.pointOrder(w.kanjiIntroducedAt),id);assert.equal(w.kanjiIntroducedAt,point)}
   assert.equal(content.vocabById['vocab-country-japan'].kanji,'日本');assert.equal(content.vocabById['vocab-country-japan'].kanjiIntroducedAt,null);assert.equal(content.vocabById['vocab-にほん'].kanji,null);
 });
 test('known vocabulary and acknowledged orthography are independent gates, including old saved exposures',()=>{
@@ -41,13 +49,13 @@ test('reading help uses the whole word, handles punctuation, and never reveals a
   app.fireDocumentEvent('click',{target:{closest:selector=>selector==='.reading-support'?active:null}});
   assert.equal(active.open,true);assert.equal(other.open,false);assert.deepEqual(plain(app.saved()),before);
 });
-test('Recall presents the exposed spelling in both directions using the same card IDs and scheduling',()=>{
+test('Recall keeps vocabulary cards in kana in both directions and retains their scheduling',()=>{
   const id='vocab-でんしゃ',other='vocab-えき',savedState={recallKanjiEnabled:true,thematicRevision:1,introducedVocabIds:[id,other],kanjiExposureIds:[id],flashcardDirections:['jp-nl','nl-jp']};
   const app=createCrashCourseProbe({savedState,savedRanks:{'l10-4':{rank:'Copper',attempts:1,last:.8},'l4-9':{rank:'Copper',attempts:1,last:.8}},now:Date.parse('2026-11-01T10:00:00Z')});
   for(const direction of ['jp-nl','nl-jp']){
     app.createFlashcardSession([{cardId:id,direction}], 'scheduled');app.state.flashcardSession.optionsRevealed=true;app.renderFlashcardsScreen();
     const html=app.element('flashcardView').innerHTML;
-    assert.match(html,/電車/);
+    assert.doesNotMatch(html,/電車/);
     assert.deepEqual(plain(app.state.flashcardProgress.cards),{});
     app.state.flashcardSession.revealed=true;app.flashcardRate('knew',direction==='jp-nl'?'trein':'でんしゃ');
     assert.equal(app.state.flashcardProgress.cards[`${id}::${direction}`].repetitions,1);

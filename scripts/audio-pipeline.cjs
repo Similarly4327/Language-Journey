@@ -116,9 +116,8 @@ async function run(argv, {env = loadEnvironment(), log = console.log, fetchImpl 
     const {audit} = require('./audio-audit.cjs');
     const report = audit(content, manifest);
     log(JSON.stringify({words: wordCounts(), configuration: Object.fromEntries(keys.map(k => [k, !!env[k]])),
-      qualityApproved: manifest.qualityGate?.signature === batch.hash(batch.selectJobs({quality: true}).map(({ref, role}) => batch.generationHash(ref, role, env['VOICE_' + role + '_ID'] || '')))
-        && batch.selectJobs({quality: true}).every(({ref, role}) => manifest.assets.some(a => a.entryId === ref.id && a.voiceRole === role && a.reviewed
-          && a.generationHash === batch.generationHash(ref, role, env['VOICE_' + role + '_ID'] || '') && safePath(a.path) && fs.existsSync(path.join(root, a.path)))),
+      model:config.model_id, approvalScope:manifest.modelTransitionApproval?.scope||'quality-set',
+      qualityApproved:batch.qualityApprovedFor(batch.selectJobs({quality:true}),batch.selectJobs({quality:true}),manifest,{A:env.VOICE_A_ID,B:env.VOICE_B_ID}),
       coverage: report.coverage, missingReadings: report.missingReadings, errors: report.errors}, null, 2));
     return;
   }

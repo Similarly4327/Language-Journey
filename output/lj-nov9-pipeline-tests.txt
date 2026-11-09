@@ -1,0 +1,22 @@
+✔ explicit voice selection adds Ren without regenerating approved Miku words (1.7346ms)
+✔ mother context stays outside the spoken word and invalidates only its recording (0.92ms)
+✔ new avatar profile tests do not revoke unchanged approved course audio (1.6644ms)
+✔ bounded generation preserves in-flight successes and stops queued work after failure (3.36ms)
+✔ v4 uses explicit Japanese for coffee and the regular library (0.3445ms)
+✔ a full model transition requires the recorded user review, exact config and voices (0.2688ms)
+✔ word report counts stable catalog IDs, excluding kana and grammar (0.1937ms)
+✔ environment loads only ElevenLabs keys and process values take precedence (1.1764ms)
+✔ course word selection excludes preview and legacy while all includes them (9.3164ms)
+✔ plan counts pending characters and never exposes API keys or voice IDs (0.7846ms)
+✔ voices handles pagination and sanitizes errors (0.6427ms)
+✔ plan and dry-run cannot call provider or finalize; generate finalizes after batch (48.8111ms)
+✔ quality review and explicit approval retain the existing quality gate (12.065ms)
+✔ review page uses only safe local MP3 paths and reports missing samples (0.4974ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 208.469

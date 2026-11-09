@@ -40,14 +40,20 @@ function replaceManifest(tmp){
 }
 function writeManifest(manifest){const tmp=manifestFile+'.tmp';fs.writeFileSync(tmp,'(function(root){\n  const manifest='+JSON.stringify(manifest,null,2)+';\n  if(typeof module!=="undefined"&&module.exports)module.exports=manifest;else root.LanguageJourneyAudioManifest=manifest;\n})(typeof globalThis!=="undefined"?globalThis:this);\n');replaceManifest(tmp)}
 function parseArgs(argv){const args={};for(let i=0;i<argv.length;i++){if(!argv[i].startsWith('--'))throw new Error('Onbekend argument');const name=argv[i].slice(2);if(['quality','dry-run','force','approve-quality','missing','regenerate'].includes(name))args[name.replace(/-([a-z])/g,(_,c)=>c.toUpperCase())]=true;else if(['ids','lesson','level','range','reviewer','voice-role'].includes(name)){if(!argv[i+1]||argv[i+1].startsWith('--'))throw new Error('Ontbrekende waarde: --'+name);args[name.replace(/-([a-z])/g,(_,c)=>c.toUpperCase())]=argv[++i]}else throw new Error('Onbekende optie: --'+name)}return args}
-async function requestAudio(ref,role,{env,fetchImpl=fetch}){
+async function requestAudio(ref,role,{env,fetchImpl=fetch,configuration=config}){
   if(!kanaOnly(ref.pronunciation?.audioTextKana))throw new Error('Uitspraak moet eerst gecontroleerd worden: '+ref.id);
-  const settings=settingsFor(ref),body={text:ref.pronunciation.audioTextKana,model_id:settings.model_id,voice_settings:settings.voice_settings};
+  const settings=settingsFor(ref,configuration),v4=settings.model_id==='eleven_v4';
+  if(settings.model_id==='eleven_v4_turbo')throw new Error('Eleven v4 Turbo vereist de Dialogue WebSocket; gebruik eleven_v4 voor deze bestandspipeline.');
+  const body=v4?{inputs:[{text:ref.pronunciation.audioTextKana,voice_id:env['VOICE_'+role+'_ID']}],model_id:settings.model_id}:{text:ref.pronunciation.audioTextKana,model_id:settings.model_id,voice_settings:settings.voice_settings};
   if(settings.language_code)body.language_code=settings.language_code;
-  if(settings.apply_language_text_normalization!==undefined)body.apply_language_text_normalization=settings.apply_language_text_normalization;
+  if(!v4&&settings.apply_language_text_normalization!==undefined)body.apply_language_text_normalization=settings.apply_language_text_normalization;
+  if(v4&&settings.apply_text_normalization)body.apply_text_normalization=settings.apply_text_normalization;
+  if(v4&&settings.dialogue_settings)body.settings=settings.dialogue_settings;
+  if(settings.seed!==undefined)body.seed=settings.seed;
   if(settings.previous_text)body.previous_text=settings.previous_text;
-  if(settings.next_text)body.next_text=settings.next_text;
-  let response;try{response=await fetchImpl('https://api.elevenlabs.io/v1/text-to-speech/'+encodeURIComponent(env['VOICE_'+role+'_ID'])+'?output_format='+settings.output_format,{method:'POST',signal:AbortSignal.timeout(60000),headers:{'xi-api-key':env.ELEVENLABS_API_KEY,'Content-Type':'application/json',Accept:'audio/mpeg'},body:JSON.stringify(body)})}catch{throw new Error('ElevenLabs-netwerkfout voor '+ref.id)}
+  if(settings.next_text)body[v4?'future_text':'next_text']=settings.next_text;
+  const endpoint=v4?'text-to-dialogue':'text-to-speech/'+encodeURIComponent(env['VOICE_'+role+'_ID']);
+  let response;try{response=await fetchImpl('https://api.elevenlabs.io/v1/'+endpoint+'?output_format='+settings.output_format,{method:'POST',signal:AbortSignal.timeout(60000),headers:{'xi-api-key':env.ELEVENLABS_API_KEY,'Content-Type':'application/json',Accept:'audio/mpeg'},body:JSON.stringify(body)})}catch{throw new Error('ElevenLabs-netwerkfout voor '+ref.id)}
   if(!response.ok)throw new Error('ElevenLabs HTTP '+response.status+' voor '+ref.id);
   const bytes=Buffer.from(await response.arrayBuffer());if(bytes.length<100)throw new Error('Lege of ongeldige audio voor '+ref.id);return bytes;
 }
@@ -59,6 +65,13 @@ async function processJobs(jobs,generate,concurrency=1){
   await Promise.all(Array.from({length:concurrency},worker));if(failure)throw failure;
 }
 function qualityApprovedFor(jobs,qualityJobs,manifest,voices,exists=file=>fs.existsSync(path.join(root,file))){
+  // An explicit full-library transition can use a separately listened model comparison.
+  // Keep its scope honest: the model was approved, not every generated clip listened to.
+  const transition=manifest.modelTransitionApproval;
+  if(transition?.scope==='full-library'&&transition.modelId===config.model_id&&transition.configurationHash===hash(config)
+    &&transition.sampleReview?.reviewer==='user'&&transition.sampleReview.files?.length>=4
+    &&transition.sampleReview.files.every(file=>exists(file))
+    &&jobs.every(job=>settingsFor(job.ref).model_id===transition.modelId&&transition.voiceFingerprints?.[job.role]===voiceFingerprint(voices[job.role]||'')))return true;
   const profiles=new Set(jobs.map(j=>j.ref.audioProfile||'default'));
   const scoped=qualityJobs.filter(j=>profiles.has(j.ref.audioProfile||'default'));
   return [qualityJobs,scoped].some(selection=>selection.length&&manifest.qualityGate?.signature===hash(selection.map(({ref,role})=>generationHash(ref,role,voices[role]||'')))&&selection.every(({ref,role})=>manifest.assets.some(a=>a.entryId===ref.id&&a.voiceRole===role&&a.reviewed&&a.generationHash===generationHash(ref,role,voices[role])&&exists(a.path))));
@@ -86,9 +99,9 @@ async function run(args,{env=process.env,fetchImpl=fetch,log=console.log,concurr
     const folder=job.ref.kind==='word'?'words':job.ref.kind==='passage'?'passages':job.ref.kind==='kana'?'kana':job.ref.kind==='grammar'?'grammar':'sentences';
     const relative=`assets/audio/ja/${folder}/${hash(job.ref.id).slice(0,16)}-${job.role}-${job.generation.slice(0,16)}.mp3`,file=path.join(root,relative);
     fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file+'.tmp',bytes);fs.renameSync(file+'.tmp',file);
-    const isQuality=qualityJobs.some(q=>q.ref.id===job.ref.id&&q.role===job.role);
+    const isQuality=qualityJobs.some(q=>q.ref.id===job.ref.id&&q.role===job.role),transitionApproved=qualityApprovedFor([job],[],manifest,voices);
     if(isQuality)delete manifest.qualityGate;
-    const asset={entryId:job.ref.id,displayText:job.ref.displayText,readingId:job.ref.pronunciation.readingId,audioTextKana:job.ref.pronunciation.audioTextKana,voiceRole:job.role,voiceFingerprint:voiceFingerprint(voices[job.role]),path:relative,generationHash:job.generation,pipelineVersion:config.pipelineVersion,reviewed:!isQuality,generatedAt:new Date().toISOString()};
+    const modelSettings=settingsFor(job.ref),asset={entryId:job.ref.id,displayText:job.ref.displayText,readingId:job.ref.pronunciation.readingId,audioTextKana:job.ref.pronunciation.audioTextKana,voiceRole:job.role,voiceFingerprint:voiceFingerprint(voices[job.role]),path:relative,generationHash:job.generation,pipelineVersion:config.pipelineVersion,modelId:modelSettings.model_id,languageCode:modelSettings.language_code||null,reviewed:!isQuality||transitionApproved,reviewBasis:transitionApproved?'user-approved-model-comparison':'existing-quality-set',individuallyListened:false,generatedAt:new Date().toISOString()};
     manifest.assets=manifest.assets.filter(a=>!(a.entryId===asset.entryId&&a.readingId===asset.readingId&&a.voiceRole===asset.voiceRole));manifest.assets.push(asset);writeManifest(manifest);log('generated '+job.ref.id+' '+job.role);
   },concurrency);
   log('Gereed. Voer daarna npm run assets:version en npm run audio:audit uit.');

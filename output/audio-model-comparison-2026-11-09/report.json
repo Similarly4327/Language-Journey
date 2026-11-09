@@ -1,0 +1,195 @@
+{
+  "date": "2026-11-09",
+  "voiceName": "Sakura - Sweet, Gentle",
+  "voiceFingerprint": "926d7b381645d69d94d67138c8491497f65d1c17c75dfa75a598a94a7c009b8a",
+  "outputFormat": "mp3_44100_128",
+  "listeningStatus": "not-reviewed",
+  "clips": [
+    {
+      "sampleId": "january",
+      "model": "eleven_multilingual_v2",
+      "text": "いちがつ",
+      "signature": "2695ee8e1617c1537cb36a8c84bbe013a5c7ec6ecbcc280ec1dfe00ffe54684c",
+      "endpoint": "/v1/text-to-speech/{voice_id}",
+      "settings": {
+        "voice_settings": {
+          "stability": 0.65,
+          "similarity_boost": 0.75,
+          "style": 0,
+          "use_speaker_boost": true
+        },
+        "seed": 1149
+      },
+      "generatedAt": "2026-11-09T12:20:32.343Z",
+      "latencyMs": 1956,
+      "status": 200,
+      "characters": 4,
+      "reportedUsage": {
+        "character-cost": "2"
+      },
+      "file": "january-eleven_multilingual_v2.mp3",
+      "bytes": 18851
+    },
+    {
+      "sampleId": "january",
+      "model": "eleven_v4",
+      "text": "いちがつ",
+      "signature": "ade3eaa4eb3a2c2799a803f14041f9299214d3de5a15f1519628a5b856508489",
+      "endpoint": "/v1/text-to-dialogue",
+      "settings": {
+        "language_code": "ja",
+        "seed": 1149,
+        "apply_text_normalization": "off"
+      },
+      "generatedAt": "2026-11-09T12:20:32.917Z",
+      "latencyMs": 564,
+      "status": 200,
+      "characters": 4,
+      "reportedUsage": {
+        "character-cost": "2"
+      },
+      "file": "january-eleven_v4.mp3",
+      "bytes": 15089
+    },
+    {
+      "sampleId": "february",
+      "model": "eleven_multilingual_v2",
+      "text": "にがつ",
+      "signature": "490dc95fed4c051f63f27a92c1a96b4efd05109ebf6fb5b06e25e3e74f234cfc",
+      "endpoint": "/v1/text-to-speech/{voice_id}",
+      "settings": {
+        "voice_settings": {
+          "stability": 0.65,
+          "similarity_boost": 0.75,
+          "style": 0,
+          "use_speaker_boost": true
+        },
+        "seed": 1149
+      },
+      "generatedAt": "2026-11-09T12:20:33.153Z",
+      "latencyMs": 227,
+      "status": 200,
+      "characters": 3,
+      "reportedUsage": {
+        "character-cost": "1"
+      },
+      "file": "february-eleven_multilingual_v2.mp3",
+      "bytes": 18015
+    },
+    {
+      "sampleId": "february",
+      "model": "eleven_v4",
+      "text": "にがつ",
+      "signature": "317f651a78f0f33ab104df6e61c133d58c699c4cd7acf0e0b271963be0aa9575",
+      "endpoint": "/v1/text-to-dialogue",
+      "settings": {
+        "language_code": "ja",
+        "seed": 1149,
+        "apply_text_normalization": "off"
+      },
+      "generatedAt": "2026-11-09T12:20:33.707Z",
+      "latencyMs": 550,
+      "status": 200,
+      "characters": 3,
+      "reportedUsage": {
+        "character-cost": "1"
+      },
+      "file": "february-eleven_v4.mp3",
+      "bytes": 15089
+    },
+    {
+      "sampleId": "short-word",
+      "model": "eleven_multilingual_v2",
+      "text": "ねこ",
+      "signature": "5482ac9d8b1d00ef366ba9212689cc5c4543785f776c4fec04430529f7cef7e9",
+      "endpoint": "/v1/text-to-speech/{voice_id}",
+      "settings": {
+        "voice_settings": {
+          "stability": 0.65,
+          "similarity_boost": 0.75,
+          "style": 0,
+          "use_speaker_boost": true
+        },
+        "seed": 1149
+      },
+      "generatedAt": "2026-11-09T12:20:33.920Z",
+      "latencyMs": 210,
+      "status": 200,
+      "characters": 2,
+      "reportedUsage": {
+        "character-cost": "1"
+      },
+      "file": "short-word-eleven_multilingual_v2.mp3",
+      "bytes": 15089
+    },
+    {
+      "sampleId": "short-word",
+      "model": "eleven_v4",
+      "text": "ねこ",
+      "signature": "19b075891babbbd2210cfd62059e5d2c6a8e744ccc0d54bad5bc5761b537a8b8",
+      "endpoint": "/v1/text-to-dialogue",
+      "settings": {
+        "language_code": "ja",
+        "seed": 1149,
+        "apply_text_normalization": "off"
+      },
+      "generatedAt": "2026-11-09T12:20:34.435Z",
+      "latencyMs": 512,
+      "status": 200,
+      "characters": 2,
+      "reportedUsage": {
+        "character-cost": "1"
+      },
+      "file": "short-word-eleven_v4.mp3",
+      "bytes": 15089
+    },
+    {
+      "sampleId": "level11-sentence",
+      "model": "eleven_multilingual_v2",
+      "text": "こたえ お えらびます。",
+      "sourceId": "sentence-l11-1-A-compact-3",
+      "signature": "e133512e3b185add92d3239dae02f6684fb76a5479fb6538f75104b67738ea5b",
+      "endpoint": "/v1/text-to-speech/{voice_id}",
+      "settings": {
+        "voice_settings": {
+          "stability": 0.65,
+          "similarity_boost": 0.75,
+          "style": 0,
+          "use_speaker_boost": true
+        },
+        "seed": 1149
+      },
+      "generatedAt": "2026-11-09T12:20:34.685Z",
+      "latencyMs": 247,
+      "status": 200,
+      "characters": 12,
+      "reportedUsage": {
+        "character-cost": "5"
+      },
+      "file": "level11-sentence-eleven_multilingual_v2.mp3",
+      "bytes": 28464
+    },
+    {
+      "sampleId": "level11-sentence",
+      "model": "eleven_v4",
+      "text": "こたえ お えらびます。",
+      "sourceId": "sentence-l11-1-A-compact-3",
+      "signature": "ae552d77be18781cfb78002558b2b5d3246a9d41cd5eed0e54b7772ab8eacbf9",
+      "endpoint": "/v1/text-to-dialogue",
+      "settings": {
+        "language_code": "ja",
+        "seed": 1149,
+        "apply_text_normalization": "off"
+      },
+      "generatedAt": "2026-11-09T12:20:35.523Z",
+      "latencyMs": 832,
+      "status": 200,
+      "characters": 12,
+      "reportedUsage": {
+        "character-cost": "5"
+      },
+      "file": "level11-sentence-eleven_v4.mp3",
+      "bytes": 36823
+    }
+  ]
+}

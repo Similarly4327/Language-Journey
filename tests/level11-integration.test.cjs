@@ -3,7 +3,24 @@ const content=require('../language-journey-content/content.js');
 const {createCrashCourseProbe}=require('./app-probe.cjs');
 const lessons=content.thematicCourses[10].lessons,day=86400000,now=Date.UTC(2026,9,15,9);
 const plain=value=>JSON.parse(JSON.stringify(value));
+test('lesson 1 reviews the known word in kanji within the block budget and assesses recognition',()=>{
+  const lesson=lessons[0],word=content.vocabById['vocab-わたし'],block=lesson.didactics.microblocks[1];
+  assert.equal(word.introducedAt,'4-3');assert.equal(word.kanji,'私');assert.equal(word.kanjiIntroducedAt,'11-1-B');
+  assert.deepEqual(plain(block.kanjiWordIds),['vocab-わたし']);assert.ok(block.wordIds.length+block.grammarIds.length+block.kanjiWordIds.length<=3);
+  const question=content.manifest.exercises.find(q=>q.id===block.kanjiRecognition.sourceId);
+  assert.equal(question.payload[2],'わたし · ik');assert.deepEqual(plain(question.targetKanjiWordIds),['vocab-わたし']);
+  const reading=content.manifest.readings.find(r=>r.id===lesson.applications[0].readingId);
+  assert.match(reading.text,/私 は こたえ を えらびます。/);assert.match(reading.audioTextKana,/わたし わ こたえ お えらびます。/);
+  assert.equal(lessons[4].wordIds.length,0);assert.equal(lessons[4].didactics.newWordIds.length,0);
+});
 function appAt(index=0,options={}){const app=createCrashCourseProbe(options);app.state.level=10;app.state.screen='module';app.openThematicLesson(index);return app}
+test('block B requires a correct recognition before advancing and persists only positive evidence',()=>{
+  const app=appAt(0,{now,savedState:{introducedVocabIds:['vocab-わたし']},savedRanks:{'l4-3':{rank:'Copper',last:1,attempts:1}}});
+  app.startThematicPart('A');app.state.thematic.microblockIndex=1;app.renderMain();assert.match(app.element('thematicBody').innerHTML,/私[\s\S]*わたし/);app.element('thematicWordsNext').onclick();assert.equal(app.state.thematic.step,'kanji-check');
+  const buttons=Array.from({length:3},(_,i)=>({dataset:{thematicChoice:String(i)}}));app.element('thematicBody').querySelectorAll=()=>buttons;app.renderMain();app.element('thematicReveal').onclick({preventDefault(){},stopPropagation(){}});app.setNow(now+200);buttons[0].onclick();assert.equal(app.state.kanjiRecognitionEvidence['vocab-わたし'],undefined);app.element('thematicNext').onclick();assert.equal(app.state.thematic.step,'kanji-check');
+  app.state.thematic.optionsRevealed=true;app.state.thematic.answerUnlockAt=0;app.renderMain();buttons[2].onclick();assert.equal(app.state.kanjiRecognitionEvidence['vocab-わたし'].sourceId,'exercise-l11-home-1-watashi-kanji');app.element('thematicNext').onclick();assert.equal(app.state.thematic.step,'practice');
+  const saved=app.saved(),again=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.equal(again.state.kanjiRecognitionEvidence['vocab-わたし'].sourceId,'exercise-l11-home-1-watashi-kanji');
+});
 test('Level 11 introduces A–D as 3/2/3/2, training only the current block in both directions',()=>{
   for(let index=0;index<4;index++){
     const app=appAt(index),lesson=lessons[index];
@@ -16,7 +33,9 @@ test('Level 11 introduces A–D as 3/2/3/2, training only the current block in b
         assert.ok(block.wordIds.length+block.grammarIds.length<=3);
         const next=lesson.didactics.microblocks.find(next=>next.sourcePart===part.part&&next.index>block.index);
         if(next)for(const id of next.wordIds)assert.ok(!app.state.introducedVocabIds.includes(id),id);
-        app.element('thematicWordsNext').onclick();const deck=app.activeWordCrashCourse.deck;assert.equal(deck.length,block.wordIds.length*2);
+        app.element('thematicWordsNext').onclick();
+        if(block.kanjiRecognition){assert.equal(app.state.thematic.step,'kanji-check');const buttons=Array.from({length:3},(_,i)=>({dataset:{thematicChoice:String(i)}}));app.element('thematicBody').querySelectorAll=()=>buttons;app.renderMain();app.state.thematic.optionsRevealed=true;app.state.thematic.answerUnlockAt=0;buttons[2].onclick();assert.equal(app.state.thematic.selected,block.kanjiRecognition.answer);app.element('thematicNext').onclick()}
+        const deck=app.activeWordCrashCourse.deck;assert.equal(deck.length,block.wordIds.length*2);
         for(const id of block.wordIds)for(const direction of ['jp-nl','nl-jp'])assert.equal(deck.filter(q=>q.word.id===id&&q.direction===direction).length,1);
         app.completeWordCrashCourse();assert.equal(app.state.thematic.step,'sentences');
         let count=0;while(app.state.thematic.step==='sentences'&&count++<12)app.element('thematicSentenceNext').onclick();

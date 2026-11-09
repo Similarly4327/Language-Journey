@@ -1,0 +1,664 @@
+{
+  "models": {
+    "status": 200,
+    "items": [
+      {
+        "id": "eleven_v4",
+        "name": "Eleven v4",
+        "tts": true,
+        "ja": true,
+        "costFactor": 1,
+        "rate": {
+          "character_cost_multiplier": 1,
+          "cost_discount_multiplier": 1
+        }
+      },
+      {
+        "id": "eleven_v4_turbo",
+        "name": "Eleven v4 Turbo",
+        "tts": true,
+        "ja": true,
+        "costFactor": 0.5,
+        "rate": {
+          "character_cost_multiplier": 0.5,
+          "cost_discount_multiplier": 1
+        }
+      },
+      {
+        "id": "eleven_v3",
+        "name": "Eleven v3",
+        "tts": true,
+        "ja": true,
+        "costFactor": 1,
+        "rate": {
+          "character_cost_multiplier": 1,
+          "cost_discount_multiplier": 1
+        }
+      },
+      {
+        "id": "eleven_v3_conversational",
+        "name": "Eleven v3 Conversational",
+        "tts": true,
+        "ja": true,
+        "costFactor": 0.5,
+        "rate": {
+          "character_cost_multiplier": 0.5,
+          "cost_discount_multiplier": 1
+        }
+      },
+      {
+        "id": "eleven_multilingual_v2",
+        "name": "Eleven Multilingual v2",
+        "tts": true,
+        "ja": true,
+        "costFactor": 1,
+        "rate": {
+          "character_cost_multiplier": 1,
+          "cost_discount_multiplier": 1
+        }
+      },
+      {
+        "id": "eleven_flash_v2_5",
+        "name": "Eleven Flash v2.5",
+        "tts": true,
+        "ja": true,
+        "costFactor": 0.5,
+        "rate": {
+          "character_cost_multiplier": 0.5,
+          "cost_discount_multiplier": 1
+        }
+      },
+      {
+        "id": "eleven_turbo_v2_5",
+        "name": "Eleven Turbo v2.5",
+        "tts": true,
+        "ja": true,
+        "costFactor": 0.5,
+        "rate": {
+          "character_cost_multiplier": 0.5,
+          "cost_discount_multiplier": 1
+        }
+      },
+      {
+        "id": "eleven_turbo_v2",
+        "name": "Eleven Turbo v2",
+        "tts": true,
+        "ja": false,
+        "costFactor": 0.5,
+        "rate": {
+          "character_cost_multiplier": 0.5,
+          "cost_discount_multiplier": 1
+        }
+      },
+      {
+        "id": "eleven_flash_v2",
+        "name": "Eleven Flash v2",
+        "tts": true,
+        "ja": false,
+        "costFactor": 0.5,
+        "rate": {
+          "character_cost_multiplier": 0.5,
+          "cost_discount_multiplier": 1
+        }
+      },
+      {
+        "id": "eleven_english_sts_v2",
+        "name": "Eleven English v2",
+        "tts": false,
+        "ja": false,
+        "costFactor": 1,
+        "rate": {
+          "character_cost_multiplier": 1,
+          "cost_discount_multiplier": 1
+        }
+      },
+      {
+        "id": "eleven_multilingual_sts_v2",
+        "name": "Eleven Multilingual v2",
+        "tts": false,
+        "ja": true,
+        "costFactor": 1,
+        "rate": {
+          "character_cost_multiplier": 1,
+          "cost_discount_multiplier": 1
+        }
+      }
+    ]
+  },
+  "subscription": {
+    "status": 401
+  },
+  "voices": [
+    {
+      "role": "A",
+      "status": 200,
+      "name": "Sakura - Sweet, Gentle",
+      "category": "professional",
+      "labels": {
+        "accent": "standard",
+        "language": "ja",
+        "use_case": "characters_animation",
+        "age": "young",
+        "descriptive": "gentle",
+        "gender": "female"
+      },
+      "fineTuning": {
+        "eleven_v4_turbo": "fine_tuned",
+        "eleven_v4_post_trained": "fine_tuned",
+        "eleven_v4_exp": "fine_tuned",
+        "eleven_v2_flash": "not_started",
+        "eleven_multilingual_sts_v2": "fine_tuned",
+        "eleven_v4_turbo_exp": "fine_tuned",
+        "eleven_turbo_v2_5": "fine_tuned",
+        "eleven_multilingual_v2": "fine_tuned",
+        "eleven_v4": "fine_tuned",
+        "eleven_flash_v2_5": "fine_tuned",
+        "eleven_v4_hq": "fine_tuned",
+        "eleven_v2_5_flash": "fine_tuned",
+        "eleven_turbo_v2": "not_started",
+        "eleven_flash_v2": "not_started",
+        "eleven_v4_eval": "fine_tuned"
+      },
+      "verifiedLanguages": [
+        {
+          "language": "ja",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_v2_5_flash"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_multilingual_sts_v2"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_v4"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_v4_eval"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_v4_exp"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_v4_hq"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_v4_post_trained"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_v4_turbo"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_v4_turbo_exp"
+        },
+        {
+          "language": "zh",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "nl",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "nl",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "de",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "de",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "de",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "uk",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "es",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "es",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "es",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "no",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "no",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "no",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "it",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "it",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "it",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "vi",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "vi",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "ms",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "ms",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "ms",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "fr",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "fr",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "pl",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "pl",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "pl",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "ro",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "ro",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "pt",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "pt",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "pt",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "ko",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "ko",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "ko",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "cs",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "cs",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "cs",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "bg",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "ru",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "ru",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "ru",
+          "model": "eleven_turbo_v2_5"
+        }
+      ]
+    },
+    {
+      "role": "B",
+      "status": 200,
+      "name": "Ishibashi - Inviting, Natural and Smoky",
+      "category": "professional",
+      "labels": {
+        "age": "young",
+        "descriptive": "deep",
+        "accent": "kanto",
+        "gender": "male",
+        "use_case": "social_media",
+        "language": "ja"
+      },
+      "fineTuning": {
+        "eleven_v4_turbo_exp": "fine_tuned",
+        "eleven_v4_post_trained": "fine_tuned",
+        "eleven_v4": "fine_tuned",
+        "eleven_turbo_v2_5": "fine_tuned",
+        "eleven_multilingual_v2": "fine_tuned",
+        "eleven_v4_hq": "fine_tuned",
+        "eleven_v4_turbo": "fine_tuned",
+        "eleven_multilingual_sts_v2": "fine_tuned",
+        "eleven_flash_v2_5": "fine_tuned",
+        "eleven_v4_exp": "fine_tuned",
+        "eleven_v4_eval": "fine_tuned",
+        "eleven_v2_5_flash": "fine_tuned"
+      },
+      "verifiedLanguages": [
+        {
+          "language": "ja",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_multilingual_sts_v2"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_v2_5_flash"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_v4"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_v4_exp"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_v4_hq"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_v4_post_trained"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_v4_turbo"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_v4_turbo_exp"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_v4_eval"
+        },
+        {
+          "language": "de",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "pt",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "cs",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "fr",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "fil",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "hu",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "ro",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "pt",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "id",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "sk",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "fr",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "sv",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "it",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "da",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "el",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "el",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "el",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "ta",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "ta",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "ta",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "ms",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "id",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "id",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "hr",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "hi",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "hi",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "hi",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "cs",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "cs",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "no",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "no",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "no",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "ro",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "ro",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "ja",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "zh",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "ar",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "tr",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "tr",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "tr",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "ko",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "ko",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "ko",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "es",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "es",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "es",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "nl",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "nl",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "nl",
+          "model": "eleven_turbo_v2_5"
+        },
+        {
+          "language": "en",
+          "model": "eleven_multilingual_v2"
+        },
+        {
+          "language": "en",
+          "model": "eleven_flash_v2_5"
+        },
+        {
+          "language": "en",
+          "model": "eleven_turbo_v2_5"
+        }
+      ]
+    }
+  ]
+}

@@ -13909,7 +13909,7 @@
   // Japan is first introduced as vocabulary in 12-1-A. Its kanji is deferred
   // until a natural later reuse; repeating the first airport scene is not enough.
   for(const [id,form,point] of [
-    ['vocab-わたし','私','11-1-A'],['vocab-ひと','人','12-1-A'],
+    ['vocab-わたし','私','11-1-B'],['vocab-ひと','人','12-1-A'],
     ['vocab-でんしゃ','電車','13-1-A'],['vocab-えき','駅','13-1-A'],
     ['vocab-みず','水','14-1-A'],['vocab-country-japan','日本',null]
   ]){const word=manifest.vocabulary.find(item=>item.id===id);if(word)Object.assign(word,{kanjiForm:form,kanjiIntroducedAt:point})}

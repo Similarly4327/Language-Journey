@@ -128,14 +128,14 @@ test('batch selects real source IDs and quality set covers A/B without needing s
 });
 test('provider receives kana only; errors never include credentials/provider response',async()=>{
  const ref=content.audioEntryById['sentence-l4-7-model-1'],env={VOICE_A_ID:'private-voice',ELEVENLABS_API_KEY:'private-key'};let request;
- const bytes=await batch.requestAudio(ref,'A',{env,fetchImpl:async(url,options)=>{request={url,options};return{ok:true,arrayBuffer:async()=>new Uint8Array(120).buffer}}});assert.equal(bytes.length,120);assert.equal(JSON.parse(request.options.body).text,ref.pronunciation.audioTextKana);assert.ok(!request.options.body.includes(ref.displayText));
+ const bytes=await batch.requestAudio(ref,'A',{env,fetchImpl:async(url,options)=>{request={url,options};return{ok:true,arrayBuffer:async()=>new Uint8Array(120).buffer}}});assert.equal(bytes.length,120);assert.equal(JSON.parse(request.options.body).inputs[0].text,ref.pronunciation.audioTextKana);assert.match(request.url,/text-to-dialogue/);assert.ok(!request.options.body.includes(ref.displayText));
  await assert.rejects(batch.requestAudio(ref,'A',{env,fetchImpl:async()=>{throw Error('private-key private-voice')}}),error=>!error.message.includes('private-')&&/netwerkfout/.test(error.message));
  await assert.rejects(batch.requestAudio({...content.audioEntryById['sentence-l9-1-model-1'],pronunciation:{audioTextKana:null}},'A',{env,fetchImpl:()=>{throw Error('must not call')}}),/gecontroleerd/);
 });
 test('validator detects unknown IDs, duplicate refs, stale hashes and reports missing content honestly',()=>{
  const asset=recording('vocab-ねこ');assert.equal(audit(content,manifest([asset]),{checkFiles:false}).errors.length,0);
  const result=audit(content,manifest([asset,asset,{...asset,entryId:'missing'},{...recording('vocab-いぬ'),generationHash:'stale'}]),{checkFiles:false});assert.ok(result.errors.some(e=>e.includes('duplicate')));assert.ok(result.errors.some(e=>e.includes('unknown')));assert.ok(result.errors.some(e=>e.includes('stale')));
- const empty=audit(content,manifest([]));assert.equal(empty.coverage.word.withAudio,0);assert.ok(!empty.missingReadings.includes('reading-l9-5'));assert.ok(empty.missingReadings.includes('grammar-l6-3'));assert.equal(empty.errors.length,0);
+ const empty=audit(content,manifest([]));assert.equal(empty.coverage.word.withAudio,0);assert.ok(!empty.missingReadings.includes('reading-l9-5'));assert.deepEqual(empty.missingReadings,[]);assert.equal(empty.errors.length,0);
 });
 test('all UI routes reuse shared service and Recall reveal never offers Japanese audio beforehand',()=>{
  const html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');

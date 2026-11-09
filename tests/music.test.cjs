@@ -38,17 +38,17 @@ test('song lesson exposes exactly two blocks and a non-mutating word/kanji info 
 
 test('context block introduces short fragments with nuance, dictionary links and sentence audio without unlocking words',()=>{
   const p=createCrashCourseProbe(),host=p.element('music-host');p.state.screen='music';p.state.music={introduced:[],kanjiIntroduced:[],score:null};interactiveChoices(host);p.renderMusic(host);
-  const before=JSON.stringify({words:p.state.introducedVocabIds,exposure:p.state.kanjiExposureIds,recall:p.state.flashcardProgress,ranks:p.rankState});p.element('musicContextStart').onclick();p.renderMusic(host);
+  const before=JSON.stringify({words:p.state.introducedVocabIds,exposure:p.state.kanjiExposureIds,recall:p.state.flashcardProgress,ranks:p.rankState});p.element('musicContextStart').onclick();p.renderMusic(host);p.element('musicContextItem0').onclick();p.renderMusic(host);
   assert.match(host.innerHTML,/Context leren · fragment 1\/3/);assert.match(host.innerHTML,/data-audio/);assert.match(host.innerHTML,/Nuance/);assert.match(host.innerHTML,/data-dictionary-open="vocab-music-kimi"/);
   for(const item of content.manifest.music.contexts){assert.ok(content.audioEntryById[item.id]?.pronunciation?.audioTextKana);assert.equal(item.kana,content.audioEntryById[item.id].pronunciation.audioTextKana);assert.doesNotMatch(`${item.note} ${item.question}`,/\p{Script=Han}/u,'context explanations keep kanji behind the Words block')}
-  p.element('musicContextQuestion').onclick();p.renderMusic(host);assert.match(host.innerHTML,/Contextcheck/);const button=host.querySelectorAll('[data-music-context-answer]')[0];button.dataset.musicContextAnswer=String(content.manifest.music.contexts[0].choices.indexOf(content.manifest.music.contexts[0].answer));button.onclick();p.element('musicContextContinue').onclick();assert.equal(p.musicSession.index,1);
+  p.element('musicContextQuestion').onclick();p.renderMusic(host);assert.match(host.innerHTML,/Contextcheck/);const button=host.querySelectorAll('[data-music-context-answer]')[0];button.dataset.musicContextAnswer=String(content.manifest.music.contexts[0].choices.indexOf(content.manifest.music.contexts[0].answer));button.onclick();p.element('musicContextContinue').onclick();assert.equal(p.musicSession.step,'context-list');assert.ok(p.state.music.contextDone.includes(content.manifest.music.contexts[0].id));
   assert.equal(before,JSON.stringify({words:p.state.introducedVocabIds,exposure:p.state.kanjiExposureIds,recall:p.state.flashcardProgress,ranks:p.rankState}));
 });
 
 test('opening a word block never unlocks it; only a Copper block check releases its catalog IDs',()=>{
   const p=createCrashCourseProbe(),host=p.element('music-host');p.state.screen='music';p.state.music={introduced:[],kanjiIntroduced:[],score:null};
   p.renderMusic(host);const before=JSON.stringify({ranks:p.rankState,recall:p.state.flashcardProgress});
-  p.element('musicStart').onclick();assert.equal(p.state.music.introduced.length,0);
+  p.element('musicStart').onclick();p.renderMusic(host);p.element('musicWordGroup0').onclick();assert.equal(p.state.music.introduced.length,0);
   p.element('musicNext').onclick();assert.equal(p.state.music.introduced.length,0);assert.equal(p.state.introducedVocabIds.length,0);
   p.musicSession.practiceIndex=p.musicSession.practiceOrder.length;p.renderMusic(host);
   p.musicSession.testIndex=p.musicSession.groupIds.length*2;p.musicSession.testScore=5;p.renderMusic(host);
@@ -60,7 +60,7 @@ test('opening a word block never unlocks it; only a Copper block check releases 
 });
 
 test('music word practice mixes both directions, hides the solution and retries an error before its two-direction check',()=>{
-  const p=createCrashCourseProbe(),host=p.element('music-host');interactiveChoices(host);p.state.screen='music';p.state.music={introduced:[],kanjiIntroduced:[],score:null};p.renderMusic(host);p.element('musicStart').onclick();p.renderMusic(host);p.element('musicNext').onclick();p.renderMusic(host);
+  const p=createCrashCourseProbe(),host=p.element('music-host');interactiveChoices(host);p.state.screen='music';p.state.music={introduced:[],kanjiIntroduced:[],score:null};p.renderMusic(host);p.element('musicStart').onclick();p.renderMusic(host);p.element('musicWordGroup0').onclick();p.renderMusic(host);p.element('musicNext').onclick();p.renderMusic(host);
   const ids=p.musicSession.groupIds,order=p.musicSession.practiceOrder;assert.equal(order.length,ids.length*3);
   for(const id of ids){const items=order.filter(item=>item.id===id);assert.equal(items.length,3);assert.ok(items.some(item=>item.direction==='jp-nl'));assert.ok(items.some(item=>item.direction==='nl-jp'))}
   for(let i=1;i<order.length;i++)assert.notEqual(order[i-1].id,order[i].id);
@@ -82,7 +82,7 @@ test('music kanji stays preview-only until its own quiz reaches Copper, then ent
 });
 
 test('known song kanji follow the word groups inside the same Words learning block',()=>{
-  const p=createCrashCourseProbe(),host=p.element('music-host');p.state.screen='music';p.state.music={introduced:[...music.groups.flat()],kanjiIntroduced:[],score:null};p.state.introducedVocabIds=[...music.groups.flat()];p.renderMusic(host);p.element('musicStart').onclick();p.musicSession.index=music.groups.length;p.renderMusic(host);
+  const p=createCrashCourseProbe(),host=p.element('music-host');p.state.screen='music';p.state.music={introduced:[...music.groups.flat()],kanjiIntroduced:[],score:null};p.state.introducedVocabIds=[...music.groups.flat()];p.renderMusic(host);p.element('musicStart').onclick();p.renderMusic(host);p.element('musicKanjiReview').onclick();p.renderMusic(host);
   assert.equal(p.musicSession.step,'kanji');assert.match(host.innerHTML,/Woorden leren · kanji/);assert.doesNotMatch(host.innerHTML,/Kanji →|musicKanji"/);assert.match(host.innerHTML,/Oefen deze schrijfwijze/);
 });
 
@@ -104,4 +104,19 @@ test('optional music vocabulary is a validated route consumer, not a level lesso
   assert.ok(manifest.lessons.every(lesson=>lesson.id!=='music-quintuplets'));
   manifest.music.groups[0].push('vocab-not-real');
   assert.ok(validate(manifest).diagnostics.some(d=>d.code==='UNKNOWN_MUSIC_VOCAB'));
+});
+
+ test('music group selection, resume, ranks and back navigation survive reload without preview credit',()=>{
+  const p=createCrashCourseProbe(),host=p.element('music-host');p.state.screen='music';p.renderMusic(host);p.element('musicStart').onclick();p.renderMusic(host);
+  assert.equal((host.innerHTML.match(/id="musicWordGroup\d+"/g)||[]).length,music.groups.length);assert.match(host.innerHTML,/Verder leren · les 1/);
+  const before=JSON.stringify({words:p.state.introducedVocabIds,exposure:p.state.kanjiExposureIds,recall:p.state.flashcardProgress,milestones:p.state.jlptMilestones});
+  p.element('musicWordGroup7').onclick();assert.equal(p.musicSession.index,7);p.element('sceneTransition').hidden=true;for(const id of ['sessionView','flashcardView','quizView','resultView'])p.element(id).classList.add('hidden');p.navigateBack();assert.equal(p.musicSession.step,'words-list');assert.equal(before,JSON.stringify({words:p.state.introducedVocabIds,exposure:p.state.kanjiExposureIds,recall:p.state.flashcardProgress,milestones:p.state.jlptMilestones}));
+  const saved=p.saved(),q=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks}),view=q.element('music-host');q.state.screen='music';q.musicSession.step='words-list';q.renderMusic(view);assert.match(view.innerHTML,/Verder leren · les 8/);q.element('musicWordsResume').onclick();assert.equal(q.musicSession.index,7);
+  const block=ids=>'words:'+ids.join('|');q.state.music.wordRanks[block(music.groups[7])]='Gold';q.musicSession.step='words-list';q.renderMusic(view);assert.match(view.innerHTML,/Verder leren · les 9/);assert.match(view.innerHTML,/Gold/);q.element('musicWordGroup7').onclick();assert.equal(q.musicSession.index,7);
+  for(const ids of content.manifest.music.groups)q.state.music.wordRanks[block(ids)]='Copper';q.musicSession.step='words-list';q.renderMusic(view);assert.match(view.innerHTML,/Alle woordgroepen zijn afgerond/);assert.doesNotMatch(view.innerHTML,/id="musicWordsResume"/);
+ });
+
+test('context selection and completed checks resume without word credit',()=>{
+ const p=createCrashCourseProbe(),host=p.element('music-host');interactiveChoices(host);p.state.screen='music';p.renderMusic(host);p.element('musicContextStart').onclick();p.renderMusic(host);p.element('musicContextItem2').onclick();p.renderMusic(host);p.element('sceneTransition').hidden=true;for(const id of ['sessionView','flashcardView','quizView','resultView'])p.element(id).classList.add('hidden');p.navigateBack();assert.equal(p.musicSession.step,'context-list');
+ const saved=p.saved(),q=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks}),view=q.element('music-host');q.state.screen='music';q.musicSession.step='context-list';q.renderMusic(view);assert.match(view.innerHTML,/Verder leren · fragment 3/);q.element('musicContextResume').onclick();assert.equal(q.musicSession.index,2);assert.equal(q.state.introducedVocabIds.length,0);
 });

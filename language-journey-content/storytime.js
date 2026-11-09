@@ -9,7 +9,10 @@
       {speaker:'ren',japanese:'ただいま。',audioId:'sentence-storytime-home-1-1',audioTextKana:'ただいま。',dutch:'Ik ben thuis.'},
       {speaker:'miku',japanese:'おかえりなさい。',audioId:'sentence-storytime-home-1-2',audioTextKana:'おかえりなさい。',dutch:'Welkom thuis.'},
       {speaker:'miku',japanese:'みず を どうぞ。',audioId:'sentence-storytime-home-1-3',audioTextKana:'みず お どうぞ。',dutch:'Hier, water voor je.'},
-      {speaker:'ren',japanese:'ありがとう。',audioId:'sentence-intro-thanks-2',audioTextKana:'ありがとう。',dutch:'Dank je.'}
+      {speaker:'ren',japanese:'ありがとう。',audioId:'sentence-intro-thanks-2',audioTextKana:'ありがとう。',dutch:'Dank je.'},
+      {speaker:'miku',japanese:'これ は わたし の ほん です。',audioId:'sentence-storytime-home-1-5',audioTextKana:'これ わ わたし の ほん です。',dutch:'Dit is mijn boek.'},
+      {speaker:'ren',japanese:'ほん を よみます か。',audioId:'sentence-storytime-home-1-6',audioTextKana:'ほん お よみます か。',dutch:'Lees je het boek?'},
+      {speaker:'miku',japanese:'はい、よみます。',audioId:'sentence-storytime-home-1-7',audioTextKana:'はい、よみます。',dutch:'Ja, ik lees het.'}
     ],
     references:[
       'https://www.erin.jpf.go.jp/materials/basic/download/erin_lesson03_basic_script.pdf',

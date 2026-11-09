@@ -1,6 +1,6 @@
 {
   "pipelineVersion": "audio-v3.1",
-  "model_id": "eleven_multilingual_v2",
+  "model_id": "eleven_v4",
   "output_format": "mp3_44100_128",
   "voice_settings": {
     "stability": 0.65,
@@ -19,25 +19,10 @@
     }
   },
   "entry_overrides": {
-    "vocab-コーヒー": {
-      "model_id": "eleven_turbo_v2_5",
-      "language_code": "ja",
-      "apply_language_text_normalization": true
-    },
-    "vocab-ここ": {
-      "model_id": "eleven_turbo_v2_5",
-      "language_code": "ja",
-      "apply_language_text_normalization": true
-    },
-    "vocab-ちかく": {
-      "model_id": "eleven_turbo_v2_5",
-      "language_code": "ja",
-      "apply_language_text_normalization": true
-    },
+    "vocab-コーヒー": {},
+    "vocab-ここ": {},
+    "vocab-ちかく": {},
     "vocab-はは": {
-      "model_id": "eleven_turbo_v2_5",
-      "language_code": "ja",
-      "apply_language_text_normalization": true,
       "previous_text": "かぞくのことばです。",
       "next_text": "わたしのおかあさんを、ははといいます。",
       "voice_settings": {
@@ -45,35 +30,14 @@
         "style": 0
       }
     },
-    "vocab-ちち": {
-      "model_id": "eleven_turbo_v2_5",
-      "language_code": "ja",
-      "apply_language_text_normalization": true
-    },
-    "vocab-かいます": {
-      "model_id": "eleven_turbo_v2_5",
-      "language_code": "ja",
-      "apply_language_text_normalization": true
-    },
-    "vocab-かようび": {
-      "model_id": "eleven_turbo_v2_5",
-      "language_code": "ja",
-      "apply_language_text_normalization": true
-    },
-    "vocab-きんようび": {
-      "model_id": "eleven_turbo_v2_5",
-      "language_code": "ja",
-      "apply_language_text_normalization": true
-    },
-    "vocab-いちがつ": {
-      "model_id": "eleven_turbo_v2_5",
-      "language_code": "ja",
-      "apply_language_text_normalization": true
-    },
-    "vocab-じゅうにがつ": {
-      "model_id": "eleven_turbo_v2_5",
-      "language_code": "ja",
-      "apply_language_text_normalization": true
-    }
-  }
+    "vocab-ちち": {},
+    "vocab-かいます": {},
+    "vocab-かようび": {},
+    "vocab-きんようび": {},
+    "vocab-いちがつ": {},
+    "vocab-じゅうにがつ": {}
+  },
+  "language_code": "ja",
+  "apply_text_normalization": "off",
+  "seed": 1149
 }

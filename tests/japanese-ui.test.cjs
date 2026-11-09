@@ -16,7 +16,7 @@ test('Japanese UI follows actual introduced words, not a level or lesson number'
   assert.match(app.thematicInstructionHtml('choose-answer'),/こたえ を えらびます/);
   assert.doesNotMatch(app.thematicInstructionHtml('read-text'),/lang="ja"/,'unintroduced reading instructions retain support language');
   assert.equal(app.thematicUiLabel('つぎ','Volgende'),'Volgende','next is actually introduced in lesson 4, not lesson 1');
-  assert.equal(app.localizedLevel(3)[0],'Level 4','earlier levels keep their interface');
+  assert.equal(app.localizedLevel(3)[0],'Level 3','the earlier course keeps its content under its new visible number');
 });
 
 test('Level 11 lessons 2–5, later headers and quiz contexts share the same learned labels',()=>{

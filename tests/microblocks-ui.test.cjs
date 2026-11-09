@@ -54,11 +54,12 @@ test('old A/B completion and ranks map to four completed blocks without rewritin
   for(const key of ['rank','attempts','last'])assert.equal(app.rankState['l11-home-1'][key],ranks['l11-home-1'][key]);assert.deepEqual(plain(app.state.flashcardProgress.cards),reviews);assert.deepEqual(plain(app.state.thematicScores['l11-home-1']),{A:2,B:2});assert.deepEqual(plain(app.state.kanjiExposureIds),['vocab-わたし']);
   const saved=app.saved(),again=createCrashCourseProbe({now,savedState:saved.state,savedRanks:saved.ranks});assert.deepEqual(plain(again.state.thematicMicroblocks),plain(app.state.thematicMicroblocks));assert.deepEqual(plain(again.state.flashcardProgress.cards),reviews);
 });
-test('new block progress resumes at B without opening later words; mandatory 11–14 screens never introduce kanji',()=>{
+test('new block progress resumes at B without opening later words; only the authored Level 11 block introduces kanji',()=>{
   const app=createCrashCourseProbe({now});app.state.level=10;app.state.screen='module';app.openThematicLesson(0);app.startThematicPart('A');app.element('thematicWordsNext').onclick();app.completeWordCrashCourse();
   while(app.state.thematic.step==='sentences')app.element('thematicSentenceNext').onclick();assert.equal(app.state.thematic.microblockIndex,1);
   const saved=app.saved(),reload=createCrashCourseProbe({now,savedState:saved.state,savedRanks:saved.ranks});reload.state.level=10;reload.state.screen='module';reload.openThematicLesson(0);reload.startThematicPart('A');assert.equal(reload.state.thematic.microblockIndex,1);assert.match(reload.element('thematicBody').innerHTML,/Oefening 1 · stap 2\/2/);
-  for(const level of [11,12,13,14]){reload.state.level=level-1;reload.openThematicLesson(0);reload.startThematicPart('A');assert.doesNotMatch(reload.element('thematicBody').innerHTML,/私|人|電車|駅|水|日本/);assert.deepEqual(plain(reload.state.kanjiExposureIds),[])}
+  assert.match(reload.element('thematicBody').innerHTML,/私[\s\S]*わたし/);
+  for(const level of [12,13,14]){reload.state.level=level-1;reload.openThematicLesson(0);reload.startThematicPart('A');assert.doesNotMatch(reload.element('thematicBody').innerHTML,/私|人|電車|駅|水|日本/);assert.deepEqual(plain(reload.state.kanjiExposureIds),[])}
 });
 test('validator counts grammar and kanji in the same three-target budget',()=>{
   const m=structuredClone(content.manifest),block=m.lessons.find(lesson=>lesson.id==='l11-home-1').didactics.microblocks[0];block.kanjiWordIds=['vocab-わたし'];assert.ok(validate(m).diagnostics.some(item=>item.code==='MICROBLOCK_OVERLOAD'));

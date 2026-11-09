@@ -671,7 +671,7 @@ test('Dictionary from Recall preserves card, scheduling and ranks and cancels au
  const timeout=app.windowTimeouts().at(-1);app.openDictionaryModal(card.id,card.lessonId);timeout.callback();
  assert.equal(JSON.stringify({cards:app.state.flashcardProgress.cards,ranks:app.rankState,session:app.state.flashcardSession,ids:app.state.introducedVocabIds}),before);
  app.closeDictionaryModal();assert.equal(app.state.flashcardSession.position,0);assert.equal(app.state.flashcardSession.feedback.chosen,card.meaning);
- assert.match(app.viewMarkup(),/data-dictionary-open="vocab-ねこ"/);assert.match(app.viewMarkup(),/Geïntroduceerd in Level 4/);
+ assert.match(app.viewMarkup(),/data-dictionary-open="vocab-ねこ"/);assert.match(app.viewMarkup(),/Geïntroduceerd in Level 3/);
 });
 
 

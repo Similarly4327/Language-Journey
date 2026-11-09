@@ -141,6 +141,19 @@
         for(const q of p.questions){const e=m.exercises.find(e=>e.id===q.sourceId);if(e)Object.assign(e,{payload:['order',q.prompt,q.answer,q.choices],context:r.text,requiredVocabIds:r.requiredVocabIds.slice(),requiredGrammarIds:[]})}
       }
     }
+    // The lexeme was learned in Level 4; this is a separate orthography goal.
+    // The block renderer presents the exercise without creating another word ID.
+    const firstApplication=lesson(11,1).applications[0];
+    const firstReading=m.readings.find(r=>r.id===firstApplication.readingId);
+    firstReading.text+='\n私 は こたえ を えらびます。';
+    firstReading.audioTextKana+='\nわたし わ こたえ お えらびます。';
+    firstReading.translation+=' Ik kies het antwoord.';
+    firstReading.requiredVocabIds=[...new Set([...firstReading.requiredVocabIds,'vocab-わたし'])];
+    // Application A is read after preparation blocks A and B, including 私.
+    Object.assign(firstReading,{introducedAt:'11-1-B',availableFrom:'11-1-B',preparedAt:'11-1-B'});
+    for(const q of firstApplication.questions){const exercise=m.exercises.find(e=>e.id===q.sourceId);if(exercise)Object.assign(exercise,{context:firstReading.text,requiredVocabIds:firstReading.requiredVocabIds.slice()})}
+    const kanjiQuestion={sourceId:'exercise-l11-home-1-watashi-kanji',prompt:'Welk bekend woord staat hier: 私？',answer:'わたし · ik',choices:['わたし · ik','これ · dit','こたえ · antwoord'],targetVocabIds:['vocab-わたし'],targetKanjiWordIds:['vocab-わたし']};
+    m.exercises.push({id:kanjiQuestion.sourceId,lessonId:lesson(11,1).id,type:'order',payload:['order',kanjiQuestion.prompt,kanjiQuestion.answer,kanjiQuestion.choices],context:firstReading.text,requiredVocabIds:firstReading.requiredVocabIds.slice(),requiredGrammarIds:[],targetKanjiWordIds:kanjiQuestion.targetKanjiWordIds.slice()});
     const grammar=m.grammar.find(g=>g.id==='grammar-l11-home-1');Object.assign(grammar,{introducedAt:'11-2-B',availableFrom:'11-2-B',shortExplanation:'〜てください is een beleefde opdracht. よんでください betekent: lees alsjeblieft. Herken deze vorm eerst als geheel.',examples:['ページ の タイトル を よんでください。']});
     lesson(11,1).grammarIds=[];lesson(11,1).patternIds=[];lesson(11,2).grammarIds=[grammar.id];lesson(11,2).patternIds=['pattern-l11-home-1'];
     Object.assign(m.patterns.find(p=>p.id==='pattern-l11-home-1'),{introducedAt:'11-2-B',availableFrom:'11-2-B',examples:grammar.examples.slice()});
@@ -179,6 +192,10 @@ const order=exam.sources[2];Object.assign(order,{label:'Reisvoorbereiding in de 
         blocks.push({key,sourcePart:part.part,index,wordIds,grammarIds,models:part.models.filter(model=>model.linkedWordIds.every(id=>available.has(id))&&model.linkedWordIds.some(id=>wordIds.includes(id)))});
       }
       lesson.didactics={...lesson.didactics,revision:4,microblocks:blocks,flow:['A-3','B-2','application-A','C-3','D-2','application-B','Lestoets']};
+      if(lesson.order===1){
+        blocks[1].kanjiWordIds=['vocab-わたし'];
+        blocks[1].kanjiRecognition={sourceId:'exercise-l11-home-1-watashi-kanji',wordId:'vocab-わたし',form:'私',reading:'わたし',meaning:'ik',prompt:'Welk bekend woord staat hier: 私？',answer:'わたし · ik',choices:['わたし · ik','これ · dit','こたえ · antwoord']};
+      }
     }
     // The new conjunction fits beside B's two words. Stable grammar/word/source
     // IDs stay intact; the complete A source is shown only after block B.

@@ -20,9 +20,9 @@ test('mother context stays outside the spoken word and invalidates only its reco
   await batch.requestAudio(ref,'B',{env:{VOICE_B_ID:'test',ELEVENLABS_API_KEY:'test'},fetchImpl:async(_,options)=>{
     body=JSON.parse(options.body);return{ok:true,arrayBuffer:async()=>new Uint8Array(128)};
   }});
-  assert.equal(body.text,'はは');assert.equal(body.language_code,'ja');
+  assert.equal(body.inputs[0].text,'はは');assert.equal(body.model_id,'eleven_v4');assert.equal(body.language_code,'ja');
   assert.equal(body.previous_text,'かぞくのことばです。');
-  assert.ok(body.next_text.includes('おかあさん'));assert.equal(body.voice_settings.style,0);
+  assert.ok(body.future_text.includes('おかあさん'));assert.equal(body.voice_settings,undefined,'Dialogue must not receive legacy TTS voice settings');
   const config=require('../audio/config.json'),before=structuredClone(config);
   delete before.entry_overrides['vocab-はは'].previous_text;delete before.entry_overrides['vocab-はは'].next_text;
   assert.notEqual(batch.generationHash(ref,'B','test'),batch.generationHash(ref,'B','test',before));
@@ -57,22 +57,33 @@ test('bounded generation preserves in-flight successes and stops queued work aft
   await assert.rejects(batch.processJobs([],()=>{},3),/één of twee/);
 });
 
-test('coffee enforces Japanese without invalidating unrelated recordings', async () => {
+test('v4 uses explicit Japanese for coffee and the regular library', async () => {
   const config = require('../audio/config.json');
   const {entry_overrides, ...base} = config;
   const coffee = content.audioEntryById['vocab-コーヒー'];
   const cat = content.audioEntryById['vocab-ねこ'];
-  assert.notEqual(batch.generationHash(coffee, 'A', 'test', config), batch.generationHash(coffee, 'A', 'test', base));
+  assert.equal(batch.generationHash(coffee, 'A', 'test', config), batch.generationHash(coffee, 'A', 'test', base));
   assert.equal(batch.generationHash(cat, 'A', 'test', config), batch.generationHash(cat, 'A', 'test', base));
   let body;
   await batch.requestAudio(coffee, 'A', {env:{VOICE_A_ID:'test', ELEVENLABS_API_KEY:'test'}, fetchImpl:async (_, options) => {
     body = JSON.parse(options.body);
     return {ok:true, arrayBuffer:async () => new Uint8Array(128)};
   }});
-  assert.equal(body.text, 'コーヒー');
-  assert.equal(body.model_id, 'eleven_turbo_v2_5');
+  assert.equal(body.inputs[0].text, 'コーヒー');
+  assert.equal(body.model_id, 'eleven_v4');
   assert.equal(body.language_code, 'ja');
-  assert.equal(body.apply_language_text_normalization, true);
+  assert.equal(body.apply_text_normalization, 'off');
+  assert.equal(body.voice_settings, undefined);
+});
+
+test('a full model transition requires the recorded user review, exact config and voices',()=>{
+  const config=require('../audio/config.json'),jobs=batch.selectJobs({ids:'vocab-ねこ',voiceRole:'both'}),voices={A:'test-A',B:'test-B'};
+  const approval={scope:'full-library',modelId:config.model_id,configurationHash:batch.hash(config),voiceFingerprints:{A:batch.hash(voices.A),B:batch.hash(voices.B)},sampleReview:{reviewer:'user',files:['one.mp3','two.mp3','three.mp3','four.mp3']}};
+  const manifest={assets:[],modelTransitionApproval:approval};
+  assert.equal(batch.qualityApprovedFor(jobs,[],manifest,voices,()=>true),true);
+  assert.equal(batch.qualityApprovedFor(jobs,[],manifest,{...voices,B:'changed'},()=>true),false);
+  assert.equal(batch.qualityApprovedFor(jobs,[],manifest,voices,()=>false),false);
+  approval.configurationHash='old';assert.equal(batch.qualityApprovedFor(jobs,[],manifest,voices,()=>true),false);
 });
 
 test('word report counts stable catalog IDs, excluding kana and grammar', () => {

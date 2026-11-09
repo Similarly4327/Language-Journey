@@ -75,3 +75,15 @@ test('thematic Japanese instructions and examples resolve without speaking Dutch
   probe.state.thematic.answered=false;
   assert.ok(!probe.thematicChoiceHtml({prompt:'Wat doe je?',answer:'antwoord',choices:['antwoord','oplossing']},'test').includes('data-audio-key'));
 });
+
+ test('grammar labels use existing example recordings, and stand-alone Japanese gets reviewed readings',()=>{
+  const expected={'grammar-l6-3':'だれ です か','grammar-l8-2':'なんようび です か','grammar-l9-1':'どこ です か','grammar-l9-5':'で','grammar-l10-1':'お ください','grammar-l10-3':'と','grammar-l10-4':'に のります','grammar-l11-1':'が あります','grammar-noun-to':'と'};
+  for(const [id,kana] of Object.entries(expected)){const ref=content.audioEntryById[id];assert.equal(ref.pronunciation.status,'specified',id);assert.equal(ref.pronunciation.audioTextKana,kana,id)}
+  const labels=content.audioEntries.filter(ref=>ref.kind==='grammar'&&ref.pronunciation.status==='context-only');assert.equal(labels.length,19);
+  for(const ref of labels){const example=content.audioEntryById[ref.exampleAudioId];assert.ok(example,ref.id);assert.equal(example.kind,'sentence',ref.id);assert.ok(foundation.kanaOnly(example.pronunciation.audioTextKana),ref.id);assert.equal(ref.pronunciation.audioTextKana,null,ref.id)}
+  assert.deepEqual(content.audioEntries.filter(ref=>ref.kind!=='dialogue'&&ref.pronunciation?.status==='needs-review').map(ref=>ref.id),[]);
+ });
+
+ test('updated Level 11 story materialization and audio use the same complete text',()=>{
+  const story=content.thematicCourses[10].lessons[0].story[0],ref=content.audioEntryById['reading-l11-home-1-a'];assert.equal(story,ref.displayText);assert.match(story,/私 は こたえ を えらびます/);assert.match(ref.pronunciation.audioTextKana,/わたし わ こたえ お えらびます/);
+ });

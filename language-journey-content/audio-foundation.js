@@ -21,7 +21,7 @@
     'わたし は えき に いきます':'わたし わ えき に いきます'
   };
   // Same verified particle meanings/readings as Dictionary (IRODORI Grammar_all.pdf).
-  const particleReadings={'grammar-ha':'わ','grammar-wo':'お','grammar-no':'の','grammar-ka':'か','grammar-mo':'も','grammar-ni':'に','grammar-desu':'です','grammar-l12-1':'え'};
+  const particleReadings={'grammar-ha':'わ','grammar-wo':'お','grammar-no':'の','grammar-ka':'か','grammar-mo':'も','grammar-ni':'に','grammar-desu':'です','grammar-l12-1':'え','grammar-l6-3':'だれ です か','grammar-l8-2':'なんようび です か','grammar-l9-1':'どこ です か','grammar-l9-5':'で','grammar-l10-1':'お ください','grammar-l10-3':'と','grammar-l10-4':'に のります','grammar-l11-1':'が あります','grammar-noun-to':'と'};
   function numberKana(n){
     const digits=['ゼロ','いち','に','さん','よん','ご','ろく','なな','はち','きゅう','じゅう'];
     if(n<=10)return digits[n];
@@ -53,7 +53,7 @@
     }
     for(const grammar of manifest.grammar){
       add(grammar,'grammar',grammar.symbol||grammar.title,particleReadings[grammar.id]||grammar.audioTextKana,{level:Number(grammar.introducedAt?.split('-')[0])||4});
-      if(particleReadings[grammar.id]&&!['grammar-desu','grammar-l12-1'].includes(grammar.id))aliases[grammar.id.replace('grammar-','grammar-particle-')]=grammar.id;
+      if(['grammar-ha','grammar-wo','grammar-no','grammar-ka','grammar-mo','grammar-ni'].includes(grammar.id))aliases[grammar.id.replace('grammar-','grammar-particle-')]=grammar.id;
     }
     aliases['grammar-particle-he']='grammar-l12-1';
     manifest.audioKana=[];
@@ -111,6 +111,24 @@
       const entry={id,displayText:text};manifest.audioUtterances.push(entry);add(entry,'sentence',text,kana,{level,lessonId});
     }
     // A writing sign has an effect in a word, not an independent spoken syllable.
+    // Placeholder patterns and lists are labels, not Japanese utterances. Play an
+    // existing, reviewed course example instead of voicing the instructional text.
+    const grammarContextExamples={
+      'grammar-l6-4':'sentence-l6-4-model-1','grammar-l6-5':'sentence-l6-5-model-1',
+      'grammar-l7-1':'sentence-l7-1-model-1','grammar-l7-2':'sentence-l7-2-model-1',
+      'grammar-l7-3':'sentence-l7-3-model-1','grammar-l7-4':'sentence-l7-4-model-1',
+      'grammar-l7-5':'sentence-l7-5-model-1','grammar-l8-1':'sentence-l8-1-model-1',
+      'grammar-l8-3':'sentence-l8-3-model-1','grammar-l8-4':'sentence-l8-4-model-1',
+      'grammar-l8-months-2':'sentence-l8-4-model-1','grammar-l8-5':'sentence-l8-5-model-1',
+      'grammar-l8-6':'sentence-l8-6-model-1','grammar-l9-2':'sentence-l9-2-model-1',
+      'grammar-l9-3':'sentence-exam-l9-3-relative-reading-0-0','grammar-l9-4':'sentence-l9-4-model-1',
+      'grammar-l10-2':'sentence-l10-2-model-1','grammar-l10-5':'sentence-l10-5-model-1',
+      'grammar-l8-minutes':'sentence-l8-minutes-model-1'
+    };
+    for(const [id,exampleId] of Object.entries(grammarContextExamples)){
+      if(!byId[id]||!byId[exampleId]?.pronunciation?.audioTextKana)throw new Error('Missing reviewed grammar audio example: '+id+' → '+exampleId);
+      byId[id].pronunciation.status='context-only';byId[id].exampleAudioId=exampleId;
+    }
     const contextExamples={'kana-small-っ':'vocab-きって','kana-small-ッ':'vocab-ベッド','writing-long-vowel-mark':'vocab-コーヒー'};
     for(const [id,exampleId] of Object.entries(contextExamples))byId[id].exampleAudioId=exampleId;
     manifest.audioNumbers=[];

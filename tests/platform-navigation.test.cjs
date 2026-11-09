@@ -43,12 +43,17 @@ test('back route has a stable parent and scene themes have fallback',()=>{
 test('app and course routes round-trip without assuming a Japanese-only URL',()=>{
   const app=load(['navigation.js']);
   const nav=app.LanguageJourneyNavigation,courses={japanese:{},italian:{}};
+  app.LanguageJourneyContent=require('../language-journey-content/content.js');
   assert.equal(nav.formatHash({screen:'app-home',courseId:null}),'#/');
   assert.deepEqual({...nav.parseHash('#/course/japanese/learn/home',courses)},{screen:'levels',courseId:'japanese',primaryTab:'learn'});
   assert.equal(nav.formatHash({screen:'levels',courseId:'japanese',primaryTab:'learn'}),'#/course/japanese/learn/levels');
   assert.deepEqual({...nav.parseHash('#/course/italian/recall',courses)},{screen:'flashcards',courseId:'italian',primaryTab:'recall'});
   assert.deepEqual({...nav.parseHash('#/course/japanese/learn/module/11',courses)},{screen:'module',courseId:'japanese',primaryTab:'learn',level:10});
-  assert.equal(nav.formatHash({screen:'module',courseId:'japanese',primaryTab:'learn',level:10}),'#/course/japanese/learn/module/11');
+  const oldMix=nav.parseHash('#/course/japanese/learn/level/2',courses);
+  assert.deepEqual({...nav.parseHash(nav.formatHash(oldMix),courses)},{...oldMix});
+  assert.equal(nav.formatHash({screen:'module',courseId:'japanese',primaryTab:'learn',level:10}),'#/course/japanese/learn/module-id/level-11');
+  assert.deepEqual({...nav.parseHash('#/course/japanese/learn/module-id/level-11',courses)},{screen:'module',courseId:'japanese',primaryTab:'learn',level:10});
+  assert.equal(nav.parseHash('#/course/japanese/learn/level-id/level-99',courses),null);
   assert.equal(nav.formatHash({screen:'session',courseId:'japanese',primaryTab:'progress'}),'#/course/japanese/progress');
   assert.equal(nav.formatHash({screen:'options-audio',courseId:null}),'#/options/audio');
   assert.equal(nav.parseHash('#/course/unknown/learn',courses),null);

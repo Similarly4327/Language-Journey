@@ -1,8 +1,10 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const content = require('./content.js');
+const levelContract = require('./level-contract.js');
 
 function validate(manifest = content.manifest, options = {}) {
+  const recordings=options.recordings||(manifest===content.manifest?require('../assets/audio/ja/manifest.js'):null);
   const diagnostics=[];
   const add=(severity,code,message,location='curriculum')=>diagnostics.push({severity,code,message,location});
   if(!Number.isInteger(manifest.schemaVersion)||manifest.schemaVersion<1)add('ERROR','SCHEMA_VERSION','schemaVersion must be a positive integer');
@@ -35,7 +37,10 @@ function validate(manifest = content.manifest, options = {}) {
     seenForms.set(word.japanese,word.id);
   }
   const inspectSentence=(text,at,location,contextIds=[])=>{
-    for(const char of String(text||'').match(/\p{Script=Han}/gu)||[])if(!knownKanji.has(char))add('WARNING','UNKNOWN_KANJI',`${char} is not registered as introduced writing`,location);
+    for(const char of String(text||'').match(/\p{Script=Han}/gu)||[]){
+      const scheduled=(manifest.vocabulary||[]).some(word=>word.kanjiForm?.includes(char)&&word.kanjiIntroducedAt&&order(word.kanjiIntroducedAt)<=order(at));
+      if(!knownKanji.has(char)&&!scheduled)add('WARNING','UNKNOWN_KANJI',`${char} is not registered as introduced writing`,location);
+    }
     for(const token of String(text||'').split(/[\s。、！？!?]+/).filter(Boolean)){
       const word=vocabByForm.get(token);
       if(word&&word.introducedAt&&order(word.introducedAt)>order(at)&&!contextIds.includes(word.id))add('ERROR','FUTURE_VOCAB_IN_TEXT',`${token} first appears at ${word.introducedAt}, after ${at}`,location);
@@ -147,7 +152,8 @@ function validate(manifest = content.manifest, options = {}) {
     else if(options.checkFiles!==false&&!fs.existsSync(path.resolve(__dirname,asset.path)))add('WARNING','MISSING_AUDIO_FILE',`${asset.path} is not present`,asset.id);
   }
   for(const item of [...(manifest.vocabulary||[]),...(manifest.readings||[]),...(manifest.bonus||[])])if(item.audioId&&!audioIds.has(item.audioId))add('ERROR','UNKNOWN_AUDIO',`${item.audioId} is not registered`,item.id);
-  const noAudio=(manifest.vocabulary||[]).filter(v=>v.coreOrContext==='core'&&!v.audioId).length;
+  const playback=recordings?require('../audio/playback.js'):null;
+  const noAudio=(manifest.vocabulary||[]).filter(v=>v.coreOrContext==='core'&&!(recordings?playback.resolve(content,recordings,v.id):v.audioId)).length;
   if(noAudio)add('WARNING','AUDIO_COVERAGE',`${noAudio} core vocabulary items have no optional recorded audio`,'audio');
   const usedVocab=new Set((manifest.lessons||[]).flatMap(l=>[...(l.wordIds||[]),...(l.exampleIds||[])]));
   const musicIds=(manifest.music?.groups||[]).flat();
@@ -160,8 +166,9 @@ function validate(manifest = content.manifest, options = {}) {
   const legacy=(manifest.vocabulary||[]).filter(v=>v.coreOrContext==='legacy').length;
   if(legacy)add('INFO','LEGACY_COMPAT',`${legacy} historical words remain addressable for saved mastery`,'vocabulary');
   if(!manifest.kanji?.length)add('INFO','NO_KANJI','Levels 1–10 currently introduce no kanji writing in the central registry','kanji');
+  for(const issue of levelContract.validateContracts(levelContract.makeContracts({...content,manifest}),{...content,manifest}))add('ERROR',`CONTRACT_${issue.code}`,issue.message,issue.id);
   const counts={ERROR:0,WARNING:0,INFO:0};for(const item of diagnostics)counts[item.severity]++;
-  return {diagnostics,counts,summary:{levels:manifest.levels.length,lessons:manifest.lessons.length,vocabulary:manifest.vocabulary.length,grammar:manifest.grammar.length,patterns:manifest.patterns.length,exercises:manifest.exercises.length,readings:manifest.readings.length,bonus:manifest.bonus.length,audio:manifest.audio.assets.length}};
+  return {diagnostics,counts,summary:{levels:manifest.levels.length,lessons:manifest.lessons.length,vocabulary:manifest.vocabulary.length,grammar:manifest.grammar.length,patterns:manifest.patterns.length,exercises:manifest.exercises.length,readings:manifest.readings.length,bonus:manifest.bonus.length,audio:recordings?.assets.length??manifest.audio.assets.length}};
 }
 
 function format(result){

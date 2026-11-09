@@ -1,0 +1,25 @@
+✔ current curriculum validates with no errors (29.4466ms)
+✔ foundation and thematic levels have renderable adapter data (0.2107ms)
+✔ app script parses, imports registry and preserves storage key (7.0557ms)
+✔ knowledge state is cumulative and excludes later and legacy words (1.9113ms)
+✔ future vocabulary and grammar are rejected (12.52ms)
+✔ explicit context vocabulary is allowed in a reading, but not a core reference (17.984ms)
+✔ duplicate IDs and unknown references are errors (11.9885ms)
+✔ kanji can follow a known word but not precede it (20.4977ms)
+✔ optional bonus is linked without changing core lesson IDs (10.6612ms)
+✔ a playable Level 11 needs five lessons and both modules (11.7491ms)
+✔ route validator rejects a future bridge and an unregistered Japanese instruction (11.1275ms)
+✔ audio references and missing files have distinct severities (16.619ms)
+✔ Level 11–15 travel route is chronological and preserves supermarket lesson IDs (0.6021ms)
+✔ instruction resolver data and destination bridges are centrally registered (0.9644ms)
+✔ report has human-readable summary (6.8572ms)
+✔ Levels 11–15 have five two-part lessons with staged words and optional bonus (0.7181ms)
+✔ foundation lesson labels and vocabulary timing match the taught sequence (0.1909ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 277.7785

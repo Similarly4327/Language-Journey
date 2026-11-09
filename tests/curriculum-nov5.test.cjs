@@ -23,11 +23,11 @@ test('Storytime switches the second named companion and reads the spoken lines i
   const dialogue=content.audioEntryById[story.dialogueId].entry;assert.equal(dialogue.lines.find(line=>line.sentenceId===story.lines.find(item=>item.speaker==='ren').audioId).speakerRole,'B');assert.equal(dialogue.lines.find(line=>line.sentenceId===story.lines.find(item=>item.speaker==='miku').audioId).speakerRole,'A');
 });
 
-test('Recall shows explicitly introduced kanji in the mixed pool without an optional deck switch',()=>{
+test('Recall keeps vocabulary cards in kana and offers separately introduced kanji without a deck switch',()=>{
   const id='vocab-でんしゃ',app=createCrashCourseProbe({savedState:{thematicRevision:1,introducedVocabIds:[id],kanjiExposureIds:[id]},savedRanks:{'l10-4':{rank:'Copper',attempts:1,last:1}}});
   app.state.screen='flashcards';app.createFlashcardSession([{cardId:id,direction:'jp-nl'}],'scheduled');app.state.flashcardSession.optionsRevealed=true;app.renderFlashcardsScreen();
   const before=plain({progress:app.state.flashcardProgress,queue:app.state.flashcardSession.queue,position:app.state.flashcardSession.position});
-  assert.match(app.element('flashcardView').innerHTML,/電車/);assert.doesNotMatch(app.element('flashcardView').innerHTML,/fcKanjiEnabled|Bekende woorden ook in kanji tonen/);assert.doesNotMatch(app.element('flashcardView').innerHTML,/reading-support/,'the active target has no reading clue');
+  assert.match(app.element('flashcardView').innerHTML,/でんしゃ/);assert.doesNotMatch(app.element('flashcardView').innerHTML,/電車|fcKanjiEnabled|Bekende woorden ook in kanji tonen/);assert.doesNotMatch(app.element('flashcardView').innerHTML,/reading-support/,'the active target has no reading clue');
   assert.deepEqual(plain({progress:app.state.flashcardProgress,queue:app.state.flashcardSession.queue,position:app.state.flashcardSession.position}),before);
   const saved=app.saved(),reload=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.equal(reload.state.recallKanjiEnabled,false);assert.match(reload.jlptProgressHtml(),/vijf afzonderlijke geslaagde Recall-herhalingen/);
 });

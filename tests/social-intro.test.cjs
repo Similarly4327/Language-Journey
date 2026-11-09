@@ -3,14 +3,15 @@ const {createCrashCourseProbe}=require('./app-probe.cjs'),content=require('../la
 const plain=value=>JSON.parse(JSON.stringify(value));
 const protectedProgress=app=>plain({level7:app.rankState['l7-exam'],oldRank:app.rankState['l4-1'],oldSteps:app.state.advancedStepProgress,oldLesson:app.state.advancedLesson,srs:app.state.flashcardProgress,errors:app.state.errorBank,kanji:app.state.kanjiExposureIds,profile:[app.state.avatarName,app.state.selectedAvatarSkin,app.state.avatarMode]});
 
-test('intro is an additive chapter before Level 7; old routes and lesson/rank identities remain stable',()=>{
+test('intro has a stable route while old routes and lesson/rank identities remain available',()=>{
   assert.equal(content.levels.length,15);assert.equal(content.advancedCourses[6].lessons.length,5);
   assert.deepEqual(content.advancedCourses[6].lessons.map(l=>l.id),['l7-1','l7-2','l7-3','l7-4','l7-5']);
   assert.equal(content.manifest.socialIntro.placementBeforeLevel,7);assert.equal(content.introLessons.length,4);
   const sandbox={window:{}};vm.runInNewContext(fs.readFileSync('navigation.js','utf8'),sandbox);const nav=sandbox.window.LanguageJourneyNavigation;
   assert.equal(nav.parseHash('#/course/japanese/learn/intro',{japanese:{}}).screen,'intro');
-  for(let level=1;level<=15;level++){const route=nav.parseHash(`#/course/japanese/learn/level/${level}`,{japanese:{}});assert.equal(route.level,level-1);assert.equal(nav.formatHash(route),`#/course/japanese/learn/level/${level}`)}
-  assert.equal(nav.formatHash({screen:'intro',courseId:'japanese'}),'#/course/japanese/learn/intro');
+  for(let level=1;level<=15;level++){const route=nav.parseHash(`#/course/japanese/learn/level/${level}`,{japanese:{}});assert.equal(route.level,level-1)}
+  assert.equal(nav.formatHash({screen:'intro',courseId:'japanese'}),'#/course/japanese/learn/level-id/social-intro');
+  assert.equal(nav.parseHash('#/course/japanese/learn/level-id/social-intro',{japanese:{}}).screen,'intro');
 });
 
 test('all requested expressions have one canonical source and both directions before a lesson check',()=>{
@@ -23,7 +24,7 @@ test('all requested expressions have one canonical source and both directions be
     app.element('introPractice').onclick();assert.equal(app.activeWordCrashCourse.deck.length,words.length*2);
     for(const word of words)for(const direction of ['jp-nl','nl-jp'])assert.equal(app.activeWordCrashCourse.deck.filter(q=>q.word.id===word.id&&q.direction===direction).length,1);
     app.completeWordCrashCourse();assert.equal(app.state.intro.step,'dialogue');assert.match(app.element('introBody').innerHTML,/Een kort gesprek/);
-    app.element('introCheck').onclick();assert.equal(app.state.quiz.rankId,lesson.id);app.state.quiz.score=app.state.quiz.questions.length;app.finishQuiz();assert.equal(app.rankState[lesson.id].rank,'Copper');app.element('nextBtn').onclick();assert.equal(app.state.intro.step,'list');
+    app.element('introCheck').onclick();assert.equal(app.state.quiz.rankId,lesson.id);app.state.quiz.score=app.state.quiz.questions.length;app.finishQuiz();assert.equal(app.rankState[lesson.id].rank,'Copper');app.element('nextBtn').onclick();const next=content.introLessons.indexOf(lesson)+1;assert.equal(app.state.intro.step,next<content.introLessons.length?'words':'list');if(next<content.introLessons.length)assert.equal(app.state.intro.lessonId,content.introLessons[next].id);
   }
   for(const form of ['おはようございます','こんにちは','こんばんは','おやすみなさい','はじめまして','おなまえはなんですか','よろしくおねがいします','ありがとう','またね','さようなら'])assert.ok(seen.has(form),form);
   assert.ok(content.introLessons[2].models[0].sentence.includes('{{avatarNameJapanese}}'));
