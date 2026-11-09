@@ -1,0 +1,26 @@
+{
+  "commit": "c8d1639",
+  "assetVersion": "recall-recovery-98560fe4140939a4",
+  "assets": 2894,
+  "v4": 2894,
+  "samples": [
+    {
+      "entryId": "vocab-いちがつ",
+      "role": "A",
+      "status": 200,
+      "identical": true
+    },
+    {
+      "entryId": "vocab-にがつ",
+      "role": "B",
+      "status": 200,
+      "identical": true
+    },
+    {
+      "entryId": "reading-l11-home-1-a",
+      "role": "A",
+      "status": 200,
+      "identical": true
+    }
+  ]
+}
