@@ -196,6 +196,22 @@ const order=exam.sources[2];Object.assign(order,{label:'Reisvoorbereiding in de 
         blocks[1].kanjiWordIds=['vocab-わたし'];
         blocks[1].kanjiRecognition={sourceId:'exercise-l11-home-1-watashi-kanji',wordId:'vocab-わたし',form:'私',reading:'わたし',meaning:'ik',prompt:'Welk bekend woord staat hier: 私？',answer:'わたし · ik',choices:['わたし · ik','これ · dit','こたえ · antwoord']};
       }
+      // Readings and spellings verified in Japan Foundation Marugoto kanji list,
+      // starter A1 lessons 11 and 18:
+      // https://marugoto.jpf.go.jp/assets/docs/download/elementary1_c/MarugotoElementary1CompetencesKanjiList.pdf
+      // Known verbs from Level 4 are introduced as whole familiar spellings.
+      // Lesson 2 already uses all three slots in each microblock, including
+      // its two grammar introductions, so it deliberately has no extra kanji.
+      const writing={3:{wordId:'vocab-みます',form:'見ます',reading:'みます',meaning:'kijken / zien',sourceId:'exercise-l11-home-3-mimasu-kanji',choices:['みます · kijken / zien','のみます · drinken','よみます · lezen']},4:{wordId:'vocab-いきます',form:'行きます',reading:'いきます',meaning:'gaan',sourceId:'exercise-l11-home-4-ikimasu-kanji',choices:['いきます · gaan','のみます · drinken','よみます · lezen']}}[lesson.order];
+      if(writing){
+        const answer=writing.choices[0];blocks[1].kanjiWordIds=[writing.wordId];
+        blocks[1].kanjiRecognition={...writing,prompt:`Welk bekend woord staat hier: ${writing.form}？`,answer};
+        // Reuse existing recorded lesson sentences; the shared renderer replaces
+        // the familiar kana verb only after its own kanji introduction.
+        const context=lesson.order===3?{id:'sentence-l11-1-B-compact-3',sentence:'まちがい を もういちど みます。',audioTextKana:'まちがい お もういちど みます。',meaning:'Ik bekijk de fout nog eens.',linkedWordIds:['vocab-まちがい','vocab-もういちど','vocab-みます']}:{id:'sentence-dialogue-l10-5-example-2',sentence:'えき に いきます。',audioTextKana:'えき に いきます。',meaning:'Ik ga naar het station.',linkedWordIds:['vocab-えき','vocab-いきます']};
+        blocks[1].models.push({...context,sentenceId:context.id,kanjiTargetId:writing.wordId,parts:[]});
+        m.exercises.push({id:writing.sourceId,lessonId:lesson.id,type:'order',payload:['order',blocks[1].kanjiRecognition.prompt,answer,writing.choices],requiredVocabIds:[writing.wordId],requiredGrammarIds:[],targetKanjiWordIds:[writing.wordId]});
+      }
     }
     // The new conjunction fits beside B's two words. Stable grammar/word/source
     // IDs stay intact; the complete A source is shown only after block B.

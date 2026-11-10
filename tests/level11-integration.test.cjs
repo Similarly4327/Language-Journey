@@ -15,15 +15,15 @@ test('lesson 1 reviews the known word in kanji within the block budget and asses
 });
 function appAt(index=0,options={}){const app=createCrashCourseProbe(options);app.state.level=10;app.state.screen='module';app.openThematicLesson(index);return app}
 test('block B requires a correct recognition before advancing and persists only positive evidence',()=>{
-  const app=appAt(0,{now,savedState:{introducedVocabIds:['vocab-わたし']},savedRanks:{'l4-3':{rank:'Copper',last:1,attempts:1}}});
+  const app=appAt(0,{now,feedbackTimers:true,savedState:{introducedVocabIds:['vocab-わたし']},savedRanks:{'l4-3':{rank:'Copper',last:1,attempts:1}}});
   app.startThematicPart('A');app.state.thematic.microblockIndex=1;app.renderMain();assert.match(app.element('thematicBody').innerHTML,/私[\s\S]*わたし/);app.element('thematicWordsNext').onclick();assert.equal(app.state.thematic.step,'kanji-check');
   const buttons=Array.from({length:3},(_,i)=>({dataset:{thematicChoice:String(i)}}));app.element('thematicBody').querySelectorAll=()=>buttons;app.renderMain();app.element('thematicReveal').onclick({preventDefault(){},stopPropagation(){}});app.setNow(now+200);buttons[0].onclick();assert.equal(app.state.kanjiRecognitionEvidence['vocab-わたし'],undefined);app.element('thematicNext').onclick();assert.equal(app.state.thematic.step,'kanji-check');
-  app.state.thematic.optionsRevealed=true;app.state.thematic.answerUnlockAt=0;app.renderMain();buttons[2].onclick();assert.equal(app.state.kanjiRecognitionEvidence['vocab-わたし'].sourceId,'exercise-l11-home-1-watashi-kanji');app.element('thematicNext').onclick();assert.equal(app.state.thematic.step,'practice');
+  app.state.thematic.optionsRevealed=true;app.state.thematic.answerUnlockAt=0;app.renderMain();buttons[2].onclick();assert.equal(app.state.kanjiRecognitionEvidence['vocab-わたし'].sourceId,'exercise-l11-home-1-watashi-kanji');const timer=app.crashTimers.findLastIndex(t=>t.delay===1500&&!t.cancelled&&!t.fired);assert.ok(timer>=0);app.fireCrashTimer(timer);assert.equal(app.state.thematic.step,'practice');
   const saved=app.saved(),again=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.equal(again.state.kanjiRecognitionEvidence['vocab-わたし'].sourceId,'exercise-l11-home-1-watashi-kanji');
 });
 test('Level 11 introduces A–D as 3/2/3/2, training only the current block in both directions',()=>{
   for(let index=0;index<4;index++){
-    const app=appAt(index),lesson=lessons[index];
+    const app=appAt(index,{feedbackTimers:true,savedState:{introducedVocabIds:['vocab-わたし','vocab-みます','vocab-いきます']}}),lesson=lessons[index];
     assert.deepEqual(lesson.didactics.microblocks.map(block=>block.wordIds.length),[3,2,3,2]);
     for(const part of lesson.applications){
       app.startThematicPart(part.part);
@@ -34,7 +34,7 @@ test('Level 11 introduces A–D as 3/2/3/2, training only the current block in b
         const next=lesson.didactics.microblocks.find(next=>next.sourcePart===part.part&&next.index>block.index);
         if(next)for(const id of next.wordIds)assert.ok(!app.state.introducedVocabIds.includes(id),id);
         app.element('thematicWordsNext').onclick();
-        if(block.kanjiRecognition){assert.equal(app.state.thematic.step,'kanji-check');const buttons=Array.from({length:3},(_,i)=>({dataset:{thematicChoice:String(i)}}));app.element('thematicBody').querySelectorAll=()=>buttons;app.renderMain();app.state.thematic.optionsRevealed=true;app.state.thematic.answerUnlockAt=0;buttons[2].onclick();assert.equal(app.state.thematic.selected,block.kanjiRecognition.answer);app.element('thematicNext').onclick()}
+        if(block.kanjiRecognition){assert.equal(app.state.thematic.step,'kanji-check');const buttons=Array.from({length:3},(_,i)=>({dataset:{thematicChoice:String(i)}}));app.element('thematicBody').querySelectorAll=()=>buttons;app.renderMain();app.state.thematic.optionsRevealed=true;app.state.thematic.answerUnlockAt=0;buttons[(3-((app.state.thematic.questionIndex+app.state.thematic.lessonIndex+(app.state.thematic.part==='B'?2:1))%3))%3].onclick();assert.equal(app.state.thematic.selected,block.kanjiRecognition.answer);const timer=app.crashTimers.findLastIndex(t=>t.delay===1500&&!t.cancelled&&!t.fired);assert.ok(timer>=0);app.fireCrashTimer(timer)}
         const deck=app.activeWordCrashCourse.deck;assert.equal(deck.length,block.wordIds.length*2);
         for(const id of block.wordIds)for(const direction of ['jp-nl','nl-jp'])assert.equal(deck.filter(q=>q.word.id===id&&q.direction===direction).length,1);
         app.completeWordCrashCourse();assert.equal(app.state.thematic.step,'sentences');
@@ -113,4 +113,17 @@ test('all old lesson-5 words keep stable IDs and explicit later sources; old kno
   const oldFourth=createCrashCourseProbe({savedState:{thematicRevision:1},savedRanks:{'l11-home-4':{rank:'Gold',attempts:3}}});
   for(const form of ['りょこう','じゅんび','ひこうき'])assert.ok(!oldFourth.flashcardEligibleCards().some(w=>w.id===`vocab-${form}`),'old destination rank cannot introduce a swapped-in word');
   for(const form of ['ぜんぶ','あと','すすめます'])assert.ok(oldFourth.flashcardEligibleCards().some(w=>w.id===`vocab-${form}`),'formerly learned words remain eligible after relocation');
+});
+
+test('new spellings reuse already-known words and fit one open slot in each selected block',()=>{
+ for(const [index,id,form,point] of [[2,'vocab-みます','見ます','11-3-B'],[3,'vocab-いきます','行きます','11-4-B']]){const lesson=lessons[index],block=lesson.didactics.microblocks[1],word=content.vocabById[id];assert.equal(word.kanji,form);assert.equal(word.kanjiIntroducedAt,point);assert.ok(content.pointOrder(word.introducedAt)<content.pointOrder('11-1-A'));assert.equal(block.kanjiRecognition.wordId,id);assert.equal(block.wordIds.length+block.grammarIds.length+block.kanjiWordIds.length,3);assert.ok(content.audioEntryById[id]?.pronunciation.audioTextKana===word.kana);}
+ assert.ok(!lessons[1].didactics.microblocks.some(block=>block.kanjiWordIds?.length));assert.ok(!lessons[4].didactics.microblocks?.some(block=>block.kanjiWordIds?.length));
+});
+test('opening a known spelling records exposure without granting rank or recognition',()=>{
+ const app=appAt(2,{savedState:{introducedVocabIds:['vocab-みます']}});app.startThematicPart('A');app.state.thematic.microblockIndex=1;app.renderMain();assert.match(app.element('thematicBody').innerHTML,/見ます/);assert.ok(app.state.kanjiExposureIds.includes('vocab-みます'));assert.equal(app.state.kanjiRecognitionEvidence['vocab-みます'],undefined);assert.equal(app.rankState['l11-home-3'].rank,null);
+ const fresh=appAt(2);fresh.startThematicPart('A');fresh.state.thematic.microblockIndex=1;fresh.renderMain();assert.doesNotMatch(fresh.element('thematicBody').innerHTML,/見ます/);assert.ok(!fresh.state.kanjiExposureIds.includes('vocab-みます'));fresh.element('thematicWordsNext').onclick();assert.notEqual(fresh.state.thematic.step,'kanji-check');
+});
+
+test('later known kanji appears in a contextual model and reuses its existing sentence audio',()=>{
+ for(const [index,id,form,audio] of [[2,'vocab-みます','見ます','sentence-l11-1-B-compact-3'],[3,'vocab-いきます','行きます','sentence-dialogue-l10-5-example-2']]){const app=appAt(index,{savedState:{introducedVocabIds:[id]}});app.startThematicPart('A');app.state.thematic.microblockIndex=1;app.renderMain();app.state.thematic.step='sentences';app.state.thematic.sentenceIndex=lessons[index].didactics.microblocks[1].models.findIndex(model=>model.kanjiTargetId===id);app.renderMain();const html=app.element('thematicBody').innerHTML;assert.match(html,new RegExp(form));assert.ok(html.includes('data-audio-key="'+audio+'"'));const fresh=appAt(index);fresh.startThematicPart('A');fresh.state.thematic.microblockIndex=1;fresh.state.thematic.step='sentences';fresh.state.thematic.sentenceIndex=1;fresh.renderMain();assert.doesNotMatch(fresh.element('thematicBody').innerHTML,new RegExp(form));}
 });

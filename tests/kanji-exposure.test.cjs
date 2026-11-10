@@ -14,11 +14,38 @@ test('known kanji appear in block B and keep the existing Recall word card',()=>
   const savedState={introducedVocabIds:['vocab-わたし'],thematicCompleted:{'l11-home-1':{A:true,B:true}},flashcardProgress:{version:1,cards:{'vocab-わたし::jp-nl':{dueAt:9000,intervalDays:4,repetitions:3,lapses:0,lastReviewedAt:100,lastGrade:'knew'}}}};
   const app=createCrashCourseProbe({savedState,savedRanks:{'l4-3':{rank:'Copper',attempts:1,last:1}}});assert.deepEqual(plain(app.state.kanjiExposureIds),[]);
   const before=plain(app.state.flashcardProgress);app.state.level=10;app.state.screen='module';app.openThematicLesson(0);app.startThematicPart('A');
-  assert.doesNotMatch(app.element('thematicBody').innerHTML,/私/);app.state.thematic.microblockIndex=1;app.renderMain();assert.match(app.element('thematicBody').innerHTML,/私[\s\S]*わたし/);assert.deepEqual(plain(app.state.kanjiExposureIds),[]);
+  assert.doesNotMatch(app.element('thematicBody').innerHTML,/私/);app.state.thematic.microblockIndex=1;app.renderMain();assert.match(app.element('thematicBody').innerHTML,/私[\s\S]*わたし/);assert.deepEqual(plain(app.state.kanjiExposureIds),['vocab-わたし']);
   app.element('thematicWordsNext').onclick();assert.deepEqual(plain(app.state.kanjiExposureIds),['vocab-わたし']);
   const saved=app.saved(),reload=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.deepEqual(plain(reload.state.kanjiExposureIds),['vocab-わたし']);assert.deepEqual(plain(reload.state.flashcardProgress),before);
   assert.match(reload.dictionaryArticleHtml(reload.dictionaryById['vocab-わたし']),/Kanji: 私/);
   assert.ok(reload.flashcardEligibleCards().some(card=>card.id==='vocab-わたし'),'Recall reuses the same canonical word card');
+});
+test('seen, completed exercise and passed lesson have distinct kanji status and first Recall review',()=>{
+  const id='vocab-わたし',sourceId='exercise-l11-home-1-watashi-kanji',now=Date.parse('2026-11-10T10:00:00Z');
+  const initial={thematicRevision:1,introducedVocabIds:[id],kanjiExposureIds:[id],thematicCompleted:{'l11-home-1':{A:true,B:true}},kanjiRecognitionEvidence:{[id]:{sourceId,at:now-1000}}};
+  const app=createCrashCourseProbe({savedState:initial,savedRanks:{},now});
+  assert.deepEqual(plain(app.kanjiInventory()),{encountered:1,unlocked:0});assert.match(app.kanjiLearningStatus(id),/behaal de lestoets/);
+  assert.equal(app.knowledgeSnapshot().kanji,0);assert.equal(app.state.jlptMilestones.kanji['私'],undefined);
+  assert.ok(!app.flashcardEligibleCards().some(card=>card.id==='kanji-card:私'));
+  app.rankState['l11-home-1'].rank='Copper';
+  assert.deepEqual(plain(app.kanjiInventory()),{encountered:1,unlocked:1});assert.equal(app.knowledgeSnapshot().kanji,1);assert.match(app.kanjiLearningStatus(id),/Ontgrendeld/);
+  const pool=app.flashcardEligibleCards(),card=pool.find(item=>item.id==='kanji-card:私');assert.equal(card.lessonId,'l11-home-1');assert.equal(pool.filter(item=>item.id===id).length,0,'the kanji check does not award word mastery');
+  assert.ok(app.newKanjiRecallCards().some(item=>item.id===card.id));assert.equal(app.state.flashcardProgress.cards['kanji-card:私::jp-nl'],undefined);
+  const before=plain(app.state.jlptMilestones.lexemes);app.createFlashcardSession([{cardId:card.id,direction:'jp-nl',answerChoices:['ik']}],'scheduled');app.state.flashcardSession.optionsRevealed=true;app.state.flashcardSession.revealed=true;app.flashcardRate('knew','ik');
+  assert.equal(app.state.jlptMilestones.kanji['私'].creditUnits,1);assert.deepEqual(plain(app.state.jlptMilestones.lexemes),before);assert.ok(!app.newKanjiRecallCards().some(item=>item.id===card.id));assert.ok(app.state.flashcardProgress.cards['kanji-card:私::jp-nl'].dueAt>now);
+  const saved=app.saved(),reloaded=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks,now});assert.deepEqual(plain(reloaded.kanjiInventory()),{encountered:1,unlocked:1});assert.equal(reloaded.knowledgeSnapshot().kanji,1);assert.equal(reloaded.state.jlptMilestones.kanji['私'].creditUnits,1);assert.equal(reloaded.state.flashcardProgress.cards['kanji-card:私::jp-nl'].repetitions,1);
+});
+test('later lesson kanji use their own recognition evidence, source and rank after reload',()=>{
+  for(const [id,character,lesson,sourceId,level] of [
+    ['vocab-みます','見','l11-home-3','exercise-l11-home-3-mimasu-kanji',3],
+    ['vocab-いきます','行','l11-home-4','exercise-l11-home-4-ikimasu-kanji',4]
+  ]){
+    const evidence={[id]:{sourceId,at:200}},base={thematicRevision:1,introducedVocabIds:[id],kanjiExposureIds:[id],kanjiRecognitionEvidence:evidence};
+    const app=createCrashCourseProbe({savedState:base,savedRanks:{}});assert.equal(app.kanjiInventory().encountered,1);assert.equal(app.kanjiInventory().unlocked,0);assert.ok(!app.flashcardEligibleCards().some(card=>card.id===`kanji-card:${character}`));
+    app.rankState[lesson].rank='Copper';const card=app.flashcardEligibleCards().find(item=>item.id===`kanji-card:${character}`);assert.ok(card);assert.equal(card.lessonId,lesson);assert.equal(card.level,11);assert.equal(card.lessonIndex,level-1);assert.ok(app.newKanjiRecallCards().some(item=>item.id===card.id));
+    const saved=app.saved(),again=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.equal(again.state.kanjiRecognitionEvidence[id].sourceId,sourceId);assert.equal(again.flashcardEligibleCards().find(item=>item.id===card.id).lessonId,lesson);assert.equal(again.kanjiInventory().unlocked,1);
+    const forged=createCrashCourseProbe({savedState:{...base,kanjiRecognitionEvidence:{[id]:{sourceId:'wrong-source',at:200}}},savedRanks:{[lesson]:{rank:'Copper',attempts:1,last:1}}});assert.equal(forged.state.kanjiRecognitionEvidence[id],undefined);assert.ok(!forged.flashcardEligibleCards().some(item=>item.id===card.id));
+  }
 });
 test('kanji points follow known lexemes and Japan is distinct from the counter',()=>{
   for(const [id,point] of [['vocab-わたし','11-1-B'],['vocab-ひと','12-1-A'],['vocab-えき','13-1-A'],['vocab-でんしゃ','13-1-A'],['vocab-みず','14-1-A']]){const w=content.vocabById[id];assert.ok(content.pointOrder(w.introducedAt)<content.pointOrder(w.kanjiIntroducedAt),id);assert.equal(w.kanjiIntroducedAt,point)}
