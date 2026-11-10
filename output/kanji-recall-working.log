@@ -1,0 +1,145 @@
+✔ internal anchors are cumulative estimates, distinct from external lists and domain scores (6.936ms)
+✔ opening, seen words, wrong answers, assisted responses and distractors do not become correct evidence (1.3924ms)
+✔ canonical words count once and a distinct sense counts only after its own introduction (0.9363ms)
+✔ calendar family caps preserve raw counts and do not invent a percentage (0.7275ms)
+✔ an early N3 target belongs to N3 without requiring lower-tier mastery (0.3977ms)
+✔ attainment is retained as Recall becomes due, and both SRS directions stay independent (1.2308ms)
+✔ kanji needs successful word evidence and explicit known spelling, and counts characters once (1.9817ms)
+✔ grammar and reading use explicit canonical task targets, while visible-text audio cannot prove listening (0.961ms)
+✔ quiz targets and every option lose kana/dictionary helpers, while non-target known context keeps kana (117.4305ms)
+✔ ordinary correct target answers persist evidence without crediting examples or requiring a diagnostic (132.2001ms)
+✔ Recall suppresses help for target and distractors before reveal and until grading; feedback restores it (136.4368ms)
+✔ stale or keyboard-activated disclosures are denied centrally during an active question (67.889ms)
+✔ existing successful Recall evidence is retained before a later wrong answer without rewriting SRS (56.3419ms)
+✔ audio controls keep playback but do not spell out protected target kana in labels or coach text (56.5045ms)
+✔ ordinary word practice protects its current target and records only the answered goal (58.8413ms)
+✔ assessed 私 requires exposure, recognition and the Level 11 lesson rank; old reviews are quarantined without touching word SRS (217.097ms)
+✖ known kanji appear in block B and keep the existing Recall word card (61.2906ms)
+✔ kanji points follow known lexemes and Japan is distinct from the counter (0.1484ms)
+✔ known vocabulary and acknowledged orthography are independent gates, including old saved exposures (55.0989ms)
+✔ Japan stays kana throughout Level 12 and later previews without losing a historical exposure or either sense (51.5927ms)
+✔ reading help uses the whole word, handles punctuation, and never reveals a gloss or grades an answer (65.402ms)
+✔ Recall keeps vocabulary cards in kana in both directions and retains their scheduling (73.7186ms)
+✔ separately taught kanji joins the normal Recall planner as one character card without creating a second word (121.4079ms)
+✔ compound spelling gets its own mixed Recall card and independent persisted SRS without extra word or character credit (247.0456ms)
+✔ active answer options suppress reading support and still respect lesson boundaries (59.0326ms)
+✔ level and lesson rows use canonical dictionary entries and never mutate course data (90.763ms)
+✔ kana, particles and words with overlapping spellings remain distinct (57.3529ms)
+✔ new kanji writing is attributed to its real later lesson and stays a preview (51.7106ms)
+✔ intro routes and higher levels use canonical scoped sources (51.4234ms)
+✔ number lessons expose actual number entries, readings and saved familiarity without changing progress (63.3734ms)
+✔ closing Dictionary keeps the page locked while its parent information panel is open (56.0476ms)
+✔ active quiz targets keep their spelling and meaning hidden in the information panel (53.679ms)
+Ontbrekende vertaling: en.flashcards.mixedHelp
+✔ mixed Recall uses both directions and writes only the answered direction across reload (188.1043ms)
+✔ mixed Recall handles either due direction, future-only and new-only states (280.6836ms)
+✔ 140-word Recall pool stays bounded, prioritizes due cards and never schedules future cards (765.5231ms)
+✔ free practice retains manual filters independently of automatic Recall and never reschedules (146.8695ms)
+✔ SRS fixture respects available word scope, never unlocked or selected levels (72.4785ms)
+✔ Auto migration keeps explicit manual selections off and defaults all/new profiles to on (187.0205ms)
+✔ manual scope survives Auto changes, later learning and reload with both SRS directions intact (162.8168ms)
+✔ manual selection stores exact available lesson IDs rather than a future all-lessons wildcard (46.6795ms)
+✔ Recall distinguishes no learned words from an empty manual pool and hides unavailable choices (83.6839ms)
+✔ audio coach only exposes registered local recordings and chooses the opposite viewport half (43.013ms)
+✔ Recall preserves legacy per-direction reviews and interrupted sessions (53.7747ms)
+✔ Bare legacy Recall records migrate to Japanese → Dutch without replacing explicit history (51.5476ms)
+✔ Good answers advance intervals while directions and duplicate clicks stay independent (46.6695ms)
+✔ Good Recall feedback is brief and auto-advances once without another SRS write (47.0092ms)
+✔ Manual advance cancels the good-answer timer and stale callbacks cannot skip a card (46.8192ms)
+✔ Leaving Recall cancels its timer and returning shows feedback before continuing (68.8335ms)
+✔ A wrong answer stays visible for manual advance, while a correct free-practice answer auto-advances without rescheduling (117.9088ms)
+✔ The last good answer waits for its feedback, then opens the normal results screen (58.9312ms)
+✔ Again returns after six hours, requeues at most once, and cannot loop alone (45.3903ms)
+✔ Future words cannot enter Recall in either direction; learned free practice does not reschedule (63.555ms)
+✔ Good intervals use local calendar days across DST and due labels use calendar dates (55.1173ms)
+✔ An answer after midnight schedules from the new local day, not session start (47.2273ms)
+✔ Recall keeps unique introduced-word counts separate from repeated SRS reviews (42.5041ms)
+✔ Recall start screen clearly separates due SRS cards from free practice (54.7252ms)
+✔ Recall rebuilds new cards from ranked Level 7, partial Level 8, and later lesson data (95.8726ms)
+✔ SRS fixture preserves existing reviews when encounter flags are missing (49.3578ms)
+✔ Dutch to Japanese choices do not offer another word with the same Dutch meaning (136.1565ms)
+✔ A Dutch → Japanese session uses only eligible kana choices and records only reverse reviews once (56.2458ms)
+✔ Fresh profiles cannot build Recall questions from future vocabulary (50.4836ms)
+✔ Recall answer feedback marks wrong, correct, and remaining options consistently (47.3458ms)
+✔ Recall dashboard identifies the earliest future due time from eligible cards only (65.8501ms)
+✔ Recall dashboard refreshes due status periodically and on focus or visibility return (86.5972ms)
+✔ Recall options reveal without selecting and reset for the next card (48.6769ms)
+✔ periodic Recall refresh does not replace a focused manual or info control (65.5945ms)
+✔ Recall keeps a revealed card revealed after reload and exposes a labeled reveal control (49.0634ms)
+✔ Recall Copper gate rejects unopened, seen, partial and historical-only words (65.5193ms)
+✔ level exam unlocks exactly its sourced core vocabulary, never a following level (51.0748ms)
+✔ context, orphan and invalid central entries cannot enter any Recall pool (205.6293ms)
+✔ all active Recall entries have exact central source metadata and stable Dictionary IDs (51.3104ms)
+✔ hidden old review history survives reload and reappears only after legitimate completion (112.1425ms)
+✔ saved interrupted queues and direct rating cannot bypass the Copper gate (57.5205ms)
+✔ retries have distance, are limited to two, and never repeat a lone word (54.5774ms)
+✔ Dictionary from Recall preserves card, scheduling and ranks and cancels automatic advance (68.2619ms)
+✔ eligible word counts and per-direction reviews remain independent under the real gate (71.2622ms)
+✔ resumed answer choices are rebuilt if an old session contains future distractors (62.2836ms)
+✔ old pending queues lose accidental duplicates without merging translation directions (59.8009ms)
+✔ pre-remake storage snapshot is saved byte-for-byte before any migration (54.7385ms)
+✔ old lesson, exam and string-version Copper all restore the pool and both review directions (251.188ms)
+✔ retired month lesson Copper frees exactly its historical word IDs, not the whole new lesson (63.1273ms)
+✔ old supermarket exam moves to Level 15 without unlocking new Level 11 words (43.6833ms)
+✔ empty reasons distinguish new users, existing reviews, seen content, linking and stale assets (387.6995ms)
+✔ a string rank and whitespace ID are normalized conservatively; invalid formats are preserved (99.012ms)
+✖ Recall recovery pages have all keys in each locale, with Dutch fallback and one asset version (651.9118ms)
+ℹ tests 85
+ℹ suites 0
+ℹ pass 83
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6132.2175
+
+✖ failing tests:
+
+test at tests\kanji-exposure.test.cjs:13:1
+✖ known kanji appear in block B and keep the existing Recall word card (61.2906ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   'vocab-わたし'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (C:\Users\Spark PC\Documents\GitHub\language-Journey\tests\kanji-exposure.test.cjs:17:193)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'vocab-わたし' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\recall.test.cjs:737:1
+✖ Recall recovery pages have all keys in each locale, with Dutch fallback and one asset version (651.9118ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'recall-recovery-98560fe4140939a4'
+  - 'recall-recovery-b789c9c1923cffb8'
+                     ^
+  
+      at TestContext.<anonymous> (C:\Users\Spark PC\Documents\GitHub\language-Journey\tests\recall.test.cjs:742:135)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'recall-recovery-98560fe4140939a4',
+    expected: 'recall-recovery-b789c9c1923cffb8',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

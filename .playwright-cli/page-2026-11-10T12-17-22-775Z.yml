@@ -1,0 +1,23 @@
+- generic [active] [ref=f3e1]:
+  - generic [ref=f3e2]:
+    - navigation "Hoofdnavigatie" [ref=f3e8]:
+      - button "Leren" [ref=f3e9] [cursor=pointer]
+      - button "Recall" [ref=f3e10] [cursor=pointer]
+      - button "Voortgang" [ref=f3e11] [cursor=pointer]
+    - generic [ref=f3e110]:
+      - generic [ref=f3e159]:
+        - generic [ref=f3e160]: Japans → Nederlands · geplande herhaling · Kanji · レベル 11 · レッスン 1 · しつもん と こたえ
+        - generic [ref=f3e161]: Kaart 1 van 1 · 0 beoordeeld
+      - generic [ref=f3e163]:
+        - mark [ref=f3e167]: 私
+        - generic [ref=f3e168]:
+          - generic [ref=f3e169]: "Kies je antwoord:"
+          - button "ik" [ref=f3e171] [cursor=pointer]
+          - button "vraag" [ref=f3e173] [cursor=pointer]
+          - button "les" [ref=f3e175] [cursor=pointer]
+          - button "oefening" [ref=f3e177] [cursor=pointer]
+        - status [ref=f3e178]
+        - generic [ref=f3e179]:
+          - button "Sla over" [ref=f3e180] [cursor=pointer]
+          - button "Onderbreek sessie" [ref=f3e181] [cursor=pointer]
+  - status [ref=f3e100]

@@ -1,0 +1,100 @@
+- generic [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - generic [ref=f1e4]:
+      - button "App-home" [ref=f1e35] [cursor=pointer]: ⌂
+      - generic [ref=f1e7]:
+        - button "Woorden en tekens van deze les en dit level" [ref=f1e8] [cursor=pointer]: i
+        - navigation "Hoofdnavigatie" [ref=f1e9]:
+          - button "Leren" [ref=f1e10] [cursor=pointer]
+          - button "Recall" [ref=f1e11] [cursor=pointer]
+          - button "Voortgang" [ref=f1e12] [cursor=pointer]
+    - generic [ref=f1e36]:
+      - generic [ref=f1e37]:
+        - generic [ref=f1e38]: Mijn Japanse leerreis
+        - generic [ref=f1e39]: Je profiel, groei en bekende bouwstenen.
+      - generic [ref=f1e40]:
+        - tablist "Voortgang" [ref=f1e41]:
+          - tab "Voortgang" [selected] [ref=f1e42] [cursor=pointer]
+          - tab "Kennis" [ref=f1e43] [cursor=pointer]
+        - generic [ref=f1e44]:
+          - generic [ref=f1e45]:
+            - generic [ref=f1e46]: Je voortgang
+            - generic [ref=f1e47]:
+              - generic [ref=f1e48]: Periode
+              - combobox "Periode" [ref=f1e49]:
+                - option "Alles" [selected]
+                - option "Laatste 7 dagen"
+                - option "Laatste 30 dagen"
+                - option "Aangepast"
+            - generic [ref=f1e50]: Nog geen gedateerde metingen
+            - group "Grafiekperiode" [ref=f1e52]:
+              - slider "Begindatum van de grafiekperiode" [disabled]: "20767"
+              - slider "Einddatum van de grafiekperiode" [disabled]: "20767"
+            - generic [ref=f1e54]: Er is nog geen dagelijkse kanjigeschiedenis. Je huidige oefenstand staat hierboven.
+            - generic "Kies een grafiek of tik voor oefenstand" [ref=f1e56]:
+              - button "11 Woorden Toon grafiek" [ref=f1e126] [cursor=pointer]:
+                - strong [ref=f1e58]: "11"
+                - generic [ref=f1e59]: Woorden
+                - generic [ref=f1e60]: Toon grafiek
+              - button "1 Kanji · ontmoet ✓ Geselecteerd" [expanded] [active] [pressed] [ref=f1e127] [cursor=pointer]:
+                - strong [ref=f1e62]: "1"
+                - generic [ref=f1e63]: Kanji · ontmoet
+                - generic [ref=f1e64]: ✓ Geselecteerd
+              - button "0m Totale leertijd Toon grafiek" [ref=f1e65] [cursor=pointer]:
+                - strong [ref=f1e66]: 0m
+                - generic [ref=f1e67]: Totale leertijd
+                - generic [ref=f1e68]: Toon grafiek
+            - status [ref=f1e128]:
+              - strong [ref=f1e130]: 1 ontmoet · 1 ontgrendeld voor Recall
+              - strong [ref=f1e131]: "Telt mee: 0 kanjiteken"
+              - generic [ref=f1e132]: "0 volledig beheerst · 0 deels geoefend. Goed: +⅓ · fout: −⅓ · maximaal ⅔ verlies per eerder opgebouwd item."
+            - generic [ref=f1e69]: Tik op Woorden of Kanji voor de oefenstand. De grafiek toont opgeslagen metingen binnen de gekozen periode.
+          - region "JLPT-richtlijn" [ref=f1e70]:
+            - generic [ref=f1e71]:
+              - heading "JLPT-richtlijn" [level=2] [ref=f1e72]
+              - button "Info over de LJ JLPT-indicatie" [ref=f1e73] [cursor=pointer]: i
+            - group "Kies N5 tot en met N1" [ref=f1e74]:
+              - article [ref=f1e75]:
+                - button "Selecteer N5, 0,0%" [pressed] [ref=f1e76] [cursor=pointer]:
+                  - generic [ref=f1e77]: N5
+                  - progressbar "N5 indicatieve richtlijn" [ref=f1e78]
+                  - strong [ref=f1e79]: 0,0%
+                - button "Toon aantallen voor N5" [ref=f1e80] [cursor=pointer]: i
+              - article [ref=f1e81]:
+                - button "Selecteer N4, 0,0%" [ref=f1e82] [cursor=pointer]:
+                  - generic [ref=f1e83]: N4
+                  - progressbar "N4 indicatieve richtlijn" [ref=f1e84]
+                  - strong [ref=f1e85]: 0,0%
+                - button "Toon aantallen voor N4" [ref=f1e86] [cursor=pointer]: i
+              - article [ref=f1e87]:
+                - button "Selecteer N3, 0,0%" [ref=f1e88] [cursor=pointer]:
+                  - generic [ref=f1e89]: N3
+                  - progressbar "N3 indicatieve richtlijn" [ref=f1e90]
+                  - strong [ref=f1e91]: 0,0%
+                - button "Toon aantallen voor N3" [ref=f1e92] [cursor=pointer]: i
+              - article [ref=f1e93]:
+                - button "Selecteer N2, 0,0%" [ref=f1e94] [cursor=pointer]:
+                  - generic [ref=f1e95]: N2
+                  - progressbar "N2 indicatieve richtlijn" [ref=f1e96]
+                  - strong [ref=f1e97]: 0,0%
+                - button "Toon aantallen voor N2" [ref=f1e98] [cursor=pointer]: i
+              - article [ref=f1e99]:
+                - button "Selecteer N1, 0,0%" [ref=f1e100] [cursor=pointer]:
+                  - generic [ref=f1e101]: N1
+                  - progressbar "N1 indicatieve richtlijn" [ref=f1e102]
+                  - strong [ref=f1e103]: 0,0%
+                - button "Toon aantallen voor N1" [ref=f1e104] [cursor=pointer]: i
+          - generic [ref=f1e105]:
+            - generic [ref=f1e106]: Je voortgang bestond al vóór de tijdmeting
+            - generic [ref=f1e107]: Ranks en mastery blijven volledig behouden. Er wordt geen studietijd verzonnen; je kunt wel één transparante historische startwaarde toevoegen.
+            - generic [ref=f1e108]:
+              - button "Historische basis toevoegen" [ref=f1e109] [cursor=pointer]
+              - button "Niet nu" [ref=f1e110] [cursor=pointer]
+          - button "Recente activiteiten (0)" [ref=f1e112] [cursor=pointer]:
+            - generic [aria-hidden] [ref=f1e114]: ⌄
+          - button "Urenanalyse" [ref=f1e116] [cursor=pointer]:
+            - generic [aria-hidden] [ref=f1e118]: ⌄
+          - button "Tijdlijn" [ref=f1e120] [cursor=pointer]:
+            - generic [aria-hidden] [ref=f1e122]: ⌄
+      - button "Terug" [ref=f1e123] [cursor=pointer]
+  - status [ref=f1e34]

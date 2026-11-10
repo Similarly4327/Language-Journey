@@ -1,0 +1,41 @@
+- generic [ref=f3e1]:
+  - generic [ref=f3e2]:
+    - generic [ref=f3e4]:
+      - button "App-home" [ref=f3e6] [cursor=pointer]: ⌂
+      - navigation "Hoofdnavigatie" [ref=f3e8]:
+        - button "Leren" [ref=f3e9] [cursor=pointer]
+        - button "Recall" [active] [ref=f3e10] [cursor=pointer]
+        - button "Voortgang" [ref=f3e11] [cursor=pointer]
+    - generic [ref=f3e110]:
+      - generic [ref=f3e111]:
+        - generic [ref=f3e112]:
+          - generic [ref=f3e113]: Recall
+          - group [ref=f3e114]:
+            - generic "Hoe werkt Recall?" [ref=f3e115] [cursor=pointer]: ⓘ
+        - generic [ref=f3e116]: Recall herhaalt automatisch wat nu nuttig is.
+        - generic [ref=f3e117]: 10 woorden in Recall-pool · 11 kaarten
+        - generic [ref=f3e118]:
+          - generic [ref=f3e119]:
+            - strong [ref=f3e120]: "0"
+            - text: Aan de beurt
+          - generic [ref=f3e121]:
+            - strong [ref=f3e122]: "22"
+            - text: Nieuw
+          - generic [ref=f3e123]:
+            - strong [ref=f3e124]: "0"
+            - text: Later gepland
+        - generic [ref=f3e125]: Kaarten tellen beide vertaalrichtingen.
+        - generic [ref=f3e126]: "Pool: unieke vrijgespeelde woorden. Aan de beurt: bestaande kaarten waarvan de herhaaltijd is bereikt. Nieuw: kaarten zonder review. Later gepland: kaarten met een toekomstige herhaaltijd."
+        - status [ref=f3e127]: Geen herhalingen aan de beurt; nieuwe kaarten staan klaar.
+        - button "Start Recall · 20 kaarten" [ref=f3e128] [cursor=pointer]
+        - generic [ref=f3e129]: Start met maximaal 40 kaarten, waarvan maximaal 20 nieuwe. Stop gerust; de rest blijft beschikbaar.
+        - button "Oefen 1 nieuwe kanji →" [ref=f3e130] [cursor=pointer]
+      - group [ref=f3e131]:
+        - generic "Vrij oefenen Kies zelf levels, lessen en richting. ⌄" [ref=f3e132] [cursor=pointer]:
+          - generic [ref=f3e133]:
+            - text: Vrij oefenen
+            - generic [ref=f3e134]: Kies zelf levels, lessen en richting.
+          - text: ⌄
+        - option "Japans → Nederlands" [selected]
+        - option "Nederlands → Japans"
+  - status [ref=f3e100]

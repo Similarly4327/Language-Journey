@@ -1,0 +1,32 @@
+- generic [ref=f3e1]:
+  - generic [ref=f3e2]:
+    - generic [ref=f3e4]:
+      - button "Terug" [ref=f3e318] [cursor=pointer]: ←
+      - generic [ref=f3e7]:
+        - button "Woorden en tekens van deze les en dit level" [ref=f3e319] [cursor=pointer]: i
+        - navigation "Hoofdnavigatie" [ref=f3e8]:
+          - button "Leren" [ref=f3e9] [cursor=pointer]
+          - button "Recall" [ref=f3e10] [cursor=pointer]
+          - button "Voortgang" [active] [ref=f3e11] [cursor=pointer]
+    - main [ref=f3e320]:
+      - generic [ref=f3e321]:
+        - generic [ref=f3e322]: Level 11 · Les 1/5
+        - generic [ref=f3e323]: De les begint
+        - generic [ref=f3e324]: Een Japanse vraag, antwoord en goed/fout-aanduiding in de app herkennen.
+        - generic [ref=f3e325]: れんしゅう 1 ✓ れんしゅう 2 ✓ · geen kalenderdruk
+      - generic [ref=f3e326]:
+        - generic [ref=f3e327]:
+          - generic [ref=f3e328]: れんしゅう 1
+          - paragraph [ref=f3e329]: Woorden → oefenen → korte zinnen → toepassen.
+          - button "Opnieuw oefenen →" [ref=f3e330] [cursor=pointer]
+          - generic [ref=f3e331]: Afgerond
+        - generic [ref=f3e332]:
+          - generic [ref=f3e333]: れんしゅう 2
+          - paragraph [ref=f3e334]: Nieuwe woorden in twee kleine stappen, daarna toepassen.
+          - button "Opnieuw oefenen →" [ref=f3e335] [cursor=pointer]
+          - generic [ref=f3e336]: Afgerond
+        - generic [ref=f3e337]:
+          - strong [ref=f3e338]: Lestoets
+          - paragraph [ref=f3e339]: Vier toepassingsvragen · Copper.
+          - button "Lestoets →" [ref=f3e340] [cursor=pointer]
+  - status [ref=f3e100]

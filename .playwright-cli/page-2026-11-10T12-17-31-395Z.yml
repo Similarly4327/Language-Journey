@@ -1,0 +1,31 @@
+- generic [active] [ref=f3e1]:
+  - generic [ref=f3e2]:
+    - navigation "Hoofdnavigatie" [ref=f3e8]:
+      - button "Leren" [ref=f3e9] [cursor=pointer]
+      - button "Recall" [ref=f3e10] [cursor=pointer]
+      - button "Voortgang" [ref=f3e11] [cursor=pointer]
+    - generic [ref=f3e110]:
+      - generic [ref=f3e184]:
+        - generic [ref=f3e185]: Japans → Nederlands · geplande herhaling · Kanji · レベル 11 · レッスン 1 · しつもん と こたえ
+        - generic [ref=f3e186]: Kaart 1 van 1 · 1 beoordeeld
+      - generic [ref=f3e189]:
+        - mark [ref=f3e193]: 私
+        - generic [ref=f3e194]:
+          - generic [ref=f3e195]: "Antwoord nagekeken:"
+          - button "ik" [disabled] [pressed] [ref=f3e197]
+          - button "vraag" [disabled] [ref=f3e199]
+          - button "les" [disabled] [ref=f3e201]
+          - button "oefening" [disabled] [ref=f3e203]
+        - status [ref=f3e204]:
+          - text: Goed!
+          - generic [ref=f3e205]:
+            - text: "Juiste antwoord:"
+            - 'button "Open Dictionary: わたし" [ref=f3e206] [cursor=pointer]': わたし
+            - text: · ik
+            - generic [ref=f3e207]: Geïntroduceerd in レベル 11 · レッスン 1 · しつもん と こたえ
+        - generic [ref=f3e208]:
+          - button "Sla over" [disabled] [ref=f3e209]
+          - button "Volgende kaart" [ref=f3e210] [cursor=pointer]
+          - button "Onderbreek sessie" [ref=f3e211] [cursor=pointer]
+        - generic [ref=f3e212]: "Huidige planning: morgen · 13:17"
+  - status [ref=f3e100]

@@ -1,0 +1,208 @@
+- generic [ref=f3e1]:
+  - generic [ref=f3e2]:
+    - generic [ref=f3e4]:
+      - button "Terug" [ref=f3e318] [cursor=pointer]: ←
+      - generic [ref=f3e7]:
+        - button "Woorden en tekens van deze les en dit level" [ref=f3e319] [cursor=pointer]: i
+        - navigation "Hoofdnavigatie" [ref=f3e8]:
+          - button "Leren" [ref=f3e9] [cursor=pointer]
+          - button "Recall" [ref=f3e10] [cursor=pointer]
+          - button "Voortgang" [ref=f3e11] [cursor=pointer]
+    - main [ref=f3e320]:
+      - generic [ref=f3e321]:
+        - generic [ref=f3e322]: Level 11 · Les 1/5
+        - generic [ref=f3e323]: De les begint
+        - generic [ref=f3e324]: Een Japanse vraag, antwoord en goed/fout-aanduiding in de app herkennen.
+        - generic [ref=f3e325]: れんしゅう 1 ✓ れんしゅう 2 ✓ · geen kalenderdruk
+      - generic [ref=f3e326]:
+        - generic [ref=f3e327]:
+          - generic [ref=f3e328]: れんしゅう 1
+          - paragraph [ref=f3e329]: Woorden → oefenen → korte zinnen → toepassen.
+          - button "Opnieuw oefenen →" [ref=f3e330] [cursor=pointer]
+          - generic [ref=f3e331]: Afgerond
+        - generic [ref=f3e332]:
+          - generic [ref=f3e333]: れんしゅう 2
+          - paragraph [ref=f3e334]: Nieuwe woorden in twee kleine stappen, daarna toepassen.
+          - button "Opnieuw oefenen →" [ref=f3e335] [cursor=pointer]
+          - generic [ref=f3e336]: Afgerond
+        - generic [ref=f3e337]:
+          - strong [ref=f3e338]: Lestoets
+          - paragraph [ref=f3e339]: Vier toepassingsvragen · Copper.
+          - button "Lestoets →" [ref=f3e340] [cursor=pointer]
+  - dialog "わたし Luister naar de uitspraak van わたし" [ref=f3e487]:
+    - generic [ref=f3e488]:
+      - generic [ref=f3e489]: Dictionary · naslag
+      - button "Dictionary sluiten" [ref=f3e490] [cursor=pointer]: Sluiten ×
+    - article [ref=f3e492]:
+      - generic [ref=f3e493]: Woord · Level 3 · Les 3
+      - heading [level=2] [ref=f3e494]:
+        - text: わたし
+        - button "Luister naar de uitspraak van わたし" [active] [pressed] [ref=f3e495] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f3e496]: 🔊
+      - generic [ref=f3e497]: Cursuswoord
+      - strong [ref=f3e499]: ik
+      - generic [ref=f3e500]:
+        - text: "Kana-lezing / romaji:"
+        - strong [ref=f3e501]: わたし · watashi
+      - generic [ref=f3e502]: "Kanji: 私 · lezing: わたし · schrijfwijze geïntroduceerd in Level 11 · Les 1"
+      - generic [ref=f3e503]:
+        - strong [ref=f3e504]: In deze zin
+        - generic [ref=f3e505]: 私
+        - generic [ref=f3e506]: ik
+      - generic [ref=f3e507]: Level 3 · Les 3 · Topicstructuur
+      - button "Extra oefenen" [ref=f3e508] [cursor=pointer]
+  - status [ref=f3e100]: Audio speelt
+  - status [ref=f3e509]:
+    - generic [ref=f3e510]:
+      - generic [ref=f3e512]:
+        - generic [ref=f3e513]: Miku leest voor
+        - generic [ref=f3e514]: わたし
+        - status [ref=f3e515]: Afspelen…
+      - generic [ref=f3e516]:
+        - button "Opnieuw afspelen" [ref=f3e517] [cursor=pointer]: ↻
+        - button "Coach sluiten" [ref=f3e518] [cursor=pointer]: ×
+  - dialog "Woorden en tekens" [ref=f3e342]:
+    - generic [ref=f3e343]:
+      - heading "Woorden en tekens" [level=2] [ref=f3e344]
+      - button "Sluiten ×" [ref=f3e345] [cursor=pointer]
+    - paragraph [ref=f3e346]: Dit overzicht is naslag. Bekijken verandert je voortgang niet.
+    - generic [ref=f3e347]:
+      - generic [ref=f3e348]:
+        - heading "Deze les" [level=3] [ref=f3e349]
+        - generic [ref=f3e350]:
+          - button "レベル" [ref=f3e351] [cursor=pointer]
+          - generic [ref=f3e352]: reberu · level · Level 11 · Les 1 · Bekend
+        - generic [ref=f3e353]:
+          - button "レッスン" [ref=f3e354] [cursor=pointer]
+          - generic [ref=f3e355]: ressun · les · Level 11 · Les 1 · Bekend
+        - generic [ref=f3e356]:
+          - button "しつもん" [ref=f3e357] [cursor=pointer]
+          - generic [ref=f3e358]: shitsumon · vraag · Level 11 · Les 1 · Bekend
+        - generic [ref=f3e359]:
+          - button "こたえ" [ref=f3e360] [cursor=pointer]
+          - generic [ref=f3e361]: kotae · antwoord · Level 11 · Les 1 · Bekend
+        - generic [ref=f3e362]:
+          - button "えらびます" [ref=f3e363] [cursor=pointer]
+          - generic [ref=f3e364]: erabimasu · kiezen · Level 11 · Les 1 · Bekend
+        - generic [ref=f3e365]:
+          - button "もんだい" [ref=f3e366] [cursor=pointer]
+          - generic [ref=f3e367]: mondai · opgave · Level 11 · Les 1 · Bekend
+        - generic [ref=f3e368]:
+          - button "れんしゅう" [ref=f3e369] [cursor=pointer]
+          - generic [ref=f3e370]: renshū · oefening · Level 11 · Les 1 · Bekend
+        - generic [ref=f3e371]:
+          - button "ただしい" [ref=f3e372] [cursor=pointer]
+          - generic [ref=f3e373]: tadashii · juist · Level 11 · Les 1 · Bekend
+        - generic [ref=f3e374]:
+          - button "まちがい" [ref=f3e375] [cursor=pointer]
+          - generic [ref=f3e376]: machigai · fout · Level 11 · Les 1 · Bekend
+        - generic [ref=f3e377]:
+          - button "もういちど" [ref=f3e378] [cursor=pointer]
+          - generic [ref=f3e379]: mō ichido · nog een keer · Level 11 · Les 1 · Bekend
+        - generic [ref=f3e380]:
+          - button "私" [ref=f3e381] [cursor=pointer]
+          - generic [ref=f3e382]: わたし · Schrijfwijze · Schrijfwijze · Level 11 · Les 1 · Ontgrendeld voor Recall
+      - generic [ref=f3e383]:
+        - heading "Dit level" [level=3] [ref=f3e384]
+        - generic [ref=f3e385]:
+          - button "せつめい" [ref=f3e386] [cursor=pointer]
+          - generic [ref=f3e387]: setsumei · uitleg · Level 11 · Les 2 · Vooruitblik
+        - generic [ref=f3e388]:
+          - button "ぶん" [ref=f3e389] [cursor=pointer]
+          - generic [ref=f3e390]: bun · zin · Level 11 · Les 2 · Vooruitblik
+        - generic [ref=f3e391]:
+          - button "ことば" [ref=f3e392] [cursor=pointer]
+          - generic [ref=f3e393]: kotoba · woord · Level 11 · Les 2 · Vooruitblik
+        - generic [ref=f3e394]:
+          - button "いみ" [ref=f3e395] [cursor=pointer]
+          - generic [ref=f3e396]: imi · betekenis · Level 11 · Les 2 · Vooruitblik
+        - generic [ref=f3e397]:
+          - button "みつけます" [ref=f3e398] [cursor=pointer]
+          - generic [ref=f3e399]: mitsukemasu · vinden · Level 11 · Les 2 · Vooruitblik
+        - generic [ref=f3e400]:
+          - button "よんでください" [ref=f3e401] [cursor=pointer]
+          - generic [ref=f3e402]: yonde kudasai · lees alstublieft · Level 11 · Les 2 · Vooruitblik
+        - generic [ref=f3e403]:
+          - button "ページ" [ref=f3e404] [cursor=pointer]
+          - generic [ref=f3e405]: pēji · pagina · Level 11 · Les 2 · Vooruitblik
+        - generic [ref=f3e406]:
+          - button "タイトル" [ref=f3e407] [cursor=pointer]
+          - generic [ref=f3e408]: taitoru · titel · Level 11 · Les 2 · Vooruitblik
+        - generic [ref=f3e409]:
+          - button "もじ" [ref=f3e410] [cursor=pointer]
+          - generic [ref=f3e411]: moji · teken / letter · Level 11 · Les 2 · Vooruitblik
+        - generic [ref=f3e412]:
+          - button "しるし" [ref=f3e413] [cursor=pointer]
+          - generic [ref=f3e414]: shirushi · markering · Level 11 · Les 2 · Vooruitblik
+        - generic [ref=f3e415]:
+          - button "きいてください" [ref=f3e416] [cursor=pointer]
+          - generic [ref=f3e417]: kiite kudasai · luister alstublieft · Level 11 · Les 3 · Vooruitblik
+        - generic [ref=f3e418]:
+          - button "おと" [ref=f3e419] [cursor=pointer]
+          - generic [ref=f3e420]: oto · geluid · Level 11 · Les 3 · Vooruitblik
+        - generic [ref=f3e421]:
+          - button "おんせい" [ref=f3e422] [cursor=pointer]
+          - generic [ref=f3e423]: onsei · audio / stemgeluid · Level 11 · Les 3 · Vooruitblik
+        - generic [ref=f3e424]:
+          - button "ゆっくり" [ref=f3e425] [cursor=pointer]
+          - generic [ref=f3e426]: yukkuri · langzaam · Level 11 · Les 3 · Vooruitblik
+        - generic [ref=f3e427]:
+          - button "くりかえします" [ref=f3e428] [cursor=pointer]
+          - generic [ref=f3e429]: kurikaeshimasu · herhalen · Level 11 · Les 3 · Vooruitblik
+        - generic [ref=f3e430]:
+          - button "うめてください" [ref=f3e431] [cursor=pointer]
+          - generic [ref=f3e432]: umete kudasai · vul alstublieft in · Level 11 · Les 3 · Vooruitblik
+        - generic [ref=f3e433]:
+          - button "くうらん" [ref=f3e434] [cursor=pointer]
+          - generic [ref=f3e435]: kūran · open vak · Level 11 · Les 3 · Vooruitblik
+        - generic [ref=f3e436]:
+          - button "かいてください" [ref=f3e437] [cursor=pointer]
+          - generic [ref=f3e438]: kaite kudasai · schrijf alstublieft · Level 11 · Les 3 · Vooruitblik
+        - generic [ref=f3e439]:
+          - button "きごう" [ref=f3e440] [cursor=pointer]
+          - generic [ref=f3e441]: kigō · symbool · Level 11 · Les 3 · Vooruitblik
+        - generic [ref=f3e442]:
+          - button "まる" [ref=f3e443] [cursor=pointer]
+          - generic [ref=f3e444]: maru · cirkel · Level 11 · Les 3 · Vooruitblik
+        - generic [ref=f3e445]:
+          - button "じゅんばん" [ref=f3e446] [cursor=pointer]
+          - generic [ref=f3e447]: junban · volgorde · Level 11 · Les 4 · Vooruitblik
+        - generic [ref=f3e448]:
+          - button "ならべます" [ref=f3e449] [cursor=pointer]
+          - generic [ref=f3e450]: narabemasu · op volgorde zetten · Level 11 · Les 4 · Vooruitblik
+        - generic [ref=f3e451]:
+          - button "さいしょ" [ref=f3e452] [cursor=pointer]
+          - generic [ref=f3e453]: saisho · eerst · Level 11 · Les 4 · Vooruitblik
+        - generic [ref=f3e454]:
+          - button "つぎ" [ref=f3e455] [cursor=pointer]
+          - generic [ref=f3e456]: tsugi · volgende · Level 11 · Les 4 · Vooruitblik
+        - generic [ref=f3e457]:
+          - button "おわり" [ref=f3e458] [cursor=pointer]
+          - generic [ref=f3e459]: owari · einde · Level 11 · Les 4 · Vooruitblik
+        - generic [ref=f3e460]:
+          - button "はじめます" [ref=f3e461] [cursor=pointer]
+          - generic [ref=f3e462]: hajimemasu · beginnen · Level 11 · Les 4 · Vooruitblik
+        - generic [ref=f3e463]:
+          - button "かくにん" [ref=f3e464] [cursor=pointer]
+          - generic [ref=f3e465]: kakunin · controleren · Level 11 · Les 4 · Vooruitblik
+        - generic [ref=f3e466]:
+          - button "りょこう" [ref=f3e467] [cursor=pointer]
+          - generic [ref=f3e468]: ryokō · reis · Level 11 · Les 4 · Vooruitblik
+        - generic [ref=f3e469]:
+          - button "じゅんび" [ref=f3e470] [cursor=pointer]
+          - generic [ref=f3e471]: junbi · voorbereiding · Level 11 · Les 4 · Vooruitblik
+        - generic [ref=f3e472]:
+          - button "ひこうき" [ref=f3e473] [cursor=pointer]
+          - generic [ref=f3e474]: hikōki · vliegtuig · Level 11 · Les 4 · Vooruitblik
+        - generic [ref=f3e475]:
+          - button "〜てください" [ref=f3e476] [cursor=pointer]
+          - generic [ref=f3e477]: te kudasai / de kudasai · Een beleefde opdracht herkennen · Level 11 · Les 2 · Vooruitblik
+        - generic [ref=f3e478]:
+          - button "と" [ref=f3e479] [cursor=pointer]
+          - generic [ref=f3e480]: "to · Naamwoorden verbinden: en · Level 11 · Les 2 · Vooruitblik"
+        - generic [ref=f3e481]:
+          - button "見ます" [ref=f3e482] [cursor=pointer]
+          - generic [ref=f3e483]: みます · Schrijfwijze · Schrijfwijze · Level 11 · Les 3 · Vooruitblik
+        - generic [ref=f3e484]:
+          - button "行きます" [ref=f3e485] [cursor=pointer]
+          - generic [ref=f3e486]: いきます · Schrijfwijze · Schrijfwijze · Level 11 · Les 4 · Vooruitblik

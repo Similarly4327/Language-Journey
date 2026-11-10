@@ -1,0 +1,49 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - button "Terug" [ref=e6] [cursor=pointer]: ←
+      - generic [ref=e7]:
+        - button "Woorden en tekens van deze les en dit level" [ref=e8] [cursor=pointer]: i
+        - navigation "Hoofdnavigatie" [ref=e9]:
+          - button "Leren" [ref=e10] [cursor=pointer]
+          - button "Recall" [ref=e11] [cursor=pointer]
+          - button "Voortgang" [ref=e12] [cursor=pointer]
+    - main [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e15]: Level 11
+        - generic [ref=e16]: Vakantiecursus thuis
+        - paragraph [ref=e17]: Vier lessen en een integratie-examen in les 5.
+        - paragraph [ref=e18]: "Als richttempo kun je één les per dag doen, met het examen op een vijfde leerdag: ongeveer één level per week. Geen dagverplichting of kalenderblokkade. Recall staat hier los van."
+        - generic [ref=e19]: "0/4 lessen doorlopen · examenrank: Geen rank"
+      - generic [ref=e20]:
+        - button "Les 1 De les begint Oefening 1 · Oefening 2 · 0/2 afgerond Geen rank" [ref=e21] [cursor=pointer]:
+          - generic [ref=e22]: Les 1
+          - generic [ref=e23]: De les begint
+          - generic [ref=e24]: Oefening 1 · Oefening 2 · 0/2 afgerond
+          - generic [ref=e25]: Geen rank
+        - button "Les 2 Lezen en betekenis Oefening 1 · Oefening 2 · 0/2 afgerond Geen rank" [ref=e26] [cursor=pointer]:
+          - generic [ref=e27]: Les 2
+          - generic [ref=e28]: Lezen en betekenis
+          - generic [ref=e29]: Oefening 1 · Oefening 2 · 0/2 afgerond
+          - generic [ref=e30]: Geen rank
+        - button "Les 3 Luisteren en invullen Oefening 1 · Oefening 2 · 0/2 afgerond Geen rank" [ref=e31] [cursor=pointer]:
+          - generic [ref=e32]: Les 3
+          - generic [ref=e33]: Luisteren en invullen
+          - generic [ref=e34]: Oefening 1 · Oefening 2 · 0/2 afgerond
+          - generic [ref=e35]: Geen rank
+        - button "Les 4 Volgorde en volgende stap Oefening 1 · Oefening 2 · 0/2 afgerond Geen rank" [ref=e36] [cursor=pointer]:
+          - generic [ref=e37]: Les 4
+          - generic [ref=e38]: Volgorde en volgende stap
+          - generic [ref=e39]: Oefening 1 · Oefening 2 · 0/2 afgerond
+          - generic [ref=e40]: Geen rank
+        - button "Les 5 Integratie-examen Drie bronnen · 12 toepassingsvragen · geen nieuwe woorden Geen rank" [ref=e41] [cursor=pointer]:
+          - generic [ref=e42]: Les 5
+          - generic [ref=e43]: Integratie-examen
+          - generic [ref=e44]: Drie bronnen · 12 toepassingsvragen · geen nieuwe woorden
+          - generic [ref=e45]: Geen rank
+        - button "Storytime · vrijwillig Weer thuis Een kort verhaal in twee leesrondes. Je kunt meteen beginnen." [ref=e46] [cursor=pointer]:
+          - generic [ref=e47]: Storytime · vrijwillig
+          - generic [ref=e48]: Weer thuis
+          - generic [ref=e49]: Een kort verhaal in twee leesrondes. Je kunt meteen beginnen.
+        - button "Bonus · vrijwillig · een extra scène" [disabled] [ref=e50]
+  - status [ref=e51]

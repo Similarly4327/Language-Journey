@@ -1,0 +1,32 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - button "Terug" [ref=e6] [cursor=pointer]: ←
+      - generic [ref=e7]:
+        - button "Woorden en tekens van deze les en dit level" [ref=e8] [cursor=pointer]: i
+        - navigation "Hoofdnavigatie" [ref=e9]:
+          - button "Leren" [ref=e10] [cursor=pointer]
+          - button "Recall" [ref=e11] [cursor=pointer]
+          - button "Voortgang" [ref=e12] [cursor=pointer]
+    - main [ref=e13]:
+      - generic [ref=e52]:
+        - generic [ref=e53]: Level 11 · Les 1/5
+        - generic [ref=e54]: De les begint
+        - generic [ref=e55]: Een Japanse vraag, antwoord en goed/fout-aanduiding in de app herkennen.
+        - generic [ref=e56]: Oefening 1 Oefening 2 · geen kalenderdruk
+      - generic [ref=e57]:
+        - generic [ref=e58]:
+          - generic [ref=e59]: Oefening 1
+          - paragraph [ref=e60]: Woorden → oefenen → korte zinnen → toepassen.
+          - button "Begin →" [ref=e61] [cursor=pointer]
+          - generic [ref=e62]: Nog te doen
+        - generic [ref=e63]:
+          - generic [ref=e64]: Oefening 2
+          - paragraph [ref=e65]: Nieuwe woorden in twee kleine stappen, daarna toepassen.
+          - button "Begin →" [disabled] [ref=e66]
+          - generic [ref=e67]: Open na Oefening 1
+        - generic [ref=e68]:
+          - strong [ref=e69]: Lestoets
+          - paragraph [ref=e70]: Vier toepassingsvragen · Geen rank.
+          - button "Lestoets →" [disabled] [ref=e71]
+  - status [ref=e51]
