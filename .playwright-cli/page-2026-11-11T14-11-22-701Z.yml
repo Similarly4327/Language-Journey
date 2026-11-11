@@ -1,0 +1,163 @@
+- generic [active] [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - generic [ref=f1e4]:
+      - button "Terug" [ref=f1e127] [cursor=pointer]: ←
+      - navigation "Hoofdnavigatie" [ref=f1e8]:
+        - button "Leren" [ref=f1e9] [cursor=pointer]
+        - button "Recall" [ref=f1e10] [cursor=pointer]
+        - button "Voortgang" [ref=f1e11] [cursor=pointer]
+    - main [ref=f1e12]:
+      - generic [ref=f1e144]:
+        - button "Bekijk woorden en kanji uit dit lied" [ref=f1e145] [cursor=pointer]: i
+        - generic [ref=f1e146]: Anime & Muziek
+        - generic [ref=f1e147]: Woorden leren
+        - paragraph [ref=f1e148]: Kies een woordgroep om te leren of te herhalen.
+        - button "Verder leren · les 1 →" [ref=f1e149] [cursor=pointer]
+        - generic [ref=f1e150]:
+          - generic [ref=f1e151]:
+            - button "Les 1 Woordgroep 1 Nog niet gestart · 3 woorden" [ref=f1e152] [cursor=pointer]:
+              - generic [ref=f1e154]:
+                - generic [ref=f1e155]: Les 1
+                - generic [ref=f1e156]: Woordgroep 1
+              - generic [ref=f1e157]: Nog niet gestart · 3 woorden
+            - button "Kanji oefenen bij woordgroep 1" [ref=f1e158] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e159]: 漢
+              - generic [ref=f1e160]: Kanji oefenen
+          - generic [ref=f1e161]:
+            - button "Les 2 Woordgroep 2 Nog niet gestart · 3 woorden" [ref=f1e162] [cursor=pointer]:
+              - generic [ref=f1e164]:
+                - generic [ref=f1e165]: Les 2
+                - generic [ref=f1e166]: Woordgroep 2
+              - generic [ref=f1e167]: Nog niet gestart · 3 woorden
+            - button "Kanji oefenen bij woordgroep 2" [ref=f1e168] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e169]: 漢
+              - generic [ref=f1e170]: Kanji oefenen
+          - generic [ref=f1e171]:
+            - button "Les 3 Woordgroep 3 Nog niet gestart · 3 woorden" [ref=f1e172] [cursor=pointer]:
+              - generic [ref=f1e174]:
+                - generic [ref=f1e175]: Les 3
+                - generic [ref=f1e176]: Woordgroep 3
+              - generic [ref=f1e177]: Nog niet gestart · 3 woorden
+            - button "Kanji oefenen bij woordgroep 3" [ref=f1e178] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e179]: 漢
+              - generic [ref=f1e180]: Kanji oefenen
+          - generic [ref=f1e181]:
+            - button "Les 4 Woordgroep 4 Nog niet gestart · 3 woorden" [ref=f1e182] [cursor=pointer]:
+              - generic [ref=f1e184]:
+                - generic [ref=f1e185]: Les 4
+                - generic [ref=f1e186]: Woordgroep 4
+              - generic [ref=f1e187]: Nog niet gestart · 3 woorden
+            - button "Kanji oefenen bij woordgroep 4" [ref=f1e188] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e189]: 漢
+              - generic [ref=f1e190]: Kanji oefenen
+          - generic [ref=f1e191]:
+            - button "Les 5 Woordgroep 5 Nog niet gestart · 3 woorden" [ref=f1e192] [cursor=pointer]:
+              - generic [ref=f1e194]:
+                - generic [ref=f1e195]: Les 5
+                - generic [ref=f1e196]: Woordgroep 5
+              - generic [ref=f1e197]: Nog niet gestart · 3 woorden
+            - button "Kanji oefenen bij woordgroep 5" [ref=f1e198] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e199]: 漢
+              - generic [ref=f1e200]: Kanji oefenen
+          - generic [ref=f1e201]:
+            - button "Les 6 Woordgroep 6 Nog niet gestart · 3 woorden" [ref=f1e202] [cursor=pointer]:
+              - generic [ref=f1e204]:
+                - generic [ref=f1e205]: Les 6
+                - generic [ref=f1e206]: Woordgroep 6
+              - generic [ref=f1e207]: Nog niet gestart · 3 woorden
+            - button "Kanji oefenen bij woordgroep 6" [ref=f1e208] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e209]: 漢
+              - generic [ref=f1e210]: Kanji oefenen
+          - generic [ref=f1e211]:
+            - button "Les 7 Woordgroep 7 Nog niet gestart · 3 woorden" [ref=f1e212] [cursor=pointer]:
+              - generic [ref=f1e214]:
+                - generic [ref=f1e215]: Les 7
+                - generic [ref=f1e216]: Woordgroep 7
+              - generic [ref=f1e217]: Nog niet gestart · 3 woorden
+            - button "Kanji oefenen bij woordgroep 7" [ref=f1e218] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e219]: 漢
+              - generic [ref=f1e220]: Kanji oefenen
+          - generic [ref=f1e221]:
+            - button "Les 8 Woordgroep 8 Nog niet gestart · 3 woorden" [ref=f1e222] [cursor=pointer]:
+              - generic [ref=f1e224]:
+                - generic [ref=f1e225]: Les 8
+                - generic [ref=f1e226]: Woordgroep 8
+              - generic [ref=f1e227]: Nog niet gestart · 3 woorden
+            - button "Kanji oefenen bij woordgroep 8" [ref=f1e228] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e229]: 漢
+              - generic [ref=f1e230]: Kanji oefenen
+          - generic [ref=f1e231]:
+            - button "Les 9 Woordgroep 9 Nog niet gestart · 3 woorden" [ref=f1e232] [cursor=pointer]:
+              - generic [ref=f1e234]:
+                - generic [ref=f1e235]: Les 9
+                - generic [ref=f1e236]: Woordgroep 9
+              - generic [ref=f1e237]: Nog niet gestart · 3 woorden
+            - button "Kanji oefenen bij woordgroep 9" [ref=f1e238] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e239]: 漢
+              - generic [ref=f1e240]: Kanji oefenen
+          - generic [ref=f1e241]:
+            - button "Les 10 Woordgroep 10 Nog niet gestart · 3 woorden" [ref=f1e242] [cursor=pointer]:
+              - generic [ref=f1e244]:
+                - generic [ref=f1e245]: Les 10
+                - generic [ref=f1e246]: Woordgroep 10
+              - generic [ref=f1e247]: Nog niet gestart · 3 woorden
+            - button "Kanji oefenen bij woordgroep 10" [ref=f1e248] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e249]: 漢
+              - generic [ref=f1e250]: Kanji oefenen
+          - generic [ref=f1e251]:
+            - button "Les 11 Woordgroep 11 Nog niet gestart · 3 woorden" [ref=f1e252] [cursor=pointer]:
+              - generic [ref=f1e254]:
+                - generic [ref=f1e255]: Les 11
+                - generic [ref=f1e256]: Woordgroep 11
+              - generic [ref=f1e257]: Nog niet gestart · 3 woorden
+            - button "Kanji oefenen bij woordgroep 11" [ref=f1e258] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e259]: 漢
+              - generic [ref=f1e260]: Kanji oefenen
+          - generic [ref=f1e261]:
+            - button "Les 12 Woordgroep 12 Nog niet gestart · 3 woorden" [ref=f1e262] [cursor=pointer]:
+              - generic [ref=f1e264]:
+                - generic [ref=f1e265]: Les 12
+                - generic [ref=f1e266]: Woordgroep 12
+              - generic [ref=f1e267]: Nog niet gestart · 3 woorden
+            - button "Kanji oefenen bij woordgroep 12" [ref=f1e268] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e269]: 漢
+              - generic [ref=f1e270]: Kanji oefenen
+          - generic [ref=f1e271]:
+            - button "Les 13 Woordgroep 13 Nog niet gestart · 3 woorden" [ref=f1e272] [cursor=pointer]:
+              - generic [ref=f1e274]:
+                - generic [ref=f1e275]: Les 13
+                - generic [ref=f1e276]: Woordgroep 13
+              - generic [ref=f1e277]: Nog niet gestart · 3 woorden
+            - button "Kanji oefenen bij woordgroep 13" [ref=f1e278] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e279]: 漢
+              - generic [ref=f1e280]: Kanji oefenen
+          - generic [ref=f1e281]:
+            - button "Les 14 Woordgroep 14 Nog niet gestart · 3 woorden" [ref=f1e282] [cursor=pointer]:
+              - generic [ref=f1e284]:
+                - generic [ref=f1e285]: Les 14
+                - generic [ref=f1e286]: Woordgroep 14
+              - generic [ref=f1e287]: Nog niet gestart · 3 woorden
+            - button "Kanji oefenen bij woordgroep 14" [ref=f1e288] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e289]: 漢
+              - generic [ref=f1e290]: Kanji oefenen
+          - generic [ref=f1e291]:
+            - button "Les 15 Woordgroep 15 Nog niet gestart · 3 woorden" [ref=f1e292] [cursor=pointer]:
+              - generic [ref=f1e294]:
+                - generic [ref=f1e295]: Les 15
+                - generic [ref=f1e296]: Woordgroep 15
+              - generic [ref=f1e297]: Nog niet gestart · 3 woorden
+            - button "Kanji oefenen bij woordgroep 15" [ref=f1e298] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e299]: 漢
+              - generic [ref=f1e300]: Kanji oefenen
+          - button "Les 16 Woordgroep 16 Nog niet gestart · 3 woorden" [ref=f1e302] [cursor=pointer]:
+            - generic [ref=f1e304]:
+              - generic [ref=f1e305]: Les 16
+              - generic [ref=f1e306]: Woordgroep 16
+            - generic [ref=f1e307]: Nog niet gestart · 3 woorden
+          - button "Les 17 Woordgroep 17 Nog niet gestart · 3 woorden" [ref=f1e309] [cursor=pointer]:
+            - generic [ref=f1e311]:
+              - generic [ref=f1e312]: Les 17
+              - generic [ref=f1e313]: Woordgroep 17
+            - generic [ref=f1e314]: Nog niet gestart · 3 woorden
+        - button "Terug naar de leerblokken" [ref=f1e315] [cursor=pointer]
+  - status [ref=f1e126]

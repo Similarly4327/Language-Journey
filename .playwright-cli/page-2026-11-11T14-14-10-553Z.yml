@@ -1,0 +1,26 @@
+- generic [active] [ref=f3e1]:
+  - generic [ref=f3e2]:
+    - generic [ref=f3e4]:
+      - button "Terug" [ref=f3e127] [cursor=pointer]: ←
+      - navigation "Hoofdnavigatie" [ref=f3e8]:
+        - button "Leren" [ref=f3e9] [cursor=pointer]
+        - button "Recall" [ref=f3e10] [cursor=pointer]
+        - button "Voortgang" [ref=f3e11] [cursor=pointer]
+    - main [ref=f3e12]:
+      - generic [ref=f3e128]:
+        - button "Bekijk woorden en kanji uit dit lied" [ref=f3e129] [cursor=pointer]: i
+        - generic [ref=f3e130]: Anime & Muziek · vrijwillig
+        - generic [ref=f3e131]: 五等分の気持ち
+        - paragraph [ref=f3e132]: Gevoelens in vijf gelijke delen
+        - paragraph [ref=f3e133]: 中野家の五つ子 · 五等分の花嫁 / The Quintessential Quintuplets
+        - paragraph [ref=f3e134]: Leer woorden en herkenbare zinnen in twee optionele blokken. Je gewone cursuslevel verandert niet.
+        - generic [ref=f3e135]:
+          - button "01 Woorden leren Woorden, uitspraak en kanji in kleine stappen" [ref=f3e136] [cursor=pointer]:
+            - generic [ref=f3e137]: "01"
+            - strong [ref=f3e138]: Woorden leren
+            - generic [ref=f3e139]: Woorden, uitspraak en kanji in kleine stappen
+          - button "02 Context leren Korte zinnen, betekenis en nuance" [ref=f3e140] [cursor=pointer]:
+            - generic [ref=f3e141]: "02"
+            - strong [ref=f3e142]: Context leren
+            - generic [ref=f3e143]: Korte zinnen, betekenis en nuance
+  - status [ref=f3e126]

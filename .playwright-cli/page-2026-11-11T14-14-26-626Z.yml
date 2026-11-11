@@ -1,0 +1,22 @@
+- generic [active] [ref=f3e1]:
+  - generic [ref=f3e2]:
+    - generic [ref=f3e4]:
+      - button "Terug" [ref=f3e127] [cursor=pointer]: ←
+      - navigation "Hoofdnavigatie" [ref=f3e8]:
+        - button "Leren" [ref=f3e9] [cursor=pointer]
+        - button "Recall" [ref=f3e10] [cursor=pointer]
+        - button "Voortgang" [ref=f3e11] [cursor=pointer]
+    - main [ref=f3e12]:
+      - generic [ref=f3e317]:
+        - button "Bekijk woorden en kanji uit dit lied" [ref=f3e318] [cursor=pointer]: i
+        - generic [ref=f3e319]: Woorden leren · kanji 1
+        - generic [ref=f3e320]: Een bekend woord, met kanji
+        - paragraph [ref=f3e321]: Je kent het woord al. Luister eerst naar de kana-lezing en bekijk daarna de schrijfwijze.
+        - generic [ref=f3e322]:
+          - strong [ref=f3e323]: 喜び
+          - text: · よろこび · yorokobi
+          - button "Luister naar het bekende woord" [ref=f3e324] [cursor=pointer]:
+            - generic [aria-hidden] [ref=f3e325]: 🔊
+          - generic [ref=f3e326]: vreugde
+        - button "Oefen deze schrijfwijze →" [ref=f3e327] [cursor=pointer]
+  - status [ref=f3e126]

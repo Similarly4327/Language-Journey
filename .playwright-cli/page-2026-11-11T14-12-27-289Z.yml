@@ -1,0 +1,16 @@
+- generic [active] [ref=f2e1]:
+  - generic [ref=f2e2]:
+    - generic [ref=f2e4]:
+      - button "Terug" [ref=f2e127] [cursor=pointer]: ←
+      - navigation "Hoofdnavigatie" [ref=f2e8]:
+        - button "Leren" [ref=f2e9] [cursor=pointer]
+        - button "Recall" [ref=f2e10] [cursor=pointer]
+        - button "Voortgang" [ref=f2e11] [cursor=pointer]
+    - main [ref=f2e12]:
+      - generic [ref=f2e316]:
+        - button "Bekijk woorden en kanji uit dit lied" [ref=f2e317] [cursor=pointer]: i
+        - generic [ref=f2e318]: Woorden leren
+        - generic [ref=f2e319]: Leer eerst de woorden
+        - paragraph [ref=f2e320]: Leer eerst de woorden van deze groep. Daarna kun je hun kanji hier oefenen.
+        - button "Terug naar de woordgroepen" [ref=f2e321] [cursor=pointer]
+  - status [ref=f2e126]

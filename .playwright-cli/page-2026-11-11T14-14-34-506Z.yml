@@ -1,0 +1,23 @@
+- generic [active] [ref=f3e1]:
+  - generic [ref=f3e2]:
+    - generic [ref=f3e4]:
+      - button "Terug" [ref=f3e127] [cursor=pointer]: ←
+      - navigation "Hoofdnavigatie" [ref=f3e8]:
+        - button "Leren" [ref=f3e9] [cursor=pointer]
+        - button "Recall" [ref=f3e10] [cursor=pointer]
+        - button "Voortgang" [ref=f3e11] [cursor=pointer]
+    - main [ref=f3e12]:
+      - generic [ref=f3e328]:
+        - button "Bekijk woorden en kanji uit dit lied" [ref=f3e329] [cursor=pointer]: i
+        - generic [ref=f3e330]: Woorden leren · kanji oefenen 1/2
+        - generic [ref=f3e331]:
+          - generic [ref=f3e332]: kanji oefenen
+          - generic [ref=f3e333]: Vraag 1/2
+        - progressbar "kanji oefenen" [ref=f3e334]
+        - paragraph [ref=f3e335]: Kijk naar het woord dat je net hebt geleerd.
+        - generic [ref=f3e336]: Welk kanjiteken hoort bij よろこび?
+        - generic [ref=f3e337]:
+          - button "忘" [ref=f3e338] [cursor=pointer]
+          - button "持" [ref=f3e339] [cursor=pointer]
+          - button "喜" [ref=f3e340] [cursor=pointer]
+  - status [ref=f3e126]
