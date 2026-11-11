@@ -30,9 +30,9 @@ test('seen, completed exercise and passed lesson have distinct kanji status and 
   app.rankState['l11-home-1'].rank='Copper';
   assert.deepEqual(plain(app.kanjiInventory()),{encountered:1,unlocked:1});assert.equal(app.knowledgeSnapshot().kanji,1);assert.match(app.kanjiLearningStatus(id),/Ontgrendeld/);
   const pool=app.flashcardEligibleCards(),card=pool.find(item=>item.id==='kanji-card:私');assert.equal(card.lessonId,'l11-home-1');assert.equal(pool.filter(item=>item.id===id).length,0,'the kanji check does not award word mastery');
-  assert.ok(app.newKanjiRecallCards().some(item=>item.id===card.id));assert.equal(app.state.flashcardProgress.cards['kanji-card:私::jp-nl'],undefined);
+  assert.ok(app.getRecallSession().queue.some(item=>item.cardId===card.id&&item.direction==='jp-nl'));assert.equal(app.state.flashcardProgress.cards['kanji-card:私::jp-nl'],undefined);
   const before=plain(app.state.jlptMilestones.lexemes);app.createFlashcardSession([{cardId:card.id,direction:'jp-nl',answerChoices:['ik']}],'scheduled');app.state.flashcardSession.optionsRevealed=true;app.state.flashcardSession.revealed=true;app.flashcardRate('knew','ik');
-  assert.equal(app.state.jlptMilestones.kanji['私'].creditUnits,1);assert.deepEqual(plain(app.state.jlptMilestones.lexemes),before);assert.ok(!app.newKanjiRecallCards().some(item=>item.id===card.id));assert.ok(app.state.flashcardProgress.cards['kanji-card:私::jp-nl'].dueAt>now);
+  assert.equal(app.state.jlptMilestones.kanji['私'].creditUnits,1);assert.deepEqual(plain(app.state.jlptMilestones.lexemes),before);assert.ok(!app.getRecallSession().queue.some(item=>item.cardId===card.id&&item.direction==='jp-nl'));assert.ok(app.state.flashcardProgress.cards['kanji-card:私::jp-nl'].dueAt>now);
   const saved=app.saved(),reloaded=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks,now});assert.deepEqual(plain(reloaded.kanjiInventory()),{encountered:1,unlocked:1});assert.equal(reloaded.knowledgeSnapshot().kanji,1);assert.equal(reloaded.state.jlptMilestones.kanji['私'].creditUnits,1);assert.equal(reloaded.state.flashcardProgress.cards['kanji-card:私::jp-nl'].repetitions,1);
 });
 test('later lesson kanji use their own recognition evidence, source and rank after reload',()=>{
@@ -42,7 +42,7 @@ test('later lesson kanji use their own recognition evidence, source and rank aft
   ]){
     const evidence={[id]:{sourceId,at:200}},base={thematicRevision:1,introducedVocabIds:[id],kanjiExposureIds:[id],kanjiRecognitionEvidence:evidence};
     const app=createCrashCourseProbe({savedState:base,savedRanks:{}});assert.equal(app.kanjiInventory().encountered,1);assert.equal(app.kanjiInventory().unlocked,0);assert.ok(!app.flashcardEligibleCards().some(card=>card.id===`kanji-card:${character}`));
-    app.rankState[lesson].rank='Copper';const card=app.flashcardEligibleCards().find(item=>item.id===`kanji-card:${character}`);assert.ok(card);assert.equal(card.lessonId,lesson);assert.equal(card.level,11);assert.equal(card.lessonIndex,level-1);assert.ok(app.newKanjiRecallCards().some(item=>item.id===card.id));
+    app.rankState[lesson].rank='Copper';const card=app.flashcardEligibleCards().find(item=>item.id===`kanji-card:${character}`);assert.ok(card);assert.equal(card.lessonId,lesson);assert.equal(card.level,11);assert.equal(card.lessonIndex,level-1);assert.ok(app.getRecallSession().queue.some(item=>item.cardId===card.id&&item.direction==='jp-nl'));
     const saved=app.saved(),again=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.equal(again.state.kanjiRecognitionEvidence[id].sourceId,sourceId);assert.equal(again.flashcardEligibleCards().find(item=>item.id===card.id).lessonId,lesson);assert.equal(again.kanjiInventory().unlocked,1);
     const forged=createCrashCourseProbe({savedState:{...base,kanjiRecognitionEvidence:{[id]:{sourceId:'wrong-source',at:200}}},savedRanks:{[lesson]:{rank:'Copper',attempts:1,last:1}}});assert.equal(forged.state.kanjiRecognitionEvidence[id],undefined);assert.ok(!forged.flashcardEligibleCards().some(item=>item.id===card.id));
   }
@@ -93,8 +93,9 @@ test('Recall keeps vocabulary cards in kana in both directions and retains their
 test('separately taught kanji joins the normal Recall planner as one character card without creating a second word',()=>{
   const word='vocab-でんしゃ',character='電',cardId='kanji-card:電',app=createCrashCourseProbe({savedState:{thematicRevision:1,introducedVocabIds:[word],kanjiExposureIds:[word],music:{componentEvidence:{[word]:['電','車']}}},savedRanks:{'l10-4':{rank:'Copper',attempts:1,last:1}}});
   const pool=app.flashcardEligibleCards();assert.ok(pool.some(card=>card.id===word));assert.equal(pool.filter(card=>card.orthographyCard&&card.kanjiCharacter===character).length,1);assert.ok(pool.some(card=>card.id===cardId));
+  const scheduled=app.getRecallSession().queue;assert.ok(scheduled.some(item=>item.cardId===word));assert.ok(scheduled.some(item=>item.cardId===cardId));
   app.createFlashcardSession([{cardId,direction:'jp-nl',answerChoices:['trein','bus']}],'scheduled');app.state.flashcardSession.optionsRevealed=true;app.state.flashcardSession.revealed=true;app.renderFlashcardsScreen();
-  assert.match(app.element('flashcardView').innerHTML,/<mark>電<\/mark>車/);assert.doesNotMatch(app.element('flashcardView').innerHTML,/でんしゃ|reading-support/);
+  assert.match(app.element('flashcardView').innerHTML,/電[\s\S]*\(in 電車\)[\s\S]*Wat betekent dit woord/);assert.doesNotMatch(app.element('flashcardView').innerHTML,/<mark>/);assert.doesNotMatch(app.element('flashcardView').innerHTML,/でんしゃ|reading-support/);
   app.flashcardRate('knew','trein');assert.equal(app.state.flashcardProgress.cards[`${cardId}::jp-nl`].repetitions,1);assert.equal(app.state.jlptMilestones.kanji[character].creditUnits,1);assert.equal(app.state.jlptMilestones.lexemes[word],undefined);
   const saved=app.saved(),reload=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.equal(reload.state.flashcardProgress.cards[`${cardId}::jp-nl`].repetitions,1);assert.equal(reload.state.jlptMilestones.kanji[character].creditUnits,1);
 });
