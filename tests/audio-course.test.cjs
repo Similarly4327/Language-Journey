@@ -87,3 +87,22 @@ test('thematic Japanese instructions and examples resolve without speaking Dutch
  test('updated Level 11 story materialization and audio use the same complete text',()=>{
   const story=content.thematicCourses[10].lessons[0].story[0],ref=content.audioEntryById['reading-l11-home-1-a'];assert.equal(story,ref.displayText);assert.match(story,/私 は こたえ を えらびます/);assert.match(ref.pronunciation.audioTextKana,/わたし わ こたえ お えらびます/);
  });
+
+test('Kanji and okurigana answer speakers resolve verified full-word recordings',()=>{
+  const probe=createProbe(),playback=require('../audio/playback.js'),manifest=require('../assets/audio/ja/manifest.js'),fs=require('node:fs'),path=require('node:path');probe.state.audioEnabled=true;
+  for(const [text,id,reading] of [['私','vocab-わたし','わたし'],['行きます','vocab-いきます','いきます'],['電車','vocab-でんしゃ','でんしゃ'],['気持ち','vocab-music-kimochi','きもち'],['わたし','vocab-わたし','わたし']]){
+    const html=probe.answerOptionAudioHtml(text);assert.match(html,new RegExp(`data-audio-key="${id}"`));assert.match(html,new RegExp(`data-audio-text="${text}"`));
+    const asset=playback.resolve(content,manifest,id,text);assert.ok(asset,text);assert.equal(asset.entry.pronunciation.audioTextKana,reading);assert.ok(fs.existsSync(path.join(__dirname,'..',asset.assets[0].path)),text);
+  }
+  assert.equal(probe.answerOptionAudioHtml('未知の文章です'),'');
+  assert.match(probe.answerOptionAudioHtml('私',['vocab-いきます']),/data-audio-key="vocab-わたし"/,'a distractor never uses another answer’s recording');
+});
+
+test('Ambiguous kanji without a contextual lexeme never falls back to a guessed reading',()=>{
+  const probe=createProbe(recordings());probe.state.audioEnabled=true;
+  const id='vocab-test-alternate-watashi',original=content.audioEntryById['vocab-わたし'];
+  const entry={id,jp:'べつ',kana:'べつ',kanji:'私'};
+  probe.vocabCatalog.push(entry);probe.vocabById[id]=entry;content.audioEntryById[id]={...original,id,entry,pronunciation:{...original.pronunciation,audioTextKana:'べつ'}};
+  try {assert.equal(probe.answerOptionAudioHtml('私'),'');assert.match(probe.answerOptionAudioHtml('私',['vocab-わたし']),/data-audio-key="vocab-わたし"/)}
+  finally {probe.vocabCatalog.pop();delete probe.vocabById[id];delete content.audioEntryById[id]}
+});

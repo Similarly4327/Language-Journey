@@ -119,3 +119,24 @@ test('active answer options suppress reading support and still respect lesson bo
  app.state.thematic={level:13,lessonIndex:2,part:'B',step:'questions',questionIndex:index,correct:0,answered:false,optionsRevealed:true,flowRevision:1};app.renderMain();const html=app.element('thematicBody').innerHTML;
  assert.match(html,/>駅<\/button>/);assert.doesNotMatch(html,/<details class="reading-support"/);
 });
+
+test('Recall Japanese options play the reviewed reading of each complete word without changing progress',()=>{
+  const ids=['vocab-わたし','vocab-いきます','vocab-でんしゃ'],now=Date.parse('2026-11-12T10:00:00Z');
+  const initial={thematicRevision:1,introducedVocabIds:ids,kanjiExposureIds:ids,kanjiRecognitionEvidence:{'vocab-わたし':{sourceId:'exercise-l11-home-1-watashi-kanji',at:200},'vocab-いきます':{sourceId:'exercise-l11-home-4-ikimasu-kanji',at:200}}};
+  const ranks={'l4-3':{rank:'Copper',attempts:1,last:1},'l10-4':{rank:'Copper',attempts:1,last:1},'l11-home-1':{rank:'Copper',attempts:1,last:1},'l11-home-4':{rank:'Copper',attempts:1,last:1}};
+  const app=createCrashCourseProbe({savedState:initial,savedRanks:ranks,now});app.state.audioEnabled=true;
+  for(const [cardId,answer,id] of [['kanji-card:私','私','vocab-わたし'],['kanji-card:行','行きます','vocab-いきます'],['kanji-word:vocab-でんしゃ','電車','vocab-でんしゃ']]){
+    assert.ok(app.flashcardEligibleCards().some(item=>item.id===cardId),cardId);
+    app.createFlashcardSession([{cardId,direction:'nl-jp',answerChoices:[answer]}],'scheduled');app.state.flashcardSession.optionsRevealed=true;app.state.flashcardSession.revealed=true;
+    const before=plain(app.state.flashcardProgress);app.renderFlashcardsScreen();const html=app.element('flashcardView').innerHTML;
+    assert.match(html,new RegExp(`data-audio-key="${id}" data-audio-text="${answer}"`));
+    assert.deepEqual(plain(app.state.flashcardProgress),before);
+  }
+});
+
+test('tapping an answer speaker stops the click before it can select an answer',()=>{
+  const app=createCrashCourseProbe();app.state.audioEnabled=false;
+  const speaker={dataset:{audioKey:'vocab-わたし',audioText:'私'},closest:()=>null};let stopped=false,prevented=false;
+  app.fireDocumentEvent('click',{target:{closest:selector=>selector==='[data-audio-key],[data-audio-text]'?speaker:null},preventDefault(){prevented=true},stopPropagation(){stopped=true}});
+  assert.equal(prevented,true);assert.equal(stopped,true);
+});
