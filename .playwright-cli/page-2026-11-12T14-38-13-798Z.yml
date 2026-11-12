@@ -1,0 +1,28 @@
+- generic [active] [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - generic [ref=f1e4]:
+      - button "Terug" [ref=f1e186] [cursor=pointer]: ←
+      - generic [ref=f1e7]:
+        - button "Woorden en tekens van deze les en dit level" [ref=f1e224] [cursor=pointer]: i
+        - navigation "Hoofdnavigatie" [ref=f1e8]:
+          - button "Leren" [ref=f1e9] [cursor=pointer]
+          - button "Recall" [ref=f1e10] [cursor=pointer]
+          - button "Voortgang" [ref=f1e11] [cursor=pointer]
+    - generic [ref=f1e245]:
+      - generic [ref=f1e247]:
+        - generic [ref=f1e248]: Level 11 · Les 1 · De les begint · Lestoets
+        - generic [ref=f1e250]: 2/4
+      - generic [ref=f1e252]:
+        - generic [ref=f1e253]:
+          - generic [ref=f1e254]: Kies het antwoord dat bij de tekst past.
+          - generic [ref=f1e255]: これは れんしゅう の もんだい です。こたえ は ただしい です。まちがい を もういちど みます。
+          - generic [ref=f1e256]: Wat zegt de tweede zin over het antwoord?
+          - button "Luister naar het Japans" [ref=f1e283] [cursor=pointer]:
+            - generic [aria-hidden] [ref=f1e284]: 🔊
+        - generic [ref=f1e260]:
+          - button "het is een geluid" [ref=f1e291] [cursor=pointer]
+          - button "het is juist" [ref=f1e293] [cursor=pointer]
+          - button "het is fout" [ref=f1e295] [cursor=pointer]
+        - strong [ref=f1e288]: Neem rustig de tijd.
+        - generic [ref=f1e267]: "Goed: 1"
+  - status [ref=f1e125]

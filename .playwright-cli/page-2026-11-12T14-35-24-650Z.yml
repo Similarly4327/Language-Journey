@@ -1,0 +1,51 @@
+- generic [active] [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - generic [ref=f1e4]:
+      - button "Terug" [ref=f1e126] [cursor=pointer]: ←
+      - generic [ref=f1e7]:
+        - button "Woorden en tekens van deze les en dit level" [ref=f1e127] [cursor=pointer]: i
+        - navigation "Hoofdnavigatie" [ref=f1e8]:
+          - button "Leren" [ref=f1e9] [cursor=pointer]
+          - button "Recall" [ref=f1e10] [cursor=pointer]
+          - button "Voortgang" [ref=f1e11] [cursor=pointer]
+    - main [ref=f1e12]:
+      - generic [ref=f1e128]:
+        - generic [ref=f1e129]: Level 12 · Les 1/5
+        - generic [ref=f1e130]: Aankomsthal en terminal
+        - generic [ref=f1e131]: Op een aankomstbord terminal, uitgang en informatiepunt vinden.
+        - generic [ref=f1e132]: Oefening 1 Oefening 2 · geen kalenderdruk
+      - generic [ref=f1e133]:
+        - generic [ref=f1e134]:
+          - generic [ref=f1e135]: Bron · Oefening 1
+          - generic [ref=f1e136]:
+            - button "ひこうき" [ref=f1e137] [cursor=pointer]
+            - text: で
+            - button "にほん" [ref=f1e138] [cursor=pointer]
+            - text: に
+            - button "つきました" [ref=f1e139] [cursor=pointer]
+            - text: 。
+            - button "ここ" [ref=f1e140] [cursor=pointer]
+            - text: は
+            - button "くうこう" [ref=f1e141] [cursor=pointer]
+            - text: です。とうちゃく ターミナル は 2 です。
+            - button "でぐち" [ref=f1e142] [cursor=pointer]
+            - text: へ
+            - button "いきます" [ref=f1e143] [cursor=pointer]
+            - text: 。
+        - generic [ref=f1e144]:
+          - generic [ref=f1e145]: Toepassen
+          - note [ref=f1e146]: Lees de zin.
+          - generic [ref=f1e147]:
+            - generic [ref=f1e148]: Vraag
+            - text: とうちゃく ターミナル は？
+            - button "Luister naar het Japans" [ref=f1e149] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e150]: 🔊
+          - generic "Antwoordopties" [ref=f1e151]:
+            - generic [aria-hidden]:
+              - button [disabled]: "1"
+            - generic [aria-hidden]:
+              - button [disabled]: "3"
+            - generic [aria-hidden]:
+              - button [disabled]: "2"
+            - button "Toon antwoordopties" [ref=f1e152] [cursor=pointer]: Toon opties
+  - status [ref=f1e125]

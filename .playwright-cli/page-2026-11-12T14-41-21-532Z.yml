@@ -1,0 +1,122 @@
+- generic [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - generic [ref=f1e4]:
+      - button "App-home" [ref=f1e6] [cursor=pointer]: ⌂
+      - navigation "Hoofdnavigatie" [ref=f1e8]:
+        - button "Leren" [ref=f1e9] [cursor=pointer]
+        - button "Recall" [ref=f1e10] [cursor=pointer]
+        - button "Voortgang" [ref=f1e11] [cursor=pointer]
+    - main [ref=f1e12]:
+      - generic [ref=f1e13]:
+        - generic [ref=f1e14]: Alle levels
+        - generic [ref=f1e15]: Tien levels vormen steeds één grotere fase. Open alleen de fase die je nu nodig hebt.
+      - group [ref=f1e16]:
+        - 'generic "Fase 1 — Japanse basis De fundering leggen Schrift, eerste grammatica en bruikbaar dagelijks Japans vormen samen één absolute basis. Level 1–10 0/10 levelranks Nu: Level 1 van 10 ＋" [ref=f1e126] [cursor=pointer]':
+          - generic [ref=f1e18]: Fase 1 — Japanse basis
+          - generic [ref=f1e19]: De fundering leggen
+          - generic [ref=f1e20]: Schrift, eerste grammatica en bruikbaar dagelijks Japans vormen samen één absolute basis.
+          - generic [ref=f1e21]:
+            - generic [ref=f1e22]: Level 1–10
+            - generic [ref=f1e23]: 0/10 levelranks
+            - generic [ref=f1e24]: "Nu: Level 1 van 10"
+          - text: ＋
+      - group [ref=f1e76]:
+        - generic "Fase 2 — Thuis voorbereiden, Japanreis Van vakantiecursus thuis naar geoefende reissituaties Je oefent thuis de app-taal en gebruikt bekende Japanse bouwstenen tijdens je reis. Level 11–20 0/10 levelranks −" [ref=f1e127] [cursor=pointer]:
+          - generic [ref=f1e78]: Fase 2 — Thuis voorbereiden, Japanreis
+          - generic [ref=f1e79]: Van vakantiecursus thuis naar geoefende reissituaties
+          - generic [ref=f1e80]: Je oefent thuis de app-taal en gebruikt bekende Japanse bouwstenen tijdens je reis.
+          - generic [ref=f1e81]:
+            - generic [ref=f1e82]: Level 11–20
+            - generic [ref=f1e83]: 0/10 levelranks
+          - text: −
+        - generic [ref=f1e128]:
+          - strong [ref=f1e133]: Je bent klaar met Les 1. Verder naar Les 2?
+          - region "Fase 2 — Thuis voorbereiden, Japanreis" [ref=f1e136]:
+            - button "Level 11 Vakantiecursus thuis Japanse app-opdrachten en vertrekvoorbereiding" [active] [ref=f1e137] [cursor=pointer]:
+              - generic [ref=f1e138]: Level 11
+              - generic [ref=f1e139]: Vakantiecursus thuis
+              - generic [ref=f1e140]: Japanse app-opdrachten en vertrekvoorbereiding
+            - 'button "Level 12 くうこう Het vliegveld · na de landing: borden, bagage en uitgang" [ref=f1e141] [cursor=pointer]':
+              - generic [ref=f1e142]: Level 12
+              - generic [ref=f1e143]: くうこう
+              - generic [ref=f1e144]: "Het vliegveld · na de landing: borden, bagage en uitgang"
+            - button "Level 13 Vervoer naar het hotel Van luchthaven naar hotel" [ref=f1e145] [cursor=pointer]:
+              - generic [ref=f1e146]: Level 13
+              - generic [ref=f1e147]: Vervoer naar het hotel
+              - generic [ref=f1e148]: Van luchthaven naar hotel
+            - button "Level 14 Inchecken in het hotel Receptie, kamer en verblijf" [ref=f1e149] [cursor=pointer]:
+              - generic [ref=f1e150]: Level 14
+              - generic [ref=f1e151]: Inchecken in het hotel
+              - generic [ref=f1e152]: Receptie, kamer en verblijf
+            - button "Level 15 Boodschappen doen Zoeken, kiezen en afrekenen" [ref=f1e153] [cursor=pointer]:
+              - generic [ref=f1e154]: Level 15
+              - generic [ref=f1e155]: Boodschappen doen
+              - generic [ref=f1e156]: Zoeken, kiezen en afrekenen
+            - generic [ref=f1e157]:
+              - generic [ref=f1e158]: Level 16
+              - generic [ref=f1e159]: Restaurant en eten
+              - generic [ref=f1e160]: Bestel een maaltijd en begrijp eenvoudige menutekst.
+              - generic [ref=f1e161]: Voorlopig · later aanpasbaar
+            - generic [ref=f1e162]:
+              - generic [ref=f1e163]: Level 17
+              - generic [ref=f1e164]: Tokio en de stad
+              - generic [ref=f1e165]: Gebruik richtingen, kaarten en herkenbare stadsinformatie.
+              - generic [ref=f1e166]: Voorlopig · later aanpasbaar
+            - generic [ref=f1e167]:
+              - generic [ref=f1e168]: Level 18
+              - generic [ref=f1e169]: Kyoto en cultuur
+              - generic [ref=f1e170]: Lees korte culturele aanduidingen en praktische informatie.
+              - generic [ref=f1e171]: Voorlopig · later aanpasbaar
+            - generic [ref=f1e172]:
+              - generic [ref=f1e173]: Level 19
+              - generic [ref=f1e174]: Vrije tijd en karaoke
+              - generic [ref=f1e175]: Volg eenvoudige vrijetijds- en karaoke-informatie.
+              - generic [ref=f1e176]: Voorlopig · later aanpasbaar
+            - generic [ref=f1e177]:
+              - generic [ref=f1e178]: Level 20
+              - generic [ref=f1e179]: Laatste reisdag
+              - generic [ref=f1e180]: Combineer hotel, boodschappen, vervoer, eten, bagage en vertrek.
+              - generic [ref=f1e181]: Voorlopig · later aanpasbaar
+      - group [ref=f1e85]:
+        - generic "Fase 3 — Lezen & natuurlijker Japans Van eenvoudige tekst naar rijkere context Langere teksten, geleidelijke kanji, informelere taal en contextueel begrip. Level 21–30 Conceptuele route ＋" [ref=f1e86] [cursor=pointer]:
+          - generic [ref=f1e87]: Fase 3 — Lezen & natuurlijker Japans
+          - generic [ref=f1e88]: Van eenvoudige tekst naar rijkere context
+          - generic [ref=f1e89]: Langere teksten, geleidelijke kanji, informelere taal en contextueel begrip.
+          - generic [ref=f1e90]:
+            - generic [ref=f1e91]: Level 21–30
+            - generic [ref=f1e92]: Conceptuele route
+          - text: ＋
+      - button "Anime & Muziek Vrijwillig · leer woorden en context in twee blokken" [ref=f1e94] [cursor=pointer]:
+        - generic [ref=f1e95]: Anime & Muziek
+        - generic [ref=f1e96]: Vrijwillig · leer woorden en context in twee blokken
+      - generic [ref=f1e97]:
+        - generic [ref=f1e98]: Grote mijlpalen in de verte
+        - generic [ref=f1e99]: Richtinggevers zonder vast levelnummer of valse eindbelofte.
+      - generic [ref=f1e100]:
+        - generic [ref=f1e101]:
+          - generic [ref=f1e102]:
+            - generic [aria-hidden] [ref=f1e103]: 📖
+            - generic [ref=f1e104]: richting
+          - generic [ref=f1e105]: Eerste eenvoudig kinderboek
+          - generic [ref=f1e106]: Van losse zin via microverhaal en korte tekst naar een echt eenvoudig verhaal.
+        - generic [ref=f1e107]:
+          - generic [ref=f1e108]:
+            - generic [aria-hidden] [ref=f1e109]: 💬
+            - generic [ref=f1e110]: richting
+          - generic [ref=f1e111]: Manga lezen
+          - generic [ref=f1e112]: Meer kanji, informele grammatica, dialogen en spreekstijlen in context.
+        - generic [ref=f1e113]:
+          - generic [ref=f1e114]:
+            - generic [aria-hidden] [ref=f1e115]: 🎧
+            - generic [ref=f1e116]: richting
+          - generic [ref=f1e117]: Anime met Japanse ondertitels
+          - generic [ref=f1e118]: Lezen en luisteren groeien samen van langzame zin naar langere scène.
+        - generic [ref=f1e119]:
+          - generic [ref=f1e120]:
+            - generic [aria-hidden] [ref=f1e121]: 📰
+            - generic [ref=f1e122]: verre richting
+          - generic [ref=f1e123]: De hoofdlijn van algemeen nieuws volgen
+          - generic [ref=f1e124]: Een verre mijlpaal voor formeel taalgebruik en algemeen begrip; zonder vast levelnummer.
+  - status [ref=f1e125]
+  - status [ref=f1e182]:
+    - strong [ref=f1e185]: Thuis

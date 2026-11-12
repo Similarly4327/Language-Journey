@@ -1,0 +1,47 @@
+- generic [active] [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - generic [ref=f1e4]:
+      - button "Terug" [ref=f1e126] [cursor=pointer]: ←
+      - generic [ref=f1e7]:
+        - button "Woorden en tekens van deze les en dit level" [ref=f1e127] [cursor=pointer]: i
+        - navigation "Hoofdnavigatie" [ref=f1e8]:
+          - button "Leren" [ref=f1e9] [cursor=pointer]
+          - button "Recall" [ref=f1e10] [cursor=pointer]
+          - button "Voortgang" [ref=f1e11] [cursor=pointer]
+    - main [ref=f1e12]:
+      - generic [ref=f1e153]:
+        - generic [ref=f1e154]: Level 12 · Les 1/5
+        - generic [ref=f1e155]: Aankomsthal en terminal
+        - generic [ref=f1e156]: Op een aankomstbord terminal, uitgang en informatiepunt vinden.
+        - generic [ref=f1e157]: Oefening 1 Oefening 2 · geen kalenderdruk
+      - generic [ref=f1e158]:
+        - generic [ref=f1e159]:
+          - generic [ref=f1e160]: Bron · Oefening 1
+          - generic [ref=f1e161]:
+            - button "ひこうき" [ref=f1e162] [cursor=pointer]
+            - text: で
+            - button "にほん" [ref=f1e163] [cursor=pointer]
+            - text: に
+            - button "つきました" [ref=f1e164] [cursor=pointer]
+            - text: 。
+            - button "ここ" [ref=f1e165] [cursor=pointer]
+            - text: は
+            - button "くうこう" [ref=f1e166] [cursor=pointer]
+            - text: です。とうちゃく ターミナル は 2 です。
+            - button "でぐち" [ref=f1e167] [cursor=pointer]
+            - text: へ
+            - button "いきます" [ref=f1e168] [cursor=pointer]
+            - text: 。
+        - generic [ref=f1e169]:
+          - generic [ref=f1e170]: Toepassen
+          - note [ref=f1e171]: Lees de zin.
+          - generic [ref=f1e172]:
+            - generic [ref=f1e173]: Vraag
+            - text: とうちゃく ターミナル は？
+            - button "Luister naar het Japans" [ref=f1e174] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f1e175]: 🔊
+          - generic "Antwoordopties" [ref=f1e176]:
+            - button "1" [ref=f1e178] [cursor=pointer]
+            - button "3" [ref=f1e180] [cursor=pointer]
+            - button "2" [ref=f1e182] [cursor=pointer]
+  - status [ref=f1e125]
