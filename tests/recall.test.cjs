@@ -597,7 +597,9 @@ test('periodic Recall refresh does not replace a focused manual or info control'
 });
 
 test('Recall keeps a revealed card revealed after reload and exposes a labeled reveal control',()=>{
-  const app=createSrsFixture({savedState:{flashcardSession:{queue:[],position:0,status:'paused',optionsRevealed:true}}});
+  const app=createSrsFixture({savedState:{introducedVocabIds:['vocab-ねこ'],flashcardSession:{
+    queue:[{cardId:'vocab-ねこ',direction:'jp-nl'}],position:0,status:'paused',optionsRevealed:true
+  }}});
   assert.equal(app.state.flashcardSession.optionsRevealed,true);
   const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8');
   assert.match(html,/\.flashcard-answer-options\.is-hidden \.flashcard-answer-choice\{filter:blur\(7px\)/);
@@ -605,6 +607,61 @@ test('Recall keeps a revealed card revealed after reload and exposes a labeled r
   assert.match(html,/reveal\.setAttribute\('aria-label','Tik om antwoordopties te tonen'\)/);
   assert.match(html,/querySelector\('\.flashcard-avatar'\)\?\.remove\(\)/,'the prompt is not preceded by an extra avatar message');
   assert.match(html,/querySelector\('\.flashcard-face-sub'\)\?\.remove\(\)/,'Recall removes the redundant direction hint from the rendered card');
+});
+
+test('reloading mixed Recall retains a ranked kanji card and an already graded answer',()=>{
+ const cardId='kanji-card:電',wordId='vocab-でんしゃ';
+ const queue=[cardId,wordId,`kanji-word:${wordId}`].map(id=>({cardId:id,direction:'jp-nl'}));
+ const savedRanks={'l10-4':{rank:'Copper',attempts:1,last:1}};
+ const app=createRecallApp({savedVersion:9,savedRanks,savedState:{
+  screen:'flashcards',thematicRevision:1,introducedVocabIds:[wordId],kanjiExposureIds:[wordId],
+  music:{componentEvidence:{[wordId]:['電','車']}},
+  flashcardSession:{queue,position:0,status:'paused',optionsRevealed:true}
+ }});
+ app.enableRender();app.resumeFlashcardSession();
+ assert.equal(app.state.flashcardSession.queue[0].cardId,cardId);
+ app.state.flashcardSession.revealed=true;
+ app.flashcardRate('knew',app.vocabById[wordId].meaning);
+ const saved=app.savedProgress(),recordKey=`${cardId}::jp-nl`;
+ assert.equal(saved.state.flashcardProgress.cards[recordKey].repetitions,1);
+ const reloaded=createRecallApp({savedVersion:saved.version,savedRanks:saved.ranks,savedState:saved.state});
+ reloaded.enableRender();reloaded.renderFlashcardsScreen();
+ const session=reloaded.state.flashcardSession;
+ assert.equal(session.status,'paused');
+ assert.deepEqual(Array.from(session.queue,item=>item.cardId),queue.map(item=>item.cardId));
+ assert.equal(session.feedback.chosen,app.vocabById[wordId].meaning);
+ reloaded.resumeFlashcardSession();
+ reloaded.flashcardRate('knew',app.vocabById[wordId].meaning);
+ reloaded.flashcardNextCard();
+ assert.equal(session.queue[session.position].cardId,wordId);
+ assert.equal(session.knew,1);
+ assert.equal(reloaded.state.flashcardProgress.cards[recordKey].repetitions,1);
+});
+
+test('a malformed earlier queue entry does not move the current Recall card',()=>{
+ const app=createRecallApp({savedRanks:{'l4-1':{rank:'Copper'}},savedState:{flashcardSession:{
+  queue:[{cardId:'vocab-ねこ',direction:'invalid'},{cardId:'vocab-ねこ',direction:'jp-nl'},{cardId:'vocab-ねこ',direction:'nl-jp'}],
+  position:1,status:'paused',optionsRevealed:true
+ }}});
+ app.enableRender();app.resumeFlashcardSession();
+ const session=app.state.flashcardSession;
+ assert.equal(session.queue[session.position].direction,'jp-nl');
+ assert.equal(session.optionsRevealed,true);
+});
+
+test('an unavailable current card does not transfer its saved feedback to the next card',()=>{
+ const app=createRecallApp({savedRanks:{'l4-1':{rank:'Copper'}},savedState:{flashcardSession:{
+  queue:[{cardId:'kanji-card:電',direction:'jp-nl'},{cardId:'vocab-ねこ',direction:'jp-nl'}],
+  position:0,status:'paused',knew:1,feedback:{grade:'knew',chosen:'trein'},optionsRevealed:true
+ }}});
+ app.enableRender();app.resumeFlashcardSession();
+ const session=app.state.flashcardSession;
+ assert.equal(session.queue[session.position].cardId,'vocab-ねこ');
+ assert.equal(session.feedback,null);
+ assert.equal(session.optionsRevealed,false);
+ assert.equal(session.knew,1);
+ app.flashcardNextCard();
+ assert.equal(session.position,0);
 });
 
 // Real curriculum integration: no synthetic eligibility override.
