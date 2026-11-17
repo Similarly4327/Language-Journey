@@ -1,5 +1,9 @@
 window.LanguageJourneyLocales=window.LanguageJourneyLocales||{};
 window.LanguageJourneyLocales.de={
+  'progress.storageConflict':'Dein Fortschritt wurde in einem anderen Tab geändert. Das Speichern ist in diesem Tab pausiert.',
+  'progress.storagePaused':'Speichern pausiert',
+  'progress.reloadSaved':'Gespeicherten Fortschritt laden',
+  'progress.reloadSavedConfirm':'Gespeicherten Fortschritt laden? Änderungen, die nur in diesem Tab vorgenommen wurden, gehen verloren.',
   'common.back':'Zurück','common.next':'Weiter','common.close':'Schließen','common.start':'Starten','common.save':'Speichern','common.cancel':'Abbrechen','common.more':'Mehr anzeigen','common.level':'Level {number}','common.lesson':'Lektion {number}','common.notYet':'Noch nicht festgelegt',
   'nav.learn':'Lernen','nav.cards':'Recall','nav.progress':'Fortschritt','nav.home':'Kursstart','nav.levels':'Alle Level','nav.backToOverview':'Zurück zur Übersicht',
   'app.allCourses':'Alle Kurse','app.choose':'Wähle deine Sprachreise.','app.intro':'Ein ruhiger Ort für alle deine Kurse.','app.openCourse':'Kurs {name} öffnen','app.options':'Optionen','app.flight':'Auf dem Weg nach Japan',

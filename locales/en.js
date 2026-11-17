@@ -1,5 +1,9 @@
 window.LanguageJourneyLocales=window.LanguageJourneyLocales||{};
 window.LanguageJourneyLocales.en={
+  'progress.storageConflict':'Your progress changed in another tab. Saving is paused in this tab.',
+  'progress.storagePaused':'Saving paused',
+  'progress.reloadSaved':'Load saved progress',
+  'progress.reloadSavedConfirm':'Load your saved progress? Changes made only in this tab will be lost.',
   'common.back':'Back','common.next':'Next','common.close':'Close','common.start':'Start','common.save':'Save','common.cancel':'Cancel','common.more':'Show more','common.level':'Level {number}','common.lesson':'Lesson {number}','common.notYet':'Not set yet',
   'nav.learn':'Learn','nav.cards':'Recall','nav.progress':'Progress','nav.home':'Course home','nav.levels':'All levels','nav.backToOverview':'Back to overview',
   'app.allCourses':'All courses','app.choose':'Choose your language journey.','app.intro':'A calm place for all your courses.','app.openCourse':'Open {name} course','app.options':'Options','app.flight':'On the way to Japan',

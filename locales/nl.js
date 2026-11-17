@@ -1,5 +1,9 @@
 window.LanguageJourneyLocales=window.LanguageJourneyLocales||{};
 window.LanguageJourneyLocales.nl={
+  'progress.storageConflict':'Je voortgang is gewijzigd in een ander tabblad. Opslaan is in dit tabblad gepauzeerd.',
+  'progress.storagePaused':'Opslaan gepauzeerd',
+  'progress.reloadSaved':'Laad opgeslagen voortgang',
+  'progress.reloadSavedConfirm':'Wil je de opgeslagen voortgang laden? Wijzigingen die alleen in dit tabblad staan gaan verloren.',
   'common.back':'Terug','common.next':'Volgende','common.close':'Sluiten','common.start':'Start','common.save':'Opslaan','common.cancel':'Annuleren','common.more':'Meer tonen','common.level':'Level {number}','common.lesson':'Les {number}','common.notYet':'Nog niet ingesteld',
   'nav.learn':'Leren','nav.cards':'Recall','nav.progress':'Voortgang','nav.home':'Cursus-home','nav.levels':'Alle levels','nav.backToOverview':'Terug naar overzicht',
   'app.allCourses':'Alle cursussen','app.choose':'Kies je taalreis.','app.intro':'Een rustige plek voor al je cursussen.','app.openCourse':'Open cursus {name}','app.options':'Opties','app.flight':'Op weg naar Japan',

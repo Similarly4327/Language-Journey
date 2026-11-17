@@ -1780,7 +1780,7 @@ body[data-scene="journey"][data-view="main"] #mainView{
 .reading-support{display:inline-block;position:relative;vertical-align:baseline}.reading-support>summary{cursor:pointer;list-style:none;border-bottom:1px dotted currentColor}.reading-support>summary::-webkit-details-marker{display:none}.reading-support>span{display:block;font-size:.72em;line-height:1.25;text-align:center;color:var(--muted)}
 .answer-option-row:has(>.reading-support){display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center}.answer-option-row:has(>.reading-support):has(>.audio-speaker){grid-template-columns:minmax(0,1fr) auto 44px}.answer-option-row>.reading-support>summary{min-width:44px;min-height:44px;padding:10px 6px;box-sizing:border-box;text-align:center}
 </style>
-<link rel="stylesheet" href="./scenes.css?v=recall-recovery-3083718c54f7b76d">
+<link rel="stylesheet" href="./scenes.css?v=recall-recovery-6d461851f9fd36e2">
 </head>
 <body data-scene="journey" data-view="main">
 <div id="app" class="app stack">
@@ -1803,6 +1803,10 @@ body[data-scene="journey"][data-view="main"] #mainView{
       </nav>
     </div>
   </div>
+</section>
+<section id="progressConflict" class="card hidden">
+  <p id="progressConflictMessage" role="status">Je voortgang is gewijzigd in een ander tabblad. Opslaan is in dit tabblad gepauzeerd.</p>
+  <button id="reloadSavedProgress" class="btn primary" type="button">Laad opgeslagen voortgang</button>
 </section>
 <main id="mainView" class="stack"></main>
 <section id="flashcardView" class="stack hidden"></section>
@@ -1847,33 +1851,33 @@ body[data-scene="journey"][data-view="main"] #mainView{
     <g class="flight-plane" fill="#bf4949"><path d="m0 0 33-7-12 11 3 11-8 2-8-11-14 4-5-5 17-9Z"/></g>
   </svg><strong>Op weg naar Japan</strong></div>
 </div>
-<script src="./locales/nl.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./locales/en.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./locales/de.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./locales/legacy-translations.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./locales/i18n.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./locales/legacy-ui.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./platform.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./navigation.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./scenes.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./language-journey-content/audio-course-readings.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./language-journey-content/audio-foundation.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./assets/audio/ja/manifest.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./audio/playback.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./language-journey-content/thematic-didactics.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./language-journey-content/level11-integration.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./language-journey-content/level9-exam.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./language-journey-content/grammar-reference.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./language-journey-content/storytime.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./language-journey-content/music.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./language-journey-content/social-intro.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./language-journey-content/content.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./language-journey-content/level-contract.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./language-journey-content/jlpt-benchmark.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./language-journey-content/jlpt-guideline.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./language-journey-content/internal-guideline.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./language-journey-content/jlpt-milestones.js?v=recall-recovery-3083718c54f7b76d"></script>
-<script src="./lesson-info.js?v=recall-recovery-3083718c54f7b76d"></script>
+<script src="./locales/nl.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./locales/en.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./locales/de.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./locales/legacy-translations.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./locales/i18n.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./locales/legacy-ui.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./platform.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./navigation.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./scenes.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./language-journey-content/audio-course-readings.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./language-journey-content/audio-foundation.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./assets/audio/ja/manifest.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./audio/playback.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./language-journey-content/thematic-didactics.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./language-journey-content/level11-integration.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./language-journey-content/level9-exam.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./language-journey-content/grammar-reference.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./language-journey-content/storytime.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./language-journey-content/music.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./language-journey-content/social-intro.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./language-journey-content/content.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./language-journey-content/level-contract.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./language-journey-content/jlpt-benchmark.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./language-journey-content/jlpt-guideline.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./language-journey-content/internal-guideline.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./language-journey-content/jlpt-milestones.js?v=recall-recovery-6d461851f9fd36e2"></script>
+<script src="./lesson-info.js?v=recall-recovery-6d461851f9fd36e2"></script>
 <script>
 (() => {
 const platform=window.LanguageJourneyPlatform,preferences=platform.preferences(),i18n=window.LanguageJourneyI18n,scenes=window.LanguageJourneyScenes,navigation=window.LanguageJourneyNavigation;
@@ -3128,6 +3132,12 @@ let storageOk=true;
 let progressLoadIssue=null,loadedRankRecords={};
 let lastSavedAt=null;
 let saveTimer=null;
+let loadedProgressRaw=null;
+let savedProgressData=null;
+let progressConflict=false;
+let progressResetting=false;
+let recoveredProgressCheckpoint=false;
+const progressCheckpointKey=`${STORAGE_KEY}:pending-tab-save`;
 
 function detectLayout(){
   const w=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);
@@ -3142,16 +3152,22 @@ function updateStorageUI(){
   const badge=$('storageBadge');
   const info=$('storageInfo');
   const layout=detectLayout();
+  const conflictMessage=t('progress.storageConflict');
+  $('progressConflict')?.classList.toggle('hidden',!progressConflict);
+  if(progressConflict){
+    $('progressConflictMessage').textContent=conflictMessage;
+    $('reloadSavedProgress').textContent=t('progress.reloadSaved');
+  }
   if(badge){
-    badge.classList.toggle('off',!storageOk);
-    badge.textContent=storageOk?'v13 · opgeslagen':'v13 · opslag uit';
-    badge.title=storageOk
+    badge.classList.toggle('off',!storageOk||progressConflict);
+    badge.textContent=progressConflict?t('progress.storagePaused'):storageOk?'v13 · opgeslagen':'v13 · opslag uit';
+    badge.title=progressConflict?conflictMessage:storageOk
       ?`Lokale browseropslag actief · ${layout.kind} ${layout.width}×${layout.height}`
       :'Lokale browseropslag is niet beschikbaar';
   }
   if(info){
     const when=lastSavedAt?i18n.date(lastSavedAt,state.uiLanguage,{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}):'nog niet opgeslagen';
-    info.textContent=storageOk
+    info.textContent=progressConflict?conflictMessage:storageOk
       ?`Lokale opslag actief · laatste opslag: ${when} · layout: ${layout.kind} (${layout.width}×${layout.height})`
       :'Browseropslag is hier niet beschikbaar. De app werkt wel, maar voortgang blijft niet bewaard.';
   }
@@ -3252,35 +3268,88 @@ function storageStateSnapshot(){
     lastErrors:state.lastErrors
   };
 }
-function saveProgress(){
-  if(!storageOk)return false;
-  try{
-    platform.savePreferences(state);
-    lastSavedAt=new Date().toISOString();
-    const ranks={...loadedRankRecords};
-    Object.keys(rankState).forEach(id=>{
-      const m=rankState[id];
-      ranks[id]={...ranks[id],rank:m.rank,last:m.last,attempts:m.attempts,curriculumRevision:m.curriculumRevision||0};
-    });
-    localStorage.setItem(STORAGE_KEY,JSON.stringify({
-      version:STORAGE_VERSION,
-      savedAt:lastSavedAt,
-      state:storageStateSnapshot(),
-      ranks,
-      itemMastery,
-      vocabMastery
-    }));
-  }catch(err){
-    storageOk=false;
-    console.warn('Lokale opslag mislukt:',err);
+function progressSnapshot(){
+  const ranks={...loadedRankRecords};
+  for(const [id,{rank,last,attempts,curriculumRevision}] of Object.entries(rankState)){
+    ranks[id]={...ranks[id],rank,last,attempts,curriculumRevision:curriculumRevision||0};
   }
+  return {version:STORAGE_VERSION,state:storageStateSnapshot(),ranks,itemMastery,vocabMastery};
+}
+function progressStorageFailed(error){
+  storageOk=false;
+  console.warn('Lokale opslag mislukt:',error);
   updateStorageUI();
-  return storageOk;
+  return false;
+}
+function withProgressLock(action){
+  try{
+    if(navigator.locks?.request)return navigator.locks.request(STORAGE_KEY,action).catch(progressStorageFailed);
+    return action();
+  }catch(error){return progressStorageFailed(error)}
+}
+function progressIsCurrent(){
+  if(progressConflict)return false;
+  if(localStorage.getItem(STORAGE_KEY)===loadedProgressRaw)return true;
+  progressConflict=true;
+  updateStorageUI();
+  return false;
+}
+function clearProgressCheckpoint(){
+  try{if(typeof sessionStorage!=='undefined')sessionStorage.removeItem(progressCheckpointKey)}catch{}
+}
+function saveProgress(){
+  if(!storageOk||progressConflict||progressResetting)return false;
+  return withProgressLock(()=>{
+    if(!storageOk||progressResetting||!progressIsCurrent())return false;
+    const snapshot=progressSnapshot(),data=JSON.stringify(snapshot);
+    if(data!==savedProgressData){
+      const savedAt=new Date().toISOString();
+      const raw=JSON.stringify({...snapshot,savedAt});
+      localStorage.setItem(STORAGE_KEY,raw);
+      loadedProgressRaw=raw;
+      savedProgressData=data;
+      lastSavedAt=savedAt;
+    }
+    platform.savePreferences(state);
+    clearProgressCheckpoint();
+    updateStorageUI();
+    return true;
+  });
+}
+function checkpointProgressForReload(){
+  if(!navigator.locks?.request||!storageOk||progressConflict||progressResetting)return;
+  // A document may unload before its lock is granted. Keep its pending save in this tab.
+  try{
+    if(!progressIsCurrent())return;
+    const snapshot=progressSnapshot();
+    if(typeof sessionStorage!=='undefined'&&JSON.stringify(snapshot)!==savedProgressData){
+      sessionStorage.setItem(progressCheckpointKey,JSON.stringify({base:loadedProgressRaw,snapshot}));
+    }
+  }catch{}
+}
+function restoreProgressCheckpoint(raw){
+  try{
+    if(typeof sessionStorage==='undefined')return null;
+    const pending=JSON.parse(sessionStorage.getItem(progressCheckpointKey));
+    if(pending?.base===raw&&pending.snapshot?.version===STORAGE_VERSION){
+      recoveredProgressCheckpoint=true;
+      return pending.snapshot;
+    }
+    if(pending)clearProgressCheckpoint();
+  }catch{}
+  return null;
+}
+function reloadSavedProgress(){
+  if(confirm(t('progress.reloadSavedConfirm'))){
+    clearProgressCheckpoint();
+    location.reload();
+  }
 }
 function flushProgressBeforeLeaving(){
   hideAvatarAudioOverlay(false);
-  pauseActiveStudySession();
+  pauseActiveStudySession(false);
   clearTimeout(saveTimer);
+  checkpointProgressForReload();
   saveProgress();
 }
 function scheduleSave(){
@@ -3310,10 +3379,16 @@ function loadProgress(){
   let savedVersion=STORAGE_VERSION;
   try{
     const raw=localStorage.getItem(STORAGE_KEY);
+    loadedProgressRaw=raw;
     if(raw&&!localStorage.getItem(`${STORAGE_KEY}:before-recall-recovery-20261007`)){
       try{localStorage.setItem(`${STORAGE_KEY}:before-recall-recovery-20261007`,raw)}catch(err){console.warn('Voortgangsnapshot kon niet worden bewaard:',err)}
     }
-    const parsed=raw?JSON.parse(raw):null;
+    const stored=raw?JSON.parse(raw):null;
+    if(stored){
+      const {savedAt,...data}=stored;
+      savedProgressData=JSON.stringify(data);
+    }
+    const parsed=restoreProgressCheckpoint(raw)||stored;
     if(parsed&&![1,2,3,4,5,6,7,8,9].includes(Number(parsed.version))){progressLoadIssue='format';storageOk=false;return}
     const saved=parsed?{...parsed,version:Number(parsed.version)}:{version:STORAGE_VERSION,state:{},ranks:{}};
     savedVersion=saved.version;
@@ -3499,7 +3574,7 @@ function loadProgress(){
         vocabMastery[id]=src;
       });
     }
-    lastSavedAt=saved.savedAt||null;
+    lastSavedAt=stored?.savedAt||null;
   }catch(err){
     progressLoadIssue='format';
     storageOk=false;
@@ -3532,8 +3607,16 @@ function normalizedProgressRank(value){return ['Copper','Silver','Gold','Platinu
 function clearStoredProgress(){
   if(!confirm('Dit wist lokaal je lessen, ranks, mastery, foutgeschiedenis, profiel en geregistreerde studietijd op dit apparaat. Doorgaan naar de laatste bevestiging?'))return;
   if(!confirm('Wis mijn voortgang? Deze actie kan niet ongedaan worden gemaakt. Kies Annuleren om alles te behouden.'))return;
-  try{localStorage.removeItem(STORAGE_KEY)}catch(err){}
-  location.reload();
+  progressResetting=true;
+  const reset=withProgressLock(()=>{
+    if(!progressIsCurrent())return false;
+    localStorage.removeItem(STORAGE_KEY);
+    clearProgressCheckpoint();
+    location.reload();
+    return true;
+  });
+  const enableRetry=ok=>{if(!ok)progressResetting=false};
+  if(typeof reset?.then==='function')reset.then(enableRetry);else enableRetry(reset);
 }
 
 
@@ -5757,7 +5840,7 @@ function activeElapsedSeconds(active=state.studyTracker.active){
   const running=active.runningSince&&!document.hidden?Math.max(0,(Date.now()-new Date(active.runningSince).getTime())/1000):0;
   return Math.round((Number(active.accumulatedSeconds)||0)+running);
 }
-function pauseActiveStudySession(){const a=state.studyTracker.active;if(!a||!a.runningSince)return;if(!document.hidden)a.accumulatedSeconds=activeElapsedSeconds(a);else a.accumulatedSeconds=Math.round((Number(a.accumulatedSeconds)||0)+Math.max(0,(Date.now()-new Date(a.runningSince).getTime())/1000));a.lastCheckpointAt=new Date().toISOString();a.runningSince=null;saveProgress()}
+function pauseActiveStudySession(save=true){const a=state.studyTracker.active;if(!a||!a.runningSince)return;if(!document.hidden)a.accumulatedSeconds=activeElapsedSeconds(a);else a.accumulatedSeconds=Math.round((Number(a.accumulatedSeconds)||0)+Math.max(0,(Date.now()-new Date(a.runningSince).getTime())/1000));a.lastCheckpointAt=new Date().toISOString();a.runningSince=null;if(save)saveProgress()}
 function resumeActiveStudySession(){const a=state.studyTracker.active;if(a&&!a.runningSince&&!document.hidden&&!dictionaryStudyPausedId){a.runningSince=new Date().toISOString();scheduleSave()}}
 function beginStudySession(meta={}){
   const current=state.studyTracker.active;
@@ -5935,10 +6018,32 @@ function answer(ok,b,chosen){const c=state.quiz;if(!c?.optionsRevealed||Date.now
 function nextQuestion(){if(state.quiz.index>=state.quiz.questions.length)finishQuiz();else renderQuestion()}
 function finishQuiz(){const c=state.quiz;if(!c||c.finished)return;c.finished=true;const acc=c.score/c.questions.length;c.passed=acc>=(c.rankThreshold??.9);c.newWordCount=registerPassedLevelExamWords(c);let rr=null;if(c.official&&c.rankId)rr=applyRank(c.rankId,acc,c.rankThreshold??.9);if(state.lastErrors[c.source])state.lastErrors[c.source]=[...c.mistakes];mergeErrorBank(c.source,c.mistakes);const study=completeStudySession({status:'afgerond',result:{score:c.score,total:c.questions.length,accuracy:acc,passed:c.passed}});show('result');$('resultTitle').textContent=c.title;$('resultScore').textContent=`${c.score} / ${c.questions.length}`;$('resultStats').textContent=`Goed: ${c.score} · Fout: ${c.questions.length-c.score} · Nauwkeurigheid: ${pct(acc)}`;if(rr){$('resultRank').classList.remove('hidden');$('resultRank').innerHTML=`${c.rankId&&/-row-/.test(c.rankId)?'Rijrank':'Sessierank'}: <strong>${rankText(rr.next)}</strong>${rr.prev!==rr.next?` · vorige: ${rankText(rr.prev)}`:''}. Een succesvolle volledige toets stijgt maximaal één stap.`}else $('resultRank').classList.add('hidden');$('resultAvatarAssist').innerHTML=avatarAssistHtml({pose:c.passed?'celebrate':'encourage',size:'medium',message:c.passed?'Mooi gedaan!':'Je bent aan het leren.',detail:c.passed?'Neem je resultaat even in je op.':'Bekijk je fouten en probeer het opnieuw.',celebrationTap:c.passed});renderErrors(c.mistakes);$('practiceErrors').disabled=!c.mistakes.length;configureNext(c);recordLevel11IntegrationPass(c);if(study)renderStudyAdjustment(study.id);const saved=saveProgress();
   if(c.thematicLessonId){
-    let stored=false;try{const record=JSON.parse(localStorage.getItem(STORAGE_KEY));stored=saved&&record?.ranks?.[c.thematicLessonId]?.rank===rankState[c.thematicLessonId]?.rank&&record?.ranks?.[c.thematicLessonId]?.attempts===rankState[c.thematicLessonId]?.attempts}catch{}
-    if(!stored){$('resultRank').classList.remove('hidden');$('resultRank').textContent='Je toetsresultaat kon niet worden opgeslagen. Controleer de opslag van je browser en maak de toets opnieuw.';$('resultAvatarAssist').innerHTML=avatarAssistHtml({pose:'encourage',size:'medium',message:'Opslaan is niet gelukt.',detail:'Je resultaat is nog niet veilig bewaard.'});$('nextBtn').classList.add('hidden');$('nextBtn').onclick=null;return}
-    if(c.passed&&rankState[c.thematicLessonId]?.rank){const n=c.next,course=thematicCourses[n.level-1],next=$('nextBtn');if(course&&n.index<course.lessons.length){next.classList.remove('hidden');next.textContent=`Volgende les · ${thematicLessonTitle(course.lessons[n.index])} →`;next.onclick=()=>{state.level=n.level-1;openThematicLesson(n.index)}}}
+    const update=succeeded=>{if(state.quiz===c&&!$('resultView').classList.contains('hidden'))renderThematicSaveResult(c,succeeded)};
+    return typeof saved?.then==='function'?saved.then(update):update(saved);
   }
+}
+function renderThematicSaveResult(c,saved){
+  const expected=rankState[c.thematicLessonId];
+  let stored;
+  try{stored=saved&&JSON.parse(localStorage.getItem(STORAGE_KEY))?.ranks?.[c.thematicLessonId]}catch{}
+  const next=$('nextBtn');
+  if(!stored||stored.rank!==expected?.rank||stored.attempts!==expected?.attempts){
+    const rank=$('resultRank');
+    rank.classList.remove('hidden');
+    rank.textContent=progressConflict
+      ?'Je toetsresultaat kan hier niet worden opgeslagen. Laad de opgeslagen voortgang en maak de toets opnieuw.'
+      :'Je toetsresultaat kon niet worden opgeslagen. Controleer de opslag van je browser en maak de toets opnieuw.';
+    $('resultAvatarAssist').innerHTML=avatarAssistHtml({pose:'encourage',size:'medium',message:'Opslaan is niet gelukt.',detail:'Je resultaat is nog niet veilig bewaard.'});
+    next.classList.add('hidden');
+    next.onclick=null;
+    return;
+  }
+  if(!c.passed||!stored.rank)return;
+  const {level,index}=c.next,lesson=thematicCourses[level-1]?.lessons[index];
+  if(!lesson)return;
+  next.classList.remove('hidden');
+  next.textContent=`Volgende les · ${thematicLessonTitle(lesson)} →`;
+  next.onclick=()=>{state.level=level-1;openThematicLesson(index)};
 }
 function renderErrors(errors){const box=$('errorList');box.innerHTML='';$('errorIntro').textContent=errors.length?'Score blijft staan. Bekijk kort wat misging.':'Geen fouten.';if(!errors.length){box.innerHTML='<div class="panel">Alles correct.</div>';return}errors.forEach(e=>{const d=document.createElement('div');d.className='error';const asked=escapeHtml(e.asked||'').replace(/\n/g,'<br>');d.innerHTML=`<div class="small">Vraag ${e.number}</div><div style="font-weight:750;margin-top:4px">${asked}</div><div style="margin-top:5px">Jouw antwoord: ${escapeHtml(e.chosen||'')}</div><div>Correct: <strong>${escapeHtml(e.correct||'')}</strong></div><div class="small" style="margin-top:4px">${escapeHtml(e.detail||'')}</div>`;box.appendChild(d)})}
 function configureNext(c){const b=$('nextBtn');b.classList.add('hidden');b.onclick=null;const n=c.next;if(!n)return;if(n.kind==='introLesson'&&c.passed){b.classList.remove('hidden');if(n.index<introLessons.length){b.textContent=`Volgende les · ${introLessons[n.index].title} →`;b.onclick=()=>{show('main');openIntroLesson(introLessons[n.index].id)}}else{b.textContent='Naar het level-examen →';b.onclick=()=>{state.intro.step='list';setMain()}}}if(n.kind==='kanaStep'){const chunks=kanaChunks(kanaModules[n.key].rows[n.row]);if(n.step<=chunks.length){b.classList.remove('hidden');b.textContent='Volgende stap →';b.onclick=()=>{state.row[n.key]=n.row;state.step[n.key]=n.step;state.tabs[n.key]='learn';setMain()}}}if(n.kind==='kanaRow'&&n.row<kanaModules[n.key].rows.length){b.classList.remove('hidden');b.textContent=`Volgende rij · ${kanaModules[n.key].rows[n.row].name} →`;b.onclick=()=>{state.row[n.key]=n.row;state.step[n.key]=0;state.tabs[n.key]='learn';setMain()}}if(n.kind==='numberLesson'&&n.index<numberLessons.length){b.classList.remove('hidden');b.textContent='Volgende cijferles →';b.onclick=()=>{state.numberLesson=n.index;state.tabs.numbers='learn';setMain()}}if(n.kind==='dakStep'&&n.step<=2){b.classList.remove('hidden');b.textContent=n.step===2?'Naar volledige rij ›':'Naar volgende stap ›';b.onclick=()=>{state.dakStep=n.step;state.tabs.dakuten='learn';setMain()}}if(n.kind==='dakNextPattern'&&state.dakPattern<dakutenPatterns.length-1){b.classList.remove('hidden');b.textContent=`Volgend onderdeel: ${dakutenPatterns[state.dakPattern+1].name} ›`;b.onclick=()=>{state.dakPattern++;state.dakStep=0;state.tabs.dakuten='learn';setMain()}}if(n.kind==='langStep'){b.classList.remove('hidden');b.textContent=`Volgende stap · ${langStepDefs.find(x=>x[0]===n.step)?.[1]||'leerroute'} →`;b.onclick=()=>{if(n.complete)markLanguageStep(langLessons[n.index].id,n.complete);state.langLesson=n.index;state.langView='lesson';state.langStep=n.step;state.tabs.lang='learn';setMain()}}if(n.kind==='langLesson'){if(!c.passed)return;if(n.complete)markLanguageStep(langLessons[Math.max(0,n.index-1)].id,n.complete);b.classList.remove('hidden');if(n.index<langLessons.length){b.textContent=`Volgende les · ${langLessons[n.index].title} →`;b.onclick=()=>{state.langLesson=n.index;state.langView='lesson';state.langStep='overview';state.tabs.lang='learn';setMain()}}else{b.textContent='Naar Level 4 examen →';b.onclick=()=>{state.tabs.lang='exams';state.langView='list';setMain()}}}if(n.kind==='smallLesson'&&n.index<smallLessons.length){b.classList.remove('hidden');b.textContent=`Volgende les · ${smallLessons[n.index].title} →`;b.onclick=()=>{state.smallLesson=n.index;state.tabs.small='learn';setMain()}}if(n.kind==='advancedStep'){const course=advancedCourses[n.level],l=course.lessons[n.index];b.classList.remove('hidden');b.textContent='Volgende stap · zelf bouwen →';b.onclick=()=>{if(n.complete)markAdvancedStep(l.id,n.complete);state.advancedLesson[n.level]=n.index;state.advancedView[n.level]='lesson';state.advancedStep[n.level]=n.step;state.tabs.advanced='learn';setMain()}}if(n.kind==='advancedLesson'){if(!c.passed)return;const course=advancedCourses[n.level];markAdvancedStep(course.lessons[Math.max(0,n.index-1)].id,'check');b.classList.remove('hidden');if(n.index<course.lessons.length){b.textContent=`Volgende les · ${course.lessons[n.index].title} →`;b.onclick=()=>{state.advancedLesson[n.level]=n.index;state.advancedView[n.level]='lesson';state.advancedStep[n.level]='overview';state.tabs.advanced='learn';setMain()}}else{b.textContent=`Naar Level ${course.number} examen →`;b.onclick=()=>{state.tabs.advanced='exams';state.advancedView[n.level]='list';setMain()}}}const nextStudy=b.onclick;if(nextStudy&&['kanaStep','kanaRow','numberLesson','dakStep','dakNextPattern','smallLesson','langStep','advancedStep'].includes(n.kind))b.onclick=()=>{nextStudy();beginStudySession({title:b.textContent.replace(/\s*[→›]$/,''),activityType:'les',category:'app',source:'lesson:continuation',level:state.level+1})};}
@@ -7171,6 +7276,11 @@ $('retryBtn').onclick=retryCurrent;
 
 root.addEventListener('click',scheduleSave);
 root.addEventListener('change',scheduleSave);
+$('reloadSavedProgress').onclick=reloadSavedProgress;
+window.addEventListener('storage',event=>{
+  if(!storageOk||progressResetting||(event.key!==STORAGE_KEY&&event.key!==null))return;
+  try{progressIsCurrent()}catch(error){progressStorageFailed(error)}
+});
 window.addEventListener('resize',()=>{detectLayout();updateStorageUI();progressSummaryRefresh?.()},{passive:true});
 window.addEventListener('orientationchange',()=>setTimeout(()=>{detectLayout();updateStorageUI()},120),{passive:true});
 window.addEventListener('pagehide',flushProgressBeforeLeaving);
@@ -7184,11 +7294,12 @@ loadProgress();
 const initialRoute=location.hash?navigation.parseHash(location.hash,platform.courses):null;
 if(initialRoute?.courseId&&initialRoute.courseId!==state.courseId){platform.savePreferences({uiLanguage:state.uiLanguage,courseId:initialRoute.courseId});location.reload();return}
 if(initialRoute){state.currentCourse=initialRoute.courseId;state.primaryTab=initialRoute.primaryTab||'learn';state.screen=initialRoute.screen==='session'?'levels':initialRoute.screen;if(Number.isInteger(initialRoute.level))state.level=Math.max(0,Math.min(levels.length-1,initialRoute.level))}
-else if(!hadSavedProgress){state.currentCourse=null;state.screen='app-home';state.primaryTab='learn'}
+else if(!hadSavedProgress&&!recoveredProgressCheckpoint){state.currentCourse=null;state.screen='app-home';state.primaryTab='learn'}
 else if(!state.currentCourse&&!state.screen.startsWith('options'))state.screen='app-home';
 document.documentElement.lang=state.uiLanguage;
 recoverInterruptedStudySession();
 if(state.flashcardSession?.status==='active'){state.flashcardSession.status='paused';saveProgress()}
+if(recoveredProgressCheckpoint)saveProgress();
 if(initialRoute?.screen==='session'||(!initialRoute&&state.currentCourse&&state.primaryTab==='progress'))renderSession();
 else renderMain();
 window.addEventListener('popstate',()=>{const route=navigation.parseHash(location.hash,platform.courses);if(route)applyBrowserRoute(route)});
