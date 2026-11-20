@@ -70,7 +70,21 @@ test('music word practice mixes both directions, hides the solution and retries 
   for(const id of ids){const items=p.musicSession.testOrder.filter(item=>item.id===id);assert.equal(items.length,2);assert.deepEqual(Array.from(items,item=>item.direction).sort(),['jp-nl','nl-jp'])}
 });
 
-test('music kanji stays preview-only until its own quiz reaches Copper, then enters mixed Recall',()=>{
+test('music questions share static audio for Japanese prompts, choices and kana readings',()=>{
+  const p=createCrashCourseProbe(),host=p.element('music-host'),ids=content.manifest.music.groups[0],words=ids.map(id=>content.vocabById[id]);
+  p.state.screen='music';p.state.music={introduced:[...ids],kanjiIntroduced:[],score:null};p.state.introducedVocabIds=[...ids];
+  p.musicSession.step='group-practice';p.musicSession.groupIds=ids;p.musicSession.practiceIndex=0;p.musicSession.practiceOrder=[{id:ids[0],direction:'jp-nl'}];p.renderMusic(host);
+  assert.match(host.innerHTML,new RegExp(`data-audio-key="${ids[0]}"`));
+  p.musicSession.practiceQuestion={word:words[0],direction:'nl-jp',prompt:'gevoel',answer:words[0].jp,choices:words.map(word=>word.jp)};p.renderMusic(host);
+  assert.equal((host.innerHTML.match(/class="audio-speaker"/g)||[]).length,3,'each Japanese choice has its own shared speaker');
+  p.musicSession.practiceQuestion={word:words[0],direction:'jp-nl',prompt:words[0].jp,answer:'gevoel',choices:['gevoel','liefde','droom']};p.renderMusic(host);
+  assert.equal((host.innerHTML.match(/class="audio-speaker"/g)||[]).length,1,'Dutch choices do not gain speakers');
+  p.musicSession.step='kanji-practice';p.musicSession.index=0;p.musicSession.questions=[{kind:'kanji-meaning',word:words[0],prompt:words[0].kanji,answer:'gevoel',choices:['gevoel','liefde']}];p.renderMusic(host);
+  assert.match(host.innerHTML,new RegExp(`data-audio-key="${ids[0]}"`));assert.match(host.innerHTML,new RegExp(`data-reading-word="${ids[0]}"`));
+  const reading=content.audioEntryById[ids[0]].pronunciation.audioTextKana;assert.equal(reading,words[0].kana);assert.ok(playback.resolve(content,audioManifest,ids[0],words[0].kanji));
+});
+
+test('music kanji stays preview-only until its recognition check passes, then enters mixed Recall',()=>{
   const p=createCrashCourseProbe(),host=p.element('music-host'),id=music.groups[0].find(wordId=>content.vocabById[wordId]?.kanji);p.state.screen='music';p.state.music={introduced:[...music.groups[0]],kanjiIntroduced:[],score:null};p.state.introducedVocabIds=[...music.groups[0]];
   p.musicSession.step='kanji';p.renderMusic(host);assert.equal(p.state.kanjiExposureIds.length,0);p.element('musicKanjiNext').onclick();assert.equal(p.state.kanjiExposureIds.length,0);const testedId=p.musicSession.kanjiWords[0];
   assert.equal(p.musicSession.step,'kanji-practice');assert.ok(p.musicSession.questions.length<=5);assert.ok(p.musicSession.questions.some(q=>q.kind==='kanji-component'));
@@ -94,8 +108,8 @@ test('song compounds are sourced notes on whole-word IDs; each component require
   p.element('musicKanjiNext').onclick();p.musicSession.index=p.musicSession.questions.length;p.renderMusic(host);assert.equal(p.musicSession.questions.filter(q=>q.kind==='kanji-component').length,2);assert.ok(p.musicSession.questions.some(q=>q.direction==='kana-to-kanji'));assert.ok(p.musicSession.questions.some(q=>q.direction==='kanji-to-kana'));
   p.musicSession.score=p.musicSession.questions.length;p.musicSession.componentResults={'気':true,'持':false};p.musicSession.index=p.musicSession.questions.length;p.renderMusic(host);assert.equal(p.state.kanjiExposureIds.length,0,'a missed character cannot be released even with an otherwise high score');
   p.element('musicDone').onclick();p.renderMusic(host);p.element('musicKanjiNext').onclick();p.musicSession.index=p.musicSession.questions.length;p.renderMusic(host);p.musicSession.score=p.musicSession.questions.length;p.musicSession.componentResults={'気':true,'持':true};p.musicSession.index=p.musicSession.questions.length;p.renderMusic(host);
-  p.renderMusic(host);assert.deepEqual(Array.from(p.state.music.kanjiIntroduced),[id]);assert.equal(p.state.music.kanjiRanks[id],'Copper');assert.equal(JSON.stringify(p.state.introducedVocabIds),beforeWords);assert.equal(JSON.stringify(p.state.jlptMilestones),beforeCredit);assert.ok(p.flashcardEligibleCards().some(card=>card.id==='kanji-card:気'));assert.ok(p.flashcardEligibleCards().some(card=>card.id==='kanji-card:持'));assert.ok(p.flashcardEligibleCards().some(card=>card.id===`kanji-word:${id}`));
-  const saved=p.saved(),again=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.equal(again.state.music.kanjiRanks[id],'Copper');assert.deepEqual(Array.from(again.state.music.componentEvidence[id]).sort(),['持','気'].sort());assert.ok(again.flashcardEligibleCards().some(card=>card.id===`kanji-word:${id}`));assert.ok(again.flashcardEligibleCards().some(card=>card.id==='kanji-card:持'));
+  p.renderMusic(host);assert.deepEqual(Array.from(p.state.music.kanjiIntroduced),[id]);assert.equal(p.state.music.kanjiRanks[id],undefined);assert.equal(JSON.stringify(p.state.introducedVocabIds),beforeWords);assert.equal(JSON.stringify(p.state.jlptMilestones),beforeCredit);assert.ok(p.flashcardEligibleCards().some(card=>card.id==='kanji-card:気'));assert.ok(p.flashcardEligibleCards().some(card=>card.id==='kanji-card:持'));assert.ok(p.flashcardEligibleCards().some(card=>card.id===`kanji-word:${id}`));
+  const saved=p.saved(),again=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks});assert.equal(again.state.music.kanjiRanks[id],undefined);assert.deepEqual(Array.from(again.state.music.componentEvidence[id]).sort(),['持','気'].sort());assert.ok(again.flashcardEligibleCards().some(card=>card.id===`kanji-word:${id}`));assert.ok(again.flashcardEligibleCards().some(card=>card.id==='kanji-card:持'));
 });
 
 test('compound practice is compact, varied, and uses real song kanji as distractors without unlocking them',()=>{
@@ -131,7 +145,7 @@ test('last check error repeats only that goal, preserving correct answers withou
   p.renderMusic(host);assert.match(host.innerHTML,/Gericht opnieuw proberen/);assert.equal(p.state.kanjiExposureIds.length,0);assert.ok(!p.state.music.kanjiRanks[id]);
   p.element('musicDone').onclick();p.renderMusic(host);assert.equal(p.musicSession.step,'kanji-retry');assert.equal(p.musicSession.questions.length,1);assert.equal(p.musicSession.questions[0].key,initialKeys.at(-1));assert.match(host.innerHTML,/Eerder goed beantwoorde onderdelen blijven bewaard/);
   const q=p.musicSession.questions[0];host.querySelectorAll('[data-music-answer]')[q.choices.indexOf(q.answer)].onclick();finishMusicFeedback(p);p.renderMusic(host);
-  assert.match(host.innerHTML,/Na gerichte herkansing/);assert.ok(p.state.music.kanjiIntroduced.includes(id));assert.equal(p.state.music.kanjiRanks[id],'Copper');
+  assert.match(host.innerHTML,/Na gerichte herkansing/);assert.ok(p.state.music.kanjiIntroduced.includes(id));assert.equal(p.state.music.kanjiRanks[id],undefined);
   for(const c of ['気','持'])assert.ok(p.flashcardEligibleCards().some(card=>card.id===`kanji-card:${c}`));
   assert.ok(p.flashcardEligibleCards().some(card=>card.id===`kanji-word:${id}`));assert.deepEqual(Array.from(p.state.introducedVocabIds),[id]);
 });
@@ -151,6 +165,25 @@ test('recovering a check error never promotes an existing kanji rank',()=>{
     const retry=p.musicSession.questions[0];host.querySelectorAll('[data-music-answer]')[retry.choices.indexOf(retry.answer)].onclick();finishMusicFeedback(p);p.renderMusic(host);
     assert.equal(p.state.music.kanjiRanks[id],rank);assert.match(host.innerHTML,new RegExp(`${total-1} van ${total} bij de eerste check`));
   }
+});
+
+test('music kanji completion adds an outline without changing the word medal and survives reload',()=>{
+  const p=createCrashCourseProbe(),host=p.element('music-host'),ids=content.manifest.music.groups[0],kanjiIds=ids.filter(id=>content.vocabById[id]?.kanji),blockId=`words:${ids.join('|')}`;
+  assert.ok(kanjiIds.length);
+  p.state.screen='music';p.state.music={introduced:[...ids],kanjiIntroduced:[],wordRanks:{[blockId]:'Copper'},kanjiRanks:{},score:null};
+  p.musicSession.step='words-list';p.renderMusic(host);
+  assert.doesNotMatch(host.innerHTML,/music-kanji-complete/);
+  p.state.music.kanjiIntroduced=[...kanjiIds];p.renderMusic(host);
+  assert.match(host.innerHTML,/music-kanji-complete/);assert.match(host.innerHTML,/Kanji geoefend/);assert.equal(p.state.music.wordRanks[blockId],'Copper');
+  const saved=p.saved(),again=createCrashCourseProbe({savedState:saved.state,savedRanks:saved.ranks}),againHost=again.element('music-host');
+  again.state.screen='music';again.musicSession.step='words-list';again.renderMusic(againHost);
+  assert.match(againHost.innerHTML,/music-kanji-complete/);assert.equal(again.state.music.wordRanks[blockId],'Copper');
+  // Historical kanji ranks were only written after a passing check. They remain
+  // evidence for the outline without rewriting ranks or unlocking knowledge.
+  again.state.music.kanjiIntroduced=[];again.state.music.kanjiRanks=Object.fromEntries(kanjiIds.map(id=>[id,'Gold']));
+  const before=JSON.stringify({words:again.state.introducedVocabIds,exposure:again.state.kanjiExposureIds,ranks:again.state.music.kanjiRanks});
+  again.renderMusic(againHost);assert.match(againHost.innerHTML,/music-kanji-complete/);
+  assert.equal(JSON.stringify({words:again.state.introducedVocabIds,exposure:again.state.kanjiExposureIds,ranks:again.state.music.kanjiRanks}),before);
 });
 
 test('optional music vocabulary is a validated route consumer, not a level lesson',()=>{

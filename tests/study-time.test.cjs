@@ -90,7 +90,7 @@ test('word crash courses are curriculum time even when opened directly',()=>{
 
 test('time graph has one total series and selected Leren/Recall/Total detail with shared navigation',()=>{
   const fs=require('node:fs'),html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');
-  assert.match(html,/data-time-series="\$\{isTime\?'total':'words'\}"/);
+  assert.match(html,/data-time-series="\$\{isTime\?'total':selection\.metric\}"/);
   assert.doesNotMatch(html,/progressSelectedRecallMarker|progress-time-legend|line-recall/);
   assert.match(html,/coordinates=lineCoordinates\('value'\)/);
   assert.match(html,/highest=Math.max\(1,\.\.\.points.map\(p=>p.value\)\)/);
