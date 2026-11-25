@@ -4228,7 +4228,7 @@
         "tas"
       ],
       "meaning": "tas",
-      "romaji": "",
+      "romaji": "kaban",
       "partOfSpeech": "unspecified",
       "introducedAt": null,
       "availableFrom": null,
@@ -4288,7 +4288,7 @@
         "vlees"
       ],
       "meaning": "vlees",
-      "romaji": "",
+      "romaji": "niku",
       "partOfSpeech": "unspecified",
       "introducedAt": null,
       "availableFrom": null,
@@ -4308,7 +4308,7 @@
         "groente"
       ],
       "meaning": "groente",
-      "romaji": "",
+      "romaji": "yasai",
       "partOfSpeech": "unspecified",
       "introducedAt": null,
       "availableFrom": null,
@@ -4328,7 +4328,7 @@
         "fruit"
       ],
       "meaning": "fruit",
-      "romaji": "",
+      "romaji": "kudamono",
       "partOfSpeech": "unspecified",
       "introducedAt": null,
       "availableFrom": null,
@@ -4348,7 +4348,7 @@
         "ei"
       ],
       "meaning": "ei",
-      "romaji": "",
+      "romaji": "tamago",
       "partOfSpeech": "unspecified",
       "introducedAt": null,
       "availableFrom": null,
@@ -4489,7 +4489,7 @@
         "appel"
       ],
       "meaning": "appel",
-      "romaji": "",
+      "romaji": "ringo",
       "partOfSpeech": "unspecified",
       "introducedAt": null,
       "availableFrom": null,
@@ -4569,7 +4569,7 @@
         "teruggaan"
       ],
       "meaning": "teruggaan",
-      "romaji": "",
+      "romaji": "kaerimasu",
       "partOfSpeech": "unspecified",
       "introducedAt": null,
       "availableFrom": null,
@@ -4669,7 +4669,7 @@
         "hotel"
       ],
       "meaning": "hotel",
-      "romaji": "",
+      "romaji": "hoteru",
       "partOfSpeech": "unspecified",
       "introducedAt": null,
       "availableFrom": null,
@@ -13913,6 +13913,66 @@
     ['vocab-でんしゃ','電車','13-1-A'],['vocab-えき','駅','13-1-A'],
     ['vocab-みず','水','14-1-A'],['vocab-country-japan','日本',null]
   ]){const word=manifest.vocabulary.find(item=>item.id===id);if(word)Object.assign(word,{kanjiForm:form,kanjiIntroducedAt:point})}
+  // Contextual explanations enrich the existing lexemes; `meaning` remains the quiz gloss.
+  for(const [id,lessonMeaning,dictionaryUsage] of [
+    ['vocab-ばん','nummer / volgnummer',{
+      note:'番 volgt vaak op een getal om een nummer of plaats in een reeks aan te duiden. Het kan ook een beurt aanduiden. Vergelijk 番号: het nummer als identificatie. 数字（すうじ） betekent cijfer of numeriek teken.',
+      partOfSpeech:'number-marker',
+      relatedIds:['vocab-ばんごう'],
+      examples:[{japanese:'5番のベルトです。',reading:'ごばん の ベルト です。',translation:'Het is band nummer 5.'},{japanese:'次は私の番です。',reading:'つぎ は わたし の ばん です。',translation:'Ik ben hierna aan de beurt.'}],
+      also:[{meaning:'beurt',description:'Geeft aan wie aan de beurt is.'}]
+    }],
+    ['vocab-ばんごう','nummer / identificatienummer',{
+      note:'番号 is een nummer waarmee je iets of iemand identificeert, bijvoorbeeld een telefoonnummer of reserveringsnummer. 番 staat vaak direct na het getal. 数字（すうじ） betekent cijfer of numeriek teken.',
+      relatedIds:['vocab-ばん'],
+      examples:[{japanese:'電話番号は何ですか。',reading:'でんわばんごう は なん です か。',translation:'Wat is het telefoonnummer?'},{japanese:'予約番号を見せます。',reading:'よやくばんごう を みせます。',translation:'Ik laat het reserveringsnummer zien.'}],also:[]
+    }],
+    ['vocab-ちず','kaart / plattegrond',{
+      note:'Een kaart of plattegrond van een gebied. カード is een fysieke kaart, bijvoorbeeld een sleutelkaart.',relatedIds:['vocab-カード'],
+      examples:[{japanese:'地図を見ます。',reading:'ちず を みます。',translation:'Ik bekijk de kaart.'}],also:[]
+    }],
+    ['vocab-カード','kaart / pasje',{
+      note:'Een kaart of pasje, bijvoorbeeld een sleutelkaart of puntenkaart. Voor een landkaart of plattegrond gebruik je 地図.',relatedIds:['vocab-ちず'],
+      examples:[{japanese:'カードキーを使います。',reading:'カードキー を つかいます。',translation:'Ik gebruik de sleutelkaart.'},{japanese:'ポイントカードはありますか。',reading:'ポイントカード は あります か。',translation:'Heeft u een spaarkaart?'}],also:[]
+    }],
+    ['vocab-ちかく','in de buurt / nabijheid',{
+      note:'近く duidt hier een nabije plek aan. In 駅の近く betekent het “in de buurt van het station”, in 近くの店 betekent het “een winkel in de buurt”. Vergelijk 近い, dat de afstand van iets beschrijft.',
+      relatedIds:['vocab-ちかい'],
+      examples:[{japanese:'駅の近くにホテルがあります。',reading:'えき の ちかく に ホテル が あります。',translation:'Er is een hotel in de buurt van het station.'},{japanese:'近くの店を探します。',reading:'ちかく の みせ を さがします。',translation:'Ik zoek een winkel in de buurt.'}]
+    }],
+    ['vocab-ちかい','dichtbij / op korte afstand',{
+      note:'近い beschrijft de afstand. Het kan direct voor een zelfstandig naamwoord staan, of de eigenschap aan het einde van een zin aangeven. Gebruik 近く als je de omgeving of een nabije plek bedoelt.',
+      partOfSpeech:'i-adjective',relatedIds:['vocab-ちかく'],
+      examples:[{japanese:'駅は近いです。',reading:'えき は ちかい です。',translation:'Het station is dichtbij.'},{japanese:'駅に近い店です。',reading:'えき に ちかい みせ です。',translation:'Het is een winkel dicht bij het station.'}]
+    }],
+    ['vocab-ください','geef me …, alstublieft',{
+      note:'Met een voorwerp en を vraag je om iets. Na de て-vorm vraag je of iemand iets wil doen. お願いします kan ook zelfstandig als beleefd antwoord op een aanbod.',
+      relatedIds:['vocab-おねがいします'],
+      examples:[{japanese:'水をください。',reading:'みず を ください。',translation:'Water, alstublieft.'},{japanese:'パスポートを見せてください。',reading:'パスポート を みせて ください。',translation:'Laat uw paspoort zien, alstublieft.'}],
+      also:[{meaning:'doe …, alstublieft',description:'Na de て-vorm van een werkwoord vraag je iemand iets te doen.'}]
+    }],
+    ['vocab-おねがいします','alstublieft / graag',{
+      note:'Beleefde formulering bij een verzoek. Je kunt er ook een voorstel mee aannemen, bijvoorbeeld wanneer iemand vraagt of je iets wilt. Vergelijk ください in een direct verzoek om iets te geven of te doen.',
+      relatedIds:['vocab-ください'],
+      examples:[{japanese:'はい、お願いします。',reading:'はい、おねがいします。',translation:'Ja, graag.'},{japanese:'カードでお願いします。',reading:'カード で おねがいします。',translation:'Met de kaart, graag.'}]
+    }],
+    ['vocab-かばん','tas',{
+      note:'Een tas die je bij je draagt, bijvoorbeeld een schooltas, handtas of reistas. Bij de kassa is ふくろ het tasje of de zak voor je boodschappen.',
+      relatedIds:['vocab-ふくろ'],
+      examples:[{japanese:'かばんは大きいです。',reading:'かばん は おおきい です。',translation:'De tas is groot.'}]
+    }],
+    ['vocab-ふくろ','zak / boodschappentas',{
+      note:'袋 is een zak of tasje waarin je iets doet. Bij de kassa gaat het om een tasje voor je boodschappen. Voor een tas die je gewoonlijk bij je draagt, gebruik je かばん.',
+      partOfSpeech:'noun',relatedIds:['vocab-かばん'],
+      examples:[{japanese:'袋は要りますか。',reading:'ふくろ は いります か。',translation:'Hebt u een tasje nodig?'},{japanese:'袋をください。',reading:'ふくろ を ください。',translation:'Een tasje, alstublieft.'}]
+    }],
+    ['vocab-まっすぐ',{default:'rechtdoor / in een rechte lijn','music-quintuplets':'oprecht / zonder omwegen'},{
+      note:'In een route geeft まっすぐ de richting rechtdoor aan. Bij gevoelens of een houding kan het oprechtheid of directheid uitdrukken.',
+      partOfSpeech:'adverb',
+      examples:[{japanese:'この道をまっすぐ行きます。',reading:'この みち を まっすぐ いきます。',translation:'Ik volg deze weg rechtdoor.'},{japanese:'まっすぐな気持ちを伝えます。',reading:'まっすぐ な きもち を つたえます。',translation:'Ik vertel eerlijk wat ik voel.'}],
+      also:[{meaning:'rechtdoor',description:'Richting bij het lopen of rijden.'},{meaning:'oprecht',description:'Figuurlijk, bij iemands gevoelens of houding.'}]
+    }]
+  ]){const word=manifest.vocabulary.find(v=>v.id===id);if(word)Object.assign(word,{lessonMeaning,dictionaryUsage})}
   const byId=Object.fromEntries(manifest.vocabulary.map(v=>[v.id,v]));
   const lessonById=Object.fromEntries(manifest.lessons.map(l=>[l.id,l]));
   const readingById=Object.fromEntries(manifest.readings.map(r=>[r.id,r]));
@@ -13929,7 +13989,7 @@
     const match=v.introducedAt?.match(/^(\d+)-(\d+)/),level=match?Number(match[1]):4,order=match?Number(match[2]):null;
     const source=manifest.lessons.find(l=>l.level===level&&l.order===order&&[...(l.wordIds||[]),...(l.exampleIds||[])].includes(v.id));
     const lessonId=v.legacyLessonId||source?.id||v.lessonId||(match?`l${match[1]}-${match[2]}`:null);
-    return{id:v.id,jp:v.japanese,kana:v.reading,romaji:v.romaji,meaning:v.meaning,meanings:v.meanings,lessonId,lessonIndex:order?order-1:Number(v.legacyLessonId?.split('-')[1]||1)-1,lessonTitle:v.coreOrContext==='legacy'?legacyLessonTitles[v.legacyLessonId]||'Historische woorden':lessonById[lessonId]?.title||'',level,routeId:v.routeId||null,kanji:v.kanjiForm,kanjiReading:v.kanjiForm?v.reading:null,kanjiIntroducedAt:v.kanjiIntroducedAt,legacy:v.coreOrContext==='legacy',introducedAt:v.introducedAt,sourceModuleId:v.introducedAt?.match(/-([AB])$/)?.[1]||source?.module||null,coreOrContext:v.coreOrContext,recallCore:v.coreOrContext==='core'||v.recallCore===true,sourceFound:!!source||v.routeId==='music'};
+    return{id:v.id,jp:v.japanese,kana:v.reading,romaji:v.romaji,meaning:v.meaning,meanings:v.meanings,lessonMeaning:v.lessonMeaning,dictionaryUsage:v.dictionaryUsage,partOfSpeech:v.partOfSpeech,lessonId,lessonIndex:order?order-1:Number(v.legacyLessonId?.split('-')[1]||1)-1,lessonTitle:v.coreOrContext==='legacy'?legacyLessonTitles[v.legacyLessonId]||'Historische woorden':lessonById[lessonId]?.title||'',level,routeId:v.routeId||null,kanji:v.kanjiForm,kanjiReading:v.kanjiForm?v.reading:null,kanjiIntroducedAt:v.kanjiIntroducedAt,legacy:v.coreOrContext==='legacy',introducedAt:v.introducedAt,sourceModuleId:v.introducedAt?.match(/-([AB])$/)?.[1]||source?.module||null,coreOrContext:v.coreOrContext,recallCore:v.coreOrContext==='core'||v.recallCore===true,sourceFound:!!source||v.routeId==='music'};
   });
   function pointOrder(point){
     if(point==='foundation-complete'||point==='10-complete')return 10*10000+9999;

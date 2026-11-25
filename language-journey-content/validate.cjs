@@ -3,10 +3,52 @@ const path = require('node:path');
 const content = require('./content.js');
 const levelContract = require('./level-contract.js');
 
+function reviewContextGlosses(manifest,add){
+  const words=(manifest.vocabulary||[]).filter(word=>word.coreOrContext!=='legacy');
+  const text=value=>typeof value==='string'&&!!value.trim();
+  const vocabularyIds=new Set(words.map(word=>word.id));
+  const glosses=new Map();
+  for(const word of words){
+    const primary=String(word.meanings?.[0]||word.meaning||'').normalize('NFKC').toLocaleLowerCase('nl');
+    const gloss=primary.split(/[;/]/u)[0].trim().replace(/\s+/gu,' ');
+    if(gloss){
+      if(!glosses.has(gloss))glosses.set(gloss,[]);
+      glosses.get(gloss).push(word);
+    }
+    if(!text(word.romaji))add('INFO','REVIEW_ROMAJI',`${word.id} heeft geen romaji voor de bestaande lezing.`,word.id);
+  }
+  const overlapping=new Set();
+  for(const [gloss,group] of glosses)if(new Set(group.map(word=>word.japanese)).size>1){
+    group.forEach(word=>overlapping.add(word.id));
+    add('INFO','REVIEW_GLOSS_OVERLAP',`“${gloss}” komt voor bij ${group.map(word=>`${word.id} (${word.introducedAt||word.lessonId||'preview'})`).join(', ')}. Beoordeel het gebruiksverschil.`,'vocabulary');
+  }
+  for(const word of words){
+    const sensitive=word.contextSensitive===true||overlapping.has(word.id)||word.meanings?.length>1;
+    const meanings=typeof word.lessonMeaning==='object'&&word.lessonMeaning?Object.values(word.lessonMeaning):[word.lessonMeaning];
+    if((sensitive||word.lessonMeaning!==undefined)&&(!meanings.length||!meanings.every(text))){
+      add('INFO','REVIEW_LESSON_GLOSS','Controleer of een beknopte lesbetekenis het gebruik onderscheidt.',word.id);
+    }
+    const usage=word.dictionaryUsage;
+    if((sensitive||usage!==undefined)&&!text(usage?.note)){
+      add('INFO','REVIEW_DICTIONARY_USAGE','Controleer of een Dictionary-uitleg over gebruik of verwante termen nodig is.',word.id);
+    }
+    if(usage?.relatedIds&&(!Array.isArray(usage.relatedIds)||usage.relatedIds.some(id=>id===word.id||!vocabularyIds.has(id)))){
+      add('INFO','REVIEW_DICTIONARY_RELATED','Gebruik bestaande woord-ID’s voor verwante termen.',word.id);
+    }
+    if(usage?.examples&&(!Array.isArray(usage.examples)||usage.examples.some(example=>!text(example?.japanese)||!text(example?.reading)||!text(example?.translation)))){
+      add('INFO','REVIEW_DICTIONARY_EXAMPLE','Een voorbeeld bevat Japans, kana en een Nederlandse vertaling.',word.id);
+    }
+  }
+  for(const grammar of manifest.grammar||[])if(grammar.contextSensitive&&(!text(grammar.shortExplanation)||!text(grammar.fullExplanation))){
+    add('INFO','REVIEW_GRAMMAR_USAGE','Controleer de korte lesuitleg en de volledige uitleg van deze grammaticale functie.',grammar.id);
+  }
+}
+
 function validate(manifest = content.manifest, options = {}) {
   const recordings=options.recordings||(manifest===content.manifest?require('../assets/audio/ja/manifest.js'):null);
   const diagnostics=[];
   const add=(severity,code,message,location='curriculum')=>diagnostics.push({severity,code,message,location});
+  reviewContextGlosses(manifest,add);
   if(!Number.isInteger(manifest.schemaVersion)||manifest.schemaVersion<1)add('ERROR','SCHEMA_VERSION','schemaVersion must be a positive integer');
   if(typeof manifest.contentVersion!=='string'||!/^\d+\.\d+\.\d+$/.test(manifest.contentVersion))add('ERROR','CONTENT_VERSION','contentVersion must use major.minor.patch');
   const registries={vocabulary:manifest.vocabulary,grammar:manifest.grammar,patterns:manifest.patterns,lessons:manifest.lessons,exercises:manifest.exercises,readings:manifest.readings,bonus:manifest.bonus,kanji:manifest.kanji,instructions:manifest.instructions};

@@ -4,12 +4,12 @@
   'use strict';
   // The host supplies canonical dictionary entries and existing knowledge lookups.
   // This selector only builds presentation rows; it never records encounters.
-  function deriveRows({entries,vocabulary=[],level,lessonId=null,lessonPoint=null,lessonEntryIds=[],originById={},isKnown=()=>false,kanjiKnown=()=>false,kanjiStatus=null,isBlocked=()=>false,route=null}){
+  function deriveRows({entries,vocabulary=[],level,lessonId=null,lessonPoint=null,lessonEntryIds=[],originById={},isKnown=()=>false,kanjiKnown=()=>false,kanjiStatus=null,isBlocked=()=>false,route=null,meaningFor=entry=>entry.meaning||''}){
     const selected=new Set(lessonEntryIds),rows=[],seen=new Set(),pointPrefix=`${level}-`;
     const add=(entry,extra={})=>{
       const key=`${entry.id}:${extra.orthography?'orthography':'entry'}`;if(seen.has(key))return;seen.add(key);
       const current=!!(extra.current||selected.has(entry.id)||(lessonId&&entry.lessonId===lessonId));
-      rows.push({id:entry.id,kind:extra.orthography?'kanji':entry.kind,jp:extra.orthography||entry.jp,reading:extra.orthography?(extra.reading||entry.kana||''):[entry.kana!==entry.jp?entry.kana:'',entry.romaji].filter(Boolean).join(' · '),meaning:entry.meaning||'',origin:extra.origin||originById[entry.id]||entry.label||'',current,known:extra.orthography?!!kanjiKnown(entry.id):!!isKnown(entry),status:extra.orthography&&kanjiStatus?kanjiStatus(entry.id):null,lessonId:extra.lessonId||entry.lessonId||''});
+      rows.push({id:entry.id,kind:extra.orthography?'kanji':entry.kind,jp:extra.orthography||entry.jp,reading:extra.orthography?(extra.reading||entry.kana||''):[entry.kana!==entry.jp?entry.kana:'',entry.romaji].filter(Boolean).join(' · '),meaning:meaningFor(entry,lessonId),origin:extra.origin||originById[entry.id]||entry.label||'',current,known:extra.orthography?!!kanjiKnown(entry.id):!!isKnown(entry),status:extra.orthography&&kanjiStatus?kanjiStatus(entry.id):null,lessonId:extra.lessonId||entry.lessonId||''});
     };
     for(const entry of Object.values(entries)){
       if(entry.legacy)continue;
