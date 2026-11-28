@@ -2218,7 +2218,7 @@ function dictionaryEntries(){
   return [...words,...dictionaryKanaEntries(),...dictionaryGrammar,...numbers]
 }
 const passportCards=new Map(),passportRecords=new Map(),passportAliases=new Map();
-function passportKnown(id){return passportRecords.has(id)||passportAliases.has(id)}
+function passportKnown(id){return (passportRecords.has(id)&&!passportRecords.get(id).contextOnly)||passportAliases.has(id)}
 function passportRelatedRecords(entry){return (state.passportKnowledge?.entries||[]).filter(record=>record.id===entry.id||record.officialId===entry.id||record.parentId===entry.id||passportAliases.get(entry.id)===record.id)}
 const dictionaryById=Object.fromEntries(dictionaryEntries().map(entry=>[entry.id,entry]));
 function dictionaryGrammarIsKnown(entry,lessonId=''){
@@ -3165,11 +3165,11 @@ function normalizePassportKnowledge(value){
   const entries=[],seen=new Set();
   const field=(value,max=16000)=>typeof value==='string'?value.slice(0,max):'';
   if(value?.version===1&&Array.isArray(value.entries))for(const record of value.entries){
-    if(!record||typeof record.id!=='string'||seen.has(record.id)||!(vocabById[record.id]||/^passport-[1-9]\d*$/.test(record.id)))continue;
+    if(!record||typeof record.id!=='string'||seen.has(record.id)||!(Object.hasOwn(vocabById,record.id)||/^passport-[1-9]\d*$/.test(record.id)))continue;
     if(!['lemma','reading','meaning'].every(key=>typeof record[key]==='string'&&record[key].trim()&&record[key].length<=2000))continue;
     const contexts=Array.isArray(record.contexts)?record.contexts.map(context=>({context_category:field(context?.context_category),example_sentence:field(context?.example_sentence),example_translation:field(context?.example_translation)})):[];
     seen.add(record.id);entries.push({id:record.id,kind:'VOCABULARY',lemma:record.lemma,reading:record.reading,meaning:record.meaning,romaji:field(record.romaji,2000),wordType:field(record.wordType,2000),
-      explanation:field(record.explanation),note:field(record.note),source:'Passport Import',officialId:typeof record.officialId==='string'&&vocabById[record.officialId]?record.officialId:null,parentId:/^passport-[1-9]\d*$/.test(record.parentId||'')?record.parentId:null,newSense:record.newSense===true,acquiredAt:field(record.acquiredAt,40),contexts});
+      explanation:field(record.explanation),note:field(record.note),source:'Passport Import',officialId:typeof record.officialId==='string'&&Object.hasOwn(vocabById,record.officialId)?record.officialId:null,parentId:/^passport-[1-9]\d*$/.test(record.parentId||'')?record.parentId:null,newSense:record.newSense===true,contextOnly:record.contextOnly===true,acquiredAt:field(record.acquiredAt,40),contexts});
   }
   return{version:1,entries,lastBackupAt:typeof value?.lastBackupAt==='string'&&Number.isFinite(Date.parse(value.lastBackupAt))?value.lastBackupAt:null};
 }
@@ -6566,7 +6566,7 @@ function flashcardHasReviewHistory(cardId){return['jp-nl','nl-jp'].some(directio
 function flashcardEligible(card){
   if(card?.orthographyCard){const word=vocabById[card.sourceWordId];return!!word&&recallKanjiEligible(word)&&kanjiWordHasEligibleSource(word)}
   if(card&&passportCards.get(card.id)===card)return true;
-  if(card&&passportRecords.has(card.id)&&vocabById[card.id]===card)return true;
+  if(card&&passportRecords.has(card.id)&&!passportRecords.get(card.id).contextOnly&&vocabById[card.id]===card)return true;
   if(!card||card.legacy||!card.recallCore||!card.sourceFound||vocabById[card.id]!==card)return false;
   if(state.music?.introduced?.includes(card.id))return true;
   if(state.deferredVocabIntroductions.includes(card.id))return false;
@@ -7424,13 +7424,14 @@ function applyPassportImport(rows,base){
   for(const row of rows){
     const item=row.item;
     if(item.kind!=='VOCABULARY'||['error','ambiguous'].includes(row.status))continue;
+    if(row.duplicateOf&&!row.existingId&&!rowIds.has(row.duplicateOf))continue;
     const officialId=row.officialId&&vocabById[row.officialId]?row.officialId:null;
     const id=row.existingId||rowIds.get(row.duplicateOf)||(row.status==='official'?officialId:null)||`passport-${nextId++}`;
     const previous=entries.get(id);
     const contexts=[...new Map([...(previous?.contexts||[]),...(item.contexts||[])].map(context=>[JSON.stringify(context),context])).values()];
     const knownOfficial=officialId&&dictionaryById[officialId]&&knowledgeWordIsKnown(dictionaryById[officialId]);
     if(!previous&&id===officialId&&knownOfficial&&!contexts.length&&!item.note&&!item.explanation){rowIds.set(row.row,id);continue}
-    const record=previous||{...item,id,officialId,parentId:row.parentId||rowIds.get(row.parentRow)||null,newSense:row.status==='new-sense',acquiredAt:new Date().toISOString()};
+    const record=previous||{...item,id,officialId,parentId:row.parentId||rowIds.get(row.parentRow)||null,newSense:row.status==='new-sense',contextOnly:id===officialId&&knownOfficial,acquiredAt:new Date().toISOString()};
     entries.set(id,{...record,contexts,note:record.note||item.note,explanation:record.explanation||item.explanation});rowIds.set(row.row,id);
   }
   const next=normalizePassportKnowledge({...base,entries:[...entries.values()]});

@@ -56,3 +56,14 @@ test('additional senses have separate cards, one word in the export, and a round
   assert.match(app.dictionaryArticleHtml(app.dictionaryById['passport-1']),/beangstigend/);
   assert.equal(app.passportBackup.preview(app.passportBackup.export()).knownWordCount,1);
 });
+
+test('supplementary context on a seen word preserves its existing Recall eligibility',()=>{
+  const app=createCrashCourseProbe({savedState:{vocabFirstSeen:{'vocab-かばん':'2026-11-27'}}});
+  const seen=app.dictionaryById['vocab-かばん'];
+  assert.equal(app.knowledgeWordIsKnown(seen),true);
+  assert.ok(!app.recallCards('jp-nl').some(card=>card.id===seen.id));
+  assert.equal(apply(app,plan(app,[{...future,explanation:'Een tas die je draagt.'}]).rows),true);
+  assert.equal(app.state.passportKnowledge.entries[0].contextOnly,true);
+  assert.ok(!app.recallCards('jp-nl').some(card=>card.id===seen.id));
+  assert.match(app.dictionaryArticleHtml(seen),/Een tas die je draagt/);
+});
