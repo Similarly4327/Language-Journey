@@ -8,6 +8,16 @@ const future={lemma:'かばん',reading:'かばん',meaning:'tas'};
 const plan=(app,items)=>app.passportImportPlan(csv.exportCSV({items}));
 const apply=(app,rows)=>app.applyPassportImport(rows,app.state.passportKnowledge);
 
+test('the primary Progress button opens Passport and both backup actions even after visiting Knowledge',()=>{
+  const app=createCrashCourseProbe({savedState:{progressTab:'knowledge'}});
+  app.renderSession();
+  assert.equal(app.element('progressPassport').innerHTML,'');
+  app.toggleProgress();
+  assert.equal(app.state.progressTab,'progress');
+  const passport=app.element('progressPassport').innerHTML;
+  for(const id of ['passportExport','passportImport','passportBackupExport','passportBackupImport'])assert.ok(passport.includes(`id="${id}"`));
+});
+
 test('confirmed Passport imports use course identity or a stable personal card without awarding progress',()=>{
   const sharedStorage=new Map();
   const app=createCrashCourseProbe({sharedStorage,savedRanks:{'l4-1':{rank:'Gold',attempts:3}}});

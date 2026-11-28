@@ -4513,7 +4513,7 @@ function applyBrowserRoute(route){
   state.screen=route.screen==='session'?'levels':route.screen==='home'?'levels':route.screen;
   if(Number.isInteger(route.level))state.level=Math.max(0,Math.min(levels.length-1,route.level));
   if(route.screen==='intro')state.level=6;
-  if(route.screen==='session')renderSession();
+  if(route.screen==='session'){state.progressTab='progress';renderSession()}
   else if(route.screen==='flashcards')renderFlashcardsScreen();
   else renderMain();
   routeApplying=false;
@@ -7184,7 +7184,6 @@ function renderProfileDashboard(box){
 function renderKnowledgeDashboard(box){
   const seenWords=new Set([...learnedVocabEntries().map(word=>word.id),...Object.keys(state.vocabFirstSeen)]),knownSmall=new Set(Object.keys(state.kanaFirstSeen).map(id=>id.split(':')[0])),groups=[['words','Woorden'],['grammar','Grammatica'],['hiragana','Hiragana'],['katakana','Katakana'],['dakuten','Dakuten / handakuten'],...(['small-y','small-tsu','long-vowel'].filter(id=>knownSmall.has(id)).map(id=>[id,id==='small-y'?'Kleine ゃゅょ':id==='small-tsu'?'Kleine っ':'Lange klinker']))];
   box.innerHTML=`<section class="card"><div class="h2">Kennis</div><div class="muted">Tegengekomen is niet hetzelfde als beheerst. Mastery en ranks blijven apart.</div><div class="study-form-grid" style="margin-top:10px"><label>Categorie<select id="knowledgeCategory">${groups.map(([id,label])=>`<option value="${id}">${label}</option>`).join('')}<option value="bank">Woordbank · vooruit bekijken</option></select></label><label>Zoeken<input id="knowledgeSearch" type="search" placeholder="Zoek Japans, romaji of betekenis"></label></div><div class="small" id="knowledgeCount" style="margin-top:8px"></div><div id="knowledgeItems" class="stack" style="margin-top:8px"></div><div class="small" style="margin-top:8px">Kanji: 0 · de cursus introduceert momenteel nog geen losse kanji.</div></section>`;
-  const passport=document.createElement('div');box.appendChild(passport);renderPassport(passport);
   const draw=()=>{const category=$('knowledgeCategory').value,query=$('knowledgeSearch').value.trim().toLowerCase(),host=$('knowledgeItems');host.innerHTML='';let rows=[];
     if(category==='words'||category==='bank')rows=[...vocabCatalog.filter(word=>!passportAliases.has(word.id)),...passportCards.values()].filter(v=>(category==='bank'||seenWords.has(v.id)||passportKnown(v.id))&&(!query||`${v.jp} ${v.romaji||''} ${v.meaning}`.toLowerCase().includes(query))).map(v=>({id:v.id,jp:v.jp,reading:v.romaji||'Leeswijze niet beschikbaar',meaning:v.meaning,word:v,seen:seenWords.has(v.id)||passportKnown(v.id),entry:dictionaryById[v.id]}));
     else if(category==='grammar')rows=(query?dictionarySearch(query).filter(entry=>entry.kind==='grammatica'):dictionaryGrammar).filter(knowledgeGrammarIsKnown).map(entry=>({id:entry.id,jp:entry.jp,reading:entry.romaji,meaning:entry.meaning,entry}));
@@ -7397,6 +7396,8 @@ function internalJlptProgressSummary(){return window.LanguageJourneyInternalGuid
 function renderProgressDashboard(box){
   const sessions=studySessions(),recent=[...sessions].sort((a,b)=>new Date(b.startedAt)-new Date(a.startedAt));
   box.innerHTML=`<section id="progressSummary" class="card"></section>${legacyStudyNotice()}<section class="card study-disclosure-card"><button id="recentActivitiesToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="recentActivitiesPanel"><span class="h2">Recente activiteiten (${sessions.length})</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="recentActivitiesPanel" class="study-disclosure-panel" hidden><div class="small">Nieuwste eerst · ${Math.min(state.progressActivityLimit,recent.length)} van ${recent.length}</div><div id="recentActivities" class="stack" style="margin-top:8px"></div><button id="moreActivities" class="btn tiny" style="width:100%;margin-top:8px" ${recent.length>state.progressActivityLimit?'':'hidden'}>Meer tonen</button><button id="activityManagerToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="activityManagerPanel" style="margin-top:14px"><span class="small">Activiteiten beheren en geschiedenis filteren</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="activityManagerPanel" class="study-disclosure-panel" hidden><div id="activityManager"></div></div></div></section><section class="card study-disclosure-card"><button id="studyAnalysisToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="studyAnalysisPanel"><span class="h2">Urenanalyse</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="studyAnalysisPanel" class="study-disclosure-panel" hidden><div id="studyAnalysisBody"></div></div></section><section class="card study-disclosure-card"><button id="studyTimelineToggle" class="study-disclosure" type="button" aria-expanded="false" aria-controls="studyTimelinePanel"><span class="h2">Tijdlijn</span><span class="study-disclosure-icon" aria-hidden="true">⌄</span></button><div id="studyTimelinePanel" class="study-disclosure-panel" hidden><div id="studyTimelineBody"></div></div></section>`;
+  box.insertAdjacentHTML('afterbegin','<div id="progressPassport"></div>');
+  renderPassport($('progressPassport'));
   renderProgressSummary($('progressSummary'));
   $('progressSummary').insertAdjacentHTML('afterend',jlptProgressHtml());
   bindJlptLevelSlider();
@@ -7514,7 +7515,10 @@ function renderSession(){
 
 function toggleProgress(){
   // A primary-tab tap is an idempotent destination, not a back action.
-  if($('sessionView').classList.contains('hidden'))renderSession();
+  if($('sessionView').classList.contains('hidden')||state.progressTab!=='progress'){
+    state.progressTab='progress';
+    renderSession();
+  }
 }
 function goToLearningHome(){
   if(state.studyTracker.active)completeStudySession({status:'verlaten'});
@@ -7607,6 +7611,7 @@ document.documentElement.lang=state.uiLanguage;
 recoverInterruptedStudySession();
 if(state.flashcardSession?.status==='active'){state.flashcardSession.status='paused';saveProgress()}
 if(recoveredProgressCheckpoint)saveProgress();
+if(initialRoute?.screen==='session')state.progressTab='progress';
 if(initialRoute?.screen==='session'||(!initialRoute&&state.currentCourse&&state.primaryTab==='progress'))renderSession();
 else renderMain();
 window.addEventListener('popstate',()=>{const route=navigation.parseHash(location.hash,platform.courses);if(route)applyBrowserRoute(route)});

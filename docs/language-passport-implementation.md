@@ -1,6 +1,6 @@
 # Language Passport
 
-Het Passport staat in **Voortgang → Kennis**. Het CSV-bestand kan worden geopend in een spreadsheet of vrijwillig worden gedeeld met een andere leeromgeving. Gebruik de JSON-back-up om een cursusprofiel met medailles en Recall-geschiedenis terug te zetten. [CSV-specificatie en uitbreidingscontract](language-passport-csv-v1.md)
+Het Passport staat bovenaan op **Voortgang**. Het CSV-bestand kan worden geopend in een spreadsheet of vrijwillig worden gedeeld met een andere leeromgeving. Gebruik de JSON-back-up om een cursusprofiel met medailles en Recall-geschiedenis terug te zetten. [CSV-specificatie en uitbreidingscontract](language-passport-csv-v1.md)
 
 ## Audit en ontwerp
 
