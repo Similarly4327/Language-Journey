@@ -1,0 +1,13 @@
+# Language Passport
+
+Het Passport staat in **Voortgang → Kennis**. Het CSV-bestand kan worden geopend in een spreadsheet of vrijwillig worden gedeeld met een andere leeromgeving. Gebruik de JSON-back-up om een cursusprofiel met medailles en Recall-geschiedenis terug te zetten. [CSV-specificatie en uitbreidingscontract](language-passport-csv-v1.md)
+
+## Audit en ontwerp
+
+- De app bewaart cursusdata onder `platform.progressKey(courseId)`. Japanse voortgang gebruikt `taal-japanse-leerapp-v1`, voortgangsschema 9 en mediavoorkeuren per cursusprofiel. Het opslaglock en de vergelijking met de laatst gelezen versie beschermen tegen overschrijven vanuit een oud tabblad. De JSON-back-up gebruikt de bestaande momentopname en het bestaande laad- en migratiepad.
+- De centrale `vocabCatalog` bepaalt officiële ID’s, lezingen en les- of routeverwijzingen. De additieve uitbreiding `state.passportKnowledge` (v1) bewaart persoonlijke gegevens en contexten. Een geïmporteerde basiskopie van een cursuswoord gebruikt het cursus-ID. Een nieuwe persoonlijke betekenis krijgt een eigen kaart-ID en gebruikt de bestaande Recall-planner. Een later exact gematcht cursuswoord levert een cursusverwijzing en eventueel audio terwijl het persoonlijke kaart-ID in gebruik blijft.
+- De voortgangskaarten gebruiken `jlptMilestoneSummary`, `jlptMilestoneFractions` en de 70/30-berekening uit `LJ-JLPT-v2` voor vijf bewezen stappen. De aparte percentages voor direct oefenen gebruiken derden en zijn geen bron voor de N5–N1-kaarten. Het CSV-profiel gebruikt dezelfde N5–N1-berekening als Voortgang. Import kent geen bewijs, kanji of medaille toe.
+- De import leest alleen tekst met de meegeleverde Papa Parse-parser. De voorbeeldweergave signaleert onzekere matches, weigert ongeldige bestanden en vraagt welke geldige regels worden toegevoegd. Een onzekere koppeling kan opnieuw worden ingediend met een duidelijkere schrijfwijze of betekenis. Bestanden en notities blijven lokaal. Audio gebruikt uitsluitend passende bestaande verwijzingen.
+- Het JSON-formaat pakt het actieve lokale cursusprofiel in. Bekende oude momentopnamen en het vroegere Recall-herstelbestand worden via het bestaande migratiepad gelezen. Voor vervanging wordt een herstelpunt bewaard onder `<course-storage-key>:passport-before-restore`. Een mislukte schrijfactie houdt de huidige voortgang in stand. Bij handmatig herstel kan de inhoud van het herstelpunt als JSON-bestand via dezelfde herstelknop worden aangeboden.
+
+CSV-import voegt woorden, betekenissen en contexten toe. Grammaticagegevens, schriftkennis, JLPT-waarden en reviewhistorie komen in het Passport als leescontext. Volledig herstel daarvan loopt via de JSON-back-up.
