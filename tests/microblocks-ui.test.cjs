@@ -70,9 +70,11 @@ test('Levels 12–14 use A–D preparation without quotas or exposing a later bl
     assert.match(app.element('thematicBody').innerHTML,/Oefening 1/);assert.match(app.element('thematicBody').innerHTML,/Oefening 2/);assert.doesNotMatch(app.element('thematicBody').innerHTML,/A → B → C → D/);
     for(const part of lesson.didactics.preparationMicroblocks?['A']:['A','B']){app.startThematicPart(part);
     for(const block of lesson.didactics.microblocks.filter(block=>block.sourcePart===part)){
+      if(app.state.thematic.microblockIndex!==block.index||!['words','sentences'].includes(app.state.thematic.step))continue; // Empty introductions and empty model blocks advance directly.
+      if(app.state.thematic.step==='sentences'){while(app.state.thematic.step==='sentences')app.element('thematicSentenceNext').onclick();continue}
       assert.equal(app.state.thematic.microblockIndex,block.index);assert.equal(app.state.thematic.step,'words');assert.ok(block.wordIds.length+block.grammarIds.length<=3);
       for(const future of lesson.didactics.microblocks.filter(next=>'ABCD'.indexOf(next.key)>'ABCD'.indexOf(block.key)))for(const id of future.wordIds)assert.ok(!app.state.introducedVocabIds.includes(id),`${lesson.id} ${block.key}: ${id}`);
-      app.element('thematicWordsNext').onclick();if(block.wordIds.length){assert.equal(app.activeWordCrashCourse.deck.length,2*block.wordIds.length);app.completeWordCrashCourse()}
+      app.element('thematicWordsNext').onclick();if(app.state.thematic.step==='practice'){assert.equal(app.activeWordCrashCourse.deck.length,2*app.state.thematic.introWordIds.length);app.completeWordCrashCourse()}
       let guard=0;while(app.state.thematic.step==='sentences'&&guard++<30)app.element('thematicSentenceNext').onclick();
     }
     assert.equal(app.state.thematic.step,lesson.didactics.preparationMicroblocks?'reading':'questions');}

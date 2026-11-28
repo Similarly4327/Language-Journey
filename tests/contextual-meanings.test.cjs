@@ -9,7 +9,8 @@ function renderWordBlock(app,id){
   const block=lesson.didactics.microblocks.find(item=>item.wordIds.includes(id));
   app.state.level=level-1;
   app.state.screen='module';
-  app.state.thematic={level,lessonIndex:2,part:block.sourcePart,step:'words',microblockIndex:block.index,wordBlockIndex:0,flowRevision:3};
+  // Resume the word cards already opened before the learner completed them.
+  app.state.thematic={level,lessonIndex:2,part:block.sourcePart,step:'words',microblockIndex:block.index,wordBlockIndex:0,introWordIds:[...block.wordIds],flowRevision:3};
   app.renderMain();
   return app.element('thematicBody').innerHTML;
 }
